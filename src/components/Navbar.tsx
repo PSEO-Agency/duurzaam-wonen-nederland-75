@@ -4,6 +4,14 @@ import { Menu, X, Phone, Search, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -38,20 +46,48 @@ const Navbar: React.FC = () => {
   // Top bar navigation items
   const topNavItems = [
     { label: 'Blog', href: '#blog' },
-    { label: 'Werken bij', href: '#careers' },
     { label: 'Kennisbank', href: '#knowledge' },
-    { label: 'Maatje worden', href: '#partner' },
+    { label: 'Zakelijk', href: '#business' },
+    { label: 'Werkgebied', href: '#area' },
     { label: 'Contact', href: '#contact' },
   ];
   
   // Main navigation items
   const mainNavItems = [
-    { label: 'Oplossingen', href: '#services' },
     { label: 'Projecten', href: '#projects' },
     { label: 'Showroom', href: '#showroom' },
-    { label: 'Over ons', href: '#about' },
-    { label: 'Zo werkt het', href: '#workflow' },
-    { label: 'Prefapp', href: '#prefapp' },
+    { label: 'Werkwijze', href: '#workflow' },
+  ];
+
+  // Oplossingen mega menu items
+  const oplossingenItems = [
+    { label: 'Aanbouw/Uitbouw', href: '#aanbouw' },
+    { label: 'Dakopbouw', href: '#dakopbouw' },
+    { label: 'Hooiberg woning', href: '#hooiberg' },
+    { label: 'Mantelzorgwoning', href: '#mantelzorg' },
+    { label: 'Tiny House', href: '#tiny-house' },
+    { label: 'Bijgebouw', href: '#bijgebouw' },
+    { label: 'Vakantiewoning', href: '#vakantiewoning' },
+    { label: 'Dakkapel', href: '#dakkapel' },
+    { label: 'Woning', href: '#woning' },
+    { label: 'Aanleunwoning', href: '#aanleunwoning' },
+  ];
+
+  // Producten mega menu items
+  const productenItems = [
+    { label: 'Kozijnen', href: '#kozijnen' },
+    { label: 'HSB wanden', href: '#hsb-wanden' },
+    { label: 'Hellend dak', href: '#hellend-dak' },
+    { label: 'Plat dak', href: '#plat-dak' },
+  ];
+
+  // Over ons mega menu items
+  const overOnsItems = [
+    { label: 'Ons team', href: '#team' },
+    { label: 'Onze geschiedenis', href: '#history' },
+    { label: 'Onze missie', href: '#mission' },
+    { label: 'Duurzaamheid', href: '#sustainability' },
+    { label: 'Vacatures', href: '#careers' },
   ];
   
   return (
@@ -60,14 +96,9 @@ const Navbar: React.FC = () => {
       <div className="bg-black text-white py-2">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            {/* Ratings Text */}
-            <div className="hidden md:flex items-center gap-1">
-              <div className="flex">
-                {'★★★★★'.split('').map((star, i) => (
-                  <span key={i} className="text-green-400">{star}</span>
-                ))}
-              </div>
-              <span className="text-sm">Lees hier wat klanten van ons vinden</span>
+            {/* Facebook Widget */}
+            <div className="hidden md:block">
+              <div className="elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
             </div>
             
             {/* Top Navigation Links - Desktop */}
@@ -109,35 +140,97 @@ const Navbar: React.FC = () => {
               <Search size={20} className="text-gray-500 mr-2" />
               <Input 
                 type="text" 
-                placeholder="Zoek een product" 
+                placeholder="Zoek" 
                 className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 p-0 text-sm h-6"
               />
             </div>
             
-            {/* Desktop Main Navigation Items */}
-            <nav className="hidden md:flex items-center space-x-6 ml-6">
-              {mainNavItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-gray-700 hover:text-brand-green transition-colors duration-200 font-medium whitespace-nowrap"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
+            {/* Desktop Main Navigation with Mega Menus */}
+            <NavigationMenu className="hidden md:flex ml-6">
+              <NavigationMenuList>
+                {/* Oplossingen Mega Menu */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-700 hover:text-brand-green bg-transparent">Oplossingen</NavigationMenuTrigger>
+                  <NavigationMenuContent className="bg-white p-4 rounded-md shadow-lg">
+                    <div className="grid grid-cols-2 gap-10 p-4 w-[600px]">
+                      <div>
+                        <h3 className="font-bold text-xl mb-4">Oplossingen</h3>
+                        <ul className="space-y-2">
+                          {oplossingenItems.map((item) => (
+                            <li key={item.label}>
+                              <NavigationMenuLink asChild>
+                                <a 
+                                  href={item.href}
+                                  className="flex items-center text-gray-700 hover:text-brand-green"
+                                >
+                                  <span className="mr-2">›</span> {item.label}
+                                </a>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-xl mb-4">Producten</h3>
+                        <ul className="space-y-2">
+                          {productenItems.map((item) => (
+                            <li key={item.label}>
+                              <NavigationMenuLink asChild>
+                                <a 
+                                  href={item.href}
+                                  className="flex items-center text-gray-700 hover:text-brand-green"
+                                >
+                                  <span className="mr-2">›</span> {item.label}
+                                </a>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Standard Navigation Items */}
+                {mainNavItems.map((item) => (
+                  <NavigationMenuItem key={item.label}>
+                    <NavigationMenuLink 
+                      href={item.href}
+                      className="text-gray-700 hover:text-brand-green transition-colors duration-200 font-medium px-4 py-2"
+                    >
+                      {item.label}
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                ))}
+
+                {/* Over ons Mega Menu */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-700 hover:text-brand-green bg-transparent">Over ons</NavigationMenuTrigger>
+                  <NavigationMenuContent className="bg-white p-4 rounded-md shadow-lg">
+                    <div className="p-4 w-[400px]">
+                      <h3 className="font-bold text-xl mb-4">Over ons</h3>
+                      <ul className="space-y-2">
+                        {overOnsItems.map((item) => (
+                          <li key={item.label}>
+                            <NavigationMenuLink asChild>
+                              <a 
+                                href={item.href}
+                                className="flex items-center text-gray-700 hover:text-brand-green"
+                              >
+                                <span className="mr-2">›</span> {item.label}
+                              </a>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
             
             {/* Action Buttons - Desktop */}
-            <div className="hidden md:flex items-center gap-3 ml-4">
-              {/* Bouwbedrijven Button */}
-              <Button 
-                variant="outline" 
-                className="bg-brand-green text-white border-brand-green hover:bg-brand-green-dark hover:border-brand-green-dark transition-colors"
-              >
-                Bouwbedrijven
-                <span className="ml-1">→</span>
-              </Button>
-              
+            <div className="hidden md:flex items-center gap-3 ml-4">              
               {/* Phone Button */}
               <Button asChild className="bg-brand-green text-white hover:bg-brand-green-dark transition-colors">
                 <a href="tel:0533030213" className="flex items-center gap-2">
@@ -147,12 +240,13 @@ const Navbar: React.FC = () => {
               </Button>
               
               {/* WhatsApp Button */}
-              <Button variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green/10 p-2 h-10 w-10">
+              <Button 
+                variant="outline" 
+                className="border-brand-green text-brand-green hover:bg-brand-green/10 flex items-center gap-2"
+              >
                 <MessageCircle size={20} />
+                <span>WhatsApp</span>
               </Button>
-              
-              {/* Facebook Rating Widget (hidden but loaded for script to attach to) */}
-              <div className="hidden elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
             </div>
             
             {/* Mobile Menu Button */}
@@ -179,9 +273,45 @@ const Navbar: React.FC = () => {
               <Search size={20} className="text-gray-500 mr-2" />
               <Input 
                 type="text" 
-                placeholder="Zoek een product" 
+                placeholder="Zoek" 
                 className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 p-0 text-sm h-6"
               />
+            </div>
+            
+            {/* Oplossingen Dropdown - Mobile */}
+            <div className="mb-4">
+              <h3 className="font-bold text-lg mb-2">Oplossingen</h3>
+              <ul className="space-y-2 pl-4">
+                {oplossingenItems.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className="block py-1 text-gray-700 hover:text-brand-green"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      › {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Producten Dropdown - Mobile */}
+            <div className="mb-4">
+              <h3 className="font-bold text-lg mb-2">Producten</h3>
+              <ul className="space-y-2 pl-4">
+                {productenItems.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className="block py-1 text-gray-700 hover:text-brand-green"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      › {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
             
             {/* Main Nav Items - Mobile */}
@@ -195,6 +325,24 @@ const Navbar: React.FC = () => {
                 {item.label}
               </a>
             ))}
+
+            {/* Over ons Dropdown - Mobile */}
+            <div className="mb-4 mt-4">
+              <h3 className="font-bold text-lg mb-2">Over ons</h3>
+              <ul className="space-y-2 pl-4">
+                {overOnsItems.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className="block py-1 text-gray-700 hover:text-brand-green"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      › {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
             
             {/* Top Nav Items - Mobile */}
             <div className="mt-4 pt-4 border-t border-gray-200">
@@ -211,15 +359,6 @@ const Navbar: React.FC = () => {
             </div>
             
             <div className="mt-4 pt-4 border-t border-gray-200 flex flex-col gap-3">
-              {/* Bouwbedrijven Button - Mobile */}
-              <Button 
-                variant="outline" 
-                className="w-full bg-brand-green text-white border-brand-green hover:bg-brand-green-dark hover:border-brand-green-dark transition-colors"
-              >
-                Bouwbedrijven
-                <span className="ml-1">→</span>
-              </Button>
-              
               {/* Phone Button - Mobile */}
               <Button 
                 asChild 
@@ -240,7 +379,7 @@ const Navbar: React.FC = () => {
                 <span>WhatsApp</span>
               </Button>
               
-              {/* Facebook Rating Widget for Mobile (visible) */}
+              {/* Facebook Rating Widget for Mobile */}
               <div className="mt-4 elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
             </div>
           </div>
