@@ -181,7 +181,7 @@ export default {
 				'pulse-soft': 'pulse-soft 3s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'hero-pattern': "url('/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png')",
+				'hero-pattern': "url('/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png')",
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
 			}
 		}

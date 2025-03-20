@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
       id="home" 
       className="relative min-h-screen pt-20 flex items-center"
       style={{
-        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png")',
+        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png")',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
