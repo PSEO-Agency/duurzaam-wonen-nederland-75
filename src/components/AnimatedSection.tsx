@@ -5,14 +5,20 @@ interface AnimatedSectionProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  animation?: 'fade-in' | 'fade-in-right' | 'fade-in-left';
+  animation?: 'fade-in' | 'fade-in-right' | 'fade-in-left' | 'zoom-in' | 'slide-up' | 'bounce';
+  threshold?: number;
+  duration?: number;
+  once?: boolean;
 }
 
 const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   children,
   className = '',
   delay = 0,
-  animation = 'fade-in'
+  animation = 'fade-in',
+  threshold = 0.2,
+  duration = 700,
+  once = true
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   
@@ -22,15 +28,28 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setTimeout(() => {
-              entry.target.classList.add('opacity-100');
-              entry.target.classList.remove('opacity-0');
-              entry.target.classList.add(`animate-${animation}`);
+              if (sectionRef.current) {
+                sectionRef.current.classList.add('opacity-100');
+                sectionRef.current.classList.remove('opacity-0');
+                sectionRef.current.classList.add(`animate-${animation}`);
+                sectionRef.current.style.animationDuration = `${duration}ms`;
+              }
             }, delay);
-            observer.unobserve(entry.target);
+            
+            if (once && sectionRef.current) {
+              observer.unobserve(sectionRef.current);
+            }
+          } else if (!once && sectionRef.current) {
+            sectionRef.current.classList.remove('opacity-100');
+            sectionRef.current.classList.add('opacity-0');
+            sectionRef.current.classList.remove(`animate-${animation}`);
           }
         });
       },
-      { threshold: 0.1 }
+      { 
+        threshold: threshold,
+        rootMargin: '0px 0px -50px 0px'
+      }
     );
     
     if (sectionRef.current) {
@@ -42,13 +61,18 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
         observer.unobserve(sectionRef.current);
       }
     };
-  }, [animation, delay]);
+  }, [animation, delay, threshold, duration, once]);
   
   return (
     <div 
       ref={sectionRef} 
       className={`opacity-0 ${className}`}
-      style={{ willChange: 'opacity, transform' }}
+      style={{ 
+        willChange: 'opacity, transform',
+        transitionDuration: `${duration}ms`,
+        transitionTimingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1.0)'
+      }}
+      data-animation={animation}
     >
       {children}
     </div>
