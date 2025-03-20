@@ -1,10 +1,22 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
 
 const Hero: React.FC = () => {
+  // Load Facebook widget script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://static.elfsight.com/platform/platform.js";
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <section 
       id="home" 
@@ -41,7 +53,7 @@ const Hero: React.FC = () => {
                 </Button>
               </div>
               
-              <div className="flex items-center gap-6 text-white">
+              <div className="flex items-center gap-6 text-white mb-8">
                 <div className="flex items-center gap-2">
                   <div className="bg-brand-green/20 p-1 rounded-full">
                     <Check className="h-4 w-4 text-brand-green" />
@@ -60,6 +72,11 @@ const Hero: React.FC = () => {
                   </div>
                   <span>Vakkundige montage</span>
                 </div>
+              </div>
+              
+              {/* Facebook Rating Widget */}
+              <div className="mt-6 p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 w-full max-w-md">
+                <div className="elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
               </div>
             </AnimatedSection>
           </div>

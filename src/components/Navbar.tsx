@@ -31,18 +31,6 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Load Facebook widget script
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://static.elfsight.com/platform/platform.js";
-    script.async = true;
-    document.body.appendChild(script);
-    
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-  
   // Top bar navigation items
   const topNavItems = [
     { label: 'Blog', href: '#blog' },
@@ -96,13 +84,8 @@ const Navbar: React.FC = () => {
       <div className="bg-black text-white py-2">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            {/* Facebook Widget */}
-            <div className="hidden md:block">
-              <div className="elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
-            </div>
-            
             {/* Top Navigation Links - Desktop */}
-            <div className="hidden md:flex ml-auto">
+            <div className="hidden md:flex">
               {topNavItems.map((item) => (
                 <a
                   key={item.label}
@@ -378,9 +361,6 @@ const Navbar: React.FC = () => {
                 <MessageCircle size={20} className="mr-2" />
                 <span>WhatsApp</span>
               </Button>
-              
-              {/* Facebook Rating Widget for Mobile */}
-              <div className="mt-4 elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
             </div>
           </div>
         </div>
