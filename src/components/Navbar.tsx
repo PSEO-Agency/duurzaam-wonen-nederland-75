@@ -22,6 +22,18 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
+  // Load Facebook widget script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://static.elfsight.com/platform/platform.js";
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+  
   // Navigation items
   const navItems = [
     { label: 'Home', href: '#home' },
@@ -66,8 +78,12 @@ const Navbar: React.FC = () => {
             ))}
           </nav>
           
-          {/* Contact Button */}
-          <div className="hidden md:flex items-center">
+          {/* Contact Button and Facebook Rating Widget */}
+          <div className="hidden md:flex items-center gap-4">
+            {/* Facebook Rating Widget */}
+            <div className="elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
+            
+            {/* Phone Button */}
             <Button asChild className="bg-brand-green hover:bg-brand-green-dark transition-colors duration-200">
               <a href="tel:0533030213" className="flex items-center gap-2">
                 <Phone size={16} />
@@ -105,6 +121,9 @@ const Navbar: React.FC = () => {
               </a>
             ))}
             <div className="mt-4 pb-2">
+              {/* Facebook Rating Widget for Mobile */}
+              <div className="mb-4 elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
+              
               <Button 
                 asChild 
                 className="w-full bg-brand-green hover:bg-brand-green-dark transition-colors duration-200"
