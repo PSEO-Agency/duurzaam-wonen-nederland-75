@@ -46,7 +46,11 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center">
-            <span className="text-2xl font-bold text-brand-green-dark">Duurzaam<span className="text-brand-green">Wonen</span></span>
+            <img 
+              src="/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png" 
+              alt="Duurzaam Wonen Logo" 
+              className="h-12 md:h-14"
+            />
           </a>
           
           {/* Desktop Navigation */}
