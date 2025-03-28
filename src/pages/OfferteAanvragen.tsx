@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
@@ -92,25 +91,31 @@ const OfferteAanvragen: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Fix: Modified to not cause infinite renders
   const handleWindowTypeToggle = (type: WindowType) => {
     setFormData(prev => {
-      const isSelected = prev.windowTypes.includes(type);
-      const newWindowTypes = isSelected
-        ? prev.windowTypes.filter(t => t !== type)
-        : [...prev.windowTypes, type];
+      const newWindowTypes = [...prev.windowTypes];
+      const index = newWindowTypes.indexOf(type);
+      
+      if (index >= 0) {
+        newWindowTypes.splice(index, 1);
+      } else {
+        newWindowTypes.push(type);
+      }
       
       return { ...prev, windowTypes: newWindowTypes };
     });
   };
 
-  // Fix: Modified to not cause infinite renders
   const handleAvailabilityToggle = (day: string) => {
     setFormData(prev => {
-      const isSelected = prev.availability.includes(day);
-      const newAvailability = isSelected
-        ? prev.availability.filter(d => d !== day)
-        : [...prev.availability, day];
+      const newAvailability = [...prev.availability];
+      const index = newAvailability.indexOf(day);
+      
+      if (index >= 0) {
+        newAvailability.splice(index, 1);
+      } else {
+        newAvailability.push(day);
+      }
       
       return { ...prev, availability: newAvailability };
     });
@@ -330,7 +335,6 @@ const OfferteAanvragen: React.FC = () => {
                         <Checkbox 
                           id={option.id} 
                           checked={formData.windowTypes.includes(option.id as WindowType)}
-                          // Fix: Remove onCheckedChange to prevent double toggle
                         />
                         <Label htmlFor={option.id} className="cursor-pointer">{option.label}</Label>
                       </div>
@@ -537,7 +541,6 @@ const OfferteAanvragen: React.FC = () => {
                         <Checkbox 
                           id={day} 
                           checked={formData.availability.includes(day)}
-                          // Fix: Remove onCheckedChange to prevent double toggle
                         />
                         <Label htmlFor={day} className="cursor-pointer">{day}</Label>
                       </div>
