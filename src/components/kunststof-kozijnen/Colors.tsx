@@ -50,21 +50,21 @@ const Colors: React.FC = () => {
   const woodlookOptions: ColorOption[] = [
     {
       name: 'Golden Oak',
-      image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
+      image: '/lovable-uploads/ab9628a0-733d-4736-833b-7a03e543c615.png',
       hex: '#C19A6B',
       description: 'Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.',
       ralCode: 'Folie 2178-001'
     },
     {
       name: 'Noten',
-      image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
+      image: '/lovable-uploads/ab9628a0-733d-4736-833b-7a03e543c615.png',
       hex: '#654321',
       description: 'Rijke, donkere houtlook die diepte en karakter aan uw woning toevoegt.',
       ralCode: 'Folie 2178-007'
     },
     {
       name: 'Mahonie',
-      image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
+      image: '/lovable-uploads/ab9628a0-733d-4736-833b-7a03e543c615.png',
       hex: '#C04000',
       description: 'Roodbruine houtlook met subtiele nerven voor een elegante afwerking.',
       ralCode: 'Folie 2097-013'

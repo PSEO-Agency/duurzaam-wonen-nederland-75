@@ -100,7 +100,7 @@ const colorData: Record<string, ColorOption> = {
   "golden-oak": {
     name: "Golden Oak",
     hex: "#C19A6B",
-    image: "/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png",
+    image: "/lovable-uploads/ab9628a0-733d-4736-833b-7a03e543c615.png",
     description: "Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.",
     category: "woodlook",
     popular: true,
