@@ -20,11 +20,20 @@ const Zoeken: React.FC = () => {
     if (query) {
       performSearch(query);
     }
-  }, [query]);
+    
+    // Cleanup function
+    return () => {
+      // Don't clear results immediately as they might be needed for the command menu
+    };
+  }, [query, performSearch]);
   
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchParams({ q: searchTerm });
+  };
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    performSearch(e.target.value);
   };
   
   // Count results by type
@@ -62,7 +71,7 @@ const Zoeken: React.FC = () => {
                   placeholder="Zoek binnen Duurzaam Wonen Nederland..."
                   className="pl-10 py-3 text-base"
                   value={searchTerm}
-                  onChange={(e) => performSearch(e.target.value)}
+                  onChange={handleInputChange}
                 />
               </div>
             </form>

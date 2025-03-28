@@ -1,9 +1,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Phone, Search as SearchIcon, MessageCircle } from 'lucide-react';
+import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import {
   NavigationMenu,
@@ -14,11 +13,11 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { useNavigate } from 'react-router-dom';
+import SearchCommandMenu from '@/components/search/SearchCommandMenu';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   
   // Handle scroll effect
@@ -34,14 +33,6 @@ const Navbar: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
-  // Handle search submission
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/zoeken?q=${encodeURIComponent(searchTerm)}`);
-    }
-  };
   
   // Use useCallback to prevent unnecessary re-renders
   const toggleMobileMenu = useCallback(() => {
@@ -78,7 +69,7 @@ const Navbar: React.FC = () => {
     { label: 'Aanleunwoning', href: '#aanleunwoning' },
   ];
 
-  // Producten mega menu items - Updated to Kunststof Kozijnen (plural)
+  // Producten mega menu items
   const productenItems = [
     { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
     { label: 'HSB wanden', href: '#hsb-wanden' },
@@ -166,16 +157,7 @@ const Navbar: React.FC = () => {
             </Link>
             
             {/* Search Bar - Desktop */}
-            <form onSubmit={handleSearch} className="hidden md:flex items-center border border-gray-300 rounded-full px-4 py-2 ml-6 flex-grow max-w-md">
-              <SearchIcon size={20} className="text-gray-500 mr-2" />
-              <Input 
-                type="text" 
-                placeholder="Zoek" 
-                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 p-0 text-sm h-6"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </form>
+            <SearchCommandMenu />
             
             {/* Desktop Main Navigation with Mega Menus */}
             <NavigationMenu className="hidden md:flex ml-6">
@@ -283,16 +265,9 @@ const Navbar: React.FC = () => {
         <div className="md:hidden bg-white shadow-lg">
           <div className="container mx-auto px-4 py-3">
             {/* Search Bar - Mobile */}
-            <form onSubmit={handleSearch} className="flex items-center border border-gray-300 rounded-full px-4 py-2 mb-4">
-              <SearchIcon size={20} className="text-gray-500 mr-2" />
-              <Input 
-                type="text" 
-                placeholder="Zoek" 
-                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 p-0 text-sm h-6"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </form>
+            <div className="mb-4">
+              <SearchCommandMenu isMobile={true} />
+            </div>
             
             {/* Oplossingen Dropdown - Mobile */}
             <div className="mb-4">

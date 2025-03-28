@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 
 type SearchResultType = {
   id: string;
@@ -31,6 +31,7 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [searchResults, setSearchResults] = useState<SearchResultType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
 
   // Mock search data (in a real app, this would come from a database or API)
   const mockSearchData: SearchResultType[] = [
@@ -106,12 +107,24 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     }
   ];
 
-  const performSearch = (query: string) => {
+  const performSearch = useCallback((query: string) => {
     setSearchTerm(query);
+    
+    // Clear previous timeout if it exists
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+
+    if (!query.trim()) {
+      setSearchResults([]);
+      setIsLoading(false);
+      return;
+    }
+    
     setIsLoading(true);
     
-    // Simulate API call with timeout
-    setTimeout(() => {
+    // Set a new timeout to debounce the search
+    const timeout = setTimeout(() => {
       // Filter the mock data based on the query
       const results = mockSearchData.filter(item => 
         item.title.toLowerCase().includes(query.toLowerCase()) || 
@@ -120,13 +133,20 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       
       setSearchResults(results);
       setIsLoading(false);
-    }, 500);
-  };
+    }, 300);
+    
+    setSearchTimeout(timeout);
+  }, [searchTimeout]);
 
-  const clearResults = () => {
+  const clearResults = useCallback(() => {
     setSearchResults([]);
     setSearchTerm('');
-  };
+    setIsLoading(false);
+    
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+  }, [searchTimeout]);
 
   return (
     <SearchContext.Provider 
