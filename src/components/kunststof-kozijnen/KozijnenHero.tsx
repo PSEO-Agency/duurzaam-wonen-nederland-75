@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { ArrowRight, Check, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from '../AnimatedSection';
 
@@ -64,6 +64,34 @@ const KozijnenHero: React.FC = () => {
               {/* Facebook Rating Widget */}
               <div className="mt-6 p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 w-full max-w-md">
                 <div className="elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
+                
+                {/* Certification Logos */}
+                <div className="mt-3 pt-3 border-t border-white/20">
+                  <p className="text-white/80 text-xs mb-2">Gecertificeerd door:</p>
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="bg-white rounded p-1 h-8 flex items-center justify-center" title="KOMO-certificaat">
+                      <Shield className="h-5 w-5 text-brand-green mr-1" />
+                      <span className="text-xs font-bold text-gray-800">KOMO</span>
+                    </div>
+                    <div className="bg-white rounded p-1 h-8 flex items-center justify-center" title="CE-markering">
+                      <span className="text-xs font-bold text-gray-800 px-1">CE</span>
+                    </div>
+                    <div className="bg-white rounded p-1 h-8 flex items-center justify-center" title="VKG Keurmerk">
+                      <span className="text-xs font-bold text-gray-800 px-1">VKG</span>
+                    </div>
+                    <div className="bg-white rounded p-1 h-8 flex items-center justify-center" title="Politiekeurmerk">
+                      <Shield className="h-5 w-5 text-blue-600 mr-1" />
+                      <span className="text-xs font-bold text-gray-800">PKVW</span>
+                    </div>
+                    <div className="bg-white rounded p-1 h-8 flex items-center justify-center" title="Energie labels">
+                      <span className="text-xs font-bold px-1">
+                        <span className="text-green-600">A</span>
+                        <span className="text-green-500">+</span>
+                        <span className="text-green-400">+</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </AnimatedSection>
           </div>
