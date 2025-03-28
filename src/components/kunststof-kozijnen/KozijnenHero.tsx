@@ -93,10 +93,6 @@ const KozijnenHero: React.FC = () => {
                 </ul>
                 <div className="mt-6 pt-4 border-t border-white/20">
                   <div className="flex flex-col gap-4">
-                    <Button asChild size="sm" variant="link" className="text-white p-0">
-                      <a href="#benefits">Meer voordelen <ArrowRight className="ml-1 h-3 w-3" /></a>
-                    </Button>
-                    
                     {/* Certification Logos Section - Moved from Benefits */}
                     <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
                       <h4 className="text-sm font-medium text-white mb-3">Gecertificeerd door:</h4>
@@ -117,8 +113,6 @@ const KozijnenHero: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                    
-                    <span className="text-white/80 text-sm">Enschede · regio Twente</span>
                   </div>
                 </div>
               </div>
