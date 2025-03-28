@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Ruler, Wrench, Tool } from 'lucide-react';
+import { Ruler, Wrench, Settings } from 'lucide-react';
 import AnimatedSection from '../AnimatedSection';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -17,7 +17,7 @@ const Services: React.FC = () => {
       description: "Vakkundige montage door ons ervaren team. Snel, schoon en met minimale overlast. Inclusief afwerking en oplevering volgens de hoogste standaarden.",
     },
     {
-      icon: <Tool className="h-10 w-10 text-brand-green" />,
+      icon: <Settings className="h-10 w-10 text-brand-green" />,
       title: "Reparatie",
       description: "Professionele reparatie- en onderhoudsdienst. Ook voor kozijnen die niet door ons zijn geplaatst. Snelle service en eerlijke prijzen.",
     },
