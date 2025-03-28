@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Check, Tool, Clock, Hammer, ShieldCheck, Star, X, Ruler, Settings, Paintbrush, CheckCircle } from 'lucide-react';
+import { ArrowRight, Check, Wrench, Clock, Hammer, ShieldCheck, Star, X, Ruler, Settings, Paintbrush, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -37,7 +36,7 @@ const KozijnMontage: React.FC = () => {
       id: 3,
       title: 'Oude kozijnen verwijderen',
       description: 'De bestaande kozijnen worden zorgvuldig gedemonteerd en afgevoerd.',
-      icon: <Tool className="h-8 w-8 text-brand-green" />,
+      icon: <Wrench className="h-8 w-8 text-brand-green" />,
       duration: '1-2 dagen'
     },
     {
