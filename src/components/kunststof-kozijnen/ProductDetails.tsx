@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Paintbrush } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
@@ -12,7 +12,13 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor }) => {
   return (
     <Card className="border-t-0 rounded-t-none">
       <div className="p-6">
-        <h3 className="text-2xl font-medium mb-4">Schüco Raamsysteem AWS 75.SI+</h3>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-2xl font-medium">Schüco Raamsysteem AWS 75.SI+</h3>
+          <Button variant="outline" className="bg-black hover:bg-black/90 text-white border-black hover:border-black/90">
+            Productdetails bekijken
+            <ExternalLink className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-4">
           <div>
@@ -85,8 +91,8 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor }) => {
           </div>
           
           <Button className="bg-brand-green hover:bg-brand-green-dark">
-            Productdetails bekijken
-            <ExternalLink className="ml-2 h-4 w-4" />
+            Kleuradvies aanvragen
+            <Paintbrush className="ml-2 h-4 w-4" />
           </Button>
         </div>
         
