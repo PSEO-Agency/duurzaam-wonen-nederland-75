@@ -97,7 +97,7 @@ const Sections: React.FC = () => {
                   <TableCell>{section.updatedAt}</TableCell>
                   <TableCell className="text-right">
                     <Link 
-                      to={`/admin/sections/${section.id}`}
+                      to={`/admin/sections/edit/${section.id}`}
                       className="text-brand-green hover:text-brand-green-dark inline-flex items-center"
                     >
                       Edit

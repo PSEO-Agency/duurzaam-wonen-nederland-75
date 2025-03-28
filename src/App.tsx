@@ -60,6 +60,7 @@ import Dashboard from "./pages/admin/Dashboard";
 import Templates from "./pages/admin/Templates";
 import Pages from "./pages/admin/Pages";
 import Sections from "./pages/admin/Sections";
+import SectionEditor from "./pages/admin/SectionEditor";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +78,7 @@ const App = () => (
               <Route path="templates" element={<Templates />} />
               <Route path="pages" element={<Pages />} />
               <Route path="sections" element={<Sections />} />
+              <Route path="sections/edit/:sectionId" element={<SectionEditor />} />
               <Route path="settings" element={<Dashboard />} />
               <Route path="users" element={<Dashboard />} />
             </Route>
