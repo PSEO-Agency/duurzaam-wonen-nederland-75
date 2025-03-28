@@ -1,40 +1,24 @@
-import React, { useMemo } from 'react';
+
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Calendar, Clock, Share2, Bookmark, Printer, FileText } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, ChevronRight, Share2, Bookmark } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import {
+import { 
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
+  BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedSection from '@/components/AnimatedSection';
 import { kennisbankArticles } from '@/data/kennisbankArticles';
-import { KennisbankCategory } from '@/types/kennisbank';
-
-// Categories with their display names
-const categories: Record<KennisbankCategory, string> = {
-  'inleiding': 'Inleiding tot Kunststof Kozijnen',
-  'voordelen': 'Voordelen van Kunststof Kozijnen',
-  'nadelen': 'Nadelen en Aandachtspunten',
-  'soorten': 'Soorten en Stijlen',
-  'technisch': 'Technische Specificaties',
-  'installatie': 'Installatie en Plaatsing',
-  'onderhoud': 'Onderhoud en Reiniging',
-  'kosten': 'Kosten en Besparingen',
-  'milieu': 'Milieu-Impact en Duurzaamheid',
-  'faq': 'Veelgestelde Vragen (FAQ)',
-  'cases': 'Case Studies en Projecten',
-  'normen': 'Normen en Regelgeving',
-  'innovaties': 'Innovaties en Toekomstige Ontwikkelingen'
-};
+import { KennisbankArticle } from '@/types/kennisbank';
+import NotFound from './NotFound';
 
 // Helper function to format dates
 const formatDate = (dateString: string) => {
@@ -44,47 +28,40 @@ const formatDate = (dateString: string) => {
 
 const KennisbankDetail: React.FC = () => {
   const { articleSlug } = useParams<{ articleSlug: string }>();
-  const navigate = useNavigate();
+  const [article, setArticle] = useState<KennisbankArticle | null>(null);
+  const [relatedArticles, setRelatedArticles] = useState<KennisbankArticle[]>([]);
   
-  // Find the current article
-  const article = useMemo(() => {
-    return kennisbankArticles.find(article => article.slug === articleSlug);
-  }, [articleSlug]);
-  
-  // Find related articles - either explicitly related or from the same category
-  const relatedArticles = useMemo(() => {
-    if (!article) return [];
+  useEffect(() => {
+    // Find the article based on the slug
+    const foundArticle = kennisbankArticles.find(item => item.slug === articleSlug);
     
-    // First try to get explicitly related articles
-    if (article.relatedArticles && article.relatedArticles.length > 0) {
-      return kennisbankArticles.filter(a => article.relatedArticles?.includes(a.id)).slice(0, 3);
+    if (foundArticle) {
+      setArticle(foundArticle);
+      
+      // Get related articles
+      if (foundArticle.relatedArticles && foundArticle.relatedArticles.length > 0) {
+        const related = kennisbankArticles.filter(item => 
+          foundArticle.relatedArticles?.includes(item.id)
+        );
+        setRelatedArticles(related);
+      } else {
+        // If no related articles specified, get 3 from the same category
+        const sameCategoryArticles = kennisbankArticles.filter(item => 
+          item.category === foundArticle.category && item.id !== foundArticle.id
+        );
+        setRelatedArticles(sameCategoryArticles.slice(0, 3));
+      }
+    } else {
+      setArticle(null);
+      setRelatedArticles([]);
     }
     
-    // Otherwise get articles from the same category
-    return kennisbankArticles
-      .filter(a => a.category === article.category && a.id !== article.id)
-      .slice(0, 3);
-  }, [article]);
+    // Scroll to top when article changes
+    window.scrollTo(0, 0);
+  }, [articleSlug]);
   
-  // If article not found, redirect to 404
   if (!article) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-grow container mx-auto px-4 py-20">
-          <div className="text-center py-16">
-            <h1 className="text-4xl font-bold mb-4">Artikel niet gevonden</h1>
-            <p className="text-lg text-gray-600 mb-8">
-              Het artikel dat u zoekt bestaat niet of is verplaatst.
-            </p>
-            <Button asChild>
-              <Link to="/kennisbank">Terug naar kennisbank</Link>
-            </Button>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
+    return <NotFound />;
   }
   
   return (
@@ -98,135 +75,107 @@ const KennisbankDetail: React.FC = () => {
       <Navbar />
       
       <main className="flex-grow pt-20">
-        {/* Breadcrumb navigation */}
-        <div className="bg-gray-50 border-b py-3">
+        {/* Hero Section */}
+        <section className={`py-10 ${article.featuredImage ? 'pb-0' : 'bg-gray-50'}`}>
           <div className="container mx-auto px-4">
-            <Breadcrumb>
+            <Breadcrumb className="mb-8">
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link to="/">Home</Link>
-                  </BreadcrumbLink>
+                  <BreadcrumbLink as={Link} to="/">Home</BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator>
+                  <ChevronRight className="h-4 w-4" />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link to="/kennisbank">Kennisbank</Link>
-                  </BreadcrumbLink>
+                  <BreadcrumbLink as={Link} to="/kennisbank">Kennisbank</BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator>
+                  <ChevronRight className="h-4 w-4" />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link to={`/kennisbank?category=${article.category}`}>
-                      {categories[article.category]}
-                    </Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{article.title}</BreadcrumbPage>
+                  <BreadcrumbLink className="max-w-[200px] truncate">{article.title}</BreadcrumbLink>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
+            
+            <div className="max-w-4xl mx-auto">
+              <Link to="/kennisbank" className="inline-flex items-center text-gray-600 hover:text-brand-green mb-6">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Terug naar kennisbank
+              </Link>
+              
+              <div className="mb-8">
+                <div className="text-sm font-medium text-brand-green mb-2">
+                  {article.category.charAt(0).toUpperCase() + article.category.slice(1)} - {article.subCategory}
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold mb-4">{article.title}</h1>
+                <p className="text-lg text-gray-700 mb-6">{article.excerpt}</p>
+                
+                <div className="flex flex-wrap items-center text-sm text-gray-500 mb-2 gap-6">
+                  <div className="flex items-center">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    <span>Gepubliceerd: {formatDate(article.publishedDate)}</span>
+                  </div>
+                  {article.lastUpdated && (
+                    <div className="flex items-center">
+                      <Calendar className="h-4 w-4 mr-1" />
+                      <span>Bijgewerkt: {formatDate(article.lastUpdated)}</span>
+                    </div>
+                  )}
+                  <div className="flex items-center">
+                    <Clock className="h-4 w-4 mr-1" />
+                    <span>{article.readTime} min leestijd</span>
+                  </div>
+                </div>
+                
+                <div className="flex gap-2 mt-6">
+                  <Button variant="outline" size="sm" className="flex items-center gap-1">
+                    <Share2 className="h-4 w-4" />
+                    <span className="hidden sm:inline">Delen</span>
+                  </Button>
+                  <Button variant="outline" size="sm" className="flex items-center gap-1">
+                    <Bookmark className="h-4 w-4" />
+                    <span className="hidden sm:inline">Opslaan</span>
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+          
+          {article.featuredImage && (
+            <div className="w-full h-64 md:h-96 overflow-hidden">
+              <img 
+                src={article.featuredImage} 
+                alt={article.title} 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+        </section>
         
-        {/* Article Header */}
-        <section className="py-8 md:py-12">
+        {/* Article Content */}
+        <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <AnimatedSection animation="fade-in">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="mb-6 hover:bg-gray-100"
-                  onClick={() => navigate(-1)}
-                >
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  <span>Terug</span>
-                </Button>
-                
-                <div className="mb-6">
-                  <div className="inline-block bg-brand-green/10 text-brand-green text-sm font-medium px-3 py-1 rounded-full mb-4">
-                    {article.subCategory}
-                  </div>
-                  <h1 className="text-3xl md:text-4xl font-bold mb-4">{article.title}</h1>
-                  <p className="text-lg text-gray-600 mb-6">{article.excerpt}</p>
+                <div className="prose prose-lg max-w-none">
+                  <p>{article.content}</p>
                   
-                  <div className="flex flex-wrap items-center text-sm text-gray-500 mb-6 gap-x-6 gap-y-2">
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      <span>Gepubliceerd: {formatDate(article.publishedDate)}</span>
-                    </div>
-                    {article.lastUpdated && (
-                      <div className="flex items-center">
-                        <Calendar className="h-4 w-4 mr-2" />
-                        <span>Bijgewerkt: {formatDate(article.lastUpdated)}</span>
-                      </div>
-                    )}
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 mr-2" />
-                      <span>{article.readTime} min leestijd</span>
-                    </div>
-                  </div>
+                  {/* Placeholder for full content - in a real app, this would be rich text */}
+                  <p>Dit artikel bevat uitgebreide informatie over kunststof kozijnen, hun voordelen, installatie, en onderhoud. In een volledige versie zou hier rijke HTML-content staan met meerdere paragrafen, koppen, afbeeldingen, en mogelijk video's.</p>
                   
-                  <div className="flex flex-wrap gap-3">
-                    <Button variant="outline" size="sm" className="gap-2">
-                      <Share2 className="h-4 w-4" />
-                      <span>Delen</span>
-                    </Button>
-                    <Button variant="outline" size="sm" className="gap-2">
-                      <Bookmark className="h-4 w-4" />
-                      <span>Opslaan</span>
-                    </Button>
-                    <Button variant="outline" size="sm" className="gap-2">
-                      <Printer className="h-4 w-4" />
-                      <span>Afdrukken</span>
-                    </Button>
-                    <Button variant="outline" size="sm" className="gap-2">
-                      <FileText className="h-4 w-4" />
-                      <span>PDF</span>
-                    </Button>
-                  </div>
-                </div>
-              </AnimatedSection>
-              
-              {/* Featured Image */}
-              {article.featuredImage && (
-                <AnimatedSection animation="fade-in" delay={100}>
-                  <div className="relative rounded-lg overflow-hidden mb-8 max-h-[500px]">
-                    <img 
-                      src={article.featuredImage} 
-                      alt={article.title} 
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </div>
-                </AnimatedSection>
-              )}
-              
-              {/* Article Content */}
-              <AnimatedSection animation="fade-in" delay={200}>
-                <div className="prose prose-lg max-w-none mb-12">
-                  {/* This would normally be rendered from HTML or Markdown */}
-                  <p className="mb-4">{article.content}</p>
-                  <p className="mb-4">
-                    Dit is een voorbeeldartikel. In een echte implementatie zou hier volledige inhoud staan,
-                    mogelijk opgemaakt met HTML of gerenderd vanuit Markdown.
-                  </p>
-                  <h2 className="text-2xl font-bold mt-8 mb-4">Subkop van het artikel</h2>
-                  <p className="mb-4">
-                    Hier zou meer gedetailleerde informatie staan over {article.title.toLowerCase()}.
-                    Met tekstblokken, opsommingen, afbeeldingen en andere elementen die het onderwerp goed uitleggen.
-                  </p>
-                  <ul className="list-disc pl-6 mb-6">
-                    <li className="mb-2">Belangrijk punt 1 over kunststof kozijnen</li>
-                    <li className="mb-2">Belangrijk punt 2 met meer details</li>
-                    <li className="mb-2">Belangrijk punt 3 met verdere uitleg</li>
+                  <h2>Meer informatie over {article.subCategory}</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim.</p>
+                  
+                  <h3>Specificaties en details</h3>
+                  <p>Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                  
+                  <ul>
+                    <li>Hoge isolatiewaarden voor energiebesparing</li>
+                    <li>Duurzame materialen met lange levensduur</li>
+                    <li>Minimaal onderhoud vereist</li>
+                    <li>Beschikbaar in diverse kleuren en afwerkingen</li>
                   </ul>
-                  <p>
-                    Voor meer specifieke informatie over {article.title.toLowerCase()}, neem gerust contact met ons op
-                    of bekijk onze andere kennisartikelen.
-                  </p>
                 </div>
               </AnimatedSection>
             </div>
@@ -237,7 +186,7 @@ const KennisbankDetail: React.FC = () => {
         {relatedArticles.length > 0 && (
           <section className="py-12 bg-gray-50">
             <div className="container mx-auto px-4">
-              <div className="max-w-5xl mx-auto">
+              <div className="max-w-6xl mx-auto">
                 <h2 className="text-2xl font-bold mb-8">Gerelateerde artikelen</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -246,14 +195,14 @@ const KennisbankDetail: React.FC = () => {
                       <Link to={`/kennisbank/${relatedArticle.slug}`}>
                         <Card className="h-full hover:shadow-md transition-shadow">
                           <CardContent className="p-6">
-                            <div className="text-xs font-medium text-brand-green mb-2">
+                            <div className="text-sm font-medium text-brand-green mb-2">
                               {relatedArticle.subCategory}
                             </div>
-                            <h3 className="text-lg font-bold mb-2 line-clamp-2">{relatedArticle.title}</h3>
+                            <h3 className="text-xl font-bold mb-2 line-clamp-2">{relatedArticle.title}</h3>
                             <p className="text-gray-600 mb-4 line-clamp-3">{relatedArticle.excerpt}</p>
                             <div className="flex items-center text-brand-green font-medium">
                               <span>Lees artikel</span>
-                              <ArrowRight className="ml-2 h-4 w-4" />
+                              <ChevronRight className="ml-1 h-4 w-4" />
                             </div>
                           </CardContent>
                         </Card>
@@ -267,23 +216,23 @@ const KennisbankDetail: React.FC = () => {
         )}
         
         {/* Call to Action */}
-        <section className="py-12 bg-brand-green text-white">
+        <section className="py-16 bg-brand-green text-white">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl font-bold mb-4">Heeft u nog vragen over kunststof kozijnen?</h2>
-              <p className="mb-8 opacity-90">
-                Onze experts staan klaar om al uw vragen te beantwoorden. Neem contact op voor persoonlijk advies 
-                of maak een afspraak in onze showroom.
+              <h2 className="text-3xl font-bold mb-4">Heeft u vragen over kunststof kozijnen?</h2>
+              <p className="text-lg mb-8 opacity-90">
+                Onze experts staan klaar om al uw vragen te beantwoorden en u te helpen bij het kiezen 
+                van de juiste oplossing voor uw woning.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild className="bg-white text-brand-green hover:bg-gray-100">
+                <Button asChild size="lg" className="bg-white text-brand-green hover:bg-gray-100">
                   <Link to="/contact">
                     Contact opnemen
                   </Link>
                 </Button>
-                <Button asChild variant="outline" className="border-white text-white hover:bg-white/10">
-                  <Link to="/showroom">
-                    Bezoek showroom
+                <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                  <Link to="/kennisbank">
+                    Meer artikelen
                   </Link>
                 </Button>
               </div>
