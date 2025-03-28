@@ -7,34 +7,159 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Plus, Search, Check, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useCms } from '@/contexts/CmsContext';
+import { Page } from '@/types/cms';
+
+interface EnhancedPage extends Page {
+  templateName?: string; // Optional for display purposes only
+}
 
 const Pages: React.FC = () => {
-  const { pages } = useCms();
+  const { pages, templates } = useCms();
   const navigate = useNavigate();
   
-  // Filtered and enhanced pages data that matches our routes
-  const [pagesData, setPagesData] = useState(pages);
+  // Filtered and enhanced pages data
+  const [pagesData, setPagesData] = useState<EnhancedPage[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Update pages with actual route information
+  // Update pages with actual route information and template names
   useEffect(() => {
-    const routeBasedPages = [
-      { id: '1', title: 'Home', slug: '/', templateName: 'Home Template', isPublished: true, createdAt: '2023-06-15', updatedAt: '2023-07-15' },
-      { id: '2', title: 'Kunststof Kozijnen', slug: '/kunststof-kozijnen', templateName: 'Product Template', isPublished: true, createdAt: '2023-06-14', updatedAt: '2023-07-14' },
-      { id: '3', title: 'Contact', slug: '/contact', templateName: 'Contact Template', isPublished: true, createdAt: '2023-06-13', updatedAt: '2023-07-13' },
-      { id: '4', title: 'Kunststof Kozijnen Enschede', slug: '/kunststof-kozijnen/locaties/enschede', templateName: 'Location Template', isPublished: true, createdAt: '2023-06-12', updatedAt: '2023-07-12' },
-      { id: '5', title: 'Draaikiepraam', slug: '/kunststof-kozijnen/types/draaikiepraam', templateName: 'Product Type Template', isPublished: true, createdAt: '2023-06-11', updatedAt: '2023-07-11' },
-      { id: '6', title: 'Blog', slug: '/blog', templateName: 'Blog Template', isPublished: true, createdAt: '2023-06-10', updatedAt: '2023-07-10' },
-      { id: '7', title: 'Over Ons', slug: '/over-ons', templateName: 'About Template', isPublished: true, createdAt: '2023-06-09', updatedAt: '2023-07-09' },
-      { id: '8', title: 'Projects', slug: '/projecten', templateName: 'Projects Template', isPublished: true, createdAt: '2023-06-08', updatedAt: '2023-07-08' },
-      { id: '9', title: 'Werkgebied', slug: '/werkgebied', templateName: 'Location Template', isPublished: true, createdAt: '2023-06-07', updatedAt: '2023-07-07' },
-      { id: '10', title: 'Showroom', slug: '/showroom', templateName: 'Location Template', isPublished: true, createdAt: '2023-06-06', updatedAt: '2023-07-06' },
-      { id: '11', title: 'Werkwijze', slug: '/werkwijze', templateName: 'Content Template', isPublished: true, createdAt: '2023-06-05', updatedAt: '2023-07-05' },
-      { id: '12', title: 'Kennisbank', slug: '/kennisbank', templateName: 'Knowledge Template', isPublished: true, createdAt: '2023-06-04', updatedAt: '2023-07-04' },
+    const routeBasedPages: EnhancedPage[] = [
+      { 
+        id: '1', 
+        title: 'Home', 
+        slug: '/', 
+        templateId: '1', 
+        metaDescription: 'Welcome to our home page',
+        isPublished: true, 
+        createdAt: new Date('2023-06-15'), 
+        updatedAt: new Date('2023-07-15'),
+        templateName: 'Home Template'
+      },
+      { 
+        id: '2', 
+        title: 'Kunststof Kozijnen', 
+        slug: '/kunststof-kozijnen', 
+        templateId: '2',
+        metaDescription: 'Explore our kunststof kozijnen products',
+        isPublished: true, 
+        createdAt: new Date('2023-06-14'), 
+        updatedAt: new Date('2023-07-14'),
+        templateName: 'Product Template'
+      },
+      { 
+        id: '3', 
+        title: 'Contact', 
+        slug: '/contact', 
+        templateId: '3',
+        metaDescription: 'Contact us for more information',
+        isPublished: true, 
+        createdAt: new Date('2023-06-13'), 
+        updatedAt: new Date('2023-07-13'),
+        templateName: 'Contact Template'
+      },
+      { 
+        id: '4', 
+        title: 'Kunststof Kozijnen Enschede', 
+        slug: '/kunststof-kozijnen/locaties/enschede', 
+        templateId: '3',
+        metaDescription: 'Kunststof kozijnen in Enschede area',
+        isPublished: true, 
+        createdAt: new Date('2023-06-12'), 
+        updatedAt: new Date('2023-07-12'),
+        templateName: 'Location Template'
+      },
+      { 
+        id: '5', 
+        title: 'Draaikiepraam', 
+        slug: '/kunststof-kozijnen/types/draaikiepraam', 
+        templateId: '2',
+        metaDescription: 'Learn about draaikiepraam windows',
+        isPublished: true, 
+        createdAt: new Date('2023-06-11'), 
+        updatedAt: new Date('2023-07-11'),
+        templateName: 'Product Type Template'
+      },
+      { 
+        id: '6', 
+        title: 'Blog', 
+        slug: '/blog', 
+        templateId: '2',
+        metaDescription: 'Read our latest blog posts',
+        isPublished: true, 
+        createdAt: new Date('2023-06-10'), 
+        updatedAt: new Date('2023-07-10'),
+        templateName: 'Blog Template'
+      },
+      { 
+        id: '7', 
+        title: 'Over Ons', 
+        slug: '/over-ons', 
+        templateId: '2',
+        metaDescription: 'Learn more about our company',
+        isPublished: true, 
+        createdAt: new Date('2023-06-09'), 
+        updatedAt: new Date('2023-07-09'),
+        templateName: 'About Template'
+      },
+      { 
+        id: '8', 
+        title: 'Projects', 
+        slug: '/projecten', 
+        templateId: '2',
+        metaDescription: 'View our completed projects',
+        isPublished: true, 
+        createdAt: new Date('2023-06-08'), 
+        updatedAt: new Date('2023-07-08'),
+        templateName: 'Projects Template'
+      },
+      { 
+        id: '9', 
+        title: 'Werkgebied', 
+        slug: '/werkgebied', 
+        templateId: '3',
+        metaDescription: 'Our service areas',
+        isPublished: true, 
+        createdAt: new Date('2023-06-07'), 
+        updatedAt: new Date('2023-07-07'),
+        templateName: 'Location Template'
+      },
+      { 
+        id: '10', 
+        title: 'Showroom', 
+        slug: '/showroom', 
+        templateId: '3',
+        metaDescription: 'Visit our showroom',
+        isPublished: true, 
+        createdAt: new Date('2023-06-06'), 
+        updatedAt: new Date('2023-07-06'),
+        templateName: 'Location Template'
+      },
+      { 
+        id: '11', 
+        title: 'Werkwijze', 
+        slug: '/werkwijze', 
+        templateId: '2',
+        metaDescription: 'Our working methods',
+        isPublished: true, 
+        createdAt: new Date('2023-06-05'), 
+        updatedAt: new Date('2023-07-05'),
+        templateName: 'Content Template'
+      },
+      { 
+        id: '12', 
+        title: 'Kennisbank', 
+        slug: '/kennisbank', 
+        templateId: '2',
+        metaDescription: 'Knowledge base and resources',
+        isPublished: true, 
+        createdAt: new Date('2023-06-04'), 
+        updatedAt: new Date('2023-07-04'),
+        templateName: 'Knowledge Template'
+      },
     ];
     
     setPagesData(routeBasedPages);
-  }, [pages]);
+  }, [pages, templates]);
 
   // Handle search functionality
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +170,7 @@ const Pages: React.FC = () => {
   const filteredPages = pagesData.filter(page => 
     page.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
     page.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    page.templateName.toLowerCase().includes(searchQuery.toLowerCase())
+    (page.templateName && page.templateName.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   // Handle create new page
@@ -114,7 +239,7 @@ const Pages: React.FC = () => {
                       </span>
                     )}
                   </TableCell>
-                  <TableCell>{page.updatedAt}</TableCell>
+                  <TableCell>{page.updatedAt.toLocaleDateString()}</TableCell>
                   <TableCell className="text-right">
                     <Link 
                       to={`/admin/pages/edit/${page.id}`}
