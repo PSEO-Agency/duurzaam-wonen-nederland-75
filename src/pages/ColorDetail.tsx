@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -8,7 +7,7 @@ import {
   Copy, 
   Info, 
   Home, 
-  Paint, 
+  Paintbrush, 
   CheckCircle2, 
   ImageIcon, 
   Droplet, 
@@ -184,21 +183,16 @@ const colorData: Record<string, ColorOption> = {
   }
 };
 
-// Helper function to find related colors
 const getRelatedColors = (currentColor: ColorOption) => {
-  // Get all colors as an array
   const allColors = Object.values(colorData);
   
-  // Find colors from the same category
   const sameCategory = allColors.filter(color => 
     color.category === currentColor.category && color.name !== currentColor.name
   ).slice(0, 3);
   
-  // Find popular colors if current is not popular
   const popularColors = !currentColor.popular ? 
     allColors.filter(color => color.popular && color.name !== currentColor.name).slice(0, 2) : [];
   
-  // Combine and ensure no duplicates
   const relatedColors = [...sameCategory];
   
   popularColors.forEach(color => {
@@ -207,30 +201,23 @@ const getRelatedColors = (currentColor: ColorOption) => {
     }
   });
   
-  // Limit to max 4 colors
   return relatedColors.slice(0, 4);
 };
 
-// Function to get complementary colors
 const getComplementaryColors = (hex: string): string[] => {
-  // Remove the hash at the start if it exists
   hex = hex.replace(/^#/, '');
   
-  // Parse the RGB values
   const bigint = parseInt(hex, 16);
   const r = (bigint >> 16) & 255;
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
   
-  // Calculate complementary color (opposite on color wheel)
   const compR = 255 - r;
   const compG = 255 - g;
   const compB = 255 - b;
   
-  // Convert back to hex
   const compHex = `#${((1 << 24) + (compR << 16) + (compG << 8) + compB).toString(16).slice(1)}`;
   
-  // Calculate analogous colors (adjacent on color wheel)
   const hsl = rgbToHsl(r, g, b);
   const analogous1 = hslToHex((hsl[0] + 30) % 360, hsl[1], hsl[2]);
   const analogous2 = hslToHex((hsl[0] + 330) % 360, hsl[1], hsl[2]);
@@ -238,7 +225,6 @@ const getComplementaryColors = (hex: string): string[] => {
   return [compHex, analogous1, analogous2];
 };
 
-// Helper function to convert RGB to HSL
 const rgbToHsl = (r: number, g: number, b: number): [number, number, number] => {
   r /= 255;
   g /= 255;
@@ -266,7 +252,6 @@ const rgbToHsl = (r: number, g: number, b: number): [number, number, number] => 
   return [h * 360, s, l];
 };
 
-// Helper function to convert HSL to Hex
 const hslToHex = (h: number, s: number, l: number): string => {
   h /= 360;
   let r, g, b;
@@ -302,11 +287,10 @@ const hslToHex = (h: number, s: number, l: number): string => {
 const ColorDetail: React.FC = () => {
   const { colorSlug } = useParams<{ colorSlug: string }>();
   
-  // Find the color by slug
   const colorKey = colorSlug?.replace(/-/g, ' ').toLowerCase();
   const colorInfo = Object.values(colorData).find(
     color => color.name.toLowerCase() === colorKey
-  ) || colorData["antraciet"]; // Default to Antraciet if not found
+  ) || colorData["antraciet"];
   
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -379,7 +363,7 @@ const ColorDetail: React.FC = () => {
                       Offerte aanvragen
                     </Button>
                     <Button variant="outline" className="border-white/70 hover:bg-white/20">
-                      <Paint className="h-4 w-4 mr-2" />
+                      <Paintbrush className="h-4 w-4 mr-2" />
                       Kleuradvies
                     </Button>
                   </div>
