@@ -12,6 +12,8 @@ import AnimatedSection from '@/components/AnimatedSection';
 import WhatAreKozijnen from '@/components/kunststof-kozijnen/WhatAreKozijnen';
 import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
 import RegionsSection from '@/components/kunststof-kozijnen/RegionsSection';
+import Services from '@/components/kunststof-kozijnen/Services';
+import Hero from '@/components/Hero';
 
 // Mock product data
 const products = [
@@ -107,30 +109,10 @@ const KunststofKozijnen: React.FC = () => {
       
       <Navbar />
       
-      <main className="flex-grow pt-36">
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-gray-50 to-gray-100 py-12">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-              <div className="w-full">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">Kunststof Kozijnen - Duurzaam, Betaalbaar en Stijlvol</h1>
-                <p className="text-lg text-gray-700 mb-6">
-                  Hoogwaardige, energiezuinige en onderhoudsarme kunststof kozijnen voor uw woning. 
-                  Met meer dan 20 jaar ervaring leveren wij kwaliteitsproducten die duurzaam en betrouwbaar zijn.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Button className="bg-brand-green hover:bg-brand-green-dark">
-                    Offerte aanvragen
-                  </Button>
-                  <Button variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green/10">
-                    Ontdek alles over kunststof kozijnen...
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <main className="flex-grow pt-20">
+        {/* Hero Section - Using the same Hero component as homepage */}
+        <Hero />
+        
         {/* Sticky Navigation */}
         <StickyNavigation />
         
@@ -423,6 +405,9 @@ const KunststofKozijnen: React.FC = () => {
             </div>
           </div>
         </section>
+        
+        {/* Services Section - Positioned before FAQ */}
+        <Services />
         
         {/* FAQ Section */}
         <section id="faq" className="py-12 bg-gray-50">
