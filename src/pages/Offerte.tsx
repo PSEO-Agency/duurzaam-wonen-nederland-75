@@ -160,27 +160,33 @@ const Offerte: React.FC = () => {
     
     if (!validateCurrentStep()) return;
     
-    setIsSubmitting(true);
-    
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+    // Only proceed with submission if we're on the review step and the user clicked the submit button
+    if (step === 5) {
+      setIsSubmitting(true);
       
-      toast({
-        title: "Offerte aanvraag verzonden!",
-        description: "We nemen zo spoedig mogelijk contact met u op.",
-      });
-      
-      setFormData(initialFormData);
-      setStep(1);
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Er is een fout opgetreden",
-        description: "Probeer het later opnieuw of neem telefonisch contact op.",
-      });
-    } finally {
-      setIsSubmitting(false);
+      try {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        toast({
+          title: "Offerte aanvraag verzonden!",
+          description: "We nemen zo spoedig mogelijk contact met u op.",
+        });
+        
+        setFormData(initialFormData);
+        setStep(1);
+      } catch (error) {
+        toast({
+          variant: "destructive",
+          title: "Er is een fout opgetreden",
+          description: "Probeer het later opnieuw of neem telefonisch contact op.",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
+    } else {
+      // If not on the review step, just move to the next step
+      nextStep();
     }
   };
 
