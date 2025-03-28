@@ -96,7 +96,7 @@ const Hero: React.FC = () => {
                   {isKozijnenPage ? 'Voordelen van kunststof kozijnen' : 'Voordelen'}
                 </h3>
                 <ul className="space-y-3">
-                  {isKozijnenPage ? [
+                  {(isKozijnenPage ? [
                     'Energiebesparend - Warmte blijft binnen',
                     'Onderhoudsarm - Nooit meer schilderen',
                     'Lange levensduur - Minimaal 30 jaar',
@@ -110,7 +110,7 @@ const Hero: React.FC = () => {
                     'Veilig en innovatief - Hoogwaardige sloten',
                     'Ruime keuze aan kleuren en stijlen',
                     '10 jaar garantie op al onze producten'
-                  ]}.map((item, index) => (
+                  ]).map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <div className="bg-brand-green p-1 rounded-full mt-1 flex-shrink-0">
                         <Check className="h-3 w-3 text-white" />
