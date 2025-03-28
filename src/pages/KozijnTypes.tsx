@@ -58,7 +58,7 @@ const KozijnTypes: React.FC = () => {
       image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
       description: 'Harmonica kozijnen vouwen open als een accordeon, ideaal om een volledig open verbinding te creëren.',
       benefits: ['Volledige opening mogelijk', 'Maximale doorgang', 'Flexibel in gebruik', 'Perfect voor binnen-buiten verbinding', 'Uniek design'],
-      applications: ['Veranda's', 'Woonkamers met tuin', 'Commerciële ruimtes', 'Horecagelegenheden'],
+      applications: ['Veranda\'s', 'Woonkamers met tuin', 'Commerciële ruimtes', 'Horecagelegenheden'],
     },
   ];
 
