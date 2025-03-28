@@ -160,8 +160,8 @@ const Offerte: React.FC = () => {
     
     if (!validateCurrentStep()) return;
     
-    // Only proceed with submission if we're on the review step and the user clicked the submit button
-    if (step === 5) {
+    // Only proceed with actual submission if on the last step AND the submit button was clicked
+    if (step === totalSteps) {
       setIsSubmitting(true);
       
       try {
@@ -185,7 +185,7 @@ const Offerte: React.FC = () => {
         setIsSubmitting(false);
       }
     } else {
-      // If not on the review step, just move to the next step
+      // If not on the last step, just move to the next step
       nextStep();
     }
   };
