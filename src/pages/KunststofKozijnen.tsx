@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, Filter, ArrowRight, ArrowDown, Star, ChevronDown } from 'lucide-react';
@@ -15,7 +14,10 @@ import WhatAreKozijnen from '@/components/kunststof-kozijnen/WhatAreKozijnen';
 import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
 import RegionsSection from '@/components/kunststof-kozijnen/RegionsSection';
 import Services from '@/components/kunststof-kozijnen/Services';
-import Hero from '@/components/Hero';
+import Projects from '@/components/Projects';
+import Workflow from '@/components/Workflow';
+import Reviews from '@/components/Reviews';
+import ContactCTA from '@/components/ContactCTA';
 import ProductFilters from '@/components/kunststof-kozijnen/ProductFilters';
 import KozijnenHero from '@/components/kunststof-kozijnen/KozijnenHero';
 import { Card, CardContent } from '@/components/ui/card';
@@ -278,7 +280,6 @@ const KunststofKozijnen: React.FC = () => {
             </AnimatedSection>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              {/* Maximum 3 columns per row */}
               <AnimatedSection animation="fade-in" delay={100}>
                 <Card className="h-full hover:shadow-md transition-shadow">
                   <CardContent className="p-6">
@@ -510,6 +511,8 @@ const KunststofKozijnen: React.FC = () => {
         
         <Services />
         
+        <Projects />
+        
         <section id="informatie" className="py-12">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-12">
@@ -700,26 +703,13 @@ const KunststofKozijnen: React.FC = () => {
           </div>
         </section>
         
+        <Workflow />
+        
+        <Reviews />
+        
         <RegionsSection />
         
-        <section className="py-16 bg-brand-green text-white">
-          <div className="container mx-auto px-4 text-center">
-            <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold mb-4">Klaar voor nieuwe kunststof kozijnen?</h2>
-              <p className="text-xl mb-8 max-w-3xl mx-auto">
-                Vraag vrijblijvend een offerte aan of maak een afspraak in onze showroom om onze kunststof kozijnen te bekijken.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button className="bg-white text-brand-green hover:bg-gray-100 px-6">
-                  Offerte aanvragen
-                </Button>
-                <Button className="bg-transparent border border-white hover:bg-white/10 px-6">
-                  Showroom bezoeken
-                </Button>
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
+        <ContactCTA />
       </main>
       
       <Footer />
