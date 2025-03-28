@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -606,4 +607,33 @@ const ColorOptions: React.FC = () => {
                                  backgroundImage: "linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent)",
                                  backgroundSize: "10px 10px"
                                }}>
-                            <span className="
+                            <span className="text-xs text-white">Buiten</span>
+                          </div>
+                          <div className="w-full h-20 bg-white border border-gray-200 rounded-r-md flex items-end justify-end p-2">
+                            <span className="text-xs text-gray-700">Binnen</span>
+                          </div>
+                        </div>
+                        <h3 className="font-semibold text-lg mb-1">Rvs-look buiten, Wit binnen</h3>
+                        <p className="text-gray-600 text-sm mb-4">Moderne combinatie met een industriële uitstraling aan de buitenzijde en een neutrale binnenzijde.</p>
+                        <div className="flex justify-between text-sm text-gray-500">
+                          <span>Kozijn: K70/K90</span>
+                          <span>Meerprijs: + €150/m²</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </AnimatedSection>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </section>
+        
+        <ContactCTA />
+      </main>
+      
+      <Footer />
+    </>
+  );
+};
+
+export default ColorOptions;
