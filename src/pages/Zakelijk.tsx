@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Briefcase, TrendingUp, Users, Coins, BadgeCheck, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Briefcase, TrendingUp, Users, Coins, BadgeCheck, ShieldCheck, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';

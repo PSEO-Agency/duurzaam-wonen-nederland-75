@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Award, Calendar, Users, Sprout, Building, History } from 'lucide-react';
+import { ArrowRight, Award, Calendar, Users, Sprout, Building, History, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
