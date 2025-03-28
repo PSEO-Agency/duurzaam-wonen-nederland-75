@@ -11,7 +11,7 @@ const navigationItems = [
   { id: 'voordelen', label: 'Voordelen' },
   { id: 'diensten', label: 'Onze Diensten' },
   { id: 'soorten', label: 'Soorten' },
-  { id: 'kleuren', label: 'Kleuren' },
+  { id: 'kleuren', label: 'Kleuren', route: '/kunststof-kozijnen/kleuren' },
   { id: 'montage', label: 'Montage' },
   { id: 'merken', label: 'Merken' },
   { id: 'regios', label: 'Regio\'s' },
@@ -56,13 +56,23 @@ const StickyNavigation: React.FC = () => {
             <div className="flex items-center overflow-x-auto scrollbar-hide">
               <div className="flex space-x-6 whitespace-nowrap px-2">
                 {navigationItems.map((item) => (
-                  <button 
-                    key={item.id} 
-                    onClick={() => scrollToSection(item.id)} 
-                    className="text-sm font-medium hover:text-brand-green transition-colors"
-                  >
-                    {item.label}
-                  </button>
+                  item.route ? (
+                    <Link 
+                      key={item.id}
+                      to={item.route}
+                      className="text-sm font-medium hover:text-brand-green transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <button 
+                      key={item.id} 
+                      onClick={() => scrollToSection(item.id)} 
+                      className="text-sm font-medium hover:text-brand-green transition-colors"
+                    >
+                      {item.label}
+                    </button>
+                  )
                 ))}
               </div>
             </div>
