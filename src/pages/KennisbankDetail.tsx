@@ -10,7 +10,8 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbSeparator
+  BreadcrumbSeparator,
+  BreadcrumbPage
 } from "@/components/ui/breadcrumb";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -81,19 +82,23 @@ const KennisbankDetail: React.FC = () => {
             <Breadcrumb className="mb-8">
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbLink as={Link} to="/">Home</BreadcrumbLink>
+                  <BreadcrumbLink asChild>
+                    <Link to="/">Home</Link>
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <ChevronRight className="h-4 w-4" />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbLink as={Link} to="/kennisbank">Kennisbank</BreadcrumbLink>
+                  <BreadcrumbLink asChild>
+                    <Link to="/kennisbank">Kennisbank</Link>
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <ChevronRight className="h-4 w-4" />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbLink className="max-w-[200px] truncate">{article.title}</BreadcrumbLink>
+                  <BreadcrumbPage className="max-w-[200px] truncate">{article.title}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
