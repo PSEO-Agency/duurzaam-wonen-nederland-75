@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, Filter, ArrowRight, ArrowDown, Star, ChevronDown } from 'lucide-react';
@@ -276,7 +277,8 @@ const KunststofKozijnen: React.FC = () => {
               </p>
             </AnimatedSection>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+              {/* Maximum 3 columns per row */}
               <AnimatedSection animation="fade-in" delay={100}>
                 <Card className="h-full hover:shadow-md transition-shadow">
                   <CardContent className="p-6">
