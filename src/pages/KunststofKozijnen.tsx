@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, Filter, ArrowRight, ArrowDown, Star, ChevronDown } from 'lucide-react';
@@ -20,7 +19,6 @@ import ProductFilters from '@/components/kunststof-kozijnen/ProductFilters';
 import KozijnenHero from '@/components/kunststof-kozijnen/KozijnenHero';
 import { Card, CardContent } from '@/components/ui/card';
 
-// Mock product data
 const products = [
   {
     id: 1,
@@ -115,13 +113,10 @@ const KunststofKozijnen: React.FC = () => {
       <Navbar />
       
       <main className="flex-grow pt-20">
-        {/* Hero Section - Using the specialized KozijnenHero component */}
         <KozijnenHero />
         
-        {/* Sticky Navigation */}
         <StickyNavigation />
         
-        {/* Introduction Section - NEW */}
         <section id="introductie" className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
@@ -197,10 +192,8 @@ const KunststofKozijnen: React.FC = () => {
           </div>
         </section>
         
-        {/* What are Kunststof Kozijnen Section */}
         <WhatAreKozijnen />
         
-        {/* Voordelen Section - NEW */}
         <section id="voordelen" className="py-12 bg-white">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-10 items-center">
@@ -273,7 +266,6 @@ const KunststofKozijnen: React.FC = () => {
           </div>
         </section>
         
-        {/* Types Section - NEW */}
         <section id="types" className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
@@ -284,7 +276,7 @@ const KunststofKozijnen: React.FC = () => {
               </p>
             </AnimatedSection>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-10">
               <AnimatedSection animation="fade-in" delay={100}>
                 <Card className="h-full hover:shadow-md transition-shadow">
                   <CardContent className="p-6">
@@ -392,26 +384,130 @@ const KunststofKozijnen: React.FC = () => {
                   </CardContent>
                 </Card>
               </AnimatedSection>
+              
+              <AnimatedSection animation="fade-in" delay={400}>
+                <Card className="h-full hover:shadow-md transition-shadow">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-4">Montage</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Inclusief montage</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Exclusief montage</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Zelfmontage</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Professioneel advies</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Inmeten service</span>
+                      </li>
+                    </ul>
+                    <div className="mt-4">
+                      <a href="#montage" className="text-brand-green flex items-center hover:underline">
+                        <span>Bekijk montage opties</span>
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              </AnimatedSection>
+              
+              <AnimatedSection animation="fade-in" delay={500}>
+                <Card className="h-full hover:shadow-md transition-shadow">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-4">Prijssegment</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Goedkope kozijnen</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Middensegment</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Premium kozijnen</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Aanbiedingen</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Incl. subsidie</span>
+                      </li>
+                    </ul>
+                    <div className="mt-4">
+                      <a href="#prijzen" className="text-brand-green flex items-center hover:underline">
+                        <span>Bekijk prijssegmenten</span>
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              </AnimatedSection>
+              
+              <AnimatedSection animation="fade-in" delay={600}>
+                <Card className="h-full hover:shadow-md transition-shadow">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-4">(Keur)Merken</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Schüco</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Veka</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Kömmerling</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Deceuninck</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Gealan</span>
+                      </li>
+                    </ul>
+                    <div className="mt-4">
+                      <a href="#merken" className="text-brand-green flex items-center hover:underline">
+                        <span>Bekijk alle merken</span>
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              </AnimatedSection>
             </div>
           </div>
         </section>
         
-        {/* Filter and Products Section - MODIFIED to not show the "Ons assortiment" text */}
         <section id="assortiment" className="py-12">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
               <h2 className="text-3xl font-bold mb-6">Filter ons assortiment</h2>
             </AnimatedSection>
             
-            {/* Use ProductFilters component */}
             <ProductFilters />
           </div>
         </section>
         
-        {/* Services Section */}
         <Services />
         
-        {/* Information Section */}
         <section id="informatie" className="py-12">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-12">
@@ -446,7 +542,7 @@ const KunststofKozijnen: React.FC = () => {
                         ongevoelig voor rot, schimmel en aantasting door insecten.
                       </p>
                       <p>
-                        Onze kozijnen zijn verkrijgbaar in diverse kleuren en afwerkingen, waaronder houtlook-uitvoeringen 
+                        Onze kozijnen zijn verkrijgbaar in diverse kleuren en afwerkingen, waaronder houtnerf-uitvoeringen 
                         die niet te onderscheiden zijn van echte houten kozijnen. Het materiaal is UV-bestendig, waardoor 
                         de kleur jarenlang mooi blijft zonder verkleuring.
                       </p>
@@ -502,7 +598,6 @@ const KunststofKozijnen: React.FC = () => {
           </div>
         </section>
         
-        {/* FAQ Section */}
         <section id="faq" className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <AnimatedSection className="text-center mb-10" animation="fade-in">
@@ -603,10 +698,8 @@ const KunststofKozijnen: React.FC = () => {
           </div>
         </section>
         
-        {/* Regions Section */}
         <RegionsSection />
         
-        {/* CTA Section */}
         <section className="py-16 bg-brand-green text-white">
           <div className="container mx-auto px-4 text-center">
             <AnimatedSection animation="fade-in">
