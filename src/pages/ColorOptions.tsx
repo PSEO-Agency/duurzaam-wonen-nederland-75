@@ -83,13 +83,13 @@ const ColorOptions: React.FC = () => {
       <Navbar />
 
       <main>
-        <section className="py-28 pt-40 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center">
+        <section className="py-20 pt-40 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in" className="flex flex-col justify-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">
                 Kleuren voor Kunststof Kozijnen
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-8">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-4">
                 Ontdek de perfecte kleur voor uw kunststof kozijnen met onze interactieve kleurenmodule
               </p>
             </AnimatedSection>
