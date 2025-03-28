@@ -61,9 +61,9 @@ const Navbar: React.FC = () => {
     { label: 'Aanleunwoning', href: '#aanleunwoning' },
   ];
 
-  // Producten mega menu items - Updated Kozijnen to Kunststof Kozijn
+  // Producten mega menu items - Updated to Kunststof Kozijnen (plural)
   const productenItems = [
-    { label: 'Kunststof Kozijn', href: '/kunststof-kozijn' },
+    { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
     { label: 'HSB wanden', href: '#hsb-wanden' },
     { label: 'Hellend dak', href: '#hellend-dak' },
     { label: 'Plat dak', href: '#plat-dak' },
