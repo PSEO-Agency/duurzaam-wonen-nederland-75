@@ -13,7 +13,14 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor }) => {
     <Card className="border-t-0 rounded-t-none">
       <div className="p-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-2xl font-medium">Schüco Raamsysteem AWS 75.SI+</h3>
+          <div className="flex items-center gap-3">
+            <h3 className="text-2xl font-medium">Schüco Raamsysteem AWS 75.SI+</h3>
+            <img 
+              src="/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png" 
+              alt="Schüco" 
+              className="h-6 w-auto"
+            />
+          </div>
           <Button variant="outline" className="bg-black hover:bg-black/90 text-white border-black hover:border-black/90">
             Productdetails bekijken
             <ExternalLink className="ml-2 h-4 w-4" />

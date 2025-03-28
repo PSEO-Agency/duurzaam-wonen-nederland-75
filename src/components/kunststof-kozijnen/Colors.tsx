@@ -89,10 +89,20 @@ const Colors: React.FC = () => {
             {standardColors.map((color) => (
               <AnimatedSection key={color.name} animation="fade-in">
                 <Card className="h-full hover:shadow-md transition-shadow overflow-hidden">
-                  <div 
-                    className="h-32" 
-                    style={{ backgroundColor: color.hex, border: color.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none' }}
-                  ></div>
+                  <div className="relative">
+                    <div 
+                      className="h-32" 
+                      style={{ backgroundColor: color.hex, border: color.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none' }}
+                    >
+                      <div className="absolute top-2 right-2 bg-white/70 px-2 py-1 rounded-sm">
+                        <img 
+                          src="/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png" 
+                          alt="Schüco" 
+                          className="h-4 w-auto"
+                        />
+                      </div>
+                    </div>
+                  </div>
                   <CardContent className="p-4">
                     <h4 className="font-semibold mb-1">{color.name}</h4>
                     {color.ralCode && (
@@ -121,10 +131,20 @@ const Colors: React.FC = () => {
             {woodlookOptions.map((option) => (
               <AnimatedSection key={option.name} animation="fade-in">
                 <Card className="h-full hover:shadow-md transition-shadow overflow-hidden">
-                  <div className="h-40 bg-cover bg-center" style={{ 
-                    backgroundColor: option.hex,
-                    backgroundImage: option.image ? `url(${option.image})` : 'none'
-                  }}></div>
+                  <div className="relative">
+                    <div className="h-40 bg-cover bg-center" style={{ 
+                      backgroundColor: option.hex,
+                      backgroundImage: option.image ? `url(${option.image})` : 'none'
+                    }}>
+                      <div className="absolute top-2 right-2 bg-white/70 px-2 py-1 rounded-sm">
+                        <img 
+                          src="/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png" 
+                          alt="Schüco" 
+                          className="h-4 w-auto"
+                        />
+                      </div>
+                    </div>
+                  </div>
                   <CardContent className="p-4">
                     <h4 className="font-semibold mb-1">{option.name}</h4>
                     {option.ralCode && (
