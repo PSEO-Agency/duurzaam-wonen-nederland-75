@@ -92,23 +92,25 @@ const OfferteAanvragen: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  // Fixed handleWindowTypeToggle to prevent infinite loops
   const handleWindowTypeToggle = (type: WindowType) => {
     setFormData(prev => {
-      if (prev.windowTypes.includes(type)) {
-        return { ...prev, windowTypes: prev.windowTypes.filter(t => t !== type) };
-      } else {
-        return { ...prev, windowTypes: [...prev.windowTypes, type] };
-      }
+      const newWindowTypes = prev.windowTypes.includes(type)
+        ? prev.windowTypes.filter(t => t !== type)
+        : [...prev.windowTypes, type];
+      
+      return { ...prev, windowTypes: newWindowTypes };
     });
   };
 
+  // Fixed handleAvailabilityToggle to prevent infinite loops
   const handleAvailabilityToggle = (day: string) => {
     setFormData(prev => {
-      if (prev.availability.includes(day)) {
-        return { ...prev, availability: prev.availability.filter(d => d !== day) };
-      } else {
-        return { ...prev, availability: [...prev.availability, day] };
-      }
+      const newAvailability = prev.availability.includes(day)
+        ? prev.availability.filter(d => d !== day)
+        : [...prev.availability, day];
+      
+      return { ...prev, availability: newAvailability };
     });
   };
 
@@ -328,7 +330,8 @@ const OfferteAanvragen: React.FC = () => {
                         <Checkbox 
                           id={option.id} 
                           checked={formData.windowTypes.includes(option.id as WindowType)}
-                          onCheckedChange={() => handleWindowTypeToggle(option.id as WindowType)}
+                          // Fixed: Remove onCheckedChange to prevent double handling
+                          // the parent div already has onClick that calls handleWindowTypeToggle
                         />
                         <Label htmlFor={option.id} className="cursor-pointer">{option.label}</Label>
                       </div>
@@ -535,7 +538,7 @@ const OfferteAanvragen: React.FC = () => {
                         <Checkbox 
                           id={day} 
                           checked={formData.availability.includes(day)}
-                          onCheckedChange={() => handleAvailabilityToggle(day)}
+                          // Fixed: Remove onCheckedChange here as well to prevent double handling
                         />
                         <Label htmlFor={day} className="cursor-pointer">{day}</Label>
                       </div>
