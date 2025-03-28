@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -31,9 +30,9 @@ const ColorOptions: React.FC = () => {
   const [filterCategory, setFilterCategory] = useState<string>("all");
   const [activeTab, setActiveTab] = useState<string>("visualizer");
 
-  const visualizerRef = useRef<HTMLDivElement>(null);
-  const collectionRef = useRef<HTMLDivElement>(null);
-  const combinationsRef = useRef<HTMLDivElement>(null);
+  const visualizerTitleRef = useRef<HTMLHeadingElement>(null);
+  const collectionTitleRef = useRef<HTMLHeadingElement>(null);
+  const combinationsTitleRef = useRef<HTMLHeadingElement>(null);
 
   const colorOptions: ColorOption[] = [
     // Standard colors
@@ -81,13 +80,20 @@ const ColorOptions: React.FC = () => {
 
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
+    
     const sectionRef = 
-      sectionId === "visualizer" ? visualizerRef :
-      sectionId === "collection" ? collectionRef :
-      combinationsRef;
+      sectionId === "visualizer" ? visualizerTitleRef :
+      sectionId === "collection" ? collectionTitleRef :
+      combinationsTitleRef;
     
     if (sectionRef.current) {
-      sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+      const yOffset = -120;
+      const y = sectionRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -116,42 +122,45 @@ const ColorOptions: React.FC = () => {
         
         <StickyNavigation />
         
-        <section className="py-12">
+        <div className="sticky top-[80px] z-10 bg-white border-b shadow-sm">
           <div className="container mx-auto px-4">
-            <div className="sticky top-36 z-10 bg-white pt-4 pb-2 mb-6">
-              <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="grid w-full grid-cols-3 mb-8">
-                  <TabsTrigger 
-                    value="visualizer" 
-                    className="flex items-center gap-2"
-                    onClick={() => scrollToSection("visualizer")}
-                  >
-                    <Palette className="h-4 w-4" />
-                    <span className="hidden sm:inline">Kleurenmodule</span>
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="collection" 
-                    className="flex items-center gap-2"
-                    onClick={() => scrollToSection("collection")}
-                  >
-                    <Droplet className="h-4 w-4" />
-                    <span className="hidden sm:inline">Kleurencollectie</span>
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="combinations" 
-                    className="flex items-center gap-2"
-                    onClick={() => scrollToSection("combinations")}
-                  >
-                    <Layers className="h-4 w-4" />
-                    <span className="hidden sm:inline">Kleurcombinaties</span>
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </div>
-            
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="py-2">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger 
+                  value="visualizer" 
+                  className="flex items-center gap-2"
+                  onClick={() => scrollToSection("visualizer")}
+                >
+                  <Palette className="h-4 w-4" />
+                  <span className="hidden sm:inline">Kleurenmodule</span>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="collection" 
+                  className="flex items-center gap-2"
+                  onClick={() => scrollToSection("collection")}
+                >
+                  <Droplet className="h-4 w-4" />
+                  <span className="hidden sm:inline">Kleurencollectie</span>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="combinations" 
+                  className="flex items-center gap-2"
+                  onClick={() => scrollToSection("combinations")}
+                >
+                  <Layers className="h-4 w-4" />
+                  <span className="hidden sm:inline">Kleurcombinaties</span>
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+        </div>
+        
+        <section className="py-12">
+          <div className="container mx-auto px-4">            
             <ScrollArea className="pr-4">
               <div className="space-y-20">
-                <div ref={visualizerRef} id="visualizer" className="space-y-8">
+                <div id="visualizer" className="space-y-8">
+                  <h2 ref={visualizerTitleRef} className="text-2xl font-bold mb-4">Interactieve Kleurenmodule</h2>
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-1 space-y-6">
                       <AnimatedSection animation="fade-in">
@@ -400,10 +409,10 @@ const ColorOptions: React.FC = () => {
                   </div>
                 </div>
                 
-                <div ref={collectionRef} id="collection" className="space-y-8">
+                <div id="collection" className="space-y-8">
                   <AnimatedSection animation="fade-in">
                     <div className="text-center max-w-3xl mx-auto mb-8">
-                      <h2 className="text-2xl font-bold mb-4">Onze kleurencollectie</h2>
+                      <h2 ref={collectionTitleRef} className="text-2xl font-bold mb-4">Onze kleurencollectie</h2>
                       <p className="text-gray-600">
                         Bekijk onze uitgebreide collectie van kleuren voor kunststof kozijnen. Van klassiek wit tot moderne antraciet en warme houtlook afwerkingen.
                       </p>
@@ -558,10 +567,10 @@ const ColorOptions: React.FC = () => {
                   </div>
                 </div>
                 
-                <div ref={combinationsRef} id="combinations" className="space-y-8">
+                <div id="combinations" className="space-y-8">
                   <AnimatedSection animation="fade-in">
                     <div className="text-center max-w-3xl mx-auto mb-8">
-                      <h2 className="text-2xl font-bold mb-4">Populaire kleurcombinaties</h2>
+                      <h2 ref={combinationsTitleRef} className="text-2xl font-bold mb-4">Populaire kleurcombinaties</h2>
                       <p className="text-gray-600">
                         Ontdek onze meest gevraagde binnen- en buitenzijde combinaties voor kunststof kozijnen.
                       </p>

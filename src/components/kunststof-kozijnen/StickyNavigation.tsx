@@ -19,7 +19,7 @@ const StickyNavigation: React.FC = () => {
       <nav className={`sticky top-20 z-20 bg-white border-b shadow-sm transition-all duration-300 ${!inView ? 'shadow-md' : ''}`}>
         <div className="container mx-auto px-4">
           {/* Breadcrumb navigation */}
-          <div className="py-2 border-b">
+          <div className="py-2">
             <Breadcrumb>
               <BreadcrumbList className="text-sm">
                 <BreadcrumbItem>
