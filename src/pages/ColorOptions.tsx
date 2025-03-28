@@ -5,6 +5,7 @@ import { Slider } from "@/components/ui/slider";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Palette, Home, CheckCircle2, Image, Droplet, PanelRight, Paintbrush, Layers, Star } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import Navbar from '@/components/Navbar';
@@ -169,22 +170,32 @@ const ColorOptions: React.FC = () => {
                           </div>
                           
                           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-3 xl:grid-cols-4 gap-2 max-h-72 overflow-y-auto p-2">
-                            {filteredColors.map((color) => (
-                              <button
-                                key={color.name}
-                                className={`w-full aspect-square rounded-md border-2 ${selectedColor?.name === color.name ? 'border-brand-green' : 'border-transparent'} hover:border-brand-green-dark transition-all`}
-                                style={{ 
-                                  backgroundColor: color.hex,
-                                  boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                                }}
-                                onClick={() => setSelectedColor(color)}
-                                title={color.name}
-                              >
-                                {selectedColor?.name === color.name && (
-                                  <CheckCircle2 className="h-5 w-5 text-brand-green bg-white rounded-full" />
-                                )}
-                              </button>
-                            ))}
+                            <TooltipProvider>
+                              {filteredColors.map((color) => (
+                                <Tooltip key={color.name}>
+                                  <TooltipTrigger asChild>
+                                    <button
+                                      className={`w-full aspect-square rounded-md border-2 ${selectedColor?.name === color.name ? 'border-brand-green' : 'border-transparent'} hover:border-brand-green-dark transition-all`}
+                                      style={{ 
+                                        backgroundColor: color.hex,
+                                        boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                      }}
+                                      onClick={() => setSelectedColor(color)}
+                                    >
+                                      {selectedColor?.name === color.name && (
+                                        <CheckCircle2 className="h-5 w-5 text-brand-green bg-white rounded-full" />
+                                      )}
+                                    </button>
+                                  </TooltipTrigger>
+                                  <TooltipContent className="font-medium">
+                                    <div className="space-y-1">
+                                      <p>{color.name}</p>
+                                      <p className="text-xs text-gray-500">{color.hex}</p>
+                                    </div>
+                                  </TooltipContent>
+                                </Tooltip>
+                              ))}
+                            </TooltipProvider>
                           </div>
                           
                           {selectedColor && (
@@ -361,24 +372,36 @@ const ColorOptions: React.FC = () => {
                       Standaardkleuren
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                      {colorOptions.filter(c => c.category === "standard").map((color) => (
-                        <Card key={color.name} className="h-full hover:shadow-md transition-shadow">
-                          <div 
-                            className="h-32" 
-                            style={{ 
-                              backgroundColor: color.hex,
-                              boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                            }}
-                          ></div>
-                          <CardContent className="p-4">
-                            <h4 className="font-semibold mb-1 flex items-center">
-                              {color.name}
-                              {color.popular && <CheckCircle2 className="h-4 w-4 ml-1 text-brand-green" />}
-                            </h4>
-                            <p className="text-sm text-gray-600 line-clamp-2">{color.description}</p>
-                          </CardContent>
-                        </Card>
-                      ))}
+                      <TooltipProvider>
+                        {colorOptions.filter(c => c.category === "standard").map((color) => (
+                          <Tooltip key={color.name}>
+                            <TooltipTrigger asChild>
+                              <Card className="h-full hover:shadow-md transition-shadow">
+                                <div 
+                                  className="h-32" 
+                                  style={{ 
+                                    backgroundColor: color.hex,
+                                    boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                  }}
+                                ></div>
+                                <CardContent className="p-4">
+                                  <h4 className="font-semibold mb-1 flex items-center">
+                                    {color.name}
+                                    {color.popular && <CheckCircle2 className="h-4 w-4 ml-1 text-brand-green" />}
+                                  </h4>
+                                  <p className="text-sm text-gray-600 line-clamp-2">{color.description}</p>
+                                </CardContent>
+                              </Card>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <div className="space-y-1">
+                                <p>{color.name}</p>
+                                <p className="text-xs text-gray-500">{color.hex}</p>
+                              </div>
+                            </TooltipContent>
+                          </Tooltip>
+                        ))}
+                      </TooltipProvider>
                     </div>
                   </AnimatedSection>
                   
@@ -388,24 +411,33 @@ const ColorOptions: React.FC = () => {
                       Houtlook afwerkingen
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {colorOptions.filter(c => c.category === "woodlook").map((color) => (
-                        <Card key={color.name} className="h-full hover:shadow-md transition-shadow overflow-hidden">
-                          <div 
-                            className="h-40 bg-cover bg-center"
-                            style={{ 
-                              backgroundImage: color.image ? `url(${color.image})` : 'none',
-                              backgroundColor: color.hex
-                            }}
-                          ></div>
-                          <CardContent className="p-4">
-                            <h4 className="font-semibold mb-1 flex items-center">
-                              {color.name}
-                              {color.popular && <CheckCircle2 className="h-4 w-4 ml-1 text-brand-green" />}
-                            </h4>
-                            <p className="text-sm text-gray-600">{color.description}</p>
-                          </CardContent>
-                        </Card>
-                      ))}
+                      <TooltipProvider>
+                        {colorOptions.filter(c => c.category === "woodlook").map((color) => (
+                          <Tooltip key={color.name}>
+                            <TooltipTrigger asChild>
+                              <Card className="h-full hover:shadow-md transition-shadow overflow-hidden">
+                                <div 
+                                  className="h-40"
+                                  style={{ backgroundColor: color.hex }}
+                                ></div>
+                                <CardContent className="p-4">
+                                  <h4 className="font-semibold mb-1 flex items-center">
+                                    {color.name}
+                                    {color.popular && <CheckCircle2 className="h-4 w-4 ml-1 text-brand-green" />}
+                                  </h4>
+                                  <p className="text-sm text-gray-600">{color.description}</p>
+                                </CardContent>
+                              </Card>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <div className="space-y-1">
+                                <p>{color.name}</p>
+                                <p className="text-xs text-gray-500">{color.hex}</p>
+                              </div>
+                            </TooltipContent>
+                          </Tooltip>
+                        ))}
+                      </TooltipProvider>
                     </div>
                   </AnimatedSection>
                   
@@ -415,22 +447,34 @@ const ColorOptions: React.FC = () => {
                       Metallic afwerkingen
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                      {colorOptions.filter(c => c.category === "metallic").map((color) => (
-                        <Card key={color.name} className="h-full hover:shadow-md transition-shadow">
-                          <div 
-                            className="h-32" 
-                            style={{ 
-                              backgroundColor: color.hex,
-                              backgroundImage: "linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent)",
-                              backgroundSize: "10px 10px"
-                            }}
-                          ></div>
-                          <CardContent className="p-4">
-                            <h4 className="font-semibold mb-1">{color.name}</h4>
-                            <p className="text-sm text-gray-600">{color.description}</p>
-                          </CardContent>
-                        </Card>
-                      ))}
+                      <TooltipProvider>
+                        {colorOptions.filter(c => c.category === "metallic").map((color) => (
+                          <Tooltip key={color.name}>
+                            <TooltipTrigger asChild>
+                              <Card className="h-full hover:shadow-md transition-shadow">
+                                <div 
+                                  className="h-32" 
+                                  style={{ 
+                                    backgroundColor: color.hex,
+                                    backgroundImage: "linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent)",
+                                    backgroundSize: "10px 10px"
+                                  }}
+                                ></div>
+                                <CardContent className="p-4">
+                                  <h4 className="font-semibold mb-1">{color.name}</h4>
+                                  <p className="text-sm text-gray-600">{color.description}</p>
+                                </CardContent>
+                              </Card>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <div className="space-y-1">
+                                <p>{color.name}</p>
+                                <p className="text-xs text-gray-500">{color.hex}</p>
+                              </div>
+                            </TooltipContent>
+                          </Tooltip>
+                        ))}
+                      </TooltipProvider>
                     </div>
                   </AnimatedSection>
                   
@@ -440,18 +484,30 @@ const ColorOptions: React.FC = () => {
                       Speciale kleuren
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                      {colorOptions.filter(c => c.category === "special").map((color) => (
-                        <Card key={color.name} className="h-full hover:shadow-md transition-shadow">
-                          <div 
-                            className="h-32" 
-                            style={{ backgroundColor: color.hex }}
-                          ></div>
-                          <CardContent className="p-4">
-                            <h4 className="font-semibold mb-1">{color.name}</h4>
-                            <p className="text-sm text-gray-600 line-clamp-2">{color.description}</p>
-                          </CardContent>
-                        </Card>
-                      ))}
+                      <TooltipProvider>
+                        {colorOptions.filter(c => c.category === "special").map((color) => (
+                          <Tooltip key={color.name}>
+                            <TooltipTrigger asChild>
+                              <Card className="h-full hover:shadow-md transition-shadow">
+                                <div 
+                                  className="h-32" 
+                                  style={{ backgroundColor: color.hex }}
+                                ></div>
+                                <CardContent className="p-4">
+                                  <h4 className="font-semibold mb-1">{color.name}</h4>
+                                  <p className="text-sm text-gray-600 line-clamp-2">{color.description}</p>
+                                </CardContent>
+                              </Card>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <div className="space-y-1">
+                                <p>{color.name}</p>
+                                <p className="text-xs text-gray-500">{color.hex}</p>
+                              </div>
+                            </TooltipContent>
+                          </Tooltip>
+                        ))}
+                      </TooltipProvider>
                     </div>
                   </AnimatedSection>
                 </div>
