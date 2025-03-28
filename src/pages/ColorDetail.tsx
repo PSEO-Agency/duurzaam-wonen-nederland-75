@@ -519,7 +519,7 @@ const ColorDetail: React.FC = () => {
                     {colorInfo.designTips?.map((tip, index) => (
                       <div key={index} className="flex items-start gap-3">
                         <div className="mt-1">
-                          <Paint className="h-4 w-4 text-brand-green" />
+                          <Paintbrush className="h-4 w-4 text-brand-green" />
                         </div>
                         <p>{tip}</p>
                       </div>
