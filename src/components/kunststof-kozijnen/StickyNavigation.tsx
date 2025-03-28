@@ -32,7 +32,7 @@ const StickyNavigation: React.FC = () => {
       <nav className={`sticky top-20 z-20 bg-white border-b shadow-sm transition-all duration-300 ${!inView ? 'shadow-md' : ''}`}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-3">
-            <div className="flex items-center overflow-x-auto no-scrollbar">
+            <div className="flex items-center overflow-x-auto scrollbar-hide">
               <div className="flex space-x-6 whitespace-nowrap px-2">
                 {navigationItems.map((item) => (
                   <button 
