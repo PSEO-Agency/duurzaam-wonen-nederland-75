@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, ArrowRight, CheckCircle, Info } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Info, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -70,6 +70,34 @@ const initialFormData: OfferteFormData = {
   availabilitySchedule: '',
   termsAccepted: false
 };
+
+const demoFormData: OfferteFormData = {
+  projectType: 'renovatie',
+  propertyType: 'woning',
+  timeline: 'binnen 3 maanden',
+  budget: '€10.000 - €15.000',
+  
+  windowTypes: ['draaikiepraam', 'vast'],
+  quantity: '4 ramen, 1 deur',
+  dimensions: '120x150 cm',
+  color: 'antraciet',
+  additionalInfo: 'Ik zoek kozijnen met hoge isolatiewaarde',
+  
+  firstName: 'Demo',
+  lastName: 'Gebruiker',
+  email: 'demo@example.com',
+  phone: '0612345678',
+  address: 'Voorbeeldstraat 123',
+  postalCode: '1234 AB',
+  city: 'Amsterdam',
+  
+  preferredContact: 'email',
+  availability: ['ochtend', 'middag'],
+  availabilitySchedule: '{}',
+  termsAccepted: true
+};
+
+const WEBHOOK_URL = 'https://n8n.virtualmin.programmaticseobuilder.com/webhook/a8d7075d-1b28-494f-86a0-c05adf144309';
 
 const Offerte: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -156,14 +184,43 @@ const Offerte: React.FC = () => {
     return isValid;
   };
 
+  const sendToWebhook = async (data: OfferteFormData) => {
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          formData: data,
+          timestamp: new Date().toISOString(),
+          source: window.location.origin
+        }),
+      });
+      
+      console.log('Data sent to webhook successfully');
+      return true;
+    } catch (error) {
+      console.error('Error sending data to webhook:', error);
+      return false;
+    }
+  };
+
   const submitForm = async () => {
     if (!validateCurrentStep()) return;
     
     setIsSubmitting(true);
     
     try {
+      // Send data to webhook
+      const webhookSuccess = await sendToWebhook(formData);
+      
+      if (!webhookSuccess) {
+        console.warn('Webhook submission failed, but continuing with form submission');
+      }
+      
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
         title: "Offerte aanvraag verzonden!",
@@ -180,6 +237,34 @@ const Offerte: React.FC = () => {
         title: "Er is een fout opgetreden",
         description: "Probeer het later opnieuw of neem telefonisch contact op.",
       });
+      setIsSubmitting(false);
+    }
+  };
+
+  const submitDemoForm = async () => {
+    setIsSubmitting(true);
+    
+    try {
+      // Send demo data to webhook
+      const webhookSuccess = await sendToWebhook(demoFormData);
+      
+      if (!webhookSuccess) {
+        console.warn('Demo webhook submission failed');
+      }
+      
+      toast({
+        title: "Demo aanvraag verzonden!",
+        description: "De demo is succesvol verzonden.",
+      });
+      
+      navigate('/offerte/success');
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Er is een fout opgetreden",
+        description: "Kon de demo aanvraag niet verzenden.",
+      });
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -244,11 +329,23 @@ const Offerte: React.FC = () => {
       
       <div className="bg-gray-50 py-12 md:py-16">
         <div className="container max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Vraag vrijblijvend een offerte aan</h1>
             <p className="text-lg text-gray-600 mt-3">
               Maak gebruik van onze handige wizard om in enkele stappen een offerte op maat te ontvangen
             </p>
+            
+            <div className="mt-6">
+              <Button 
+                onClick={submitDemoForm} 
+                disabled={isSubmitting}
+                variant="outline"
+                className="bg-amber-50 hover:bg-amber-100 border-amber-200"
+              >
+                <Zap className="mr-2 h-4 w-4 text-amber-500" />
+                Demo Aanvraag
+              </Button>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

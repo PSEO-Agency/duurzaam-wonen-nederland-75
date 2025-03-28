@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -68,6 +68,13 @@ const OfferteSuccess: React.FC = () => {
                     Terug naar homepage
                   </Link>
                 </Button>
+              </div>
+            </div>
+            
+            <div className="mt-6 pt-6 border-t border-gray-100">
+              <div className="flex items-center justify-center gap-2 text-gray-600">
+                <Mail className="h-5 w-5" />
+                <span>Een bevestigingsmail is onderweg naar uw inbox</span>
               </div>
             </div>
           </div>
