@@ -18,6 +18,8 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
   onClick,
   className = '',
 }) => {
+  // The main issue is here - we're creating an endless loop with the state updates
+  // Let's fix it by not using onCheckedChange at all in this component
   return (
     <div 
       className={`border rounded-lg p-4 cursor-pointer transition-colors ${
@@ -29,7 +31,7 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
         <Checkbox 
           id={id}
           checked={checked}
-          onCheckedChange={() => {}}
+          // Removing the onCheckedChange prop completely as we handle changes via onClick on the parent div
           className="pointer-events-none"
         />
         <Label htmlFor={id} className="cursor-pointer">{label}</Label>
@@ -38,4 +40,5 @@ const FormCheckbox: React.FC<FormCheckboxProps> = ({
   );
 };
 
+// Using React.memo to prevent unnecessary re-renders
 export default React.memo(FormCheckbox);
