@@ -317,7 +317,7 @@ const ColorOptions: React.FC = () => {
                           <CardContent className="p-0 relative">
                             <div className="relative">
                               <img 
-                                src="/lovable-uploads/73d57948-a36b-408e-bb8c-aad91f4b7495.png"
+                                src="/lovable-uploads/78d706ca-fb91-4c03-82ca-97b0b0c127eb.png"
                                 alt="Kunststof kozijn doorsnede"
                                 className="w-full object-cover"
                               />
