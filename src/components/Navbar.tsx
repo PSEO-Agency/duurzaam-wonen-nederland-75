@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Phone, Search as SearchIcon, MessageCircle } from 'lucide-react';
@@ -46,7 +45,7 @@ const Navbar: React.FC = () => {
   // Top bar navigation items
   const topNavItems = [
     { label: 'Blog', href: '/blog' },
-    { label: 'Kennisbank', href: '#knowledge' },
+    { label: 'Kennisbank', href: '/kennisbank' },
     { label: 'Zakelijk', href: '/zakelijk' },
     { label: 'Werkgebied', href: '/werkgebied' },
     { label: 'Contact', href: '/contact' },
