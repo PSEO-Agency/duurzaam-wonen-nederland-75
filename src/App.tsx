@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -35,6 +34,7 @@ import Vacatures from "./pages/over-ons/Vacatures";
 import Kennisbank from "./pages/Kennisbank";
 import KennisbankDetail from "./pages/KennisbankDetail";
 import Offerte from "./pages/Offerte";
+import OfferteSuccess from "./pages/OfferteSuccess";
 
 // New location pages
 import KozijnenEnschede from "./pages/locaties/KozijnenEnschede";
@@ -90,6 +90,7 @@ const App = () => (
             {/* Public Routes */}
             <Route path="/" element={<Index />} />
             <Route path="/offerte" element={<Offerte />} />
+            <Route path="/offerte/success" element={<OfferteSuccess />} />
             <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
             <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
             <Route path="/kunststof-kozijnen/kleuren/:colorSlug" element={<ColorDetail />} />

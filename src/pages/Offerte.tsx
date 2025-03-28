@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ArrowRight, CheckCircle, Info } from 'lucide-react';
@@ -6,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { toast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProjectTypeStep from '@/components/offerte/ProjectTypeStep';
@@ -76,6 +76,7 @@ const Offerte: React.FC = () => {
   const [formData, setFormData] = useState<OfferteFormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const totalSteps = 5;
+  const navigate = useNavigate();
 
   const updateFormData = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -169,6 +170,8 @@ const Offerte: React.FC = () => {
         description: "We nemen zo spoedig mogelijk contact met u op.",
       });
       
+      navigate('/offerte/success');
+      
       setFormData(initialFormData);
       setStep(1);
     } catch (error) {
@@ -177,12 +180,10 @@ const Offerte: React.FC = () => {
         title: "Er is een fout opgetreden",
         description: "Probeer het later opnieuw of neem telefonisch contact op.",
       });
-    } finally {
       setIsSubmitting(false);
     }
   };
 
-  // This function now only handles navigation between steps, not actual submission
   const handleNavigate = (e: React.FormEvent) => {
     e.preventDefault();
     nextStep();
@@ -254,10 +255,8 @@ const Offerte: React.FC = () => {
             <div className="lg:col-span-2">
               <Card className="bg-white shadow-sm border-0">
                 <CardContent className="p-6 sm:p-8">
-                  {/* Form starts here, but switched to a <div> for the last step to prevent automatic submission */}
                   {step < totalSteps ? (
                     <form onSubmit={handleNavigate}>
-                      {/* Progress Indicator */}
                       <div className="mb-8">
                         <div className="flex justify-between mb-2">
                           <span className="text-sm font-medium">Stap {step} van {totalSteps}</span>
@@ -266,12 +265,10 @@ const Offerte: React.FC = () => {
                         <Progress value={(step / totalSteps) * 100} className="h-2" />
                       </div>
                       
-                      {/* Step Content */}
                       <div className="min-h-[400px]">
                         {renderStepContent()}
                       </div>
                       
-                      {/* Navigation Buttons */}
                       <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 mt-8">
                         {step > 1 ? (
                           <Button
@@ -298,8 +295,7 @@ const Offerte: React.FC = () => {
                       </div>
                     </form>
                   ) : (
-                    <div> {/* For the review step, use a div instead of a form to prevent automatic submission */}
-                      {/* Progress Indicator */}
+                    <div>
                       <div className="mb-8">
                         <div className="flex justify-between mb-2">
                           <span className="text-sm font-medium">Stap {step} van {totalSteps}</span>
@@ -308,12 +304,10 @@ const Offerte: React.FC = () => {
                         <Progress value={(step / totalSteps) * 100} className="h-2" />
                       </div>
                       
-                      {/* Step Content */}
                       <div className="min-h-[400px]">
                         {renderStepContent()}
                       </div>
                       
-                      {/* Navigation Buttons */}
                       <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 mt-8">
                         <Button
                           type="button"
@@ -348,7 +342,6 @@ const Offerte: React.FC = () => {
               </Card>
             </div>
             
-            {/* Advisor Panel - Right Column */}
             <div className="lg:col-span-1">
               <AdvisorPanel />
             </div>
