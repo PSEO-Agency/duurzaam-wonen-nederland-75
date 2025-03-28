@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
 import { useLocation } from 'react-router-dom';
@@ -120,11 +120,27 @@ const Hero: React.FC = () => {
                   ))}
                 </ul>
                 <div className="mt-6 pt-4 border-t border-white/20">
-                  <div className="flex items-center justify-between">
-                    <Button asChild size="sm" variant="link" className="text-white p-0">
-                      <a href="#benefits">Meer voordelen <ArrowRight className="ml-1 h-3 w-3" /></a>
-                    </Button>
-                    <span className="text-white/80 text-sm">Enschede · regio Twente</span>
+                  <div className="flex flex-col gap-4">
+                    {/* Certification Logos Section */}
+                    <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+                      <h4 className="text-sm font-medium text-white mb-3">Gecertificeerd door:</h4>
+                      <div className="flex items-center justify-between flex-wrap gap-2">
+                        <div className="bg-white/20 rounded p-2 h-10 flex items-center backdrop-blur-sm" title="KOMO-certificaat">
+                          <Shield className="h-4 w-4 text-brand-green mr-1" />
+                          <span className="text-xs font-bold text-white">KOMO</span>
+                        </div>
+                        <div className="bg-white/20 rounded p-2 h-10 flex items-center backdrop-blur-sm" title="CE-markering">
+                          <span className="text-xs font-bold text-white px-1">CE</span>
+                        </div>
+                        <div className="bg-white/20 rounded p-2 h-10 flex items-center backdrop-blur-sm" title="VKG Keurmerk">
+                          <span className="text-xs font-bold text-white px-1">VKG</span>
+                        </div>
+                        <div className="bg-white/20 rounded p-2 h-10 flex items-center backdrop-blur-sm" title="Politiekeurmerk">
+                          <Shield className="h-4 w-4 text-white mr-1" />
+                          <span className="text-xs font-bold text-white">PKVW</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
