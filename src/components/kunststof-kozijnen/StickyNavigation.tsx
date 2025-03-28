@@ -3,15 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Home } from 'lucide-react';
+import { Separator } from "@/components/ui/separator";
+import { Home, ChevronRight } from 'lucide-react';
 
 const navigationItems = [
   { id: 'wat-zijn', label: 'Wat zijn Kunststof Kozijnen?' },
@@ -43,27 +36,19 @@ const StickyNavigation: React.FC = () => {
         <div className="container mx-auto px-4">
           {/* Breadcrumb navigation */}
           <div className="py-2 border-b">
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link to="/">
-                      <Home className="h-3.5 w-3.5" />
-                    </Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link to="/producten">Producten</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Kunststof Kozijnen</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+            <div className="flex items-center text-sm text-gray-500">
+              <Link to="/" className="flex items-center hover:text-brand-green transition-colors">
+                <Home className="h-3.5 w-3.5" />
+              </Link>
+              <ChevronRight className="mx-2 h-3.5 w-3.5" />
+              <Link to="/producten" className="hover:text-brand-green transition-colors">
+                Producten
+              </Link>
+              <ChevronRight className="mx-2 h-3.5 w-3.5" />
+              <span className="font-medium text-foreground">
+                Kunststof Kozijnen
+              </span>
+            </div>
           </div>
           
           {/* Navigation items */}
