@@ -54,6 +54,13 @@ import SchucoBrand from "./pages/brands/SchucoBrand";
 import KozijnenAfbetaling from "./pages/prices/KozijnenAfbetaling";
 import KozijnenSubsidie from "./pages/prices/KozijnenSubsidie";
 
+// Admin pages
+import AdminLayout from "./components/admin/AdminLayout";
+import Dashboard from "./pages/admin/Dashboard";
+import Templates from "./pages/admin/Templates";
+import Pages from "./pages/admin/Pages";
+import Sections from "./pages/admin/Sections";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -65,6 +72,17 @@ const App = () => (
         <SearchProvider>
           <BrowserRouter>
             <Routes>
+              {/* Admin Routes */}
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="templates" element={<Templates />} />
+                <Route path="pages" element={<Pages />} />
+                <Route path="sections" element={<Sections />} />
+                <Route path="settings" element={<Dashboard />} />
+                <Route path="users" element={<Dashboard />} />
+              </Route>
+              
+              {/* Public Routes */}
               <Route path="/" element={<Index />} />
               <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
               <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
