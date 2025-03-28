@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -12,6 +11,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
 import ContactCTA from '@/components/ContactCTA';
+import ProductDetails from '@/components/kunststof-kozijnen/ProductDetails';
 
 interface ColorOption {
   name: string;
@@ -63,17 +63,11 @@ const ColorOptions: React.FC = () => {
   
   const popularColors = colorOptions.filter(color => color.popular);
 
-  // Function to calculate the overlay color with transparency based on intensity
   const getOverlayColor = (hex: string, intensity: number) => {
-    // Convert intensity (0-100) to opacity (0-0.8)
-    // Using max 0.8 opacity to ensure some of the original product details are still visible
     const opacity = (intensity / 100) * 0.8;
-    
-    // Convert hex to rgba
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
     const b = parseInt(hex.slice(5, 7), 16);
-    
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   };
 
@@ -122,7 +116,6 @@ const ColorOptions: React.FC = () => {
               
               <TabsContent value="visualizer" className="space-y-8">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                  {/* Left Panel: Color Selector */}
                   <div className="lg:col-span-1 space-y-6">
                     <AnimatedSection animation="fade-in">
                       <Card>
@@ -251,20 +244,17 @@ const ColorOptions: React.FC = () => {
                     </AnimatedSection>
                   </div>
                   
-                  {/* Center: Visualization */}
                   <div className="lg:col-span-2">
                     <AnimatedSection animation="fade-in" delay={200}>
                       <Card className="overflow-hidden h-full">
                         <CardContent className="p-0 relative">
                           <div className="relative">
-                            {/* Base product image */}
                             <img 
                               src="/lovable-uploads/73d57948-a36b-408e-bb8c-aad91f4b7495.png"
                               alt="Kunststof kozijn doorsnede"
                               className="w-full object-cover"
                             />
                             
-                            {/* Color overlay */}
                             {selectedColor && (
                               <div 
                                 className="absolute inset-0 mix-blend-multiply"
@@ -282,7 +272,6 @@ const ColorOptions: React.FC = () => {
                               ></div>
                             )}
                             
-                            {/* No color selected message */}
                             {!selectedColor && (
                               <div className="absolute inset-0 flex items-center justify-center bg-black/5">
                                 <div className="text-center bg-white/90 backdrop-blur-sm p-6 rounded-lg max-w-md">
@@ -294,36 +283,7 @@ const ColorOptions: React.FC = () => {
                             )}
                           </div>
                           
-                          {/* Selected color information */}
-                          {selectedColor && (
-                            <div className="p-6 bg-white">
-                              <div className="flex items-center gap-3 mb-2">
-                                <div 
-                                  className="w-8 h-8 rounded-full" 
-                                  style={{ 
-                                    background: selectedColor.image ? `url(${selectedColor.image}) center/cover` : selectedColor.hex,
-                                    boxShadow: selectedColor.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                                  }}
-                                ></div>
-                                <h3 className="text-xl font-semibold">{selectedColor.name}</h3>
-                              </div>
-                              
-                              <p className="text-gray-600 mb-4">{selectedColor.description}</p>
-                              
-                              <div className="grid grid-cols-2 gap-4 text-sm">
-                                <div className="bg-gray-50 p-3 rounded-md">
-                                  <span className="font-medium">Categorie:</span>{' '}
-                                  {filterCategory === 'standard' ? 'Standaard kleur' :
-                                   filterCategory === 'woodlook' ? 'Houtlook' :
-                                   filterCategory === 'metallic' ? 'Metallic' : 'Speciale kleur'}
-                                </div>
-                                <div className="bg-gray-50 p-3 rounded-md">
-                                  <span className="font-medium">Levertijd:</span>{' '}
-                                  {filterCategory === 'standard' ? '6-8 weken' : '8-10 weken'}
-                                </div>
-                              </div>
-                            </div>
-                          )}
+                          <ProductDetails selectedColor={selectedColor?.name || null} />
                         </CardContent>
                       </Card>
                     </AnimatedSection>
