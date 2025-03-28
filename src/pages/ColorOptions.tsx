@@ -23,8 +23,7 @@ interface ColorOption {
 
 const ColorOptions: React.FC = () => {
   const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null);
-  const [roomScene, setRoomScene] = useState<number>(1);
-  const [brightness, setBrightness] = useState<number>(50);
+  const [intensity, setIntensity] = useState<number>(50);
   const [filterCategory, setFilterCategory] = useState<string>("all");
 
   const colorOptions: ColorOption[] = [
@@ -60,14 +59,22 @@ const ColorOptions: React.FC = () => {
   const filteredColors = filterCategory === "all" 
     ? colorOptions 
     : colorOptions.filter(color => color.category === filterCategory);
-
-  const roomScenes = [
-    { id: 1, name: "Moderne woning", image: "/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png" },
-    { id: 2, name: "Jaren 30 woning", image: "/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png" },
-    { id: 3, name: "Landelijk huis", image: "/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png" }
-  ];
   
   const popularColors = colorOptions.filter(color => color.popular);
+
+  // Function to calculate the overlay color with transparency based on intensity
+  const getOverlayColor = (hex: string, intensity: number) => {
+    // Convert intensity (0-100) to opacity (0-0.8)
+    // Using max 0.8 opacity to ensure some of the original product details are still visible
+    const opacity = (intensity / 100) * 0.8;
+    
+    // Convert hex to rgba
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  };
 
   return (
     <>
@@ -211,41 +218,32 @@ const ColorOptions: React.FC = () => {
                       <Card>
                         <CardContent className="p-6">
                           <h3 className="text-xl font-semibold mb-4 flex items-center">
-                            <Image className="h-5 w-5 mr-2 text-brand-green" />
-                            Kies een stijl woning
+                            <Droplet className="h-5 w-5 mr-2 text-brand-green" />
+                            Kleurintensiteit aanpassen
                           </h3>
                           
-                          <div className="grid grid-cols-3 gap-2 mb-4">
-                            {roomScenes.map((scene) => (
-                              <button
-                                key={scene.id}
-                                className={`aspect-video rounded-md border-2 overflow-hidden ${roomScene === scene.id ? 'border-brand-green' : 'border-transparent'} hover:border-brand-green-dark transition-all`}
-                                onClick={() => setRoomScene(scene.id)}
-                              >
-                                <img 
-                                  src={scene.image} 
-                                  alt={scene.name} 
-                                  className="w-full h-full object-cover"
-                                />
-                              </button>
-                            ))}
-                          </div>
-                          
                           <div className="space-y-4">
-                            <h4 className="font-medium text-sm">Lichtinval aanpassen</h4>
                             <div className="px-2">
                               <Slider
                                 defaultValue={[50]}
                                 max={100}
                                 step={1}
-                                value={[brightness]}
-                                onValueChange={(values) => setBrightness(values[0])}
+                                value={[intensity]}
+                                onValueChange={(values) => setIntensity(values[0])}
+                                disabled={!selectedColor}
                               />
                             </div>
                             <div className="flex justify-between text-xs text-gray-500">
-                              <span>Donker</span>
-                              <span>Licht</span>
+                              <span>Subtiel</span>
+                              <span>Intens</span>
                             </div>
+                          </div>
+                          
+                          <div className="mt-6">
+                            <p className="text-sm text-gray-600">
+                              Deze visualisatie geeft een indicatie van hoe de kleur eruit zal zien op uw kozijnen. 
+                              De werkelijke kleur kan afwijken afhankelijk van het gekozen materiaal en lichtomstandigheden.
+                            </p>
                           </div>
                         </CardContent>
                       </Card>
@@ -256,36 +254,37 @@ const ColorOptions: React.FC = () => {
                   <div className="lg:col-span-2">
                     <AnimatedSection animation="fade-in" delay={200}>
                       <Card className="overflow-hidden h-full">
-                        <CardContent className="p-0 relative aspect-[4/3]">
-                          <div 
-                            className="w-full h-full bg-cover bg-center relative"
-                            style={{ 
-                              backgroundImage: `url(${roomScenes.find(s => s.id === roomScene)?.image})`,
-                              filter: `brightness(${brightness / 50})`
-                            }}
-                          >
+                        <CardContent className="p-0 relative">
+                          <div className="relative">
+                            {/* Base product image */}
+                            <img 
+                              src="/lovable-uploads/73d57948-a36b-408e-bb8c-aad91f4b7495.png"
+                              alt="Kunststof kozijn doorsnede"
+                              className="w-full object-cover"
+                            />
+                            
+                            {/* Color overlay */}
                             {selectedColor && (
-                              <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="relative z-10 bg-white/80 backdrop-blur-sm p-6 rounded-lg max-w-md text-center">
-                                  <h3 className="text-xl font-semibold mb-2">Visualisatie in ontwikkeling</h3>
-                                  <p className="mb-4">Onze 3D-visualisatietool is momenteel in ontwikkeling.</p>
-                                  <div className="flex justify-center gap-2 items-center">
-                                    <div 
-                                      className="w-6 h-6 rounded-full" 
-                                      style={{ 
-                                        background: selectedColor.image ? `url(${selectedColor.image}) center/cover` : selectedColor.hex,
-                                        boxShadow: selectedColor.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none' 
-                                      }}
-                                    ></div>
-                                    <p className="font-medium">{selectedColor.name} geselecteerd</p>
-                                  </div>
-                                </div>
-                              </div>
+                              <div 
+                                className="absolute inset-0 mix-blend-multiply"
+                                style={{ 
+                                  backgroundColor: selectedColor.image 
+                                    ? 'transparent' 
+                                    : getOverlayColor(selectedColor.hex, intensity),
+                                  backgroundImage: selectedColor.image 
+                                    ? `url(${selectedColor.image})` 
+                                    : 'none',
+                                  backgroundSize: 'cover',
+                                  backgroundPosition: 'center',
+                                  opacity: selectedColor.image ? intensity / 100 : 1
+                                }}
+                              ></div>
                             )}
                             
+                            {/* No color selected message */}
                             {!selectedColor && (
-                              <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="text-center bg-white/80 backdrop-blur-sm p-6 rounded-lg max-w-md">
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/5">
+                                <div className="text-center bg-white/90 backdrop-blur-sm p-6 rounded-lg max-w-md">
                                   <Palette className="h-12 w-12 mx-auto mb-4 text-brand-green" />
                                   <h3 className="text-xl font-semibold mb-2">Selecteer een kleur</h3>
                                   <p>Kies een kleur in het paneel links om te zien hoe het eruit ziet op kunststof kozijnen.</p>
@@ -293,6 +292,37 @@ const ColorOptions: React.FC = () => {
                               </div>
                             )}
                           </div>
+                          
+                          {/* Selected color information */}
+                          {selectedColor && (
+                            <div className="p-6 bg-white">
+                              <div className="flex items-center gap-3 mb-2">
+                                <div 
+                                  className="w-8 h-8 rounded-full" 
+                                  style={{ 
+                                    background: selectedColor.image ? `url(${selectedColor.image}) center/cover` : selectedColor.hex,
+                                    boxShadow: selectedColor.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                  }}
+                                ></div>
+                                <h3 className="text-xl font-semibold">{selectedColor.name}</h3>
+                              </div>
+                              
+                              <p className="text-gray-600 mb-4">{selectedColor.description}</p>
+                              
+                              <div className="grid grid-cols-2 gap-4 text-sm">
+                                <div className="bg-gray-50 p-3 rounded-md">
+                                  <span className="font-medium">Categorie:</span>{' '}
+                                  {filterCategory === 'standard' ? 'Standaard kleur' :
+                                   filterCategory === 'woodlook' ? 'Houtlook' :
+                                   filterCategory === 'metallic' ? 'Metallic' : 'Speciale kleur'}
+                                </div>
+                                <div className="bg-gray-50 p-3 rounded-md">
+                                  <span className="font-medium">Levertijd:</span>{' '}
+                                  {filterCategory === 'standard' ? '6-8 weken' : '8-10 weken'}
+                                </div>
+                              </div>
+                            </div>
+                          )}
                         </CardContent>
                       </Card>
                     </AnimatedSection>
@@ -557,211 +587,4 @@ const ColorOptions: React.FC = () => {
                           </div>
                         </div>
                         <h3 className="font-semibold text-lg mb-1">Rvs-look buiten, Wit binnen</h3>
-                        <p className="text-gray-600 text-sm mb-4">Moderne industriële uitstraling met licht interieur.</p>
-                        <div className="flex justify-between text-sm text-gray-500">
-                          <span>Kozijn: K90+</span>
-                          <span>Meerprijs: + €140/m²</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
-                  
-                  <AnimatedSection animation="fade-in" delay={300}>
-                    <Card className="h-full hover:shadow-md transition-shadow">
-                      <CardContent className="p-6">
-                        <div className="flex space-x-2 mb-4">
-                          <div className="w-full h-20 bg-[#121212] rounded-l-md flex items-end justify-start p-2">
-                            <span className="text-xs text-white">Buiten</span>
-                          </div>
-                          <div className="w-full h-20 bg-[#121212] rounded-r-md flex items-end justify-end p-2">
-                            <span className="text-xs text-white">Binnen</span>
-                          </div>
-                        </div>
-                        <h3 className="font-semibold text-lg mb-1">Zwart buiten, Zwart binnen</h3>
-                        <p className="text-gray-600 text-sm mb-4">Stijlvolle designlook voor een sterk statement.</p>
-                        <div className="flex justify-between text-sm text-gray-500">
-                          <span>Kozijn: K90</span>
-                          <span>Meerprijs: + €80/m²</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
-                  
-                  <AnimatedSection animation="fade-in" delay={350}>
-                    <Card className="hover:shadow-md transition-shadow bg-brand-green text-white">
-                      <CardContent className="p-6 flex flex-col h-full justify-between">
-                        <div>
-                          <h3 className="font-semibold text-lg mb-2">Persoonlijk kleuradvies</h3>
-                          <p className="mb-4">Wilt u weten welke kleurcombinatie het beste past bij uw woning?</p>
-                        </div>
-                        <div>
-                          <ul className="mb-6 space-y-2">
-                            <li className="flex items-center gap-2">
-                              <CheckCircle2 className="h-5 w-5 text-white" />
-                              <span>Gratis adviesgesprek</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <CheckCircle2 className="h-5 w-5 text-white" />
-                              <span>Kleurstalen bekijken</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <CheckCircle2 className="h-5 w-5 text-white" />
-                              <span>Zonder verplichtingen</span>
-                            </li>
-                          </ul>
-                          <Button className="w-full bg-white text-brand-green hover:bg-gray-100">
-                            Afspraak maken
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </section>
-        
-        <section className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold text-center mb-4">Populaire kleurkeuzes</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-8">
-                De meest gekozen kleuren voor kunststof kozijnen in Nederland
-              </p>
-            </AnimatedSection>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {popularColors.map((color) => (
-                <AnimatedSection key={color.name} animation="fade-in" delay={100}>
-                  <Card className="h-full hover:shadow-md transition-shadow">
-                    <div 
-                      className="h-48" 
-                      style={{ 
-                        background: color.image ? `url(${color.image}) center/cover` : color.hex,
-                        boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                      }}
-                    ></div>
-                    <CardContent className="p-6">
-                      <h3 className="font-semibold text-xl mb-2">{color.name}</h3>
-                      <p className="text-gray-600 mb-4">{color.description}</p>
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Star className="h-4 w-4 text-yellow-400 mr-1" fill="currentColor" />
-                        <Star className="h-4 w-4 text-yellow-400 mr-1" fill="currentColor" />
-                        <Star className="h-4 w-4 text-yellow-400 mr-1" fill="currentColor" />
-                        <Star className="h-4 w-4 text-yellow-400 mr-1" fill="currentColor" />
-                        <Star className="h-4 w-4 text-yellow-400 mr-1" fill="currentColor" />
-                        <span className="ml-1">Zeer populair</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
-        </section>
-        
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <AnimatedSection animation="fade-in">
-              <div className="max-w-3xl mx-auto text-center mb-12">
-                <h2 className="text-3xl font-bold mb-4">Veelgestelde vragen over kleuren</h2>
-                <p className="text-gray-600">
-                  Antwoorden op de meest gestelde vragen over kleuropties voor kunststof kozijnen
-                </p>
-              </div>
-            </AnimatedSection>
-            
-            <div className="max-w-3xl mx-auto">
-              <Accordion type="single" collapsible className="w-full">
-                <AnimatedSection animation="fade-in" delay={100}>
-                  <AccordionItem value="faq-1">
-                    <AccordionTrigger>Hoe duurzaam zijn de kleuren op kunststof kozijnen?</AccordionTrigger>
-                    <AccordionContent>
-                      <p>De kleuren op kunststof kozijnen zijn zeer duurzaam. Ze worden aangebracht met een speciale techniek waarbij de kleur in het profiel wordt gecoëxtrudeerd of met acrylaat folies die UV-bestendig zijn. Hierdoor:</p>
-                      <ul className="list-disc pl-5 mt-2 space-y-1">
-                        <li>Verkleuren ze niet of nauwelijks</li>
-                        <li>Zijn ze krasbestendig</li>
-                        <li>Gaan ze minimaal 25-30 jaar mee</li>
-                        <li>Hoeven ze niet opnieuw geschilderd te worden</li>
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AnimatedSection>
-                
-                <AnimatedSection animation="fade-in" delay={150}>
-                  <AccordionItem value="faq-2">
-                    <AccordionTrigger>Wat is het prijsverschil tussen verschillende kleuren?</AccordionTrigger>
-                    <AccordionContent>
-                      <p>Er zijn prijsverschillen tussen de verschillende kleuropties voor kunststof kozijnen:</p>
-                      <ul className="list-disc pl-5 mt-2 space-y-1">
-                        <li>Wit is meestal de standaardkleur zonder meerprijs</li>
-                        <li>Standaard RAL-kleuren: ca. 15-20% meerprijs</li>
-                        <li>Houtlook afwerkingen: ca. 25-30% meerprijs</li>
-                        <li>Tweekleurige kozijnen (binnen anders dan buiten): ca. 10-15% extra</li>
-                      </ul>
-                      <p className="mt-2">Voor een exacte prijsopgave is het best om een offerte aan te vragen.</p>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AnimatedSection>
-                
-                <AnimatedSection animation="fade-in" delay={200}>
-                  <AccordionItem value="faq-3">
-                    <AccordionTrigger>Kan ik mijn bestaande kozijnen in een andere kleur laten spuiten?</AccordionTrigger>
-                    <AccordionContent>
-                      <p>Bestaande kunststof kozijnen kunnen in sommige gevallen worden overgespoten, maar dit is niet altijd ideaal:</p>
-                      <ul className="list-disc pl-5 mt-2 space-y-1">
-                        <li>De duurzaamheid is minder dan bij in de fabriek gekleurde kozijnen</li>
-                        <li>Niet alle kleuren zijn mogelijk</li>
-                        <li>De garantie kan hierdoor vervallen</li>
-                      </ul>
-                      <p className="mt-2">Voor het beste resultaat raden we aan om nieuwe, in de fabriek gekleurde kozijnen te kiezen als u de kleur wilt veranderen.</p>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AnimatedSection>
-                
-                <AnimatedSection animation="fade-in" delay={250}>
-                  <AccordionItem value="faq-4">
-                    <AccordionTrigger>Wat zijn de meest populaire kleuren voor kunststof kozijnen?</AccordionTrigger>
-                    <AccordionContent>
-                      <p>De meest populaire kleuren voor kunststof kozijnen in Nederland zijn:</p>
-                      <ol className="list-decimal pl-5 mt-2 space-y-1">
-                        <li>Wit (RAL 9016)</li>
-                        <li>Antraciet (RAL 7016)</li>
-                        <li>Golden Oak (houtlook)</li>
-                        <li>Crème (RAL 9001)</li>
-                        <li>Monumentengroen (RAL 6009)</li>
-                      </ol>
-                      <p className="mt-2">De trend gaat de laatste jaren richting donkere kleuren (antraciet) en natuurlijke houtlook afwerkingen.</p>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AnimatedSection>
-                
-                <AnimatedSection animation="fade-in" delay={300}>
-                  <AccordionItem value="faq-5">
-                    <AccordionTrigger>Moet ik met de VvE of gemeente overleggen over de kleur?</AccordionTrigger>
-                    <AccordionContent>
-                      <p>In veel gevallen moet u inderdaad toestemming krijgen voor de kleur van uw kozijnen:</p>
-                      <ul className="list-disc pl-5 mt-2 space-y-1">
-                        <li>Bij een VvE zijn er vaak regels over de uitstraling van het gebouw, inclusief kozijnkleuren</li>
-                        <li>In beschermde stads- of dorpsgezichten kan de gemeente eisen stellen</li>
-                        <li>Bij monumentale panden gelden strikte regels voor kozijnkleuren</li>
-                      </ul>
-                      <p className="mt-2">Informeer altijd vooraf bij uw VvE en/of gemeente over de mogelijkheden en beperkingen.</p>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AnimatedSection>
-              </Accordion>
-            </div>
-          </div>
-        </section>
-        
-        <ContactCTA />
-      </main>
-      
-      <Footer />
-    </>
-  );
-};
-
-export default ColorOptions;
+                        <p className="text-gray-600 text-sm mb-4">
