@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
@@ -92,7 +91,6 @@ const OfferteAanvragen: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   }, []);
 
-  // Memoized stable implementations to avoid update loops
   const handleWindowTypeToggle = useCallback((type: WindowType) => {
     setFormData(prev => {
       const newWindowTypes = [...prev.windowTypes];
@@ -219,7 +217,6 @@ const OfferteAanvragen: React.FC = () => {
     }
   };
 
-  // Type kozijnen card content for both checked and unchecked states
   const renderWindowTypeCard = (option: { id: string; label: string }) => {
     const isChecked = formData.windowTypes.includes(option.id as WindowType);
     
@@ -235,8 +232,7 @@ const OfferteAanvragen: React.FC = () => {
           <Checkbox 
             id={option.id} 
             checked={isChecked}
-            className="pointer-events-none" // Prevent direct interaction with checkbox
-            readOnly
+            className="pointer-events-none"
           />
           <Label htmlFor={option.id} className="cursor-pointer">{option.label}</Label>
         </div>
@@ -244,7 +240,6 @@ const OfferteAanvragen: React.FC = () => {
     );
   };
 
-  // Availability days card content
   const renderAvailabilityCard = (day: string) => {
     const isChecked = formData.availability.includes(day);
     
@@ -260,8 +255,7 @@ const OfferteAanvragen: React.FC = () => {
           <Checkbox 
             id={day} 
             checked={isChecked}
-            className="pointer-events-none" // Prevent direct interaction with checkbox
-            readOnly
+            className="pointer-events-none"
           />
           <Label htmlFor={day} className="cursor-pointer">{day}</Label>
         </div>
