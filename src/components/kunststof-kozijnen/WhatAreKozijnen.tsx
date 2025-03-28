@@ -44,11 +44,6 @@ const WhatAreKozijnen: React.FC = () => {
           <div className="lg:w-1/2">
             <AnimatedSection animation="fade-in" delay={200}>
               <div className="relative rounded-lg overflow-hidden shadow-lg">
-                <img 
-                  src="/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png" 
-                  alt="Kunststof kozijn detail" 
-                  className="w-full h-auto" 
-                />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
                   <p className="text-white font-medium">Modern kunststof kozijn met drievoudig glas</p>
                 </div>
