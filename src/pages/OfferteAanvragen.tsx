@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
@@ -126,7 +127,7 @@ const OfferteAanvragen: React.FC = () => {
       setStep(prev => Math.min(prev + 1, totalSteps));
       window.scrollTo(0, 0);
     }
-  }, [totalSteps]);
+  }, [step, formData, totalSteps]);
 
   const prevStep = useCallback(() => {
     setStep(prev => Math.max(prev - 1, 1));
@@ -148,7 +149,7 @@ const OfferteAanvragen: React.FC = () => {
         }
         break;
       case 2:
-        // Window types are now optional - no validation needed
+        // Window types are optional - no validation needed
         break;
       case 3:
         if (!formData.firstName || !formData.lastName) {
@@ -197,6 +198,7 @@ const OfferteAanvragen: React.FC = () => {
     setIsSubmitting(true);
     
     try {
+      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       toast({
@@ -217,7 +219,7 @@ const OfferteAanvragen: React.FC = () => {
     }
   };
 
-  const renderWindowTypeCard = (option: { id: string; label: string }) => {
+  const renderWindowTypeCard = useCallback((option: { id: string; label: string }) => {
     const isChecked = formData.windowTypes.includes(option.id as WindowType);
     
     return (
@@ -238,9 +240,9 @@ const OfferteAanvragen: React.FC = () => {
         </div>
       </div>
     );
-  };
+  }, [formData.windowTypes, handleWindowTypeToggle]);
 
-  const renderAvailabilityCard = (day: string) => {
+  const renderAvailabilityCard = useCallback((day: string) => {
     const isChecked = formData.availability.includes(day);
     
     return (
@@ -261,7 +263,7 @@ const OfferteAanvragen: React.FC = () => {
         </div>
       </div>
     );
-  };
+  }, [formData.availability, handleAvailabilityToggle]);
 
   const renderStep = () => {
     switch (step) {
@@ -276,7 +278,11 @@ const OfferteAanvragen: React.FC = () => {
             <div className="space-y-4">
               <div>
                 <Label className="text-base mb-2 block">Type project</Label>
-                <RadioGroup value={formData.projectType} onValueChange={(value) => updateFormData('projectType', value)} className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <RadioGroup 
+                  value={formData.projectType} 
+                  onValueChange={(value: ProjectType) => updateFormData('projectType', value)} 
+                  className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                >
                   <div className="flex items-center space-x-2 border rounded-lg p-4 hover:border-brand-green transition-colors">
                     <RadioGroupItem value="nieuwbouw" id="nieuwbouw" />
                     <Label htmlFor="nieuwbouw" className="flex-1 cursor-pointer">Nieuwbouw</Label>
@@ -294,7 +300,11 @@ const OfferteAanvragen: React.FC = () => {
               
               <div className="mt-6">
                 <Label className="text-base mb-2 block">Type pand</Label>
-                <RadioGroup value={formData.propertyType} onValueChange={(value) => updateFormData('propertyType', value)} className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <RadioGroup 
+                  value={formData.propertyType} 
+                  onValueChange={(value: PropertyType) => updateFormData('propertyType', value)} 
+                  className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                >
                   <div className="flex items-center space-x-2 border rounded-lg p-4 hover:border-brand-green transition-colors">
                     <RadioGroupItem value="woning" id="woning" />
                     <Label htmlFor="woning" className="flex-1 cursor-pointer">Woning</Label>
@@ -529,7 +539,7 @@ const OfferteAanvragen: React.FC = () => {
                 <Label className="text-base mb-2 block">Hoe wilt u dat we contact met u opnemen?</Label>
                 <RadioGroup 
                   value={formData.preferredContact} 
-                  onValueChange={(value) => updateFormData('preferredContact', value)}
+                  onValueChange={(value: 'email' | 'phone') => updateFormData('preferredContact', value)}
                   className="grid grid-cols-1 md:grid-cols-2 gap-4"
                 >
                   <div className="flex items-center space-x-2 border rounded-lg p-4 hover:border-brand-green transition-colors">
