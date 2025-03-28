@@ -61,6 +61,8 @@ const StickyNavigation: React.FC = () => {
         parentPage = 'Prijzen';
         if (path.includes('afbetaling')) {
           currentPage = 'Afbetaling';
+        } else if (path.includes('subsidie')) {
+          currentPage = 'Subsidie';
         }
       }
     } else if (path.includes('/merken')) {

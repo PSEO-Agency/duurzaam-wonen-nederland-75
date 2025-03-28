@@ -52,6 +52,7 @@ import SchucoBrand from "./pages/brands/SchucoBrand";
 
 // New price option pages
 import KozijnenAfbetaling from "./pages/prices/KozijnenAfbetaling";
+import KozijnenSubsidie from "./pages/prices/KozijnenSubsidie";
 
 const queryClient = new QueryClient();
 
@@ -81,6 +82,7 @@ const App = () => (
               <Route path="/kunststof-kozijnen/afmetingen/100x100" element={<Kozijn100x100 />} />
               <Route path="/kunststof-kozijnen/merken/schuco" element={<SchucoBrand />} />
               <Route path="/kunststof-kozijnen/prijzen/afbetaling" element={<KozijnenAfbetaling />} />
+              <Route path="/kunststof-kozijnen/prijzen/subsidie" element={<KozijnenSubsidie />} />
               
               <Route path="/projecten" element={<Projects />} />
               <Route path="/projecten/:projectSlug" element={<ProjectDetail />} />
