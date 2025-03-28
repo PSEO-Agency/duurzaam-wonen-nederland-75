@@ -13,7 +13,7 @@ interface CmsContextType {
 
 const CmsContext = createContext<CmsContextType | undefined>(undefined);
 
-export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CmsProvider = ({ children }: { children: React.ReactNode }) => {
   const [pages, setPages] = useState<Page[]>([]);
   const [templates, setTemplates] = useState<Template[]>([]);
   const [sections, setSections] = useState<Section[]>([]);
