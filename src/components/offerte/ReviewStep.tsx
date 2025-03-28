@@ -140,9 +140,9 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ formData }) => {
           <div className="flex items-start gap-3">
             <Info className="text-brand-green mt-0.5 flex-shrink-0" size={20} />
             <div>
-              <h4 className="font-medium text-gray-900">Gereed om te verzenden!</h4>
+              <h4 className="font-medium text-gray-900">Klaar om te verzenden</h4>
               <p className="text-sm text-gray-600 mt-1">
-                Klik op 'Offerte aanvragen' om uw aanvraag te verzenden. We nemen binnen 24 uur contact met u op.
+                Klik op 'Offerte aanvragen' hieronder om uw offerte-aanvraag te verzenden. We nemen binnen 24 uur contact met u op.
               </p>
               <ul className="mt-3 space-y-1">
                 <li className="flex items-center text-sm text-gray-600">

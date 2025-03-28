@@ -13,6 +13,7 @@ import WindowDetailsStep from '@/components/offerte/WindowDetailsStep';
 import ContactInfoStep from '@/components/offerte/ContactInfoStep';
 import FinalStep from '@/components/offerte/FinalStep';
 import ReviewStep from '@/components/offerte/ReviewStep';
+import AdvisorPanel from '@/components/offerte/AdvisorPanel';
 
 export type OfferteFormData = {
   // Project info
@@ -235,7 +236,7 @@ const Offerte: React.FC = () => {
       <Navbar />
       
       <div className="bg-gray-50 py-12 md:py-16">
-        <div className="container max-w-5xl mx-auto px-4">
+        <div className="container max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Vraag vrijblijvend een offerte aan</h1>
             <p className="text-lg text-gray-600 mt-3">
@@ -243,69 +244,78 @@ const Offerte: React.FC = () => {
             </p>
           </div>
           
-          <Card className="bg-white shadow-sm border-0">
-            <CardContent className="p-6 sm:p-8">
-              <form onSubmit={handleSubmit}>
-                {/* Progress Indicator */}
-                <div className="mb-8">
-                  <div className="flex justify-between mb-2">
-                    <span className="text-sm font-medium">Stap {step} van {totalSteps}</span>
-                    <span className="text-sm font-medium">{Math.round((step / totalSteps) * 100)}% voltooid</span>
-                  </div>
-                  <Progress value={(step / totalSteps) * 100} className="h-2" />
-                </div>
-                
-                {/* Step Content */}
-                <div className="min-h-[400px]">
-                  {renderStepContent()}
-                </div>
-                
-                {/* Navigation Buttons */}
-                <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 mt-8">
-                  {step > 1 ? (
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={prevStep}
-                      disabled={isSubmitting}
-                      className="w-full sm:w-auto"
-                    >
-                      <ArrowLeft className="mr-2 h-4 w-4" />
-                      Vorige
-                    </Button>
-                  ) : (
-                    <div></div>
-                  )}
-                  
-                  {step < totalSteps ? (
-                    <Button 
-                      type="button"
-                      onClick={nextStep}
-                      className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto"
-                    >
-                      Volgende
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  ) : (
-                    <Button 
-                      type="submit"
-                      className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <>Verzenden...</>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <Card className="bg-white shadow-sm border-0">
+                <CardContent className="p-6 sm:p-8">
+                  <form onSubmit={handleSubmit}>
+                    {/* Progress Indicator */}
+                    <div className="mb-8">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium">Stap {step} van {totalSteps}</span>
+                        <span className="text-sm font-medium">{Math.round((step / totalSteps) * 100)}% voltooid</span>
+                      </div>
+                      <Progress value={(step / totalSteps) * 100} className="h-2" />
+                    </div>
+                    
+                    {/* Step Content */}
+                    <div className="min-h-[400px]">
+                      {renderStepContent()}
+                    </div>
+                    
+                    {/* Navigation Buttons */}
+                    <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 mt-8">
+                      {step > 1 ? (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={prevStep}
+                          disabled={isSubmitting}
+                          className="w-full sm:w-auto"
+                        >
+                          <ArrowLeft className="mr-2 h-4 w-4" />
+                          Vorige
+                        </Button>
                       ) : (
-                        <>
-                          <CheckCircle className="mr-2 h-4 w-4" />
-                          Offerte aanvragen
-                        </>
+                        <div></div>
                       )}
-                    </Button>
-                  )}
-                </div>
-              </form>
-            </CardContent>
-          </Card>
+                      
+                      {step < totalSteps ? (
+                        <Button 
+                          type="button"
+                          onClick={nextStep}
+                          className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto"
+                        >
+                          Volgende
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      ) : (
+                        <Button 
+                          type="submit"
+                          className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? (
+                            <>Verzenden...</>
+                          ) : (
+                            <>
+                              <CheckCircle className="mr-2 h-4 w-4" />
+                              Offerte aanvragen
+                            </>
+                          )}
+                        </Button>
+                      )}
+                    </div>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+            
+            {/* Advisor Panel - Right Column */}
+            <div className="lg:col-span-1">
+              <AdvisorPanel />
+            </div>
+          </div>
           
           <div className="mt-8 bg-white p-6 rounded-lg shadow-sm border border-gray-100">
             <div className="flex items-start gap-3">
