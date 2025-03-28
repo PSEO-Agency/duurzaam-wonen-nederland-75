@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, Plus, Search, Check, X } from 'lucide-react';
+import { ArrowRight, Plus, Search, Check, X, ExternalLink } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useCms } from '@/contexts/CmsContext';
 import { Page } from '@/types/cms';
@@ -404,6 +404,17 @@ const Pages: React.FC = () => {
     return parentPage ? parentPage.title : parentPath;
   };
 
+  // Function to open the page URL in a new tab
+  const handlePreviewPage = (slug: string) => {
+    // Handle special case for 404 page (wildcard route)
+    if (slug === '*') {
+      // Open a non-existent page to trigger 404
+      window.open('/non-existent-page-for-preview', '_blank');
+    } else {
+      window.open(slug, '_blank');
+    }
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -469,13 +480,24 @@ const Pages: React.FC = () => {
                   </TableCell>
                   <TableCell>{page.updatedAt.toLocaleDateString()}</TableCell>
                   <TableCell className="text-right">
-                    <Link 
-                      to={`/admin/pages/edit/${page.id}`}
-                      className="text-brand-green hover:text-brand-green-dark inline-flex items-center"
-                    >
-                      Edit
-                      <ArrowRight size={16} className="ml-1" />
-                    </Link>
+                    <div className="flex justify-end items-center space-x-2">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => handlePreviewPage(page.slug)}
+                        className="text-gray-500 hover:text-brand-green"
+                      >
+                        <ExternalLink size={16} />
+                        <span className="sr-only">Preview</span>
+                      </Button>
+                      <Link 
+                        to={`/admin/pages/edit/${page.id}`}
+                        className="text-brand-green hover:text-brand-green-dark inline-flex items-center"
+                      >
+                        Edit
+                        <ArrowRight size={16} className="ml-1" />
+                      </Link>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

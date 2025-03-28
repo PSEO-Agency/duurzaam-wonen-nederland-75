@@ -34,6 +34,7 @@ import Duurzaamheid from "./pages/over-ons/Duurzaamheid";
 import Vacatures from "./pages/over-ons/Vacatures";
 import Kennisbank from "./pages/Kennisbank";
 import KennisbankDetail from "./pages/KennisbankDetail";
+import OfferteAanvragen from "./pages/OfferteAanvragen";
 
 // New location pages
 import KozijnenEnschede from "./pages/locaties/KozijnenEnschede";
@@ -88,6 +89,7 @@ const App = () => (
             
             {/* Public Routes */}
             <Route path="/" element={<Index />} />
+            <Route path="/offerte-aanvragen" element={<OfferteAanvragen />} />
             <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
             <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
             <Route path="/kunststof-kozijnen/kleuren/:colorSlug" element={<ColorDetail />} />
