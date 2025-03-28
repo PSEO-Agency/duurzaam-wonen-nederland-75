@@ -2,6 +2,8 @@
 import React from 'react';
 import AnimatedSection from '../AnimatedSection';
 import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Info } from 'lucide-react';
 
 interface ColorOption {
   name: string;
@@ -97,6 +99,15 @@ const Colors: React.FC = () => {
                       <p className="text-xs text-gray-500 mb-1">{color.ralCode}</p>
                     )}
                     <p className="text-sm text-gray-600">{color.description}</p>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full mt-3 text-xs"
+                      onClick={() => window.open(`/kunststof-kozijnen/kleuren/${color.name.toLowerCase().replace(/\s+/g, '-')}`, '_blank')}
+                    >
+                      <Info className="h-3.5 w-3.5 mr-1" />
+                      Kleur details
+                    </Button>
                   </CardContent>
                 </Card>
               </AnimatedSection>
@@ -120,6 +131,15 @@ const Colors: React.FC = () => {
                       <p className="text-xs text-gray-500 mb-1">{option.ralCode}</p>
                     )}
                     <p className="text-sm text-gray-600">{option.description}</p>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full mt-3 text-xs"
+                      onClick={() => window.open(`/kunststof-kozijnen/kleuren/${option.name.toLowerCase().replace(/\s+/g, '-')}`, '_blank')}
+                    >
+                      <Info className="h-3.5 w-3.5 mr-1" />
+                      Kleur details
+                    </Button>
                   </CardContent>
                 </Card>
               </AnimatedSection>
