@@ -9,6 +9,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedSection from '@/components/AnimatedSection';
+import WhatAreKozijnen from '@/components/kunststof-kozijnen/WhatAreKozijnen';
+import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
+import RegionsSection from '@/components/kunststof-kozijnen/RegionsSection';
 
 // Mock product data
 const products = [
@@ -110,7 +113,7 @@ const KunststofKozijnen: React.FC = () => {
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="w-full">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">Kunststof Kozijnen</h1>
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">Kunststof Kozijnen - Duurzaam, Betaalbaar en Stijlvol</h1>
                 <p className="text-lg text-gray-700 mb-6">
                   Hoogwaardige, energiezuinige en onderhoudsarme kunststof kozijnen voor uw woning. 
                   Met meer dan 20 jaar ervaring leveren wij kwaliteitsproducten die duurzaam en betrouwbaar zijn.
@@ -120,7 +123,7 @@ const KunststofKozijnen: React.FC = () => {
                     Offerte aanvragen
                   </Button>
                   <Button variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green/10">
-                    Showroom bezoeken
+                    Ontdek alles over kunststof kozijnen...
                   </Button>
                 </div>
               </div>
@@ -129,179 +132,146 @@ const KunststofKozijnen: React.FC = () => {
         </div>
 
         {/* Sticky Navigation */}
-        <div className="sticky top-20 z-20 bg-white border-b shadow-sm">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center py-3">
-              <div className="flex items-center gap-4">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
-                  className="md:hidden flex items-center gap-2"
-                >
-                  <Filter size={16} />
-                  Filters
-                </Button>
-                
-                <a href="#assortiment" className="text-sm font-medium hover:text-brand-green hidden md:block">
-                  Assortiment
-                </a>
-                <a href="#voordelen" className="text-sm font-medium hover:text-brand-green hidden md:block">
-                  Voordelen
-                </a>
-                <a href="#informatie" className="text-sm font-medium hover:text-brand-green hidden md:block">
-                  Informatie
-                </a>
-                <a href="#faq" className="text-sm font-medium hover:text-brand-green hidden md:block">
-                  Veelgestelde vragen
-                </a>
-              </div>
-              <Button size="sm" className="bg-brand-green hover:bg-brand-green-dark">
-                Direct offerte
-              </Button>
-            </div>
-          </div>
-        </div>
+        <StickyNavigation />
+        
+        {/* What are Kunststof Kozijnen Section */}
+        <WhatAreKozijnen />
         
         {/* Filter and Products Section */}
         <section id="assortiment" className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row gap-8">
-              {/* Mobile Filters */}
-              {mobileFiltersOpen && (
-                <div className="fixed inset-0 bg-black/60 z-40 md:hidden">
-                  <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-white p-6 overflow-y-auto">
-                    <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-lg font-semibold">Filters</h2>
-                      <Button variant="ghost" size="icon" onClick={() => setMobileFiltersOpen(false)}>
-                        <ArrowLeft size={18} />
-                      </Button>
-                    </div>
-                    
-                    {/* Filter Groups - Mobile */}
-                    {Object.entries(filters).map(([category, options]) => (
-                      <div key={category} className="mb-6">
-                        <h3 className="font-medium mb-3 capitalize">{category}</h3>
-                        <div className="space-y-2">
-                          {options.map((option) => (
-                            <div key={option} className="flex items-center">
-                              <Checkbox 
-                                id={`mobile-${category}-${option}`} 
-                                checked={activeFilters[category].includes(option)}
-                                onCheckedChange={() => toggleFilter(category, option)}
-                              />
-                              <Label 
-                                htmlFor={`mobile-${category}-${option}`}
-                                className="ml-2 text-sm"
-                              >
-                                {option}
-                              </Label>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                    
-                    <Button 
-                      className="w-full mt-4 bg-brand-green hover:bg-brand-green-dark"
-                      onClick={() => setMobileFiltersOpen(false)}
-                    >
-                      Toon resultaten
-                    </Button>
-                  </div>
-                </div>
-              )}
-              
-              {/* Desktop Filters */}
-              <div className="hidden md:block w-1/4">
-                <div className="bg-white rounded-lg border p-4">
-                  <h2 className="text-lg font-semibold mb-4">Filters</h2>
-                  
-                  {Object.entries(filters).map(([category, options]) => (
-                    <div key={category} className="mb-6">
-                      <h3 className="font-medium mb-3 capitalize">{category}</h3>
-                      <div className="space-y-2">
-                        {options.map((option) => (
-                          <div key={option} className="flex items-center">
-                            <Checkbox 
-                              id={`${category}-${option}`} 
-                              checked={activeFilters[category].includes(option)}
-                              onCheckedChange={() => toggleFilter(category, option)}
-                            />
-                            <Label 
-                              htmlFor={`${category}-${option}`}
-                              className="ml-2 text-sm"
-                            >
-                              {option}
-                            </Label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Products */}
-              <div className="md:w-3/4">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold">Ons assortiment</h2>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-500">Sorteer op:</span>
-                    <div className="relative">
-                      <select className="pl-3 pr-8 py-1 border rounded-md text-sm appearance-none bg-white">
-                        <option>Populair</option>
-                        <option>Prijs (laag-hoog)</option>
-                        <option>Prijs (hoog-laag)</option>
-                      </select>
-                      <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
-                    </div>
-                  </div>
+          {/* Mobile Filters */}
+          {mobileFiltersOpen && (
+            <div className="fixed inset-0 bg-black/60 z-40 md:hidden">
+              <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-white p-6 overflow-y-auto">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-lg font-semibold">Filters</h2>
+                  <Button variant="ghost" size="icon" onClick={() => setMobileFiltersOpen(false)}>
+                    <ArrowLeft size={18} />
+                  </Button>
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {products.map((product) => (
-                    <AnimatedSection
-                      key={product.id}
-                      className="bg-white rounded-lg border overflow-hidden hover:shadow-md transition-shadow"
-                      animation="fade-in"
-                    >
-                      <div className="p-4">
-                        <img 
-                          src={product.image} 
-                          alt={product.name} 
-                          className="w-full h-48 object-cover rounded-md mb-4"
+                {/* Filter Groups - Mobile */}
+                {Object.entries(filters).map(([category, options]) => (
+                  <div key={category} className="mb-6">
+                    <h3 className="font-medium mb-3 capitalize">{category}</h3>
+                    <div className="space-y-2">
+                      {options.map((option) => (
+                        <div key={option} className="flex items-center">
+                          <Checkbox 
+                            id={`mobile-${category}-${option}`} 
+                            checked={activeFilters[category].includes(option)}
+                            onCheckedChange={() => toggleFilter(category, option)}
+                          />
+                          <Label 
+                            htmlFor={`mobile-${category}-${option}`}
+                            className="ml-2 text-sm"
+                          >
+                            {option}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                
+                <Button 
+                  className="w-full mt-4 bg-brand-green hover:bg-brand-green-dark"
+                  onClick={() => setMobileFiltersOpen(false)}
+                >
+                  Toon resultaten
+                </Button>
+              </div>
+            </div>
+          )}
+          
+          {/* Desktop Filters */}
+          <div className="hidden md:block w-1/4">
+            <div className="bg-white rounded-lg border p-4">
+              <h2 className="text-lg font-semibold mb-4">Filters</h2>
+              
+              {Object.entries(filters).map(([category, options]) => (
+                <div key={category} className="mb-6">
+                  <h3 className="font-medium mb-3 capitalize">{category}</h3>
+                  <div className="space-y-2">
+                    {options.map((option) => (
+                      <div key={option} className="flex items-center">
+                        <Checkbox 
+                          id={`${category}-${option}`} 
+                          checked={activeFilters[category].includes(option)}
+                          onCheckedChange={() => toggleFilter(category, option)}
                         />
-                        <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
-                        <div className="flex items-center mb-3">
-                          <div className="flex items-center">
-                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 mr-1" />
-                            <span className="text-sm font-medium">{product.rating}</span>
-                          </div>
-                          <span className="text-sm text-gray-500 ml-2">({product.reviewCount} reviews)</span>
-                        </div>
-                        <ul className="mb-4 space-y-1">
-                          {product.features.map((feature, index) => (
-                            <li key={index} className="text-sm flex items-center">
-                              <Check size={14} className="text-brand-green mr-2" />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="flex justify-between items-end mt-4">
-                          <div>
-                            <span className="text-xl font-bold">{product.price}</span>
-                            <span className="text-sm text-gray-500 ml-1">{product.perUnit}</span>
-                          </div>
-                          <Button size="sm" className="bg-brand-green hover:bg-brand-green-dark">
-                            Details
-                          </Button>
-                        </div>
+                        <Label 
+                          htmlFor={`${category}-${option}`}
+                          className="ml-2 text-sm"
+                        >
+                          {option}
+                        </Label>
                       </div>
-                    </AnimatedSection>
-                  ))}
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Products */}
+          <div className="md:w-3/4">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold">Ons assortiment</h2>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Sorteer op:</span>
+                <div className="relative">
+                  <select className="pl-3 pr-8 py-1 border rounded-md text-sm appearance-none bg-white">
+                    <option>Populair</option>
+                    <option>Prijs (laag-hoog)</option>
+                    <option>Prijs (hoog-laag)</option>
+                  </select>
+                  <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.map((product) => (
+                <AnimatedSection
+                  key={product.id}
+                  className="bg-white rounded-lg border overflow-hidden hover:shadow-md transition-shadow"
+                  animation="fade-in"
+                >
+                  <div className="p-4">
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-48 object-cover rounded-md mb-4"
+                    />
+                    <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
+                    <div className="flex items-center mb-3">
+                      <div className="flex items-center">
+                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 mr-1" />
+                        <span className="text-sm font-medium">{product.rating}</span>
+                      </div>
+                      <span className="text-sm text-gray-500 ml-2">({product.reviewCount} reviews)</span>
+                    </div>
+                    <ul className="mb-4 space-y-1">
+                      {product.features.map((feature, index) => (
+                        <li key={index} className="text-sm flex items-center">
+                          <Check size={14} className="text-brand-green mr-2" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex justify-between items-end mt-4">
+                      <div>
+                        <span className="text-xl font-bold">{product.price}</span>
+                        <span className="text-sm text-gray-500 ml-1">{product.perUnit}</span>
+                      </div>
+                      <Button size="sm" className="bg-brand-green hover:bg-brand-green-dark">
+                        Details
+                      </Button>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
             </div>
           </div>
         </section>
@@ -516,6 +486,9 @@ const KunststofKozijnen: React.FC = () => {
             </div>
           </div>
         </section>
+        
+        {/* Regions Section - Now positioned below FAQ */}
+        <RegionsSection />
         
         {/* CTA Section */}
         <section className="py-16 bg-brand-green text-white">
