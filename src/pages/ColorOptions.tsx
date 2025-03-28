@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -587,4 +588,26 @@ const ColorOptions: React.FC = () => {
                           </div>
                         </div>
                         <h3 className="font-semibold text-lg mb-1">Rvs-look buiten, Wit binnen</h3>
-                        <p className="text-gray-600 text-sm mb-4">
+                        <p className="text-gray-600 text-sm mb-4">Moderne combinatie met een industriële uitstraling aan de buitenzijde en een neutrale binnenzijde.</p>
+                        <div className="flex justify-between text-sm text-gray-500">
+                          <span>Kozijn: K70/K90</span>
+                          <span>Meerprijs: + €150/m²</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </AnimatedSection>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </section>
+        
+        <ContactCTA />
+      </main>
+      
+      <Footer />
+    </>
+  );
+};
+
+export default ColorOptions;
