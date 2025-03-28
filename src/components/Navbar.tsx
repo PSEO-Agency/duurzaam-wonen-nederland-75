@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Phone, Search, MessageCircle } from 'lucide-react';
+import { Menu, X, Phone, Search as SearchIcon, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
@@ -13,10 +13,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
   
   // Handle scroll effect
   useEffect(() => {
@@ -32,20 +35,28 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
+  // Handle search submission
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/zoeken?q=${encodeURIComponent(searchTerm)}`);
+    }
+  };
+  
   // Top bar navigation items
   const topNavItems = [
     { label: 'Blog', href: '/blog' },
     { label: 'Kennisbank', href: '#knowledge' },
-    { label: 'Zakelijk', href: '#business' },
-    { label: 'Werkgebied', href: '#area' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Zakelijk', href: '/zakelijk' },
+    { label: 'Werkgebied', href: '/werkgebied' },
+    { label: 'Contact', href: '/contact' },
   ];
   
   // Main navigation items
   const mainNavItems = [
     { label: 'Projecten', href: '/projecten' },
-    { label: 'Showroom', href: '#showroom' },
-    { label: 'Werkwijze', href: '#workflow' },
+    { label: 'Showroom', href: '/showroom' },
+    { label: 'Werkwijze', href: '/werkwijze' },
   ];
 
   // Oplossingen mega menu items
@@ -72,11 +83,11 @@ const Navbar: React.FC = () => {
 
   // Over ons mega menu items
   const overOnsItems = [
-    { label: 'Ons team', href: '#team' },
-    { label: 'Onze geschiedenis', href: '#history' },
-    { label: 'Onze missie', href: '#mission' },
-    { label: 'Duurzaamheid', href: '#sustainability' },
-    { label: 'Vacatures', href: '#careers' },
+    { label: 'Ons team', href: '/over-ons/team' },
+    { label: 'Onze geschiedenis', href: '/over-ons/geschiedenis' },
+    { label: 'Onze missie', href: '/over-ons/missie' },
+    { label: 'Duurzaamheid', href: '/over-ons/duurzaamheid' },
+    { label: 'Vacatures', href: '/over-ons/vacatures' },
   ];
   
   // Common menu item styling class for consistency
@@ -136,14 +147,16 @@ const Navbar: React.FC = () => {
             </Link>
             
             {/* Search Bar - Desktop */}
-            <div className="hidden md:flex items-center border border-gray-300 rounded-full px-4 py-2 ml-6 flex-grow max-w-md">
-              <Search size={20} className="text-gray-500 mr-2" />
+            <form onSubmit={handleSearch} className="hidden md:flex items-center border border-gray-300 rounded-full px-4 py-2 ml-6 flex-grow max-w-md">
+              <SearchIcon size={20} className="text-gray-500 mr-2" />
               <Input 
                 type="text" 
                 placeholder="Zoek" 
                 className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 p-0 text-sm h-6"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
-            </div>
+            </form>
             
             {/* Desktop Main Navigation with Mega Menus */}
             <NavigationMenu className="hidden md:flex ml-6">
@@ -307,14 +320,16 @@ const Navbar: React.FC = () => {
         <div className="md:hidden bg-white shadow-lg">
           <div className="container mx-auto px-4 py-3">
             {/* Search Bar - Mobile */}
-            <div className="flex items-center border border-gray-300 rounded-full px-4 py-2 mb-4">
-              <Search size={20} className="text-gray-500 mr-2" />
+            <form onSubmit={handleSearch} className="flex items-center border border-gray-300 rounded-full px-4 py-2 mb-4">
+              <SearchIcon size={20} className="text-gray-500 mr-2" />
               <Input 
                 type="text" 
                 placeholder="Zoek" 
                 className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 p-0 text-sm h-6"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
-            </div>
+            </form>
             
             {/* Oplossingen Dropdown - Mobile */}
             <div className="mb-4">
