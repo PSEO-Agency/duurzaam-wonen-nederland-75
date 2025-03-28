@@ -79,6 +79,12 @@ const Navbar: React.FC = () => {
     { label: 'Vacatures', href: '#careers' },
   ];
   
+  // Common menu item styling class for consistency
+  const menuItemClass = "text-gray-700 hover:text-brand-green transition-colors duration-200 text-sm font-medium";
+  const mobileMenuItemClass = "block py-2 text-gray-700 hover:text-brand-green text-sm font-medium";
+  const megaMenuItemClass = "flex items-center text-gray-700 hover:text-brand-green text-sm";
+  const megaMenuHeaderClass = "font-bold text-lg mb-2";
+  
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Black Top Bar */}
@@ -144,11 +150,11 @@ const Navbar: React.FC = () => {
               <NavigationMenuList>
                 {/* Oplossingen Mega Menu */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-gray-700 hover:text-brand-green bg-transparent">Oplossingen</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>Oplossingen</NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-white p-4 rounded-md shadow-lg">
                     <div className="grid grid-cols-2 gap-10 p-4 w-[600px]">
                       <div>
-                        <h3 className="font-bold text-xl mb-4">Oplossingen</h3>
+                        <h3 className={megaMenuHeaderClass}>Oplossingen</h3>
                         <ul className="space-y-2">
                           {oplossingenItems.map((item) => (
                             <li key={item.label}>
@@ -156,14 +162,14 @@ const Navbar: React.FC = () => {
                                 {item.href.startsWith('#') ? (
                                   <a 
                                     href={item.href}
-                                    className="flex items-center text-gray-700 hover:text-brand-green"
+                                    className={megaMenuItemClass}
                                   >
                                     <span className="mr-2">›</span> {item.label}
                                   </a>
                                 ) : (
                                   <Link 
                                     to={item.href}
-                                    className="flex items-center text-gray-700 hover:text-brand-green"
+                                    className={megaMenuItemClass}
                                   >
                                     <span className="mr-2">›</span> {item.label}
                                   </Link>
@@ -174,7 +180,7 @@ const Navbar: React.FC = () => {
                         </ul>
                       </div>
                       <div>
-                        <h3 className="font-bold text-xl mb-4">Producten</h3>
+                        <h3 className={megaMenuHeaderClass}>Producten</h3>
                         <ul className="space-y-2">
                           {productenItems.map((item) => (
                             <li key={item.label}>
@@ -182,14 +188,14 @@ const Navbar: React.FC = () => {
                                 {item.href.startsWith('#') ? (
                                   <a 
                                     href={item.href}
-                                    className="flex items-center text-gray-700 hover:text-brand-green"
+                                    className={megaMenuItemClass}
                                   >
                                     <span className="mr-2">›</span> {item.label}
                                   </a>
                                 ) : (
                                   <Link 
                                     to={item.href}
-                                    className="flex items-center text-gray-700 hover:text-brand-green"
+                                    className={megaMenuItemClass}
                                   >
                                     <span className="mr-2">›</span> {item.label}
                                   </Link>
@@ -210,14 +216,14 @@ const Navbar: React.FC = () => {
                       {item.href.startsWith('#') ? (
                         <a 
                           href={item.href}
-                          className="text-gray-700 hover:text-brand-green transition-colors duration-200 font-medium px-4 py-2"
+                          className={`${menuItemClass} px-4 py-2`}
                         >
                           {item.label}
                         </a>
                       ) : (
                         <Link 
                           to={item.href}
-                          className="text-gray-700 hover:text-brand-green transition-colors duration-200 font-medium px-4 py-2"
+                          className={`${menuItemClass} px-4 py-2`}
                         >
                           {item.label}
                         </Link>
@@ -228,10 +234,10 @@ const Navbar: React.FC = () => {
 
                 {/* Over ons Mega Menu */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-gray-700 hover:text-brand-green bg-transparent">Over ons</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>Over ons</NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-white p-4 rounded-md shadow-lg">
                     <div className="p-4 w-[400px]">
-                      <h3 className="font-bold text-xl mb-4">Over ons</h3>
+                      <h3 className={megaMenuHeaderClass}>Over ons</h3>
                       <ul className="space-y-2">
                         {overOnsItems.map((item) => (
                           <li key={item.label}>
@@ -239,14 +245,14 @@ const Navbar: React.FC = () => {
                               {item.href.startsWith('#') ? (
                                 <a 
                                   href={item.href}
-                                  className="flex items-center text-gray-700 hover:text-brand-green"
+                                  className={megaMenuItemClass}
                                 >
                                   <span className="mr-2">›</span> {item.label}
                                 </a>
                               ) : (
                                 <Link 
                                   to={item.href}
-                                  className="flex items-center text-gray-700 hover:text-brand-green"
+                                  className={megaMenuItemClass}
                                 >
                                   <span className="mr-2">›</span> {item.label}
                                 </Link>
@@ -312,14 +318,14 @@ const Navbar: React.FC = () => {
             
             {/* Oplossingen Dropdown - Mobile */}
             <div className="mb-4">
-              <h3 className="font-bold text-lg mb-2">Oplossingen</h3>
+              <h3 className={megaMenuHeaderClass}>Oplossingen</h3>
               <ul className="space-y-2 pl-4">
                 {oplossingenItems.map((item) => (
                   <li key={item.label}>
                     {item.href.startsWith('#') ? (
                       <a
                         href={item.href}
-                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        className={mobileMenuItemClass}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         › {item.label}
@@ -327,7 +333,7 @@ const Navbar: React.FC = () => {
                     ) : (
                       <Link
                         to={item.href}
-                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        className={mobileMenuItemClass}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         › {item.label}
@@ -340,14 +346,14 @@ const Navbar: React.FC = () => {
 
             {/* Producten Dropdown - Mobile */}
             <div className="mb-4">
-              <h3 className="font-bold text-lg mb-2">Producten</h3>
+              <h3 className={megaMenuHeaderClass}>Producten</h3>
               <ul className="space-y-2 pl-4">
                 {productenItems.map((item) => (
                   <li key={item.label}>
                     {item.href.startsWith('#') ? (
                       <a
                         href={item.href}
-                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        className={mobileMenuItemClass}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         › {item.label}
@@ -355,7 +361,7 @@ const Navbar: React.FC = () => {
                     ) : (
                       <Link
                         to={item.href}
-                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        className={mobileMenuItemClass}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         › {item.label}
@@ -372,7 +378,7 @@ const Navbar: React.FC = () => {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="block py-2 text-gray-700 hover:text-brand-green"
+                  className={mobileMenuItemClass}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
@@ -381,7 +387,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.label}
                   to={item.href}
-                  className="block py-2 text-gray-700 hover:text-brand-green"
+                  className={mobileMenuItemClass}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
@@ -391,14 +397,14 @@ const Navbar: React.FC = () => {
 
             {/* Over ons Dropdown - Mobile */}
             <div className="mb-4 mt-4">
-              <h3 className="font-bold text-lg mb-2">Over ons</h3>
+              <h3 className={megaMenuHeaderClass}>Over ons</h3>
               <ul className="space-y-2 pl-4">
                 {overOnsItems.map((item) => (
                   <li key={item.label}>
                     {item.href.startsWith('#') ? (
                       <a
                         href={item.href}
-                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        className={mobileMenuItemClass}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         › {item.label}
@@ -406,7 +412,7 @@ const Navbar: React.FC = () => {
                     ) : (
                       <Link
                         to={item.href}
-                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        className={mobileMenuItemClass}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         › {item.label}
@@ -424,7 +430,7 @@ const Navbar: React.FC = () => {
                   <a
                     key={item.label}
                     href={item.href}
-                    className="block py-2 text-gray-700 hover:text-brand-green"
+                    className={mobileMenuItemClass}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
@@ -433,7 +439,7 @@ const Navbar: React.FC = () => {
                   <Link
                     key={item.label}
                     to={item.href}
-                    className="block py-2 text-gray-700 hover:text-brand-green"
+                    className={mobileMenuItemClass}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
