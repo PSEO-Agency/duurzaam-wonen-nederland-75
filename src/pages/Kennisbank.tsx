@@ -96,7 +96,7 @@ const Kennisbank: React.FC = () => {
                       <SelectValue placeholder="Categorie" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Alle categorieën</SelectItem>
+                      <SelectItem value="all">Alle categorieën</SelectItem>
                       {Object.entries(categories).map(([value, label]) => (
                         <SelectItem key={value} value={value}>{label}</SelectItem>
                       ))}
@@ -170,7 +170,7 @@ const Kennisbank: React.FC = () => {
                     <SelectValue placeholder="Categorie" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Alle categorieën</SelectItem>
+                    <SelectItem value="all">Alle categorieën</SelectItem>
                     {Object.entries(categories).map(([value, label]) => (
                       <SelectItem key={value} value={value}>{label}</SelectItem>
                     ))}
