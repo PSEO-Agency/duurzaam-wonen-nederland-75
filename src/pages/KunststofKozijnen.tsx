@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, Filter, ArrowLeft, Star, ChevronDown } from 'lucide-react';
@@ -110,7 +109,7 @@ const KunststofKozijnen: React.FC = () => {
         <div className="bg-gradient-to-r from-gray-50 to-gray-100 py-12">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row gap-8 items-center">
-              <div className="md:w-1/2">
+              <div className="w-full">
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">Kunststof Kozijnen</h1>
                 <p className="text-lg text-gray-700 mb-6">
                   Hoogwaardige, energiezuinige en onderhoudsarme kunststof kozijnen voor uw woning. 
@@ -124,13 +123,6 @@ const KunststofKozijnen: React.FC = () => {
                     Showroom bezoeken
                   </Button>
                 </div>
-              </div>
-              <div className="md:w-1/2">
-                <img 
-                  src="/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png" 
-                  alt="Kunststof Kozijnen" 
-                  className="rounded-lg shadow-md w-full h-auto"
-                />
               </div>
             </div>
           </div>
