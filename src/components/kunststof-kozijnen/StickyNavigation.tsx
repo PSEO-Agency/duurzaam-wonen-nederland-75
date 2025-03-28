@@ -50,36 +50,6 @@ const StickyNavigation: React.FC = () => {
               </span>
             </div>
           </div>
-          
-          {/* Navigation items */}
-          <div className="flex justify-between items-center py-3">
-            <div className="flex items-center overflow-x-auto scrollbar-hide">
-              <div className="flex space-x-6 whitespace-nowrap px-2">
-                {navigationItems.map((item) => (
-                  item.route ? (
-                    <Link 
-                      key={item.id}
-                      to={item.route}
-                      className="text-sm font-medium hover:text-brand-green transition-colors"
-                    >
-                      {item.label}
-                    </Link>
-                  ) : (
-                    <button 
-                      key={item.id} 
-                      onClick={() => scrollToSection(item.id)} 
-                      className="text-sm font-medium hover:text-brand-green transition-colors"
-                    >
-                      {item.label}
-                    </button>
-                  )
-                ))}
-              </div>
-            </div>
-            <Button size="sm" className="bg-brand-green hover:bg-brand-green-dark shrink-0">
-              Direct offerte
-            </Button>
-          </div>
         </div>
       </nav>
     </div>
