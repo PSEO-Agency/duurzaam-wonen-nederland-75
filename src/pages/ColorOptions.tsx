@@ -174,7 +174,7 @@ const ColorOptions: React.FC = () => {
                                 key={color.name}
                                 className={`w-full aspect-square rounded-md border-2 ${selectedColor?.name === color.name ? 'border-brand-green' : 'border-transparent'} hover:border-brand-green-dark transition-all`}
                                 style={{ 
-                                  background: color.image ? `url(${color.image}) center/cover` : color.hex,
+                                  backgroundColor: color.hex,
                                   boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                 }}
                                 onClick={() => setSelectedColor(color)}
@@ -193,7 +193,7 @@ const ColorOptions: React.FC = () => {
                                 <div 
                                   className="w-6 h-6 rounded-full" 
                                   style={{ 
-                                    background: selectedColor.image ? `url(${selectedColor.image}) center/cover` : selectedColor.hex,
+                                    backgroundColor: selectedColor.hex,
                                     boxShadow: selectedColor.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                   }}
                                 ></div>
