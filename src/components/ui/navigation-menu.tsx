@@ -80,29 +80,11 @@ NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName
 
 const NavigationMenuLink = NavigationMenuPrimitive.Link
 
-// Completely rewritten NavigationMenuViewport component to fix the infinite update loop
+// Fix: Completely rewritten NavigationMenuViewport component
 const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
 >(({ className, ...props }, ref) => {
-  // Using useRef instead of useState to prevent infinite updates
-  const viewportRef = React.useRef<React.ElementRef<typeof NavigationMenuPrimitive.Viewport>>(null);
-  
-  // Merge refs to avoid conflicts
-  const mergedRef = (node: any) => {
-    // Update the ref from useRef
-    if (viewportRef.current !== node) {
-      viewportRef.current = node;
-    }
-    
-    // Forward the ref passed from parent
-    if (typeof ref === 'function') {
-      ref(node);
-    } else if (ref) {
-      ref.current = node;
-    }
-  };
-  
   return (
     <div className={cn("absolute left-0 top-full flex justify-center")}>
       <NavigationMenuPrimitive.Viewport
@@ -110,7 +92,7 @@ const NavigationMenuViewport = React.forwardRef<
           "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
           className
         )}
-        ref={mergedRef}
+        ref={ref}
         {...props}
       />
     </div>
@@ -118,32 +100,14 @@ const NavigationMenuViewport = React.forwardRef<
 })
 NavigationMenuViewport.displayName = NavigationMenuPrimitive.Viewport.displayName
 
-// Completely rewritten NavigationMenuIndicator to prevent infinite updates
+// Fix: Completely rewritten NavigationMenuIndicator
 const NavigationMenuIndicator = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Indicator>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Indicator>
 >(({ className, ...props }, ref) => {
-  // Using useRef instead of useState to prevent infinite updates
-  const indicatorRef = React.useRef<React.ElementRef<typeof NavigationMenuPrimitive.Indicator>>(null);
-  
-  // Merge refs to avoid conflicts
-  const mergedRef = (node: any) => {
-    // Update the ref from useRef
-    if (indicatorRef.current !== node) {
-      indicatorRef.current = node;
-    }
-    
-    // Forward the ref passed from parent
-    if (typeof ref === 'function') {
-      ref(node);
-    } else if (ref) {
-      ref.current = node;
-    }
-  };
-  
   return (
     <NavigationMenuPrimitive.Indicator
-      ref={mergedRef}
+      ref={ref}
       className={cn(
         "top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:fade-in",
         className
