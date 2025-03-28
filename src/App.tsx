@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { SearchProvider } from "./contexts/SearchContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -70,59 +70,57 @@ const App = () => (
         <Toaster />
         <Sonner />
         <SearchProvider>
-          <BrowserRouter>
-            <Routes>
-              {/* Admin Routes */}
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="templates" element={<Templates />} />
-                <Route path="pages" element={<Pages />} />
-                <Route path="sections" element={<Sections />} />
-                <Route path="settings" element={<Dashboard />} />
-                <Route path="users" element={<Dashboard />} />
-              </Route>
-              
-              {/* Public Routes */}
-              <Route path="/" element={<Index />} />
-              <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
-              <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
-              <Route path="/kunststof-kozijnen/kleuren/:colorSlug" element={<ColorDetail />} />
-              <Route path="/kunststof-kozijnen/types" element={<KozijnTypes />} />
-              <Route path="/kunststof-kozijnen/afmetingen" element={<KozijnSizes />} />
-              <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />
-              <Route path="/kunststof-kozijnen/prijzen" element={<KozijnPrices />} />
-              <Route path="/kunststof-kozijnen/merken" element={<KozijnBrands />} />
-              
-              {/* New routes for specific location, service, type, size, brand, and price pages */}
-              <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />
-              <Route path="/kunststof-kozijnen/services/inmeten" element={<KozijnenInmeten />} />
-              <Route path="/kunststof-kozijnen/types/draaikiepraam" element={<Draaikiepraam />} />
-              <Route path="/kunststof-kozijnen/afmetingen/100x100" element={<Kozijn100x100 />} />
-              <Route path="/kunststof-kozijnen/merken/schuco" element={<SchucoBrand />} />
-              <Route path="/kunststof-kozijnen/prijzen/afbetaling" element={<KozijnenAfbetaling />} />
-              <Route path="/kunststof-kozijnen/prijzen/subsidie" element={<KozijnenSubsidie />} />
-              
-              <Route path="/projecten" element={<Projects />} />
-              <Route path="/projecten/:projectSlug" element={<ProjectDetail />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:blogSlug" element={<BlogDetail />} />
-              <Route path="/werkgebied" element={<Werkgebied />} />
-              <Route path="/zakelijk" element={<Zakelijk />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/zoeken" element={<Zoeken />} />
-              <Route path="/showroom" element={<Showroom />} />
-              <Route path="/werkwijze" element={<Werkwijze />} />
-              <Route path="/over-ons" element={<OverOns />} />
-              <Route path="/over-ons/team" element={<Team />} />
-              <Route path="/over-ons/geschiedenis" element={<Geschiedenis />} />
-              <Route path="/over-ons/missie" element={<Missie />} />
-              <Route path="/over-ons/duurzaamheid" element={<Duurzaamheid />} />
-              <Route path="/over-ons/vacatures" element={<Vacatures />} />
-              <Route path="/kennisbank" element={<Kennisbank />} />
-              <Route path="/kennisbank/:articleSlug" element={<KennisbankDetail />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
+          <Routes>
+            {/* Admin Routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="templates" element={<Templates />} />
+              <Route path="pages" element={<Pages />} />
+              <Route path="sections" element={<Sections />} />
+              <Route path="settings" element={<Dashboard />} />
+              <Route path="users" element={<Dashboard />} />
+            </Route>
+            
+            {/* Public Routes */}
+            <Route path="/" element={<Index />} />
+            <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
+            <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
+            <Route path="/kunststof-kozijnen/kleuren/:colorSlug" element={<ColorDetail />} />
+            <Route path="/kunststof-kozijnen/types" element={<KozijnTypes />} />
+            <Route path="/kunststof-kozijnen/afmetingen" element={<KozijnSizes />} />
+            <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />
+            <Route path="/kunststof-kozijnen/prijzen" element={<KozijnPrices />} />
+            <Route path="/kunststof-kozijnen/merken" element={<KozijnBrands />} />
+            
+            {/* New routes for specific location, service, type, size, brand, and price pages */}
+            <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />
+            <Route path="/kunststof-kozijnen/services/inmeten" element={<KozijnenInmeten />} />
+            <Route path="/kunststof-kozijnen/types/draaikiepraam" element={<Draaikiepraam />} />
+            <Route path="/kunststof-kozijnen/afmetingen/100x100" element={<Kozijn100x100 />} />
+            <Route path="/kunststof-kozijnen/merken/schuco" element={<SchucoBrand />} />
+            <Route path="/kunststof-kozijnen/prijzen/afbetaling" element={<KozijnenAfbetaling />} />
+            <Route path="/kunststof-kozijnen/prijzen/subsidie" element={<KozijnenSubsidie />} />
+            
+            <Route path="/projecten" element={<Projects />} />
+            <Route path="/projecten/:projectSlug" element={<ProjectDetail />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:blogSlug" element={<BlogDetail />} />
+            <Route path="/werkgebied" element={<Werkgebied />} />
+            <Route path="/zakelijk" element={<Zakelijk />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/zoeken" element={<Zoeken />} />
+            <Route path="/showroom" element={<Showroom />} />
+            <Route path="/werkwijze" element={<Werkwijze />} />
+            <Route path="/over-ons" element={<OverOns />} />
+            <Route path="/over-ons/team" element={<Team />} />
+            <Route path="/over-ons/geschiedenis" element={<Geschiedenis />} />
+            <Route path="/over-ons/missie" element={<Missie />} />
+            <Route path="/over-ons/duurzaamheid" element={<Duurzaamheid />} />
+            <Route path="/over-ons/vacatures" element={<Vacatures />} />
+            <Route path="/kennisbank" element={<Kennisbank />} />
+            <Route path="/kennisbank/:articleSlug" element={<KennisbankDetail />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </SearchProvider>
       </TooltipProvider>
     </HelmetProvider>
