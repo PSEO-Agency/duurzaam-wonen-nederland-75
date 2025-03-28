@@ -39,7 +39,13 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ formData }) => {
             {formData.timeline && (
               <div>
                 <dt className="text-sm text-gray-500">Tijdlijn</dt>
-                <dd className="text-sm font-medium">{formData.timeline}</dd>
+                <dd className="text-sm font-medium">
+                  {formData.timeline === 'per-direct' && 'Per direct!'}
+                  {formData.timeline === '0-3 maanden' && 'Binnen 3 maanden'}
+                  {formData.timeline === '3-6 maanden' && '3 tot 6 maanden'}
+                  {formData.timeline === '6-12 maanden' && '6 tot 12 maanden'}
+                  {formData.timeline === 'orienterend' && 'Alleen oriënterend'}
+                </dd>
               </div>
             )}
             {formData.budget && (
@@ -124,13 +130,21 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ formData }) => {
             <div>
               <dt className="text-sm text-gray-500">Contactvoorkeur</dt>
               <dd className="text-sm font-medium">
-                {formData.preferredContact === 'email' ? 'Via e-mail' : 'Via telefoon'}
+                {formData.preferredContact === 'email' && 'Via e-mail'}
+                {formData.preferredContact === 'phone' && 'Via telefoon'}
+                {formData.preferredContact === 'whatsapp' && 'Via WhatsApp'}
               </dd>
             </div>
-            {formData.availability.length > 0 && (
-              <div>
+            {formData.availability && formData.availability.length > 0 && (
+              <div className="md:col-span-2">
                 <dt className="text-sm text-gray-500">Beschikbaarheid</dt>
-                <dd className="text-sm font-medium">{formData.availability.join(', ')}</dd>
+                <dd className="text-sm">
+                  <ul className="space-y-1 mt-1">
+                    {formData.availability.map((item, index) => (
+                      <li key={index} className="text-sm font-medium">{item}</li>
+                    ))}
+                  </ul>
+                </dd>
               </div>
             )}
           </dl>

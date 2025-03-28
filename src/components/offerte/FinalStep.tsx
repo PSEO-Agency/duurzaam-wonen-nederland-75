@@ -3,9 +3,22 @@ import React from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, MessageSquare, Plus, Trash2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { OfferteFormData } from '@/pages/Offerte';
+
+interface TimeSlot {
+  id: string;
+  startTime: string;
+  endTime: string;
+}
+
+interface DaySchedule {
+  day: string;
+  slots: TimeSlot[];
+}
 
 interface FinalStepProps {
   formData: OfferteFormData;
@@ -13,19 +26,67 @@ interface FinalStepProps {
 }
 
 const FinalStep: React.FC<FinalStepProps> = ({ formData, updateFormData }) => {
-  const availabilityDays = ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'];
-
-  const handleAvailabilityToggle = (day: string) => {
-    const currentAvailability = [...formData.availability];
-    const index = currentAvailability.indexOf(day);
-    
-    if (index >= 0) {
-      currentAvailability.splice(index, 1);
-    } else {
-      currentAvailability.push(day);
+  const days = ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag'];
+  
+  // Parse the availability from string format to DaySchedule objects
+  const parseAvailability = (): DaySchedule[] => {
+    if (!formData.availabilitySchedule) {
+      // Initialize with empty schedule for each day
+      return days.map(day => ({
+        day,
+        slots: []
+      }));
     }
     
-    updateFormData('availability', currentAvailability);
+    try {
+      return JSON.parse(formData.availabilitySchedule);
+    } catch (e) {
+      // If parsing fails, return empty schedule
+      return days.map(day => ({
+        day,
+        slots: []
+      }));
+    }
+  };
+  
+  const [schedule, setSchedule] = React.useState<DaySchedule[]>(parseAvailability());
+  
+  // Update the availability in formData when schedule changes
+  React.useEffect(() => {
+    updateFormData('availabilitySchedule', JSON.stringify(schedule));
+    // Create a formatted string representation for the review step
+    const formattedAvailability = schedule
+      .filter(day => day.slots.length > 0)
+      .map(day => {
+        const slotTexts = day.slots.map(slot => `${slot.startTime}-${slot.endTime}`);
+        return `${day.day}: ${slotTexts.join(', ')}`;
+      });
+    updateFormData('availability', formattedAvailability);
+  }, [schedule]);
+  
+  // Add a new time slot to a specific day
+  const addTimeSlot = (dayIndex: number) => {
+    const newSchedule = [...schedule];
+    newSchedule[dayIndex].slots.push({
+      id: `slot-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      startTime: '09:00',
+      endTime: '12:00'
+    });
+    setSchedule(newSchedule);
+  };
+  
+  // Remove a time slot
+  const removeTimeSlot = (dayIndex: number, slotIndex: number) => {
+    const newSchedule = [...schedule];
+    newSchedule[dayIndex].slots.splice(slotIndex, 1);
+    setSchedule(newSchedule);
+  };
+  
+  // Update a time slot
+  const updateTimeSlot = (dayIndex: number, slotIndex: number, field: 'startTime' | 'endTime', value: string) => {
+    const newSchedule = [...schedule];
+    newSchedule[dayIndex].slots[slotIndex][field] = value;
+    setSchedule(newSchedule);
   };
 
   return (
@@ -40,8 +101,8 @@ const FinalStep: React.FC<FinalStepProps> = ({ formData, updateFormData }) => {
           <Label className="text-base mb-3 block">Hoe wilt u dat we contact met u opnemen?</Label>
           <RadioGroup 
             value={formData.preferredContact} 
-            onValueChange={(value: 'email' | 'phone') => updateFormData('preferredContact', value)}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+            onValueChange={(value: 'email' | 'phone' | 'whatsapp') => updateFormData('preferredContact', value)}
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
           >
             <label className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer transition-all hover:border-brand-green hover:bg-brand-green/5 data-[state=checked]:border-brand-green data-[state=checked]:bg-brand-green/5" data-state={formData.preferredContact === 'email' ? 'checked' : 'unchecked'}>
               <RadioGroupItem value="email" id="email-contact" className="sr-only" />
@@ -68,29 +129,85 @@ const FinalStep: React.FC<FinalStepProps> = ({ formData, updateFormData }) => {
                 <span>Via telefoon</span>
               </div>
             </label>
+            
+            <label className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer transition-all hover:border-brand-green hover:bg-brand-green/5 data-[state=checked]:border-brand-green data-[state=checked]:bg-brand-green/5" data-state={formData.preferredContact === 'whatsapp' ? 'checked' : 'unchecked'}>
+              <RadioGroupItem value="whatsapp" id="whatsapp-contact" className="sr-only" />
+              <div className="rounded-full w-5 h-5 border border-gray-300 flex items-center justify-center data-[state=checked]:bg-brand-green data-[state=checked]:border-brand-green" data-state={formData.preferredContact === 'whatsapp' ? 'checked' : 'unchecked'}>
+                {formData.preferredContact === 'whatsapp' && (
+                  <div className="w-2.5 h-2.5 rounded-full bg-white"></div>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                <MessageSquare size={18} className="text-gray-600" />
+                <span>Via WhatsApp</span>
+              </div>
+            </label>
           </RadioGroup>
         </div>
         
         <div>
           <Label className="text-base mb-3 block">Wanneer bent u het beste bereikbaar?</Label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-2">
-            {availabilityDays.map((day) => (
-              <label
-                key={day}
-                className={`flex items-center border rounded-lg p-4 cursor-pointer transition-all hover:border-brand-green ${
-                  formData.availability.includes(day) 
-                    ? 'border-brand-green bg-brand-green/5' 
-                    : 'hover:bg-gray-50'
-                }`}
-              >
-                <Checkbox
-                  id={`availability-${day}`}
-                  checked={formData.availability.includes(day)}
-                  onCheckedChange={() => handleAvailabilityToggle(day)}
-                  className="data-[state=checked]:bg-brand-green data-[state=checked]:text-white border-gray-300 mr-3"
-                />
-                <span>{day}</span>
-              </label>
+          <p className="text-sm text-gray-500 mb-4">Voeg tijdslots toe voor de dagen waarop u beschikbaar bent.</p>
+          
+          <div className="space-y-4">
+            {schedule.map((day, dayIndex) => (
+              <div key={day.day} className="border rounded-lg p-4">
+                <div className="flex justify-between items-center mb-3">
+                  <h4 className="font-medium">{day.day}</h4>
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => addTimeSlot(dayIndex)}
+                    className="text-xs"
+                  >
+                    <Plus className="h-3.5 w-3.5 mr-1" />
+                    Tijdslot toevoegen
+                  </Button>
+                </div>
+                
+                {day.slots.length === 0 ? (
+                  <p className="text-sm text-gray-500 italic">Geen beschikbaarheid opgegeven</p>
+                ) : (
+                  <div className="space-y-2">
+                    {day.slots.map((slot, slotIndex) => (
+                      <div key={slot.id} className="flex items-center gap-2">
+                        <div className="grid grid-cols-2 gap-2 flex-1">
+                          <div>
+                            <Label htmlFor={`${day.day}-start-${slotIndex}`} className="sr-only">Starttijd</Label>
+                            <Input
+                              id={`${day.day}-start-${slotIndex}`}
+                              type="time"
+                              value={slot.startTime}
+                              onChange={(e) => updateTimeSlot(dayIndex, slotIndex, 'startTime', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor={`${day.day}-end-${slotIndex}`} className="sr-only">Eindtijd</Label>
+                            <Input
+                              id={`${day.day}-end-${slotIndex}`}
+                              type="time"
+                              value={slot.endTime}
+                              onChange={(e) => updateTimeSlot(dayIndex, slotIndex, 'endTime', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => removeTimeSlot(dayIndex, slotIndex)}
+                          className="h-8 w-8 text-gray-500"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>

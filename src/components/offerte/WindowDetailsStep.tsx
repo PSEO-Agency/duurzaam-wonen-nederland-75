@@ -14,11 +14,31 @@ interface WindowDetailsStepProps {
 
 const WindowDetailsStep: React.FC<WindowDetailsStepProps> = ({ formData, updateFormData }) => {
   const windowTypeOptions = [
-    { id: 'draaikiepraam', label: 'Draaikiepraam' },
-    { id: 'vast', label: 'Vast raam' },
-    { id: 'schuifraam', label: 'Schuifraam' },
-    { id: 'vouwwand', label: 'Vouwwand' },
-    { id: 'anders', label: 'Anders' }
+    { 
+      id: 'draaikiepraam', 
+      label: 'Draaikiepraam',
+      image: '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png'
+    },
+    { 
+      id: 'vast', 
+      label: 'Vast raam',
+      image: '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png'
+    },
+    { 
+      id: 'schuifraam', 
+      label: 'Schuifraam',
+      image: '/lovable-uploads/4c9a119b-a8e6-43f0-82fc-8e485c5ec3d5.png'
+    },
+    { 
+      id: 'vouwwand', 
+      label: 'Vouwwand',
+      image: '/lovable-uploads/78d706ca-fb91-4c03-82ca-97b0b0c127eb.png'
+    },
+    { 
+      id: 'anders', 
+      label: 'Anders',
+      image: '/lovable-uploads/e923780c-9e14-408a-a016-0b63db9b8daa.png'
+    }
   ];
 
   const handleWindowTypeToggle = (type: string) => {
@@ -44,23 +64,32 @@ const WindowDetailsStep: React.FC<WindowDetailsStepProps> = ({ formData, updateF
       <div className="space-y-6">
         <div>
           <Label className="text-base mb-2 block">Type kozijnen (meerdere opties mogelijk)</Label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
             {windowTypeOptions.map((option) => (
               <label
                 key={option.id}
-                className={`flex items-center border rounded-lg p-4 cursor-pointer transition-all hover:border-brand-green ${
+                className={`flex flex-col border rounded-lg overflow-hidden cursor-pointer transition-all hover:border-brand-green ${
                   formData.windowTypes.includes(option.id) 
                     ? 'border-brand-green bg-brand-green/5' 
                     : 'hover:bg-gray-50'
                 }`}
               >
-                <Checkbox
-                  id={`window-type-${option.id}`}
-                  checked={formData.windowTypes.includes(option.id)}
-                  onCheckedChange={() => handleWindowTypeToggle(option.id)}
-                  className="data-[state=checked]:bg-brand-green data-[state=checked]:text-white border-gray-300 mr-3"
-                />
-                <span>{option.label}</span>
+                <div className="aspect-video w-full bg-gray-100 overflow-hidden">
+                  <img 
+                    src={option.image} 
+                    alt={option.label} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4 flex items-center">
+                  <Checkbox
+                    id={`window-type-${option.id}`}
+                    checked={formData.windowTypes.includes(option.id)}
+                    onCheckedChange={() => handleWindowTypeToggle(option.id)}
+                    className="data-[state=checked]:bg-brand-green data-[state=checked]:text-white border-gray-300 mr-3"
+                  />
+                  <span>{option.label}</span>
+                </div>
               </label>
             ))}
           </div>

@@ -39,8 +39,9 @@ export type OfferteFormData = {
   city: string;
   
   // Preferences
-  preferredContact: 'email' | 'phone' | '';
+  preferredContact: 'email' | 'phone' | 'whatsapp' | '';
   availability: string[];
+  availabilitySchedule: string; // Serialized JSON of the schedule
   termsAccepted: boolean;
 };
 
@@ -66,6 +67,7 @@ const initialFormData: OfferteFormData = {
   
   preferredContact: '',
   availability: [],
+  availabilitySchedule: '',
   termsAccepted: false
 };
 
