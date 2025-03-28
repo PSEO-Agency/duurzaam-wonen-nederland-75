@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ArrowRight, CheckCircle, Info, Zap } from 'lucide-react';
@@ -186,16 +187,29 @@ const Offerte: React.FC = () => {
 
   const sendToWebhook = async (data: OfferteFormData) => {
     try {
-      await fetch(WEBHOOK_URL, {
-        method: 'POST',
+      // Convert the data to URL parameters
+      const params = new URLSearchParams();
+      
+      // Add form data as URL parameters
+      for (const [key, value] of Object.entries(data)) {
+        if (typeof value === 'object') {
+          // Handle arrays and objects by stringifying them
+          params.append(key, JSON.stringify(value));
+        } else {
+          params.append(key, String(value));
+        }
+      }
+      
+      // Add additional data
+      params.append('timestamp', new Date().toISOString());
+      params.append('source', window.location.origin);
+      
+      // Send as GET request with parameters in the URL
+      const response = await fetch(`${WEBHOOK_URL}?${params.toString()}`, {
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify({
-          formData: data,
-          timestamp: new Date().toISOString(),
-          source: window.location.origin
-        }),
       });
       
       console.log('Data sent to webhook successfully');
