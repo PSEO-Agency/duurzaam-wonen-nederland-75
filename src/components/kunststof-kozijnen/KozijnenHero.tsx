@@ -1,55 +1,110 @@
 
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from '../AnimatedSection';
 
 const KozijnenHero: React.FC = () => {
   return (
-    <div className="bg-gradient-to-r from-gray-50 to-gray-100 py-12 md:py-20">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row gap-10 items-center">
-          <div className="md:w-1/2">
-            <AnimatedSection animation="fade-in">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Kunststof Kozijnen - <span className="text-brand-green">Duurzaam, Betaalbaar en Stijlvol</span>
+    <section 
+      className="relative min-h-screen pt-20 flex items-center"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png")`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+      
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7">
+            <AnimatedSection animation="fade-in-right">
+              <span className="inline-block px-4 py-1 bg-brand-green/90 text-white rounded-full text-sm font-medium mb-4">
+                Specialist in kunststof kozijnen
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                Kunststof Kozijnen - Duurzaam, Betaalbaar en Stijlvol
               </h1>
-              <p className="text-lg text-gray-700 mb-4">
-                Kunststof kozijnen bieden de perfecte combinatie van duurzaamheid, isolatie en stijl voor uw woning. 
-                Vrijwel onderhoudsvrij, energiebesparend en verkrijgbaar in talloze designs en kleuren.
+              <p className="text-lg md:text-xl text-white/90 mb-8 max-w-xl">
+                Hoogwaardige, energiezuinige en onderhoudsarme kunststof kozijnen voor uw woning. Met meer dan 20 jaar ervaring leveren wij kwaliteitsproducten die duurzaam en betrouwbaar zijn.
               </p>
-              <p className="text-lg text-gray-700 mb-6">
-                Met onze hoogwaardige kunststof kozijnen verhoogt u direct de waarde van uw woning én bespaart u op uw energiekosten. 
-                Duurzaam Wonen Nederland levert alleen topkwaliteit voor een betaalbare prijs.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
-                  Offerte aanvragen
-                </Button>
-                <Button variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green/10">
-                  Ontdek alles over kunststof kozijnen
+              
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <Button size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
+                  <span>Offerte aanvragen</span>
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
+                <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-white/20">
+                  Ontdek alles over kunststof kozijnen
+                </Button>
+              </div>
+              
+              <div className="flex items-center gap-6 text-white mb-8">
+                <div className="flex items-center gap-2">
+                  <div className="bg-brand-green/20 p-1 rounded-full">
+                    <Check className="h-4 w-4 text-brand-green" />
+                  </div>
+                  <span>10 jaar garantie</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="bg-brand-green/20 p-1 rounded-full">
+                    <Check className="h-4 w-4 text-brand-green" />
+                  </div>
+                  <span>Gratis advies</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="bg-brand-green/20 p-1 rounded-full">
+                    <Check className="h-4 w-4 text-brand-green" />
+                  </div>
+                  <span>Vakkundige montage</span>
+                </div>
+              </div>
+              
+              {/* Facebook Rating Widget */}
+              <div className="mt-6 p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 w-full max-w-md">
+                <div className="elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
               </div>
             </AnimatedSection>
           </div>
-          <div className="md:w-1/2">
-            <AnimatedSection animation="fade-in" delay={200}>
-              <div className="relative">
-                <img 
-                  src="/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png" 
-                  alt="Kunststof kozijnen in moderne woning" 
-                  className="rounded-lg shadow-lg w-full h-auto"
-                />
-                <div className="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg">
-                  <p className="text-sm font-semibold text-brand-green">Tot 30% energiebesparing</p>
+          
+          <div className="lg:col-span-5">
+            <AnimatedSection animation="fade-in-left" delay={300}>
+              <div className="glass-card p-6 backdrop-blur-lg bg-white/10 border border-white/20">
+                <h3 className="text-xl font-semibold text-white mb-4">
+                  Voordelen van kunststof kozijnen
+                </h3>
+                <ul className="space-y-3">
+                  {[
+                    'Energiebesparend - Warmte blijft binnen',
+                    'Onderhoudsarm - Nooit meer schilderen',
+                    'Lange levensduur - Minimaal 30 jaar',
+                    'Uitstekende isolatie - Minder geluid',
+                    'Diverse kleuren en stijlen beschikbaar',
+                    '10 jaar garantie op al onze producten'
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="bg-brand-green p-1 rounded-full mt-1 flex-shrink-0">
+                        <Check className="h-3 w-3 text-white" />
+                      </div>
+                      <span className="text-white/90">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 pt-4 border-t border-white/20">
+                  <div className="flex items-center justify-between">
+                    <Button asChild size="sm" variant="link" className="text-white p-0">
+                      <a href="#benefits">Meer voordelen <ArrowRight className="ml-1 h-3 w-3" /></a>
+                    </Button>
+                    <span className="text-white/80 text-sm">Enschede · regio Twente</span>
+                  </div>
                 </div>
               </div>
             </AnimatedSection>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
