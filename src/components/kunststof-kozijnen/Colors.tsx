@@ -8,6 +8,7 @@ interface ColorOption {
   hex: string;
   image?: string;
   description: string;
+  ralCode?: string;
 }
 
 const Colors: React.FC = () => {
@@ -15,27 +16,32 @@ const Colors: React.FC = () => {
     {
       name: 'Wit',
       hex: '#FFFFFF',
-      description: 'De klassieke en meest gekozen kleur voor kunststof kozijnen. Tijdloos en past bij elke woning.'
+      description: 'De klassieke en meest gekozen kleur voor kunststof kozijnen. Tijdloos en past bij elke woning.',
+      ralCode: 'RAL 9016'
     },
     {
       name: 'Antraciet',
       hex: '#293133',
-      description: 'Moderne en stijlvolle donkergrijze kleur, zeer populair bij nieuwbouw en renovaties.'
+      description: 'Moderne en stijlvolle donkergrijze kleur, zeer populair bij nieuwbouw en renovaties.',
+      ralCode: 'RAL 7016'
     },
     {
       name: 'Crème',
       hex: '#F5F5DC',
-      description: 'Warme, zachte kleur die perfect past bij traditionele en landelijke woningen.'
+      description: 'Warme, zachte kleur die perfect past bij traditionele en landelijke woningen.',
+      ralCode: 'RAL 9001'
     },
     {
       name: 'Zwart',
       hex: '#121212',
-      description: 'Elegante en contrasterende kleur voor een krachtige uitstraling van uw woning.'
+      description: 'Elegante en contrasterende kleur voor een krachtige uitstraling van uw woning.',
+      ralCode: 'RAL 9005'
     },
     {
       name: 'Donkergroen',
       hex: '#2D5E40',
-      description: 'Traditionele kleur die goed past bij klassieke woningen en landhuizen.'
+      description: 'Traditionele kleur die goed past bij klassieke woningen en landhuizen.',
+      ralCode: 'RAL 6009'
     },
   ];
   
@@ -44,19 +50,22 @@ const Colors: React.FC = () => {
       name: 'Golden Oak',
       image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
       hex: '#C19A6B',
-      description: 'Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.'
+      description: 'Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.',
+      ralCode: 'Folie 2178-001'
     },
     {
       name: 'Noten',
       image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
       hex: '#654321',
-      description: 'Rijke, donkere houtlook die diepte en karakter aan uw woning toevoegt.'
+      description: 'Rijke, donkere houtlook die diepte en karakter aan uw woning toevoegt.',
+      ralCode: 'Folie 2178-007'
     },
     {
       name: 'Mahonie',
       image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
       hex: '#C04000',
-      description: 'Roodbruine houtlook met subtiele nerven voor een elegante afwerking.'
+      description: 'Roodbruine houtlook met subtiele nerven voor een elegante afwerking.',
+      ralCode: 'Folie 2097-013'
     }
   ];
 
@@ -84,6 +93,9 @@ const Colors: React.FC = () => {
                   ></div>
                   <CardContent className="p-4">
                     <h4 className="font-semibold mb-1">{color.name}</h4>
+                    {color.ralCode && (
+                      <p className="text-xs text-gray-500 mb-1">{color.ralCode}</p>
+                    )}
                     <p className="text-sm text-gray-600">{color.description}</p>
                   </CardContent>
                 </Card>
@@ -104,6 +116,9 @@ const Colors: React.FC = () => {
                   }}></div>
                   <CardContent className="p-4">
                     <h4 className="font-semibold mb-1">{option.name}</h4>
+                    {option.ralCode && (
+                      <p className="text-xs text-gray-500 mb-1">{option.ralCode}</p>
+                    )}
                     <p className="text-sm text-gray-600">{option.description}</p>
                   </CardContent>
                 </Card>

@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -22,6 +23,7 @@ interface ColorOption {
   description?: string;
   category: string;
   popular?: boolean;
+  ralCode?: string; // Add RAL code property
 }
 
 const ColorOptions: React.FC = () => {
@@ -36,32 +38,32 @@ const ColorOptions: React.FC = () => {
 
   const colorOptions: ColorOption[] = [
     // Standard colors
-    { name: 'Puur Wit', hex: '#FFFFFF', category: 'standard', popular: true, description: 'De klassieke en meest gekozen kleur, tijdloos en past bij elke woning.' },
-    { name: 'Verkeerswit', hex: '#F5F5F5', category: 'standard', description: 'Een heldere witte tint, perfect voor een frisse en moderne uitstraling.' },
-    { name: 'Crème', hex: '#F5F5DC', category: 'standard', popular: true, description: 'Warme, zachte tint die perfect past bij traditionele en landelijke woningen.' },
-    { name: 'Lichtgrijs', hex: '#D3D3D3', category: 'standard', description: 'Subtiele grijstint voor een ingetogen uitstraling.' },
-    { name: 'Antraciet', hex: '#293133', category: 'standard', popular: true, description: 'Moderne en stijlvolle donkergrijze kleur, zeer populair bij nieuwbouw en renovaties.' },
-    { name: 'Monumentengroen', hex: '#2D5E40', category: 'standard', description: 'Traditionele groentint die goed past bij klassieke woningen en landhuizen.' },
-    { name: 'Staalblauw', hex: '#4682B4', category: 'standard', description: 'Krachtige blauwtint met een industriële uitstraling.' },
-    { name: 'Zwart', hex: '#121212', category: 'standard', description: 'Elegante en contrasterende kleur voor een krachtige uitstraling.' },
+    { name: 'Puur Wit', hex: '#FFFFFF', category: 'standard', popular: true, description: 'De klassieke en meest gekozen kleur, tijdloos en past bij elke woning.', ralCode: 'RAL 9016' },
+    { name: 'Verkeerswit', hex: '#F5F5F5', category: 'standard', description: 'Een heldere witte tint, perfect voor een frisse en moderne uitstraling.', ralCode: 'RAL 9016' },
+    { name: 'Crème', hex: '#F5F5DC', category: 'standard', popular: true, description: 'Warme, zachte tint die perfect past bij traditionele en landelijke woningen.', ralCode: 'RAL 9001' },
+    { name: 'Lichtgrijs', hex: '#D3D3D3', category: 'standard', description: 'Subtiele grijstint voor een ingetogen uitstraling.', ralCode: 'RAL 7035' },
+    { name: 'Antraciet', hex: '#293133', category: 'standard', popular: true, description: 'Moderne en stijlvolle donkergrijze kleur, zeer populair bij nieuwbouw en renovaties.', ralCode: 'RAL 7016' },
+    { name: 'Monumentengroen', hex: '#2D5E40', category: 'standard', description: 'Traditionele groentint die goed past bij klassieke woningen en landhuizen.', ralCode: 'RAL 6009' },
+    { name: 'Staalblauw', hex: '#4682B4', category: 'standard', description: 'Krachtige blauwtint met een industriële uitstraling.', ralCode: 'RAL 5011' },
+    { name: 'Zwart', hex: '#121212', category: 'standard', description: 'Elegante en contrasterende kleur voor een krachtige uitstraling.', ralCode: 'RAL 9005' },
     
     // Wood look
-    { name: 'Golden Oak', hex: '#C19A6B', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', popular: true, description: 'Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.' },
-    { name: 'Noten', hex: '#654321', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Rijke, donkere houtlook die diepte en karakter aan uw woning toevoegt.' },
-    { name: 'Mahonie', hex: '#C04000', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Roodbruine houtlook met subtiele nerven voor een elegante afwerking.' },
-    { name: 'Oregon Pine', hex: '#D8B28E', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte houtlook met een subtiele nerf, perfect voor een natuurlijke uitstraling.' },
-    { name: 'Eiken Naturel', hex: '#D2B48C', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte eikenhouttint met een natuurlijke uitstraling.' },
+    { name: 'Golden Oak', hex: '#C19A6B', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', popular: true, description: 'Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.', ralCode: 'Folie 2178-001' },
+    { name: 'Noten', hex: '#654321', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Rijke, donkere houtlook die diepte en karakter aan uw woning toevoegt.', ralCode: 'Folie 2178-007' },
+    { name: 'Mahonie', hex: '#C04000', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Roodbruine houtlook met subtiele nerven voor een elegante afwerking.', ralCode: 'Folie 2097-013' },
+    { name: 'Oregon Pine', hex: '#D8B28E', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte houtlook met een subtiele nerf, perfect voor een natuurlijke uitstraling.', ralCode: 'Folie 1192-001' },
+    { name: 'Eiken Naturel', hex: '#D2B48C', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte eikenhouttint met een natuurlijke uitstraling.', ralCode: 'Folie 3149-008' },
     
     // Metallic look
-    { name: 'Aluminium Metallic', hex: '#A9A9A9', category: 'metallic', description: 'Moderne metallic look die het beste van aluminium nabootst.' },
-    { name: 'Geborsteld Rvs Look', hex: '#B4B4B4', category: 'metallic', description: 'Stijlvolle metallic afwerking met een geborsteld effect.' },
-    { name: 'Brons Metallic', hex: '#CD7F32', category: 'metallic', description: 'Warme metallic tint met een rijke, klassieke uitstraling.' },
+    { name: 'Aluminium Metallic', hex: '#A9A9A9', category: 'metallic', description: 'Moderne metallic look die het beste van aluminium nabootst.', ralCode: 'RAL 9006' },
+    { name: 'Geborsteld Rvs Look', hex: '#B4B4B4', category: 'metallic', description: 'Stijlvolle metallic afwerking met een geborsteld effect.', ralCode: 'RAL 9007' },
+    { name: 'Brons Metallic', hex: '#CD7F32', category: 'metallic', description: 'Warme metallic tint met een rijke, klassieke uitstraling.', ralCode: 'RAL 8023' },
     
     // Special colors
-    { name: 'Wijnrood', hex: '#722F37', category: 'special', description: 'Rijke, diepe kleur die warmte en karakter toevoegt aan uw woning.' },
-    { name: 'Mosgroen', hex: '#607D3B', category: 'special', description: 'Natuurlijke groentint die perfect in landelijke omgevingen past.' },
-    { name: 'Monumentenblauw', hex: '#27548E', category: 'special', description: 'Traditionele blauwtint, vaak gebruikt in historische gebouwen.' },
-    { name: 'Leisteengrijs', hex: '#708090', category: 'special', description: 'Elegante grijstint geïnspireerd door natuurlijke leisteen.' }
+    { name: 'Wijnrood', hex: '#722F37', category: 'special', description: 'Rijke, diepe kleur die warmte en karakter toevoegt aan uw woning.', ralCode: 'RAL 3005' },
+    { name: 'Mosgroen', hex: '#607D3B', category: 'special', description: 'Natuurlijke groentint die perfect in landelijke omgevingen past.', ralCode: 'RAL 6005' },
+    { name: 'Monumentenblauw', hex: '#27548E', category: 'special', description: 'Traditionele blauwtint, vaak gebruikt in historische gebouwen.', ralCode: 'RAL 5010' },
+    { name: 'Leisteengrijs', hex: '#708090', category: 'special', description: 'Elegante grijstint geïnspireerd door natuurlijke leisteen.', ralCode: 'RAL 7015' }
   ];
 
   const filteredColors = filterCategory === "all" 
@@ -443,6 +445,9 @@ const ColorOptions: React.FC = () => {
                                       {color.name}
                                       {color.popular && <CheckCircle2 className="h-4 w-4 ml-1 text-brand-green" />}
                                     </h4>
+                                    {color.ralCode && (
+                                      <p className="text-xs text-gray-500 mb-1">{color.ralCode}</p>
+                                    )}
                                     <p className="text-sm text-gray-600 line-clamp-2">{color.description}</p>
                                   </CardContent>
                                 </Card>
@@ -451,6 +456,7 @@ const ColorOptions: React.FC = () => {
                                 <div className="space-y-1">
                                   <p>{color.name}</p>
                                   <p className="text-xs text-gray-500">{color.hex}</p>
+                                  {color.ralCode && <p className="text-xs text-gray-500">{color.ralCode}</p>}
                                 </div>
                               </TooltipContent>
                             </Tooltip>
@@ -479,6 +485,9 @@ const ColorOptions: React.FC = () => {
                                       {color.name}
                                       {color.popular && <CheckCircle2 className="h-4 w-4 ml-1 text-brand-green" />}
                                     </h4>
+                                    {color.ralCode && (
+                                      <p className="text-xs text-gray-500 mb-1">{color.ralCode}</p>
+                                    )}
                                     <p className="text-sm text-gray-600">{color.description}</p>
                                   </CardContent>
                                 </Card>
@@ -487,6 +496,7 @@ const ColorOptions: React.FC = () => {
                                 <div className="space-y-1">
                                   <p>{color.name}</p>
                                   <p className="text-xs text-gray-500">{color.hex}</p>
+                                  {color.ralCode && <p className="text-xs text-gray-500">{color.ralCode}</p>}
                                 </div>
                               </TooltipContent>
                             </Tooltip>
@@ -516,6 +526,9 @@ const ColorOptions: React.FC = () => {
                                   ></div>
                                   <CardContent className="p-4">
                                     <h4 className="font-semibold mb-1">{color.name}</h4>
+                                    {color.ralCode && (
+                                      <p className="text-xs text-gray-500 mb-1">{color.ralCode}</p>
+                                    )}
                                     <p className="text-sm text-gray-600">{color.description}</p>
                                   </CardContent>
                                 </Card>
@@ -524,6 +537,7 @@ const ColorOptions: React.FC = () => {
                                 <div className="space-y-1">
                                   <p>{color.name}</p>
                                   <p className="text-xs text-gray-500">{color.hex}</p>
+                                  {color.ralCode && <p className="text-xs text-gray-500">{color.ralCode}</p>}
                                 </div>
                               </TooltipContent>
                             </Tooltip>
@@ -549,6 +563,9 @@ const ColorOptions: React.FC = () => {
                                   ></div>
                                   <CardContent className="p-4">
                                     <h4 className="font-semibold mb-1">{color.name}</h4>
+                                    {color.ralCode && (
+                                      <p className="text-xs text-gray-500 mb-1">{color.ralCode}</p>
+                                    )}
                                     <p className="text-sm text-gray-600 line-clamp-2">{color.description}</p>
                                   </CardContent>
                                 </Card>
@@ -557,6 +574,7 @@ const ColorOptions: React.FC = () => {
                                 <div className="space-y-1">
                                   <p>{color.name}</p>
                                   <p className="text-xs text-gray-500">{color.hex}</p>
+                                  {color.ralCode && <p className="text-xs text-gray-500">{color.ralCode}</p>}
                                 </div>
                               </TooltipContent>
                             </Tooltip>
