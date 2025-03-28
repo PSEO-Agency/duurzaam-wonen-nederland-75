@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Check, Filter, ArrowLeft, Star, ChevronDown } from 'lucide-react';
+import { Check, Filter, ArrowRight, ArrowDown, Star, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -17,6 +17,8 @@ import RegionsSection from '@/components/kunststof-kozijnen/RegionsSection';
 import Services from '@/components/kunststof-kozijnen/Services';
 import Hero from '@/components/Hero';
 import ProductFilters from '@/components/kunststof-kozijnen/ProductFilters';
+import KozijnenHero from '@/components/kunststof-kozijnen/KozijnenHero';
+import { Card, CardContent } from '@/components/ui/card';
 
 // Mock product data
 const products = [
@@ -113,86 +115,301 @@ const KunststofKozijnen: React.FC = () => {
       <Navbar />
       
       <main className="flex-grow pt-20">
-        {/* Hero Section - Using the same Hero component as homepage */}
-        <Hero />
+        {/* Hero Section - Using the specialized KozijnenHero component */}
+        <KozijnenHero />
         
         {/* Sticky Navigation */}
         <StickyNavigation />
         
-        {/* What are Kunststof Kozijnen Section */}
-        <WhatAreKozijnen />
-        
-        {/* Filter and Products Section */}
-        <section id="assortiment" className="py-12">
+        {/* Introduction Section - NEW */}
+        <section id="introductie" className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold mb-6">Ons assortiment</h2>
-              <p className="text-lg text-gray-700 mb-8 max-w-3xl">
-                Bekijk ons uitgebreide assortiment kunststof kozijnen en vind de perfecte oplossing voor uw woning.
-              </p>
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-3xl font-bold mb-6 text-center">Kunststof Kozijnen - De Ideale Oplossing</h2>
+                <div className="space-y-4 text-gray-700">
+                  <p className="text-lg">
+                    Kunststof kozijnen zijn dé ideale keuze voor wie op zoek is naar een combinatie van duurzaamheid, betaalbaarheid en stijl. 
+                    Met hun onderhoudsvrije eigenschappen, uitstekende isolatie en lange levensduur bieden ze een perfecte oplossing voor 
+                    zowel moderne als traditionele woningen. Of je nu energiekosten wilt besparen, de waarde van je woning wilt verhogen, 
+                    of gewoon een strakke, stijlvolle uitstraling wilt creëren – kunststof kozijnen bieden het allemaal.
+                  </p>
+                  
+                  <p className="text-lg">
+                    Dankzij hun energiezuinige eigenschappen zorgen kunststof kozijnen voor een betere isolatie, waardoor je minder 
+                    warmte verliest en kunt besparen op stookkosten. Bovendien zijn ze onderhoudsvrij, wat betekent dat je geen tijd 
+                    en geld kwijt bent aan schilderwerk of complexe reinigingsbeurten. En met een breed scala aan kleuren, stijlen en 
+                    glasopties passen kunststof kozijnen perfect bij jouw persoonlijke smaak en woningstijl.
+                  </p>
+                  
+                  <p className="text-lg font-medium">
+                    Wil je meer weten over de voordelen van kunststof kozijnen?
+                  </p>
+                  
+                  <p className="text-lg">
+                    Ontdek alles over kunststof kozijnen, inclusief prijzen, montageopties en de vele kleurmogelijkheden, 
+                    en maak vandaag nog een weloverwogen keuze!
+                  </p>
+                </div>
+                
+                <div className="mt-8 bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+                  <h3 className="text-xl font-semibold mb-4">Ga direct naar de volgende onderwerpen:</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="#wat-zijn" className="flex items-center py-2 px-3 hover:bg-gray-50 rounded-md transition-colors">
+                      <ArrowRight className="h-4 w-4 text-brand-green mr-2" />
+                      <span>Wat zijn Kunststof Kozijnen?</span>
+                    </a>
+                    <a href="#voordelen" className="flex items-center py-2 px-3 hover:bg-gray-50 rounded-md transition-colors">
+                      <ArrowRight className="h-4 w-4 text-brand-green mr-2" />
+                      <span>Voordelen Kunststof Kozijnen</span>
+                    </a>
+                    <a href="#diensten" className="flex items-center py-2 px-3 hover:bg-gray-50 rounded-md transition-colors">
+                      <ArrowRight className="h-4 w-4 text-brand-green mr-2" />
+                      <span>Onze Diensten</span>
+                    </a>
+                    <a href="#soorten" className="flex items-center py-2 px-3 hover:bg-gray-50 rounded-md transition-colors">
+                      <ArrowRight className="h-4 w-4 text-brand-green mr-2" />
+                      <span>Soorten Kunststof Kozijnen</span>
+                    </a>
+                    <a href="#kleuren" className="flex items-center py-2 px-3 hover:bg-gray-50 rounded-md transition-colors">
+                      <ArrowRight className="h-4 w-4 text-brand-green mr-2" />
+                      <span>Verschillende Kleuren</span>
+                    </a>
+                    <a href="#montage" className="flex items-center py-2 px-3 hover:bg-gray-50 rounded-md transition-colors">
+                      <ArrowRight className="h-4 w-4 text-brand-green mr-2" />
+                      <span>Montage Opties</span>
+                    </a>
+                    <a href="#regio" className="flex items-center py-2 px-3 hover:bg-gray-50 rounded-md transition-colors">
+                      <ArrowRight className="h-4 w-4 text-brand-green mr-2" />
+                      <span>Kunststof Kozijnen in jouw regio</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="mt-8 text-center">
+                  <Button className="bg-brand-green hover:bg-brand-green-dark text-white px-6">
+                    <span>Vraag nu vrijblijvend een offerte aan</span>
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
             </AnimatedSection>
-            
-            {/* Replace with ProductFilters component */}
-            <ProductFilters />
           </div>
         </section>
         
-        {/* Benefits Section */}
-        <section id="voordelen" className="py-12 bg-gray-50">
+        {/* What are Kunststof Kozijnen Section */}
+        <WhatAreKozijnen />
+        
+        {/* Voordelen Section - NEW */}
+        <section id="voordelen" className="py-12 bg-white">
           <div className="container mx-auto px-4">
-            <AnimatedSection className="text-center mb-10" animation="fade-in" delay={100}>
-              <h2 className="text-3xl font-bold mb-4">Voordelen van kunststof kozijnen</h2>
-              <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-                Onze kunststof kozijnen bieden talloze voordelen voor uw woning en comfort. 
-                Ontdek waarom zoveel huiseigenaren kiezen voor deze duurzame oplossing.
+            <div className="flex flex-col lg:flex-row gap-10 items-center">
+              <div className="lg:w-1/2">
+                <AnimatedSection animation="fade-in">
+                  <h2 className="text-3xl font-bold mb-6">Voordelen van Kunststof Kozijnen</h2>
+                  <p className="text-lg text-gray-700 mb-6">
+                    Waarom kiezen voor kunststof kozijnen? Kunststof kozijnen zijn onderhoudsarm, energiezuinig en betaalbaar. 
+                    Ze bieden uitstekende isolatie, helpen energiekosten te verlagen en gaan meer dan 30 jaar mee. 
+                    Ze zijn veelzijdig, beschikbaar in verschillende kleuren en stijlen, en vaak gemaakt van recyclebaar materiaal.
+                  </p>
+                  
+                  <h3 className="text-xl font-semibold mb-4">Belangrijkste voordelen:</h3>
+                  
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                      <span className="text-gray-700">Onderhoudsarm – geen schilderwerk nodig.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                      <span className="text-gray-700">Energiezuinig – bespaar op stookkosten.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                      <span className="text-gray-700">Lange levensduur – bestand tegen weer en wind.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                      <span className="text-gray-700">Betaalbaar – lagere kosten dan hout of aluminium.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                      <span className="text-gray-700">Duurzaam – recyclebaar en milieuvriendelijk.</span>
+                    </li>
+                  </ul>
+                  
+                  <div className="mt-4">
+                    <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
+                      <span>Overweeg kunststof kozijnen? Vraag vrijblijvend een offerte aan!</span>
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </AnimatedSection>
+              </div>
+              
+              <div className="lg:w-1/2">
+                <AnimatedSection animation="fade-in" delay={200}>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-gray-50 rounded-lg p-5 shadow-sm">
+                      <div className="text-3xl font-bold text-brand-green mb-2">30+</div>
+                      <p className="text-gray-700">Jaar levensduur zonder groot onderhoud</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-5 shadow-sm">
+                      <div className="text-3xl font-bold text-brand-green mb-2">20%</div>
+                      <p className="text-gray-700">Gemiddelde energiebesparing per jaar</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-5 shadow-sm">
+                      <div className="text-3xl font-bold text-brand-green mb-2">100%</div>
+                      <p className="text-gray-700">Recyclebaar materiaal voor duurzaamheid</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-5 shadow-sm">
+                      <div className="text-3xl font-bold text-brand-green mb-2">0</div>
+                      <p className="text-gray-700">Schilderbeurten nodig tijdens levensduur</p>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Types Section - NEW */}
+        <section id="types" className="py-12 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-in">
+              <h2 className="text-3xl font-bold mb-6">Kunststof Kozijnen - Alle Opties</h2>
+              <p className="text-lg text-gray-700 mb-8 max-w-3xl">
+                Ontdek alle mogelijkheden voor kunststof kozijnen, van verschillende types en kleuren tot diverse afmetingen.
+                Filter op uw specifieke wensen om het perfecte kozijn voor uw woning te vinden.
               </p>
             </AnimatedSection>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={200}>
-                <h3 className="text-xl font-semibold mb-3">Uitstekende isolatie</h3>
-                <p className="text-gray-700">
-                  Kunststof kozijnen hebben uitstekende isolerende eigenschappen, wat resulteert in minder warmteverlies en lagere energiekosten.
-                </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              <AnimatedSection animation="fade-in" delay={100}>
+                <Card className="h-full hover:shadow-md transition-shadow">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-4">Type Kozijn</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Vast kozijn</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Draai-kiep kozijn</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Schuifpui</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Stolpstel kozijn</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Harmonica kozijn</span>
+                      </li>
+                    </ul>
+                    <div className="mt-4">
+                      <a href="#soorten" className="text-brand-green flex items-center hover:underline">
+                        <span>Bekijk alle types</span>
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
               </AnimatedSection>
               
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={300}>
-                <h3 className="text-xl font-semibold mb-3">Onderhoudsarm</h3>
-                <p className="text-gray-700">
-                  Anders dan houten kozijnen hoeven kunststof kozijnen niet regelmatig geschilderd te worden. Een simpele schoonmaakbeurt volstaat.
-                </p>
+              <AnimatedSection animation="fade-in" delay={200}>
+                <Card className="h-full hover:shadow-md transition-shadow">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-4">Kleur Kozijn</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-white border border-gray-300 mr-2"></div>
+                        <span>Wit</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-black mr-2"></div>
+                        <span>Zwart</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-gray-700 mr-2"></div>
+                        <span>Antraciet</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-amber-800 mr-2"></div>
+                        <span>Houtlook</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-gray-500 mr-2"></div>
+                        <span>Grijs</span>
+                      </li>
+                    </ul>
+                    <div className="mt-4">
+                      <a href="#kleuren" className="text-brand-green flex items-center hover:underline">
+                        <span>Bekijk alle kleuren</span>
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
               </AnimatedSection>
               
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={400}>
-                <h3 className="text-xl font-semibold mb-3">Lange levensduur</h3>
-                <p className="text-gray-700">
-                  Met een levensduur van minimaal 30 jaar zijn kunststof kozijnen een duurzame investering voor uw woning.
-                </p>
-              </AnimatedSection>
-              
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={500}>
-                <h3 className="text-xl font-semibold mb-3">Inbraakwerend</h3>
-                <p className="text-gray-700">
-                  Onze kunststof kozijnen zijn voorzien van moderne sluitingen en voldoen aan het Politiekeurmerk Veilig Wonen.
-                </p>
-              </AnimatedSection>
-              
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={600}>
-                <h3 className="text-xl font-semibold mb-3">Diverse uitvoeringen</h3>
-                <p className="text-gray-700">
-                  Verkrijgbaar in diverse kleuren en uitvoeringen, waaronder houtlook afwerkingen die niet van echt te onderscheiden zijn.
-                </p>
-              </AnimatedSection>
-              
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={700}>
-                <h3 className="text-xl font-semibold mb-3">Geluidsisolerend</h3>
-                <p className="text-gray-700">
-                  Geniet van een rustigere woonomgeving dankzij de goede geluidsisolerende eigenschappen van kunststof kozijnen.
-                </p>
+              <AnimatedSection animation="fade-in" delay={300}>
+                <Card className="h-full hover:shadow-md transition-shadow">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-4">Kozijn Afmeting</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>100x100 cm</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>200x100 cm</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>300x100 cm</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>400x100 cm</span>
+                      </li>
+                      <li className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                        <span>Maatwerk</span>
+                      </li>
+                    </ul>
+                    <div className="mt-4">
+                      <a href="#sizes" className="text-brand-green flex items-center hover:underline">
+                        <span>Bekijk alle afmetingen</span>
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
               </AnimatedSection>
             </div>
           </div>
         </section>
+        
+        {/* Filter and Products Section - MODIFIED to not show the "Ons assortiment" text */}
+        <section id="assortiment" className="py-12">
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-in">
+              <h2 className="text-3xl font-bold mb-6">Filter ons assortiment</h2>
+            </AnimatedSection>
+            
+            {/* Use ProductFilters component */}
+            <ProductFilters />
+          </div>
+        </section>
+        
+        {/* Services Section */}
+        <Services />
         
         {/* Information Section */}
         <section id="informatie" className="py-12">
@@ -284,9 +501,6 @@ const KunststofKozijnen: React.FC = () => {
             </div>
           </div>
         </section>
-        
-        {/* Services Section - Now positioned before FAQ */}
-        <Services />
         
         {/* FAQ Section */}
         <section id="faq" className="py-12 bg-gray-50">
@@ -389,7 +603,7 @@ const KunststofKozijnen: React.FC = () => {
           </div>
         </section>
         
-        {/* Regions Section - Now positioned below FAQ */}
+        {/* Regions Section */}
         <RegionsSection />
         
         {/* CTA Section */}
