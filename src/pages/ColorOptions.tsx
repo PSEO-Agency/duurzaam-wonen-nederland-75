@@ -6,7 +6,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Palette, Home, CheckCircle2, Image, Droplet, PanelRight, Paintbrush, Layers, Star } from 'lucide-react';
+import { Palette, Home, CheckCircle2, Image, Droplet, PanelRight, Paintbrush, Layers, Star, Info } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -211,8 +211,17 @@ const ColorOptions: React.FC = () => {
                                 <h4 className="font-semibold">{selectedColor.name}</h4>
                               </div>
                               {selectedColor.description && (
-                                <p className="text-sm text-gray-600">{selectedColor.description}</p>
+                                <p className="text-sm text-gray-600 mb-3">{selectedColor.description}</p>
                               )}
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className="w-full mt-2 text-xs"
+                                onClick={() => window.open(`/kunststof-kozijnen/kleuren/${selectedColor.name.toLowerCase().replace(/\s+/g, '-')}`, '_blank')}
+                              >
+                                <Info className="h-3.5 w-3.5 mr-1" />
+                                Kleur details
+                              </Button>
                             </div>
                           )}
                         </CardContent>
@@ -597,33 +606,4 @@ const ColorOptions: React.FC = () => {
                                  backgroundImage: "linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent)",
                                  backgroundSize: "10px 10px"
                                }}>
-                            <span className="text-xs text-gray-700">Buiten</span>
-                          </div>
-                          <div className="w-full h-20 bg-white border border-gray-200 rounded-r-md flex items-end justify-end p-2">
-                            <span className="text-xs text-gray-700">Binnen</span>
-                          </div>
-                        </div>
-                        <h3 className="font-semibold text-lg mb-1">Rvs-look buiten, Wit binnen</h3>
-                        <p className="text-gray-600 text-sm mb-4">Moderne combinatie met een industriële uitstraling aan de buitenzijde en een neutrale binnenzijde.</p>
-                        <div className="flex justify-between text-sm text-gray-500">
-                          <span>Kozijn: K70/K90</span>
-                          <span>Meerprijs: + €150/m²</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </section>
-        
-        <ContactCTA />
-      </main>
-      
-      <Footer />
-    </>
-  );
-};
-
-export default ColorOptions;
+                            <span className="
