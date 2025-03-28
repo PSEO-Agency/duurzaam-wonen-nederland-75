@@ -11,6 +11,7 @@ import { Page } from '@/types/cms';
 
 interface EnhancedPage extends Page {
   templateName?: string; // Optional for display purposes only
+  parentPath?: string; // Optional parent path information
 }
 
 const Pages: React.FC = () => {
@@ -66,7 +67,8 @@ const Pages: React.FC = () => {
         isPublished: true, 
         createdAt: new Date('2023-06-12'), 
         updatedAt: new Date('2023-07-12'),
-        templateName: 'Location Template'
+        templateName: 'Location Template',
+        parentPath: '/kunststof-kozijnen'
       },
       { 
         id: '5', 
@@ -77,7 +79,8 @@ const Pages: React.FC = () => {
         isPublished: true, 
         createdAt: new Date('2023-06-11'), 
         updatedAt: new Date('2023-07-11'),
-        templateName: 'Product Type Template'
+        templateName: 'Product Type Template',
+        parentPath: '/kunststof-kozijnen'
       },
       { 
         id: '6', 
@@ -156,6 +159,221 @@ const Pages: React.FC = () => {
         updatedAt: new Date('2023-07-04'),
         templateName: 'Knowledge Template'
       },
+      // Add all pages from App.tsx routes
+      { 
+        id: '13', 
+        title: 'Color Options', 
+        slug: '/kunststof-kozijnen/kleuren', 
+        templateId: '2',
+        metaDescription: 'Explore color options for your kozijnen',
+        isPublished: true, 
+        createdAt: new Date('2023-06-03'), 
+        updatedAt: new Date('2023-07-03'),
+        templateName: 'Product Template',
+        parentPath: '/kunststof-kozijnen'
+      },
+      { 
+        id: '14', 
+        title: 'Kozijn Types', 
+        slug: '/kunststof-kozijnen/types', 
+        templateId: '2',
+        metaDescription: 'Different types of kozijnen',
+        isPublished: true, 
+        createdAt: new Date('2023-06-02'), 
+        updatedAt: new Date('2023-07-02'),
+        templateName: 'Product Template',
+        parentPath: '/kunststof-kozijnen'
+      },
+      { 
+        id: '15', 
+        title: 'Kozijn Sizes', 
+        slug: '/kunststof-kozijnen/afmetingen', 
+        templateId: '2',
+        metaDescription: 'Standard and custom kozijn sizes',
+        isPublished: true, 
+        createdAt: new Date('2023-06-01'), 
+        updatedAt: new Date('2023-07-01'),
+        templateName: 'Product Template',
+        parentPath: '/kunststof-kozijnen'
+      },
+      { 
+        id: '16', 
+        title: 'Kozijn Montage', 
+        slug: '/kunststof-kozijnen/montage', 
+        templateId: '2',
+        metaDescription: 'Installation services for kozijnen',
+        isPublished: true, 
+        createdAt: new Date('2023-05-31'), 
+        updatedAt: new Date('2023-06-30'),
+        templateName: 'Service Template',
+        parentPath: '/kunststof-kozijnen'
+      },
+      { 
+        id: '17', 
+        title: 'Kozijn Prices', 
+        slug: '/kunststof-kozijnen/prijzen', 
+        templateId: '2',
+        metaDescription: 'Pricing for kozijnen products',
+        isPublished: true, 
+        createdAt: new Date('2023-05-30'), 
+        updatedAt: new Date('2023-06-29'),
+        templateName: 'Product Template',
+        parentPath: '/kunststof-kozijnen'
+      },
+      { 
+        id: '18', 
+        title: 'Kozijn Brands', 
+        slug: '/kunststof-kozijnen/merken', 
+        templateId: '2',
+        metaDescription: 'Brands we work with for kozijnen',
+        isPublished: true, 
+        createdAt: new Date('2023-05-29'), 
+        updatedAt: new Date('2023-06-28'),
+        templateName: 'Brand Template',
+        parentPath: '/kunststof-kozijnen'
+      },
+      { 
+        id: '19', 
+        title: 'Kozijnen Inmeten', 
+        slug: '/kunststof-kozijnen/services/inmeten', 
+        templateId: '2',
+        metaDescription: 'Measurement services for kozijnen',
+        isPublished: true, 
+        createdAt: new Date('2023-05-28'), 
+        updatedAt: new Date('2023-06-27'),
+        templateName: 'Service Template',
+        parentPath: '/kunststof-kozijnen'
+      },
+      { 
+        id: '20', 
+        title: 'Kozijn 100x100', 
+        slug: '/kunststof-kozijnen/afmetingen/100x100', 
+        templateId: '2',
+        metaDescription: '100x100 size kozijnen',
+        isPublished: true, 
+        createdAt: new Date('2023-05-27'), 
+        updatedAt: new Date('2023-06-26'),
+        templateName: 'Size Template',
+        parentPath: '/kunststof-kozijnen/afmetingen'
+      },
+      { 
+        id: '21', 
+        title: 'Schuco Brand', 
+        slug: '/kunststof-kozijnen/merken/schuco', 
+        templateId: '2',
+        metaDescription: 'Schuco kozijnen products',
+        isPublished: true, 
+        createdAt: new Date('2023-05-26'), 
+        updatedAt: new Date('2023-06-25'),
+        templateName: 'Brand Template',
+        parentPath: '/kunststof-kozijnen/merken'
+      },
+      { 
+        id: '22', 
+        title: 'Kozijnen Afbetaling', 
+        slug: '/kunststof-kozijnen/prijzen/afbetaling', 
+        templateId: '2',
+        metaDescription: 'Payment plans for kozijnen',
+        isPublished: true, 
+        createdAt: new Date('2023-05-25'), 
+        updatedAt: new Date('2023-06-24'),
+        templateName: 'Price Template',
+        parentPath: '/kunststof-kozijnen/prijzen'
+      },
+      { 
+        id: '23', 
+        title: 'Kozijnen Subsidie', 
+        slug: '/kunststof-kozijnen/prijzen/subsidie', 
+        templateId: '2',
+        metaDescription: 'Subsidies for kozijnen installation',
+        isPublished: true, 
+        createdAt: new Date('2023-05-24'), 
+        updatedAt: new Date('2023-06-23'),
+        templateName: 'Price Template',
+        parentPath: '/kunststof-kozijnen/prijzen'
+      },
+      { 
+        id: '24', 
+        title: 'Team', 
+        slug: '/over-ons/team', 
+        templateId: '2',
+        metaDescription: 'Meet our team',
+        isPublished: true, 
+        createdAt: new Date('2023-05-23'), 
+        updatedAt: new Date('2023-06-22'),
+        templateName: 'Team Template',
+        parentPath: '/over-ons'
+      },
+      { 
+        id: '25', 
+        title: 'Geschiedenis', 
+        slug: '/over-ons/geschiedenis', 
+        templateId: '2',
+        metaDescription: 'Our company history',
+        isPublished: true, 
+        createdAt: new Date('2023-05-22'), 
+        updatedAt: new Date('2023-06-21'),
+        templateName: 'Content Template',
+        parentPath: '/over-ons'
+      },
+      { 
+        id: '26', 
+        title: 'Missie', 
+        slug: '/over-ons/missie', 
+        templateId: '2',
+        metaDescription: 'Our mission and values',
+        isPublished: true, 
+        createdAt: new Date('2023-05-21'), 
+        updatedAt: new Date('2023-06-20'),
+        templateName: 'Content Template',
+        parentPath: '/over-ons'
+      },
+      { 
+        id: '27', 
+        title: 'Duurzaamheid', 
+        slug: '/over-ons/duurzaamheid', 
+        templateId: '2',
+        metaDescription: 'Our sustainability efforts',
+        isPublished: true, 
+        createdAt: new Date('2023-05-20'), 
+        updatedAt: new Date('2023-06-19'),
+        templateName: 'Content Template',
+        parentPath: '/over-ons'
+      },
+      { 
+        id: '28', 
+        title: 'Vacatures', 
+        slug: '/over-ons/vacatures', 
+        templateId: '2',
+        metaDescription: 'Job opportunities',
+        isPublished: true, 
+        createdAt: new Date('2023-05-19'), 
+        updatedAt: new Date('2023-06-18'),
+        templateName: 'Content Template',
+        parentPath: '/over-ons'
+      },
+      { 
+        id: '29', 
+        title: 'Zoeken', 
+        slug: '/zoeken', 
+        templateId: '2',
+        metaDescription: 'Search our site',
+        isPublished: true, 
+        createdAt: new Date('2023-05-18'), 
+        updatedAt: new Date('2023-06-17'),
+        templateName: 'Search Template'
+      },
+      { 
+        id: '30', 
+        title: '404 Not Found', 
+        slug: '*', 
+        templateId: '3',
+        metaDescription: 'Page not found',
+        isPublished: true, 
+        createdAt: new Date('2023-05-17'), 
+        updatedAt: new Date('2023-06-16'),
+        templateName: 'Error Template'
+      }
     ];
     
     setPagesData(routeBasedPages);
@@ -170,12 +388,20 @@ const Pages: React.FC = () => {
   const filteredPages = pagesData.filter(page => 
     page.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
     page.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (page.templateName && page.templateName.toLowerCase().includes(searchQuery.toLowerCase()))
+    (page.templateName && page.templateName.toLowerCase().includes(searchQuery.toLowerCase())) ||
+    (page.parentPath && page.parentPath.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   // Handle create new page
   const handleAddPage = () => {
     navigate('/admin/pages/create');
+  };
+
+  // Helper function to show parent page name instead of path
+  const getParentPageName = (parentPath: string | undefined): string => {
+    if (!parentPath) return '-';
+    const parentPage = pagesData.find(page => page.slug === parentPath);
+    return parentPage ? parentPage.title : parentPath;
   };
 
   return (
@@ -214,6 +440,7 @@ const Pages: React.FC = () => {
               <TableRow>
                 <TableHead>Title</TableHead>
                 <TableHead>URL</TableHead>
+                <TableHead>Parent</TableHead>
                 <TableHead>Template</TableHead>
                 <TableHead>Published</TableHead>
                 <TableHead>Updated</TableHead>
@@ -225,6 +452,7 @@ const Pages: React.FC = () => {
                 <TableRow key={page.id}>
                   <TableCell className="font-medium">{page.title}</TableCell>
                   <TableCell className="text-sm font-mono">{page.slug}</TableCell>
+                  <TableCell>{getParentPageName(page.parentPath)}</TableCell>
                   <TableCell>{page.templateName}</TableCell>
                   <TableCell>
                     {page.isPublished ? (
