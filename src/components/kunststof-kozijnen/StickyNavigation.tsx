@@ -1,34 +1,18 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
-import { Button } from '@/components/ui/button';
-import { Separator } from "@/components/ui/separator";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight } from 'lucide-react';
-
-const navigationItems = [
-  { id: 'wat-zijn', label: 'Wat zijn Kunststof Kozijnen?' },
-  { id: 'voordelen', label: 'Voordelen' },
-  { id: 'diensten', label: 'Onze Diensten' },
-  { id: 'soorten', label: 'Soorten' },
-  { id: 'kleuren', label: 'Kleuren', route: '/kunststof-kozijnen/kleuren' },
-  { id: 'montage', label: 'Montage' },
-  { id: 'merken', label: 'Merken' },
-  { id: 'regios', label: 'Regio\'s' },
-];
 
 const StickyNavigation: React.FC = () => {
   const { ref, inView } = useInView({
     threshold: 0,
     initialInView: true,
   });
-
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  
+  const location = useLocation();
+  const isKleurenPage = location.pathname.includes('/kunststof-kozijnen/kleuren');
 
   return (
     <div ref={ref}>
@@ -36,19 +20,51 @@ const StickyNavigation: React.FC = () => {
         <div className="container mx-auto px-4">
           {/* Breadcrumb navigation */}
           <div className="py-2 border-b">
-            <div className="flex items-center text-sm text-gray-500">
-              <Link to="/" className="flex items-center hover:text-brand-green transition-colors">
-                <Home className="h-3.5 w-3.5" />
-              </Link>
-              <ChevronRight className="mx-2 h-3.5 w-3.5" />
-              <Link to="/producten" className="hover:text-brand-green transition-colors">
-                Producten
-              </Link>
-              <ChevronRight className="mx-2 h-3.5 w-3.5" />
-              <span className="font-medium text-foreground">
-                Kunststof Kozijnen
-              </span>
-            </div>
+            <Breadcrumb>
+              <BreadcrumbList className="text-sm">
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/" className="flex items-center hover:text-brand-green transition-colors">
+                      <Home className="h-3.5 w-3.5" />
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/producten" className="hover:text-brand-green transition-colors">
+                      Producten
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  {isKleurenPage ? (
+                    <BreadcrumbLink asChild>
+                      <Link to="/kunststof-kozijnen" className="hover:text-brand-green transition-colors">
+                        Kunststof Kozijnen
+                      </Link>
+                    </BreadcrumbLink>
+                  ) : (
+                    <BreadcrumbPage>Kunststof Kozijnen</BreadcrumbPage>
+                  )}
+                </BreadcrumbItem>
+                {isKleurenPage && (
+                  <>
+                    <BreadcrumbSeparator>
+                      <ChevronRight className="h-3.5 w-3.5" />
+                    </BreadcrumbSeparator>
+                    <BreadcrumbItem>
+                      <BreadcrumbPage>Kleuren</BreadcrumbPage>
+                    </BreadcrumbItem>
+                  </>
+                )}
+              </BreadcrumbList>
+            </Breadcrumb>
           </div>
         </div>
       </nav>
