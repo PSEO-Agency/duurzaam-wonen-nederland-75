@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, Filter, ArrowLeft, Star, ChevronDown } from 'lucide-react';
@@ -5,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
@@ -296,55 +298,93 @@ const KunststofKozijnen: React.FC = () => {
               </p>
             </AnimatedSection>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={100}>
-                <h3 className="text-lg font-semibold mb-2">Hoe lang gaan kunststof kozijnen mee?</h3>
-                <p className="text-gray-700">
-                  Kunststof kozijnen hebben een gemiddelde levensduur van 30 tot 50 jaar, afhankelijk van de kwaliteit en 
-                  het onderhoud. Onze kozijnen worden geleverd met garantie en zijn ontworpen voor een lange levensduur.
-                </p>
-              </AnimatedSection>
-              
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={200}>
-                <h3 className="text-lg font-semibold mb-2">Zijn kunststof kozijnen onderhoudsvriendelijk?</h3>
-                <p className="text-gray-700">
-                  Ja, kunststof kozijnen zijn zeer onderhoudsvriendelijk. Ze hoeven niet geschilderd te worden en een 
-                  regelmatige schoonmaakbeurt met water en milde zeep is voldoende om ze in goede staat te houden.
-                </p>
-              </AnimatedSection>
-              
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={300}>
-                <h3 className="text-lg font-semibold mb-2">Kan ik subsidie krijgen voor kunststof kozijnen?</h3>
-                <p className="text-gray-700">
-                  In sommige gemeenten is het mogelijk subsidie te krijgen voor energiebesparende maatregelen, waaronder 
-                  het plaatsen van kunststof kozijnen met hoogrendementsglas. Onze adviseurs kunnen u informeren over de 
-                  actuele mogelijkheden in uw regio.
-                </p>
-              </AnimatedSection>
-              
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={400}>
-                <h3 className="text-lg font-semibold mb-2">Kan ik mijn oude kozijnen inruilen?</h3>
-                <p className="text-gray-700">
-                  Bij renovatieprojecten verwijderen wij de oude kozijnen en zorgen voor een correcte afvoer hiervan. 
-                  Er is geen specifiek inruilprogramma, maar wij nemen de afvoer en recycling van de oude materialen voor onze rekening.
-                </p>
-              </AnimatedSection>
-              
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={500}>
-                <h3 className="text-lg font-semibold mb-2">Hoe snel kunnen kunststof kozijnen geplaatst worden?</h3>
-                <p className="text-gray-700">
-                  Na bestelling hebben we gemiddeld 4-6 weken productietijd nodig. De eigenlijke installatie gaat 
-                  vrij snel: afhankelijk van het aantal kozijnen kan dit variëren van één dag tot enkele dagen.
-                </p>
-              </AnimatedSection>
-              
-              <AnimatedSection className="bg-white p-6 rounded-lg shadow-sm" animation="fade-in" delay={600}>
-                <h3 className="text-lg font-semibold mb-2">Kan ik kunststof kozijnen in elke kleur krijgen?</h3>
-                <p className="text-gray-700">
-                  Wij bieden een uitgebreid assortiment kleuren aan, waaronder standaardkleuren en speciale afwerkingen 
-                  zoals houtnerf. Ook tweekleurige kozijnen zijn mogelijk, bijvoorbeeld wit aan de binnenkant en een andere kleur aan de buitenkant.
-                </p>
-              </AnimatedSection>
+            <div className="max-w-4xl mx-auto">
+              <Accordion type="single" collapsible className="w-full">
+                <AnimatedSection animation="fade-in" delay={100}>
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger className="text-lg font-semibold">
+                      Hoe lang gaan kunststof kozijnen mee?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-gray-700">
+                        Kunststof kozijnen hebben een gemiddelde levensduur van 30 tot 50 jaar, afhankelijk van de kwaliteit en 
+                        het onderhoud. Onze kozijnen worden geleverd met garantie en zijn ontworpen voor een lange levensduur.
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </AnimatedSection>
+                
+                <AnimatedSection animation="fade-in" delay={200}>
+                  <AccordionItem value="item-2">
+                    <AccordionTrigger className="text-lg font-semibold">
+                      Zijn kunststof kozijnen onderhoudsvriendelijk?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-gray-700">
+                        Ja, kunststof kozijnen zijn zeer onderhoudsvriendelijk. Ze hoeven niet geschilderd te worden en een 
+                        regelmatige schoonmaakbeurt met water en milde zeep is voldoende om ze in goede staat te houden.
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </AnimatedSection>
+                
+                <AnimatedSection animation="fade-in" delay={300}>
+                  <AccordionItem value="item-3">
+                    <AccordionTrigger className="text-lg font-semibold">
+                      Kan ik subsidie krijgen voor kunststof kozijnen?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-gray-700">
+                        In sommige gemeenten is het mogelijk subsidie te krijgen voor energiebesparende maatregelen, waaronder 
+                        het plaatsen van kunststof kozijnen met hoogrendementsglas. Onze adviseurs kunnen u informeren over de 
+                        actuele mogelijkheden in uw regio.
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </AnimatedSection>
+                
+                <AnimatedSection animation="fade-in" delay={400}>
+                  <AccordionItem value="item-4">
+                    <AccordionTrigger className="text-lg font-semibold">
+                      Kan ik mijn oude kozijnen inruilen?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-gray-700">
+                        Bij renovatieprojecten verwijderen wij de oude kozijnen en zorgen voor een correcte afvoer hiervan. 
+                        Er is geen specifiek inruilprogramma, maar wij nemen de afvoer en recycling van de oude materialen voor onze rekening.
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </AnimatedSection>
+                
+                <AnimatedSection animation="fade-in" delay={500}>
+                  <AccordionItem value="item-5">
+                    <AccordionTrigger className="text-lg font-semibold">
+                      Hoe snel kunnen kunststof kozijnen geplaatst worden?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-gray-700">
+                        Na bestelling hebben we gemiddeld 4-6 weken productietijd nodig. De eigenlijke installatie gaat 
+                        vrij snel: afhankelijk van het aantal kozijnen kan dit variëren van één dag tot enkele dagen.
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </AnimatedSection>
+                
+                <AnimatedSection animation="fade-in" delay={600}>
+                  <AccordionItem value="item-6">
+                    <AccordionTrigger className="text-lg font-semibold">
+                      Kan ik kunststof kozijnen in elke kleur krijgen?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-gray-700">
+                        Wij bieden een uitgebreid assortiment kleuren aan, waaronder standaardkleuren en speciale afwerkingen 
+                        zoals houtnerf. Ook tweekleurige kozijnen zijn mogelijk, bijvoorbeeld wit aan de binnenkant en een andere kleur aan de buitenkant.
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </AnimatedSection>
+              </Accordion>
             </div>
           </div>
         </section>
