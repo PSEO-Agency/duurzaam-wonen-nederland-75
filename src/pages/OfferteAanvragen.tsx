@@ -1,5 +1,4 @@
-
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -219,6 +218,18 @@ const OfferteAanvragen: React.FC = () => {
     }
   };
 
+  const windowTypeOptions = useMemo(() => [
+    { id: 'draaikiepraam', label: 'Draaikiepraam' },
+    { id: 'vast', label: 'Vast raam' },
+    { id: 'schuifraam', label: 'Schuifraam' },
+    { id: 'vouwwand', label: 'Vouwwand' },
+    { id: 'anders', label: 'Anders' }
+  ], []);
+
+  const availabilityDays = useMemo(() => 
+    ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'],
+  []);
+
   const renderWindowTypeCard = useCallback((option: { id: string; label: string }) => {
     const isChecked = formData.windowTypes.includes(option.id as WindowType);
     
@@ -232,11 +243,12 @@ const OfferteAanvragen: React.FC = () => {
       >
         <div className="flex items-center space-x-2">
           <Checkbox 
-            id={option.id} 
+            id={`window-type-${option.id}`}
             checked={isChecked}
+            onCheckedChange={() => {}}
             className="pointer-events-none"
           />
-          <Label htmlFor={option.id} className="cursor-pointer">{option.label}</Label>
+          <Label htmlFor={`window-type-${option.id}`} className="cursor-pointer">{option.label}</Label>
         </div>
       </div>
     );
@@ -255,11 +267,12 @@ const OfferteAanvragen: React.FC = () => {
       >
         <div className="flex items-center space-x-2">
           <Checkbox 
-            id={day} 
+            id={`availability-${day}`}
             checked={isChecked}
+            onCheckedChange={() => {}}
             className="pointer-events-none"
           />
-          <Label htmlFor={day} className="cursor-pointer">{day}</Label>
+          <Label htmlFor={`availability-${day}`} className="cursor-pointer">{day}</Label>
         </div>
       </div>
     );
@@ -368,13 +381,7 @@ const OfferteAanvragen: React.FC = () => {
               <div>
                 <Label className="text-base mb-2 block">Type kozijnen (meerdere opties mogelijk, optioneel)</Label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-2">
-                  {[
-                    { id: 'draaikiepraam', label: 'Draaikiepraam' },
-                    { id: 'vast', label: 'Vast raam' },
-                    { id: 'schuifraam', label: 'Schuifraam' },
-                    { id: 'vouwwand', label: 'Vouwwand' },
-                    { id: 'anders', label: 'Anders' }
-                  ].map(renderWindowTypeCard)}
+                  {windowTypeOptions.map(renderWindowTypeCard)}
                 </div>
               </div>
 
@@ -562,7 +569,7 @@ const OfferteAanvragen: React.FC = () => {
               <div>
                 <Label className="text-base mb-2 block">Wanneer bent u het beste bereikbaar?</Label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
-                  {['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'].map(renderAvailabilityCard)}
+                  {availabilityDays.map(renderAvailabilityCard)}
                 </div>
               </div>
               
