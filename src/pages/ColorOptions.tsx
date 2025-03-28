@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -6,7 +5,7 @@ import { Slider } from "@/components/ui/slider";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Palette, Home, CheckCircle2, Image, Droplet, PanelRight, Paintbrush, Layers } from 'lucide-react';
+import { Palette, Home, CheckCircle2, Image, Droplet, PanelRight, Paintbrush, Layers, Star } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
