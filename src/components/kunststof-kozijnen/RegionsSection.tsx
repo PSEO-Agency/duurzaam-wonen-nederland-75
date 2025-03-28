@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import AnimatedSection from '../AnimatedSection';
-import { ChevronDown, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -12,8 +12,6 @@ interface RegionData {
 }
 
 const RegionsSection: React.FC = () => {
-  const [expandedProvince, setExpandedProvince] = useState<string | null>(null);
-
   const regions: RegionData[] = [
     {
       province: "Drenthe",
@@ -65,14 +63,6 @@ const RegionsSection: React.FC = () => {
     }
   ];
 
-  const toggleProvince = (province: string) => {
-    if (expandedProvince === province) {
-      setExpandedProvince(null);
-    } else {
-      setExpandedProvince(province);
-    }
-  };
-
   return (
     <section id="regios" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -88,33 +78,27 @@ const RegionsSection: React.FC = () => {
           {regions.map((region) => (
             <AnimatedSection key={region.province} animation="fade-in">
               <Card className="h-full hover:shadow-md transition-shadow overflow-hidden">
-                <div 
-                  className="bg-brand-green/5 p-4 flex justify-between items-center cursor-pointer"
-                  onClick={() => toggleProvince(region.province)}
-                >
+                <div className="bg-brand-green/5 p-4">
                   <h3 className="font-semibold flex items-center">
                     <MapPin className="h-4 w-4 mr-2 text-brand-green" />
                     {region.province}
                   </h3>
-                  <ChevronDown className={`h-5 w-5 transition-transform ${expandedProvince === region.province ? 'transform rotate-180' : ''}`} />
                 </div>
                 
-                {expandedProvince === region.province && (
-                  <CardContent className="pt-4">
-                    <div className="flex flex-wrap gap-2">
-                      {region.cities.map((city) => (
-                        <Button 
-                          key={city} 
-                          variant="outline" 
-                          size="sm" 
-                          className="text-sm"
-                        >
-                          {city}
-                        </Button>
-                      ))}
-                    </div>
-                  </CardContent>
-                )}
+                <CardContent className="pt-4">
+                  <div className="flex flex-wrap gap-2">
+                    {region.cities.map((city) => (
+                      <Button 
+                        key={city} 
+                        variant="outline" 
+                        size="sm" 
+                        className="text-sm"
+                      >
+                        {city}
+                      </Button>
+                    ))}
+                  </div>
+                </CardContent>
               </Card>
             </AnimatedSection>
           ))}
