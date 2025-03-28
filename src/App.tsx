@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import KunststofKozijnen from "./pages/KunststofKozijnen";
 import ColorOptions from "./pages/ColorOptions";
+import ColorDetail from "./pages/ColorDetail";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
             <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
+            <Route path="/kunststof-kozijnen/kleuren/:colorSlug" element={<ColorDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
