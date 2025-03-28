@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Phone, Search as SearchIcon, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -41,6 +42,11 @@ const Navbar: React.FC = () => {
       navigate(`/zoeken?q=${encodeURIComponent(searchTerm)}`);
     }
   };
+  
+  // Use useCallback to prevent unnecessary re-renders
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(prevState => !prevState);
+  }, []);
   
   // Top bar navigation items
   const topNavItems = [
@@ -95,6 +101,33 @@ const Navbar: React.FC = () => {
   const megaMenuItemClass = "flex items-center text-gray-700 hover:text-brand-green text-sm";
   const megaMenuHeaderClass = "font-bold text-lg mb-2";
   
+  // Memoize nav item rendering to avoid unnecessary re-renders
+  const renderNavItem = useCallback((item: { label: string; href: string }, className: string, onClick?: () => void) => {
+    if (item.href.startsWith('#')) {
+      return (
+        <a
+          key={item.label}
+          href={item.href}
+          className={className}
+          onClick={onClick}
+        >
+          {item.label}
+        </a>
+      );
+    } else {
+      return (
+        <Link
+          key={item.label}
+          to={item.href}
+          className={className}
+          onClick={onClick}
+        >
+          {item.label}
+        </Link>
+      );
+    }
+  }, []);
+  
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Black Top Bar */}
@@ -104,22 +137,9 @@ const Navbar: React.FC = () => {
             {/* Top Navigation Links - Desktop */}
             <div className="hidden md:flex">
               {topNavItems.map((item) => (
-                item.href.startsWith('#') ? (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="text-white text-sm mx-3 hover:text-gray-300 transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className="text-white text-sm mx-3 hover:text-gray-300 transition-colors"
-                  >
-                    {item.label}
-                  </Link>
+                renderNavItem(
+                  item, 
+                  "text-white text-sm mx-3 hover:text-gray-300 transition-colors"
                 )
               ))}
             </div>
@@ -171,21 +191,7 @@ const Navbar: React.FC = () => {
                           {oplossingenItems.map((item) => (
                             <li key={item.label}>
                               <NavigationMenuLink asChild>
-                                {item.href.startsWith('#') ? (
-                                  <a 
-                                    href={item.href}
-                                    className={megaMenuItemClass}
-                                  >
-                                    <span className="mr-2">›</span> {item.label}
-                                  </a>
-                                ) : (
-                                  <Link 
-                                    to={item.href}
-                                    className={megaMenuItemClass}
-                                  >
-                                    <span className="mr-2">›</span> {item.label}
-                                  </Link>
-                                )}
+                                {renderNavItem(item, megaMenuItemClass)}
                               </NavigationMenuLink>
                             </li>
                           ))}
@@ -197,21 +203,7 @@ const Navbar: React.FC = () => {
                           {productenItems.map((item) => (
                             <li key={item.label}>
                               <NavigationMenuLink asChild>
-                                {item.href.startsWith('#') ? (
-                                  <a 
-                                    href={item.href}
-                                    className={megaMenuItemClass}
-                                  >
-                                    <span className="mr-2">›</span> {item.label}
-                                  </a>
-                                ) : (
-                                  <Link 
-                                    to={item.href}
-                                    className={megaMenuItemClass}
-                                  >
-                                    <span className="mr-2">›</span> {item.label}
-                                  </Link>
-                                )}
+                                {renderNavItem(item, megaMenuItemClass)}
                               </NavigationMenuLink>
                             </li>
                           ))}
@@ -225,21 +217,7 @@ const Navbar: React.FC = () => {
                 {mainNavItems.map((item) => (
                   <NavigationMenuItem key={item.label}>
                     <NavigationMenuLink asChild>
-                      {item.href.startsWith('#') ? (
-                        <a 
-                          href={item.href}
-                          className={`${menuItemClass} px-4 py-2`}
-                        >
-                          {item.label}
-                        </a>
-                      ) : (
-                        <Link 
-                          to={item.href}
-                          className={`${menuItemClass} px-4 py-2`}
-                        >
-                          {item.label}
-                        </Link>
-                      )}
+                      {renderNavItem(item, `${menuItemClass} px-4 py-2`)}
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 ))}
@@ -254,21 +232,7 @@ const Navbar: React.FC = () => {
                         {overOnsItems.map((item) => (
                           <li key={item.label}>
                             <NavigationMenuLink asChild>
-                              {item.href.startsWith('#') ? (
-                                <a 
-                                  href={item.href}
-                                  className={megaMenuItemClass}
-                                >
-                                  <span className="mr-2">›</span> {item.label}
-                                </a>
-                              ) : (
-                                <Link 
-                                  to={item.href}
-                                  className={megaMenuItemClass}
-                                >
-                                  <span className="mr-2">›</span> {item.label}
-                                </Link>
-                              )}
+                              {renderNavItem(item, megaMenuItemClass)}
                             </NavigationMenuLink>
                           </li>
                         ))}
@@ -302,7 +266,7 @@ const Navbar: React.FC = () => {
             {/* Mobile Menu Button */}
             <button
               className="md:hidden focus:outline-none ml-auto"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={toggleMobileMenu}
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6 text-gray-700" />
@@ -336,23 +300,7 @@ const Navbar: React.FC = () => {
               <ul className="space-y-2 pl-4">
                 {oplossingenItems.map((item) => (
                   <li key={item.label}>
-                    {item.href.startsWith('#') ? (
-                      <a
-                        href={item.href}
-                        className={mobileMenuItemClass}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        › {item.label}
-                      </a>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        className={mobileMenuItemClass}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        › {item.label}
-                      </Link>
-                    )}
+                    {renderNavItem(item, mobileMenuItemClass, toggleMobileMenu)}
                   </li>
                 ))}
               </ul>
@@ -364,23 +312,7 @@ const Navbar: React.FC = () => {
               <ul className="space-y-2 pl-4">
                 {productenItems.map((item) => (
                   <li key={item.label}>
-                    {item.href.startsWith('#') ? (
-                      <a
-                        href={item.href}
-                        className={mobileMenuItemClass}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        › {item.label}
-                      </a>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        className={mobileMenuItemClass}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        › {item.label}
-                      </Link>
-                    )}
+                    {renderNavItem(item, mobileMenuItemClass, toggleMobileMenu)}
                   </li>
                 ))}
               </ul>
@@ -388,25 +320,9 @@ const Navbar: React.FC = () => {
             
             {/* Main Nav Items - Mobile */}
             {mainNavItems.map((item) => (
-              item.href.startsWith('#') ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className={mobileMenuItemClass}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className={mobileMenuItemClass}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              )
+              <div key={item.label}>
+                {renderNavItem(item, mobileMenuItemClass, toggleMobileMenu)}
+              </div>
             ))}
 
             {/* Over ons Dropdown - Mobile */}
@@ -415,23 +331,7 @@ const Navbar: React.FC = () => {
               <ul className="space-y-2 pl-4">
                 {overOnsItems.map((item) => (
                   <li key={item.label}>
-                    {item.href.startsWith('#') ? (
-                      <a
-                        href={item.href}
-                        className={mobileMenuItemClass}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        › {item.label}
-                      </a>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        className={mobileMenuItemClass}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        › {item.label}
-                      </Link>
-                    )}
+                    {renderNavItem(item, mobileMenuItemClass, toggleMobileMenu)}
                   </li>
                 ))}
               </ul>
@@ -440,25 +340,9 @@ const Navbar: React.FC = () => {
             {/* Top Nav Items - Mobile */}
             <div className="mt-4 pt-4 border-t border-gray-200">
               {topNavItems.map((item) => (
-                item.href.startsWith('#') ? (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className={mobileMenuItemClass}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className={mobileMenuItemClass}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                )
+                <div key={item.label}>
+                  {renderNavItem(item, mobileMenuItemClass, toggleMobileMenu)}
+                </div>
               ))}
             </div>
             

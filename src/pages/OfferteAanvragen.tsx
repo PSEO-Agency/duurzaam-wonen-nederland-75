@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -88,12 +88,12 @@ const OfferteAanvragen: React.FC = () => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const updateFormData = (name: keyof FormData, value: any) => {
+  const updateFormData = useCallback((name: keyof FormData, value: any) => {
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  }, []);
 
-  // Fixed implementation to avoid state update loops
-  const handleWindowTypeToggle = (type: WindowType) => {
+  // Memoized stable implementations to avoid update loops
+  const handleWindowTypeToggle = useCallback((type: WindowType) => {
     setFormData(prev => {
       const newWindowTypes = [...prev.windowTypes];
       const index = newWindowTypes.indexOf(type);
@@ -106,10 +106,9 @@ const OfferteAanvragen: React.FC = () => {
       
       return { ...prev, windowTypes: newWindowTypes };
     });
-  };
+  }, []);
 
-  // Fixed implementation to avoid state update loops
-  const handleAvailabilityToggle = (day: string) => {
+  const handleAvailabilityToggle = useCallback((day: string) => {
     setFormData(prev => {
       const newAvailability = [...prev.availability];
       const index = newAvailability.indexOf(day);
@@ -122,19 +121,19 @@ const OfferteAanvragen: React.FC = () => {
       
       return { ...prev, availability: newAvailability };
     });
-  };
+  }, []);
 
-  const nextStep = () => {
+  const nextStep = useCallback(() => {
     if (validateCurrentStep()) {
       setStep(prev => Math.min(prev + 1, totalSteps));
       window.scrollTo(0, 0);
     }
-  };
+  }, [totalSteps]);
 
-  const prevStep = () => {
+  const prevStep = useCallback(() => {
     setStep(prev => Math.max(prev - 1, 1));
     window.scrollTo(0, 0);
-  };
+  }, []);
 
   const validateCurrentStep = () => {
     let isValid = true;
@@ -151,7 +150,7 @@ const OfferteAanvragen: React.FC = () => {
         }
         break;
       case 2:
-        // Window types are now optional
+        // Window types are now optional - no validation needed
         break;
       case 3:
         if (!formData.firstName || !formData.lastName) {
@@ -218,6 +217,56 @@ const OfferteAanvragen: React.FC = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // Type kozijnen card content for both checked and unchecked states
+  const renderWindowTypeCard = (option: { id: string; label: string }) => {
+    const isChecked = formData.windowTypes.includes(option.id as WindowType);
+    
+    return (
+      <div 
+        key={option.id}
+        className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+          isChecked ? 'border-brand-green bg-brand-green/5' : 'hover:border-gray-400'
+        }`}
+        onClick={() => handleWindowTypeToggle(option.id as WindowType)}
+      >
+        <div className="flex items-center space-x-2">
+          <Checkbox 
+            id={option.id} 
+            checked={isChecked}
+            className="pointer-events-none" // Prevent direct interaction with checkbox
+            readOnly
+          />
+          <Label htmlFor={option.id} className="cursor-pointer">{option.label}</Label>
+        </div>
+      </div>
+    );
+  };
+
+  // Availability days card content
+  const renderAvailabilityCard = (day: string) => {
+    const isChecked = formData.availability.includes(day);
+    
+    return (
+      <div 
+        key={day}
+        className={`border rounded-lg p-3 cursor-pointer transition-colors ${
+          isChecked ? 'border-brand-green bg-brand-green/5' : 'hover:border-gray-400'
+        }`}
+        onClick={() => handleAvailabilityToggle(day)}
+      >
+        <div className="flex items-center space-x-2">
+          <Checkbox 
+            id={day} 
+            checked={isChecked}
+            className="pointer-events-none" // Prevent direct interaction with checkbox
+            readOnly
+          />
+          <Label htmlFor={day} className="cursor-pointer">{day}</Label>
+        </div>
+      </div>
+    );
   };
 
   const renderStep = () => {
@@ -321,26 +370,7 @@ const OfferteAanvragen: React.FC = () => {
                     { id: 'schuifraam', label: 'Schuifraam' },
                     { id: 'vouwwand', label: 'Vouwwand' },
                     { id: 'anders', label: 'Anders' }
-                  ].map(option => (
-                    <div 
-                      key={option.id}
-                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                        formData.windowTypes.includes(option.id as WindowType) 
-                          ? 'border-brand-green bg-brand-green/5' 
-                          : 'hover:border-gray-400'
-                      }`}
-                      onClick={() => handleWindowTypeToggle(option.id as WindowType)}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id={option.id} 
-                          checked={formData.windowTypes.includes(option.id as WindowType)}
-                          className="pointer-events-none" // Prevent direct interaction with checkbox
-                        />
-                        <Label htmlFor={option.id} className="cursor-pointer">{option.label}</Label>
-                      </div>
-                    </div>
-                  ))}
+                  ].map(renderWindowTypeCard)}
                 </div>
               </div>
 
@@ -528,26 +558,7 @@ const OfferteAanvragen: React.FC = () => {
               <div>
                 <Label className="text-base mb-2 block">Wanneer bent u het beste bereikbaar?</Label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
-                  {['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'].map(day => (
-                    <div 
-                      key={day}
-                      className={`border rounded-lg p-3 cursor-pointer transition-colors ${
-                        formData.availability.includes(day) 
-                          ? 'border-brand-green bg-brand-green/5' 
-                          : 'hover:border-gray-400'
-                      }`}
-                      onClick={() => handleAvailabilityToggle(day)}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id={day} 
-                          checked={formData.availability.includes(day)}
-                          className="pointer-events-none" // Prevent direct interaction with checkbox
-                        />
-                        <Label htmlFor={day} className="cursor-pointer">{day}</Label>
-                      </div>
-                    </div>
-                  ))}
+                  {['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'].map(renderAvailabilityCard)}
                 </div>
               </div>
               
