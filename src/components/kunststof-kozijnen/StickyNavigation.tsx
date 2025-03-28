@@ -12,7 +12,29 @@ const StickyNavigation: React.FC = () => {
   });
   
   const location = useLocation();
-  const isKleurenPage = location.pathname.includes('/kunststof-kozijnen/kleuren');
+  const path = location.pathname;
+  
+  // Determine the current page for breadcrumb
+  let currentPage = '';
+  let isSubPage = false;
+  
+  if (path.includes('/kunststof-kozijnen')) {
+    isSubPage = path !== '/kunststof-kozijnen';
+    
+    if (path.includes('/kleuren')) {
+      currentPage = 'Kleuren';
+    } else if (path.includes('/types')) {
+      currentPage = 'Types';
+    } else if (path.includes('/afmetingen')) {
+      currentPage = 'Afmetingen';
+    } else if (path.includes('/montage')) {
+      currentPage = 'Montage';
+    } else if (path.includes('/prijzen')) {
+      currentPage = 'Prijzen';
+    } else if (path.includes('/merken')) {
+      currentPage = 'Merken';
+    }
+  }
 
   return (
     <div ref={ref}>
@@ -43,7 +65,7 @@ const StickyNavigation: React.FC = () => {
                   <ChevronRight className="h-3.5 w-3.5" />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  {isKleurenPage ? (
+                  {isSubPage ? (
                     <BreadcrumbLink asChild>
                       <Link to="/kunststof-kozijnen" className="hover:text-brand-green transition-colors">
                         Kunststof Kozijnen
@@ -53,13 +75,13 @@ const StickyNavigation: React.FC = () => {
                     <BreadcrumbPage>Kunststof Kozijnen</BreadcrumbPage>
                   )}
                 </BreadcrumbItem>
-                {isKleurenPage && (
+                {isSubPage && (
                   <>
                     <BreadcrumbSeparator>
                       <ChevronRight className="h-3.5 w-3.5" />
                     </BreadcrumbSeparator>
                     <BreadcrumbItem>
-                      <BreadcrumbPage>Kleuren</BreadcrumbPage>
+                      <BreadcrumbPage>{currentPage}</BreadcrumbPage>
                     </BreadcrumbItem>
                   </>
                 )}

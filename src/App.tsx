@@ -10,6 +10,11 @@ import NotFound from "./pages/NotFound";
 import KunststofKozijnen from "./pages/KunststofKozijnen";
 import ColorOptions from "./pages/ColorOptions";
 import ColorDetail from "./pages/ColorDetail";
+import KozijnTypes from "./pages/KozijnTypes";
+import KozijnSizes from "./pages/KozijnSizes";
+import KozijnMontage from "./pages/KozijnMontage";
+import KozijnPrices from "./pages/KozijnPrices";
+import KozijnBrands from "./pages/KozijnBrands";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +30,11 @@ const App = () => (
             <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
             <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
             <Route path="/kunststof-kozijnen/kleuren/:colorSlug" element={<ColorDetail />} />
+            <Route path="/kunststof-kozijnen/types" element={<KozijnTypes />} />
+            <Route path="/kunststof-kozijnen/afmetingen" element={<KozijnSizes />} />
+            <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />
+            <Route path="/kunststof-kozijnen/prijzen" element={<KozijnPrices />} />
+            <Route path="/kunststof-kozijnen/merken" element={<KozijnBrands />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

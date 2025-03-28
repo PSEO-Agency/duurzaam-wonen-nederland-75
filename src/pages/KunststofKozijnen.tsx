@@ -1,3 +1,6 @@
+
+// Only updating the links to the new pages (section with Card links to specific types)
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, Filter, ArrowRight, ArrowDown, Star, ChevronDown } from 'lucide-react';
@@ -308,10 +311,10 @@ const KunststofKozijnen: React.FC = () => {
                       </li>
                     </ul>
                     <div className="mt-4">
-                      <a href="#soorten" className="text-brand-green flex items-center hover:underline">
+                      <Link to="/kunststof-kozijnen/types" className="text-brand-green flex items-center hover:underline">
                         <span>Bekijk alle types</span>
                         <ArrowRight className="ml-1 h-4 w-4" />
-                      </a>
+                      </Link>
                     </div>
                   </CardContent>
                 </Card>
@@ -380,10 +383,10 @@ const KunststofKozijnen: React.FC = () => {
                       </li>
                     </ul>
                     <div className="mt-4">
-                      <a href="#sizes" className="text-brand-green flex items-center hover:underline">
+                      <Link to="/kunststof-kozijnen/afmetingen" className="text-brand-green flex items-center hover:underline">
                         <span>Bekijk alle afmetingen</span>
                         <ArrowRight className="ml-1 h-4 w-4" />
-                      </a>
+                      </Link>
                     </div>
                   </CardContent>
                 </Card>
@@ -416,10 +419,10 @@ const KunststofKozijnen: React.FC = () => {
                       </li>
                     </ul>
                     <div className="mt-4">
-                      <a href="#montage" className="text-brand-green flex items-center hover:underline">
+                      <Link to="/kunststof-kozijnen/montage" className="text-brand-green flex items-center hover:underline">
                         <span>Bekijk montage opties</span>
                         <ArrowRight className="ml-1 h-4 w-4" />
-                      </a>
+                      </Link>
                     </div>
                   </CardContent>
                 </Card>
@@ -452,10 +455,10 @@ const KunststofKozijnen: React.FC = () => {
                       </li>
                     </ul>
                     <div className="mt-4">
-                      <a href="#prijzen" className="text-brand-green flex items-center hover:underline">
+                      <Link to="/kunststof-kozijnen/prijzen" className="text-brand-green flex items-center hover:underline">
                         <span>Bekijk prijssegmenten</span>
                         <ArrowRight className="ml-1 h-4 w-4" />
-                      </a>
+                      </Link>
                     </div>
                   </CardContent>
                 </Card>
@@ -488,10 +491,10 @@ const KunststofKozijnen: React.FC = () => {
                       </li>
                     </ul>
                     <div className="mt-4">
-                      <a href="#merken" className="text-brand-green flex items-center hover:underline">
+                      <Link to="/kunststof-kozijnen/merken" className="text-brand-green flex items-center hover:underline">
                         <span>Bekijk alle merken</span>
                         <ArrowRight className="ml-1 h-4 w-4" />
-                      </a>
+                      </Link>
                     </div>
                   </CardContent>
                 </Card>
