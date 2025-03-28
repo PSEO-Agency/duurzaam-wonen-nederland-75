@@ -155,39 +155,37 @@ const Offerte: React.FC = () => {
     return isValid;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const submitForm = async () => {
     if (!validateCurrentStep()) return;
     
-    // Only proceed with actual submission if on the last step AND the submit button was clicked
-    if (step === totalSteps) {
-      setIsSubmitting(true);
+    setIsSubmitting(true);
+    
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
       
-      try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        toast({
-          title: "Offerte aanvraag verzonden!",
-          description: "We nemen zo spoedig mogelijk contact met u op.",
-        });
-        
-        setFormData(initialFormData);
-        setStep(1);
-      } catch (error) {
-        toast({
-          variant: "destructive",
-          title: "Er is een fout opgetreden",
-          description: "Probeer het later opnieuw of neem telefonisch contact op.",
-        });
-      } finally {
-        setIsSubmitting(false);
-      }
-    } else {
-      // If not on the last step, just move to the next step
-      nextStep();
+      toast({
+        title: "Offerte aanvraag verzonden!",
+        description: "We nemen zo spoedig mogelijk contact met u op.",
+      });
+      
+      setFormData(initialFormData);
+      setStep(1);
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Er is een fout opgetreden",
+        description: "Probeer het later opnieuw of neem telefonisch contact op.",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
+  };
+
+  // This function now only handles navigation between steps, not actual submission
+  const handleNavigate = (e: React.FormEvent) => {
+    e.preventDefault();
+    nextStep();
   };
 
   const renderStepContent = () => {
@@ -256,24 +254,67 @@ const Offerte: React.FC = () => {
             <div className="lg:col-span-2">
               <Card className="bg-white shadow-sm border-0">
                 <CardContent className="p-6 sm:p-8">
-                  <form onSubmit={handleSubmit}>
-                    {/* Progress Indicator */}
-                    <div className="mb-8">
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm font-medium">Stap {step} van {totalSteps}</span>
-                        <span className="text-sm font-medium">{Math.round((step / totalSteps) * 100)}% voltooid</span>
+                  {/* Form starts here, but switched to a <div> for the last step to prevent automatic submission */}
+                  {step < totalSteps ? (
+                    <form onSubmit={handleNavigate}>
+                      {/* Progress Indicator */}
+                      <div className="mb-8">
+                        <div className="flex justify-between mb-2">
+                          <span className="text-sm font-medium">Stap {step} van {totalSteps}</span>
+                          <span className="text-sm font-medium">{Math.round((step / totalSteps) * 100)}% voltooid</span>
+                        </div>
+                        <Progress value={(step / totalSteps) * 100} className="h-2" />
                       </div>
-                      <Progress value={(step / totalSteps) * 100} className="h-2" />
-                    </div>
-                    
-                    {/* Step Content */}
-                    <div className="min-h-[400px]">
-                      {renderStepContent()}
-                    </div>
-                    
-                    {/* Navigation Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 mt-8">
-                      {step > 1 ? (
+                      
+                      {/* Step Content */}
+                      <div className="min-h-[400px]">
+                        {renderStepContent()}
+                      </div>
+                      
+                      {/* Navigation Buttons */}
+                      <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 mt-8">
+                        {step > 1 ? (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={prevStep}
+                            disabled={isSubmitting}
+                            className="w-full sm:w-auto"
+                          >
+                            <ArrowLeft className="mr-2 h-4 w-4" />
+                            Vorige
+                          </Button>
+                        ) : (
+                          <div></div>
+                        )}
+                        
+                        <Button 
+                          type="submit"
+                          className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto"
+                        >
+                          Volgende
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </div>
+                    </form>
+                  ) : (
+                    <div> {/* For the review step, use a div instead of a form to prevent automatic submission */}
+                      {/* Progress Indicator */}
+                      <div className="mb-8">
+                        <div className="flex justify-between mb-2">
+                          <span className="text-sm font-medium">Stap {step} van {totalSteps}</span>
+                          <span className="text-sm font-medium">{Math.round((step / totalSteps) * 100)}% voltooid</span>
+                        </div>
+                        <Progress value={(step / totalSteps) * 100} className="h-2" />
+                      </div>
+                      
+                      {/* Step Content */}
+                      <div className="min-h-[400px]">
+                        {renderStepContent()}
+                      </div>
+                      
+                      {/* Navigation Buttons */}
+                      <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 mt-8">
                         <Button
                           type="button"
                           variant="outline"
@@ -284,23 +325,11 @@ const Offerte: React.FC = () => {
                           <ArrowLeft className="mr-2 h-4 w-4" />
                           Vorige
                         </Button>
-                      ) : (
-                        <div></div>
-                      )}
-                      
-                      {step < totalSteps ? (
+                        
                         <Button 
                           type="button"
-                          onClick={nextStep}
                           className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto"
-                        >
-                          Volgende
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                      ) : (
-                        <Button 
-                          type="submit"
-                          className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto"
+                          onClick={submitForm}
                           disabled={isSubmitting}
                         >
                           {isSubmitting ? (
@@ -312,9 +341,9 @@ const Offerte: React.FC = () => {
                             </>
                           )}
                         </Button>
-                      )}
+                      </div>
                     </div>
-                  </form>
+                  )}
                 </CardContent>
               </Card>
             </div>
