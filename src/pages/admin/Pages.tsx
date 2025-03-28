@@ -1,24 +1,57 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Plus, Search, Check, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { useCms } from '@/contexts/CmsContext';
 
 const Pages: React.FC = () => {
-  // This would normally come from an API call or state management
-  const pages = [
-    { id: '1', title: 'Home', slug: '/', templateName: 'Home Template', isPublished: true, createdAt: '2023-06-15', updatedAt: '2023-07-15' },
-    { id: '2', title: 'Kunststof Kozijnen', slug: '/kunststof-kozijnen', templateName: 'Product Template', isPublished: true, createdAt: '2023-06-14', updatedAt: '2023-07-14' },
-    { id: '3', title: 'Contact', slug: '/contact', templateName: 'Contact Template', isPublished: true, createdAt: '2023-06-13', updatedAt: '2023-07-13' },
-    { id: '4', title: 'Kunststof Kozijnen Enschede', slug: '/kunststof-kozijnen/locaties/enschede', templateName: 'Location Template', isPublished: true, createdAt: '2023-06-12', updatedAt: '2023-07-12' },
-    { id: '5', title: 'Draaikiepraam', slug: '/kunststof-kozijnen/types/draaikiepraam', templateName: 'Product Type Template', isPublished: true, createdAt: '2023-06-11', updatedAt: '2023-07-11' },
-    { id: '6', title: 'Blog', slug: '/blog', templateName: 'Blog Template', isPublished: true, createdAt: '2023-06-10', updatedAt: '2023-07-10' },
-    { id: '7', title: 'Over Ons', slug: '/over-ons', templateName: 'About Template', isPublished: true, createdAt: '2023-06-09', updatedAt: '2023-07-09' },
-    { id: '8', title: 'Nieuwe Pagina', slug: '/nieuwe-pagina', templateName: 'Product Template', isPublished: false, createdAt: '2023-06-08', updatedAt: '2023-07-08' },
-  ];
+  const { pages } = useCms();
+  const navigate = useNavigate();
+  
+  // Filtered and enhanced pages data that matches our routes
+  const [pagesData, setPagesData] = useState(pages);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Update pages with actual route information
+  useEffect(() => {
+    const routeBasedPages = [
+      { id: '1', title: 'Home', slug: '/', templateName: 'Home Template', isPublished: true, createdAt: '2023-06-15', updatedAt: '2023-07-15' },
+      { id: '2', title: 'Kunststof Kozijnen', slug: '/kunststof-kozijnen', templateName: 'Product Template', isPublished: true, createdAt: '2023-06-14', updatedAt: '2023-07-14' },
+      { id: '3', title: 'Contact', slug: '/contact', templateName: 'Contact Template', isPublished: true, createdAt: '2023-06-13', updatedAt: '2023-07-13' },
+      { id: '4', title: 'Kunststof Kozijnen Enschede', slug: '/kunststof-kozijnen/locaties/enschede', templateName: 'Location Template', isPublished: true, createdAt: '2023-06-12', updatedAt: '2023-07-12' },
+      { id: '5', title: 'Draaikiepraam', slug: '/kunststof-kozijnen/types/draaikiepraam', templateName: 'Product Type Template', isPublished: true, createdAt: '2023-06-11', updatedAt: '2023-07-11' },
+      { id: '6', title: 'Blog', slug: '/blog', templateName: 'Blog Template', isPublished: true, createdAt: '2023-06-10', updatedAt: '2023-07-10' },
+      { id: '7', title: 'Over Ons', slug: '/over-ons', templateName: 'About Template', isPublished: true, createdAt: '2023-06-09', updatedAt: '2023-07-09' },
+      { id: '8', title: 'Projects', slug: '/projecten', templateName: 'Projects Template', isPublished: true, createdAt: '2023-06-08', updatedAt: '2023-07-08' },
+      { id: '9', title: 'Werkgebied', slug: '/werkgebied', templateName: 'Location Template', isPublished: true, createdAt: '2023-06-07', updatedAt: '2023-07-07' },
+      { id: '10', title: 'Showroom', slug: '/showroom', templateName: 'Location Template', isPublished: true, createdAt: '2023-06-06', updatedAt: '2023-07-06' },
+      { id: '11', title: 'Werkwijze', slug: '/werkwijze', templateName: 'Content Template', isPublished: true, createdAt: '2023-06-05', updatedAt: '2023-07-05' },
+      { id: '12', title: 'Kennisbank', slug: '/kennisbank', templateName: 'Knowledge Template', isPublished: true, createdAt: '2023-06-04', updatedAt: '2023-07-04' },
+    ];
+    
+    setPagesData(routeBasedPages);
+  }, [pages]);
+
+  // Handle search functionality
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Filter pages based on search query
+  const filteredPages = pagesData.filter(page => 
+    page.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    page.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    page.templateName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Handle create new page
+  const handleAddPage = () => {
+    navigate('/admin/pages/create');
+  };
 
   return (
     <div className="space-y-8">
@@ -28,7 +61,7 @@ const Pages: React.FC = () => {
           <p className="text-gray-500">Manage your website pages and their content.</p>
         </div>
         
-        <Button className="bg-brand-green hover:bg-brand-green-dark">
+        <Button className="bg-brand-green hover:bg-brand-green-dark" onClick={handleAddPage}>
           <Plus size={18} className="mr-2" />
           Add Page
         </Button>
@@ -45,6 +78,8 @@ const Pages: React.FC = () => {
               <Input 
                 placeholder="Search pages..." 
                 className="pl-10"
+                value={searchQuery}
+                onChange={handleSearch}
               />
             </div>
           </div>
@@ -61,7 +96,7 @@ const Pages: React.FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {pages.map(page => (
+              {filteredPages.map(page => (
                 <TableRow key={page.id}>
                   <TableCell className="font-medium">{page.title}</TableCell>
                   <TableCell className="text-sm font-mono">{page.slug}</TableCell>
@@ -82,7 +117,7 @@ const Pages: React.FC = () => {
                   <TableCell>{page.updatedAt}</TableCell>
                   <TableCell className="text-right">
                     <Link 
-                      to={`/admin/pages/${page.id}`}
+                      to={`/admin/pages/edit/${page.id}`}
                       className="text-brand-green hover:text-brand-green-dark inline-flex items-center"
                     >
                       Edit

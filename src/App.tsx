@@ -59,6 +59,7 @@ import AdminLayout from "./components/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import Templates from "./pages/admin/Templates";
 import Pages from "./pages/admin/Pages";
+import PageEditor from "./pages/admin/PageEditor";
 import Sections from "./pages/admin/Sections";
 import SectionEditor from "./pages/admin/SectionEditor";
 
@@ -77,6 +78,8 @@ const App = () => (
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="templates" element={<Templates />} />
               <Route path="pages" element={<Pages />} />
+              <Route path="pages/edit/:pageId" element={<PageEditor />} />
+              <Route path="pages/create" element={<PageEditor />} />
               <Route path="sections" element={<Sections />} />
               <Route path="sections/edit/:sectionId" element={<SectionEditor />} />
               <Route path="settings" element={<Dashboard />} />
