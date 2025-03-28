@@ -77,36 +77,6 @@ const Benefits: React.FC = () => {
           ))}
         </div>
         
-        {/* Certification Logos Section - Moved from KozijnenHero */}
-        <AnimatedSection animation="fade-in" delay={200} className="mt-12">
-          <div className="glass-card p-6 rounded-lg">
-            <h3 className="text-xl font-semibold mb-4 text-center">Gecertificeerd door:</h3>
-            <div className="flex items-center justify-center flex-wrap gap-6">
-              <div className="bg-white rounded p-3 h-14 flex items-center justify-center shadow-sm" title="KOMO-certificaat">
-                <Shield className="h-6 w-6 text-brand-green mr-2" />
-                <span className="text-sm font-bold text-gray-800">KOMO</span>
-              </div>
-              <div className="bg-white rounded p-3 h-14 flex items-center justify-center shadow-sm" title="CE-markering">
-                <span className="text-sm font-bold text-gray-800 px-2">CE</span>
-              </div>
-              <div className="bg-white rounded p-3 h-14 flex items-center justify-center shadow-sm" title="VKG Keurmerk">
-                <span className="text-sm font-bold text-gray-800 px-2">VKG</span>
-              </div>
-              <div className="bg-white rounded p-3 h-14 flex items-center justify-center shadow-sm" title="Politiekeurmerk">
-                <Shield className="h-6 w-6 text-blue-600 mr-2" />
-                <span className="text-sm font-bold text-gray-800">PKVW</span>
-              </div>
-              <div className="bg-white rounded p-3 h-14 flex items-center justify-center shadow-sm" title="Energie labels">
-                <span className="text-sm font-bold px-2">
-                  <span className="text-green-600">A</span>
-                  <span className="text-green-500">+</span>
-                  <span className="text-green-400">+</span>
-                </span>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
-        
         {/* Added CTA at the bottom of the Benefits section for better conversion */}
         <AnimatedSection delay={600} animation="slide-up" className="mt-16">
           <div className="text-center">
