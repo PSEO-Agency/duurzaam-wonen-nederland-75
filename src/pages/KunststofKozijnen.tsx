@@ -21,6 +21,7 @@ import ContactCTA from '@/components/ContactCTA';
 import ProductFilters from '@/components/kunststof-kozijnen/ProductFilters';
 import KozijnenHero from '@/components/kunststof-kozijnen/KozijnenHero';
 import { Card, CardContent } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 
 const products = [
   {
@@ -343,10 +344,10 @@ const KunststofKozijnen: React.FC = () => {
                       </li>
                     </ul>
                     <div className="mt-4">
-                      <a href="#kleuren" className="text-brand-green flex items-center hover:underline">
+                      <Link to="/kunststof-kozijnen/kleuren" className="text-brand-green flex items-center hover:underline">
                         <span>Bekijk alle kleuren</span>
                         <ArrowRight className="ml-1 h-4 w-4" />
-                      </a>
+                      </Link>
                     </div>
                   </CardContent>
                 </Card>
