@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
@@ -92,26 +91,22 @@ const OfferteAanvragen: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Fixed handleWindowTypeToggle to prevent infinite loops
   const handleWindowTypeToggle = (type: WindowType) => {
-    setFormData(prev => {
-      const newWindowTypes = prev.windowTypes.includes(type)
-        ? prev.windowTypes.filter(t => t !== type)
-        : [...prev.windowTypes, type];
-      
-      return { ...prev, windowTypes: newWindowTypes };
-    });
+    const isSelected = formData.windowTypes.includes(type);
+    const newWindowTypes = isSelected
+      ? formData.windowTypes.filter(t => t !== type)
+      : [...formData.windowTypes, type];
+    
+    updateFormData('windowTypes', newWindowTypes);
   };
 
-  // Fixed handleAvailabilityToggle to prevent infinite loops
   const handleAvailabilityToggle = (day: string) => {
-    setFormData(prev => {
-      const newAvailability = prev.availability.includes(day)
-        ? prev.availability.filter(d => d !== day)
-        : [...prev.availability, day];
-      
-      return { ...prev, availability: newAvailability };
-    });
+    const isSelected = formData.availability.includes(day);
+    const newAvailability = isSelected
+      ? formData.availability.filter(d => d !== day)
+      : [...formData.availability, day];
+    
+    updateFormData('availability', newAvailability);
   };
 
   const nextStep = () => {
@@ -193,7 +188,6 @@ const OfferteAanvragen: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      // In a real app, this would send the data to a backend
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       toast({
@@ -201,7 +195,6 @@ const OfferteAanvragen: React.FC = () => {
         description: "We nemen zo spoedig mogelijk contact met u op.",
       });
       
-      // Reset form and go back to first step
       setFormData(initialFormData);
       setStep(1);
     } catch (error) {
@@ -330,8 +323,6 @@ const OfferteAanvragen: React.FC = () => {
                         <Checkbox 
                           id={option.id} 
                           checked={formData.windowTypes.includes(option.id as WindowType)}
-                          // Fixed: Remove onCheckedChange to prevent double handling
-                          // the parent div already has onClick that calls handleWindowTypeToggle
                         />
                         <Label htmlFor={option.id} className="cursor-pointer">{option.label}</Label>
                       </div>
@@ -538,7 +529,6 @@ const OfferteAanvragen: React.FC = () => {
                         <Checkbox 
                           id={day} 
                           checked={formData.availability.includes(day)}
-                          // Fixed: Remove onCheckedChange here as well to prevent double handling
                         />
                         <Label htmlFor={day} className="cursor-pointer">{day}</Label>
                       </div>
