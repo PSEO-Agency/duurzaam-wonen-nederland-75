@@ -13,6 +13,7 @@ import { Progress } from '@/components/ui/progress';
 import { toast } from '@/components/ui/use-toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import FormCheckbox from '@/components/form/FormCheckbox';
 
 type ProjectType = 'nieuwbouw' | 'renovatie' | 'vervanging';
 type PropertyType = 'woning' | 'bedrijfspand' | 'anders';
@@ -230,54 +231,6 @@ const OfferteAanvragen: React.FC = () => {
     ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'],
   []);
 
-  const renderWindowTypeCard = useCallback((option: { id: string; label: string }) => {
-    const isChecked = formData.windowTypes.includes(option.id as WindowType);
-    
-    return (
-      <div 
-        key={option.id}
-        className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-          isChecked ? 'border-brand-green bg-brand-green/5' : 'hover:border-gray-400'
-        }`}
-        onClick={() => handleWindowTypeToggle(option.id as WindowType)}
-      >
-        <div className="flex items-center space-x-2">
-          <Checkbox 
-            id={`window-type-${option.id}`}
-            checked={isChecked}
-            onCheckedChange={() => {}}
-            className="pointer-events-none"
-          />
-          <Label htmlFor={`window-type-${option.id}`} className="cursor-pointer">{option.label}</Label>
-        </div>
-      </div>
-    );
-  }, [formData.windowTypes, handleWindowTypeToggle]);
-
-  const renderAvailabilityCard = useCallback((day: string) => {
-    const isChecked = formData.availability.includes(day);
-    
-    return (
-      <div 
-        key={day}
-        className={`border rounded-lg p-3 cursor-pointer transition-colors ${
-          isChecked ? 'border-brand-green bg-brand-green/5' : 'hover:border-gray-400'
-        }`}
-        onClick={() => handleAvailabilityToggle(day)}
-      >
-        <div className="flex items-center space-x-2">
-          <Checkbox 
-            id={`availability-${day}`}
-            checked={isChecked}
-            onCheckedChange={() => {}}
-            className="pointer-events-none"
-          />
-          <Label htmlFor={`availability-${day}`} className="cursor-pointer">{day}</Label>
-        </div>
-      </div>
-    );
-  }, [formData.availability, handleAvailabilityToggle]);
-
   const renderStep = () => {
     switch (step) {
       case 1:
@@ -381,7 +334,15 @@ const OfferteAanvragen: React.FC = () => {
               <div>
                 <Label className="text-base mb-2 block">Type kozijnen (meerdere opties mogelijk, optioneel)</Label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-2">
-                  {windowTypeOptions.map(renderWindowTypeCard)}
+                  {windowTypeOptions.map((option) => (
+                    <FormCheckbox
+                      key={option.id}
+                      id={`window-type-${option.id}`}
+                      label={option.label}
+                      checked={formData.windowTypes.includes(option.id as WindowType)}
+                      onClick={() => handleWindowTypeToggle(option.id as WindowType)}
+                    />
+                  ))}
                 </div>
               </div>
 
@@ -569,7 +530,15 @@ const OfferteAanvragen: React.FC = () => {
               <div>
                 <Label className="text-base mb-2 block">Wanneer bent u het beste bereikbaar?</Label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
-                  {availabilityDays.map(renderAvailabilityCard)}
+                  {availabilityDays.map((day) => (
+                    <FormCheckbox
+                      key={day}
+                      id={`availability-${day}`}
+                      label={day}
+                      checked={formData.availability.includes(day)}
+                      onClick={() => handleAvailabilityToggle(day)}
+                    />
+                  ))}
                 </div>
               </div>
               
