@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
@@ -91,6 +92,7 @@ const OfferteAanvragen: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  // Fixed implementation to avoid state update loops
   const handleWindowTypeToggle = (type: WindowType) => {
     setFormData(prev => {
       const newWindowTypes = [...prev.windowTypes];
@@ -106,6 +108,7 @@ const OfferteAanvragen: React.FC = () => {
     });
   };
 
+  // Fixed implementation to avoid state update loops
   const handleAvailabilityToggle = (day: string) => {
     setFormData(prev => {
       const newAvailability = [...prev.availability];
@@ -148,10 +151,7 @@ const OfferteAanvragen: React.FC = () => {
         }
         break;
       case 2:
-        if (formData.windowTypes.length === 0) {
-          isValid = false;
-          errorMessage = 'Selecteer minimaal één type kozijn';
-        }
+        // Window types are now optional
         break;
       case 3:
         if (!formData.firstName || !formData.lastName) {
@@ -308,12 +308,12 @@ const OfferteAanvragen: React.FC = () => {
           <div className="space-y-6">
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold">Welke kozijnen heeft u nodig?</h2>
-              <p className="text-gray-500 mt-2">Specificeer de details van uw gewenste kozijnen</p>
+              <p className="text-gray-500 mt-2">Specificeer de details van uw gewenste kozijnen (optioneel)</p>
             </div>
             
             <div className="space-y-6">
               <div>
-                <Label className="text-base mb-2 block">Type kozijnen (meerdere opties mogelijk)</Label>
+                <Label className="text-base mb-2 block">Type kozijnen (meerdere opties mogelijk, optioneel)</Label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-2">
                   {[
                     { id: 'draaikiepraam', label: 'Draaikiepraam' },
@@ -335,6 +335,7 @@ const OfferteAanvragen: React.FC = () => {
                         <Checkbox 
                           id={option.id} 
                           checked={formData.windowTypes.includes(option.id as WindowType)}
+                          className="pointer-events-none" // Prevent direct interaction with checkbox
                         />
                         <Label htmlFor={option.id} className="cursor-pointer">{option.label}</Label>
                       </div>
@@ -541,6 +542,7 @@ const OfferteAanvragen: React.FC = () => {
                         <Checkbox 
                           id={day} 
                           checked={formData.availability.includes(day)}
+                          className="pointer-events-none" // Prevent direct interaction with checkbox
                         />
                         <Label htmlFor={day} className="cursor-pointer">{day}</Label>
                       </div>
@@ -573,8 +575,7 @@ const OfferteAanvragen: React.FC = () => {
                 <Checkbox 
                   id="terms" 
                   checked={formData.termsAccepted}
-                  onCheckedChange={(checked) => updateFormData('termsAccepted', checked)}
-                  required
+                  onCheckedChange={(checked) => updateFormData('termsAccepted', checked === true)}
                 />
                 <div className="grid gap-1.5 leading-none">
                   <Label
