@@ -1,6 +1,7 @@
+
 import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -118,32 +119,34 @@ const ColorOptions: React.FC = () => {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="sticky top-36 z-10 bg-white pt-4 pb-2 mb-6">
-              <TabsList className="grid w-full grid-cols-3 mb-8" value={activeTab}>
-                <TabsTrigger 
-                  value="visualizer" 
-                  className="flex items-center gap-2"
-                  onClick={() => scrollToSection("visualizer")}
-                >
-                  <Palette className="h-4 w-4" />
-                  <span className="hidden sm:inline">Kleurenmodule</span>
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="collection" 
-                  className="flex items-center gap-2"
-                  onClick={() => scrollToSection("collection")}
-                >
-                  <Droplet className="h-4 w-4" />
-                  <span className="hidden sm:inline">Kleurencollectie</span>
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="combinations" 
-                  className="flex items-center gap-2"
-                  onClick={() => scrollToSection("combinations")}
-                >
-                  <Layers className="h-4 w-4" />
-                  <span className="hidden sm:inline">Kleurcombinaties</span>
-                </TabsTrigger>
-              </TabsList>
+              <Tabs value={activeTab} onValueChange={setActiveTab}>
+                <TabsList className="grid w-full grid-cols-3 mb-8">
+                  <TabsTrigger 
+                    value="visualizer" 
+                    className="flex items-center gap-2"
+                    onClick={() => scrollToSection("visualizer")}
+                  >
+                    <Palette className="h-4 w-4" />
+                    <span className="hidden sm:inline">Kleurenmodule</span>
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="collection" 
+                    className="flex items-center gap-2"
+                    onClick={() => scrollToSection("collection")}
+                  >
+                    <Droplet className="h-4 w-4" />
+                    <span className="hidden sm:inline">Kleurencollectie</span>
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="combinations" 
+                    className="flex items-center gap-2"
+                    onClick={() => scrollToSection("combinations")}
+                  >
+                    <Layers className="h-4 w-4" />
+                    <span className="hidden sm:inline">Kleurcombinaties</span>
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
             
             <ScrollArea className="pr-4">
