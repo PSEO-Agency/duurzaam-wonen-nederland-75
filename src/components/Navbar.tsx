@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, Phone, Search, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -87,13 +88,23 @@ const Navbar: React.FC = () => {
             {/* Top Navigation Links - Desktop */}
             <div className="hidden md:flex">
               {topNavItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-white text-sm mx-3 hover:text-gray-300 transition-colors"
-                >
-                  {item.label}
-                </a>
+                item.href.startsWith('#') ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="text-white text-sm mx-3 hover:text-gray-300 transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="text-white text-sm mx-3 hover:text-gray-300 transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
             </div>
           </div>
@@ -110,13 +121,13 @@ const Navbar: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="#" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <img 
                 src="/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png" 
                 alt="Duurzaam Wonen Logo" 
                 className="h-12"
               />
-            </a>
+            </Link>
             
             {/* Search Bar - Desktop */}
             <div className="hidden md:flex items-center border border-gray-300 rounded-full px-4 py-2 ml-6 flex-grow max-w-md">
@@ -142,12 +153,21 @@ const Navbar: React.FC = () => {
                           {oplossingenItems.map((item) => (
                             <li key={item.label}>
                               <NavigationMenuLink asChild>
-                                <a 
-                                  href={item.href}
-                                  className="flex items-center text-gray-700 hover:text-brand-green"
-                                >
-                                  <span className="mr-2">›</span> {item.label}
-                                </a>
+                                {item.href.startsWith('#') ? (
+                                  <a 
+                                    href={item.href}
+                                    className="flex items-center text-gray-700 hover:text-brand-green"
+                                  >
+                                    <span className="mr-2">›</span> {item.label}
+                                  </a>
+                                ) : (
+                                  <Link 
+                                    to={item.href}
+                                    className="flex items-center text-gray-700 hover:text-brand-green"
+                                  >
+                                    <span className="mr-2">›</span> {item.label}
+                                  </Link>
+                                )}
                               </NavigationMenuLink>
                             </li>
                           ))}
@@ -159,12 +179,21 @@ const Navbar: React.FC = () => {
                           {productenItems.map((item) => (
                             <li key={item.label}>
                               <NavigationMenuLink asChild>
-                                <a 
-                                  href={item.href}
-                                  className="flex items-center text-gray-700 hover:text-brand-green"
-                                >
-                                  <span className="mr-2">›</span> {item.label}
-                                </a>
+                                {item.href.startsWith('#') ? (
+                                  <a 
+                                    href={item.href}
+                                    className="flex items-center text-gray-700 hover:text-brand-green"
+                                  >
+                                    <span className="mr-2">›</span> {item.label}
+                                  </a>
+                                ) : (
+                                  <Link 
+                                    to={item.href}
+                                    className="flex items-center text-gray-700 hover:text-brand-green"
+                                  >
+                                    <span className="mr-2">›</span> {item.label}
+                                  </Link>
+                                )}
                               </NavigationMenuLink>
                             </li>
                           ))}
@@ -177,11 +206,22 @@ const Navbar: React.FC = () => {
                 {/* Standard Navigation Items */}
                 {mainNavItems.map((item) => (
                   <NavigationMenuItem key={item.label}>
-                    <NavigationMenuLink 
-                      href={item.href}
-                      className="text-gray-700 hover:text-brand-green transition-colors duration-200 font-medium px-4 py-2"
-                    >
-                      {item.label}
+                    <NavigationMenuLink asChild>
+                      {item.href.startsWith('#') ? (
+                        <a 
+                          href={item.href}
+                          className="text-gray-700 hover:text-brand-green transition-colors duration-200 font-medium px-4 py-2"
+                        >
+                          {item.label}
+                        </a>
+                      ) : (
+                        <Link 
+                          to={item.href}
+                          className="text-gray-700 hover:text-brand-green transition-colors duration-200 font-medium px-4 py-2"
+                        >
+                          {item.label}
+                        </Link>
+                      )}
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 ))}
@@ -196,12 +236,21 @@ const Navbar: React.FC = () => {
                         {overOnsItems.map((item) => (
                           <li key={item.label}>
                             <NavigationMenuLink asChild>
-                              <a 
-                                href={item.href}
-                                className="flex items-center text-gray-700 hover:text-brand-green"
-                              >
-                                <span className="mr-2">›</span> {item.label}
-                              </a>
+                              {item.href.startsWith('#') ? (
+                                <a 
+                                  href={item.href}
+                                  className="flex items-center text-gray-700 hover:text-brand-green"
+                                >
+                                  <span className="mr-2">›</span> {item.label}
+                                </a>
+                              ) : (
+                                <Link 
+                                  to={item.href}
+                                  className="flex items-center text-gray-700 hover:text-brand-green"
+                                >
+                                  <span className="mr-2">›</span> {item.label}
+                                </Link>
+                              )}
                             </NavigationMenuLink>
                           </li>
                         ))}
@@ -267,13 +316,23 @@ const Navbar: React.FC = () => {
               <ul className="space-y-2 pl-4">
                 {oplossingenItems.map((item) => (
                   <li key={item.label}>
-                    <a
-                      href={item.href}
-                      className="block py-1 text-gray-700 hover:text-brand-green"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      › {item.label}
-                    </a>
+                    {item.href.startsWith('#') ? (
+                      <a
+                        href={item.href}
+                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        › {item.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={item.href}
+                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        › {item.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -285,13 +344,23 @@ const Navbar: React.FC = () => {
               <ul className="space-y-2 pl-4">
                 {productenItems.map((item) => (
                   <li key={item.label}>
-                    <a
-                      href={item.href}
-                      className="block py-1 text-gray-700 hover:text-brand-green"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      › {item.label}
-                    </a>
+                    {item.href.startsWith('#') ? (
+                      <a
+                        href={item.href}
+                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        › {item.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={item.href}
+                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        › {item.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -299,37 +368,7 @@ const Navbar: React.FC = () => {
             
             {/* Main Nav Items - Mobile */}
             {mainNavItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="block py-2 text-gray-700 hover:text-brand-green"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
-
-            {/* Over ons Dropdown - Mobile */}
-            <div className="mb-4 mt-4">
-              <h3 className="font-bold text-lg mb-2">Over ons</h3>
-              <ul className="space-y-2 pl-4">
-                {overOnsItems.map((item) => (
-                  <li key={item.label}>
-                    <a
-                      href={item.href}
-                      className="block py-1 text-gray-700 hover:text-brand-green"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      › {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            {/* Top Nav Items - Mobile */}
-            <div className="mt-4 pt-4 border-t border-gray-200">
-              {topNavItems.map((item) => (
+              item.href.startsWith('#') ? (
                 <a
                   key={item.label}
                   href={item.href}
@@ -338,6 +377,68 @@ const Navbar: React.FC = () => {
                 >
                   {item.label}
                 </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className="block py-2 text-gray-700 hover:text-brand-green"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )
+            ))}
+
+            {/* Over ons Dropdown - Mobile */}
+            <div className="mb-4 mt-4">
+              <h3 className="font-bold text-lg mb-2">Over ons</h3>
+              <ul className="space-y-2 pl-4">
+                {overOnsItems.map((item) => (
+                  <li key={item.label}>
+                    {item.href.startsWith('#') ? (
+                      <a
+                        href={item.href}
+                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        › {item.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={item.href}
+                        className="block py-1 text-gray-700 hover:text-brand-green"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        › {item.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Top Nav Items - Mobile */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              {topNavItems.map((item) => (
+                item.href.startsWith('#') ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="block py-2 text-gray-700 hover:text-brand-green"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="block py-2 text-gray-700 hover:text-brand-green"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
             </div>
             
