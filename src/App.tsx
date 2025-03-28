@@ -35,6 +35,24 @@ import Vacatures from "./pages/over-ons/Vacatures";
 import Kennisbank from "./pages/Kennisbank";
 import KennisbankDetail from "./pages/KennisbankDetail";
 
+// New location pages
+import KozijnenEnschede from "./pages/locaties/KozijnenEnschede";
+
+// New service pages
+import KozijnenInmeten from "./pages/services/KozijnenInmeten";
+
+// New type pages
+import Draaikiepraam from "./pages/types/Draaikiepraam";
+
+// New size pages
+import Kozijn100x100 from "./pages/sizes/Kozijn100x100";
+
+// New brand pages
+import SchucoBrand from "./pages/brands/SchucoBrand";
+
+// New price option pages
+import KozijnenAfbetaling from "./pages/prices/KozijnenAfbetaling";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -55,6 +73,15 @@ const App = () => (
               <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />
               <Route path="/kunststof-kozijnen/prijzen" element={<KozijnPrices />} />
               <Route path="/kunststof-kozijnen/merken" element={<KozijnBrands />} />
+              
+              {/* New routes for specific location, service, type, size, brand, and price pages */}
+              <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />
+              <Route path="/kunststof-kozijnen/services/inmeten" element={<KozijnenInmeten />} />
+              <Route path="/kunststof-kozijnen/types/draaikiepraam" element={<Draaikiepraam />} />
+              <Route path="/kunststof-kozijnen/afmetingen/100x100" element={<Kozijn100x100 />} />
+              <Route path="/kunststof-kozijnen/merken/schuco" element={<SchucoBrand />} />
+              <Route path="/kunststof-kozijnen/prijzen/afbetaling" element={<KozijnenAfbetaling />} />
+              
               <Route path="/projecten" element={<Projects />} />
               <Route path="/projecten/:projectSlug" element={<ProjectDetail />} />
               <Route path="/blog" element={<Blog />} />

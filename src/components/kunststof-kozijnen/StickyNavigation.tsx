@@ -16,23 +16,74 @@ const StickyNavigation: React.FC = () => {
   
   // Determine the current page for breadcrumb
   let currentPage = '';
+  let parentPage = '';
   let isSubPage = false;
+  let isNestedSubPage = false;
   
   if (path.includes('/kunststof-kozijnen')) {
     isSubPage = path !== '/kunststof-kozijnen';
     
     if (path.includes('/kleuren')) {
       currentPage = 'Kleuren';
+      if (path.includes('/kleuren/')) {
+        isNestedSubPage = true;
+        // Extract color name from path
+        const colorSlug = path.split('/').pop();
+        if (colorSlug) {
+          currentPage = colorSlug.charAt(0).toUpperCase() + colorSlug.slice(1).replace('-', ' ');
+          parentPage = 'Kleuren';
+        }
+      }
     } else if (path.includes('/types')) {
       currentPage = 'Types';
+      if (path.includes('/types/')) {
+        isNestedSubPage = true;
+        parentPage = 'Types';
+        if (path.includes('draaikiepraam')) {
+          currentPage = 'Draaikiepraam';
+        }
+      }
     } else if (path.includes('/afmetingen')) {
       currentPage = 'Afmetingen';
+      if (path.includes('/afmetingen/')) {
+        isNestedSubPage = true;
+        parentPage = 'Afmetingen';
+        if (path.includes('100x100')) {
+          currentPage = '100x100 cm';
+        }
+      }
     } else if (path.includes('/montage')) {
       currentPage = 'Montage';
     } else if (path.includes('/prijzen')) {
       currentPage = 'Prijzen';
+      if (path.includes('/prijzen/')) {
+        isNestedSubPage = true;
+        parentPage = 'Prijzen';
+        if (path.includes('afbetaling')) {
+          currentPage = 'Afbetaling';
+        }
+      }
     } else if (path.includes('/merken')) {
       currentPage = 'Merken';
+      if (path.includes('/merken/')) {
+        isNestedSubPage = true;
+        parentPage = 'Merken';
+        if (path.includes('schuco')) {
+          currentPage = 'Schüco';
+        }
+      }
+    } else if (path.includes('/locaties/')) {
+      isNestedSubPage = true;
+      parentPage = 'Locaties';
+      if (path.includes('enschede')) {
+        currentPage = 'Enschede';
+      }
+    } else if (path.includes('/services/')) {
+      isNestedSubPage = true;
+      parentPage = 'Services';
+      if (path.includes('inmeten')) {
+        currentPage = 'Inmeten';
+      }
     }
   }
 
@@ -75,8 +126,31 @@ const StickyNavigation: React.FC = () => {
                     <BreadcrumbPage>Kunststof Kozijnen</BreadcrumbPage>
                   )}
                 </BreadcrumbItem>
-                {isSubPage && (
+                {isSubPage && !isNestedSubPage && (
                   <>
+                    <BreadcrumbSeparator>
+                      <ChevronRight className="h-3.5 w-3.5" />
+                    </BreadcrumbSeparator>
+                    <BreadcrumbItem>
+                      <BreadcrumbPage>{currentPage}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                  </>
+                )}
+                {isNestedSubPage && (
+                  <>
+                    <BreadcrumbSeparator>
+                      <ChevronRight className="h-3.5 w-3.5" />
+                    </BreadcrumbSeparator>
+                    <BreadcrumbItem>
+                      <BreadcrumbLink asChild>
+                        <Link 
+                          to={`/kunststof-kozijnen/${parentPage.toLowerCase()}`} 
+                          className="hover:text-brand-green transition-colors"
+                        >
+                          {parentPage}
+                        </Link>
+                      </BreadcrumbLink>
+                    </BreadcrumbItem>
                     <BreadcrumbSeparator>
                       <ChevronRight className="h-3.5 w-3.5" />
                     </BreadcrumbSeparator>
