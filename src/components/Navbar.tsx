@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
   
   // Top bar navigation items
   const topNavItems = [
-    { label: 'Blog', href: '#blog' },
+    { label: 'Blog', href: '/blog' },
     { label: 'Kennisbank', href: '#knowledge' },
     { label: 'Zakelijk', href: '#business' },
     { label: 'Werkgebied', href: '#area' },
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
   
   // Main navigation items
   const mainNavItems = [
-    { label: 'Projecten', href: '#projects' },
+    { label: 'Projecten', href: '/projecten' },
     { label: 'Showroom', href: '#showroom' },
     { label: 'Werkwijze', href: '#workflow' },
   ];

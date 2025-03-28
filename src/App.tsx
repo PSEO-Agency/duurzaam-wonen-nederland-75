@@ -15,6 +15,10 @@ import KozijnSizes from "./pages/KozijnSizes";
 import KozijnMontage from "./pages/KozijnMontage";
 import KozijnPrices from "./pages/KozijnPrices";
 import KozijnBrands from "./pages/KozijnBrands";
+import Projects from "./pages/Projects";
+import ProjectDetail from "./pages/ProjectDetail";
+import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +39,10 @@ const App = () => (
             <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />
             <Route path="/kunststof-kozijnen/prijzen" element={<KozijnPrices />} />
             <Route path="/kunststof-kozijnen/merken" element={<KozijnBrands />} />
+            <Route path="/projecten" element={<Projects />} />
+            <Route path="/projecten/:projectSlug" element={<ProjectDetail />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:blogSlug" element={<BlogDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
