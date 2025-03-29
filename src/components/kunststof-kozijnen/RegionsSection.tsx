@@ -4,6 +4,7 @@ import AnimatedSection from '../AnimatedSection';
 import { MapPin } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 // Data structure for provinces and cities
 interface RegionData {
@@ -93,8 +94,11 @@ const RegionsSection: React.FC = () => {
                         variant="outline" 
                         size="sm" 
                         className="text-sm"
+                        asChild
                       >
-                        {city}
+                        <Link to="/kunststof-kozijnen/locaties/enschede">
+                          {city}
+                        </Link>
                       </Button>
                     ))}
                   </div>
