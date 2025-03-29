@@ -3,6 +3,7 @@ import React from 'react';
 import { Zap, Shield, Home, Sparkles, Palette, Award, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
+import { Link } from 'react-router-dom';
 
 const benefitsData = [
   {
@@ -84,11 +85,14 @@ const Benefits: React.FC = () => {
               Ontdek hoe deze voordelen specifiek voor uw woning kunnen gelden met een vrijblijvend adviesgesprek.
             </p>
             <Button 
+              asChild
               size="lg" 
               className="bg-brand-green hover:bg-brand-green-dark text-white shadow-md hover:shadow-lg transition-all duration-300"
             >
-              Vrijblijvend adviesgesprek
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <Link to="/offerte">
+                Vrijblijvend adviesgesprek
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </AnimatedSection>

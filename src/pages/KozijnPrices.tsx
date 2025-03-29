@@ -136,9 +136,11 @@ const KozijnPrices: React.FC = () => {
               </p>
               
               <div className="flex justify-center">
-                <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
-                  <span>Vraag een persoonlijke prijsopgave aan</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Button asChild className="bg-brand-green hover:bg-brand-green-dark text-white">
+                  <Link to="/offerte">
+                    <span>Vraag een persoonlijke prijsopgave aan</span>
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
               </div>
             </AnimatedSection>

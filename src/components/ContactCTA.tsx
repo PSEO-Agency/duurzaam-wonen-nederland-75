@@ -3,6 +3,7 @@ import React from 'react';
 import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
+import { Link } from 'react-router-dom';
 
 const ContactCTA: React.FC = () => {
   return (
@@ -54,9 +55,11 @@ const ContactCTA: React.FC = () => {
                   </div>
                 </div>
                 
-                <Button className="bg-brand-green hover:bg-brand-green-dark">
-                  Neem contact op
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Button asChild className="bg-brand-green hover:bg-brand-green-dark">
+                  <Link to="/contact">
+                    Neem contact op
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
               </div>
               
@@ -74,8 +77,10 @@ const ContactCTA: React.FC = () => {
                     Maak een afspraak voor een gratis en vrijblijvend adviesgesprek 
                     bij u thuis of in onze showroom.
                   </p>
-                  <Button variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/20 w-full md:w-auto">
-                    Plan een afspraak
+                  <Button asChild variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/20 w-full md:w-auto">
+                    <Link to="/offerte">
+                      Plan een afspraak
+                    </Link>
                   </Button>
                 </div>
               </div>

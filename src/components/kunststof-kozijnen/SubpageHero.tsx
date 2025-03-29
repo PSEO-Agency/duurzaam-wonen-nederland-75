@@ -52,7 +52,7 @@ const SubpageHero: React.FC<SubpageHeroProps> = ({
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
-                  <Link to="/contact">
+                  <Link to="/offerte">
                     <span>Offerte aanvragen</span>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>

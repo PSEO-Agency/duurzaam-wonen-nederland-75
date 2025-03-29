@@ -48,7 +48,7 @@ const Services: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
                   <p className="text-gray-600 mb-4">{service.description}</p>
-                  <Link to="/kunststof-kozijnen/services/inmeten" className="mt-auto">
+                  <Link to={service.link} className="mt-auto">
                     <Button variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green hover:text-white">
                       Meer informatie
                     </Button>

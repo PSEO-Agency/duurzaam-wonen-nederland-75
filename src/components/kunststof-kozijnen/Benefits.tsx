@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrowRight, ShieldCheck, Leaf, Clock, PiggyBank, Recycle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from '../AnimatedSection';
+import { Link } from 'react-router-dom';
 
 interface BenefitProps {
   icon: React.ReactNode;
@@ -75,9 +76,11 @@ const Benefits: React.FC = () => {
         </div>
         
         <AnimatedSection animation="fade-in" delay={600} className="text-center">
-          <Button size="lg" className="bg-brand-green hover:bg-brand-green-dark">
-            Vraag vrijblijvend een offerte aan
-            <ArrowRight className="ml-2 h-5 w-5" />
+          <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark">
+            <Link to="/offerte">
+              Vraag vrijblijvend een offerte aan
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
           </Button>
         </AnimatedSection>
       </div>

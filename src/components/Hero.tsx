@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { ArrowRight, Check, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   const location = useLocation();
@@ -52,9 +52,11 @@ const Hero: React.FC = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
-                  <span>Offerte aanvragen</span>
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
+                  <Link to="/offerte">
+                    <span>Offerte aanvragen</span>
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-white/20">
                   {isKozijnenPage ? 'Ontdek alles over kunststof kozijnen' : 'Onze projecten'}

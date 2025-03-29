@@ -72,7 +72,7 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button asChild size="lg" className="bg-white text-brand-green hover:bg-gray-100">
-                    <Link to="/contact">
+                    <Link to="/offerte">
                       Vraag offerte aan
                     </Link>
                   </Button>
