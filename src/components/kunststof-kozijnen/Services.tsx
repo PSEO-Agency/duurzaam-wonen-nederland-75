@@ -12,19 +12,19 @@ const Services: React.FC = () => {
       icon: <Ruler className="h-10 w-10 text-brand-green" />,
       title: "Kozijnen Inmeten",
       description: "Onze experts komen bij u thuis voor nauwkeurig inmeten. Perfect passende kozijnen gegarandeerd, rekening houdend met alle bouwkundige details.",
-      link: "/kunststof-kozijnen/inmeten"
+      link: "/kunststof-kozijnen/services/inmeten"
     },
     {
       icon: <Wrench className="h-10 w-10 text-brand-green" />,
       title: "Kozijnen Montage",
       description: "Vakkundige montage door ons ervaren team. Snel, schoon en met minimale overlast. Inclusief afwerking en oplevering volgens de hoogste standaarden.",
-      link: "/kunststof-kozijnen/montage"
+      link: "/kunststof-kozijnen/services/inmeten"
     },
     {
       icon: <Settings className="h-10 w-10 text-brand-green" />,
       title: "Kozijnen Reparatie",
       description: "Professionele reparatie- en onderhoudsdienst. Ook voor kozijnen die niet door ons zijn geplaatst. Snelle service en eerlijke prijzen.",
-      link: "/kunststof-kozijnen/reparatie"
+      link: "/kunststof-kozijnen/services/inmeten"
     },
   ];
 
@@ -48,7 +48,7 @@ const Services: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
                   <p className="text-gray-600 mb-4">{service.description}</p>
-                  <Link to={service.link} className="mt-auto">
+                  <Link to="/kunststof-kozijnen/services/inmeten" className="mt-auto">
                     <Button variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green hover:text-white">
                       Meer informatie
                     </Button>
