@@ -66,7 +66,7 @@ const Benefits: React.FC = () => {
           </p>
         </AnimatedSection>
         
-        <div className={`grid grid-cols-1 ${isMobile ? '' : 'md:grid-cols-2 lg:grid-cols-5'} gap-6 mb-12`}>
+        <div className="grid grid-cols-1 gap-6 mb-12 md:grid-cols-2 lg:grid-cols-5">
           {benefits.map((benefit, index) => (
             <Benefit 
               key={index} 

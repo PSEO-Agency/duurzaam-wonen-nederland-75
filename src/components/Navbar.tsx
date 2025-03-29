@@ -138,15 +138,7 @@ const Navbar: React.FC = () => {
               ))}
             </div>
             
-            {/* Mobile Quick Actions */}
-            <div className="flex md:hidden gap-4 ml-auto">
-              <a href="tel:0533030213" className="text-white flex items-center">
-                <Phone size={16} />
-              </a>
-              <a href="https://wa.me/+310533030213" className="text-white flex items-center">
-                <MessageCircle size={16} />
-              </a>
-            </div>
+            {/* Mobile Quick Actions - Removed from here as we'll add them to the main nav */}
           </div>
         </div>
       </div>
@@ -169,8 +161,35 @@ const Navbar: React.FC = () => {
               />
             </Link>
             
+            {/* Mobile Action Buttons - NEW: between logo and hamburger */}
+            <div className="flex md:hidden items-center gap-2 mx-auto">
+              <Button 
+                asChild
+                size="icon" 
+                variant="ghost" 
+                className="text-gray-700 hover:text-brand-green hover:bg-brand-green/10 h-9 w-9"
+              >
+                <a href="tel:0533030213">
+                  <Phone size={20} />
+                </a>
+              </Button>
+              
+              <Button 
+                asChild
+                size="icon" 
+                variant="ghost" 
+                className="text-gray-700 hover:text-brand-green hover:bg-brand-green/10 h-9 w-9"
+              >
+                <a href="https://wa.me/+310533030213">
+                  <MessageCircle size={20} />
+                </a>
+              </Button>
+            </div>
+            
             {/* Search Bar - Desktop */}
-            <SearchCommandMenu />
+            <div className="hidden md:block">
+              <SearchCommandMenu />
+            </div>
             
             {/* Desktop Main Navigation with Mega Menus */}
             <NavigationMenu className="hidden md:flex ml-6">
@@ -263,7 +282,7 @@ const Navbar: React.FC = () => {
             
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden focus:outline-none ml-auto"
+              className="md:hidden focus:outline-none"
               onClick={toggleMobileMenu}
             >
               {isMobileMenuOpen ? (

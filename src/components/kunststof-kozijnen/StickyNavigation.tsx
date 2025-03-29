@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const StickyNavigation: React.FC = () => {
   const { ref, inView } = useInView({
@@ -13,6 +14,7 @@ const StickyNavigation: React.FC = () => {
   
   const location = useLocation();
   const path = location.pathname;
+  const isMobile = useIsMobile();
   
   // Determine the current page for breadcrumb
   let currentPage = '';
@@ -92,11 +94,11 @@ const StickyNavigation: React.FC = () => {
   return (
     <div ref={ref}>
       <nav className={`sticky top-20 z-20 bg-white border-b shadow-sm transition-all duration-300 ${!inView ? 'shadow-md' : ''}`}>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 overflow-x-auto">
           {/* Breadcrumb navigation */}
           <div className="py-2">
             <Breadcrumb>
-              <BreadcrumbList className="text-sm">
+              <BreadcrumbList className={`text-sm ${isMobile ? 'whitespace-nowrap' : ''}`}>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
                     <Link to="/" className="flex items-center hover:text-brand-green transition-colors">
