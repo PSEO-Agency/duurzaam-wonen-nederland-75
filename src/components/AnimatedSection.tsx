@@ -66,7 +66,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   return (
     <div 
       ref={sectionRef} 
-      className={`opacity-0 ${className}`}
+      className={`opacity-0 max-w-full overflow-x-hidden ${className}`}
       style={{ 
         willChange: 'opacity, transform',
         transitionDuration: `${duration}ms`,
