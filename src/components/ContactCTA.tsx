@@ -4,22 +4,25 @@ import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const ContactCTA: React.FC = () => {
+  const isMobile = useIsMobile();
+  
   return (
     <section id="contact" className="bg-gray-50 py-16">
       <div className="container mx-auto px-4">
         <AnimatedSection>
           <div className="glass-card bg-white shadow-xl overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-5">
-              <div className="lg:col-span-3 p-8 md:p-12">
+              <div className="lg:col-span-3 p-6 md:p-12">
                 <h2 className="text-3xl font-bold mb-6">Heeft u vragen? We zijn er om te helpen</h2>
                 <p className="text-gray-600 mb-8 max-w-lg">
                   Neem contact met ons op voor meer informatie over onze diensten of voor een vrijblijvende offerte. 
                   Onze experts staan klaar om al uw vragen te beantwoorden.
                 </p>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className={`grid grid-cols-1 ${isMobile ? '' : 'md:grid-cols-2'} gap-6 mb-8`}>
                   <div className="flex items-start">
                     <div className="bg-brand-green/10 p-3 rounded-full mr-4">
                       <Phone className="h-5 w-5 text-brand-green" />
@@ -71,7 +74,7 @@ const ContactCTA: React.FC = () => {
                   backgroundPosition: 'center',
                 }}
               >
-                <div className="bg-brand-green/80 h-full w-full p-8 md:p-12 flex flex-col justify-center">
+                <div className="bg-brand-green/80 h-full w-full p-6 md:p-12 flex flex-col justify-center">
                   <h3 className="text-2xl font-bold text-white mb-6">Vrijblijvend adviesgesprek</h3>
                   <p className="text-white/90 mb-6">
                     Maak een afspraak voor een gratis en vrijblijvend adviesgesprek 

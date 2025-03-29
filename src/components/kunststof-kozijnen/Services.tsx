@@ -5,8 +5,11 @@ import { Ruler, Wrench, Settings } from 'lucide-react';
 import AnimatedSection from '../AnimatedSection';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Services: React.FC = () => {
+  const isMobile = useIsMobile();
+  
   const services = [
     {
       icon: <Ruler className="h-10 w-10 text-brand-green" />,
@@ -38,7 +41,7 @@ const Services: React.FC = () => {
           </p>
         </AnimatedSection>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className={`grid grid-cols-1 ${isMobile ? '' : 'md:grid-cols-3'} gap-8`}>
           {services.map((service, index) => (
             <AnimatedSection key={index} animation="fade-in" delay={index * 150}>
               <Card className="h-full hover:shadow-md transition-shadow">

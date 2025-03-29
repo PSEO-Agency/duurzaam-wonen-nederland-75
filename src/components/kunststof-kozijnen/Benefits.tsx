@@ -4,6 +4,7 @@ import { ArrowRight, ShieldCheck, Leaf, Clock, PiggyBank, Recycle } from 'lucide
 import { Button } from '@/components/ui/button';
 import AnimatedSection from '../AnimatedSection';
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface BenefitProps {
   icon: React.ReactNode;
@@ -25,6 +26,8 @@ const Benefit: React.FC<BenefitProps> = ({ icon, title, description, delay = 0 }
 );
 
 const Benefits: React.FC = () => {
+  const isMobile = useIsMobile();
+  
   const benefits = [
     {
       icon: <ShieldCheck className="h-8 w-8 text-brand-green" />,
@@ -63,7 +66,7 @@ const Benefits: React.FC = () => {
           </p>
         </AnimatedSection>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
+        <div className={`grid grid-cols-1 ${isMobile ? '' : 'md:grid-cols-2 lg:grid-cols-5'} gap-6 mb-12`}>
           {benefits.map((benefit, index) => (
             <Benefit 
               key={index} 

@@ -10,6 +10,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedSection from '@/components/AnimatedSection';
 import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
 import ContactCTA from '@/components/ContactCTA';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface RelatedItem {
   title: string;
@@ -50,6 +51,8 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
   breadcrumbTitle,
   showContactCTA = true,
 }) => {
+  const isMobile = useIsMobile();
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
@@ -92,14 +95,14 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
         {/* Main Content Section */}
         <section className="py-12 bg-white">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col lg:flex-row gap-12">
-              <div className="lg:w-2/3">
+            <div className={`flex flex-col ${isMobile ? '' : 'lg:flex-row'} gap-12`}>
+              <div className={isMobile ? "w-full" : "lg:w-2/3"}>
                 <AnimatedSection animation="fade-in">
                   {mainContent}
                 </AnimatedSection>
               </div>
               
-              <div className="lg:w-1/3">
+              <div className={isMobile ? "w-full" : "lg:w-1/3"}>
                 {mainImageUrl && (
                   <AnimatedSection animation="fade-in" delay={200}>
                     <div className="rounded-lg overflow-hidden shadow-md mb-8">
@@ -132,8 +135,8 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
                     Onze experts staan klaar om u te helpen bij het kiezen van de juiste kozijnen voor uw woning.
                   </p>
                   <Button asChild className="w-full bg-white text-brand-green hover:bg-gray-100">
-                    <Link to="/contact">
-                      <span>Neem contact op</span>
+                    <Link to="/offerte">
+                      Offerte Aanvragen
                     </Link>
                   </Button>
                 </AnimatedSection>
@@ -167,7 +170,7 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
             <div className="container mx-auto px-4">
               <AnimatedSection animation="fade-in">
                 <h2 className="text-3xl font-bold mb-8">{relatedItemsTitle}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className={`grid grid-cols-1 ${isMobile ? '' : 'md:grid-cols-2 lg:grid-cols-3'} gap-6`}>
                   {relatedItems.map((item, index) => (
                     <div key={index} className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
                       <h3 className="text-xl font-semibold mb-2">{item.title}</h3>

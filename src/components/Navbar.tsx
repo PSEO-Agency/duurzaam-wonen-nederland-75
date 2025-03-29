@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Phone, MessageCircle } from 'lucide-react';
+import { Menu, X, Phone, MessageCircle, ChevronDown, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
@@ -14,10 +14,13 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useNavigate } from 'react-router-dom';
 import SearchCommandMenu from '@/components/search/SearchCommandMenu';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
   
   // Handle scroll effect
@@ -134,6 +137,16 @@ const Navbar: React.FC = () => {
                 )
               ))}
             </div>
+            
+            {/* Mobile Quick Actions */}
+            <div className="flex md:hidden gap-4 ml-auto">
+              <a href="tel:0533030213" className="text-white flex items-center">
+                <Phone size={16} />
+              </a>
+              <a href="https://wa.me/+310533030213" className="text-white flex items-center">
+                <MessageCircle size={16} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -230,18 +243,21 @@ const Navbar: React.FC = () => {
               {/* Phone Button */}
               <Button asChild className="bg-brand-green text-white hover:bg-brand-green-dark transition-colors">
                 <a href="tel:0533030213" className="flex items-center gap-2">
-                  <span>053-3030213</span>
                   <Phone size={16} />
+                  <span>053-3030213</span>
                 </a>
               </Button>
               
               {/* WhatsApp Button */}
               <Button 
+                asChild
                 variant="outline" 
                 className="border-brand-green text-brand-green hover:bg-brand-green/10 flex items-center gap-2"
               >
-                <MessageCircle size={20} />
-                <span>WhatsApp</span>
+                <a href="https://wa.me/+310533030213">
+                  <MessageCircle size={20} />
+                  <span>WhatsApp</span>
+                </a>
               </Button>
             </div>
             
@@ -260,86 +276,144 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Improved */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg">
+        <div className="md:hidden bg-white shadow-lg overflow-y-auto max-h-[80vh]">
           <div className="container mx-auto px-4 py-3">
             {/* Search Bar - Mobile */}
             <div className="mb-4">
               <SearchCommandMenu isMobile={true} />
             </div>
             
-            {/* Oplossingen Dropdown - Mobile */}
-            <div className="mb-4">
-              <h3 className={megaMenuHeaderClass}>Oplossingen</h3>
-              <ul className="space-y-2 pl-4">
-                {oplossingenItems.map((item) => (
-                  <li key={item.label}>
-                    {renderNavItem(item, mobileMenuItemClass, toggleMobileMenu)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Producten Dropdown - Mobile */}
-            <div className="mb-4">
-              <h3 className={megaMenuHeaderClass}>Producten</h3>
-              <ul className="space-y-2 pl-4">
-                {productenItems.map((item) => (
-                  <li key={item.label}>
-                    {renderNavItem(item, mobileMenuItemClass, toggleMobileMenu)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            {/* Main Nav Items - Mobile */}
-            {mainNavItems.map((item) => (
-              <div key={item.label}>
-                {renderNavItem(item, mobileMenuItemClass, toggleMobileMenu)}
-              </div>
-            ))}
-
-            {/* Over ons Dropdown - Mobile */}
-            <div className="mb-4 mt-4">
-              <h3 className={megaMenuHeaderClass}>Over ons</h3>
-              <ul className="space-y-2 pl-4">
-                {overOnsItems.map((item) => (
-                  <li key={item.label}>
-                    {renderNavItem(item, mobileMenuItemClass, toggleMobileMenu)}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Mobile Mega Menu with Accordion */}
+            <Accordion type="single" collapsible className="w-full mb-4">
+              <AccordionItem value="oplossingen" className="border-b">
+                <AccordionTrigger className="py-3 text-base font-medium">
+                  Oplossingen
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="pl-4 py-2">
+                    <h4 className="font-medium text-sm text-gray-500 mb-2">Oplossingen</h4>
+                    <ul className="space-y-3">
+                      {oplossingenItems.map((item) => (
+                        <li key={item.label}>
+                          <Link 
+                            to={item.href} 
+                            className="flex items-center text-gray-700 hover:text-brand-green"
+                            onClick={toggleMobileMenu}
+                          >
+                            <ChevronRight size={16} className="mr-2" />
+                            <span>{item.label}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="pl-4 py-2 mt-4">
+                    <h4 className="font-medium text-sm text-gray-500 mb-2">Producten</h4>
+                    <ul className="space-y-3">
+                      {productenItems.map((item) => (
+                        <li key={item.label}>
+                          <Link 
+                            to={item.href} 
+                            className="flex items-center text-gray-700 hover:text-brand-green"
+                            onClick={toggleMobileMenu}
+                          >
+                            <ChevronRight size={16} className="mr-2" />
+                            <span>{item.label}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              
+              {/* Main Nav Items */}
+              {mainNavItems.map((item) => (
+                <div key={item.label} className="py-3 border-b">
+                  <Link 
+                    to={item.href} 
+                    className="block font-medium text-base"
+                    onClick={toggleMobileMenu}
+                  >
+                    {item.label}
+                  </Link>
+                </div>
+              ))}
+              
+              {/* Over ons Accordion */}
+              <AccordionItem value="over-ons" className="border-b">
+                <AccordionTrigger className="py-3 text-base font-medium">
+                  Over ons
+                </AccordionTrigger>
+                <AccordionContent>
+                  <ul className="pl-4 space-y-3">
+                    {overOnsItems.map((item) => (
+                      <li key={item.label}>
+                        <Link 
+                          to={item.href} 
+                          className="flex items-center text-gray-700 hover:text-brand-green"
+                          onClick={toggleMobileMenu}
+                        >
+                          <ChevronRight size={16} className="mr-2" />
+                          <span>{item.label}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
             
             {/* Top Nav Items - Mobile */}
             <div className="mt-4 pt-4 border-t border-gray-200">
               {topNavItems.map((item) => (
-                <div key={item.label}>
-                  {renderNavItem(item, mobileMenuItemClass, toggleMobileMenu)}
+                <div key={item.label} className="py-2">
+                  <Link 
+                    to={item.href} 
+                    className="block text-base"
+                    onClick={toggleMobileMenu}
+                  >
+                    {item.label}
+                  </Link>
                 </div>
               ))}
             </div>
             
-            <div className="mt-4 pt-4 border-t border-gray-200 flex flex-col gap-3">
+            <div className="mt-4 pt-4 border-t border-gray-200 grid grid-cols-2 gap-4">
               {/* Phone Button - Mobile */}
               <Button 
                 asChild 
-                className="w-full bg-brand-green hover:bg-brand-green-dark transition-colors duration-200"
+                className="bg-brand-green hover:bg-brand-green-dark transition-colors duration-200"
               >
                 <a href="tel:0533030213" className="flex items-center justify-center gap-2">
                   <Phone size={16} />
-                  <span>053-3030213</span>
+                  <span>Bellen</span>
                 </a>
               </Button>
               
               {/* WhatsApp Button - Mobile */}
               <Button 
+                asChild
                 variant="outline" 
-                className="w-full border-brand-green text-brand-green hover:bg-brand-green/10"
+                className="border-brand-green text-brand-green hover:bg-brand-green/10"
               >
-                <MessageCircle size={20} className="mr-2" />
-                <span>WhatsApp</span>
+                <a href="https://wa.me/+310533030213" className="flex items-center justify-center gap-2">
+                  <MessageCircle size={16} />
+                  <span>WhatsApp</span>
+                </a>
+              </Button>
+              
+              {/* Offerte Button - Mobile */}
+              <Button 
+                asChild
+                className="col-span-2 bg-brand-green hover:bg-brand-green-dark mt-4"
+              >
+                <Link to="/offerte" onClick={toggleMobileMenu}>
+                  Offerte Aanvragen
+                </Link>
               </Button>
             </div>
           </div>
