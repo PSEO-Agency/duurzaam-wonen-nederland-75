@@ -32,7 +32,7 @@ const Services: React.FC = () => {
     <section id="diensten" className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="fade-in">
-          <h2 className="text-3xl font-bold text-center mb-4">Onze Diensten</h2>
+          <h2 className="text-3xl font-bold text-center mb-4">Onze Oplossingen</h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-12">
             Van inmeten tot montage en onderhoud - wij begeleiden u door het hele proces met deskundig advies en service.
           </p>
