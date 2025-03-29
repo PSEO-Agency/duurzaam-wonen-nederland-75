@@ -94,11 +94,11 @@ const StickyNavigation: React.FC = () => {
   return (
     <div ref={ref}>
       <nav className={`sticky top-20 z-20 bg-white border-b shadow-sm transition-all duration-300 ${!inView ? 'shadow-md' : ''}`}>
-        <div className="container mx-auto px-4 overflow-x-auto">
+        <div className="container mx-auto px-4">
           {/* Breadcrumb navigation */}
-          <div className="py-2">
+          <div className="py-2 overflow-x-auto">
             <Breadcrumb>
-              <BreadcrumbList className={`text-sm ${isMobile ? 'whitespace-nowrap' : ''}`}>
+              <BreadcrumbList className={`text-sm ${isMobile ? 'flex-nowrap whitespace-nowrap' : ''}`}>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
                     <Link to="/" className="flex items-center hover:text-brand-green transition-colors">

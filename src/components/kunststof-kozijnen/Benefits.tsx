@@ -20,7 +20,7 @@ const Benefit: React.FC<BenefitProps> = ({ icon, title, description, delay = 0 }
         {icon}
       </div>
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <p className="text-gray-600 text-sm md:text-base">{description}</p>
     </div>
   </AnimatedSection>
 );
@@ -61,7 +61,7 @@ const Benefits: React.FC = () => {
       <div className="container mx-auto px-4">
         <AnimatedSection animation="fade-in">
           <h2 className="text-3xl font-bold text-center mb-4">Voordelen van Kunststof Kozijnen</h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-12">
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-12 px-2">
             Ontdek waarom steeds meer huiseigenaren kiezen voor kunststof kozijnen als duurzame en praktische oplossing.
           </p>
         </AnimatedSection>

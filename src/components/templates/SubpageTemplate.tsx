@@ -69,8 +69,8 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
               <div className="max-w-4xl mx-auto text-center text-white">
-                <h1 className="text-4xl md:text-5xl font-bold mb-6">{heroTitle}</h1>
-                <p className="text-lg md:text-xl mb-8 opacity-90">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">{heroTitle}</h1>
+                <p className="text-base md:text-lg lg:text-xl mb-8 opacity-90 px-2">
                   {heroDescription}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -121,8 +121,8 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
                     <ul className="space-y-3">
                       {benefits.map((benefit, index) => (
                         <li key={index} className="flex items-start">
-                          <span className="text-brand-green mr-2">✓</span>
-                          <span>{benefit}</span>
+                          <span className="text-brand-green mr-2 flex-shrink-0">✓</span>
+                          <span className="text-sm md:text-base">{benefit}</span>
                         </li>
                       ))}
                     </ul>
@@ -131,7 +131,7 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
                 
                 <AnimatedSection animation="fade-in" delay={400} className="bg-brand-green text-white p-6 rounded-lg">
                   <h3 className="text-xl font-semibold mb-4">Hulp nodig?</h3>
-                  <p className="mb-4">
+                  <p className="mb-4 text-sm md:text-base">
                     Onze experts staan klaar om u te helpen bij het kiezen van de juiste kozijnen voor uw woning.
                   </p>
                   <Button asChild className="w-full bg-white text-brand-green hover:bg-gray-100">
@@ -155,7 +155,7 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
                   {faqs.map((faq, index) => (
                     <div key={index} className="mb-6">
                       <h3 className="text-xl font-semibold mb-2">{faq.question}</h3>
-                      <p className="text-gray-700">{faq.answer}</p>
+                      <p className="text-gray-700 text-sm md:text-base">{faq.answer}</p>
                     </div>
                   ))}
                 </div>
@@ -174,7 +174,7 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
                   {relatedItems.map((item, index) => (
                     <div key={index} className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
                       <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                      {item.excerpt && <p className="text-gray-700 mb-4">{item.excerpt}</p>}
+                      {item.excerpt && <p className="text-gray-700 text-sm md:text-base mb-4">{item.excerpt}</p>}
                       <Link 
                         to={item.slug} 
                         className="text-brand-green flex items-center hover:underline"

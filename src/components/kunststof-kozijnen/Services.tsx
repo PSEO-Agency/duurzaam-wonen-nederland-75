@@ -33,7 +33,7 @@ const Services: React.FC = () => {
       <div className="container mx-auto px-4">
         <AnimatedSection animation="fade-in">
           <h2 className="text-3xl font-bold text-center mb-4">Onze Oplossingen</h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-12">
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-12 px-2">
             Van inmeten tot montage en onderhoud - wij begeleiden u door het hele proces met deskundig advies en service.
           </p>
         </AnimatedSection>
@@ -47,7 +47,7 @@ const Services: React.FC = () => {
                     {service.icon}
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  <p className="text-gray-600 text-sm md:text-base mb-4">{service.description}</p>
                   <Link to={service.link} className="mt-auto">
                     <Button variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green hover:text-white">
                       Meer informatie
