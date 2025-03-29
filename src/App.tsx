@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -35,6 +36,8 @@ import Kennisbank from "./pages/Kennisbank";
 import KennisbankDetail from "./pages/KennisbankDetail";
 import Offerte from "./pages/Offerte";
 import OfferteSuccess from "./pages/OfferteSuccess";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import AlgemeneVoorwaarden from "./pages/AlgemeneVoorwaarden";
 
 // New location pages
 import KozijnenEnschede from "./pages/locaties/KozijnenEnschede";
@@ -99,6 +102,8 @@ const App = () => (
             <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />
             <Route path="/kunststof-kozijnen/prijzen" element={<KozijnPrices />} />
             <Route path="/kunststof-kozijnen/merken" element={<KozijnBrands />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
             
             {/* New routes for specific location, service, type, size, brand, and price pages */}
             <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />

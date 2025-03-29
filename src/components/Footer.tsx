@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Facebook, Instagram, Linkedin, MapPin, Phone, Mail, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -32,20 +33,42 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Snelle links</h4>
             <ul className="space-y-3">
-              {['Home', 'Diensten', 'Projecten', 'Over ons', 'Contact'].map((link) => (
-                <li key={link}>
-                  <a href={`#${link.toLowerCase().replace(' ', '-')}`} className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
-                    <ChevronRight className="h-4 w-4 mr-2" />
-                    {link}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link to="/" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/kunststof-kozijnen" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Oplossingen
+                </Link>
+              </li>
+              <li>
+                <Link to="/projecten" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Projecten
+                </Link>
+              </li>
+              <li>
+                <Link to="/over-ons" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Over ons
+                </Link>
+              </li>
+              <li>
+                <Link to="/offerte" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
           
           {/* Services */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Onze diensten</h4>
+            <h4 className="text-lg font-semibold mb-6">Onze oplossingen</h4>
             <ul className="space-y-3">
               {[
                 'Kunststof kozijnen', 
@@ -56,10 +79,10 @@ const Footer: React.FC = () => {
                 'Schuifpuien'
               ].map((service) => (
                 <li key={service}>
-                  <a href="#services" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <Link to="/kunststof-kozijnen" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
                     <ChevronRight className="h-4 w-4 mr-2" />
                     {service}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -91,9 +114,9 @@ const Footer: React.FC = () => {
               &copy; {currentYear} Duurzaam Wonen Nederland. Alle rechten voorbehouden.
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-brand-green text-sm">Privacybeleid</a>
-              <a href="#" className="text-gray-400 hover:text-brand-green text-sm">Algemene voorwaarden</a>
-              <a href="#" className="text-gray-400 hover:text-brand-green text-sm">Sitemap</a>
+              <Link to="/privacy-policy" className="text-gray-400 hover:text-brand-green text-sm">Privacybeleid</Link>
+              <Link to="/algemene-voorwaarden" className="text-gray-400 hover:text-brand-green text-sm">Algemene voorwaarden</Link>
+              <Link to="/sitemap" className="text-gray-400 hover:text-brand-green text-sm">Sitemap</Link>
             </div>
           </div>
         </div>

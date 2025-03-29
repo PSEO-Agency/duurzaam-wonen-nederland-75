@@ -3,6 +3,7 @@ import React from 'react';
 import { CornerDownRight, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
+import { Link } from 'react-router-dom';
 
 const servicesData = [
   {
@@ -36,7 +37,7 @@ const Services: React.FC = () => {
     <section id="services" className="section-container">
       <div className="container mx-auto px-4">
         <AnimatedSection>
-          <h2 className="section-title">Onze diensten</h2>
+          <h2 className="section-title">Onze oplossingen</h2>
           <p className="section-subtitle">
             Duurzaam Wonen Nederland biedt een breed scala aan hoogwaardige verduurzamingsoplossingen
           </p>
@@ -67,8 +68,10 @@ const Services: React.FC = () => {
                   </ul>
                 </div>
                 <div className="p-6 pt-0 mt-auto">
-                  <Button variant="ghost" className="text-brand-green hover:text-brand-green-dark hover:bg-brand-green/10 -ml-3">
-                    Meer informatie <ArrowRight className="ml-2 h-4 w-4" />
+                  <Button variant="ghost" asChild className="text-brand-green hover:text-brand-green-dark hover:bg-brand-green/10 -ml-3">
+                    <Link to="/kunststof-kozijnen">
+                      Meer informatie <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
                   </Button>
                 </div>
               </div>

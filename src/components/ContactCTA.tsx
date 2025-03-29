@@ -56,7 +56,7 @@ const ContactCTA: React.FC = () => {
                 </div>
                 
                 <Button asChild className="bg-brand-green hover:bg-brand-green-dark">
-                  <Link to="/contact">
+                  <Link to="/offerte">
                     Neem contact op
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
