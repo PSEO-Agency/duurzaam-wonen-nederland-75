@@ -18,13 +18,13 @@ const Services: React.FC = () => {
       icon: <Wrench className="h-10 w-10 text-brand-green" />,
       title: "Kozijnen Montage",
       description: "Vakkundige montage door ons ervaren team. Snel, schoon en met minimale overlast. Inclusief afwerking en oplevering volgens de hoogste standaarden.",
-      link: "/kunststof-kozijnen/services/inmeten"
+      link: "/kunststof-kozijnen/services/montage"
     },
     {
       icon: <Settings className="h-10 w-10 text-brand-green" />,
       title: "Kozijnen Reparatie",
       description: "Professionele reparatie- en onderhoudsdienst. Ook voor kozijnen die niet door ons zijn geplaatst. Snelle service en eerlijke prijzen.",
-      link: "/kunststof-kozijnen/services/inmeten"
+      link: "/kunststof-kozijnen/services/reparatie"
     },
   ];
 
