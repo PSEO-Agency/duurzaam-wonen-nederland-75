@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -38,27 +37,13 @@ import Offerte from "./pages/Offerte";
 import OfferteSuccess from "./pages/OfferteSuccess";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AlgemeneVoorwaarden from "./pages/AlgemeneVoorwaarden";
-
-// New location pages
 import KozijnenEnschede from "./pages/locaties/KozijnenEnschede";
-
-// New service pages
 import KozijnenInmeten from "./pages/services/KozijnenInmeten";
-
-// New type pages
 import Draaikiepraam from "./pages/types/Draaikiepraam";
-
-// New size pages
 import Kozijn100x100 from "./pages/sizes/Kozijn100x100";
-
-// New brand pages
 import SchucoBrand from "./pages/brands/SchucoBrand";
-
-// New price option pages
 import KozijnenAfbetaling from "./pages/prices/KozijnenAfbetaling";
 import KozijnenSubsidie from "./pages/prices/KozijnenSubsidie";
-
-// Admin pages
 import AdminLayout from "./components/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import Templates from "./pages/admin/Templates";
@@ -66,6 +51,7 @@ import Pages from "./pages/admin/Pages";
 import PageEditor from "./pages/admin/PageEditor";
 import Sections from "./pages/admin/Sections";
 import SectionEditor from "./pages/admin/SectionEditor";
+import Sitemap from "./pages/Sitemap";
 
 const queryClient = new QueryClient();
 
@@ -77,7 +63,6 @@ const App = () => (
         <Sonner />
         <SearchProvider>
           <Routes>
-            {/* Admin Routes */}
             <Route path="/admin" element={<AdminLayout />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="templates" element={<Templates />} />
@@ -90,7 +75,6 @@ const App = () => (
               <Route path="users" element={<Dashboard />} />
             </Route>
             
-            {/* Public Routes */}
             <Route path="/" element={<Index />} />
             <Route path="/offerte" element={<Offerte />} />
             <Route path="/offerte/success" element={<OfferteSuccess />} />
@@ -104,15 +88,7 @@ const App = () => (
             <Route path="/kunststof-kozijnen/merken" element={<KozijnBrands />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
-            
-            {/* New routes for specific location, service, type, size, brand, and price pages */}
-            <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />
-            <Route path="/kunststof-kozijnen/services/inmeten" element={<KozijnenInmeten />} />
-            <Route path="/kunststof-kozijnen/types/draaikiepraam" element={<Draaikiepraam />} />
-            <Route path="/kunststof-kozijnen/afmetingen/100x100" element={<Kozijn100x100 />} />
-            <Route path="/kunststof-kozijnen/merken/schuco" element={<SchucoBrand />} />
-            <Route path="/kunststof-kozijnen/prijzen/afbetaling" element={<KozijnenAfbetaling />} />
-            <Route path="/kunststof-kozijnen/prijzen/subsidie" element={<KozijnenSubsidie />} />
+            <Route path="/sitemap" element={<Sitemap />} />
             
             <Route path="/projecten" element={<Projects />} />
             <Route path="/projecten/:projectSlug" element={<ProjectDetail />} />
