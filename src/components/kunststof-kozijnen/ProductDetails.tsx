@@ -142,7 +142,7 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor }) => {
         </div>
         
         <div className="mt-6 pt-4 border-t border-gray-200">
-          <h4 className="font-medium mb-2">Snelle toegang</h4>
+          <h4 className="font-medium mb-2 text-base">Snelle toegang</h4>
           <div className="space-y-2">
             <div className="flex items-center text-brand-green hover:underline">
               <ExternalLink className="h-4 w-4 mr-2" />
