@@ -15,26 +15,7 @@ const Brands: React.FC = () => {
                   Onze producten en oplossingen zijn geselecteerd op basis van kwaliteit, duurzaamheid en innovatie. 
                   We werken samen met toonaangevende merken voor optimale resultaten.
                 </p>
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                      <span className="text-white font-bold">1</span>
-                    </div>
-                    <p className="text-sm">Schüco - Premium kozijnsystemen</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                      <span className="text-white font-bold">2</span>
-                    </div>
-                    <p className="text-sm">Keralit - Duurzame gevelbekleding</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                      <span className="text-white font-bold">3</span>
-                    </div>
-                    <p className="text-sm">Hörmann - Hoogwaardige deursystemen</p>
-                  </div>
-                </div>
+                {/* The flex container with numbered list items has been removed */}
               </div>
               
               <div className="col-span-2 p-8 md:p-12 flex flex-col items-center justify-center">
