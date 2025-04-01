@@ -19,10 +19,10 @@ const SubpageHero: React.FC<SubpageHeroProps> = ({
   benefits = [
     'Energiebesparend - Warmte blijft binnen',
     'Onderhoudsarm - Nooit meer schilderen',
-    'Lange levensduur - Minimaal 30 jaar',
+    'Lange levensduur - 15 jaar fabrieksgarantie',
     'Uitstekende isolatie - Minder geluid',
     'Diverse kleuren en stijlen beschikbaar',
-    '10 jaar garantie op al onze producten'
+    '10 jaar service- en montagegarantie'
   ] 
 }) => {
   return (

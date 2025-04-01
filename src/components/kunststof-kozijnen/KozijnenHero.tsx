@@ -81,10 +81,10 @@ const KozijnenHero: React.FC = () => {
                   {[
                     'Energiebesparend - Warmte blijft binnen',
                     'Onderhoudsarm - Nooit meer schilderen',
-                    'Lange levensduur - Minimaal 30 jaar',
+                    'Lange levensduur - 15 jaar fabrieksgarantie',
                     'Uitstekende isolatie - Minder geluid',
                     'Diverse kleuren en stijlen beschikbaar',
-                    '10 jaar garantie op al onze producten'
+                    '10 jaar service- en montagegarantie'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <div className="bg-brand-green p-1 rounded-full mt-1 flex-shrink-0">
