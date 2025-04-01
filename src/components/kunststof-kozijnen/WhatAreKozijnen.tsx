@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Check, Play } from 'lucide-react';
+import { Check } from 'lucide-react';
 import AnimatedSection from '../AnimatedSection';
 import { Button } from '@/components/ui/button';
 
@@ -53,16 +52,6 @@ const WhatAreKozijnen: React.FC = () => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
-                
-                {/* Video overlay with play button for better UX */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <Button
-                    className="rounded-full w-16 h-16 flex items-center justify-center bg-brand-green/80 hover:bg-brand-green text-white transition-colors pointer-events-auto"
-                    aria-label="Speel video af"
-                  >
-                    <Play className="h-8 w-8 ml-1" fill="white" />
-                  </Button>
-                </div>
                 
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
                   <p className="text-white font-medium">Bekijk hoe kunststof kozijnen uw woning transformeren</p>
