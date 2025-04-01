@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
@@ -176,9 +177,9 @@ const siteStructure = [
     description: 'Ons werkgebied in Nederland',
   },
   {
-    title: 'Showroom',
-    path: '/showroom',
-    description: 'Onze showroom in Enschede',
+    title: 'Rentevrije Financiering',
+    path: '/rentevrije-financiering',
+    description: 'Financieringsmogelijkheden via het Nationaal Warmtefonds',
   },
   {
     title: 'Werkwijze',

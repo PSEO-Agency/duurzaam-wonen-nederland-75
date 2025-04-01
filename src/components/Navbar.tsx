@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
   // Main navigation items
   const mainNavItems = [
     { label: 'Projecten', href: '/projecten' },
-    { label: 'Showroom', href: '/showroom' },
+    { label: 'Rentevrije Financiering*', href: '/rentevrije-financiering' },
     { label: 'Werkwijze', href: '/werkwijze' },
   ];
 

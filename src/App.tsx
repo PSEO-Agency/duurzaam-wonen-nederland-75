@@ -23,7 +23,7 @@ import BlogDetail from "./pages/BlogDetail";
 import Werkgebied from "./pages/Werkgebied";
 import Contact from "./pages/Contact";
 import Zoeken from "./pages/Zoeken";
-import Showroom from "./pages/Showroom";
+import RentevrijeFinanciering from "./pages/RentevrijeFinanciering";
 import Werkwijze from "./pages/Werkwijze";
 import OverOns from "./pages/OverOns";
 import Team from "./pages/over-ons/Team";
@@ -97,7 +97,7 @@ const App = () => (
             <Route path="/werkgebied" element={<Werkgebied />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/zoeken" element={<Zoeken />} />
-            <Route path="/showroom" element={<Showroom />} />
+            <Route path="/rentevrije-financiering" element={<RentevrijeFinanciering />} />
             <Route path="/werkwijze" element={<Werkwijze />} />
             <Route path="/over-ons" element={<OverOns />} />
             <Route path="/over-ons/team" element={<Team />} />
