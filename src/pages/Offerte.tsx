@@ -351,8 +351,8 @@ const Offerte: React.FC = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div className="lg:col-span-3">
               <Card className="bg-white shadow-sm border-0">
                 <CardContent className="p-6 sm:p-8">
                   {step < totalSteps ? (
