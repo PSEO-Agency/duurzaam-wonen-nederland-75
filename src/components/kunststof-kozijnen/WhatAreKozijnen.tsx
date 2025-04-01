@@ -47,7 +47,7 @@ const WhatAreKozijnen: React.FC = () => {
               <div className="relative rounded-lg overflow-hidden shadow-lg bg-gray-900 aspect-video">
                 <iframe 
                   className="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                  src="https://www.youtube.com/embed/9y33GNZbazw" 
                   title="Kunststof Kozijnen Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
