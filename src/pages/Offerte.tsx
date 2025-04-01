@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ArrowRight, CheckCircle, Info, Zap } from 'lucide-react';
@@ -334,7 +335,7 @@ const Offerte: React.FC = () => {
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Vraag vrijblijvend een offerte aan</h1>
             <p className="text-lg text-gray-600 mt-3">
-              Maak gebruik van onze handige wizard om in enkele stappen een offerte op maat te ontvangen
+              Maak gebruik van onze handige wizard om in enkele minuten een offerte en/of adviesgesprek aan te vragen.
             </p>
             
             <div className="mt-6">
