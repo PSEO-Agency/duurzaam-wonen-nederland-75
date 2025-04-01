@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Phone, MessageCircle, ChevronDown, ChevronRight } from 'lucide-react';
@@ -23,7 +22,6 @@ const Navbar: React.FC = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -37,12 +35,10 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Use useCallback to prevent unnecessary re-renders
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(prevState => !prevState);
   }, []);
   
-  // Top bar navigation items - Removed Zakelijk
   const topNavItems = [
     { label: 'Blog', href: '/blog' },
     { label: 'Kennisbank', href: '/kennisbank' },
@@ -50,27 +46,18 @@ const Navbar: React.FC = () => {
     { label: 'Contact', href: '/contact' },
   ];
   
-  // Main navigation items
   const mainNavItems = [
     { label: 'Projecten', href: '/projecten' },
     { label: 'Rentevrije Financiering*', href: '/rentevrije-financiering' },
     { label: 'Werkwijze', href: '/werkwijze' },
   ];
 
-  // Oplossingen mega menu items - Removed "Aanbouw/Uitbouw"
   const oplossingenItems = [
-    { label: 'Dakopbouw', href: '#dakopbouw' },
-    { label: 'Hooiberg woning', href: '#hooiberg' },
-    { label: 'Mantelzorgwoning', href: '#mantelzorg' },
-    { label: 'Tiny House', href: '#tiny-house' },
-    { label: 'Bijgebouw', href: '#bijgebouw' },
-    { label: 'Vakantiewoning', href: '#vakantiewoning' },
-    { label: 'Dakkapel', href: '#dakkapel' },
-    { label: 'Woning', href: '#woning' },
-    { label: 'Aanleunwoning', href: '#aanleunwoning' },
+    { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
+    { label: 'Kunststof Schuifpuien', href: '#schuifpuien' },
+    { label: 'Kunststof Deuren', href: '#deuren' },
   ];
 
-  // Producten mega menu items
   const productenItems = [
     { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
     { label: 'HSB wanden', href: '#hsb-wanden' },
@@ -78,7 +65,6 @@ const Navbar: React.FC = () => {
     { label: 'Plat dak', href: '#plat-dak' },
   ];
 
-  // Over ons mega menu items
   const overOnsItems = [
     { label: 'Ons team', href: '/over-ons/team' },
     { label: 'Onze geschiedenis', href: '/over-ons/geschiedenis' },
@@ -87,13 +73,11 @@ const Navbar: React.FC = () => {
     { label: 'Vacatures', href: '/over-ons/vacatures' },
   ];
   
-  // Common menu item styling class for consistency
   const menuItemClass = "text-gray-700 hover:text-brand-green transition-colors duration-200 text-sm font-medium";
   const mobileMenuItemClass = "block py-2 text-gray-700 hover:text-brand-green text-sm font-medium";
   const megaMenuItemClass = "flex items-center text-gray-700 hover:text-brand-green text-sm";
   const megaMenuHeaderClass = "font-bold text-lg mb-2";
   
-  // Memoize nav item rendering to avoid unnecessary re-renders
   const renderNavItem = useCallback((item: { label: string; href: string }, className: string, onClick?: () => void) => {
     if (item.href.startsWith('#')) {
       return (
@@ -122,11 +106,9 @@ const Navbar: React.FC = () => {
   
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Black Top Bar */}
       <div className="bg-black text-white py-2">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            {/* Top Navigation Links - Desktop */}
             <div className="hidden md:flex">
               {topNavItems.map((item) => (
                 renderNavItem(
@@ -135,13 +117,10 @@ const Navbar: React.FC = () => {
                 )
               ))}
             </div>
-            
-            {/* Mobile Quick Actions - Removed from here as we'll add them to the main nav */}
           </div>
         </div>
       </div>
       
-      {/* Main Navigation Bar */}
       <div 
         className={cn(
           'bg-white transition-all duration-300 ease-in-out py-3 border-b',
@@ -150,7 +129,6 @@ const Navbar: React.FC = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
             <Link to="/" className="flex items-center">
               <img 
                 src="/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png" 
@@ -159,7 +137,6 @@ const Navbar: React.FC = () => {
               />
             </Link>
             
-            {/* Mobile Action Buttons - NEW: between logo and hamburger */}
             <div className="flex md:hidden items-center gap-2 mx-auto">
               <Button 
                 asChild
@@ -184,15 +161,12 @@ const Navbar: React.FC = () => {
               </Button>
             </div>
             
-            {/* Search Bar - Desktop */}
             <div className="hidden md:block">
               <SearchCommandMenu />
             </div>
             
-            {/* Desktop Main Navigation with Mega Menus */}
             <NavigationMenu className="hidden md:flex ml-6">
               <NavigationMenuList>
-                {/* Oplossingen Mega Menu */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>Oplossingen</NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-white p-4 rounded-md shadow-lg">
@@ -225,7 +199,6 @@ const Navbar: React.FC = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* Standard Navigation Items */}
                 {mainNavItems.map((item) => (
                   <NavigationMenuItem key={item.label}>
                     <NavigationMenuLink asChild>
@@ -234,7 +207,6 @@ const Navbar: React.FC = () => {
                   </NavigationMenuItem>
                 ))}
 
-                {/* Over ons Mega Menu */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>Over ons</NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-white p-4 rounded-md shadow-lg">
@@ -255,9 +227,7 @@ const Navbar: React.FC = () => {
               </NavigationMenuList>
             </NavigationMenu>
             
-            {/* Action Buttons - Desktop */}
             <div className="hidden md:flex items-center gap-3 ml-4">              
-              {/* Phone Button */}
               <Button asChild className="bg-brand-green text-white hover:bg-brand-green-dark transition-colors">
                 <a href="tel:0533030213" className="flex items-center gap-2">
                   <Phone size={16} />
@@ -265,7 +235,6 @@ const Navbar: React.FC = () => {
                 </a>
               </Button>
               
-              {/* WhatsApp Button */}
               <Button 
                 asChild
                 variant="outline" 
@@ -278,7 +247,6 @@ const Navbar: React.FC = () => {
               </Button>
             </div>
             
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden focus:outline-none"
               onClick={toggleMobileMenu}
@@ -293,16 +261,13 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile Menu - Improved */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white shadow-lg overflow-y-auto max-h-[80vh]">
           <div className="container mx-auto px-4 py-3">
-            {/* Search Bar - Mobile */}
             <div className="mb-4">
               <SearchCommandMenu isMobile={true} />
             </div>
             
-            {/* Mobile Mega Menu with Accordion */}
             <Accordion type="single" collapsible className="w-full mb-4">
               <AccordionItem value="oplossingen" className="border-b">
                 <AccordionTrigger className="py-3 text-base font-medium">
@@ -347,7 +312,6 @@ const Navbar: React.FC = () => {
                 </AccordionContent>
               </AccordionItem>
               
-              {/* Main Nav Items */}
               {mainNavItems.map((item) => (
                 <div key={item.label} className="py-3 border-b">
                   <Link 
@@ -360,7 +324,6 @@ const Navbar: React.FC = () => {
                 </div>
               ))}
               
-              {/* Over ons Accordion */}
               <AccordionItem value="over-ons" className="border-b">
                 <AccordionTrigger className="py-3 text-base font-medium">
                   Over ons
@@ -384,7 +347,6 @@ const Navbar: React.FC = () => {
               </AccordionItem>
             </Accordion>
             
-            {/* Top Nav Items - Mobile */}
             <div className="mt-4 pt-4 border-t border-gray-200">
               {topNavItems.map((item) => (
                 <div key={item.label} className="py-2">
@@ -400,7 +362,6 @@ const Navbar: React.FC = () => {
             </div>
             
             <div className="mt-4 pt-4 border-t border-gray-200 grid grid-cols-2 gap-4">
-              {/* Phone Button - Mobile */}
               <Button 
                 asChild 
                 className="bg-brand-green hover:bg-brand-green-dark transition-colors duration-200"
@@ -411,7 +372,6 @@ const Navbar: React.FC = () => {
                 </a>
               </Button>
               
-              {/* WhatsApp Button - Mobile */}
               <Button 
                 asChild
                 variant="outline" 
@@ -423,7 +383,6 @@ const Navbar: React.FC = () => {
                 </a>
               </Button>
               
-              {/* Offerte Button - Mobile */}
               <Button 
                 asChild
                 className="col-span-2 bg-brand-green hover:bg-brand-green-dark mt-4"
