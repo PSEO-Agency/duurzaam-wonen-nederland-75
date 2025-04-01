@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ArrowRight, CheckCircle, Info, Zap } from 'lucide-react';
@@ -19,9 +18,8 @@ import AdvisorPanel from '@/components/offerte/AdvisorPanel';
 export type OfferteFormData = {
   // Project info
   projectType: 'nieuwbouw' | 'renovatie' | 'vervanging' | '';
-  propertyType: 'woning' | 'bedrijfspand' | 'anders' | '';
+  propertyType: 'eengezinswoning' | 'appartement' | 'twee-onder-een-kap' | 'bedrijfspand' | '';
   timeline: string;
-  budget: string;
   
   // Window details
   windowTypes: string[];
@@ -50,7 +48,6 @@ const initialFormData: OfferteFormData = {
   projectType: '',
   propertyType: '',
   timeline: '',
-  budget: '',
   
   windowTypes: [],
   quantity: '',
@@ -74,9 +71,8 @@ const initialFormData: OfferteFormData = {
 
 const demoFormData: OfferteFormData = {
   projectType: 'renovatie',
-  propertyType: 'woning',
+  propertyType: 'eengezinswoning',
   timeline: 'binnen 3 maanden',
-  budget: '€10.000 - €15.000',
   
   windowTypes: ['draaikiepraam', 'vast'],
   quantity: '4 ramen, 1 deur',
@@ -187,24 +183,19 @@ const Offerte: React.FC = () => {
 
   const sendToWebhook = async (data: OfferteFormData) => {
     try {
-      // Convert the data to URL parameters
       const params = new URLSearchParams();
       
-      // Add form data as URL parameters
       for (const [key, value] of Object.entries(data)) {
         if (typeof value === 'object') {
-          // Handle arrays and objects by stringifying them
           params.append(key, JSON.stringify(value));
         } else {
           params.append(key, String(value));
         }
       }
       
-      // Add additional data
       params.append('timestamp', new Date().toISOString());
       params.append('source', window.location.origin);
       
-      // Send as GET request with parameters in the URL
       const response = await fetch(`${WEBHOOK_URL}?${params.toString()}`, {
         method: 'GET',
         headers: {
@@ -226,14 +217,12 @@ const Offerte: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      // Send data to webhook
       const webhookSuccess = await sendToWebhook(formData);
       
       if (!webhookSuccess) {
         console.warn('Webhook submission failed, but continuing with form submission');
       }
       
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
@@ -259,7 +248,6 @@ const Offerte: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      // Send demo data to webhook
       const webhookSuccess = await sendToWebhook(demoFormData);
       
       if (!webhookSuccess) {
