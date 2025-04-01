@@ -58,8 +58,10 @@ const Hero: React.FC = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-white/20">
-                  {isKozijnenPage ? 'Ontdek alles over kunststof kozijnen' : 'Onze projecten'}
+                <Button asChild size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-white/20">
+                  <Link to="/projecten">
+                    {isKozijnenPage ? 'Ontdek alles over kunststof kozijnen' : 'Onze projecten'}
+                  </Link>
                 </Button>
               </div>
               
