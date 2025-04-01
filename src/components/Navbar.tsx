@@ -53,9 +53,7 @@ const Navbar: React.FC = () => {
   ];
 
   const oplossingenItems = [
-    { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
-    { label: 'Kunststof Schuifpuien', href: '#schuifpuien' },
-    { label: 'Kunststof Deuren', href: '#deuren' },
+    { label: 'Uitbouw/Aanbouw', href: '/uitbouw-aanbouw' },
   ];
 
   const productenItems = [
