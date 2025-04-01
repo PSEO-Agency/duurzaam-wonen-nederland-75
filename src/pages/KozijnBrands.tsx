@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Star, ShieldCheck, Award, ExternalLink } from 'lucide-react';
@@ -170,16 +169,26 @@ const KozijnBrands: React.FC = () => {
                             </div>
                           </div>
                           
+                          {/* Certification Logos Section - Similar to Hero components */}
                           <div className="mt-auto">
-                            <h4 className="font-medium mb-2">Belangrijkste profielsystemen:</h4>
-                            <ul className="text-sm space-y-1">
-                              {brand.profileSystems.map((system, idx) => (
-                                <li key={idx} className="flex items-center">
-                                  <div className="w-2 h-2 rounded-full bg-brand-green mr-2"></div>
-                                  <span>{system}</span>
-                                </li>
-                              ))}
-                            </ul>
+                            <h4 className="text-sm font-medium mb-3">Keurmerken:</h4>
+                            <div className="grid grid-cols-3 grid-rows-2 gap-4">
+                              <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="KOMO-certificaat">
+                                <img src="/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png" alt="KOMO" className="h-10 max-w-full object-contain" />
+                              </div>
+                              <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="CE-markering">
+                                <img src="/lovable-uploads/10906789-676e-4aef-b797-6bc0815255ea.png" alt="CE" className="h-10 max-w-full object-contain" />
+                              </div>
+                              <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="PKVW Keurmerk">
+                                <img src="/lovable-uploads/a680436d-6948-4799-a383-6aad791b1e0e.png" alt="PKVW" className="h-12 max-w-full object-contain" />
+                              </div>
+                              <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Nationaal Warmtefonds">
+                                <img src="/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png" alt="Warmtefonds" className="h-12 max-w-full object-contain" />
+                              </div>
+                              <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Schüco">
+                                <img src="/lovable-uploads/4d42855f-0a4b-48ef-b632-25f5f01975fc.png" alt="Schüco" className="h-10 max-w-full object-contain" />
+                              </div>
+                            </div>
                           </div>
                         </div>
                         
@@ -524,29 +533,4 @@ const KozijnBrands: React.FC = () => {
                         <li>Garantie op glas varieert van 5-10 jaar</li>
                         <li>Garantie op montage is afhankelijk van de installateur (bij ons 10 jaar)</li>
                       </ul>
-                      <p className="text-gray-700 mt-2">
-                        Let op: garantievoorwaarden zijn alleen geldig als de kozijnen professioneel zijn gemonteerd en correct worden onderhouden. 
-                        Wij leveren bij elk project duidelijke garantiedocumenten met alle voorwaarden.
-                      </p>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
-        
-        <Services />
-        
-        <Reviews />
-        
-        <ContactCTA />
-      </main>
-      
-      <Footer />
-      <ScrollToTop />
-    </div>
-  );
-};
-
-export default KozijnBrands;
+                      <p className="text-
