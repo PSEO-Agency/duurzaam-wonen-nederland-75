@@ -21,7 +21,6 @@ import ProjectDetail from "./pages/ProjectDetail";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Werkgebied from "./pages/Werkgebied";
-import Zakelijk from "./pages/Zakelijk";
 import Contact from "./pages/Contact";
 import Zoeken from "./pages/Zoeken";
 import Showroom from "./pages/Showroom";
@@ -96,7 +95,6 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:blogSlug" element={<BlogDetail />} />
             <Route path="/werkgebied" element={<Werkgebied />} />
-            <Route path="/zakelijk" element={<Zakelijk />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/zoeken" element={<Zoeken />} />
             <Route path="/showroom" element={<Showroom />} />

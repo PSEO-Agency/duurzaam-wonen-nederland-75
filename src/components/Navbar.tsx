@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Phone, MessageCircle, ChevronDown, ChevronRight } from 'lucide-react';
@@ -42,11 +41,10 @@ const Navbar: React.FC = () => {
     setIsMobileMenuOpen(prevState => !prevState);
   }, []);
   
-  // Top bar navigation items
+  // Top bar navigation items - Removed Zakelijk
   const topNavItems = [
     { label: 'Blog', href: '/blog' },
     { label: 'Kennisbank', href: '/kennisbank' },
-    { label: 'Zakelijk', href: '/zakelijk' },
     { label: 'Werkgebied', href: '/werkgebied' },
     { label: 'Contact', href: '/contact' },
   ];

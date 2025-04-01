@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
@@ -175,11 +174,6 @@ const siteStructure = [
     title: 'Werkgebied',
     path: '/werkgebied',
     description: 'Ons werkgebied in Nederland',
-  },
-  {
-    title: 'Zakelijk',
-    path: '/zakelijk',
-    description: 'Zakelijke diensten en oplossingen',
   },
   {
     title: 'Showroom',
