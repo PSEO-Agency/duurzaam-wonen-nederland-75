@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -701,4 +702,25 @@ const ColorDetail: React.FC = () => {
                       <div className="space-y-2">
                         <h3 className="font-semibold">Past {colorInfo.name} bij mijn type woning?</h3>
                         <p className="text-gray-600">
-                          {colorInfo.name === "Wit" && "Wit past bij vrijwel elk type woning en architectuurstijl. Het
+                          {colorInfo.name === "Wit" 
+                            ? "Wit past bij vrijwel elk type woning en architectuurstijl. Het is een tijdloze en neutrale keuze die zowel bij moderne als traditionele woningen goed tot zijn recht komt."
+                            : `${colorInfo.name} past vooral goed bij ${colorInfo.applications?.join(", ").toLowerCase() || "verschillende typen woningen"}. Voor persoonlijk advies kunt u contact opnemen met onze kleurspecialisten.`
+                          }
+                        </p>
+                      </div>
+                    </div>
+                  </AnimatedSection>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+        
+        <ContactCTA />
+      </main>
+      <Footer />
+    </>
+  );
+};
+
+export default ColorDetail;
