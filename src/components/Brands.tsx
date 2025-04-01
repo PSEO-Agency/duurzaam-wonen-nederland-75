@@ -75,6 +75,16 @@ const Brands: React.FC = () => {
                       LUXAFLEX
                     </div>
                   </div>
+                  {/* Added Twents Design logo */}
+                  <div className="flex justify-center">
+                    <div className="h-12 w-32 bg-gray-200 rounded flex items-center justify-center">
+                      <img 
+                        src="/lovable-uploads/a38f538b-3291-42a1-9330-6fbd4be048f6.png" 
+                        alt="Twents Design" 
+                        className="h-10 max-w-full object-contain" 
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
