@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Phone, MessageCircle, ChevronDown, ChevronRight } from 'lucide-react';
@@ -56,9 +57,8 @@ const Navbar: React.FC = () => {
     { label: 'Werkwijze', href: '/werkwijze' },
   ];
 
-  // Oplossingen mega menu items
+  // Oplossingen mega menu items - Removed "Aanbouw/Uitbouw"
   const oplossingenItems = [
-    { label: 'Aanbouw/Uitbouw', href: '#aanbouw' },
     { label: 'Dakopbouw', href: '#dakopbouw' },
     { label: 'Hooiberg woning', href: '#hooiberg' },
     { label: 'Mantelzorgwoning', href: '#mantelzorg' },
