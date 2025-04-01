@@ -63,11 +63,12 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ formData }) => {
                 <dd className="text-sm font-medium">
                   {formData.windowTypes.map((type, index) => (
                     <span key={type}>
-                      {type === 'draaikiepraam' && 'Draaikiepraam'}
-                      {type === 'vast' && 'Vast raam'}
-                      {type === 'schuifraam' && 'Schuifraam'}
-                      {type === 'vouwwand' && 'Vouwwand'}
-                      {type === 'anders' && 'Anders'}
+                      {type === 'kunststof' && 'Kunststof kozijnen'}
+                      {type === 'schuifpui' && 'Schuifpui'}
+                      {type === 'tuindeuren' && 'Tuindeuren'}
+                      {type === 'gehele-woning' && 'Gehele woning'}
+                      {type === 'deur' && 'Voor/Achterdeur'}
+                      {type === 'anders' && 'Anders / Nader te bepalen'}
                       {index < formData.windowTypes.length - 1 && ', '}
                     </span>
                   ))}
@@ -78,18 +79,6 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ formData }) => {
               <div>
                 <dt className="text-sm text-gray-500">Aantal</dt>
                 <dd className="text-sm font-medium">{formData.quantity}</dd>
-              </div>
-            )}
-            {formData.dimensions && (
-              <div>
-                <dt className="text-sm text-gray-500">Afmetingen</dt>
-                <dd className="text-sm font-medium">{formData.dimensions}</dd>
-              </div>
-            )}
-            {formData.color && (
-              <div>
-                <dt className="text-sm text-gray-500">Kleur</dt>
-                <dd className="text-sm font-medium">{formData.color}</dd>
               </div>
             )}
             {formData.additionalInfo && (

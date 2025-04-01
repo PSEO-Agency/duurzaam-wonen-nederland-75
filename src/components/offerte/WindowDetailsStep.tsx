@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -15,28 +14,33 @@ interface WindowDetailsStepProps {
 const WindowDetailsStep: React.FC<WindowDetailsStepProps> = ({ formData, updateFormData }) => {
   const windowTypeOptions = [
     { 
-      id: 'draaikiepraam', 
-      label: 'Draaikiepraam',
+      id: 'kunststof', 
+      label: 'Kunststof kozijnen',
       image: '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png'
     },
     { 
-      id: 'vast', 
-      label: 'Vast raam',
+      id: 'schuifpui', 
+      label: 'Schuifpui',
       image: '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png'
     },
     { 
-      id: 'schuifraam', 
-      label: 'Schuifraam',
+      id: 'tuindeuren', 
+      label: 'Tuindeuren',
       image: '/lovable-uploads/4c9a119b-a8e6-43f0-82fc-8e485c5ec3d5.png'
     },
     { 
-      id: 'vouwwand', 
-      label: 'Vouwwand',
+      id: 'gehele-woning', 
+      label: 'Gehele woning',
       image: '/lovable-uploads/78d706ca-fb91-4c03-82ca-97b0b0c127eb.png'
     },
     { 
+      id: 'deur', 
+      label: 'Voor/Achterdeur',
+      image: '/lovable-uploads/e923780c-9e14-408a-a016-0b63db9b8daa.png'
+    },
+    { 
       id: 'anders', 
-      label: 'Anders',
+      label: 'Anders / Nader te bepalen',
       image: '/lovable-uploads/e923780c-9e14-408a-a016-0b63db9b8daa.png'
     }
   ];
@@ -95,44 +99,18 @@ const WindowDetailsStep: React.FC<WindowDetailsStepProps> = ({ formData, updateF
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <Label htmlFor="quantity" className="text-base mb-1.5 block">Aantal kozijnen (schatting)</Label>
-            <Input 
-              id="quantity" 
-              placeholder="Bijv. 5 ramen, 2 deuren" 
-              value={formData.quantity}
-              onChange={(e) => updateFormData('quantity', e.target.value)}
-              className="border-gray-300"
-            />
-          </div>
-          
-          <div>
-            <Label htmlFor="dimensions" className="text-base mb-1.5 block">Afmetingen (indien bekend)</Label>
-            <Input 
-              id="dimensions" 
-              placeholder="Bijv. 100x150 cm" 
-              value={formData.dimensions}
-              onChange={(e) => updateFormData('dimensions', e.target.value)}
-              className="border-gray-300"
-            />
-          </div>
-        </div>
-        
         <div>
-          <Label htmlFor="color" className="text-base mb-1.5 block">Gewenste kleur</Label>
-          <Select value={formData.color} onValueChange={(value) => updateFormData('color', value)}>
-            <SelectTrigger id="color">
-              <SelectValue placeholder="Selecteer een kleur" />
+          <Label htmlFor="quantity" className="text-base mb-1.5 block">Aantal kozijnen</Label>
+          <Select value={formData.quantity} onValueChange={(value) => updateFormData('quantity', value)}>
+            <SelectTrigger id="quantity" className="border-gray-300">
+              <SelectValue placeholder="Selecteer aantal kozijnen" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="wit">Wit</SelectItem>
-              <SelectItem value="crème">Crème</SelectItem>
-              <SelectItem value="grijs">Grijs</SelectItem>
-              <SelectItem value="antraciet">Antraciet</SelectItem>
-              <SelectItem value="zwart">Zwart</SelectItem>
-              <SelectItem value="houtlook">Houtlook</SelectItem>
-              <SelectItem value="anders">Anders / weet ik nog niet</SelectItem>
+              <SelectItem value="1-3">1-3 kozijnen</SelectItem>
+              <SelectItem value="3-6">3-6 kozijnen</SelectItem>
+              <SelectItem value="6-9">6-9 kozijnen</SelectItem>
+              <SelectItem value="9+">9 of meer kozijnen</SelectItem>
+              <SelectItem value="anders">Anders / Nader te bepalen</SelectItem>
             </SelectContent>
           </Select>
         </div>
