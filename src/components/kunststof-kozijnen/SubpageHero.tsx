@@ -110,23 +110,24 @@ const SubpageHero: React.FC<SubpageHeroProps> = ({
                 </ul>
                 <div className="mt-6 pt-4 border-t border-white/20">
                   <div className="flex flex-col gap-4">
-                    {/* Certification Logos Section */}
+                    {/* Certification Logos Section - Updated */}
                     <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
-                      <h4 className="text-sm font-medium text-white mb-3">Gecertificeerd door:</h4>
-                      <div className="flex items-center justify-between flex-wrap gap-2">
-                        <div className="bg-white/20 rounded p-2 h-10 flex items-center backdrop-blur-sm" title="KOMO-certificaat">
-                          <Shield className="h-4 w-4 text-brand-green mr-1" />
-                          <span className="text-xs font-bold text-white">KOMO</span>
+                      <h4 className="text-sm font-medium text-white mb-3">Keurmerken:</h4>
+                      <div className="flex items-center justify-between flex-wrap gap-3">
+                        <div className="bg-white rounded p-2 h-10 w-14 flex items-center justify-center" title="KOMO-certificaat">
+                          <img src="/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png" alt="KOMO" className="h-6 max-w-full" />
                         </div>
-                        <div className="bg-white/20 rounded p-2 h-10 flex items-center backdrop-blur-sm" title="CE-markering">
-                          <span className="text-xs font-bold text-white px-1">CE</span>
+                        <div className="bg-white rounded p-2 h-10 w-14 flex items-center justify-center" title="CE-markering">
+                          <img src="/lovable-uploads/10906789-676e-4aef-b797-6bc0815255ea.png" alt="CE" className="h-6 max-w-full" />
                         </div>
-                        <div className="bg-white/20 rounded p-2 h-10 flex items-center backdrop-blur-sm" title="VKG Keurmerk">
-                          <span className="text-xs font-bold text-white px-1">VKG</span>
+                        <div className="bg-white rounded p-1 h-10 w-14 flex items-center justify-center" title="PKVW Keurmerk">
+                          <img src="/lovable-uploads/a680436d-6948-4799-a383-6aad791b1e0e.png" alt="PKVW" className="h-8 max-w-full" />
                         </div>
-                        <div className="bg-white/20 rounded p-2 h-10 flex items-center backdrop-blur-sm" title="Politiekeurmerk">
-                          <Shield className="h-4 w-4 text-white mr-1" />
-                          <span className="text-xs font-bold text-white">PKVW</span>
+                        <div className="bg-white rounded p-1 h-10 w-14 flex items-center justify-center" title="Nationaal Warmtefonds">
+                          <img src="/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png" alt="Warmtefonds" className="h-7 max-w-full" />
+                        </div>
+                        <div className="bg-white rounded p-1 h-10 w-14 flex items-center justify-center" title="Schüco">
+                          <img src="/lovable-uploads/4d42855f-0a4b-48ef-b632-25f5f01975fc.png" alt="Schüco" className="h-6 max-w-full" />
                         </div>
                       </div>
                     </div>
