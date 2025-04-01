@@ -4,30 +4,49 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Phone, Mail, MessageSquare } from 'lucide-react';
 
 const AdvisorPanel: React.FC = () => {
+  const advisors = [
+    {
+      name: "Ronald",
+      title: "Kozijnen Specialist",
+      image: "/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png",
+      quote: "Ik help u graag bij het vinden van de perfecte kozijnen voor uw woning. Samen kijken we naar de beste opties binnen uw budget."
+    },
+    {
+      name: "Youri",
+      title: "Kozijnen Adviseur",
+      image: "/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png",
+      quote: "Met persoonlijk advies en gedegen vakkennis zorg ik ervoor dat u de juiste keuze maakt voor uw kozijnen, passend bij uw woning."
+    }
+  ];
+
   return (
     <Card className="bg-white shadow-sm border-0 h-full">
       <CardContent className="p-6 flex flex-col h-full">
         <div className="text-center mb-6">
-          <h3 className="text-xl font-bold text-gray-900">Uw Persoonlijke Adviseur</h3>
+          <h3 className="text-xl font-bold text-gray-900">Uw Persoonlijke Adviseurs</h3>
           <div className="h-0.5 w-16 bg-brand-green mx-auto mt-2"></div>
         </div>
         
-        <div className="flex flex-col items-center mb-6">
-          <div className="w-32 h-32 rounded-full overflow-hidden mb-4">
-            <img 
-              src="/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png" 
-              alt="Adviseur" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <h4 className="text-lg font-medium">Mark de Vries</h4>
-          <p className="text-gray-500">Senior Kozijnen Specialist</p>
-        </div>
-        
-        <div className="bg-gray-50 p-4 rounded-lg mb-6">
-          <blockquote className="text-gray-600 italic text-sm">
-            "Ik help u graag bij het vinden van de perfecte kozijnen voor uw woning. Samen kijken we naar de beste opties binnen uw budget."
-          </blockquote>
+        <div className="space-y-6 mb-6">
+          {advisors.map((advisor, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <div className="w-24 h-24 rounded-full overflow-hidden mb-3">
+                <img 
+                  src={advisor.image}
+                  alt={`Adviseur ${advisor.name}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h4 className="text-lg font-medium">{advisor.name}</h4>
+              <p className="text-gray-500 text-sm">{advisor.title}</p>
+              <div className="bg-gray-50 p-3 rounded-lg mt-2 w-full">
+                <blockquote className="text-gray-600 italic text-sm">
+                  "{advisor.quote}"
+                </blockquote>
+              </div>
+              {index < advisors.length - 1 && <div className="border-t w-1/2 my-4"></div>}
+            </div>
+          ))}
         </div>
         
         <div className="space-y-4 mb-8">
@@ -47,7 +66,7 @@ const AdvisorPanel: React.FC = () => {
             </div>
             <div>
               <p className="text-sm text-gray-500">E-mail</p>
-              <p className="font-medium">info@dwn.nl</p>
+              <p className="font-medium">info@duurzaamwonen.info</p>
             </div>
           </div>
           
