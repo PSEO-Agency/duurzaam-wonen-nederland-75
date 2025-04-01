@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Star, ShieldCheck, Award, ExternalLink } from 'lucide-react';
@@ -533,4 +534,29 @@ const KozijnBrands: React.FC = () => {
                         <li>Garantie op glas varieert van 5-10 jaar</li>
                         <li>Garantie op montage is afhankelijk van de installateur (bij ons 10 jaar)</li>
                       </ul>
-                      <p className="text-
+                      <p className="text-gray-700 mt-2">
+                        Let op: garantievoorwaarden zijn alleen geldig als de kozijnen professioneel zijn gemonteerd en correct worden onderhouden. 
+                        Wij leveren bij elk project duidelijke garantiedocumenten met alle voorwaarden.
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+        
+        <Services />
+        
+        <Reviews />
+        
+        <ContactCTA />
+      </main>
+      
+      <Footer />
+      <ScrollToTop />
+    </div>
+  );
+};
+
+export default KozijnBrands;
