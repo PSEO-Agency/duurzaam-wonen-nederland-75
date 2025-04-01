@@ -83,7 +83,7 @@ const Projects: React.FC = () => {
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {projectsData.map((project, index) => (
             <AnimatedSection key={index} delay={index * 100}>
-              <Link to={`/projecten/${project.slug}`} className="block h-full">
+              <Link to="/projecten/moderne-villa-kunststof-kozijnen" className="block h-full">
                 <div className="glass-card h-full overflow-hidden group cursor-pointer">
                   <div className="relative h-64 overflow-hidden">
                     <img 
@@ -116,7 +116,7 @@ const Projects: React.FC = () => {
           >
             {projectsData.map((project, index) => (
               <div key={index} className="w-full flex-shrink-0 px-4">
-                <Link to={`/projecten/${project.slug}`} className="block h-full">
+                <Link to="/projecten/moderne-villa-kunststof-kozijnen" className="block h-full">
                   <div className="glass-card h-full overflow-hidden">
                     <div className="relative h-64 overflow-hidden">
                       <img 
