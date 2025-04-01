@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -312,7 +313,7 @@ const ColorOptions: React.FC = () => {
                           <CardContent className="p-0 relative">
                             <div className="relative">
                               <img 
-                                src="/lovable-uploads/78d706ca-fb91-4c03-82ca-97b0b0c127eb.png"
+                                src="/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png"
                                 alt="Kunststof kozijn doorsnede"
                                 className="w-full object-cover"
                               />
@@ -338,7 +339,7 @@ const ColorOptions: React.FC = () => {
                                 <div 
                                   className="absolute inset-0 flex items-center justify-center"
                                   style={{
-                                    backgroundImage: "url('/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png')",
+                                    backgroundImage: "url('/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png')",
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center'
                                   }}
