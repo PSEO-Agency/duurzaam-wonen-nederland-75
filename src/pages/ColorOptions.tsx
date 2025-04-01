@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -23,7 +22,7 @@ interface ColorOption {
   description?: string;
   category: string;
   popular?: boolean;
-  ralCode?: string; // Add RAL code property
+  ralCode?: string;
 }
 
 const ColorOptions: React.FC = () => {
@@ -37,7 +36,6 @@ const ColorOptions: React.FC = () => {
   const combinationsTitleRef = useRef<HTMLHeadingElement>(null);
 
   const colorOptions: ColorOption[] = [
-    // Standard colors
     { name: 'Puur Wit', hex: '#FFFFFF', category: 'standard', popular: true, description: 'De klassieke en meest gekozen kleur, tijdloos en past bij elke woning.', ralCode: 'RAL 9016' },
     { name: 'Verkeerswit', hex: '#F5F5F5', category: 'standard', description: 'Een heldere witte tint, perfect voor een frisse en moderne uitstraling.', ralCode: 'RAL 9016' },
     { name: 'Crème', hex: '#F5F5DC', category: 'standard', popular: true, description: 'Warme, zachte tint die perfect past bij traditionele en landelijke woningen.', ralCode: 'RAL 9001' },
@@ -47,19 +45,16 @@ const ColorOptions: React.FC = () => {
     { name: 'Staalblauw', hex: '#4682B4', category: 'standard', description: 'Krachtige blauwtint met een industriële uitstraling.', ralCode: 'RAL 5011' },
     { name: 'Zwart', hex: '#121212', category: 'standard', description: 'Elegante en contrasterende kleur voor een krachtige uitstraling.', ralCode: 'RAL 9005' },
     
-    // Wood look
     { name: 'Golden Oak', hex: '#C19A6B', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', popular: true, description: 'Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.', ralCode: 'Folie 2178-001' },
     { name: 'Noten', hex: '#654321', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Rijke, donkere houtlook die diepte en karakter aan uw woning toevoegt.', ralCode: 'Folie 2178-007' },
     { name: 'Mahonie', hex: '#C04000', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Roodbruine houtlook met subtiele nerven voor een elegante afwerking.', ralCode: 'Folie 2097-013' },
     { name: 'Oregon Pine', hex: '#D8B28E', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte houtlook met een subtiele nerf, perfect voor een natuurlijke uitstraling.', ralCode: 'Folie 1192-001' },
     { name: 'Eiken Naturel', hex: '#D2B48C', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte eikenhouttint met een natuurlijke uitstraling.', ralCode: 'Folie 3149-008' },
     
-    // Metallic look
     { name: 'Aluminium Metallic', hex: '#A9A9A9', category: 'metallic', description: 'Moderne metallic look die het beste van aluminium nabootst.', ralCode: 'RAL 9006' },
     { name: 'Geborsteld Rvs Look', hex: '#B4B4B4', category: 'metallic', description: 'Stijlvolle metallic afwerking met een geborsteld effect.', ralCode: 'RAL 9007' },
     { name: 'Brons Metallic', hex: '#CD7F32', category: 'metallic', description: 'Warme metallic tint met een rijke, klassieke uitstraling.', ralCode: 'RAL 8023' },
     
-    // Special colors
     { name: 'Wijnrood', hex: '#722F37', category: 'special', description: 'Rijke, diepe kleur die warmte en karakter toevoegt aan uw woning.', ralCode: 'RAL 3005' },
     { name: 'Mosgroen', hex: '#607D3B', category: 'special', description: 'Natuurlijke groentint die perfect in landelijke omgevingen past.', ralCode: 'RAL 6005' },
     { name: 'Monumentenblauw', hex: '#27548E', category: 'special', description: 'Traditionele blauwtint, vaak gebruikt in historische gebouwen.', ralCode: 'RAL 5010' },
@@ -340,7 +335,14 @@ const ColorOptions: React.FC = () => {
                               )}
                               
                               {!selectedColor && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/5">
+                                <div 
+                                  className="absolute inset-0 flex items-center justify-center"
+                                  style={{
+                                    backgroundImage: "url('/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png')",
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center'
+                                  }}
+                                >
                                   <div className="text-center bg-white/90 backdrop-blur-sm p-6 rounded-lg max-w-md">
                                     <Palette className="h-12 w-12 mx-auto mb-4 text-brand-green" />
                                     <h3 className="text-xl font-semibold mb-2">Selecteer een kleur</h3>
