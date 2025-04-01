@@ -13,22 +13,10 @@ const servicesData = [
     features: ['HR++ of triple glas', 'Onderhoudsvrij', 'Diverse kleuren en stijlen']
   },
   {
-    image: 'https://images.unsplash.com/photo-1542128962-9d50ad7bf014?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-    title: 'Dakkapellen',
-    description: 'Maatwerk dakkapellen voor extra ruimte en lichtinval in uw woning.',
-    features: ['Uitstekende isolatie', 'Snelle montage', 'Diverse afwerkingen']
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1548086488-5b31b1b4776a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+    image: '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png',
     title: 'Gevelbekleding',
     description: 'Duurzame gevelbekleding voor verbeterde isolatie en een moderne uitstraling.',
     features: ['Onderhoudsarm', '64 kleuropties', 'Verbetert isolatiewaarde']
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1558642692-9105423fb14f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-    title: 'Zonwering',
-    description: 'Optimale klimaatbeheersing met rolluiken en screens voor uw woning.',
-    features: ['Energiebesparend', 'Automatisering mogelijk', 'UV-bescherming']
   }
 ];
 
