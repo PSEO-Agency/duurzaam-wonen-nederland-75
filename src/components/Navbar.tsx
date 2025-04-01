@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Phone, MessageCircle, ChevronDown, ChevronRight } from 'lucide-react';
@@ -53,7 +54,9 @@ const Navbar: React.FC = () => {
   ];
 
   const oplossingenItems = [
-    { label: 'Uitbouw/Aanbouw', href: '/uitbouw-aanbouw' },
+    { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
+    { label: 'Kunststof Schuifpuien', href: '/kunststof-schuifpuien' },
+    { label: 'Kunststof Deuren', href: '/kunststof-deuren' },
   ];
 
   const productenItems = [
