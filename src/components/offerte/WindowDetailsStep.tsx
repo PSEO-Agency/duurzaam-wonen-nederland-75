@@ -15,33 +15,23 @@ const WindowDetailsStep: React.FC<WindowDetailsStepProps> = ({ formData, updateF
   const windowTypeOptions = [
     { 
       id: 'kunststof', 
-      label: 'Kunststof kozijnen',
-      image: '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png'
+      label: 'Kunststof kozijnen'
     },
     { 
       id: 'schuifpui', 
-      label: 'Schuifpui',
-      image: '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png'
+      label: 'Schuifpui'
     },
     { 
       id: 'tuindeuren', 
-      label: 'Tuindeuren',
-      image: '/lovable-uploads/4c9a119b-a8e6-43f0-82fc-8e485c5ec3d5.png'
-    },
-    { 
-      id: 'gehele-woning', 
-      label: 'Gehele woning',
-      image: '/lovable-uploads/78d706ca-fb91-4c03-82ca-97b0b0c127eb.png'
+      label: 'Tuindeuren'
     },
     { 
       id: 'deur', 
-      label: 'Voor/Achterdeur',
-      image: '/lovable-uploads/e923780c-9e14-408a-a016-0b63db9b8daa.png'
+      label: 'Voor/Achterdeur'
     },
     { 
       id: 'anders', 
-      label: 'Anders / Nader te bepalen',
-      image: '/lovable-uploads/e923780c-9e14-408a-a016-0b63db9b8daa.png'
+      label: 'Anders / Nader te bepalen'
     }
   ];
 
@@ -78,13 +68,6 @@ const WindowDetailsStep: React.FC<WindowDetailsStepProps> = ({ formData, updateF
                     : 'hover:bg-gray-50'
                 }`}
               >
-                <div className="aspect-video w-full bg-gray-100 overflow-hidden">
-                  <img 
-                    src={option.image} 
-                    alt={option.label} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
                 <div className="p-4 flex items-center">
                   <Checkbox
                     id={`window-type-${option.id}`}

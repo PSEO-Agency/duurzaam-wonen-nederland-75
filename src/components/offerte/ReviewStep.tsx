@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
 import { Check, Info } from 'lucide-react';
@@ -66,7 +65,6 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ formData }) => {
                       {type === 'kunststof' && 'Kunststof kozijnen'}
                       {type === 'schuifpui' && 'Schuifpui'}
                       {type === 'tuindeuren' && 'Tuindeuren'}
-                      {type === 'gehele-woning' && 'Gehele woning'}
                       {type === 'deur' && 'Voor/Achterdeur'}
                       {type === 'anders' && 'Anders / Nader te bepalen'}
                       {index < formData.windowTypes.length - 1 && ', '}
