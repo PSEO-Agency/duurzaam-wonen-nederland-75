@@ -29,29 +29,24 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ formData }) => {
               </dd>
             </div>
             <div>
-              <dt className="text-sm text-gray-500">Type pand</dt>
+              <dt className="text-sm text-gray-500">Type woning</dt>
               <dd className="text-sm font-medium">
-                {formData.propertyType === 'woning' && 'Woning'}
+                {formData.propertyType === 'eengezinswoning' && 'Eengezinswoning'}
+                {formData.propertyType === 'appartement' && 'Appartement'}
+                {formData.propertyType === 'twee-onder-een-kap' && 'Twee-onder-een-kapwoning'}
                 {formData.propertyType === 'bedrijfspand' && 'Bedrijfspand'}
-                {formData.propertyType === 'anders' && 'Anders'}
               </dd>
             </div>
             {formData.timeline && (
               <div>
                 <dt className="text-sm text-gray-500">Tijdlijn</dt>
                 <dd className="text-sm font-medium">
-                  {formData.timeline === 'per-direct' && 'Per direct!'}
+                  {formData.timeline === 'zo-snel-mogelijk' && 'Zo snel mogelijk'}
                   {formData.timeline === '0-3 maanden' && 'Binnen 3 maanden'}
                   {formData.timeline === '3-6 maanden' && '3 tot 6 maanden'}
                   {formData.timeline === '6-12 maanden' && '6 tot 12 maanden'}
                   {formData.timeline === 'orienterend' && 'Alleen oriënterend'}
                 </dd>
-              </div>
-            )}
-            {formData.budget && (
-              <div>
-                <dt className="text-sm text-gray-500">Budget</dt>
-                <dd className="text-sm font-medium">{formData.budget}</dd>
               </div>
             )}
           </dl>
