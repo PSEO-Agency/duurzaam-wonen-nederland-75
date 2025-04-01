@@ -108,7 +108,7 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor }) => {
                     <span className="font-medium">24...52 mm</span>
                   </div>
                   <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                    <span className="text-gray-600">Barrièrevrij (<=) 20 mm</span>
+                    <span className="text-gray-600">Barrièrevrij (≤ 20 mm)</span>
                     <span className="font-medium">Ja</span>
                   </div>
                   <div className="grid grid-cols-2 py-2 border-b border-gray-100">
