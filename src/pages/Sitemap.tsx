@@ -177,7 +177,7 @@ const siteStructure = [
     description: 'Ons werkgebied in Nederland',
   },
   {
-    title: 'Rentevrije Financiering',
+    title: 'Rentevrije Financiering*',
     path: '/rentevrije-financiering',
     description: 'Financieringsmogelijkheden via het Nationaal Warmtefonds',
   },

@@ -13,7 +13,7 @@ const RentevrijeFinanciering: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Rentevrije Financiering | Duurzaam Wonen Nederland</title>
+        <title>Rentevrije Financiering* | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Financier uw isolerende deuren, kozijnen en panelen met een rentevrije lening van het Nationaal Warmtefonds. Ontdek de mogelijkheden voor uw verduurzamingsproject." />
         <link rel="canonical" href="https://duurzaamwonen.info/rentevrije-financiering" />
       </Helmet>
@@ -38,7 +38,7 @@ const RentevrijeFinanciering: React.FC = () => {
                   Nationaal Warmtefonds
                 </span>
                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                  Rentevrije Financiering voor uw Kozijnen
+                  Rentevrije Financiering* voor uw Verduurzaming
                 </h1>
                 <p className="text-lg md:text-xl text-white/90 mb-8 max-w-xl">
                   Financier uw isolerende deuren, kozijnen en panelen met een aantrekkelijke lening via het Nationaal Warmtefonds en verduurzaam uw woning zonder hoge voorafkosten.
@@ -60,7 +60,7 @@ const RentevrijeFinanciering: React.FC = () => {
                     <div className="bg-brand-green/20 p-2 rounded-full">
                       <InfoIcon className="h-5 w-5 text-brand-green" />
                     </div>
-                    <span>Rentepercentage vanaf 3,70%</span>
+                    <span>*Bij verzamelinkomen tot 60.000 pj</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="bg-brand-green/20 p-2 rounded-full">
