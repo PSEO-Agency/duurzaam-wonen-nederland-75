@@ -99,21 +99,21 @@ const KozijnenHero: React.FC = () => {
                     {/* Certification Logos Section - Updated */}
                     <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
                       <h4 className="text-sm font-medium text-white mb-3">Keurmerken:</h4>
-                      <div className="flex items-center justify-between flex-wrap gap-3">
-                        <div className="bg-white rounded p-2 h-10 w-14 flex items-center justify-center" title="KOMO-certificaat">
-                          <img src="/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png" alt="KOMO" className="h-6 max-w-full" />
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="KOMO-certificaat">
+                          <img src="/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png" alt="KOMO" className="h-10 max-w-full object-contain" />
                         </div>
-                        <div className="bg-white rounded p-2 h-10 w-14 flex items-center justify-center" title="CE-markering">
-                          <img src="/lovable-uploads/10906789-676e-4aef-b797-6bc0815255ea.png" alt="CE" className="h-6 max-w-full" />
+                        <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="CE-markering">
+                          <img src="/lovable-uploads/10906789-676e-4aef-b797-6bc0815255ea.png" alt="CE" className="h-10 max-w-full object-contain" />
                         </div>
-                        <div className="bg-white rounded p-1 h-10 w-14 flex items-center justify-center" title="PKVW Keurmerk">
-                          <img src="/lovable-uploads/a680436d-6948-4799-a383-6aad791b1e0e.png" alt="PKVW" className="h-8 max-w-full" />
+                        <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="PKVW Keurmerk">
+                          <img src="/lovable-uploads/a680436d-6948-4799-a383-6aad791b1e0e.png" alt="PKVW" className="h-12 max-w-full object-contain" />
                         </div>
-                        <div className="bg-white rounded p-1 h-10 w-14 flex items-center justify-center" title="Nationaal Warmtefonds">
-                          <img src="/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png" alt="Warmtefonds" className="h-7 max-w-full" />
+                        <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Nationaal Warmtefonds">
+                          <img src="/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png" alt="Warmtefonds" className="h-12 max-w-full object-contain" />
                         </div>
-                        <div className="bg-white rounded p-1 h-10 w-14 flex items-center justify-center" title="Schüco">
-                          <img src="/lovable-uploads/4d42855f-0a4b-48ef-b632-25f5f01975fc.png" alt="Schüco" className="h-6 max-w-full" />
+                        <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Schüco">
+                          <img src="/lovable-uploads/4d42855f-0a4b-48ef-b632-25f5f01975fc.png" alt="Schüco" className="h-10 max-w-full object-contain" />
                         </div>
                       </div>
                     </div>
