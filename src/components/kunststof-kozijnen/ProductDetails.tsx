@@ -4,6 +4,7 @@ import { ExternalLink, Paintbrush, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Link } from 'react-router-dom';
 
 interface ProductDetailProps {
   selectedColor: string | null;
@@ -132,9 +133,11 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor }) => {
             </div>
           )}
           
-          <Button className="bg-brand-green hover:bg-brand-green-dark">
-            Kleuradvies aanvragen
-            <Paintbrush className="ml-2 h-4 w-4" />
+          <Button asChild className="bg-brand-green hover:bg-brand-green-dark">
+            <Link to="/offerte">
+              Offerte Aanvragen
+              <Paintbrush className="ml-2 h-4 w-4" />
+            </Link>
           </Button>
         </div>
         
