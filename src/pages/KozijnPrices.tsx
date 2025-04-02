@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Euro, PiggyBank, BarChart4, Calculator, BadgePercent } from 'lucide-react';
@@ -179,7 +178,6 @@ const KozijnPrices: React.FC = () => {
                             <p className="text-sm text-gray-700 mb-2">Afmetingen: 100x100 cm tot 150x150 cm</p>
                             <p className="text-sm text-gray-700">Prijs: Op offertebasis</p>
                           </CardContent>
-                        </Card>
                         
                         <Card className="h-full">
                           <CardContent className="p-4">
@@ -399,7 +397,7 @@ const KozijnPrices: React.FC = () => {
                         </h4>
                         <div className="bg-green-50 p-4 rounded-md border border-green-100">
                           <p className="text-gray-700 text-sm">
-                            <strong>Voorjaarsactie 2023:</strong> Bij aanschaf van 4 of meer kozijnen ontvangt u 10% korting op het totaalbedrag. Actie geldig t/m 30 juni 2023. Vraag naar de voorwaarden.
+                            <strong>Voorjaarsactie 2025:</strong> Bij aanschaf van onze kozijnen, krijgt u altijd Gratis Houtnerf, Horren en Vensterbanken.
                           </p>
                         </div>
                       </div>
@@ -660,4 +658,3 @@ const KozijnPrices: React.FC = () => {
 };
 
 export default KozijnPrices;
-
