@@ -19,56 +19,51 @@ import ContactCTA from '@/components/ContactCTA';
 import { Link } from 'react-router-dom';
 
 const KozijnPrices: React.FC = () => {
-  const priceRanges = [
+  const kozijnTypes = [
     {
       category: 'Vast kozijn',
-      standard: { min: 250, max: 450 },
-      premium: { min: 450, max: 700 },
-      sizes: '60x60 cm tot 120x120 cm'
+      sizes: '60x60 cm tot 120x120 cm',
+      features: 'Maximale isolatie, vaste ruit'
     },
     {
       category: 'Draai-kiep kozijn',
-      standard: { min: 400, max: 700 },
-      premium: { min: 700, max: 1100 },
-      sizes: '60x80 cm tot 100x160 cm'
+      sizes: '60x80 cm tot 100x160 cm',
+      features: 'Ventilatie mogelijk, draaibaar'
     },
     {
       category: 'Stolpstel kozijn',
-      standard: { min: 800, max: 1200 },
-      premium: { min: 1200, max: 1800 },
-      sizes: '120x120 cm tot 200x200 cm'
+      sizes: '120x120 cm tot 200x200 cm',
+      features: 'Brede opening, klassieke uitstraling'
     },
     {
       category: 'Schuifpui',
-      standard: { min: 1200, max: 2000 },
-      premium: { min: 2000, max: 3500 },
-      sizes: '180x210 cm tot 400x210 cm'
+      sizes: '180x210 cm tot 400x210 cm',
+      features: 'Ruimtebesparend, grote glaspartijen'
     },
     {
       category: 'Harmonica kozijn',
-      standard: { min: 1800, max: 3000 },
-      premium: { min: 3000, max: 5000 },
-      sizes: '240x210 cm tot 600x250 cm'
+      sizes: '240x210 cm tot 600x250 cm',
+      features: 'Maximale opening, flexibel'
     }
   ];
 
   const additionalOptions = [
-    { option: 'Triple beglazing', price: '€75 - €150 per m²' },
-    { option: 'Geluidsisolerend glas', price: '€90 - €180 per m²' },
-    { option: 'Veiligheidsglas', price: '€100 - €200 per m²' },
-    { option: 'Zonwerend glas', price: '€85 - €170 per m²' },
-    { option: 'Roedes tussen glas', price: '€40 - €80 per m²' },
-    { option: 'Inbouw-/opbouwrolluiken', price: '€200 - €400 per kozijn' },
-    { option: 'Ventilatieroosters', price: '€50 - €150 per stuk' },
-    { option: 'Horren', price: '€60 - €150 per stuk' },
-    { option: 'Speciale grepen/krukken', price: '€20 - €100 per stuk' },
+    { option: 'Triple beglazing', feature: 'Superieure isolatie' },
+    { option: 'Geluidsisolerend glas', feature: 'Optimale geluidswering' },
+    { option: 'Veiligheidsglas', feature: 'Extra bescherming' },
+    { option: 'Zonwerend glas', feature: 'Vermindert warmtetoetreding' },
+    { option: 'Roedes tussen glas', feature: 'Klassieke uitstraling' },
+    { option: 'Inbouw-/opbouwrolluiken', feature: 'Privacy en isolatie' },
+    { option: 'Ventilatieroosters', feature: 'Gecontroleerde luchtcirculatie' },
+    { option: 'Horren', feature: 'Insectenwerend' },
+    { option: 'Speciale grepen/krukken', feature: 'Uniek design' },
   ];
 
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>Kunststof Kozijnen Prijzen | Duurzaam Wonen Nederland</title>
-        <meta name="description" content="Ontdek transparante prijsinformatie voor kunststof kozijnen, inclusief prijsranges, factoren die de prijs beïnvloeden en besparingstips." />
+        <meta name="description" content="Vraag vrijblijvend een offerte aan voor kunststof kozijnen. Elke prijsopgave wordt op maat gemaakt op basis van uw specifieke wensen en situatie." />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/prijzen" />
       </Helmet>
       
@@ -79,13 +74,13 @@ const KozijnPrices: React.FC = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <span className="inline-block px-4 py-1 bg-brand-green/90 text-white rounded-full text-sm font-medium mb-4">
-                Prijzen Kunststof Kozijnen
+                Kunststof Kozijnen
               </span>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Wat Kosten Kunststof Kozijnen?
+                Prijsinformatie Kunststof Kozijnen
               </h1>
               <p className="text-lg text-gray-700 mb-8">
-                Transparante informatie over de prijzen van kunststof kozijnen, van standaard tot premium, inclusief alle factoren die de prijs beïnvloeden.
+                Voor kunststof kozijnen werken wij uitsluitend met gepersonaliseerde prijsopgaves op basis van uw specifieke situatie en wensen.
               </p>
             </div>
           </div>
@@ -96,33 +91,27 @@ const KozijnPrices: React.FC = () => {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold mb-2 text-center">Prijsoverzicht Kunststof Kozijnen</h2>
-              <p className="text-gray-500 mb-8 text-center">Indicatieve prijzen inclusief BTW, exclusief montage</p>
+              <h2 className="text-3xl font-bold mb-2 text-center">Kozijnen op maat van hoogwaardige kwaliteit</h2>
+              <p className="text-gray-500 mb-8 text-center">Vrijblijvende offerte op basis van uw specifieke wensen</p>
               
               <div className="overflow-x-auto bg-white rounded-lg shadow-sm mb-8">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="w-1/5">Type kozijn</TableHead>
-                      <TableHead className="w-1/5">Standaard kwaliteit</TableHead>
-                      <TableHead className="w-1/5">Premium kwaliteit</TableHead>
-                      <TableHead className="w-1/5">Afmetingen</TableHead>
-                      <TableHead className="w-1/5">Eigenschappen</TableHead>
+                      <TableHead className="w-1/4">Type kozijn</TableHead>
+                      <TableHead className="w-1/4">Afmetingen</TableHead>
+                      <TableHead className="w-1/4">Eigenschappen</TableHead>
+                      <TableHead className="w-1/4">Prijsindicatie</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {priceRanges.map((item, index) => (
+                    {kozijnTypes.map((item, index) => (
                       <TableRow key={index}>
                         <TableCell className="font-medium">{item.category}</TableCell>
-                        <TableCell>€{item.standard.min} - €{item.standard.max}</TableCell>
-                        <TableCell>€{item.premium.min} - €{item.premium.max}</TableCell>
                         <TableCell>{item.sizes}</TableCell>
+                        <TableCell>{item.features}</TableCell>
                         <TableCell>
-                          {index === 0 && "Maximale isolatie, vaste ruit"}
-                          {index === 1 && "Ventilatie mogelijk, draaibaar"}
-                          {index === 2 && "Brede opening, klassieke uitstraling"}
-                          {index === 3 && "Ruimtebesparend, grote glaspartijen"}
-                          {index === 4 && "Maximale opening, flexibel"}
+                          <span className="text-brand-green font-medium">Op offertebasis</span>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -131,14 +120,15 @@ const KozijnPrices: React.FC = () => {
               </div>
               
               <p className="text-sm text-gray-500 mb-8 max-w-3xl mx-auto">
-                * Bovenstaande prijzen zijn indicatief en kunnen variëren afhankelijk van specifieke wensen, situatie, en marktomstandigheden. 
-                Voor een exacte prijsopgave kunt u een vrijblijvende offerte aanvragen. Prijzen zijn exclusief montage.
+                * Elke situatie is anders. Om u een eerlijke en exacte prijs te kunnen geven, stellen wij graag een 
+                persoonlijke offerte voor u op. Hierin nemen we alle factoren mee zoals afmetingen, gewenste opties, 
+                isolatiewaarden en montage.
               </p>
               
               <div className="flex justify-center">
                 <Button asChild className="bg-brand-green hover:bg-brand-green-dark text-white">
                   <Link to="/offerte">
-                    <span>Vraag een persoonlijke prijsopgave aan</span>
+                    <span>Vraag een vrijblijvende offerte aan</span>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -179,7 +169,7 @@ const KozijnPrices: React.FC = () => {
                           <CardContent className="p-4">
                             <h4 className="font-medium mb-2">Klein formaat</h4>
                             <p className="text-sm text-gray-700 mb-2">Afmetingen: tot 100x100 cm</p>
-                            <p className="text-sm text-gray-700">Prijsindicatie: €250 - €500</p>
+                            <p className="text-sm text-gray-700">Prijs: Op offertebasis</p>
                           </CardContent>
                         </Card>
                         
@@ -187,7 +177,7 @@ const KozijnPrices: React.FC = () => {
                           <CardContent className="p-4">
                             <h4 className="font-medium mb-2">Middelgroot formaat</h4>
                             <p className="text-sm text-gray-700 mb-2">Afmetingen: 100x100 cm tot 150x150 cm</p>
-                            <p className="text-sm text-gray-700">Prijsindicatie: €500 - €800</p>
+                            <p className="text-sm text-gray-700">Prijs: Op offertebasis</p>
                           </CardContent>
                         </Card>
                         
@@ -195,7 +185,7 @@ const KozijnPrices: React.FC = () => {
                           <CardContent className="p-4">
                             <h4 className="font-medium mb-2">Groot formaat</h4>
                             <p className="text-sm text-gray-700 mb-2">Afmetingen: 150x150 cm tot 200x200 cm</p>
-                            <p className="text-sm text-gray-700">Prijsindicatie: €800 - €1500</p>
+                            <p className="text-sm text-gray-700">Prijs: Op offertebasis</p>
                           </CardContent>
                         </Card>
                         
@@ -203,7 +193,7 @@ const KozijnPrices: React.FC = () => {
                           <CardContent className="p-4">
                             <h4 className="font-medium mb-2">Extra groot formaat</h4>
                             <p className="text-sm text-gray-700 mb-2">Afmetingen: boven 200x200 cm</p>
-                            <p className="text-sm text-gray-700">Prijsindicatie: vanaf €1500</p>
+                            <p className="text-sm text-gray-700">Prijs: Op offertebasis</p>
                           </CardContent>
                         </Card>
                       </div>
@@ -220,23 +210,23 @@ const KozijnPrices: React.FC = () => {
                       <ul className="space-y-2">
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Vast kozijn: laagste prijscategorie (vanaf €250)</span>
+                          <span className="text-gray-700">Vast kozijn (prijs op offertebasis)</span>
                         </li>
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Draai-kiep kozijn: middencategorie (vanaf €400)</span>
+                          <span className="text-gray-700">Draai-kiep kozijn (prijs op offertebasis)</span>
                         </li>
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Stolpstel: hogere middencategorie (vanaf €800)</span>
+                          <span className="text-gray-700">Stolpstel (prijs op offertebasis)</span>
                         </li>
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Schuifpui: hoge categorie (vanaf €1200)</span>
+                          <span className="text-gray-700">Schuifpui (prijs op offertebasis)</span>
                         </li>
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Harmonica kozijn: hoogste prijscategorie (vanaf €1800)</span>
+                          <span className="text-gray-700">Harmonica kozijn (prijs op offertebasis)</span>
                         </li>
                       </ul>
                     </TabsContent>
@@ -254,7 +244,7 @@ const KozijnPrices: React.FC = () => {
                           <div>
                             <strong className="block">HR++ glas</strong>
                             <p className="text-sm text-gray-700">Standaard, goede isolatie (U-waarde ±1,1)</p>
-                            <p className="text-sm text-gray-700">Meerprijs: standaard inbegrepen</p>
+                            <p className="text-sm text-gray-700">Prijs: Op offertebasis</p>
                           </div>
                         </li>
                         <li className="flex items-start">
@@ -262,7 +252,7 @@ const KozijnPrices: React.FC = () => {
                           <div>
                             <strong className="block">Triple glas</strong>
                             <p className="text-sm text-gray-700">Uitstekende isolatie (U-waarde ±0,7)</p>
-                            <p className="text-sm text-gray-700">Meerprijs: €75 - €150 per m²</p>
+                            <p className="text-sm text-gray-700">Prijs: Op offertebasis</p>
                           </div>
                         </li>
                         <li className="flex items-start">
@@ -270,7 +260,7 @@ const KozijnPrices: React.FC = () => {
                           <div>
                             <strong className="block">Geluidsisolerend glas</strong>
                             <p className="text-sm text-gray-700">Reduceert geluid van buiten</p>
-                            <p className="text-sm text-gray-700">Meerprijs: €90 - €180 per m²</p>
+                            <p className="text-sm text-gray-700">Prijs: Op offertebasis</p>
                           </div>
                         </li>
                         <li className="flex items-start">
@@ -278,7 +268,7 @@ const KozijnPrices: React.FC = () => {
                           <div>
                             <strong className="block">Veiligheidsglas</strong>
                             <p className="text-sm text-gray-700">Inbraakwerend of letselwerend</p>
-                            <p className="text-sm text-gray-700">Meerprijs: €100 - €200 per m²</p>
+                            <p className="text-sm text-gray-700">Prijs: Op offertebasis</p>
                           </div>
                         </li>
                       </ul>
@@ -295,7 +285,8 @@ const KozijnPrices: React.FC = () => {
                         <Table>
                           <TableHeader>
                             <TableRow>
-                              <TableHead className="w-2/3">Extra optie</TableHead>
+                              <TableHead className="w-1/3">Extra optie</TableHead>
+                              <TableHead className="w-1/3">Voordelen</TableHead>
                               <TableHead className="w-1/3">Prijsindicatie</TableHead>
                             </TableRow>
                           </TableHeader>
@@ -303,7 +294,10 @@ const KozijnPrices: React.FC = () => {
                             {additionalOptions.map((item, index) => (
                               <TableRow key={index}>
                                 <TableCell>{item.option}</TableCell>
-                                <TableCell>{item.price}</TableCell>
+                                <TableCell>{item.feature}</TableCell>
+                                <TableCell>
+                                  <span className="text-brand-green font-medium">Op offertebasis</span>
+                                </TableCell>
                               </TableRow>
                             ))}
                           </TableBody>
@@ -332,7 +326,7 @@ const KozijnPrices: React.FC = () => {
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
                           <div>
                             <strong className="block text-gray-800">Kies voor standaardmaten</strong>
-                            <p className="text-gray-700 text-sm">Standaardmaten zijn voordeliger dan maatwerk. Als uw kozijnopeningen standaard afmetingen hebben, kunt u tot 15% besparen.</p>
+                            <p className="text-gray-700 text-sm">Standaardmaten zijn voordeliger dan maatwerk. Als uw kozijnopeningen standaard afmetingen hebben, kunt u besparen op de kosten.</p>
                           </div>
                         </li>
                         <li className="flex items-start">
@@ -346,7 +340,7 @@ const KozijnPrices: React.FC = () => {
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
                           <div>
                             <strong className="block text-gray-800">Kies voor HR++ in plaats van triple glas</strong>
-                            <p className="text-gray-700 text-sm">Als maximale isolatie niet noodzakelijk is, kunt u kiezen voor HR++ glas in plaats van triple glas. Dit kan een besparing opleveren van €75-€150 per m².</p>
+                            <p className="text-gray-700 text-sm">Als maximale isolatie niet noodzakelijk is, kunt u kiezen voor HR++ glas in plaats van triple glas. Dit kan een aanzienlijke besparing opleveren.</p>
                           </div>
                         </li>
                         <li className="flex items-start">
@@ -379,21 +373,21 @@ const KozijnPrices: React.FC = () => {
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
                           <div>
                             <strong className="block text-gray-800">Energiebesparing</strong>
-                            <p className="text-gray-700 text-sm">Jaarlijkse besparing op stookkosten: €200-€500</p>
+                            <p className="text-gray-700 text-sm">Significante jaarlijkse besparing op stookkosten</p>
                           </div>
                         </li>
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
                           <div>
                             <strong className="block text-gray-800">Onderhoudskosten</strong>
-                            <p className="text-gray-700 text-sm">Besparing op schilderwerk: €75-€150 per kozijn per 5 jaar</p>
+                            <p className="text-gray-700 text-sm">Besparing op schilderwerk en onderhoud</p>
                           </div>
                         </li>
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
                           <div>
                             <strong className="block text-gray-800">Waardestijging woning</strong>
-                            <p className="text-gray-700 text-sm">Gemiddelde waardestijging: 1-3% van de woningwaarde</p>
+                            <p className="text-gray-700 text-sm">Verhoogt de waarde van uw woning</p>
                           </div>
                         </li>
                       </ul>
@@ -420,7 +414,7 @@ const KozijnPrices: React.FC = () => {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold mb-8 text-center">Prijsvergelijking</h2>
+              <h2 className="text-3xl font-bold mb-8 text-center">Vergelijk materialen</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 <AnimatedSection animation="fade-in" delay={100}>
@@ -430,8 +424,8 @@ const KozijnPrices: React.FC = () => {
                     </div>
                     <CardContent className="p-6">
                       <div className="text-center mb-4">
-                        <span className="text-3xl font-bold">€400 - €700</span>
-                        <p className="text-sm text-gray-500">per kozijn, excl. montage</p>
+                        <span className="text-lg font-bold">Prijs op offertebasis</span>
+                        <p className="text-sm text-gray-500">Vraag een vrijblijvende offerte aan</p>
                       </div>
                       
                       <ul className="space-y-3 mb-6">
@@ -457,9 +451,11 @@ const KozijnPrices: React.FC = () => {
                         </li>
                       </ul>
                       
-                      <Button className="w-full bg-brand-green hover:bg-brand-green-dark text-white">
-                        <span>Bekijk aanbod</span>
-                        <ArrowRight className="ml-2 h-4 w-4" />
+                      <Button asChild className="w-full bg-brand-green hover:bg-brand-green-dark text-white">
+                        <Link to="/offerte">
+                          <span>Offerte aanvragen</span>
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
                       </Button>
                     </CardContent>
                   </Card>
@@ -472,8 +468,8 @@ const KozijnPrices: React.FC = () => {
                     </div>
                     <CardContent className="p-6">
                       <div className="text-center mb-4">
-                        <span className="text-3xl font-bold">€800 - €1500</span>
-                        <p className="text-sm text-gray-500">per kozijn, excl. montage</p>
+                        <span className="text-lg font-bold">Prijs op offertebasis</span>
+                        <p className="text-sm text-gray-500">Vraag een vrijblijvende offerte aan</p>
                       </div>
                       
                       <ul className="space-y-3 mb-6">
@@ -495,13 +491,15 @@ const KozijnPrices: React.FC = () => {
                         </li>
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-gray-700 mt-1 mr-2 shrink-0 opacity-30" />
-                          <span className="text-gray-400">Hoger in prijs</span>
+                          <span className="text-gray-400">Minder duurzaam zonder onderhoud</span>
                         </li>
                       </ul>
                       
-                      <Button variant="outline" className="w-full">
-                        <span>Vergelijk opties</span>
-                        <ArrowRight className="ml-2 h-4 w-4" />
+                      <Button variant="outline" asChild className="w-full">
+                        <Link to="/offerte">
+                          <span>Offerte aanvragen</span>
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
                       </Button>
                     </CardContent>
                   </Card>
@@ -514,8 +512,8 @@ const KozijnPrices: React.FC = () => {
                     </div>
                     <CardContent className="p-6">
                       <div className="text-center mb-4">
-                        <span className="text-3xl font-bold">€900 - €1800</span>
-                        <p className="text-sm text-gray-500">per kozijn, excl. montage</p>
+                        <span className="text-lg font-bold">Prijs op offertebasis</span>
+                        <p className="text-sm text-gray-500">Vraag een vrijblijvende offerte aan</p>
                       </div>
                       
                       <ul className="space-y-3 mb-6">
@@ -541,9 +539,11 @@ const KozijnPrices: React.FC = () => {
                         </li>
                       </ul>
                       
-                      <Button variant="outline" className="w-full">
-                        <span>Vergelijk opties</span>
-                        <ArrowRight className="ml-2 h-4 w-4" />
+                      <Button variant="outline" asChild className="w-full">
+                        <Link to="/offerte">
+                          <span>Offerte aanvragen</span>
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
                       </Button>
                     </CardContent>
                   </Card>
@@ -562,14 +562,14 @@ const KozijnPrices: React.FC = () => {
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="item-1">
                     <AccordionTrigger className="text-lg font-semibold">
-                      Wat is een realistische prijs voor kunststof kozijnen?
+                      Waarom werkt u alleen met offerteprijzen?
                     </AccordionTrigger>
                     <AccordionContent>
                       <p className="text-gray-700">
-                        Een realistische prijs voor kunststof kozijnen ligt tussen €250 en €700 per kozijn voor standaardformaten, 
-                        exclusief montage. Voor grote kozijnen, schuifpuien of harmonica deuren kan dit oplopen tot €1200-€5000 
-                        per element. De totaalprijs voor een gemiddelde woning met 8-10 kozijnen ligt doorgaans tussen €5000 en €15.000 
-                        inclusief montage, afhankelijk van de gekozen opties en afmetingen.
+                        Elke woningsituatie is uniek, en daarmee ook de prijs voor kunststof kozijnen. Factoren zoals exacte
+                        afmetingen, type kozijn, beglazingsopties, isolatiewaarden en specifieke montage-eisen bepalen de
+                        uiteindelijke prijs. Door met persoonlijke offertes te werken, kunnen wij u een eerlijke en nauwkeurige
+                        prijsopgave bieden die exact aansluit op uw situatie, zonder verrassingen achteraf.
                       </p>
                     </AccordionContent>
                   </AccordionItem>
@@ -581,25 +581,26 @@ const KozijnPrices: React.FC = () => {
                     <AccordionContent>
                       <p className="text-gray-700">
                         Ja, in verschillende gemeenten zijn subsidies beschikbaar voor energiebesparende maatregelen, waaronder 
-                        hoogwaardige isolerende kozijnen. Deze subsidies kunnen variëren van €35 tot €100 per m² glas. Daarnaast 
-                        is er vaak een btw-teruggave mogelijk van 9% (verschil tussen 21% en 12% btw-tarief) als de kozijnen worden 
-                        geplaatst in woningen ouder dan 2 jaar. We adviseren u om de actuele subsidiemogelijkheden in uw gemeente 
-                        te controleren of ons hierover te raadplegen.
+                        hoogwaardige isolerende kozijnen. Deze subsidies kunnen variëren per gemeente en per periode. Daarnaast 
+                        is er vaak een btw-teruggave mogelijk als de kozijnen worden geplaatst in woningen ouder dan 2 jaar. 
+                        We adviseren u om de actuele subsidiemogelijkheden in uw gemeente te controleren of ons hierover te raadplegen
+                        tijdens het offertetraject.
                       </p>
                     </AccordionContent>
                   </AccordionItem>
                   
                   <AccordionItem value="item-3">
                     <AccordionTrigger className="text-lg font-semibold">
-                      Wat is het prijsverschil tussen standaard en premium kozijnen?
+                      Wat is het verschil tussen standaard en premium kozijnen?
                     </AccordionTrigger>
                     <AccordionContent>
                       <p className="text-gray-700">
-                        Het prijsverschil tussen standaard en premium kunststof kozijnen bedraagt gemiddeld 30-50%. Premium kozijnen 
-                        onderscheiden zich door betere isolatiewaarden (vaak 6+ kamers in het profiel vs. 3-5 kamers bij standaard), 
-                        hoogwaardiger beslag, extra verstevigingen, en geavanceerdere afdichtingen. Ook bieden premium kozijnen meestal 
-                        meer esthetische opties zoals vlakke verbindingen in plaats van zichtbare lasnaden, en luxere afwerkingen. 
-                        De investering in premium kozijnen verdient zich vaak terug door hogere energiebesparing en langere levensduur.
+                        Premium kunststof kozijnen onderscheiden zich door betere isolatiewaarden (vaak 6+ kamers in het profiel 
+                        vs. 3-5 kamers bij standaard), hoogwaardiger beslag, extra verstevigingen, en geavanceerdere afdichtingen. 
+                        Ook bieden premium kozijnen meestal meer esthetische opties zoals vlakke verbindingen in plaats van zichtbare 
+                        lasnaden, en luxere afwerkingen. De investering in premium kozijnen verdient zich vaak terug door hogere 
+                        energiebesparing en langere levensduur. In onze offerte verduidelijken we graag de verschillen in kwaliteit 
+                        en prijs.
                       </p>
                     </AccordionContent>
                   </AccordionItem>
@@ -613,15 +614,16 @@ const KozijnPrices: React.FC = () => {
                         Naast de basisprijs van de kozijnen zelf kunt u rekening houden met de volgende bijkomende kosten:
                       </p>
                       <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-700">
-                        <li>Montagekosten: €200-€500 per kozijn, afhankelijk van complexiteit</li>
-                        <li>Verwijdering en afvoer oude kozijnen: €50-€100 per kozijn</li>
-                        <li>Aanpassingen aan metselwerk: €75-€300 indien nodig</li>
-                        <li>Nieuwe vensterbanken: €40-€120 per strekkende meter</li>
-                        <li>Afwerking binnenzijde (stucwerk, schilderwerk): €75-€200 per kozijn</li>
-                        <li>Eventuele vergunningskosten: variabel per gemeente</li>
+                        <li>Montagekosten (afhankelijk van complexiteit)</li>
+                        <li>Verwijdering en afvoer oude kozijnen</li>
+                        <li>Eventuele aanpassingen aan metselwerk</li>
+                        <li>Nieuwe vensterbanken indien gewenst</li>
+                        <li>Afwerking binnenzijde (stucwerk, schilderwerk)</li>
+                        <li>Eventuele vergunningskosten (variabel per gemeente)</li>
                       </ul>
                       <p className="text-gray-700 mt-2">
-                        We raden aan om altijd een gespecificeerde offerte aan te vragen waarin alle kosten duidelijk staan vermeld.
+                        In onze offertes specificeren wij exact welke kosten inbegrepen zijn en welke niet, zodat u niet voor 
+                        verrassingen komt te staan.
                       </p>
                     </AccordionContent>
                   </AccordionItem>
@@ -632,8 +634,8 @@ const KozijnPrices: React.FC = () => {
                     </AccordionTrigger>
                     <AccordionContent>
                       <p className="text-gray-700">
-                        De wintermaanden (november-februari) zijn vaak voordeliger voor de aanschaf van kozijnen. In deze periode 
-                        is er minder vraag, waardoor leveranciers regelmatig winteracties aanbieden met kortingen van 10-15%. 
+                        De wintermaanden (november-februari) zijn vaak financieel voordelig voor de aanschaf van kozijnen. In deze periode 
+                        is er minder vraag, waardoor leveranciers regelmatig winteracties aanbieden met aantrekkelijke kortingen. 
                         Daarnaast is het begin van het jaar vaak een goed moment om te profiteren van nieuwe subsidies die door 
                         gemeenten en de rijksoverheid worden uitgegeven. Het nadeel van plaatsing in de winter is dat er bij vorst 
                         niet altijd direct kan worden gemonteerd en dat uw woning tijdens de werkzaamheden meer warmte verliest.
@@ -658,3 +660,4 @@ const KozijnPrices: React.FC = () => {
 };
 
 export default KozijnPrices;
+
