@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Euro, PiggyBank, BarChart4, Calculator, BadgePercent } from 'lucide-react';
@@ -353,7 +354,7 @@ const KozijnPrices: React.FC = () => {
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
                           <div>
                             <strong className="block text-gray-800">Vergelijk offertes</strong>
-                            <p className="text-gray-700 text-sm">Vraag meerdere offertes aan en vergelijk deze zorgvuldig. Let niet alleen op de prijs, maar ook op wat precies wordt geleverd.</p>
+                            <p className="text-gray-700 text-sm">Vraag een offerte aan en laat u goed informeren over de verschillende opties. Kijk niet alleen naar de prijs, maar ook naar wat precies wordt geleverd.</p>
                           </div>
                         </li>
                       </ul>
@@ -610,4 +611,36 @@ const KozijnPrices: React.FC = () => {
                     </AccordionTrigger>
                     <AccordionContent>
                       <p className="text-gray-700">
-                        Naast de basisprijs van de kozijnen zelf kunt u rekening houden met de volgende
+                        Naast de basisprijs van de kozijnen zelf kunt u rekening houden met de volgende bijkomende kosten:
+                      </p>
+                      <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-700">
+                        <li>Montagekosten (afhankelijk van complexiteit)</li>
+                        <li>Verwijdering en afvoer oude kozijnen</li>
+                        <li>Eventuele aanpassingen aan metselwerk</li>
+                        <li>Nieuwe vensterbanken indien gewenst</li>
+                        <li>Afwerking binnenzijde (stucwerk, schilderwerk)</li>
+                      </ul>
+                      <p className="text-gray-700 mt-2">
+                        In onze offertes specificeren wij exact welke kosten inbegrepen zijn en welke niet, zodat u niet voor 
+                        verrassingen komt te staan.
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+        
+        <Services />
+        
+        <ContactCTA />
+      </main>
+      
+      <Footer />
+      <ScrollToTop />
+    </div>
+  );
+};
+
+export default KozijnPrices;
