@@ -178,6 +178,7 @@ const KozijnPrices: React.FC = () => {
                             <p className="text-sm text-gray-700 mb-2">Afmetingen: 100x100 cm tot 150x150 cm</p>
                             <p className="text-sm text-gray-700">Prijs: Op offertebasis</p>
                           </CardContent>
+                        </Card>
                         
                         <Card className="h-full">
                           <CardContent className="p-4">
@@ -609,52 +610,4 @@ const KozijnPrices: React.FC = () => {
                     </AccordionTrigger>
                     <AccordionContent>
                       <p className="text-gray-700">
-                        Naast de basisprijs van de kozijnen zelf kunt u rekening houden met de volgende bijkomende kosten:
-                      </p>
-                      <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-700">
-                        <li>Montagekosten (afhankelijk van complexiteit)</li>
-                        <li>Verwijdering en afvoer oude kozijnen</li>
-                        <li>Eventuele aanpassingen aan metselwerk</li>
-                        <li>Nieuwe vensterbanken indien gewenst</li>
-                        <li>Afwerking binnenzijde (stucwerk, schilderwerk)</li>
-                        <li>Eventuele vergunningskosten (variabel per gemeente)</li>
-                      </ul>
-                      <p className="text-gray-700 mt-2">
-                        In onze offertes specificeren wij exact welke kosten inbegrepen zijn en welke niet, zodat u niet voor 
-                        verrassingen komt te staan.
-                      </p>
-                    </AccordionContent>
-                  </AccordionItem>
-                  
-                  <AccordionItem value="item-5">
-                    <AccordionTrigger className="text-lg font-semibold">
-                      Wat is financieel gezien de beste periode om kozijnen te vervangen?
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <p className="text-gray-700">
-                        De wintermaanden (november-februari) zijn vaak financieel voordelig voor de aanschaf van kozijnen. In deze periode 
-                        is er minder vraag, waardoor leveranciers regelmatig winteracties aanbieden met aantrekkelijke kortingen. 
-                        Daarnaast is het begin van het jaar vaak een goed moment om te profiteren van nieuwe subsidies die door 
-                        gemeenten en de rijksoverheid worden uitgegeven. Het nadeel van plaatsing in de winter is dat er bij vorst 
-                        niet altijd direct kan worden gemonteerd en dat uw woning tijdens de werkzaamheden meer warmte verliest.
-                      </p>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
-        
-        <Services />
-        
-        <ContactCTA />
-      </main>
-      
-      <Footer />
-      <ScrollToTop />
-    </div>
-  );
-};
-
-export default KozijnPrices;
+                        Naast de basisprijs van de kozijnen zelf kunt u rekening houden met de volgende
