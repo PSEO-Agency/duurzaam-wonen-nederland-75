@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Facebook, Instagram, Linkedin, MapPin, Phone, Mail, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -17,13 +16,26 @@ const Footer: React.FC = () => {
               Specialist in woningverduurzaming met meer dan 20 jaar ervaring in installatietechniek.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green transition-colors duration-300">
+              <a 
+                href="https://www.facebook.com/people/Duurzaam-Wonen-Nederland/100057187820677/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green transition-colors duration-300"
+              >
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green transition-colors duration-300">
+              <a 
+                href="https://www.instagram.com/duurzaamwonennl/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green transition-colors duration-300"
+              >
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green transition-colors duration-300">
+              <a 
+                href="#"
+                className="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green transition-colors duration-300"
+              >
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>
