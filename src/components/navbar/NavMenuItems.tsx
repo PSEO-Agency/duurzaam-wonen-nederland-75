@@ -1,4 +1,3 @@
-
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
@@ -8,7 +7,7 @@ interface MenuSection {
   href: string;
 }
 
-const menuItemClass = "text-gray-700 hover:text-brand-green transition-colors duration-200 text-sm font-medium";
+const menuItemClass = "text-gray-700 hover:text-brand-green transition-colors duration-200 text-sm font-medium px-2";
 const megaMenuItemClass = "flex items-center text-gray-700 hover:text-brand-green text-sm";
 const megaMenuHeaderClass = "font-bold text-lg mb-2";
 
@@ -96,7 +95,7 @@ export const NavMenuItems = () => {
       {mainNavItems.map((item) => (
         <NavigationMenuItem key={item.label}>
           <NavigationMenuLink asChild>
-            <Link to={item.href} className={`${menuItemClass} px-4 py-2`}>
+            <Link to={item.href} className={`${menuItemClass}`}>
               {item.label}
             </Link>
           </NavigationMenuLink>

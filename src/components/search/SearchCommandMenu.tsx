@@ -56,13 +56,13 @@ const SearchCommandMenu: React.FC<SearchCommandMenuProps> = ({ isMobile = false 
   return (
     <>
       <div 
-        className={`${isMobile ? 'w-full' : 'hidden md:flex items-center border border-gray-300 rounded-full px-4 py-2 ml-6 flex-grow max-w-md cursor-pointer'}`}
+        className={`${isMobile ? 'w-full' : 'hidden md:flex items-center border border-gray-300 rounded-full px-3 py-1.5 ml-6 flex-grow max-w-md cursor-pointer'}`}
         onClick={() => setOpen(true)}
       >
         {!isMobile && (
           <>
-            <SearchIcon size={20} className="text-gray-500 mr-2" />
-            <div className="flex-1 text-sm text-gray-500">Zoeken... <kbd className="ml-2 text-xs border border-gray-300 rounded px-1 py-0.5 bg-gray-50">⌘K</kbd></div>
+            <SearchIcon size={18} className="text-gray-500 mr-2" />
+            <div className="flex-1 text-sm text-gray-500 truncate">Zoeken <kbd className="ml-2 text-xs border border-gray-300 rounded px-1 py-0.5 bg-gray-50">⌘K</kbd></div>
           </>
         )}
       </div>

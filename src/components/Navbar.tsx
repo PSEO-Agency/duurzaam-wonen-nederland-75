@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -6,6 +7,7 @@ import {
   NavigationMenu,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { Button } from "@/components/ui/button";
 import SearchCommandMenu from '@/components/search/SearchCommandMenu';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Logo } from './navbar/Logo';
@@ -71,7 +73,7 @@ const Navbar: React.FC = () => {
               {topNavItems.map((item) => (
                 renderNavItem(
                   item, 
-                  "text-white text-sm mx-3 hover:text-gray-300 transition-colors"
+                  "text-white text-sm mx-2 hover:text-gray-300 transition-colors"
                 )
               ))}
             </div>
@@ -89,15 +91,23 @@ const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             <Logo />
             
-            <div className="hidden md:block flex-1 max-w-xl mx-8">
+            <div className="hidden md:block flex-1 max-w-[280px] mx-4">
               <SearchCommandMenu />
             </div>
             
-            <NavigationMenu className="hidden md:flex">
-              <NavigationMenuList className="whitespace-nowrap">
+            <NavigationMenu className="hidden md:flex flex-1 justify-center">
+              <NavigationMenuList className="flex-wrap gap-1 px-2">
                 <NavMenuItems />
               </NavigationMenuList>
             </NavigationMenu>
+
+            <div className="hidden md:block">
+              <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark">
+                <Link to="/offerte">
+                  Offerte Aanvragen
+                </Link>
+              </Button>
+            </div>
             
             <button
               className="md:hidden focus:outline-none"
