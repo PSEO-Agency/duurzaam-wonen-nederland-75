@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
                 asChild 
                 size="lg"
                 variant="default"
-                className="transition-all duration-[6000ms]"
+                className="transition-all duration-[4000ms]"
               >
                 <Link to="/offerte">
                   Offerte Aanvragen
