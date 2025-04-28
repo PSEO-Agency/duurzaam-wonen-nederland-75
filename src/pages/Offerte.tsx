@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ArrowRight, CheckCircle, Info, Zap } from 'lucide-react';
@@ -95,6 +96,8 @@ const demoFormData: OfferteFormData = {
 };
 
 const FORM_SUBMISSION_ENDPOINT = 'https://n8n.virtualmin.programmaticseobuilder.com/webhook/a8d7075d-1b28-494f-86a0-c05adf144309';
+const GHL_API_KEY = 'pit-c12a2cf9-f10a-4eb0-a879-2e5638660da6';
+const GHL_BASE_URL = 'https://services.leadconnectorhq.com';
 
 const Offerte: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -211,18 +214,130 @@ const Offerte: React.FC = () => {
     }
   };
 
+  // New function to create contact in GoHighLevel
+  const createGHLContact = async (data: OfferteFormData) => {
+    try {
+      const contactPayload = {
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
+        address1: data.address,
+        city: data.city,
+        postalCode: data.postalCode,
+        source: "Website Offerte",
+        customField: {
+          "Project Type": data.projectType,
+          "Property Type": data.propertyType,
+          "Timeline": data.timeline,
+          "Window Types": data.windowTypes.join(", "),
+          "Quantity": data.quantity,
+          "Dimensions": data.dimensions,
+          "Color": data.color,
+          "Additional Info": data.additionalInfo,
+          "Preferred Contact": data.preferredContact,
+          "Availability": data.availability.join(", ")
+        }
+      };
+      
+      const response = await fetch(`${GHL_BASE_URL}/api/v1/contacts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${GHL_API_KEY}`,
+          'Version': '2021-07-28'
+        },
+        body: JSON.stringify(contactPayload)
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Failed to create contact: ${response.status}`);
+      }
+      
+      const contactData = await response.json();
+      console.log('GHL Contact created:', contactData);
+      return contactData.id;
+    } catch (error) {
+      console.error('Error creating GHL contact:', error);
+      return null;
+    }
+  };
+
+  // New function to create ticket in GoHighLevel
+  const createGHLTicket = async (contactId: string, data: OfferteFormData) => {
+    try {
+      // Create details from all form fields
+      const projectDetails = `
+Project Type: ${data.projectType}
+Property Type: ${data.propertyType}
+Timeline: ${data.timeline}
+
+Window Details:
+- Types: ${data.windowTypes.join(", ")}
+- Quantity: ${data.quantity}
+- Dimensions: ${data.dimensions}
+- Color: ${data.color}
+- Additional Info: ${data.additionalInfo}
+
+Contact Preferences:
+- Method: ${data.preferredContact}
+- Availability: ${data.availability.join(", ")}
+      `;
+      
+      const ticketPayload = {
+        contactId: contactId,
+        status: "new",
+        priority: "medium",
+        title: `Offerte Aanvraag - ${data.firstName} ${data.lastName}`,
+        description: projectDetails,
+        source: "Website"
+      };
+      
+      const response = await fetch(`${GHL_BASE_URL}/api/v1/tickets`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${GHL_API_KEY}`,
+          'Version': '2021-07-28'
+        },
+        body: JSON.stringify(ticketPayload)
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Failed to create ticket: ${response.status}`);
+      }
+      
+      const ticketData = await response.json();
+      console.log('GHL Ticket created:', ticketData);
+      return true;
+    } catch (error) {
+      console.error('Error creating GHL ticket:', error);
+      return false;
+    }
+  };
+
   const submitForm = async () => {
     if (!validateCurrentStep()) return;
     
     setIsSubmitting(true);
     
     try {
+      // 1. Try to send to N8N webhook (original implementation)
       const submissionSuccess = await sendFormData(formData);
       
       if (!submissionSuccess) {
-        console.warn('Form submission failed, but continuing with the process');
+        console.warn('N8N form submission failed, but continuing with GHL submission');
       }
       
+      // 2. Create contact in GoHighLevel
+      const contactId = await createGHLContact(formData);
+      
+      if (contactId) {
+        // 3. Create ticket in GoHighLevel if contact was created
+        await createGHLTicket(contactId, formData);
+      }
+      
+      // Add slight delay for better UX
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
@@ -235,6 +350,7 @@ const Offerte: React.FC = () => {
       setFormData(initialFormData);
       setStep(1);
     } catch (error) {
+      console.error('Error during form submission:', error);
       toast({
         variant: "destructive",
         title: "Er is een fout opgetreden",
@@ -249,10 +365,19 @@ const Offerte: React.FC = () => {
     setIsSubmitting(true);
     
     try {
+      // Send to N8N webhook
       const submissionSuccess = await sendFormData(demoFormData);
       
       if (!submissionSuccess) {
         console.warn('Demo form submission failed');
+      }
+      
+      // Create contact in GoHighLevel
+      const contactId = await createGHLContact(demoFormData);
+      
+      if (contactId) {
+        // Create ticket in GoHighLevel
+        await createGHLTicket(contactId, demoFormData);
       }
       
       toast({
@@ -262,6 +387,7 @@ const Offerte: React.FC = () => {
       
       navigate('/offerte/success');
     } catch (error) {
+      console.error('Error during demo submission:', error);
       toast({
         variant: "destructive",
         title: "Er is een fout opgetreden",
