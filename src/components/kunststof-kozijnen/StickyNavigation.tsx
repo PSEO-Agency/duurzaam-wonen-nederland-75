@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
@@ -93,7 +92,7 @@ const StickyNavigation: React.FC = () => {
 
   return (
     <div ref={ref}>
-      <nav className={`sticky top-20 z-20 bg-white border-b shadow-sm transition-all duration-300 ${!inView ? 'shadow-md' : ''}`}>
+      <nav className={`fixed top-20 left-0 right-0 z-20 bg-white border-b shadow-sm transition-all duration-300 ${!inView ? 'shadow-md' : ''}`}>
         <div className="container mx-auto px-4">
           {/* Breadcrumb navigation */}
           <div className="py-2 overflow-x-auto">
@@ -168,6 +167,8 @@ const StickyNavigation: React.FC = () => {
           </div>
         </div>
       </nav>
+      {/* Add a spacer div to prevent content jump when nav becomes fixed */}
+      <div className="h-[48px]" />
     </div>
   );
 };
