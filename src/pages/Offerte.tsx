@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ArrowRight, CheckCircle, Info, Zap } from 'lucide-react';
@@ -95,9 +94,11 @@ const demoFormData: OfferteFormData = {
   termsAccepted: true
 };
 
+// Define webhook URLs
 const FORM_SUBMISSION_ENDPOINT = 'https://n8n.virtualmin.programmaticseobuilder.com/webhook/a8d7075d-1b28-494f-86a0-c05adf144309';
-const GHL_API_KEY = 'pit-c12a2cf9-f10a-4eb0-a879-2e5638660da6';
-const GHL_BASE_URL = 'https://services.leadconnectorhq.com';
+// Replace this with your actual GoHighLevel webhook URL - users will need to create this in GHL
+const GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/webhooks/your-webhook-id';
+const WEBHOOK_RETRY_ATTEMPTS = 2;
 
 const Offerte: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -184,6 +185,7 @@ const Offerte: React.FC = () => {
     return isValid;
   };
 
+  // Updated to send data to N8N webhook as a backup
   const sendFormData = async (data: OfferteFormData) => {
     try {
       const params = new URLSearchParams();
@@ -206,135 +208,122 @@ const Offerte: React.FC = () => {
         },
       });
       
-      console.log('Form data submitted successfully');
+      console.log('Form data submitted successfully to N8N');
       return true;
     } catch (error) {
-      console.error('Error submitting form data:', error);
+      console.error('Error submitting form data to N8N:', error);
       return false;
     }
   };
 
-  // New function to create contact in GoHighLevel
-  const createGHLContact = async (data: OfferteFormData) => {
+  // New function to send data to GoHighLevel webhook
+  const sendToGHLWebhook = async (data: OfferteFormData, retryCount = 0): Promise<boolean> => {
     try {
-      const contactPayload = {
-        email: data.email,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        phone: data.phone,
-        address1: data.address,
-        city: data.city,
-        postalCode: data.postalCode,
-        source: "Website Offerte",
-        customField: {
-          "Project Type": data.projectType,
-          "Property Type": data.propertyType,
-          "Timeline": data.timeline,
-          "Window Types": data.windowTypes.join(", "),
-          "Quantity": data.quantity,
-          "Dimensions": data.dimensions,
-          "Color": data.color,
-          "Additional Info": data.additionalInfo,
-          "Preferred Contact": data.preferredContact,
-          "Availability": data.availability.join(", ")
+      // Format the data according to GoHighLevel webhook expectations
+      const ghlPayload = {
+        // Contact Information
+        contact: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          phone: data.phone,
+          address: {
+            line1: data.address,
+            city: data.city,
+            postalCode: data.postalCode,
+            country: "Netherlands"
+          }
+        },
+        // Opportunity Information
+        opportunity: {
+          name: `Offerte Aanvraag - ${data.firstName} ${data.lastName}`,
+          value: 0, // Set an estimated value if known
+          pipelineStageId: "new", // Replace with your actual pipeline stage ID
+          status: "open",
+          source: "Website Offerte"
+        },
+        // Project Details - will be saved as custom fields
+        customFields: {
+          projectType: data.projectType,
+          propertyType: data.propertyType,
+          timeline: data.timeline,
+          windowTypes: data.windowTypes.join(", "),
+          quantity: data.quantity,
+          dimensions: data.dimensions,
+          color: data.color,
+          additionalInfo: data.additionalInfo || "Geen extra informatie",
+          preferredContact: data.preferredContact,
+          availability: data.availability.join(", ")
+        },
+        // Additional metadata
+        meta: {
+          timestamp: new Date().toISOString(),
+          source: window.location.origin,
+          formType: "Offerte Aanvraag"
         }
       };
-      
-      const response = await fetch(`${GHL_BASE_URL}/api/v1/contacts`, {
+
+      const response = await fetch(GHL_WEBHOOK_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${GHL_API_KEY}`,
-          'Version': '2021-07-28'
         },
-        body: JSON.stringify(contactPayload)
+        body: JSON.stringify(ghlPayload)
       });
-      
+
       if (!response.ok) {
-        throw new Error(`Failed to create contact: ${response.status}`);
+        const responseText = await response.text();
+        throw new Error(`GHL webhook error: ${response.status} - ${responseText}`);
       }
-      
-      const contactData = await response.json();
-      console.log('GHL Contact created:', contactData);
-      return contactData.id;
-    } catch (error) {
-      console.error('Error creating GHL contact:', error);
-      return null;
-    }
-  };
 
-  // New function to create ticket in GoHighLevel
-  const createGHLTicket = async (contactId: string, data: OfferteFormData) => {
-    try {
-      // Create details from all form fields
-      const projectDetails = `
-Project Type: ${data.projectType}
-Property Type: ${data.propertyType}
-Timeline: ${data.timeline}
-
-Window Details:
-- Types: ${data.windowTypes.join(", ")}
-- Quantity: ${data.quantity}
-- Dimensions: ${data.dimensions}
-- Color: ${data.color}
-- Additional Info: ${data.additionalInfo}
-
-Contact Preferences:
-- Method: ${data.preferredContact}
-- Availability: ${data.availability.join(", ")}
-      `;
-      
-      const ticketPayload = {
-        contactId: contactId,
-        status: "new",
-        priority: "medium",
-        title: `Offerte Aanvraag - ${data.firstName} ${data.lastName}`,
-        description: projectDetails,
-        source: "Website"
-      };
-      
-      const response = await fetch(`${GHL_BASE_URL}/api/v1/tickets`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${GHL_API_KEY}`,
-          'Version': '2021-07-28'
-        },
-        body: JSON.stringify(ticketPayload)
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Failed to create ticket: ${response.status}`);
-      }
-      
-      const ticketData = await response.json();
-      console.log('GHL Ticket created:', ticketData);
+      console.log('Form data submitted successfully to GoHighLevel webhook');
       return true;
     } catch (error) {
-      console.error('Error creating GHL ticket:', error);
+      console.error('Error submitting to GoHighLevel webhook:', error);
+      
+      // Implement retry logic for transient errors
+      if (retryCount < WEBHOOK_RETRY_ATTEMPTS) {
+        console.log(`Retrying GHL webhook submission (${retryCount + 1}/${WEBHOOK_RETRY_ATTEMPTS})...`);
+        // Wait for 1 second before retrying
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        return sendToGHLWebhook(data, retryCount + 1);
+      }
+      
       return false;
     }
   };
 
+  // Updated submitForm function to use both webhooks
   const submitForm = async () => {
     if (!validateCurrentStep()) return;
     
     setIsSubmitting(true);
     
     try {
-      // 1. Try to send to N8N webhook (original implementation)
-      const submissionSuccess = await sendFormData(formData);
+      // Create a flag to track overall success status
+      let submissionSuccess = false;
       
-      if (!submissionSuccess) {
-        console.warn('N8N form submission failed, but continuing with GHL submission');
+      // First try the GHL webhook
+      const ghlSuccess = await sendToGHLWebhook(formData);
+      
+      if (ghlSuccess) {
+        submissionSuccess = true;
+        console.log('GHL webhook submission successful');
+      } else {
+        console.warn('GHL webhook submission failed, trying backup N8N webhook...');
+        
+        // If GHL fails, fall back to N8N webhook
+        const n8nSuccess = await sendFormData(formData);
+        
+        if (n8nSuccess) {
+          submissionSuccess = true;
+          console.log('Backup N8N webhook submission successful');
+        }
       }
       
-      // 2. Create contact in GoHighLevel
-      const contactId = await createGHLContact(formData);
-      
-      if (contactId) {
-        // 3. Create ticket in GoHighLevel if contact was created
-        await createGHLTicket(contactId, formData);
+      // If both submission methods failed
+      if (!submissionSuccess) {
+        throw new Error('All submission methods failed');
       }
       
       // Add slight delay for better UX
@@ -361,23 +350,17 @@ Contact Preferences:
     }
   };
 
+  // Updated submitDemoForm to use both webhooks
   const submitDemoForm = async () => {
     setIsSubmitting(true);
     
     try {
-      // Send to N8N webhook
-      const submissionSuccess = await sendFormData(demoFormData);
+      // Try GHL webhook first
+      const ghlSuccess = await sendToGHLWebhook(demoFormData);
       
-      if (!submissionSuccess) {
-        console.warn('Demo form submission failed');
-      }
-      
-      // Create contact in GoHighLevel
-      const contactId = await createGHLContact(demoFormData);
-      
-      if (contactId) {
-        // Create ticket in GoHighLevel
-        await createGHLTicket(contactId, demoFormData);
+      // If GHL fails, use N8N as backup
+      if (!ghlSuccess) {
+        await sendFormData(demoFormData);
       }
       
       toast({
