@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Search as SearchIcon } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { 
   CommandDialog, 
@@ -11,6 +11,7 @@ import {
   Command 
 } from '@/components/ui/command';
 import { useSearch } from '@/contexts/SearchContext';
+import { Button } from '@/components/ui/button';
 
 interface SearchCommandMenuProps {
   isMobile?: boolean;
@@ -36,7 +37,6 @@ const SearchCommandMenu: React.FC<SearchCommandMenuProps> = ({ isMobile = false 
   const handleOpenChange = (open: boolean) => {
     setOpen(open);
     if (!open) {
-      // Clear results when closing the dialog
       setTimeout(() => {
         clearResults();
       }, 300);
@@ -54,17 +54,15 @@ const SearchCommandMenu: React.FC<SearchCommandMenuProps> = ({ isMobile = false 
 
   return (
     <>
-      <div 
-        className={`${isMobile ? 'w-full' : 'hidden md:flex items-center border border-gray-300 rounded-full px-3 py-1.5 cursor-pointer'}`}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="h-9 w-9"
         onClick={() => setOpen(true)}
       >
-        {!isMobile && (
-          <>
-            <SearchIcon size={18} className="text-gray-500 mr-2" />
-            <div className="flex-1 text-sm text-gray-500 truncate">Zoeken <kbd className="ml-2 text-xs border border-gray-300 rounded px-1 py-0.5 bg-gray-50">⌘K</kbd></div>
-          </>
-        )}
-      </div>
+        <Search className="h-4 w-4" />
+        <span className="sr-only">Zoeken</span>
+      </Button>
 
       <CommandDialog open={open} onOpenChange={handleOpenChange}>
         <Command className="rounded-lg border shadow-md">
@@ -164,7 +162,7 @@ const SearchCommandMenu: React.FC<SearchCommandMenuProps> = ({ isMobile = false 
                 onSelect={() => handleSelect(`/zoeken?q=${encodeURIComponent(searchTerm)}`)}
                 className="border-t pt-2 mt-2"
               >
-                <SearchIcon className="mr-2 h-4 w-4" />
+                <Search className="mr-2 h-4 w-4" />
                 <span>Bekijk alle resultaten voor "{searchTerm}"</span>
               </CommandItem>
             )}

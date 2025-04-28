@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
   NavigationMenu,
@@ -90,17 +90,14 @@ const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             <Logo />
             
-            <div className="hidden md:block w-48 mx-4">
-              <SearchCommandMenu />
-            </div>
-            
             <NavigationMenu className="hidden md:flex flex-1 justify-center px-4">
               <NavigationMenuList className="flex flex-wrap gap-2">
                 <NavMenuItems />
               </NavigationMenuList>
             </NavigationMenu>
 
-            <div className="hidden md:block ml-4">
+            <div className="hidden md:flex items-center space-x-4">
+              <SearchCommandMenu />
               <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark">
                 <Link to="/offerte">
                   Offerte Aanvragen
