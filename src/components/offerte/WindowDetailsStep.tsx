@@ -2,6 +2,7 @@
 import React from 'react';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { OfferteFormData } from '@/pages/Offerte';
@@ -13,26 +14,20 @@ interface WindowDetailsStepProps {
 
 const WindowDetailsStep: React.FC<WindowDetailsStepProps> = ({ formData, updateFormData }) => {
   const windowTypeOptions = [
-    { 
-      id: 'kunststof', 
-      label: 'Kunststof kozijnen'
-    },
-    { 
-      id: 'schuifpui', 
-      label: 'Schuifpui'
-    },
-    { 
-      id: 'tuindeuren', 
-      label: 'Tuindeuren'
-    },
-    { 
-      id: 'deur', 
-      label: 'Voor/Achterdeur'
-    },
-    { 
-      id: 'anders', 
-      label: 'Anders / Nader te bepalen'
-    }
+    { id: 'kunststof', label: 'Kunststof kozijnen' },
+    { id: 'schuifpui', label: 'Schuifpui' },
+    { id: 'tuindeuren', label: 'Tuindeuren' },
+    { id: 'deur', label: 'Voor/Achterdeur' },
+    { id: 'anders', label: 'Anders / Nader te bepalen' }
+  ];
+
+  const colorOptions = [
+    { value: 'wit', label: 'Wit' },
+    { value: 'antraciet', label: 'Antraciet' },
+    { value: 'zwart', label: 'Zwart' },
+    { value: 'crème', label: 'Crème' },
+    { value: 'houtlook', label: 'Houtlook' },
+    { value: 'anders', label: 'Anders / Nader te bepalen' }
   ];
 
   const handleWindowTypeToggle = (type: string) => {
@@ -82,18 +77,45 @@ const WindowDetailsStep: React.FC<WindowDetailsStepProps> = ({ formData, updateF
           </div>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <Label htmlFor="quantity" className="text-base mb-1.5 block">Aantal kozijnen</Label>
+            <Select value={formData.quantity} onValueChange={(value) => updateFormData('quantity', value)}>
+              <SelectTrigger id="quantity" className="border-gray-300">
+                <SelectValue placeholder="Selecteer aantal kozijnen" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1-3">1-3 kozijnen</SelectItem>
+                <SelectItem value="3-6">3-6 kozijnen</SelectItem>
+                <SelectItem value="6-9">6-9 kozijnen</SelectItem>
+                <SelectItem value="9+">9 of meer kozijnen</SelectItem>
+                <SelectItem value="anders">Anders / Nader te bepalen</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div>
+            <Label htmlFor="dimensions" className="text-base mb-1.5 block">Afmetingen (indien bekend)</Label>
+            <Input 
+              id="dimensions" 
+              placeholder="Bijv. 120x150 cm" 
+              className="border-gray-300"
+              value={formData.dimensions}
+              onChange={(e) => updateFormData('dimensions', e.target.value)}
+            />
+          </div>
+        </div>
+        
         <div>
-          <Label htmlFor="quantity" className="text-base mb-1.5 block">Aantal kozijnen</Label>
-          <Select value={formData.quantity} onValueChange={(value) => updateFormData('quantity', value)}>
-            <SelectTrigger id="quantity" className="border-gray-300">
-              <SelectValue placeholder="Selecteer aantal kozijnen" />
+          <Label htmlFor="color" className="text-base mb-1.5 block">Gewenste kleur</Label>
+          <Select value={formData.color} onValueChange={(value) => updateFormData('color', value)}>
+            <SelectTrigger id="color" className="border-gray-300">
+              <SelectValue placeholder="Selecteer een kleur" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="1-3">1-3 kozijnen</SelectItem>
-              <SelectItem value="3-6">3-6 kozijnen</SelectItem>
-              <SelectItem value="6-9">6-9 kozijnen</SelectItem>
-              <SelectItem value="9+">9 of meer kozijnen</SelectItem>
-              <SelectItem value="anders">Anders / Nader te bepalen</SelectItem>
+              {colorOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>

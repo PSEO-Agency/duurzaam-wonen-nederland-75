@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ArrowRight, CheckCircle, Info, Zap } from 'lucide-react';
@@ -95,7 +94,7 @@ const demoFormData: OfferteFormData = {
   termsAccepted: true
 };
 
-const WEBHOOK_URL = 'https://n8n.virtualmin.programmaticseobuilder.com/webhook/a8d7075d-1b28-494f-86a0-c05adf144309';
+const FORM_SUBMISSION_ENDPOINT = 'https://n8n.virtualmin.programmaticseobuilder.com/webhook/a8d7075d-1b28-494f-86a0-c05adf144309';
 
 const Offerte: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -182,7 +181,7 @@ const Offerte: React.FC = () => {
     return isValid;
   };
 
-  const sendToWebhook = async (data: OfferteFormData) => {
+  const sendFormData = async (data: OfferteFormData) => {
     try {
       const params = new URLSearchParams();
       
@@ -197,17 +196,17 @@ const Offerte: React.FC = () => {
       params.append('timestamp', new Date().toISOString());
       params.append('source', window.location.origin);
       
-      const response = await fetch(`${WEBHOOK_URL}?${params.toString()}`, {
+      const response = await fetch(`${FORM_SUBMISSION_ENDPOINT}?${params.toString()}`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
         },
       });
       
-      console.log('Data sent to webhook successfully');
+      console.log('Form data submitted successfully');
       return true;
     } catch (error) {
-      console.error('Error sending data to webhook:', error);
+      console.error('Error submitting form data:', error);
       return false;
     }
   };
@@ -218,10 +217,10 @@ const Offerte: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      const webhookSuccess = await sendToWebhook(formData);
+      const submissionSuccess = await sendFormData(formData);
       
-      if (!webhookSuccess) {
-        console.warn('Webhook submission failed, but continuing with form submission');
+      if (!submissionSuccess) {
+        console.warn('Form submission failed, but continuing with the process');
       }
       
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -241,6 +240,7 @@ const Offerte: React.FC = () => {
         title: "Er is een fout opgetreden",
         description: "Probeer het later opnieuw of neem telefonisch contact op.",
       });
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -249,10 +249,10 @@ const Offerte: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      const webhookSuccess = await sendToWebhook(demoFormData);
+      const submissionSuccess = await sendFormData(demoFormData);
       
-      if (!webhookSuccess) {
-        console.warn('Demo webhook submission failed');
+      if (!submissionSuccess) {
+        console.warn('Demo form submission failed');
       }
       
       toast({

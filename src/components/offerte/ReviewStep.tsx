@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
 import { Check, Info } from 'lucide-react';
@@ -77,6 +78,25 @@ const ReviewStep: React.FC<ReviewStepProps> = ({ formData }) => {
               <div>
                 <dt className="text-sm text-gray-500">Aantal</dt>
                 <dd className="text-sm font-medium">{formData.quantity}</dd>
+              </div>
+            )}
+            {formData.dimensions && (
+              <div>
+                <dt className="text-sm text-gray-500">Afmetingen</dt>
+                <dd className="text-sm font-medium">{formData.dimensions}</dd>
+              </div>
+            )}
+            {formData.color && (
+              <div>
+                <dt className="text-sm text-gray-500">Kleur</dt>
+                <dd className="text-sm font-medium">
+                  {formData.color === 'wit' && 'Wit'}
+                  {formData.color === 'antraciet' && 'Antraciet'}
+                  {formData.color === 'zwart' && 'Zwart'}
+                  {formData.color === 'crème' && 'Crème'}
+                  {formData.color === 'houtlook' && 'Houtlook'}
+                  {formData.color === 'anders' && 'Anders / Nader te bepalen'}
+                </dd>
               </div>
             )}
             {formData.additionalInfo && (
