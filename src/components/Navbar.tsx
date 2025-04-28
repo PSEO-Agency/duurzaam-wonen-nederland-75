@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Search } from 'lucide-react';
@@ -104,8 +103,8 @@ const Navbar: React.FC = () => {
               
               <Button 
                 asChild 
-                size="lg" 
-                className="bg-gradient-to-r from-brand-green to-brand-green-dark hover:from-brand-green-dark hover:to-brand-green text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 rounded-full px-6"
+                size="lg"
+                variant="default"
               >
                 <Link to="/offerte">
                   Offerte Aanvragen
