@@ -95,7 +95,6 @@ const demoFormData: OfferteFormData = {
 };
 
 const FORM_SUBMISSION_ENDPOINT = 'https://n8n.virtualmin.programmaticseobuilder.com/webhook/a8d7075d-1b28-494f-86a0-c05adf144309';
-const GOHIGHLEVEL_ENDPOINT = 'https://rest.gohighlevel.com/v1/contacts/';
 
 const Offerte: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -212,61 +211,16 @@ const Offerte: React.FC = () => {
     }
   };
 
-  const sendToGoHighLevel = async (data: OfferteFormData) => {
-    try {
-      const response = await fetch(GOHIGHLEVEL_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer pit-c12a2cf9-f10a-4eb0-a879-2e5638660da6`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: data.email,
-          phone: data.phone,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          address1: data.address,
-          city: data.city,
-          postalCode: data.postalCode,
-          source: window.location.origin,
-          tags: ['Website Offerte'],
-          customField: {
-            projectType: data.projectType,
-            propertyType: data.propertyType,
-            timeline: data.timeline,
-            windowTypes: data.windowTypes.join(', '),
-            quantity: data.quantity,
-            dimensions: data.dimensions,
-            color: data.color,
-            additionalInfo: data.additionalInfo
-          }
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit to GoHighLevel');
-      }
-
-      console.log('Successfully submitted to GoHighLevel');
-      return true;
-    } catch (error) {
-      console.error('Error submitting to GoHighLevel:', error);
-      return false;
-    }
-  };
-
   const submitForm = async () => {
     if (!validateCurrentStep()) return;
     
     setIsSubmitting(true);
     
     try {
-      const n8nSuccess = await sendFormData(formData);
+      const submissionSuccess = await sendFormData(formData);
       
-      const ghlSuccess = await sendToGoHighLevel(formData);
-      
-      if (!n8nSuccess && !ghlSuccess) {
-        throw new Error('Both submissions failed');
+      if (!submissionSuccess) {
+        console.warn('Form submission failed, but continuing with the process');
       }
       
       await new Promise(resolve => setTimeout(resolve, 1000));
