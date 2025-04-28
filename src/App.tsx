@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -31,8 +30,6 @@ import Geschiedenis from "./pages/over-ons/Geschiedenis";
 import Missie from "./pages/over-ons/Missie";
 import Duurzaamheid from "./pages/over-ons/Duurzaamheid";
 import Vacatures from "./pages/over-ons/Vacatures";
-import Kennisbank from "./pages/Kennisbank";
-import KennisbankDetail from "./pages/KennisbankDetail";
 import Offerte from "./pages/Offerte";
 import OfferteSuccess from "./pages/OfferteSuccess";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -105,8 +102,6 @@ const App = () => (
             <Route path="/over-ons/missie" element={<Missie />} />
             <Route path="/over-ons/duurzaamheid" element={<Duurzaamheid />} />
             <Route path="/over-ons/vacatures" element={<Vacatures />} />
-            <Route path="/kennisbank" element={<Kennisbank />} />
-            <Route path="/kennisbank/:articleSlug" element={<KennisbankDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </SearchProvider>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Phone, MessageCircle, ChevronDown, ChevronRight } from 'lucide-react';
@@ -42,7 +41,6 @@ const Navbar: React.FC = () => {
   
   const topNavItems = [
     { label: 'Blog', href: '/blog' },
-    { label: 'Kennisbank', href: '/kennisbank' },
     { label: 'Werkgebied', href: '/werkgebied' },
     { label: 'Contact', href: '/contact' },
   ];
