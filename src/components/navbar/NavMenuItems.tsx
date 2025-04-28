@@ -45,18 +45,18 @@ export const NavMenuItems = () => {
     if (item.href.startsWith('#')) {
       return (
         <a href={item.href} className={megaMenuItemClass}>
-          <div>
-            <ChevronRight size={16} className="mb-2" />
-            <span>{item.label}</span>
+          <div className="flex items-center">
+            <ChevronRight size={16} className="mr-2 flex-shrink-0" />
+            <span className="line-clamp-2">{item.label}</span>
           </div>
         </a>
       );
     }
     return (
       <Link to={item.href} className={megaMenuItemClass}>
-        <div>
-          <ChevronRight size={16} className="mb-2" />
-          <span>{item.label}</span>
+        <div className="flex items-center">
+          <ChevronRight size={16} className="mr-2 flex-shrink-0" />
+          <span className="line-clamp-2">{item.label}</span>
         </div>
       </Link>
     );
@@ -69,15 +69,15 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-full bg-white">
-            <div className="max-w-7xl mx-auto py-8 px-4">
+          <div className="w-full bg-white shadow-lg">
+            <div className="max-w-7xl mx-auto py-8 px-4 w-full">
               <h3 className={megaMenuHeaderClass}>Ontdek onze oplossingen</h3>
-              <div className="grid grid-cols-2 gap-8 mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-4 text-lg">Oplossingen</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {oplossingenItems.map((item) => (
-                      <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
+                      <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow h-16 flex">
                         {renderMenuLink(item)}
                       </div>
                     ))}
@@ -85,9 +85,9 @@ export const NavMenuItems = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-4 text-lg">Producten</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {productenItems.map((item) => (
-                      <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
+                      <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow h-16 flex">
                         {renderMenuLink(item)}
                       </div>
                     ))}
@@ -114,12 +114,12 @@ export const NavMenuItems = () => {
           Over ons
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-full bg-white">
-            <div className="max-w-7xl mx-auto py-8 px-4">
+          <div className="w-full bg-white shadow-lg">
+            <div className="max-w-7xl mx-auto py-8 px-4 w-full">
               <h3 className={megaMenuHeaderClass}>Over ons</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
                 {overOnsItems.map((item) => (
-                  <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
+                  <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow h-16 flex">
                     {renderMenuLink(item)}
                   </div>
                 ))}
