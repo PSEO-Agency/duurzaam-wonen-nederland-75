@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
@@ -99,7 +98,7 @@ const StickyNavigation: React.FC = () => {
       {/* Navigation that becomes sticky */}
       <nav 
         className={`bg-white border-b shadow-sm transition-all duration-300 ${
-          !inView ? 'fixed top-20 left-0 right-0 z-20 shadow-md' : ''
+          !inView ? 'fixed top-[80px] left-0 right-0 z-20 shadow-md' : ''
         }`}
       >
         <div className="container mx-auto px-4">
