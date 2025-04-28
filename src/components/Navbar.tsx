@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             <Logo />
             
-            <div className="hidden md:block w-64 mx-4">
+            <div className="hidden md:block w-48 mx-4">
               <SearchCommandMenu />
             </div>
             
