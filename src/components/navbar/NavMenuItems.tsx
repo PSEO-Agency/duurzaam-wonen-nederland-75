@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
@@ -10,8 +9,8 @@ interface MenuSection {
 }
 
 const menuItemClass = "text-gray-700 hover:text-brand-green transition-colors duration-200 text-sm font-medium px-2";
-const megaMenuItemClass = "flex items-center text-gray-700 hover:text-brand-green text-sm";
-const megaMenuHeaderClass = "font-bold text-lg mb-4 text-gray-800";
+const megaMenuItemClass = "flex items-center text-gray-700 hover:text-brand-green text-sm h-full w-full p-4 rounded-lg hover:bg-gray-50 transition-all duration-200";
+const megaMenuHeaderClass = "font-bold text-xl mb-6 text-gray-800";
 
 export const mainNavItems: MenuSection[] = [
   { label: 'Projecten', href: '/projecten' },
@@ -45,15 +44,19 @@ export const NavMenuItems = () => {
     if (item.href.startsWith('#')) {
       return (
         <a href={item.href} className={megaMenuItemClass}>
-          <ChevronRight size={16} className="mr-2" />
-          <span>{item.label}</span>
+          <div>
+            <ChevronRight size={16} className="mb-2" />
+            <span>{item.label}</span>
+          </div>
         </a>
       );
     }
     return (
       <Link to={item.href} className={megaMenuItemClass}>
-        <ChevronRight size={16} className="mr-2" />
-        <span>{item.label}</span>
+        <div>
+          <ChevronRight size={16} className="mb-2" />
+          <span>{item.label}</span>
+        </div>
       </Link>
     );
   };
@@ -65,27 +68,32 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent className="w-full">
-          <div className="container mx-auto py-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="container mx-auto py-8">
+            <div className="grid grid-cols-1 gap-8">
               <div>
-                <h3 className={megaMenuHeaderClass}>Oplossingen</h3>
-                <ul className="space-y-3">
-                  {oplossingenItems.map((item) => (
-                    <li key={item.label}>
-                      {renderMenuLink(item)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className={megaMenuHeaderClass}>Producten</h3>
-                <ul className="space-y-3">
-                  {productenItems.map((item) => (
-                    <li key={item.label}>
-                      {renderMenuLink(item)}
-                    </li>
-                  ))}
-                </ul>
+                <h3 className={megaMenuHeaderClass}>Ontdek onze oplossingen</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-4">
+                    <h4 className="font-semibold text-gray-900 mb-4">Oplossingen</h4>
+                    <div className="grid grid-cols-1 gap-3">
+                      {oplossingenItems.map((item) => (
+                        <div key={item.label} className="bg-white shadow-sm border rounded-lg">
+                          {renderMenuLink(item)}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h4 className="font-semibold text-gray-900 mb-4">Producten</h4>
+                    <div className="grid grid-cols-1 gap-3">
+                      {productenItems.map((item) => (
+                        <div key={item.label} className="bg-white shadow-sm border rounded-lg">
+                          {renderMenuLink(item)}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -107,15 +115,15 @@ export const NavMenuItems = () => {
           Over ons
         </NavigationMenuTrigger>
         <NavigationMenuContent className="w-full">
-          <div className="container mx-auto py-6">
+          <div className="container mx-auto py-8">
             <h3 className={megaMenuHeaderClass}>Over ons</h3>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {overOnsItems.map((item) => (
-                <li key={item.label}>
+                <div key={item.label} className="bg-white shadow-sm border rounded-lg">
                   {renderMenuLink(item)}
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </NavigationMenuContent>
       </NavigationMenuItem>
