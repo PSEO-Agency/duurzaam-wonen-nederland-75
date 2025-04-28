@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Phone, MessageCircle, ChevronDown, ChevronRight } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
@@ -128,44 +128,20 @@ const Navbar: React.FC = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex-shrink-0">
               <img 
                 src="/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png" 
                 alt="Duurzaam Wonen Logo" 
-                className="h-12"
+                className="h-12 w-auto object-contain"
               />
             </Link>
             
-            <div className="flex md:hidden items-center gap-2 mx-auto">
-              <Button 
-                asChild
-                size="icon" 
-                variant="ghost" 
-                className="text-gray-700 hover:text-brand-green hover:bg-brand-green/10 h-9 w-9"
-              >
-                <a href="tel:0533030213">
-                  <Phone size={20} />
-                </a>
-              </Button>
-              
-              <Button 
-                asChild
-                size="icon" 
-                variant="ghost" 
-                className="text-gray-700 hover:text-brand-green hover:bg-brand-green/10 h-9 w-9"
-              >
-                <a href="https://wa.me/+310533030213">
-                  <MessageCircle size={20} />
-                </a>
-              </Button>
-            </div>
-            
-            <div className="hidden md:block">
+            <div className="hidden md:block flex-1 max-w-xl mx-8">
               <SearchCommandMenu />
             </div>
             
-            <NavigationMenu className="hidden md:flex ml-6">
-              <NavigationMenuList>
+            <NavigationMenu className="hidden md:flex">
+              <NavigationMenuList className="whitespace-nowrap">
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>Oplossingen</NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-white p-4 rounded-md shadow-lg">
@@ -225,26 +201,6 @@ const Navbar: React.FC = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            
-            <div className="hidden md:flex items-center gap-3 ml-4">              
-              <Button asChild className="bg-brand-green text-white hover:bg-brand-green-dark transition-colors">
-                <a href="tel:0533030213" className="flex items-center gap-2">
-                  <Phone size={16} />
-                  <span>053-3030213</span>
-                </a>
-              </Button>
-              
-              <Button 
-                asChild
-                variant="outline" 
-                className="border-brand-green text-brand-green hover:bg-brand-green/10 flex items-center gap-2"
-              >
-                <a href="https://wa.me/+310533030213">
-                  <MessageCircle size={20} />
-                  <span>WhatsApp</span>
-                </a>
-              </Button>
-            </div>
             
             <button
               className="md:hidden focus:outline-none"
