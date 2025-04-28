@@ -2,15 +2,16 @@
 import React from 'react';
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 
 interface MenuSection {
   label: string;
   href: string;
-  description?: string;
-  icon?: React.ReactNode;
 }
 
 const menuItemClass = "text-gray-700 hover:text-brand-green transition-colors duration-200 text-sm font-medium px-2";
+const megaMenuItemClass = "flex items-center text-gray-700 hover:text-brand-green text-sm h-full w-full p-4 rounded-lg hover:bg-gray-50 transition-all duration-200";
+const megaMenuHeaderClass = "font-bold text-xl mb-6 text-gray-800";
 
 export const mainNavItems: MenuSection[] = [
   { label: 'Projecten', href: '/projecten' },
@@ -19,75 +20,48 @@ export const mainNavItems: MenuSection[] = [
 ];
 
 export const oplossingenItems: MenuSection[] = [
-  { 
-    label: 'Kunststof Schuifpuien', 
-    href: '/kunststof-schuifpuien',
-    description: 'Moderne schuifpuien voor uw woning of bedrijfspand'
-  },
-  { 
-    label: 'Kunststof Deuren', 
-    href: '/kunststof-deuren',
-    description: 'Duurzame en energiezuinige deuroplossingen'
-  },
-  { 
-    label: 'Gevelbekleding', 
-    href: '/gevelbekleding',
-    description: 'Moderne en onderhoudsarme geveloplossingen'
-  },
+  { label: 'Kunststof Schuifpuien', href: '/kunststof-schuifpuien' },
+  { label: 'Kunststof Deuren', href: '/kunststof-deuren' },
+  { label: 'Gevelbekleding', href: '/gevelbekleding' },
 ];
 
 export const productenItems: MenuSection[] = [
-  { 
-    label: 'Kunststof Kozijnen', 
-    href: '/kunststof-kozijnen',
-    description: 'Hoogwaardige kunststof kozijnen met uitstekende isolatie'
-  },
-  { 
-    label: 'HSB wanden', 
-    href: '#hsb-wanden',
-    description: 'Houtskeletbouw voor duurzame wandconstructies'
-  },
-  { 
-    label: 'Hellend dak', 
-    href: '#hellend-dak',
-    description: 'Optimale dakoplossingen voor elk type woning'
-  },
-  { 
-    label: 'Plat dak', 
-    href: '#plat-dak',
-    description: 'Moderne en efficiënte platte dakconstructies'
-  },
+  { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
+  { label: 'HSB wanden', href: '#hsb-wanden' },
+  { label: 'Hellend dak', href: '#hellend-dak' },
+  { label: 'Plat dak', href: '#plat-dak' },
 ];
 
 export const overOnsItems: MenuSection[] = [
-  { 
-    label: 'Ons team', 
-    href: '/over-ons/team',
-    description: 'Maak kennis met onze vakspecialisten'
-  },
-  { 
-    label: 'Onze geschiedenis', 
-    href: '/over-ons/geschiedenis',
-    description: 'Meer dan 25 jaar ervaring in de branche'
-  },
-  { 
-    label: 'Onze missie', 
-    href: '/over-ons/missie',
-    description: 'Kwaliteit en duurzaamheid als kernwaarden'
-  },
-  { 
-    label: 'Duurzaamheid', 
-    href: '/over-ons/duurzaamheid',
-    description: 'Onze bijdrage aan een betere wereld'
-  },
-  { 
-    label: 'Vacatures', 
-    href: '/over-ons/vacatures',
-    description: 'Word onderdeel van ons team'
-  },
+  { label: 'Ons team', href: '/over-ons/team' },
+  { label: 'Onze geschiedenis', href: '/over-ons/geschiedenis' },
+  { label: 'Onze missie', href: '/over-ons/missie' },
+  { label: 'Duurzaamheid', href: '/over-ons/duurzaamheid' },
+  { label: 'Vacatures', href: '/over-ons/vacatures' },
 ];
 
 export const NavMenuItems = () => {
+  const renderMenuLink = (item: MenuSection) => {
+    if (item.href.startsWith('#')) {
+      return (
+        <a href={item.href} className={megaMenuItemClass}>
+          <div>
+            <ChevronRight size={16} className="mb-2" />
+            <span>{item.label}</span>
+          </div>
+        </a>
+      );
+    }
+    return (
+      <Link to={item.href} className={megaMenuItemClass}>
+        <div>
+          <ChevronRight size={16} className="mb-2" />
+          <span>{item.label}</span>
+        </div>
+      </Link>
+    );
+  };
+
   return (
     <>
       <NavigationMenuItem>
@@ -95,54 +69,27 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-full bg-white p-4" style={{ minWidth: '600px' }}>
-            <div className="container mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-6">
-                <div className="col-span-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Oplossingen</h3>
-                  <div className="grid grid-cols-1 gap-3">
+          <div className="w-full bg-white">
+            <div className="max-w-7xl mx-auto py-8 px-4">
+              <h3 className={megaMenuHeaderClass}>Ontdek onze oplossingen</h3>
+              <div className="grid grid-cols-2 gap-8 mt-6">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4 text-lg">Oplossingen</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {oplossingenItems.map((item) => (
-                      <Link 
-                        key={item.label}
-                        to={item.href}
-                        className="group p-3 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
-                      >
-                        <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
-                        {item.description && (
-                          <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
-                        )}
-                      </Link>
+                      <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
+                        {renderMenuLink(item)}
+                      </div>
                     ))}
                   </div>
                 </div>
-                
-                <div className="col-span-1 md:col-span-2">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Producten</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4 text-lg">Producten</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {productenItems.map((item) => (
-                      item.href.startsWith('#') ? (
-                        <a
-                          key={item.label}
-                          href={item.href}
-                          className="group p-3 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
-                        >
-                          <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
-                          {item.description && (
-                            <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
-                          )}
-                        </a>
-                      ) : (
-                        <Link
-                          key={item.label}
-                          to={item.href}
-                          className="group p-3 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
-                        >
-                          <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
-                          {item.description && (
-                            <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
-                          )}
-                        </Link>
-                      )
+                      <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
+                        {renderMenuLink(item)}
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -167,24 +114,15 @@ export const NavMenuItems = () => {
           Over ons
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-full bg-white p-4" style={{ minWidth: '600px' }}>
-            <div className="container mx-auto">
-              <div className="py-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Over ons</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                  {overOnsItems.map((item) => (
-                    <Link
-                      key={item.label}
-                      to={item.href}
-                      className="group p-3 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
-                    >
-                      <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
-                      {item.description && (
-                        <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
-                      )}
-                    </Link>
-                  ))}
-                </div>
+          <div className="w-full bg-white">
+            <div className="max-w-7xl mx-auto py-8 px-4">
+              <h3 className={megaMenuHeaderClass}>Over ons</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
+                {overOnsItems.map((item) => (
+                  <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
+                    {renderMenuLink(item)}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
