@@ -107,9 +107,9 @@ export const NavMenuItems = () => {
                         to={item.href}
                         className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2"
                       >
-                        <h4 className="font-medium text-gray-900 group-hover:text-brand-green">{item.label}</h4>
+                        <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
                         {item.description && (
-                          <p className="text-sm text-gray-500">{item.description}</p>
+                          <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
                         )}
                       </Link>
                     ))}
@@ -124,22 +124,22 @@ export const NavMenuItems = () => {
                         <a
                           key={item.label}
                           href={item.href}
-                          className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2"
+                          className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
                         >
-                          <h4 className="font-medium text-gray-900 group-hover:text-brand-green">{item.label}</h4>
+                          <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
                           {item.description && (
-                            <p className="text-sm text-gray-500">{item.description}</p>
+                            <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
                           )}
                         </a>
                       ) : (
                         <Link
                           key={item.label}
                           to={item.href}
-                          className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2"
+                          className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
                         >
-                          <h4 className="font-medium text-gray-900 group-hover:text-brand-green">{item.label}</h4>
+                          <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
                           {item.description && (
-                            <p className="text-sm text-gray-500">{item.description}</p>
+                            <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
                           )}
                         </Link>
                       )
@@ -175,11 +175,11 @@ export const NavMenuItems = () => {
                   <Link
                     key={item.label}
                     to={item.href}
-                    className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2"
+                    className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
                   >
-                    <h4 className="font-medium text-gray-900 group-hover:text-brand-green">{item.label}</h4>
+                    <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
                     {item.description && (
-                      <p className="text-sm text-gray-500">{item.description}</p>
+                      <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
                     )}
                   </Link>
                 ))}
