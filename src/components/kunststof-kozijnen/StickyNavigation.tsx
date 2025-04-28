@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
@@ -95,12 +96,8 @@ const StickyNavigation: React.FC = () => {
       {/* This is the sentinel div that we observe */}
       <div ref={ref} className="h-0 w-full" />
       
-      {/* Navigation that becomes sticky */}
-      <nav 
-        className={`bg-white border-b shadow-sm transition-all duration-300 ${
-          !inView ? 'fixed top-[80px] left-0 right-0 z-20 shadow-md' : ''
-        }`}
-      >
+      {/* Normal (non-sticky) navigation */}
+      <nav className={`bg-white border-b shadow-sm`}>
         <div className="container mx-auto px-4">
           {/* Breadcrumb navigation */}
           <div className="py-2 overflow-x-auto">
@@ -176,8 +173,84 @@ const StickyNavigation: React.FC = () => {
         </div>
       </nav>
       
-      {/* Add a spacer div only when the navigation is fixed */}
-      {!inView && <div className="h-[48px]" />}
+      {/* Sticky navigation that only appears when scrolled past original */}
+      {!inView && (
+        <nav className="fixed top-[109px] left-0 right-0 z-20 bg-white border-b shadow-md">
+          <div className="container mx-auto px-4">
+            {/* Breadcrumb navigation */}
+            <div className="py-2 overflow-x-auto">
+              <Breadcrumb>
+                <BreadcrumbList className={`text-sm ${isMobile ? 'flex-nowrap whitespace-nowrap' : ''}`}>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink asChild>
+                      <Link to="/" className="flex items-center hover:text-brand-green transition-colors">
+                        <Home className="h-3.5 w-3.5" />
+                      </Link>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator>
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </BreadcrumbSeparator>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink asChild>
+                      <Link to="/producten" className="hover:text-brand-green transition-colors">
+                        Producten
+                      </Link>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator>
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </BreadcrumbSeparator>
+                  <BreadcrumbItem>
+                    {isSubPage ? (
+                      <BreadcrumbLink asChild>
+                        <Link to="/kunststof-kozijnen" className="hover:text-brand-green transition-colors">
+                          Kunststof Kozijnen
+                        </Link>
+                      </BreadcrumbLink>
+                    ) : (
+                      <BreadcrumbPage>Kunststof Kozijnen</BreadcrumbPage>
+                    )}
+                  </BreadcrumbItem>
+                  {isSubPage && !isNestedSubPage && (
+                    <>
+                      <BreadcrumbSeparator>
+                        <ChevronRight className="h-3.5 w-3.5" />
+                      </BreadcrumbSeparator>
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>{currentPage}</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </>
+                  )}
+                  {isNestedSubPage && (
+                    <>
+                      <BreadcrumbSeparator>
+                        <ChevronRight className="h-3.5 w-3.5" />
+                      </BreadcrumbSeparator>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                          <Link 
+                            to={`/kunststof-kozijnen/${parentPage.toLowerCase()}`} 
+                            className="hover:text-brand-green transition-colors"
+                          >
+                            {parentPage}
+                          </Link>
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator>
+                        <ChevronRight className="h-3.5 w-3.5" />
+                      </BreadcrumbSeparator>
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>{currentPage}</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </>
+                  )}
+                </BreadcrumbList>
+              </Breadcrumb>
+            </div>
+          </div>
+        </nav>
+      )}
     </>
   );
 };
