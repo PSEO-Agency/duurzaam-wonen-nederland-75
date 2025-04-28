@@ -95,17 +95,17 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-full bg-white">
-            <div className="max-w-7xl mx-auto py-10 px-8">
-              <div className="grid grid-cols-3 gap-10">
-                <div className="col-span-3 md:col-span-1">
+          <div className="w-full bg-white p-4">
+            <div className="container mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-6">
+                <div className="col-span-1">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Oplossingen</h3>
-                  <div className="grid grid-cols-1 gap-4">
+                  <div className="grid grid-cols-1 gap-3">
                     {oplossingenItems.map((item) => (
                       <Link 
                         key={item.label}
                         to={item.href}
-                        className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2"
+                        className="group p-3 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
                       >
                         <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
                         {item.description && (
@@ -116,15 +116,15 @@ export const NavMenuItems = () => {
                   </div>
                 </div>
                 
-                <div className="col-span-3 md:col-span-2">
+                <div className="col-span-1 md:col-span-2">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Producten</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {productenItems.map((item) => (
                       item.href.startsWith('#') ? (
                         <a
                           key={item.label}
                           href={item.href}
-                          className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
+                          className="group p-3 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
                         >
                           <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
                           {item.description && (
@@ -135,7 +135,7 @@ export const NavMenuItems = () => {
                         <Link
                           key={item.label}
                           to={item.href}
-                          className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
+                          className="group p-3 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
                         >
                           <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
                           {item.description && (
@@ -167,22 +167,24 @@ export const NavMenuItems = () => {
           Over ons
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-full bg-white">
-            <div className="max-w-7xl mx-auto py-10 px-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-6">Over ons</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                {overOnsItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className="group p-4 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
-                  >
-                    <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
-                    {item.description && (
-                      <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
-                    )}
-                  </Link>
-                ))}
+          <div className="w-full bg-white p-4">
+            <div className="container mx-auto">
+              <div className="py-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Over ons</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                  {overOnsItems.map((item) => (
+                    <Link
+                      key={item.label}
+                      to={item.href}
+                      className="group p-3 rounded-lg border hover:border-brand-green hover:shadow-md transition-all duration-200 flex flex-col gap-2 h-full"
+                    >
+                      <h4 className="font-medium text-gray-900 group-hover:text-brand-green truncate">{item.label}</h4>
+                      {item.description && (
+                        <p className="text-sm text-gray-500 line-clamp-2">{item.description}</p>
+                      )}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
