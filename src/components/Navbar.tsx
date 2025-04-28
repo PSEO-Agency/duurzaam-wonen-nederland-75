@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Search } from 'lucide-react';
@@ -68,7 +69,7 @@ const Navbar: React.FC = () => {
       <div className="bg-black text-white py-2">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <div className="hidden md:flex">
+            <div className="hidden lg:flex">
               {topNavItems.map((item) => (
                 renderNavItem(
                   item, 
@@ -90,31 +91,38 @@ const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             <Logo />
             
-            <NavigationMenu className="hidden md:flex flex-1 justify-center px-4">
-              <NavigationMenuList className="flex flex-wrap gap-2">
+            <NavigationMenu className="hidden lg:flex justify-center px-4 whitespace-nowrap">
+              <NavigationMenuList className="flex gap-2">
                 <NavMenuItems />
               </NavigationMenuList>
             </NavigationMenu>
 
-            <div className="hidden md:flex items-center space-x-4">
-              <SearchCommandMenu />
-              <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark">
+            <div className="flex items-center gap-3">
+              <div className="hidden lg:flex items-center gap-3">
+                <SearchCommandMenu />
+              </div>
+              
+              <Button 
+                asChild 
+                size="lg" 
+                className="bg-gradient-to-r from-brand-green to-brand-green-dark hover:from-brand-green-dark hover:to-brand-green text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 rounded-full px-6"
+              >
                 <Link to="/offerte">
                   Offerte Aanvragen
                 </Link>
               </Button>
+
+              <button
+                className="lg:hidden focus:outline-none"
+                onClick={toggleMobileMenu}
+              >
+                {isMobileMenuOpen ? (
+                  <X className="h-6 w-6 text-gray-700" />
+                ) : (
+                  <Menu className="h-6 w-6 text-gray-700" />
+                )}
+              </button>
             </div>
-            
-            <button
-              className="md:hidden focus:outline-none"
-              onClick={toggleMobileMenu}
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6 text-gray-700" />
-              ) : (
-                <Menu className="h-6 w-6 text-gray-700" />
-              )}
-            </button>
           </div>
         </div>
       </div>
