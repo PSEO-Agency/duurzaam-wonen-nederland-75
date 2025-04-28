@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -91,17 +90,17 @@ const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             <Logo />
             
-            <div className="hidden md:block flex-1 max-w-[280px] mx-4">
+            <div className="hidden md:block w-64 mx-4">
               <SearchCommandMenu />
             </div>
             
-            <NavigationMenu className="hidden md:flex flex-1 justify-center">
-              <NavigationMenuList className="flex-wrap gap-1 px-2">
+            <NavigationMenu className="hidden md:flex flex-1 justify-center px-4">
+              <NavigationMenuList className="flex flex-wrap gap-2">
                 <NavMenuItems />
               </NavigationMenuList>
             </NavigationMenu>
 
-            <div className="hidden md:block">
+            <div className="hidden md:block ml-4">
               <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark">
                 <Link to="/offerte">
                   Offerte Aanvragen

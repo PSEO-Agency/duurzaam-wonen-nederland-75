@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Search as SearchIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -56,7 +55,7 @@ const SearchCommandMenu: React.FC<SearchCommandMenuProps> = ({ isMobile = false 
   return (
     <>
       <div 
-        className={`${isMobile ? 'w-full' : 'hidden md:flex items-center border border-gray-300 rounded-full px-3 py-1.5 ml-6 flex-grow max-w-md cursor-pointer'}`}
+        className={`${isMobile ? 'w-full' : 'hidden md:flex items-center border border-gray-300 rounded-full px-3 py-1.5 cursor-pointer'}`}
         onClick={() => setOpen(true)}
       >
         {!isMobile && (
