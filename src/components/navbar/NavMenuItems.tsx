@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
@@ -67,31 +68,29 @@ export const NavMenuItems = () => {
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Oplossingen
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="w-full">
-          <div className="container mx-auto py-8">
-            <div className="grid grid-cols-1 gap-8">
-              <div>
-                <h3 className={megaMenuHeaderClass}>Ontdek onze oplossingen</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-4">
-                    <h4 className="font-semibold text-gray-900 mb-4">Oplossingen</h4>
-                    <div className="grid grid-cols-1 gap-3">
-                      {oplossingenItems.map((item) => (
-                        <div key={item.label} className="bg-white shadow-sm border rounded-lg">
-                          {renderMenuLink(item)}
-                        </div>
-                      ))}
-                    </div>
+        <NavigationMenuContent>
+          <div className="w-full bg-white">
+            <div className="max-w-7xl mx-auto py-8 px-4">
+              <h3 className={megaMenuHeaderClass}>Ontdek onze oplossingen</h3>
+              <div className="grid grid-cols-2 gap-8 mt-6">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4 text-lg">Oplossingen</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {oplossingenItems.map((item) => (
+                      <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
+                        {renderMenuLink(item)}
+                      </div>
+                    ))}
                   </div>
-                  <div className="space-y-4">
-                    <h4 className="font-semibold text-gray-900 mb-4">Producten</h4>
-                    <div className="grid grid-cols-1 gap-3">
-                      {productenItems.map((item) => (
-                        <div key={item.label} className="bg-white shadow-sm border rounded-lg">
-                          {renderMenuLink(item)}
-                        </div>
-                      ))}
-                    </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4 text-lg">Producten</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {productenItems.map((item) => (
+                      <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
+                        {renderMenuLink(item)}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -114,15 +113,17 @@ export const NavMenuItems = () => {
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Over ons
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="w-full">
-          <div className="container mx-auto py-8">
-            <h3 className={megaMenuHeaderClass}>Over ons</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {overOnsItems.map((item) => (
-                <div key={item.label} className="bg-white shadow-sm border rounded-lg">
-                  {renderMenuLink(item)}
-                </div>
-              ))}
+        <NavigationMenuContent>
+          <div className="w-full bg-white">
+            <div className="max-w-7xl mx-auto py-8 px-4">
+              <h3 className={megaMenuHeaderClass}>Over ons</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
+                {overOnsItems.map((item) => (
+                  <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
+                    {renderMenuLink(item)}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </NavigationMenuContent>
