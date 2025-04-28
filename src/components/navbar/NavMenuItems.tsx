@@ -64,7 +64,7 @@ export const NavMenuItems = () => {
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Oplossingen
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="absolute left-0 top-full w-full bg-white shadow-lg border-t">
+        <NavigationMenuContent className="w-full">
           <div className="container mx-auto py-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -72,9 +72,7 @@ export const NavMenuItems = () => {
                 <ul className="space-y-3">
                   {oplossingenItems.map((item) => (
                     <li key={item.label}>
-                      <NavigationMenuLink asChild>
-                        {renderMenuLink(item)}
-                      </NavigationMenuLink>
+                      {renderMenuLink(item)}
                     </li>
                   ))}
                 </ul>
@@ -84,9 +82,7 @@ export const NavMenuItems = () => {
                 <ul className="space-y-3">
                   {productenItems.map((item) => (
                     <li key={item.label}>
-                      <NavigationMenuLink asChild>
-                        {renderMenuLink(item)}
-                      </NavigationMenuLink>
+                      {renderMenuLink(item)}
                     </li>
                   ))}
                 </ul>
@@ -110,15 +106,13 @@ export const NavMenuItems = () => {
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Over ons
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="absolute left-0 top-full w-full bg-white shadow-lg border-t">
+        <NavigationMenuContent className="w-full">
           <div className="container mx-auto py-6">
             <h3 className={megaMenuHeaderClass}>Over ons</h3>
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {overOnsItems.map((item) => (
                 <li key={item.label}>
-                  <NavigationMenuLink asChild>
-                    {renderMenuLink(item)}
-                  </NavigationMenuLink>
+                  {renderMenuLink(item)}
                 </li>
               ))}
             </ul>
