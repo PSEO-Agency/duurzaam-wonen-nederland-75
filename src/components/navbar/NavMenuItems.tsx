@@ -95,7 +95,7 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-full bg-white p-4">
+          <div className="w-full bg-white p-4" style={{ minWidth: '600px' }}>
             <div className="container mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-6">
                 <div className="col-span-1">
@@ -167,7 +167,7 @@ export const NavMenuItems = () => {
           Over ons
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-full bg-white p-4">
+          <div className="w-full bg-white p-4" style={{ minWidth: '600px' }}>
             <div className="container mx-auto">
               <div className="py-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Over ons</h3>
