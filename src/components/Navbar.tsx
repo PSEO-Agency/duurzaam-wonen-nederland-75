@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             <Logo />
             
-            <NavigationMenu className="hidden md:flex justify-center px-4">
+            <NavigationMenu className="hidden lg:flex justify-center px-4">
               <NavigationMenuList className="flex gap-1 lg:gap-2">
                 <NavMenuItems />
               </NavigationMenuList>
@@ -104,6 +104,7 @@ const Navbar: React.FC = () => {
                 asChild 
                 size="lg"
                 variant="default"
+                className="transition-all duration-[6000ms]"
               >
                 <Link to="/offerte">
                   Offerte Aanvragen
@@ -111,7 +112,7 @@ const Navbar: React.FC = () => {
               </Button>
 
               <button
-                className="md:hidden focus:outline-none"
+                className="lg:hidden focus:outline-none"
                 onClick={toggleMobileMenu}
               >
                 {isMobileMenuOpen ? (

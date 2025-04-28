@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
@@ -10,7 +11,7 @@ interface MenuSection {
 
 const menuItemClass = "text-gray-700 hover:text-brand-green transition-colors duration-200 text-sm font-medium px-2";
 const megaMenuItemClass = "flex items-center text-gray-700 hover:text-brand-green text-sm";
-const megaMenuHeaderClass = "font-bold text-lg mb-2";
+const megaMenuHeaderClass = "font-bold text-lg mb-4 text-gray-800";
 
 export const mainNavItems: MenuSection[] = [
   { label: 'Projecten', href: '/projecten' },
@@ -63,12 +64,12 @@ export const NavMenuItems = () => {
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Oplossingen
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="absolute left-0 w-screen bg-white p-6 rounded-b-md shadow-lg border-t">
-          <div className="container mx-auto">
-            <div className="grid grid-cols-2 gap-6">
+        <NavigationMenuContent className="absolute left-0 top-full w-full bg-white shadow-lg border-t">
+          <div className="container mx-auto py-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className={megaMenuHeaderClass}>Oplossingen</h3>
-                <ul className="space-y-2 mt-4">
+                <ul className="space-y-3">
                   {oplossingenItems.map((item) => (
                     <li key={item.label}>
                       <NavigationMenuLink asChild>
@@ -80,7 +81,7 @@ export const NavMenuItems = () => {
               </div>
               <div>
                 <h3 className={megaMenuHeaderClass}>Producten</h3>
-                <ul className="space-y-2 mt-4">
+                <ul className="space-y-3">
                   {productenItems.map((item) => (
                     <li key={item.label}>
                       <NavigationMenuLink asChild>
@@ -109,10 +110,10 @@ export const NavMenuItems = () => {
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Over ons
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="absolute left-0 w-screen bg-white p-6 rounded-b-md shadow-lg border-t">
-          <div className="container mx-auto">
+        <NavigationMenuContent className="absolute left-0 top-full w-full bg-white shadow-lg border-t">
+          <div className="container mx-auto py-6">
             <h3 className={megaMenuHeaderClass}>Over ons</h3>
-            <ul className="grid grid-cols-3 gap-4 mt-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {overOnsItems.map((item) => (
                 <li key={item.label}>
                   <NavigationMenuLink asChild>
