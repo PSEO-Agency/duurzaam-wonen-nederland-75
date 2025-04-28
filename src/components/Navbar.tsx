@@ -90,16 +90,14 @@ const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             <Logo />
             
-            <NavigationMenu className="hidden lg:flex justify-center px-4 whitespace-nowrap">
-              <NavigationMenuList className="flex gap-2">
+            <NavigationMenu className="hidden md:flex justify-center px-4">
+              <NavigationMenuList className="flex gap-1 lg:gap-2">
                 <NavMenuItems />
               </NavigationMenuList>
             </NavigationMenu>
 
             <div className="flex items-center gap-3">
-              <div className="hidden lg:flex items-center gap-3">
-                <SearchCommandMenu />
-              </div>
+              <SearchCommandMenu />
               
               <Button 
                 asChild 
@@ -112,7 +110,7 @@ const Navbar: React.FC = () => {
               </Button>
 
               <button
-                className="lg:hidden focus:outline-none"
+                className="md:hidden focus:outline-none"
                 onClick={toggleMobileMenu}
               >
                 {isMobileMenuOpen ? (
