@@ -106,8 +106,8 @@ export const NavMenuItems = () => {
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Over ons
         </NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <div className="w-[250px] bg-white p-4">
+        <NavigationMenuContent className="right-0">
+          <div className="bg-white p-4 w-auto">
             <h3 className="font-semibold text-lg mb-2">Over ons</h3>
             <ul className="space-y-1">
               {overOnsItems.map((item) => (
