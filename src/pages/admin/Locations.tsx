@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
@@ -45,6 +44,8 @@ const Locations: React.FC = () => {
     name: '',
     slug: '',
     description: '',
+    meta_title: '',
+    meta_description: '',
   });
   
   const [editCity, setEditCity] = useState({
@@ -78,6 +79,8 @@ const Locations: React.FC = () => {
       name: '',
       slug: '',
       description: '',
+      meta_title: '',
+      meta_description: '',
     });
   };
   
@@ -240,6 +243,27 @@ const Locations: React.FC = () => {
                           value={newCity.description}
                           onChange={(e) => setNewCity(prev => ({ ...prev, description: e.target.value }))}
                           rows={3}
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="meta_title">Meta Title (SEO)</Label>
+                        <Input 
+                          id="meta_title" 
+                          placeholder="Meta title for SEO"
+                          value={newCity.meta_title}
+                          onChange={(e) => setNewCity(prev => ({ ...prev, meta_title: e.target.value }))}
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="meta_description">Meta Description (SEO)</Label>
+                        <Textarea 
+                          id="meta_description" 
+                          placeholder="Meta description for SEO"
+                          value={newCity.meta_description}
+                          onChange={(e) => setNewCity(prev => ({ ...prev, meta_description: e.target.value }))}
+                          rows={2}
                         />
                       </div>
                     </div>
