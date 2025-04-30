@@ -33,7 +33,7 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
-import { PlusIcon, Edit2Icon, MapPinIcon } from 'lucide-react';
+import { PlusIcon, Edit2Icon, MapPin } from 'lucide-react';
 
 const Locations: React.FC = () => {
   const [selectedRegionId, setSelectedRegionId] = useState<string | null>(null);
@@ -283,13 +283,13 @@ const Locations: React.FC = () => {
                   <div className="flex gap-2 mb-4">
                     <Select 
                       onValueChange={(value) => setSelectedRegionId(value)}
-                      value={selectedRegionId || ""}
+                      value={selectedRegionId || "all"}
                     >
                       <SelectTrigger className="w-[240px]">
                         <SelectValue placeholder="Filter by region" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All regions</SelectItem>
+                        <SelectItem value="all">All regions</SelectItem>
                         {regions?.map(region => (
                           <SelectItem key={region.id} value={region.id}>{region.name}</SelectItem>
                         ))}
@@ -306,7 +306,7 @@ const Locations: React.FC = () => {
                           <CardHeader className="pb-2 flex flex-row justify-between">
                             <div>
                               <CardTitle className="text-lg flex items-center">
-                                <MapPinIcon className="h-4 w-4 mr-1" />
+                                <MapPin className="h-4 w-4 mr-1" />
                                 {city.name}
                               </CardTitle>
                               {regions && (
@@ -321,7 +321,7 @@ const Locations: React.FC = () => {
                                 size="icon"
                                 onClick={() => handleCitySelect(city)}
                               >
-                                <MapPinIcon className="h-4 w-4" />
+                                <MapPin className="h-4 w-4" />
                               </Button>
                               <Dialog>
                                 <DialogTrigger asChild>
@@ -420,7 +420,7 @@ const Locations: React.FC = () => {
               <CardContent>
                 {!selectedCityId ? (
                   <div className="text-center py-8 text-gray-500">
-                    <MapPinIcon className="h-12 w-12 mx-auto mb-2 opacity-20" />
+                    <MapPin className="h-12 w-12 mx-auto mb-2 opacity-20" />
                     <p>No city selected</p>
                   </div>
                 ) : (
@@ -538,13 +538,13 @@ const Locations: React.FC = () => {
                 <div className="flex gap-2 mb-4">
                   <Select 
                     onValueChange={(value) => setSelectedRegionId(value)}
-                    value={selectedRegionId || ""}
+                    value={selectedRegionId || "all"}
                   >
                     <SelectTrigger className="w-[240px]">
                       <SelectValue placeholder="Select region" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All regions</SelectItem>
+                      <SelectItem value="all">All regions</SelectItem>
                       {regions?.map(region => (
                         <SelectItem key={region.id} value={region.id}>{region.name}</SelectItem>
                       ))}
@@ -553,13 +553,13 @@ const Locations: React.FC = () => {
 
                   <Select 
                     onValueChange={(value) => setSelectedCityId(value)}
-                    value={selectedCityId || ""}
+                    value={selectedCityId || "all"}
                   >
                     <SelectTrigger className="w-[240px]">
                       <SelectValue placeholder="Select city" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All cities</SelectItem>
+                      <SelectItem value="all">All cities</SelectItem>
                       {cities?.map(city => (
                         <SelectItem key={city.id} value={city.id}>{city.name}</SelectItem>
                       ))}
