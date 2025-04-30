@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
@@ -138,11 +137,6 @@ const siteStructure = [
         title: 'Team',
         path: '/over-ons/team',
         description: 'Ons team',
-      },
-      {
-        title: 'Geschiedenis',
-        path: '/over-ons/geschiedenis',
-        description: 'Onze geschiedenis',
       },
       {
         title: 'Missie',

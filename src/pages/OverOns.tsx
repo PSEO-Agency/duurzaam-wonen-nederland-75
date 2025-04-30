@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Award, Calendar, Users, Sprout, Building, History, MessageCircle } from 'lucide-react';
@@ -52,9 +51,9 @@ const OverOns: React.FC = () => {
                     variant="outline" 
                     className="border-gray-300"
                   >
-                    <Link to="/over-ons/geschiedenis">
+                    <Link to="/over-ons/missie">
                       <History className="mr-2 h-4 w-4" />
-                      <span>Onze geschiedenis</span>
+                      <span>Onze missie</span>
                     </Link>
                   </Button>
                 </div>
@@ -168,25 +167,6 @@ const OverOns: React.FC = () => {
               </AnimatedSection>
               
               <AnimatedSection animation="fade-in" delay={200}>
-                <Link to="/over-ons/geschiedenis">
-                  <div className="bg-white p-6 rounded-lg shadow-sm h-full border border-gray-100 hover:shadow-md transition-shadow">
-                    <div className="bg-brand-green/10 p-3 rounded-full w-fit mb-4">
-                      <History className="h-6 w-6 text-brand-green" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3">Onze geschiedenis</h3>
-                    <p className="text-gray-700 mb-4">
-                      Van klein familiebedrijf tot toonaangevende specialist in woningverduurzaming. 
-                      Ontdek hoe Duurzaam Wonen Nederland is uitgegroeid tot wat het nu is.
-                    </p>
-                    <div className="flex items-center text-brand-green font-medium">
-                      <span>Lees ons verhaal</span>
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </div>
-                  </div>
-                </Link>
-              </AnimatedSection>
-              
-              <AnimatedSection animation="fade-in" delay={300}>
                 <Link to="/over-ons/missie">
                   <div className="bg-white p-6 rounded-lg shadow-sm h-full border border-gray-100 hover:shadow-md transition-shadow">
                     <div className="bg-brand-green/10 p-3 rounded-full w-fit mb-4">
@@ -205,7 +185,7 @@ const OverOns: React.FC = () => {
                 </Link>
               </AnimatedSection>
               
-              <AnimatedSection animation="fade-in" delay={400}>
+              <AnimatedSection animation="fade-in" delay={300}>
                 <Link to="/over-ons/duurzaamheid">
                   <div className="bg-white p-6 rounded-lg shadow-sm h-full border border-gray-100 hover:shadow-md transition-shadow">
                     <div className="bg-brand-green/10 p-3 rounded-full w-fit mb-4">
@@ -224,7 +204,7 @@ const OverOns: React.FC = () => {
                 </Link>
               </AnimatedSection>
               
-              <AnimatedSection animation="fade-in" delay={500}>
+              <AnimatedSection animation="fade-in" delay={400}>
                 <Link to="/projecten">
                   <div className="bg-white p-6 rounded-lg shadow-sm h-full border border-gray-100 hover:shadow-md transition-shadow">
                     <div className="bg-brand-green/10 p-3 rounded-full w-fit mb-4">
@@ -237,6 +217,24 @@ const OverOns: React.FC = () => {
                     </p>
                     <div className="flex items-center text-brand-green font-medium">
                       <span>Bekijk projecten</span>
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </div>
+                  </div>
+                </Link>
+              </AnimatedSection>
+              
+              <AnimatedSection animation="fade-in" delay={500}>
+                <Link to="/over-ons/vacatures">
+                  <div className="bg-white p-6 rounded-lg shadow-sm h-full border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="bg-brand-green/10 p-3 rounded-full w-fit mb-4">
+                      <MessageCircle className="h-6 w-6 text-brand-green" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">Vacatures</h3>
+                    <p className="text-gray-700 mb-4">
+                      Op zoek naar een nieuwe uitdaging? Ontdek onze vacatures en word onderdeel van ons team.
+                    </p>
+                    <div className="flex items-center text-brand-green font-medium">
+                      <span>Bekijk vacatures</span>
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </div>
                   </div>

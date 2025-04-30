@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
@@ -33,7 +32,6 @@ export const productenItems: MenuSection[] = [
 
 export const overOnsItems: MenuSection[] = [
   { label: 'Ons team', href: '/over-ons/team' },
-  { label: 'Onze geschiedenis', href: '/over-ons/geschiedenis' },
   { label: 'Onze missie', href: '/over-ons/missie' },
   { label: 'Duurzaamheid', href: '/over-ons/duurzaamheid' },
   { label: 'Vacatures', href: '/over-ons/vacatures' },
