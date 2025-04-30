@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
   }}>
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
       
-      <div className="container mx-auto px-16 py-16 relative z-10">
+      <div className="container mx-auto py-16 relative z-10 px-[32px]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7">
             <AnimatedSection animation="fade-in-right">
