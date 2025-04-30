@@ -118,11 +118,19 @@ const Contact: React.FC = () => {
                     </div>
                   </div>
                   
-                  {/* Map */}
-                  <div className="mt-8 rounded-lg overflow-hidden border border-gray-200 h-64 bg-gray-100">
-                    <div className="w-full h-full flex items-center justify-center">
-                      <p className="text-gray-500">Interactieve kaart hier</p>
-                    </div>
+                  {/* Google Maps */}
+                  <div className="mt-8 rounded-lg overflow-hidden border border-gray-200 h-64">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2442.755846848202!2d6.9433978!3d52.2229364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8154f9d9487e5%3A0xaaf6dcd78dca124c!2sDuurzaam%20Wonen%20Nederland%20in%20Enschede!5e0!3m2!1sen!2snl!4v1714675998115!5m2!1sen!2snl" 
+                      width="100%" 
+                      height="100%" 
+                      style={{ border: 0 }} 
+                      allowFullScreen={true} 
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Duurzaam Wonen Nederland Locatie"
+                      className="w-full h-full"
+                    ></iframe>
                   </div>
                 </div>
               </AnimatedSection>
