@@ -41,6 +41,7 @@ import Kozijn100x100 from "./pages/sizes/Kozijn100x100";
 import SchucoBrand from "./pages/brands/SchucoBrand";
 import KozijnenAfbetaling from "./pages/prices/KozijnenAfbetaling";
 import KozijnenSubsidie from "./pages/prices/KozijnenSubsidie";
+import CityServicePage from "./pages/CityServicePage";
 import AdminLayout from "./components/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import Templates from "./pages/admin/Templates";
@@ -86,6 +87,9 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
             <Route path="/sitemap" element={<Sitemap />} />
+            
+            {/* City Service Routes */}
+            <Route path="/:serviceSlug/:citySlug" element={<CityServicePage />} />
             
             <Route path="/projecten" element={<Projects />} />
             <Route path="/projecten/:projectSlug" element={<ProjectDetail />} />

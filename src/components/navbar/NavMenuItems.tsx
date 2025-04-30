@@ -1,7 +1,9 @@
+
 import React from 'react';
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import { services } from '@/data/services';
 
 interface MenuSection {
   label: string;
@@ -13,15 +15,18 @@ const dropdownItemClass = "flex items-center text-gray-700 hover:text-brand-gree
 
 export const mainNavItems: MenuSection[] = [
   { label: 'Projecten', href: '/projecten' },
+  { label: 'Werkgebied', href: '/werkgebied' },
   { label: 'Rentevrije Financiering*', href: '/rentevrije-financiering' },
   { label: 'Werkwijze', href: '/werkwijze' },
 ];
 
-export const oplossingenItems: MenuSection[] = [
-  { label: 'Kunststof Schuifpuien', href: '/kunststof-schuifpuien' },
-  { label: 'Kunststof Deuren', href: '/kunststof-deuren' },
-  { label: 'Gevelbekleding', href: '/gevelbekleding' },
-];
+// Get services from our data
+export const oplossingenItems: MenuSection[] = services
+  .filter(service => service.slug !== 'kunststof-kozijnen') // Already in productenItems
+  .map(service => ({
+    label: service.title,
+    href: `/${service.slug}`
+  }));
 
 export const productenItems: MenuSection[] = [
   { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
