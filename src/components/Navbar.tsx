@@ -97,23 +97,24 @@ const Navbar: React.FC = () => {
               </NavigationMenuList>
             </NavigationMenu>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3">
               <SearchCommandMenu />
               
               <Button 
                 asChild 
-                size="lg"
+                size={isMobile ? "sm" : "lg"}
                 variant="default"
                 className="transition-all duration-[4000ms]"
               >
                 <Link to="/offerte">
-                  Offerte Aanvragen
+                  {isMobile ? "Offerte" : "Offerte Aanvragen"}
                 </Link>
               </Button>
 
               <button
                 className="lg:hidden focus:outline-none"
                 onClick={toggleMobileMenu}
+                aria-label="Toggle mobile menu"
               >
                 {isMobileMenuOpen ? (
                   <X className="h-6 w-6 text-gray-700" />
