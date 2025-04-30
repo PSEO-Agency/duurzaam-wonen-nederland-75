@@ -10,8 +10,7 @@ interface MenuSection {
 }
 
 const menuItemClass = "text-gray-700 hover:text-brand-green transition-colors duration-200 text-sm font-medium px-2";
-const megaMenuItemClass = "flex items-center text-gray-700 hover:text-brand-green text-sm p-4 rounded-lg hover:bg-gray-50 transition-all duration-200 w-full";
-const megaMenuHeaderClass = "font-bold text-xl mb-6 text-gray-800";
+const dropdownItemClass = "flex items-center text-gray-700 hover:text-brand-green transition-colors duration-200 py-2 text-sm";
 
 export const mainNavItems: MenuSection[] = [
   { label: 'Projecten', href: '/projecten' },
@@ -44,20 +43,16 @@ export const NavMenuItems = () => {
   const renderMenuLink = (item: MenuSection) => {
     if (item.href.startsWith('#')) {
       return (
-        <a href={item.href} className={megaMenuItemClass}>
-          <div className="flex items-center">
-            <ChevronRight size={16} className="mr-2 flex-shrink-0" />
-            <span className="line-clamp-2">{item.label}</span>
-          </div>
+        <a href={item.href} className={dropdownItemClass}>
+          <ChevronRight size={16} className="mr-2 flex-shrink-0" />
+          <span>{item.label}</span>
         </a>
       );
     }
     return (
-      <Link to={item.href} className={megaMenuItemClass}>
-        <div className="flex items-center">
-          <ChevronRight size={16} className="mr-2 flex-shrink-0" />
-          <span className="line-clamp-2">{item.label}</span>
-        </div>
+      <Link to={item.href} className={dropdownItemClass}>
+        <ChevronRight size={16} className="mr-2 flex-shrink-0" />
+        <span>{item.label}</span>
       </Link>
     );
   };
@@ -69,30 +64,28 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-full bg-white shadow-lg">
-            <div className="max-w-7xl mx-auto py-8 px-4 w-full">
-              <h3 className={megaMenuHeaderClass}>Ontdek onze oplossingen</h3>
-              <div className="flex flex-col md:flex-row gap-8 mt-6">
-                <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 mb-4 text-lg">Oplossingen</h4>
-                  <div className="flex flex-col gap-4">
-                    {oplossingenItems.map((item) => (
-                      <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
-                        {renderMenuLink(item)}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 mb-4 text-lg">Producten</h4>
-                  <div className="flex flex-col gap-4">
-                    {productenItems.map((item) => (
-                      <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
-                        {renderMenuLink(item)}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+          <div className="w-[400px] bg-white p-4">
+            <h3 className="font-semibold text-lg mb-2">Ontdek onze oplossingen</h3>
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-medium text-gray-900 mb-2">Oplossingen</h4>
+                <ul className="space-y-1">
+                  {oplossingenItems.map((item) => (
+                    <li key={item.label}>
+                      {renderMenuLink(item)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-medium text-gray-900 mb-2">Producten</h4>
+                <ul className="space-y-1">
+                  {productenItems.map((item) => (
+                    <li key={item.label}>
+                      {renderMenuLink(item)}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -114,17 +107,15 @@ export const NavMenuItems = () => {
           Over ons
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-full bg-white shadow-lg">
-            <div className="max-w-7xl mx-auto py-8 px-4 w-full">
-              <h3 className={megaMenuHeaderClass}>Over ons</h3>
-              <div className="flex flex-col gap-4 mt-6">
-                {overOnsItems.map((item) => (
-                  <div key={item.label} className="bg-white shadow-md border rounded-lg hover:shadow-lg transition-shadow">
-                    {renderMenuLink(item)}
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="w-[300px] bg-white p-4">
+            <h3 className="font-semibold text-lg mb-2">Over ons</h3>
+            <ul className="space-y-1">
+              {overOnsItems.map((item) => (
+                <li key={item.label}>
+                  {renderMenuLink(item)}
+                </li>
+              ))}
+            </ul>
           </div>
         </NavigationMenuContent>
       </NavigationMenuItem>
