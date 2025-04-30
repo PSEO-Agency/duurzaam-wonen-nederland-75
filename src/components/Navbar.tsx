@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
       <div className="bg-black text-white py-2">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <div className="hidden lg:flex">
+            <div className="flex">
               {topNavItems.map((item) => (
                 renderNavItem(
                   item, 
