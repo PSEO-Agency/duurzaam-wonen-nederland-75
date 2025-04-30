@@ -49,6 +49,10 @@ import PageEditor from "./pages/admin/PageEditor";
 import Sections from "./pages/admin/Sections";
 import SectionEditor from "./pages/admin/SectionEditor";
 import Sitemap from "./pages/Sitemap";
+import Locations from "./pages/admin/Locations";
+import Services from "./pages/admin/Services";
+import CityServices from "./pages/admin/CityServices";
+import CityServicePage from "./pages/CityServicePage";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +74,9 @@ const App = () => (
               <Route path="sections/edit/:sectionId" element={<SectionEditor />} />
               <Route path="settings" element={<Dashboard />} />
               <Route path="users" element={<Dashboard />} />
+              <Route path="locations" element={<Locations />} />
+              <Route path="services" element={<Services />} />
+              <Route path="city-services" element={<CityServices />} />
             </Route>
             
             <Route path="/" element={<Index />} />
@@ -101,6 +108,10 @@ const App = () => (
             <Route path="/over-ons/missie" element={<Missie />} />
             <Route path="/over-ons/duurzaamheid" element={<Duurzaamheid />} />
             <Route path="/over-ons/vacatures" element={<Vacatures />} />
+            
+            {/* Dynamic city service routes */}
+            <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
+            
             <Route path="*" element={<NotFound />} />
           </Routes>
         </SearchProvider>
