@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
@@ -13,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
@@ -230,7 +230,8 @@ const Contact: React.FC = () => {
                 },
                 {
                   question: "Werken jullie in heel Nederland?",
-                  answer: "Ja, wij zijn actief in heel Nederland. Bekijk onze werkgebied pagina voor meer informatie over de regio's waarin wij actief zijn."
+                  answer: "Ja, wij zijn actief in heel Nederland. Bekijk onze " + 
+                    <Link to="/werkgebied" className="text-brand-green hover:underline">werkgebied</Link> + " pagina voor meer informatie over de regio's waarin wij actief zijn."
                 }
               ].map((faq, index) => (
                 <AnimatedSection key={index} animation="fade-in" delay={index * 100}>
