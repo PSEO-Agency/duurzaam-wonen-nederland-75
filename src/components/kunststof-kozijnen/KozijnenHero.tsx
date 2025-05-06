@@ -64,10 +64,7 @@ const KozijnenHero: React.FC = () => {
                 </div>
               </div>
               
-              {/* Facebook Rating Widget - Positioned directly below the guarantees */}
-              <div className="p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 w-full max-w-md">
-                <div className="elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
-              </div>
+              {/* Facebook Rating Widget removed */}
             </AnimatedSection>
           </div>
           

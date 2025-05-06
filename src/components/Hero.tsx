@@ -1,25 +1,20 @@
+
 import React, { useEffect } from 'react';
 import { ArrowRight, Check, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
 import { useLocation, Link } from 'react-router-dom';
+
 const Hero: React.FC = () => {
   const location = useLocation();
   const isKozijnenPage = location.pathname.includes('kunststof-kozijnen');
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://static.elfsight.com/platform/platform.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-  return <section id="home" className="relative min-h-screen pt-20 flex items-center" style={{
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${isKozijnenPage ? '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png' : '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png'}")`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center'
-  }}>
+  
+  return (
+    <section id="home" className="relative min-h-screen pt-20 flex items-center" style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${isKozijnenPage ? '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png' : '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png'}")`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}>
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
       
       <div className="container mx-auto py-16 relative z-10 px-[32px]">
@@ -71,9 +66,7 @@ const Hero: React.FC = () => {
                 </div>
               </div>
               
-              <div className="mt-6 p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 w-full max-w-md">
-                <div className="elfsight-app-4bd45e33-f576-4478-bdd9-4d9257b33093" data-elfsight-app-lazy></div>
-              </div>
+              {/* Facebook Rating Widget removed */}
             </AnimatedSection>
           </div>
           
@@ -120,6 +113,8 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;
