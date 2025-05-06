@@ -224,10 +224,10 @@ const Offerte: React.FC = () => {
     }
   };
 
-  // Enhanced function to send data to GoHighLevel webhook
+  // Enhanced function to send data to GoHighLevel webhook with ALL form fields
   const sendToGHLWebhook = async (data: OfferteFormData, retryCount = 0): Promise<boolean> => {
     try {
-      // Format the data according to GoHighLevel webhook expectations
+      // Format the data according to GoHighLevel webhook expectations with ALL form fields
       const ghlPayload = {
         // Contact Information
         contact: {
@@ -250,18 +250,32 @@ const Offerte: React.FC = () => {
           status: "open",
           source: "Website Offerte"
         },
-        // Project Details - will be saved as custom fields
+        // Project Details - ensure ALL form fields are included
         customFields: {
+          // Project Type Information
           projectType: data.projectType,
           propertyType: data.propertyType,
           timeline: data.timeline,
-          windowTypes: data.windowTypes.join(", "),
+          
+          // Window Details
+          windowTypes: Array.isArray(data.windowTypes) ? data.windowTypes.join(", ") : data.windowTypes,
           quantity: data.quantity,
           dimensions: data.dimensions,
           color: data.color,
           additionalInfo: data.additionalInfo || "Geen extra informatie",
+          
+          // Contact Preferences
           preferredContact: data.preferredContact,
-          availability: data.availability.join(", ")
+          termsAccepted: data.termsAccepted ? "Ja" : "Nee",
+          
+          // Availability details
+          availabilityTimes: Array.isArray(data.availability) ? data.availability.join(", ") : data.availability,
+          availabilityDetails: data.availabilitySchedule || "{}", // The full schedule JSON
+          
+          // Additional form metadata
+          formSubmissionDate: new Date().toISOString(),
+          formSubmissionOrigin: window.location.origin,
+          browserInfo: navigator.userAgent
         },
         // Additional metadata
         meta: {
@@ -270,6 +284,8 @@ const Offerte: React.FC = () => {
           formType: "Offerte Aanvraag"
         }
       };
+
+      console.log("Sending to GHL webhook:", JSON.stringify(ghlPayload, null, 2));
 
       const response = await fetch(GHL_WEBHOOK_URL, {
         method: 'POST',
