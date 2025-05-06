@@ -11,6 +11,14 @@
     <meta property="og:image" content="/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png" />
     <meta property="og:title" content="Duurzaam Wonen Nederland" />
     <meta property="og:description" content="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten." />
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png" as="image">
+    <link rel="preload" href="/lovable-uploads/d6b87756-2629-4908-9132-8c9e113111b3.png" as="image">
+    <link rel="preload" href="/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png" as="image">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://widgets.leadconnectorhq.com" crossorigin>
   </head>
 
   <body>
@@ -18,11 +26,13 @@
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- Chat widget -->
+    <!-- Chat widget with defer attribute to load after page is fully rendered -->
     <script 
-      src="https://widgets.leadconnectorhq.com/loader.js"  
+      src="https://widgets.leadconnectorhq.com/loader.js"
       data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" 
-      data-widget-id="680f48b10f7b390172882aea"   
+      data-widget-id="680f48b10f7b390172882aea"
+      defer
+      async
     ></script>
   </body>
 </html>

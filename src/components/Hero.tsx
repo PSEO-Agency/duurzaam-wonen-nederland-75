@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, Check, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
@@ -8,19 +8,51 @@ import { useLocation, Link } from 'react-router-dom';
 const Hero: React.FC = () => {
   const location = useLocation();
   const isKozijnenPage = location.pathname.includes('kunststof-kozijnen');
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
+  // Preload the hero image
+  useEffect(() => {
+    const imageUrl = isKozijnenPage ? 
+      '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png' : 
+      '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png';
+    
+    const img = new Image();
+    img.src = imageUrl;
+    img.onload = () => setImageLoaded(true);
+  }, [isKozijnenPage]);
+
+  const heroImageUrl = isKozijnenPage ? 
+    '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png' : 
+    '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png';
   
   return (
-    <section id="home" className="relative min-h-screen pt-20 flex items-center" style={{
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${isKozijnenPage ? '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png' : '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png'}")`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
-    }}>
+    <section 
+      id="home" 
+      className="relative min-h-screen pt-20 flex items-center" 
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${heroImageUrl}")`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        transition: 'opacity 0.3s ease-in-out',
+        opacity: imageLoaded ? 1 : 0.5,
+      }}
+    >
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+      
+      {/* Low-quality placeholder to show immediately */}
+      {!imageLoaded && (
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            background: 'linear-gradient(to right, #1a1a1a, #333333)',
+          }}
+        ></div>
+      )}
       
       <div className="container mx-auto py-16 relative z-10 px-[32px]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7">
-            <AnimatedSection animation="fade-in-right">
+            <AnimatedSection animation="fade-in-right" noDelay={true}>
               <span className="inline-block px-4 py-1 bg-brand-green/90 text-white rounded-full text-sm font-medium mb-4">
                 {isKozijnenPage ? 'Specialist in kunststof kozijnen' : 'Specialist in woningverduurzaming'}
               </span>
@@ -65,13 +97,11 @@ const Hero: React.FC = () => {
                   <span>Vakkundige montage</span>
                 </div>
               </div>
-              
-              {/* Facebook Rating Widget removed */}
             </AnimatedSection>
           </div>
           
           <div className="lg:col-span-5">
-            <AnimatedSection animation="fade-in-left" delay={300}>
+            <AnimatedSection animation="fade-in-left" delay={300} noDelay={true}>
               <div className="glass-card p-6 backdrop-blur-lg bg-white/10 border border-white/20">
                 <h3 className="text-xl font-semibold text-white mb-4">
                   {isKozijnenPage ? 'Voordelen van kunststof kozijnen' : 'Voordelen'}

@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -14,10 +14,43 @@ import ContactCTA from '@/components/ContactCTA';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import CookieConsent from '@/components/CookieConsent';
+import LoadingScreen from '@/components/LoadingScreen';
 import { SearchProvider } from '@/contexts/SearchContext';
 
 const Index: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
+    // Preload critical images and resources
+    const preloadImages = [
+      '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png', // Hero background
+      '/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png', // Logo
+      '/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png', // Keurmerk KOMO
+    ];
+    
+    let loadedCount = 0;
+    
+    preloadImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === preloadImages.length) {
+          // Small timeout to ensure smooth transition
+          setTimeout(() => setIsLoading(false), 300);
+        }
+      };
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === preloadImages.length) {
+          setTimeout(() => setIsLoading(false), 300);
+        }
+      };
+    });
+    
+    // Fallback in case images don't load
+    const timeout = setTimeout(() => setIsLoading(false), 2000);
+    
     // Intersection Observer for reveal animations
     const observer = new IntersectionObserver(
       (entries) => {
@@ -38,12 +71,14 @@ const Index: React.FC = () => {
       document.querySelectorAll('.reveal-up').forEach((el) => {
         observer.unobserve(el);
       });
+      clearTimeout(timeout);
     };
   }, []);
   
   return (
     <SearchProvider>
-      <div className="min-h-screen flex flex-col">
+      {isLoading && <LoadingScreen />}
+      <div className={`min-h-screen flex flex-col ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}`}>
         <Helmet>
           <title>Duurzaam Wonen Nederland | Specialist in Woningverduurzaming</title>
           <meta name="description" content="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten." />

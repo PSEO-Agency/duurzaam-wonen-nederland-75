@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -9,6 +9,7 @@ interface AnimatedSectionProps {
   threshold?: number;
   duration?: number;
   once?: boolean;
+  noDelay?: boolean; // Added to skip animation delay for critical components
 }
 
 const AnimatedSection: React.FC<AnimatedSectionProps> = ({
@@ -18,11 +19,22 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   animation = 'fade-in',
   threshold = 0.2,
   duration = 700,
-  once = true
+  once = true,
+  noDelay = false // Skip animation delay for critical UI
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(noDelay);
   
   useEffect(() => {
+    // If noDelay is true, immediately set to visible
+    if (noDelay && sectionRef.current) {
+      sectionRef.current.classList.add('opacity-100');
+      sectionRef.current.classList.remove('opacity-0');
+      sectionRef.current.classList.add(`animate-${animation}`);
+      sectionRef.current.style.animationDuration = `${duration}ms`;
+      return;
+    }
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -33,6 +45,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
                 sectionRef.current.classList.remove('opacity-0');
                 sectionRef.current.classList.add(`animate-${animation}`);
                 sectionRef.current.style.animationDuration = `${duration}ms`;
+                setIsVisible(true);
               }
             }, delay);
             
@@ -43,6 +56,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
             sectionRef.current.classList.remove('opacity-100');
             sectionRef.current.classList.add('opacity-0');
             sectionRef.current.classList.remove(`animate-${animation}`);
+            setIsVisible(false);
           }
         });
       },
@@ -61,12 +75,12 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
         observer.unobserve(sectionRef.current);
       }
     };
-  }, [animation, delay, threshold, duration, once]);
+  }, [animation, delay, threshold, duration, once, noDelay]);
   
   return (
     <div 
       ref={sectionRef} 
-      className={`opacity-0 max-w-full overflow-x-hidden ${className}`}
+      className={`${noDelay ? 'opacity-100' : 'opacity-0'} max-w-full overflow-x-hidden ${className}`}
       style={{ 
         willChange: 'opacity, transform',
         transitionDuration: `${duration}ms`,
