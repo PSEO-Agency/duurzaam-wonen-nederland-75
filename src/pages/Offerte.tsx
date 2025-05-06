@@ -104,11 +104,9 @@ const demoFormData: OfferteFormData = {
 
 // Define webhook URLs
 const FORM_SUBMISSION_ENDPOINT = 'https://n8n.virtualmin.programmaticseobuilder.com/webhook/a8d7075d-1b28-494f-86a0-c05adf144309';
-// GoHighLevel webhook URL - Replace this with your actual webhook URL
-const GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/webhooks/your-webhook-id';
-// Custom GoHighLevel webhook for automation
-const GHL_AUTOMATION_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/123456/abcdef/'; // Replace with your actual webhook URL
-const WEBHOOK_RETRY_ATTEMPTS = 2;
+// GoHighLevel webhook URL - Actual webhook URL from GoHighLevel
+const GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/3aRsj8TT2qcU3nkx3kWm/webhook-trigger/fe83d1b1-2118-455d-bc33-55e085692dbf';
+const WEBHOOK_RETRY_ATTEMPTS = 3;
 
 const Offerte: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -226,7 +224,7 @@ const Offerte: React.FC = () => {
     }
   };
 
-  // New function to send data to GoHighLevel webhook
+  // Enhanced function to send data to GoHighLevel webhook
   const sendToGHLWebhook = async (data: OfferteFormData, retryCount = 0): Promise<boolean> => {
     try {
       // Format the data according to GoHighLevel webhook expectations
@@ -294,8 +292,8 @@ const Offerte: React.FC = () => {
       // Implement retry logic for transient errors
       if (retryCount < WEBHOOK_RETRY_ATTEMPTS) {
         console.log(`Retrying GHL webhook submission (${retryCount + 1}/${WEBHOOK_RETRY_ATTEMPTS})...`);
-        // Wait for 1 second before retrying
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Exponential backoff: wait longer with each retry
+        await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, retryCount)));
         return sendToGHLWebhook(data, retryCount + 1);
       }
       
@@ -303,73 +301,7 @@ const Offerte: React.FC = () => {
     }
   };
 
-  // NEW: Function to send data to custom GHL automation webhook
-  const sendToGHLAutomationWebhook = async (data: OfferteFormData, retryCount = 0): Promise<boolean> => {
-    try {
-      // Format the data according to the automation webhook's expected format
-      const automationPayload = {
-        // Contact Information
-        contact: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          phone: data.phone,
-          address: data.address,
-          city: data.city,
-          postalCode: data.postalCode,
-        },
-        // Project Details
-        project: {
-          type: data.projectType,
-          propertyType: data.propertyType,
-          timeline: data.timeline,
-          windowTypes: data.windowTypes,
-          quantity: data.quantity,
-          dimensions: data.dimensions,
-          color: data.color,
-          additionalInfo: data.additionalInfo || "",
-          preferredContact: data.preferredContact,
-          availability: data.availability.join(", "),
-        },
-        // Metadata
-        meta: {
-          source: "Website Offerte Form",
-          submittedAt: new Date().toISOString(),
-          formVersion: "1.0"
-        }
-      };
-
-      const response = await fetch(GHL_AUTOMATION_WEBHOOK_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(automationPayload)
-      });
-
-      if (!response.ok) {
-        const responseText = await response.text();
-        throw new Error(`GHL automation webhook error: ${response.status} - ${responseText}`);
-      }
-
-      console.log('Form data submitted successfully to GoHighLevel automation webhook');
-      return true;
-    } catch (error) {
-      console.error('Error submitting to GoHighLevel automation webhook:', error);
-      
-      // Implement retry logic for transient errors
-      if (retryCount < WEBHOOK_RETRY_ATTEMPTS) {
-        console.log(`Retrying GHL automation webhook submission (${retryCount + 1}/${WEBHOOK_RETRY_ATTEMPTS})...`);
-        // Wait for 1 second before retrying
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        return sendToGHLAutomationWebhook(data, retryCount + 1);
-      }
-      
-      return false;
-    }
-  };
-
-  // Updated submitForm function to use all three webhooks
+  // Updated submitForm function to use both webhooks with N8N as fallback
   const submitForm = async () => {
     if (!validateCurrentStep()) return;
     
@@ -379,24 +311,21 @@ const Offerte: React.FC = () => {
       // Create a flag to track overall success status
       let submissionSuccess = false;
       
-      // Try the webhooks in order
+      // Try the GoHighLevel webhook first
       const ghlSuccess = await sendToGHLWebhook(formData);
-      const automationSuccess = await sendToGHLAutomationWebhook(formData);
       
-      if (ghlSuccess || automationSuccess) {
+      if (ghlSuccess) {
         submissionSuccess = true;
-        console.log('At least one webhook submission successful');
+        console.log('GoHighLevel webhook submission successful');
+      } else {
+        console.warn('GoHighLevel webhook submission failed, trying backup N8N webhook...');
         
-        // If both GHL webhooks fail, fall back to N8N webhook
-        if (!ghlSuccess && !automationSuccess) {
-          console.warn('GHL webhook submissions failed, trying backup N8N webhook...');
-          
-          const n8nSuccess = await sendFormData(formData);
-          
-          if (n8nSuccess) {
-            submissionSuccess = true;
-            console.log('Backup N8N webhook submission successful');
-          }
+        // If GHL webhook fails, fall back to N8N webhook
+        const n8nSuccess = await sendFormData(formData);
+        
+        if (n8nSuccess) {
+          submissionSuccess = true;
+          console.log('Backup N8N webhook submission successful');
         }
       }
       
@@ -429,17 +358,16 @@ const Offerte: React.FC = () => {
     }
   };
 
-  // Updated submitDemoForm to use all three webhooks
+  // Updated submitDemoForm to use the same webhook path as regular submissions
   const submitDemoForm = async () => {
     setIsSubmitting(true);
     
     try {
-      // Try GHL webhooks first
+      // Try GHL webhook first
       const ghlSuccess = await sendToGHLWebhook(demoFormData);
-      const automationSuccess = await sendToGHLAutomationWebhook(demoFormData);
       
-      // If both GHL webhooks fail, use N8N as backup
-      if (!ghlSuccess && !automationSuccess) {
+      // If GHL webhook fails, use N8N as backup
+      if (!ghlSuccess) {
         await sendFormData(demoFormData);
       }
       
