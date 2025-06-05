@@ -37,9 +37,13 @@ const Reviews: React.FC = () => {
               className="lc_reviews_widget" 
               src="https://reputationhub.site/reputation/widgets/review_widget/3aRsj8TT2qcU3nkx3kWm" 
               frameBorder="0" 
-              scrolling="no" 
-              style={{ minWidth: '100%', width: '100%', height: '400px' }}
-              title="Customer Reviews"
+              scrolling="yes"
+              style={{ 
+                minWidth: '100%', 
+                width: '100%', 
+                height: '600px' 
+              }}
+              title="Customer Reviews - Full Section"
             />
           </div>
         </AnimatedSection>

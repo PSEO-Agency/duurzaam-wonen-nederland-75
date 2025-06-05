@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
@@ -155,9 +154,16 @@ const Index: React.FC = () => {
                   className="lc_reviews_widget" 
                   src="https://reputationhub.site/reputation/widgets/review_widget/3aRsj8TT2qcU3nkx3kWm" 
                   frameBorder="0" 
-                  scrolling="no" 
-                  style={{ minWidth: '100%', width: '100%', height: '400px' }}
-                  title="Customer Reviews"
+                  scrolling="yes"
+                  style={{ 
+                    minWidth: '100%', 
+                    width: '100%', 
+                    height: '600px',
+                    '@media (max-width: 768px)': {
+                      height: '500px'
+                    }
+                  }}
+                  title="Customer Reviews - Quick Preview"
                 />
               </div>
             </div>
