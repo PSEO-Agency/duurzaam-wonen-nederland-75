@@ -151,17 +151,14 @@ const Index: React.FC = () => {
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
                 <iframe 
-                  className="lc_reviews_widget" 
+                  className="lc_reviews_widget w-full h-[600px] md:h-[600px]" 
                   src="https://reputationhub.site/reputation/widgets/review_widget/3aRsj8TT2qcU3nkx3kWm" 
                   frameBorder="0" 
                   scrolling="yes"
                   style={{ 
                     minWidth: '100%', 
                     width: '100%', 
-                    height: '600px',
-                    '@media (max-width: 768px)': {
-                      height: '500px'
-                    }
+                    height: '600px'
                   }}
                   title="Customer Reviews - Quick Preview"
                 />
