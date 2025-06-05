@@ -14,6 +14,7 @@ const Missie: React.FC = () => {
       <Helmet>
         <title>Onze Missie & Visie | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Lees meer over de missie en visie van Duurzaam Wonen Nederland. Wij streven naar een duurzame toekomst voor woningen in Nederland." />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://duurzaamwonen.info/over-ons/missie" />
       </Helmet>
       

@@ -53,6 +53,7 @@ const Team: React.FC = () => {
       <Helmet>
         <title>Ons Team | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Maak kennis met het team van Duurzaam Wonen Nederland. Een gedreven groep professionals die zich inzet voor duurzame woningverbetering." />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://duurzaamwonen.info/over-ons/team" />
       </Helmet>
       

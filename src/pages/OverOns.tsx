@@ -15,6 +15,7 @@ const OverOns: React.FC = () => {
       <Helmet>
         <title>Over Ons | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Leer meer over Duurzaam Wonen Nederland, onze missie, visie en het team achter onze duurzame woningoplossingen." />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://duurzaamwonen.info/over-ons" />
       </Helmet>
       

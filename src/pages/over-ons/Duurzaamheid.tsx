@@ -14,6 +14,7 @@ const Duurzaamheid: React.FC = () => {
       <Helmet>
         <title>Duurzaamheid | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek hoe Duurzaam Wonen Nederland bijdraagt aan een duurzamere toekomst door middel van onze producten, processen en bedrijfsvoering." />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://duurzaamwonen.info/over-ons/duurzaamheid" />
       </Helmet>
       

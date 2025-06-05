@@ -111,24 +111,6 @@ export const NavMenuItems = () => {
 
       <NavigationMenuItem>
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
-          Over ons
-        </NavigationMenuTrigger>
-        <NavigationMenuContent className="right-0">
-          <div className="bg-white p-4 w-auto">
-            <h3 className="font-semibold text-lg mb-2">Over ons</h3>
-            <ul className="space-y-1">
-              {overOnsItems.map((item) => (
-                <li key={item.label}>
-                  {renderMenuLink(item)}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-      
-      <NavigationMenuItem>
-        <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Admin
         </NavigationMenuTrigger>
         <NavigationMenuContent className="right-0">

@@ -36,6 +36,7 @@ const Vacatures: React.FC = () => {
       <Helmet>
         <title>Vacatures | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek de vacatures bij Duurzaam Wonen Nederland. Word onderdeel van ons team en help mee aan een duurzamere toekomst." />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://duurzaamwonen.info/over-ons/vacatures" />
       </Helmet>
       
