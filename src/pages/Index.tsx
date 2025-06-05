@@ -66,12 +66,23 @@ const Index: React.FC = () => {
     document.querySelectorAll('.reveal-up').forEach((el) => {
       observer.observe(el);
     });
+
+    // Load review widget script
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://reputationhub.site/reputation/assets/review-widget.js';
+    script.async = true;
+    document.head.appendChild(script);
     
     return () => {
       document.querySelectorAll('.reveal-up').forEach((el) => {
         observer.unobserve(el);
       });
       clearTimeout(timeout);
+      // Clean up script
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
     };
   }, []);
   
@@ -135,6 +146,23 @@ const Index: React.FC = () => {
         <main className="flex-grow">
           <Hero />
           <Benefits />
+          
+          {/* Review Widget Section */}
+          <section className="py-8 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <iframe 
+                  className="lc_reviews_widget" 
+                  src="https://reputationhub.site/reputation/widgets/review_widget/3aRsj8TT2qcU3nkx3kWm" 
+                  frameBorder="0" 
+                  scrolling="no" 
+                  style={{ minWidth: '100%', width: '100%', height: '400px' }}
+                  title="Customer Reviews"
+                />
+              </div>
+            </div>
+          </section>
+          
           <Services />
           <Projects />
           <AboutUs />
