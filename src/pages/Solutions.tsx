@@ -6,6 +6,14 @@ import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
@@ -45,17 +53,30 @@ const Solutions: React.FC = () => {
       <Navbar />
 
       <main className="flex-grow pt-20">
+        {/* Breadcrumbs */}
+        <section className="py-4 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/">Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Oplossingen</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </section>
+
         {/* Hero Section */}
         <section className="bg-brand-green py-12 md:py-20">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
               <div className="max-w-4xl mx-auto text-center text-white">
-                <nav className="text-white/80 text-sm mb-4">
-                  <Link to="/" className="hover:text-white">Home</Link>
-                  <span className="mx-2">/</span>
-                  <span className="text-white">Oplossingen</span>
-                </nav>
-                
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
                   Onze Oplossingen voor Woningverduurzaming
                 </h1>

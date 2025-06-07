@@ -1,17 +1,26 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Check, Star, MapPin, Calendar } from 'lucide-react';
+import { ArrowRight, Check, Star, MapPin, Calendar, Phone, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedSection from '@/components/AnimatedSection';
 import ContactCTA from '@/components/ContactCTA';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useSolutions } from '@/hooks/useSolutions';
 
 interface QuickLink {
   label: string;
@@ -81,6 +90,7 @@ const SolutionTemplate: React.FC<SolutionTemplateProps> = ({
   relatedSolutions = [] 
 }) => {
   const isMobile = useIsMobile();
+  const { data: allSolutions = [] } = useSolutions();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -100,6 +110,31 @@ const SolutionTemplate: React.FC<SolutionTemplateProps> = ({
       <Navbar />
 
       <main className="flex-grow pt-20">
+        {/* Breadcrumbs */}
+        <section className="py-4 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/">Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/oplossingen">Oplossingen</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>{solution.name}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </section>
+
         {/* Hero Section */}
         <section 
           className="relative min-h-[70vh] flex items-center"
@@ -117,14 +152,6 @@ const SolutionTemplate: React.FC<SolutionTemplateProps> = ({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7">
                 <AnimatedSection animation="fade-in-right">
-                  <nav className="text-white/80 text-sm mb-4">
-                    <Link to="/" className="hover:text-white">Home</Link>
-                    <span className="mx-2">/</span>
-                    <Link to="/oplossingen" className="hover:text-white">Oplossingen</Link>
-                    <span className="mx-2">/</span>
-                    <span className="text-white">{solution.name}</span>
-                  </nav>
-                  
                   <span className="inline-block px-4 py-1 bg-brand-green/90 text-white rounded-full text-sm font-medium mb-4">
                     Duurzaam Wonen Nederland
                   </span>
@@ -294,9 +321,49 @@ const SolutionTemplate: React.FC<SolutionTemplateProps> = ({
           </section>
         )}
 
+        {/* Onze Oplossingen Section */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-in">
+              <h2 className="text-3xl font-bold mb-12 text-center">Onze Oplossingen</h2>
+              <div className={`grid grid-cols-1 ${isMobile ? '' : 'md:grid-cols-2 lg:grid-cols-3'} gap-8`}>
+                {allSolutions.slice(0, 6).map((solutionItem, index) => (
+                  <AnimatedSection key={solutionItem.id} animation="fade-in" delay={index * 100}>
+                    <Card className="h-full hover:shadow-lg transition-shadow group">
+                      {solutionItem.hero_image_url && (
+                        <div className="aspect-video overflow-hidden rounded-t-lg">
+                          <img 
+                            src={solutionItem.hero_image_url} 
+                            alt={solutionItem.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      )}
+                      <CardHeader>
+                        <CardTitle className="text-xl group-hover:text-brand-green transition-colors">
+                          {solutionItem.name}
+                        </CardTitle>
+                        <CardDescription>{solutionItem.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <Button asChild className="w-full">
+                          <Link to={`/${solutionItem.slug}`}>
+                            <span>Meer informatie</span>
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </AnimatedSection>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+
         {/* Recent Projects Section */}
         {solution.projects && solution.projects.length > 0 && (
-          <section className="py-12 bg-white">
+          <section className="py-12 bg-gray-50">
             <div className="container mx-auto px-4">
               <AnimatedSection animation="fade-in">
                 <h2 className="text-3xl font-bold mb-12 text-center">Recente Projecten</h2>
@@ -337,6 +404,25 @@ const SolutionTemplate: React.FC<SolutionTemplateProps> = ({
           </section>
         )}
 
+        {/* FAQ Section */}
+        {solution.faq && solution.faq.length > 0 && (
+          <section className="py-12 bg-white">
+            <div className="container mx-auto px-4">
+              <AnimatedSection animation="fade-in">
+                <h2 className="text-3xl font-bold mb-12 text-center">Veelgestelde Vragen</h2>
+                <div className="max-w-3xl mx-auto space-y-6">
+                  {solution.faq.map((item, index) => (
+                    <div key={index} className="bg-gray-50 rounded-lg p-6">
+                      <h3 className="text-lg font-semibold mb-3">{item.question}</h3>
+                      <p className="text-gray-700">{item.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              </AnimatedSection>
+            </div>
+          </section>
+        )}
+
         {/* Workflow Section */}
         {solution.workflow_steps && solution.workflow_steps.length > 0 && (
           <section className="py-12 bg-gray-50">
@@ -363,59 +449,8 @@ const SolutionTemplate: React.FC<SolutionTemplateProps> = ({
           </section>
         )}
 
-        {/* FAQ Section */}
-        {solution.faq && solution.faq.length > 0 && (
-          <section className="py-12 bg-white">
-            <div className="container mx-auto px-4">
-              <AnimatedSection animation="fade-in">
-                <h2 className="text-3xl font-bold mb-12 text-center">Veelgestelde Vragen</h2>
-                <div className="max-w-3xl mx-auto space-y-6">
-                  {solution.faq.map((item, index) => (
-                    <div key={index} className="bg-gray-50 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold mb-3">{item.question}</h3>
-                      <p className="text-gray-700">{item.answer}</p>
-                    </div>
-                  ))}
-                </div>
-              </AnimatedSection>
-            </div>
-          </section>
-        )}
-
-        {/* Related Solutions Section */}
-        {relatedSolutions.length > 0 && (
-          <section className="py-12 bg-gray-50">
-            <div className="container mx-auto px-4">
-              <AnimatedSection animation="fade-in">
-                <h2 className="text-3xl font-bold mb-12 text-center">Andere Oplossingen</h2>
-                <div className={`grid grid-cols-1 ${isMobile ? '' : 'md:grid-cols-2 lg:grid-cols-3'} gap-8`}>
-                  {relatedSolutions.slice(0, 3).map((relatedSolution, index) => (
-                    <AnimatedSection key={relatedSolution.id} animation="fade-in" delay={index * 100}>
-                      <Card className="h-full hover:shadow-lg transition-shadow">
-                        <CardHeader>
-                          <CardTitle className="text-xl">{relatedSolution.name}</CardTitle>
-                          <CardDescription>{relatedSolution.description}</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <Link 
-                            to={`/${relatedSolution.slug}`}
-                            className="text-brand-green flex items-center hover:underline"
-                          >
-                            <span>Meer over {relatedSolution.name}</span>
-                            <ArrowRight className="ml-1 h-4 w-4" />
-                          </Link>
-                        </CardContent>
-                      </Card>
-                    </AnimatedSection>
-                  ))}
-                </div>
-              </AnimatedSection>
-            </div>
-          </section>
-        )}
-
         {/* Reviews Section */}
-        <section className="py-8 bg-gray-50">
+        <section className="py-8 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <iframe 
@@ -431,6 +466,35 @@ const SolutionTemplate: React.FC<SolutionTemplateProps> = ({
                 title="Customer Reviews"
               />
             </div>
+          </div>
+        </section>
+
+        {/* Locations Section */}
+        <section className="py-12 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-in">
+              <h2 className="text-3xl font-bold mb-12 text-center">Onze Werkgebieden</h2>
+              <div className="max-w-4xl mx-auto">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                  {[
+                    'Enschede', 'Hengelo', 'Almelo', 'Oldenzaal',
+                    'Haaksbergen', 'Losser', 'Denekamp', 'Tubbergen',
+                    'Twenterand', 'Wierden', 'Rijssen-Holten', 'Hellendoorn'
+                  ].map((city, index) => (
+                    <div key={index} className="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                      <p className="font-medium text-gray-800">{city}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="text-center mt-8">
+                  <Button asChild variant="outline">
+                    <Link to="/werkgebied">
+                      Bekijk alle werkgebieden
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </AnimatedSection>
           </div>
         </section>
 
