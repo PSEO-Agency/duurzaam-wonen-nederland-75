@@ -95,6 +95,14 @@ export const NavMenuItems = () => {
                 </ul>
               </div>
             </div>
+            <div className="mt-4 pt-4 border-t">
+              <Link 
+                to="/oplossingen" 
+                className="text-brand-green font-medium hover:underline"
+              >
+                Bekijk alle oplossingen →
+              </Link>
+            </div>
           </div>
         </NavigationMenuContent>
       </NavigationMenuItem>

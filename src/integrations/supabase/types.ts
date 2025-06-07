@@ -180,14 +180,100 @@ export type Database = {
       }
       services: {
         Row: {
+          benefits: Json | null
+          category_id: string | null
+          created_at: string
+          description: string | null
+          faq: Json | null
+          features: Json | null
+          hero_description: string | null
+          hero_image_url: string | null
+          hero_title: string | null
+          icon_name: string | null
+          id: string
+          intro_text: string | null
+          is_active: boolean | null
+          meta_description: string | null
+          meta_title: string | null
+          name: string
+          pricing_info: string | null
+          quick_links: Json | null
+          slug: string
+          sort_order: number | null
+          updated_at: string
+          what_are_description: string | null
+          workflow_steps: Json | null
+        }
+        Insert: {
+          benefits?: Json | null
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          faq?: Json | null
+          features?: Json | null
+          hero_description?: string | null
+          hero_image_url?: string | null
+          hero_title?: string | null
+          icon_name?: string | null
+          id?: string
+          intro_text?: string | null
+          is_active?: boolean | null
+          meta_description?: string | null
+          meta_title?: string | null
+          name: string
+          pricing_info?: string | null
+          quick_links?: Json | null
+          slug: string
+          sort_order?: number | null
+          updated_at?: string
+          what_are_description?: string | null
+          workflow_steps?: Json | null
+        }
+        Update: {
+          benefits?: Json | null
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          faq?: Json | null
+          features?: Json | null
+          hero_description?: string | null
+          hero_image_url?: string | null
+          hero_title?: string | null
+          icon_name?: string | null
+          id?: string
+          intro_text?: string | null
+          is_active?: boolean | null
+          meta_description?: string | null
+          meta_title?: string | null
+          name?: string
+          pricing_info?: string | null
+          quick_links?: Json | null
+          slug?: string
+          sort_order?: number | null
+          updated_at?: string
+          what_are_description?: string | null
+          workflow_steps?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "services_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "solution_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      solution_categories: {
+        Row: {
           created_at: string
           description: string | null
           icon_name: string | null
           id: string
-          meta_description: string | null
-          meta_title: string | null
+          is_active: boolean | null
           name: string
           slug: string
+          sort_order: number | null
           updated_at: string
         }
         Insert: {
@@ -195,10 +281,10 @@ export type Database = {
           description?: string | null
           icon_name?: string | null
           id?: string
-          meta_description?: string | null
-          meta_title?: string | null
+          is_active?: boolean | null
           name: string
           slug: string
+          sort_order?: number | null
           updated_at?: string
         }
         Update: {
@@ -206,13 +292,63 @@ export type Database = {
           description?: string | null
           icon_name?: string | null
           id?: string
-          meta_description?: string | null
-          meta_title?: string | null
+          is_active?: boolean | null
           name?: string
           slug?: string
+          sort_order?: number | null
           updated_at?: string
         }
         Relationships: []
+      }
+      solution_projects: {
+        Row: {
+          completion_date: string | null
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          is_featured: boolean | null
+          location: string | null
+          project_type: string | null
+          service_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          completion_date?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean | null
+          location?: string | null
+          project_type?: string | null
+          service_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          completion_date?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean | null
+          location?: string | null
+          project_type?: string | null
+          service_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "solution_projects_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
