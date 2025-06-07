@@ -1,25 +1,23 @@
+
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import Index from './pages/Index';
-import Projecten from './pages/Projecten';
+import Projects from './pages/Projects';
 import Werkwijze from './pages/Werkwijze';
-import Financiering from './pages/Financiering';
+import RentevrijeFinanciering from './pages/RentevrijeFinanciering';
 import Contact from './pages/Contact';
 import OverOns from './pages/OverOns';
-import Team from './pages/Team';
-import Missie from './pages/Missie';
-import Duurzaamheid from './pages/Duurzaamheid';
-import Vacatures from './pages/Vacatures';
+import Team from './pages/over-ons/Team';
+import Missie from './pages/over-ons/Missie';
+import Duurzaamheid from './pages/over-ons/Duurzaamheid';
+import Vacatures from './pages/over-ons/Vacatures';
 import KunststofKozijnen from './pages/KunststofKozijnen';
-import KunststofSchuifpuien from './pages/KunststofSchuifpuien';
-import KunststofDeuren from './pages/KunststofDeuren';
-import Gevelbekleding from './pages/Gevelbekleding';
-import Error404Page from './pages/Error404Page';
+import NotFound from './pages/NotFound';
 import ScrollToTopOnNavigate from './components/ScrollToTopOnNavigate';
-import AdminWrapper from './components/AdminWrapper';
+import AdminWrapper from './components/admin/AdminWrapper';
 import Dashboard from './pages/admin/Dashboard';
 import Pages from './pages/admin/Pages';
 import Locations from './pages/admin/Locations';
@@ -46,9 +44,9 @@ function App() {
             <AdminWrapper>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/projecten" element={<Projecten />} />
+                <Route path="/projecten" element={<Projects />} />
                 <Route path="/werkwijze" element={<Werkwijze />} />
-                <Route path="/rentevrije-financiering" element={<Financiering />} />
+                <Route path="/rentevrije-financiering" element={<RentevrijeFinanciering />} />
                 <Route path="/contact" element={<Contact />} />
                 
                 <Route path="/over-ons" element={<OverOns />} />
@@ -58,9 +56,6 @@ function App() {
                 <Route path="/over-ons/vacatures" element={<Vacatures />} />
 
                 <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
-                <Route path="/kunststof-schuifpuien" element={<KunststofSchuifpuien />} />
-                <Route path="/kunststof-deuren" element={<KunststofDeuren />} />
-                <Route path="/gevelbekleding" element={<Gevelbekleding />} />
                 
                 <Route path="/admin/dashboard" element={<Dashboard />} />
                 <Route path="/admin/pages" element={<Pages />} />
@@ -70,11 +65,9 @@ function App() {
 
                 {/* Add new solution routes */}
                 <Route path="/oplossingen" element={<Solutions />} />
-                <Route path="/kunststof-schuifpuien" element={<SolutionPage />} />
-                <Route path="/kunststof-deuren" element={<SolutionPage />} />
-                <Route path="/gevelbekleding" element={<SolutionPage />} />
+                <Route path="/:slug" element={<SolutionPage />} />
                 
-                <Route path="*" element={<Error404Page />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </AdminWrapper>
           </div>
