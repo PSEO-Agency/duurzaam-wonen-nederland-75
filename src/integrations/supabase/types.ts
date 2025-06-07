@@ -154,6 +154,128 @@ export type Database = {
           },
         ]
       }
+      product_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon_name: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          slug: string
+          sort_order: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          slug: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          slug?: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          benefits: Json | null
+          category_id: string | null
+          created_at: string
+          description: string | null
+          faq: Json | null
+          features: Json | null
+          hero_description: string | null
+          hero_image_url: string | null
+          hero_title: string | null
+          icon_name: string | null
+          id: string
+          intro_text: string | null
+          is_active: boolean | null
+          meta_description: string | null
+          meta_title: string | null
+          name: string
+          pricing_info: string | null
+          quick_links: Json | null
+          slug: string
+          sort_order: number | null
+          updated_at: string
+          what_are_description: string | null
+          workflow_steps: Json | null
+        }
+        Insert: {
+          benefits?: Json | null
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          faq?: Json | null
+          features?: Json | null
+          hero_description?: string | null
+          hero_image_url?: string | null
+          hero_title?: string | null
+          icon_name?: string | null
+          id?: string
+          intro_text?: string | null
+          is_active?: boolean | null
+          meta_description?: string | null
+          meta_title?: string | null
+          name: string
+          pricing_info?: string | null
+          quick_links?: Json | null
+          slug: string
+          sort_order?: number | null
+          updated_at?: string
+          what_are_description?: string | null
+          workflow_steps?: Json | null
+        }
+        Update: {
+          benefits?: Json | null
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          faq?: Json | null
+          features?: Json | null
+          hero_description?: string | null
+          hero_image_url?: string | null
+          hero_title?: string | null
+          icon_name?: string | null
+          id?: string
+          intro_text?: string | null
+          is_active?: boolean | null
+          meta_description?: string | null
+          meta_title?: string | null
+          name?: string
+          pricing_info?: string | null
+          quick_links?: Json | null
+          slug?: string
+          sort_order?: number | null
+          updated_at?: string
+          what_are_description?: string | null
+          workflow_steps?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "product_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       regions: {
         Row: {
           created_at: string
