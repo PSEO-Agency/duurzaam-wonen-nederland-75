@@ -22,13 +22,10 @@ import Dashboard from './pages/admin/Dashboard';
 import Pages from './pages/admin/Pages';
 import Locations from './pages/admin/Locations';
 import Services from './pages/admin/Services';
-import Products from './pages/admin/Products';
 import CityServices from './pages/admin/CityServices';
 import AdminSolutions from './pages/admin/Solutions';
 import Solutions from './pages/Solutions';
 import SolutionPage from './pages/SolutionPage';
-import ProductsPage from './pages/Products';
-import ProductPage from './pages/ProductPage';
 import Zoeken from './pages/Zoeken';
 
 function App() {
@@ -58,7 +55,6 @@ function App() {
               <Route path="/over-ons/duurzaamheid" element={<Duurzaamheid />} />
               <Route path="/over-ons/vacatures" element={<Vacatures />} />
 
-              {/* Specific product/service routes */}
               <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
               
               {/* Wrap all admin routes with AdminLayout */}
@@ -67,7 +63,6 @@ function App() {
                 <Route path="pages" element={<Pages />} />
                 <Route path="locations" element={<Locations />} />
                 <Route path="services" element={<Services />} />
-                <Route path="products" element={<Products />} />
                 <Route path="city-services" element={<CityServices />} />
                 <Route path="solutions" element={<AdminSolutions />} />
               </Route>
@@ -75,16 +70,8 @@ function App() {
               {/* Search results page */}
               <Route path="/zoeken" element={<Zoeken />} />
 
-              {/* Solutions overview page */}
+              {/* Add new solution routes */}
               <Route path="/oplossingen" element={<Solutions />} />
-
-              {/* Products overview page */}
-              <Route path="/producten" element={<ProductsPage />} />
-              
-              {/* Dynamic product pages */}
-              <Route path="/producten/:slug" element={<ProductPage />} />
-              
-              {/* Dynamic solution pages - MUST be last to avoid catching specific routes */}
               <Route path="/:slug" element={<SolutionPage />} />
               
               <Route path="*" element={<NotFound />} />

@@ -24,6 +24,7 @@ import SolutionFAQ from '@/components/solution/SolutionFAQ';
 import SolutionWorkflow from '@/components/solution/SolutionWorkflow';
 import SolutionLocations from '@/components/solution/SolutionLocations';
 import SolutionRelated from '@/components/solution/SolutionRelated';
+import { useSolutions } from '@/hooks/useSolutions';
 
 interface QuickLink {
   label: string;
@@ -92,6 +93,8 @@ const SolutionTemplate: React.FC<SolutionTemplateProps> = ({
   solution, 
   relatedSolutions = [] 
 }) => {
+  const { data: allSolutions = [] } = useSolutions();
+
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
@@ -180,7 +183,7 @@ const SolutionTemplate: React.FC<SolutionTemplateProps> = ({
         <SolutionFeatures features={solution.features} />
 
         {/* Related Solutions Section */}
-        <SolutionRelated solutions={relatedSolutions} currentSolutionId={solution.id} />
+        <SolutionRelated solutions={allSolutions} />
 
         {/* Recent Projects Section */}
         <SolutionProjects projects={solution.projects || []} />
