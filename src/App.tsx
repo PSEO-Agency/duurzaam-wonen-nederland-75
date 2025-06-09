@@ -29,6 +29,7 @@ import Locations from './pages/admin/Locations';
 import Services from './pages/admin/Services';
 import CityServices from './pages/admin/CityServices';
 import AdminSolutions from './pages/admin/Solutions';
+import AdminProducts from './pages/admin/Products';
 import Solutions from './pages/Solutions';
 import SolutionPage from './pages/SolutionPage';
 import Zoeken from './pages/Zoeken';
@@ -74,6 +75,7 @@ function App() {
                   <Route path="services" element={<Services />} />
                   <Route path="city-services" element={<CityServices />} />
                   <Route path="solutions" element={<AdminSolutions />} />
+                  <Route path="products" element={<AdminProducts />} />
                 </Route>
                 
                 {/* Search results page */}

@@ -12,7 +12,8 @@ import {
   MapPin,
   Briefcase,
   Building,
-  Wrench
+  Wrench,
+  Package
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -31,6 +32,7 @@ const AdminSidebar: React.FC = () => {
     { label: "Templates", icon: Layers, path: "/admin/templates" },
     { label: "Sections", icon: Puzzle, path: "/admin/sections" },
     { label: "Oplossingen", icon: Wrench, path: "/admin/solutions" },
+    { label: "Producten", icon: Package, path: "/admin/products" },
     { label: "Locations", icon: MapPin, path: "/admin/locations" },
     { label: "Services", icon: Briefcase, path: "/admin/services" },
     { label: "City Services", icon: Building, path: "/admin/city-services" },

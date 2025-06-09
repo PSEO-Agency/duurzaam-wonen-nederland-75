@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { ProductFormData } from './types';
 import { ProductBenefitsFieldArray } from './ProductBenefitsFieldArray';
+import { ProductFeaturesFieldArray } from './ProductFeaturesFieldArray';
 import { ProductFAQFieldArray } from './ProductFAQFieldArray';
 
 interface ContentTabProps {
@@ -17,6 +18,11 @@ export const ContentTab: React.FC<ContentTabProps> = ({ form }) => {
   const { fields: benefitFields, append: appendBenefit, remove: removeBenefit } = useFieldArray({
     control: form.control,
     name: 'benefits',
+  });
+
+  const { fields: featureFields, append: appendFeature, remove: removeFeature } = useFieldArray({
+    control: form.control,
+    name: 'features',
   });
 
   const { fields: faqFields, append: appendFaq, remove: removeFaq } = useFieldArray({
@@ -80,6 +86,15 @@ export const ContentTab: React.FC<ContentTabProps> = ({ form }) => {
           fields={benefitFields}
           append={appendBenefit}
           remove={removeBenefit}
+        />
+
+        <Separator />
+
+        <ProductFeaturesFieldArray
+          form={form}
+          fields={featureFields}
+          append={appendFeature}
+          remove={removeFeature}
         />
 
         <Separator />

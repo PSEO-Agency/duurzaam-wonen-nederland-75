@@ -3,6 +3,7 @@ import React from 'react';
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import { useProducts } from '@/hooks/useProducts';
 
 interface MenuSection {
   label: string;
@@ -44,9 +45,13 @@ export const adminItems: MenuSection[] = [
   { label: 'Locaties', href: '/admin/locations' },
   { label: 'Diensten', href: '/admin/services' },
   { label: 'Stad Diensten', href: '/admin/city-services' },
+  { label: 'Oplossingen', href: '/admin/solutions' },
+  { label: 'Producten', href: '/admin/products' },
 ];
 
 export const NavMenuItems = () => {
+  const { data: products = [] } = useProducts();
+
   const renderMenuLink = (item: MenuSection) => {
     if (item.href.startsWith('#')) {
       return (
@@ -84,8 +89,18 @@ export const NavMenuItems = () => {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-gray-900 mb-2">Producten</h4>
+                <h4 className="font-medium text-gray-900 mb-2">
+                  Producten {products.length > 0 && `(${products.length})`}
+                </h4>
                 <ul className="space-y-1">
+                  {products.slice(0, 4).map((product) => (
+                    <li key={product.slug}>
+                      <Link to={`/products/${product.slug}`} className={dropdownItemClass}>
+                        <ChevronRight size={16} className="mr-2 flex-shrink-0" />
+                        <span>{product.name}</span>
+                      </Link>
+                    </li>
+                  ))}
                   {productenItems.map((item) => (
                     <li key={item.label}>
                       {renderMenuLink(item)}
@@ -97,9 +112,15 @@ export const NavMenuItems = () => {
             <div className="mt-4 pt-4 border-t">
               <Link 
                 to="/oplossingen" 
-                className="text-brand-green font-medium hover:underline"
+                className="text-brand-green font-medium hover:underline mr-4"
               >
                 Bekijk alle oplossingen →
+              </Link>
+              <Link 
+                to="/products" 
+                className="text-brand-green font-medium hover:underline"
+              >
+                Bekijk alle producten →
               </Link>
             </div>
           </div>
