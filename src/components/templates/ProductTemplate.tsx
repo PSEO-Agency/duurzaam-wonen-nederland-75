@@ -11,6 +11,7 @@ import ProductWorkflow from '@/components/product/ProductWorkflow';
 import ProductFAQ from '@/components/product/ProductFAQ';
 import ProductContent from '@/components/product/ProductContent';
 import ProductRelated from '@/components/product/ProductRelated';
+import ProductQuickLinks from '@/components/product/ProductQuickLinks';
 import ContactCTA from '@/components/ContactCTA';
 import Projects from '@/components/Projects';
 import Reviews from '@/components/Reviews';
@@ -37,6 +38,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product, relatedProdu
   const features = parseJsonField(product.features);
   const faq = parseJsonField(product.faq);
   const workflowSteps = parseJsonField(product.workflow_steps);
+  const quickLinks = parseJsonField(product.quick_links);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -54,6 +56,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product, relatedProdu
           description={product.hero_description || product.description}
           imageUrl={product.hero_image_url}
         />
+        
+        {quickLinks.length > 0 && <ProductQuickLinks quickLinks={quickLinks} />}
         
         {product.intro_text && (
           <ProductContent 

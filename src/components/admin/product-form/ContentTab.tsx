@@ -9,6 +9,8 @@ import { ProductFormData } from './types';
 import { ProductBenefitsFieldArray } from './ProductBenefitsFieldArray';
 import { ProductFeaturesFieldArray } from './ProductFeaturesFieldArray';
 import { ProductFAQFieldArray } from './ProductFAQFieldArray';
+import { ProductWorkflowFieldArray } from './WorkflowFieldArray';
+import { ProductQuickLinksFieldArray } from './QuickLinksFieldArray';
 
 interface ContentTabProps {
   form: UseFormReturn<ProductFormData>;
@@ -28,6 +30,16 @@ export const ContentTab: React.FC<ContentTabProps> = ({ form }) => {
   const { fields: faqFields, append: appendFaq, remove: removeFaq } = useFieldArray({
     control: form.control,
     name: 'faq',
+  });
+
+  const { fields: workflowFields, append: appendWorkflow, remove: removeWorkflow } = useFieldArray({
+    control: form.control,
+    name: 'workflow_steps',
+  });
+
+  const { fields: quickLinkFields, append: appendQuickLink, remove: removeQuickLink } = useFieldArray({
+    control: form.control,
+    name: 'quick_links',
   });
 
   return (
@@ -81,6 +93,15 @@ export const ContentTab: React.FC<ContentTabProps> = ({ form }) => {
 
         <Separator />
 
+        <ProductQuickLinksFieldArray
+          form={form}
+          fields={quickLinkFields}
+          append={appendQuickLink}
+          remove={removeQuickLink}
+        />
+
+        <Separator />
+
         <ProductBenefitsFieldArray
           form={form}
           fields={benefitFields}
@@ -95,6 +116,15 @@ export const ContentTab: React.FC<ContentTabProps> = ({ form }) => {
           fields={featureFields}
           append={appendFeature}
           remove={removeFeature}
+        />
+
+        <Separator />
+
+        <ProductWorkflowFieldArray
+          form={form}
+          fields={workflowFields}
+          append={appendWorkflow}
+          remove={removeWorkflow}
         />
 
         <Separator />

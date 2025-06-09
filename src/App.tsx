@@ -25,6 +25,8 @@ import NotFound from './pages/NotFound';
 import AdminLayout from './components/admin/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
 import Pages from './pages/admin/Pages';
+import Templates from './pages/admin/Templates';
+import Sections from './pages/admin/Sections';
 import Locations from './pages/admin/Locations';
 import Services from './pages/admin/Services';
 import CityServices from './pages/admin/CityServices';
@@ -71,6 +73,8 @@ function App() {
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route path="dashboard" element={<Dashboard />} />
                   <Route path="pages" element={<Pages />} />
+                  <Route path="templates" element={<Templates />} />
+                  <Route path="sections" element={<Sections />} />
                   <Route path="locations" element={<Locations />} />
                   <Route path="services" element={<Services />} />
                   <Route path="city-services" element={<CityServices />} />
