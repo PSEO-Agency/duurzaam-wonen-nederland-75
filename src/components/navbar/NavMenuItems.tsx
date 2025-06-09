@@ -25,13 +25,6 @@ export const oplossingenItems: MenuSection[] = [
   { label: 'Gevelbekleding', href: '/gevelbekleding' },
 ];
 
-export const productenItems: MenuSection[] = [
-  { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
-  { label: 'HSB wanden', href: '#hsb-wanden' },
-  { label: 'Hellend dak', href: '#hellend-dak' },
-  { label: 'Plat dak', href: '#plat-dak' },
-];
-
 export const overOnsItems: MenuSection[] = [
   { label: 'Ons team', href: '/over-ons/team' },
   { label: 'Onze missie', href: '/over-ons/missie' },
@@ -93,17 +86,12 @@ export const NavMenuItems = () => {
                   Producten {products.length > 0 && `(${products.length})`}
                 </h4>
                 <ul className="space-y-1">
-                  {products.slice(0, 4).map((product) => (
+                  {products.map((product) => (
                     <li key={product.slug}>
                       <Link to={`/products/${product.slug}`} className={dropdownItemClass}>
                         <ChevronRight size={16} className="mr-2 flex-shrink-0" />
                         <span>{product.name}</span>
                       </Link>
-                    </li>
-                  ))}
-                  {productenItems.map((item) => (
-                    <li key={item.label}>
-                      {renderMenuLink(item)}
                     </li>
                   ))}
                 </ul>
