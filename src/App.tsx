@@ -55,6 +55,7 @@ function App() {
               <Route path="/over-ons/duurzaamheid" element={<Duurzaamheid />} />
               <Route path="/over-ons/vacatures" element={<Vacatures />} />
 
+              {/* Specific product/service routes */}
               <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
               
               {/* Wrap all admin routes with AdminLayout */}
@@ -70,8 +71,10 @@ function App() {
               {/* Search results page */}
               <Route path="/zoeken" element={<Zoeken />} />
 
-              {/* Add new solution routes */}
+              {/* Solutions overview page */}
               <Route path="/oplossingen" element={<Solutions />} />
+              
+              {/* Dynamic solution pages - MUST be last to avoid catching specific routes */}
               <Route path="/:slug" element={<SolutionPage />} />
               
               <Route path="*" element={<NotFound />} />
