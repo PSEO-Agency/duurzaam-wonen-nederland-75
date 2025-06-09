@@ -22,10 +22,13 @@ import Dashboard from './pages/admin/Dashboard';
 import Pages from './pages/admin/Pages';
 import Locations from './pages/admin/Locations';
 import Services from './pages/admin/Services';
+import Products from './pages/admin/Products';
 import CityServices from './pages/admin/CityServices';
 import AdminSolutions from './pages/admin/Solutions';
 import Solutions from './pages/Solutions';
 import SolutionPage from './pages/SolutionPage';
+import ProductsPage from './pages/Products';
+import ProductPage from './pages/ProductPage';
 import Zoeken from './pages/Zoeken';
 
 function App() {
@@ -64,6 +67,7 @@ function App() {
                 <Route path="pages" element={<Pages />} />
                 <Route path="locations" element={<Locations />} />
                 <Route path="services" element={<Services />} />
+                <Route path="products" element={<Products />} />
                 <Route path="city-services" element={<CityServices />} />
                 <Route path="solutions" element={<AdminSolutions />} />
               </Route>
@@ -73,6 +77,12 @@ function App() {
 
               {/* Solutions overview page */}
               <Route path="/oplossingen" element={<Solutions />} />
+
+              {/* Products overview page */}
+              <Route path="/producten" element={<ProductsPage />} />
+              
+              {/* Dynamic product pages */}
+              <Route path="/producten/:slug" element={<ProductPage />} />
               
               {/* Dynamic solution pages - MUST be last to avoid catching specific routes */}
               <Route path="/:slug" element={<SolutionPage />} />
