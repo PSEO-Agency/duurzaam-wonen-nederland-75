@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { SearchProvider } from '@/contexts/SearchContext';
@@ -45,10 +46,10 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <HelmetProvider>
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          <SearchProvider>
-            <CmsProvider>
+      <QueryClientProvider client={queryClient}>
+        <SearchProvider>
+          <CmsProvider>
+            <AdminWrapper>
               <ScrollToTopOnNavigate />
               <Routes>
                 <Route path="/" element={<Index />} />
@@ -87,13 +88,12 @@ function App() {
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>
-              <AdminWrapper />
               <Toaster />
               <CookieConsent />
-            </CmsProvider>
-          </SearchProvider>
-        </QueryClientProvider>
-      </BrowserRouter>
+            </AdminWrapper>
+          </CmsProvider>
+        </SearchProvider>
+      </QueryClientProvider>
     </HelmetProvider>
   );
 }
