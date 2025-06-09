@@ -72,7 +72,6 @@ export const NavMenuItems = () => {
         </NavigationMenuTrigger>
         <NavigationMenuContent>
           <div className="w-[400px] bg-white p-4">
-            <h3 className="font-semibold text-lg mb-2">Ontdek onze oplossingen</h3>
             <div className="grid grid-cols-2 gap-6">
               <div>
                 <h4 className="font-medium text-gray-900 mb-2">Oplossingen</h4>
