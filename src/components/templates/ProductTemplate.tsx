@@ -12,6 +12,7 @@ import ProductFAQ from '@/components/product/ProductFAQ';
 import ProductContent from '@/components/product/ProductContent';
 import ProductRelated from '@/components/product/ProductRelated';
 import ProductQuickLinks from '@/components/product/ProductQuickLinks';
+import RegionsSection from '@/components/kunststof-kozijnen/RegionsSection';
 import ContactCTA from '@/components/ContactCTA';
 import Projects from '@/components/Projects';
 import Reviews from '@/components/Reviews';
@@ -64,6 +65,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product, relatedProdu
             introText={product.intro_text}
             whatAreDescription={product.what_are_description}
             pricingInfo={product.pricing_info}
+            productName={product.name}
           />
         )}
         
@@ -76,6 +78,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product, relatedProdu
         {workflowSteps.length > 0 && <ProductWorkflow workflowSteps={workflowSteps} />}
         
         <Reviews />
+        
+        <RegionsSection />
         
         {faq.length > 0 && <ProductFAQ faq={faq} />}
         
