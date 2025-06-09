@@ -20,6 +20,19 @@ interface SolutionFormProps {
 }
 
 export const SolutionForm: React.FC<SolutionFormProps> = ({ solution, onSuccess }) => {
+  console.log('SolutionForm rendered with solution:', solution);
+
+  // Parse JSON fields safely for form defaults
+  const parseJsonField = (field: any) => {
+    if (!field) return [];
+    if (Array.isArray(field)) return field;
+    try {
+      return JSON.parse(field);
+    } catch {
+      return [];
+    }
+  };
+
   const form = useForm<SolutionFormData>({
     resolver: zodResolver(solutionSchema),
     defaultValues: {
@@ -37,11 +50,11 @@ export const SolutionForm: React.FC<SolutionFormProps> = ({ solution, onSuccess 
       category_id: solution?.category_id || '',
       is_active: solution?.is_active ?? true,
       sort_order: solution?.sort_order || 0,
-      benefits: solution?.benefits || [],
-      features: solution?.features || [],
-      faq: solution?.faq || [],
-      workflow_steps: solution?.workflow_steps || [],
-      quick_links: solution?.quick_links || [],
+      benefits: parseJsonField(solution?.benefits),
+      features: parseJsonField(solution?.features),
+      faq: parseJsonField(solution?.faq),
+      workflow_steps: parseJsonField(solution?.workflow_steps),
+      quick_links: parseJsonField(solution?.quick_links),
     },
   });
 
@@ -105,7 +118,7 @@ export const SolutionForm: React.FC<SolutionFormProps> = ({ solution, onSuccess 
 
         <div className="flex justify-end space-x-4">
           <Button type="submit" disabled={saveMutation.isPending}>
-            {saveMutation.isPending ? 'Opslaan...' : 'Oplossing Opslaan'}
+            {saveMutation.isPending ? 'Opslaan...' : (solution ? 'Oplossing Bijwerken' : 'Oplossing Aanmaken')}
           </Button>
         </div>
       </form>

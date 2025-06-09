@@ -8,13 +8,19 @@ export const useSolutionForm = (solution: any, onSuccess: () => void) => {
   const { data: categories = [] } = useQuery({
     queryKey: ['solution-categories'],
     queryFn: async () => {
+      console.log('Fetching solution categories...');
       const { data, error } = await supabase
         .from('solution_categories')
         .select('*')
         .eq('is_active', true)
         .order('sort_order');
       
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching categories:', error);
+        throw error;
+      }
+      
+      console.log('Fetched categories:', data);
       return data;
     },
   });
@@ -23,6 +29,14 @@ export const useSolutionForm = (solution: any, onSuccess: () => void) => {
     mutationFn: async (data: SolutionFormData) => {
       console.log('Saving solution with data:', data);
       
+      // Parse JSON fields safely
+      const parseJsonField = (field: any) => {
+        if (!field || (Array.isArray(field) && field.length === 0)) {
+          return null;
+        }
+        return Array.isArray(field) ? field : JSON.parse(field);
+      };
+
       // Prepare the data for database insertion
       const dbData = {
         name: data.name,
@@ -39,12 +53,14 @@ export const useSolutionForm = (solution: any, onSuccess: () => void) => {
         category_id: data.category_id || null,
         is_active: data.is_active,
         sort_order: data.sort_order,
-        benefits: data.benefits.length > 0 ? JSON.stringify(data.benefits) : null,
-        features: data.features.length > 0 ? JSON.stringify(data.features) : null,
-        faq: data.faq.length > 0 ? JSON.stringify(data.faq) : null,
-        workflow_steps: data.workflow_steps.length > 0 ? JSON.stringify(data.workflow_steps) : null,
-        quick_links: data.quick_links.length > 0 ? JSON.stringify(data.quick_links) : null,
+        benefits: data.benefits && data.benefits.length > 0 ? data.benefits : null,
+        features: data.features && data.features.length > 0 ? data.features : null,
+        faq: data.faq && data.faq.length > 0 ? data.faq : null,
+        workflow_steps: data.workflow_steps && data.workflow_steps.length > 0 ? data.workflow_steps : null,
+        quick_links: data.quick_links && data.quick_links.length > 0 ? data.quick_links : null,
       };
+
+      console.log('Prepared database data:', dbData);
 
       if (solution?.id) {
         console.log('Updating existing solution:', solution.id);

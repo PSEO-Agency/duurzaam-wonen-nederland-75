@@ -19,7 +19,7 @@ interface Solution {
   is_active: boolean;
   category_id?: string;
   created_at: string;
-  category?: {
+  solution_categories?: {
     name: string;
   };
 }
@@ -32,38 +32,71 @@ const Solutions: React.FC = () => {
   const { data: solutions = [], isLoading } = useQuery({
     queryKey: ['admin-solutions'],
     queryFn: async () => {
+      console.log('Fetching solutions...');
       const { data, error } = await supabase
         .from('services')
         .select(`
-          *,
-          solution_categories!inner(name)
+          id,
+          name,
+          slug,
+          description,
+          is_active,
+          category_id,
+          created_at,
+          sort_order,
+          hero_title,
+          hero_description,
+          hero_image_url,
+          intro_text,
+          what_are_description,
+          pricing_info,
+          meta_title,
+          meta_description,
+          benefits,
+          features,
+          faq,
+          workflow_steps,
+          quick_links,
+          solution_categories(name)
         `)
         .order('sort_order', { ascending: true });
       
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching solutions:', error);
+        throw error;
+      }
+      
+      console.log('Fetched solutions:', data);
       return data as Solution[];
     },
   });
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
+      console.log('Deleting solution:', id);
       const { error } = await supabase
         .from('services')
         .delete()
         .eq('id', id);
       
-      if (error) throw error;
+      if (error) {
+        console.error('Delete error:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
+      console.log('Solution deleted successfully');
       queryClient.invalidateQueries({ queryKey: ['admin-solutions'] });
       toast.success('Oplossing verwijderd');
     },
     onError: (error) => {
+      console.error('Delete error:', error);
       toast.error('Fout bij verwijderen: ' + error.message);
     },
   });
 
   const handleEdit = (solution: Solution) => {
+    console.log('Editing solution:', solution);
     setSelectedSolution(solution);
     setIsFormOpen(true);
   };
@@ -75,9 +108,16 @@ const Solutions: React.FC = () => {
   };
 
   const handleFormSuccess = () => {
+    console.log('Form success, closing dialog and refreshing data');
     setIsFormOpen(false);
     setSelectedSolution(null);
     queryClient.invalidateQueries({ queryKey: ['admin-solutions'] });
+  };
+
+  const handleNewSolution = () => {
+    console.log('Creating new solution');
+    setSelectedSolution(null);
+    setIsFormOpen(true);
   };
 
   if (isLoading) {
@@ -93,7 +133,7 @@ const Solutions: React.FC = () => {
         </div>
         <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
           <DialogTrigger asChild>
-            <Button onClick={() => setSelectedSolution(null)}>
+            <Button onClick={handleNewSolution}>
               <Plus className="h-4 w-4 mr-2" />
               Nieuwe Oplossing
             </Button>
@@ -137,9 +177,9 @@ const Solutions: React.FC = () => {
                   <TableCell className="font-medium">{solution.name}</TableCell>
                   <TableCell className="font-mono text-sm">{solution.slug}</TableCell>
                   <TableCell>
-                    {solution.category_id && (
+                    {solution.solution_categories?.name && (
                       <Badge variant="secondary">
-                        {(solution as any).solution_categories?.name}
+                        {solution.solution_categories.name}
                       </Badge>
                     )}
                   </TableCell>
