@@ -68,7 +68,7 @@ export const NavMenuItems = () => {
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Oplossingen
         </NavigationMenuTrigger>
-        <NavigationMenuContent>
+        <NavigationMenuContent className="w-auto min-w-0">
           <div className="w-[400px] bg-white p-4">
             <div className="grid grid-cols-2 gap-6">
               <div>
