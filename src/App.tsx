@@ -1,9 +1,13 @@
-
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { SearchProvider } from '@/contexts/SearchContext';
+import { CmsProvider } from '@/contexts/CmsContext';
+import { Toaster } from '@/components/ui/sonner';
+import ScrollToTopOnNavigate from '@/components/ScrollToTopOnNavigate';
+import AdminWrapper from '@/components/admin/AdminWrapper';
+import CookieConsent from '@/components/CookieConsent';
 
 import Index from './pages/Index';
 import Projects from './pages/Projects';
@@ -27,59 +31,70 @@ import AdminSolutions from './pages/admin/Solutions';
 import Solutions from './pages/Solutions';
 import SolutionPage from './pages/SolutionPage';
 import Zoeken from './pages/Zoeken';
+import Products from '@/pages/Products';
+import ProductPage from '@/pages/ProductPage';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000, // 60 seconds
+    },
+  },
+});
 
 function App() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000, // 60 seconds
-      },
-    },
-  });
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <SearchProvider>
-          <div className="min-h-screen bg-background font-sans antialiased">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/projecten" element={<Projects />} />
-              <Route path="/werkwijze" element={<Werkwijze />} />
-              <Route path="/rentevrije-financiering" element={<RentevrijeFinanciering />} />
-              <Route path="/contact" element={<Contact />} />
-              
-              <Route path="/over-ons" element={<OverOns />} />
-              <Route path="/over-ons/team" element={<Team />} />
-              <Route path="/over-ons/missie" element={<Missie />} />
-              <Route path="/over-ons/duurzaamheid" element={<Duurzaamheid />} />
-              <Route path="/over-ons/vacatures" element={<Vacatures />} />
-
-              <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
-              
-              {/* Wrap all admin routes with AdminLayout */}
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="pages" element={<Pages />} />
-                <Route path="locations" element={<Locations />} />
-                <Route path="services" element={<Services />} />
-                <Route path="city-services" element={<CityServices />} />
-                <Route path="solutions" element={<AdminSolutions />} />
-              </Route>
-
-              {/* Search results page */}
-              <Route path="/zoeken" element={<Zoeken />} />
-
-              {/* Add new solution routes */}
-              <Route path="/oplossingen" element={<Solutions />} />
-              <Route path="/:slug" element={<SolutionPage />} />
-              
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </SearchProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <SearchProvider>
+            <CmsProvider>
+              <ScrollToTopOnNavigate />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/projecten" element={<Projects />} />
+                <Route path="/werkwijze" element={<Werkwijze />} />
+                <Route path="/rentevrije-financiering" element={<RentevrijeFinanciering />} />
+                <Route path="/contact" element={<Contact />} />
+                
+                <Route path="/over-ons" element={<OverOns />} />
+                <Route path="/over-ons/team" element={<Team />} />
+                <Route path="/over-ons/missie" element={<Missie />} />
+                <Route path="/over-ons/duurzaamheid" element={<Duurzaamheid />} />
+                <Route path="/over-ons/vacatures" element={<Vacatures />} />
+                
+                <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
+                
+                {/* Wrap all admin routes with AdminLayout */}
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="pages" element={<Pages />} />
+                  <Route path="locations" element={<Locations />} />
+                  <Route path="services" element={<Services />} />
+                  <Route path="city-services" element={<CityServices />} />
+                  <Route path="solutions" element={<AdminSolutions />} />
+                </Route>
+                
+                {/* Search results page */}
+                <Route path="/zoeken" element={<Zoeken />} />
+                
+                {/* Add new solution routes */}
+                <Route path="/oplossingen" element={<Solutions />} />
+                <Route path="/:slug" element={<SolutionPage />} />
+                
+                <Route path="/products" element={<Products />} />
+                <Route path="/products/:slug" element={<ProductPage />} />
+                
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <AdminWrapper />
+              <Toaster />
+              <CookieConsent />
+            </CmsProvider>
+          </SearchProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
