@@ -1,6 +1,6 @@
 
 import { supabase } from '@/integrations/supabase/client';
-import { sampleServices, sampleCityServices } from './sampleData';
+import { sampleServices, sampleCityServices, sampleRegions, sampleCities } from './sampleData';
 
 export async function seedServices() {
   try {
@@ -100,20 +100,12 @@ export async function seedCityServices() {
   }
 }
 
-// Function to seed sample regions and cities for testing
+// Function to seed comprehensive Dutch regions and cities
 export async function seedSampleLocations() {
   try {
-    console.log('Starting to seed sample locations...');
+    console.log('Starting to seed comprehensive Dutch locations...');
     
-    // Sample regions
-    const sampleRegions = [
-      { name: 'Noord-Holland', slug: 'noord-holland' },
-      { name: 'Zuid-Holland', slug: 'zuid-holland' },
-      { name: 'Utrecht', slug: 'utrecht' },
-      { name: 'Gelderland', slug: 'gelderland' }
-    ];
-
-    // Insert regions
+    // Insert all Dutch regions
     for (const region of sampleRegions) {
       const { data: existingRegion } = await supabase
         .from('regions')
@@ -122,22 +114,18 @@ export async function seedSampleLocations() {
         .single();
 
       if (!existingRegion) {
-        await supabase.from('regions').insert(region);
-        console.log(`Inserted region: ${region.name}`);
+        const { error } = await supabase.from('regions').insert(region);
+        if (error) {
+          console.error(`Error inserting region ${region.name}:`, error);
+        } else {
+          console.log(`Inserted region: ${region.name}`);
+        }
+      } else {
+        console.log(`Region ${region.name} already exists, skipping...`);
       }
     }
 
-    // Sample cities with their regions
-    const sampleCities = [
-      { name: 'Amsterdam', slug: 'amsterdam', region_slug: 'noord-holland' },
-      { name: 'Haarlem', slug: 'haarlem', region_slug: 'noord-holland' },
-      { name: 'Rotterdam', slug: 'rotterdam', region_slug: 'zuid-holland' },
-      { name: 'Den Haag', slug: 'den-haag', region_slug: 'zuid-holland' },
-      { name: 'Utrecht', slug: 'utrecht', region_slug: 'utrecht' },
-      { name: 'Arnhem', slug: 'arnhem', region_slug: 'gelderland' }
-    ];
-
-    // Insert cities
+    // Insert all cities with their regions
     for (const city of sampleCities) {
       const { data: region } = await supabase
         .from('regions')
@@ -153,28 +141,40 @@ export async function seedSampleLocations() {
           .single();
 
         if (!existingCity) {
-          await supabase.from('cities').insert({
+          const cityData = {
             name: city.name,
             slug: city.slug,
             region_id: region.id,
-            description: `${city.name} en omgeving`
-          });
-          console.log(`Inserted city: ${city.name}`);
+            description: city.description,
+            meta_title: `${city.name} - Duurzaam Wonen Nederland`,
+            meta_description: `${city.description} Ontdek onze diensten in ${city.name}.`
+          };
+
+          const { error } = await supabase.from('cities').insert(cityData);
+          if (error) {
+            console.error(`Error inserting city ${city.name}:`, error);
+          } else {
+            console.log(`Inserted city: ${city.name}`);
+          }
+        } else {
+          console.log(`City ${city.name} already exists, skipping...`);
         }
+      } else {
+        console.error(`Region not found for city ${city.name} with region_slug ${city.region_slug}`);
       }
     }
     
-    console.log('Sample locations seeding completed');
+    console.log('Comprehensive Dutch locations seeding completed');
   } catch (error) {
-    console.error('Error seeding sample locations:', error);
+    console.error('Error seeding comprehensive locations:', error);
   }
 }
 
 // Main seeding function
 export async function seedAllData() {
-  console.log('Starting database seeding...');
+  console.log('Starting comprehensive database seeding...');
   await seedSampleLocations();
   await seedServices();
   await seedCityServices();
-  console.log('Database seeding completed!');
+  console.log('Comprehensive database seeding completed!');
 }
