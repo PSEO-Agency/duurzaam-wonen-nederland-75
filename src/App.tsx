@@ -37,6 +37,7 @@ import SolutionPage from './pages/SolutionPage';
 import Zoeken from './pages/Zoeken';
 import Products from '@/pages/Products';
 import ProductPage from '@/pages/ProductPage';
+import CityServicePage from '@/pages/CityServicePage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -91,6 +92,9 @@ function App() {
                 
                 <Route path="/products" element={<Products />} />
                 <Route path="/products/:slug" element={<ProductPage />} />
+                
+                {/* City service pages - this is the new route */}
+                <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>
