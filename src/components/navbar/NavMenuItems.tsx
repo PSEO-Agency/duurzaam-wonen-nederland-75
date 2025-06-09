@@ -69,9 +69,9 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent className="w-auto min-w-0">
-          <div className="w-[400px] bg-white p-4">
-            <div className="grid grid-cols-2 gap-6">
-              <div>
+          <div className="bg-white p-4 min-w-fit">
+            <div className="grid grid-cols-2 gap-6 min-w-0">
+              <div className="min-w-0">
                 <h4 className="font-medium text-gray-900 mb-2">Oplossingen</h4>
                 <ul className="space-y-1">
                   {oplossingenItems.map((item) => (
@@ -81,7 +81,7 @@ export const NavMenuItems = () => {
                   ))}
                 </ul>
               </div>
-              <div>
+              <div className="min-w-0">
                 <h4 className="font-medium text-gray-900 mb-2">
                   Producten {products.length > 0 && `(${products.length})`}
                 </h4>
