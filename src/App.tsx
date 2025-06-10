@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import KunststofKozijnen from "./pages/KunststofKozijnen";
 import KunststofSchuifpuien from "./pages/KunststofSchuifpuien";
+import ProductPage from "./pages/ProductPage";
 import ColorOptions from "./pages/ColorOptions";
 import ColorDetail from "./pages/ColorDetail";
 import KozijnTypes from "./pages/KozijnTypes";
@@ -115,6 +116,9 @@ const App = () => (
             
             {/* Dynamic city service routes */}
             <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
+            
+            {/* Dynamic product routes - must come after specific routes */}
+            <Route path="/:productSlug" element={<ProductPage />} />
             
             <Route path="*" element={<NotFound />} />
           </Routes>
