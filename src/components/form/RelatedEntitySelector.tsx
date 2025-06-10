@@ -9,53 +9,32 @@ import { Trash2, Plus, GripVertical } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-interface BaseItem {
+// Simplified base type
+interface RelatedEntity {
   id: string;
   sort_order?: number;
   is_active?: boolean;
   created_at?: string;
   updated_at?: string;
+  // Entity-specific fields
+  question?: string;      // FAQ
+  answer?: string;        // FAQ
+  category?: string;      // FAQ
+  title?: string;         // Project
+  description?: string;   // Project
+  image_url?: string;     // Project
+  location?: string;      // Project
+  project_type?: string;  // Project
+  name?: string;          // Region
+  slug?: string;          // Region
 }
-
-interface FAQ extends BaseItem {
-  question: string;
-  answer: string;
-  category?: string;
-}
-
-interface Project extends BaseItem {
-  title: string;
-  description?: string;
-  image_url?: string;
-  location?: string;
-  project_type?: string;
-}
-
-interface Region extends BaseItem {
-  name: string;
-  slug: string;
-}
-
-// Use a more generic type to avoid deep type instantiation
-type EntityItem = BaseItem & {
-  question?: string;
-  answer?: string;
-  category?: string;
-  title?: string;
-  description?: string;
-  image_url?: string;
-  location?: string;
-  project_type?: string;
-  name?: string;
-  slug?: string;
-};
 
 interface RelatedEntitySelectorProps {
   label: string;
   entityType: 'faqs' | 'projects' | 'regions';
   productId?: string;
-  selectedItems: EntityItem[];
-  onSelectionChange: (items: EntityItem[]) => void;
+  selectedItems: RelatedEntity[];
+  onSelectionChange: (items: RelatedEntity[]) => void;
 }
 
 const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
@@ -65,7 +44,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
   selectedItems,
   onSelectionChange
 }) => {
-  const [availableItems, setAvailableItems] = useState<EntityItem[]>([]);
+  const [availableItems, setAvailableItems] = useState<RelatedEntity[]>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -91,7 +70,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
     }
   };
 
-  const getItemLabel = (item: EntityItem): string => {
+  const getItemLabel = (item: RelatedEntity): string => {
     switch (entityType) {
       case 'faqs':
         return item.question || 'Unknown FAQ';
@@ -104,21 +83,37 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
     }
   };
 
-  const handleItemToggle = (item: EntityItem, checked: boolean) => {
+  const handleItemToggle = (item: RelatedEntity, checked: boolean) => {
     if (checked) {
-      const newItem: EntityItem = {
-        ...item,
-        sort_order: selectedItems.length
+      const newItem: RelatedEntity = {
+        id: item.id,
+        sort_order: selectedItems.length,
+        is_active: item.is_active,
+        created_at: item.created_at,
+        updated_at: item.updated_at,
+        question: item.question,
+        answer: item.answer,
+        category: item.category,
+        title: item.title,
+        description: item.description,
+        image_url: item.image_url,
+        location: item.location,
+        project_type: item.project_type,
+        name: item.name,
+        slug: item.slug
       };
-      // Use concat instead of spread to avoid type inference issues
-      onSelectionChange(selectedItems.concat([newItem]));
+      
+      const newItems: RelatedEntity[] = [...selectedItems, newItem];
+      onSelectionChange(newItems);
     } else {
-      onSelectionChange(selectedItems.filter(selected => selected.id !== item.id));
+      const filteredItems = selectedItems.filter(selected => selected.id !== item.id);
+      onSelectionChange(filteredItems);
     }
   };
 
   const handleRemoveItem = (itemId: string) => {
-    onSelectionChange(selectedItems.filter(item => item.id !== itemId));
+    const filteredItems = selectedItems.filter(item => item.id !== itemId);
+    onSelectionChange(filteredItems);
   };
 
   const handleSortOrderChange = (itemId: string, sortOrder: number) => {
