@@ -10,6 +10,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, Save } from 'lucide-react';
+import JsonArrayEditor from '@/components/form/JsonArrayEditor';
+import ImageUpload from '@/components/form/ImageUpload';
 
 const ProductEditor: React.FC = () => {
   const { productId } = useParams();
@@ -39,46 +41,46 @@ const ProductEditor: React.FC = () => {
     hero_primary_button_link: '',
     hero_secondary_button_text: '',
     hero_secondary_button_link: '',
-    hero_guarantees: [],
-    hero_certification_logos: [],
+    hero_guarantees: [] as any[],
+    hero_certification_logos: [] as any[],
     
     // Introduction Section
     introduction_title: '',
-    introduction_content: [],
-    introduction_quick_links: [],
+    introduction_content: [] as any[],
+    introduction_quick_links: [] as any[],
     introduction_cta_text: '',
     introduction_cta_link: '',
     
     // What Are Section
     what_are_title: '',
-    what_are_content: [],
+    what_are_content: [] as any[],
     what_are_video_url: '',
     what_are_video_title: '',
     
     // Benefits Section
     benefits_title: '',
     benefits_description: '',
-    benefits_main_content: [],
-    benefits_stats: [],
+    benefits_main_content: [] as any[],
+    benefits_stats: [] as any[],
     benefits_cta_text: '',
     benefits_cta_link: '',
     
     // Options Section
     options_title: '',
     options_description: '',
-    options_categories: [],
+    options_categories: [] as any[],
     
     // Services Section
     services_title: '',
     services_description: '',
-    services_items: [],
+    services_items: [] as any[],
     
     // Information Section
     information_title: '',
     information_image: '',
     information_image_alt: '',
-    information_tabs: [],
-    information_did_you_know: [],
+    information_tabs: [] as any[],
+    information_did_you_know: [] as any[],
     
     // FAQ Section
     faq_title: '',
@@ -126,34 +128,34 @@ const ProductEditor: React.FC = () => {
           hero_primary_button_link: data.hero_primary_button_link || '',
           hero_secondary_button_text: data.hero_secondary_button_text || '',
           hero_secondary_button_link: data.hero_secondary_button_link || '',
-          hero_guarantees: data.hero_guarantees || [],
-          hero_certification_logos: data.hero_certification_logos || [],
+          hero_guarantees: Array.isArray(data.hero_guarantees) ? data.hero_guarantees : [],
+          hero_certification_logos: Array.isArray(data.hero_certification_logos) ? data.hero_certification_logos : [],
           introduction_title: data.introduction_title || '',
-          introduction_content: data.introduction_content || [],
-          introduction_quick_links: data.introduction_quick_links || [],
+          introduction_content: Array.isArray(data.introduction_content) ? data.introduction_content : [],
+          introduction_quick_links: Array.isArray(data.introduction_quick_links) ? data.introduction_quick_links : [],
           introduction_cta_text: data.introduction_cta_text || '',
           introduction_cta_link: data.introduction_cta_link || '',
           what_are_title: data.what_are_title || '',
-          what_are_content: data.what_are_content || [],
+          what_are_content: Array.isArray(data.what_are_content) ? data.what_are_content : [],
           what_are_video_url: data.what_are_video_url || '',
           what_are_video_title: data.what_are_video_title || '',
           benefits_title: data.benefits_title || '',
           benefits_description: data.benefits_description || '',
-          benefits_main_content: data.benefits_main_content || [],
-          benefits_stats: data.benefits_stats || [],
+          benefits_main_content: Array.isArray(data.benefits_main_content) ? data.benefits_main_content : [],
+          benefits_stats: Array.isArray(data.benefits_stats) ? data.benefits_stats : [],
           benefits_cta_text: data.benefits_cta_text || '',
           benefits_cta_link: data.benefits_cta_link || '',
           options_title: data.options_title || '',
           options_description: data.options_description || '',
-          options_categories: data.options_categories || [],
+          options_categories: Array.isArray(data.options_categories) ? data.options_categories : [],
           services_title: data.services_title || '',
           services_description: data.services_description || '',
-          services_items: data.services_items || [],
+          services_items: Array.isArray(data.services_items) ? data.services_items : [],
           information_title: data.information_title || '',
           information_image: data.information_image || '',
           information_image_alt: data.information_image_alt || '',
-          information_tabs: data.information_tabs || [],
-          information_did_you_know: data.information_did_you_know || [],
+          information_tabs: Array.isArray(data.information_tabs) ? data.information_tabs : [],
+          information_did_you_know: Array.isArray(data.information_did_you_know) ? data.information_did_you_know : [],
           faq_title: data.faq_title || '',
           faq_description: data.faq_description || '',
           show_regions: data.show_regions ?? true
@@ -459,15 +461,12 @@ const ProductEditor: React.FC = () => {
                 />
               </div>
 
-              <div>
-                <Label htmlFor="hero_background_image">Hero Achtergrond Afbeelding</Label>
-                <Input
-                  id="hero_background_image"
-                  value={product.hero_background_image}
-                  onChange={(e) => handleInputChange('hero_background_image', e.target.value)}
-                  placeholder="/lovable-uploads/image.png"
-                />
-              </div>
+              <ImageUpload
+                label="Hero Achtergrond Afbeelding"
+                value={product.hero_background_image}
+                onChange={(url) => handleInputChange('hero_background_image', url)}
+                placeholder="/lovable-uploads/image.png"
+              />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -511,27 +510,25 @@ const ProductEditor: React.FC = () => {
                 </div>
               </div>
 
-              <div>
-                <Label htmlFor="hero_guarantees">Hero Garanties (JSON Array)</Label>
-                <Textarea
-                  id="hero_guarantees"
-                  value={JSON.stringify(product.hero_guarantees, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('hero_guarantees', e.target.value)}
-                  placeholder='["10 jaar garantie", "Gratis advies", "Vakkundige montage"]'
-                  rows={3}
-                />
-              </div>
+              <JsonArrayEditor
+                label="Hero Garanties"
+                value={product.hero_guarantees}
+                onChange={(value) => handleInputChange('hero_guarantees', value)}
+                itemType="string"
+                placeholder="Voeg garanties toe..."
+              />
 
-              <div>
-                <Label htmlFor="hero_certification_logos">Hero Certificering Logo's (JSON Array)</Label>
-                <Textarea
-                  id="hero_certification_logos"
-                  value={JSON.stringify(product.hero_certification_logos, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('hero_certification_logos', e.target.value)}
-                  placeholder='[{"src": "/image.png", "alt": "Logo", "title": "Titel"}]'
-                  rows={4}
-                />
-              </div>
+              <JsonArrayEditor
+                label="Hero Certificering Logo's"
+                value={product.hero_certification_logos}
+                onChange={(value) => handleInputChange('hero_certification_logos', value)}
+                itemType="object"
+                objectFields={[
+                  { key: 'src', label: 'Logo URL', type: 'text' },
+                  { key: 'alt', label: 'Alt tekst', type: 'text' },
+                  { key: 'title', label: 'Titel', type: 'text' }
+                ]}
+              />
             </TabsContent>
 
             <TabsContent value="content" className="space-y-6">
@@ -545,27 +542,24 @@ const ProductEditor: React.FC = () => {
                 />
               </div>
 
-              <div>
-                <Label htmlFor="introduction_content">Introductie Content (JSON Array)</Label>
-                <Textarea
-                  id="introduction_content"
-                  value={JSON.stringify(product.introduction_content, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('introduction_content', e.target.value)}
-                  placeholder='["Paragraaf 1", "Paragraaf 2"]'
-                  rows={4}
-                />
-              </div>
+              <JsonArrayEditor
+                label="Introductie Content"
+                value={product.introduction_content}
+                onChange={(value) => handleInputChange('introduction_content', value)}
+                itemType="string"
+                placeholder="Voeg paragrafen toe..."
+              />
 
-              <div>
-                <Label htmlFor="introduction_quick_links">Introductie Quick Links (JSON Array)</Label>
-                <Textarea
-                  id="introduction_quick_links"
-                  value={JSON.stringify(product.introduction_quick_links, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('introduction_quick_links', e.target.value)}
-                  placeholder='[{"href": "#section", "text": "Link tekst"}]'
-                  rows={3}
-                />
-              </div>
+              <JsonArrayEditor
+                label="Introductie Quick Links"
+                value={product.introduction_quick_links}
+                onChange={(value) => handleInputChange('introduction_quick_links', value)}
+                itemType="object"
+                objectFields={[
+                  { key: 'href', label: 'Link URL', type: 'text' },
+                  { key: 'text', label: 'Link tekst', type: 'text' }
+                ]}
+              />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -598,16 +592,13 @@ const ProductEditor: React.FC = () => {
                 />
               </div>
 
-              <div>
-                <Label htmlFor="what_are_content">"Wat zijn" Content (JSON Array)</Label>
-                <Textarea
-                  id="what_are_content"
-                  value={JSON.stringify(product.what_are_content, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('what_are_content', e.target.value)}
-                  placeholder='["Uitleg paragraaf 1", "Uitleg paragraaf 2"]'
-                  rows={4}
-                />
-              </div>
+              <JsonArrayEditor
+                label='"Wat zijn" Content'
+                value={product.what_are_content}
+                onChange={(value) => handleInputChange('what_are_content', value)}
+                itemType="string"
+                placeholder="Voeg uitleg paragrafen toe..."
+              />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -653,27 +644,24 @@ const ProductEditor: React.FC = () => {
                 />
               </div>
 
-              <div>
-                <Label htmlFor="benefits_main_content">Voordelen Hoofdcontent (JSON Array)</Label>
-                <Textarea
-                  id="benefits_main_content"
-                  value={JSON.stringify(product.benefits_main_content, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('benefits_main_content', e.target.value)}
-                  placeholder='["Voordeel uitleg 1", "Voordeel uitleg 2"]'
-                  rows={3}
-                />
-              </div>
+              <JsonArrayEditor
+                label="Voordelen Hoofdcontent"
+                value={product.benefits_main_content}
+                onChange={(value) => handleInputChange('benefits_main_content', value)}
+                itemType="string"
+                placeholder="Voeg voordelen uitleg toe..."
+              />
 
-              <div>
-                <Label htmlFor="benefits_stats">Voordelen Statistieken (JSON Array)</Label>
-                <Textarea
-                  id="benefits_stats"
-                  value={JSON.stringify(product.benefits_stats, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('benefits_stats', e.target.value)}
-                  placeholder='[{"value": "30+", "label": "Jaar levensduur"}]'
-                  rows={4}
-                />
-              </div>
+              <JsonArrayEditor
+                label="Voordelen Statistieken"
+                value={product.benefits_stats}
+                onChange={(value) => handleInputChange('benefits_stats', value)}
+                itemType="object"
+                objectFields={[
+                  { key: 'value', label: 'Waarde', type: 'text' },
+                  { key: 'label', label: 'Label', type: 'text' }
+                ]}
+              />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -717,16 +705,16 @@ const ProductEditor: React.FC = () => {
                 />
               </div>
 
-              <div>
-                <Label htmlFor="options_categories">Opties Categorieën (JSON Array)</Label>
-                <Textarea
-                  id="options_categories"
-                  value={JSON.stringify(product.options_categories, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('options_categories', e.target.value)}
-                  placeholder='[{"title": "Categorie", "items": ["Item 1", "Item 2"]}]'
-                  rows={4}
-                />
-              </div>
+              <JsonArrayEditor
+                label="Opties Categorieën"
+                value={product.options_categories}
+                onChange={(value) => handleInputChange('options_categories', value)}
+                itemType="object"
+                objectFields={[
+                  { key: 'title', label: 'Categorie titel', type: 'text' },
+                  { key: 'items', label: 'Items (JSON array)', type: 'textarea' }
+                ]}
+              />
             </TabsContent>
 
             <TabsContent value="services" className="space-y-6">
@@ -751,16 +739,20 @@ const ProductEditor: React.FC = () => {
                 />
               </div>
 
-              <div>
-                <Label htmlFor="services_items">Services Items (JSON Array)</Label>
-                <Textarea
-                  id="services_items"
-                  value={JSON.stringify(product.services_items, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('services_items', e.target.value)}
-                  placeholder='[{"title": "Service", "description": "Beschrijving", "features": ["Feature 1"]}]'
-                  rows={6}
-                />
-              </div>
+              <JsonArrayEditor
+                label="Services Items"
+                value={product.services_items}
+                onChange={(value) => handleInputChange('services_items', value)}
+                itemType="object"
+                objectFields={[
+                  { key: 'title', label: 'Service titel', type: 'text' },
+                  { key: 'description', label: 'Beschrijving', type: 'textarea' },
+                  { key: 'image', label: 'Afbeelding URL', type: 'text' },
+                  { key: 'features', label: 'Features (JSON array)', type: 'textarea' },
+                  { key: 'linkText', label: 'Link tekst', type: 'text' },
+                  { key: 'linkUrl', label: 'Link URL', type: 'text' }
+                ]}
+              />
 
               <div>
                 <Label htmlFor="information_title">Informatie Titel</Label>
@@ -772,48 +764,44 @@ const ProductEditor: React.FC = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="information_image">Informatie Afbeelding</Label>
-                  <Input
-                    id="information_image"
-                    value={product.information_image}
-                    onChange={(e) => handleInputChange('information_image', e.target.value)}
-                    placeholder="/lovable-uploads/image.png"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="information_image_alt">Informatie Afbeelding Alt Tekst</Label>
-                  <Input
-                    id="information_image_alt"
-                    value={product.information_image_alt}
-                    onChange={(e) => handleInputChange('information_image_alt', e.target.value)}
-                    placeholder="Alt tekst voor afbeelding"
-                  />
-                </div>
-              </div>
+              <ImageUpload
+                label="Informatie Afbeelding"
+                value={product.information_image}
+                onChange={(url) => handleInputChange('information_image', url)}
+                placeholder="/lovable-uploads/image.png"
+              />
 
               <div>
-                <Label htmlFor="information_tabs">Informatie Tabs (JSON Array)</Label>
-                <Textarea
-                  id="information_tabs"
-                  value={JSON.stringify(product.information_tabs, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('information_tabs', e.target.value)}
-                  placeholder='[{"title": "Tab", "content": "Content"}]'
-                  rows={4}
+                <Label htmlFor="information_image_alt">Informatie Afbeelding Alt Tekst</Label>
+                <Input
+                  id="information_image_alt"
+                  value={product.information_image_alt}
+                  onChange={(e) => handleInputChange('information_image_alt', e.target.value)}
+                  placeholder="Alt tekst voor afbeelding"
                 />
               </div>
 
-              <div>
-                <Label htmlFor="information_did_you_know">Wist je dat (JSON Array)</Label>
-                <Textarea
-                  id="information_did_you_know"
-                  value={JSON.stringify(product.information_did_you_know, null, 2)}
-                  onChange={(e) => handleJsonFieldChange('information_did_you_know', e.target.value)}
-                  placeholder='[{"title": "Wist je dat...", "content": "Feit"}]'
-                  rows={3}
-                />
-              </div>
+              <JsonArrayEditor
+                label="Informatie Tabs"
+                value={product.information_tabs}
+                onChange={(value) => handleInputChange('information_tabs', value)}
+                itemType="object"
+                objectFields={[
+                  { key: 'title', label: 'Tab titel', type: 'text' },
+                  { key: 'content', label: 'Content', type: 'textarea' }
+                ]}
+              />
+
+              <JsonArrayEditor
+                label="Wist je dat"
+                value={product.information_did_you_know}
+                onChange={(value) => handleInputChange('information_did_you_know', value)}
+                itemType="object"
+                objectFields={[
+                  { key: 'title', label: 'Titel', type: 'text' },
+                  { key: 'content', label: 'Content', type: 'textarea' }
+                ]}
+              />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
