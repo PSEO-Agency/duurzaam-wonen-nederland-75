@@ -193,77 +193,200 @@ export type Database = {
       products: {
         Row: {
           benefits: Json | null
+          benefits_cta_link: string | null
+          benefits_cta_text: string | null
+          benefits_description: string | null
+          benefits_main_content: Json | null
+          benefits_stats: Json | null
+          benefits_title: string | null
           category_id: string | null
           created_at: string
           description: string | null
           faq: Json | null
+          faq_description: string | null
+          faq_title: string | null
           features: Json | null
+          hero_background_image: string | null
+          hero_badge: string | null
+          hero_certification_logos: Json | null
           hero_description: string | null
+          hero_guarantees: Json | null
           hero_image_url: string | null
+          hero_primary_button_link: string | null
+          hero_primary_button_text: string | null
+          hero_secondary_button_link: string | null
+          hero_secondary_button_text: string | null
           hero_title: string | null
           icon_name: string | null
           id: string
+          information_did_you_know: Json | null
+          information_image: string | null
+          information_image_alt: string | null
+          information_tabs: Json | null
+          information_title: string | null
           intro_text: string | null
+          introduction_content: Json | null
+          introduction_cta_link: string | null
+          introduction_cta_text: string | null
+          introduction_quick_links: Json | null
+          introduction_title: string | null
           is_active: boolean | null
           meta_description: string | null
           meta_title: string | null
           name: string
+          options_categories: Json | null
+          options_description: string | null
+          options_title: string | null
           pricing_info: string | null
           quick_links: Json | null
+          seo_canonical_url: string | null
+          seo_description: string | null
+          seo_title: string | null
+          services_description: string | null
+          services_items: Json | null
+          services_title: string | null
+          show_regions: boolean | null
           slug: string
           sort_order: number | null
+          template_type: string | null
           updated_at: string
+          what_are_content: Json | null
           what_are_description: string | null
+          what_are_title: string | null
+          what_are_video_title: string | null
+          what_are_video_url: string | null
           workflow_steps: Json | null
         }
         Insert: {
           benefits?: Json | null
+          benefits_cta_link?: string | null
+          benefits_cta_text?: string | null
+          benefits_description?: string | null
+          benefits_main_content?: Json | null
+          benefits_stats?: Json | null
+          benefits_title?: string | null
           category_id?: string | null
           created_at?: string
           description?: string | null
           faq?: Json | null
+          faq_description?: string | null
+          faq_title?: string | null
           features?: Json | null
+          hero_background_image?: string | null
+          hero_badge?: string | null
+          hero_certification_logos?: Json | null
           hero_description?: string | null
+          hero_guarantees?: Json | null
           hero_image_url?: string | null
+          hero_primary_button_link?: string | null
+          hero_primary_button_text?: string | null
+          hero_secondary_button_link?: string | null
+          hero_secondary_button_text?: string | null
           hero_title?: string | null
           icon_name?: string | null
           id?: string
+          information_did_you_know?: Json | null
+          information_image?: string | null
+          information_image_alt?: string | null
+          information_tabs?: Json | null
+          information_title?: string | null
           intro_text?: string | null
+          introduction_content?: Json | null
+          introduction_cta_link?: string | null
+          introduction_cta_text?: string | null
+          introduction_quick_links?: Json | null
+          introduction_title?: string | null
           is_active?: boolean | null
           meta_description?: string | null
           meta_title?: string | null
           name: string
+          options_categories?: Json | null
+          options_description?: string | null
+          options_title?: string | null
           pricing_info?: string | null
           quick_links?: Json | null
+          seo_canonical_url?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          services_description?: string | null
+          services_items?: Json | null
+          services_title?: string | null
+          show_regions?: boolean | null
           slug: string
           sort_order?: number | null
+          template_type?: string | null
           updated_at?: string
+          what_are_content?: Json | null
           what_are_description?: string | null
+          what_are_title?: string | null
+          what_are_video_title?: string | null
+          what_are_video_url?: string | null
           workflow_steps?: Json | null
         }
         Update: {
           benefits?: Json | null
+          benefits_cta_link?: string | null
+          benefits_cta_text?: string | null
+          benefits_description?: string | null
+          benefits_main_content?: Json | null
+          benefits_stats?: Json | null
+          benefits_title?: string | null
           category_id?: string | null
           created_at?: string
           description?: string | null
           faq?: Json | null
+          faq_description?: string | null
+          faq_title?: string | null
           features?: Json | null
+          hero_background_image?: string | null
+          hero_badge?: string | null
+          hero_certification_logos?: Json | null
           hero_description?: string | null
+          hero_guarantees?: Json | null
           hero_image_url?: string | null
+          hero_primary_button_link?: string | null
+          hero_primary_button_text?: string | null
+          hero_secondary_button_link?: string | null
+          hero_secondary_button_text?: string | null
           hero_title?: string | null
           icon_name?: string | null
           id?: string
+          information_did_you_know?: Json | null
+          information_image?: string | null
+          information_image_alt?: string | null
+          information_tabs?: Json | null
+          information_title?: string | null
           intro_text?: string | null
+          introduction_content?: Json | null
+          introduction_cta_link?: string | null
+          introduction_cta_text?: string | null
+          introduction_quick_links?: Json | null
+          introduction_title?: string | null
           is_active?: boolean | null
           meta_description?: string | null
           meta_title?: string | null
           name?: string
+          options_categories?: Json | null
+          options_description?: string | null
+          options_title?: string | null
           pricing_info?: string | null
           quick_links?: Json | null
+          seo_canonical_url?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          services_description?: string | null
+          services_items?: Json | null
+          services_title?: string | null
+          show_regions?: boolean | null
           slug?: string
           sort_order?: number | null
+          template_type?: string | null
           updated_at?: string
+          what_are_content?: Json | null
           what_are_description?: string | null
+          what_are_title?: string | null
+          what_are_video_title?: string | null
+          what_are_video_url?: string | null
           workflow_steps?: Json | null
         }
         Relationships: [

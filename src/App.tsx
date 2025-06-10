@@ -53,6 +53,7 @@ import Sitemap from "./pages/Sitemap";
 import Locations from "./pages/admin/Locations";
 import Services from "./pages/admin/Services";
 import CityServices from "./pages/admin/CityServices";
+import Products from "./pages/admin/Products";
 import CityServicePage from "./pages/CityServicePage";
 
 const queryClient = new QueryClient();
@@ -78,6 +79,7 @@ const App = () => (
               <Route path="locations" element={<Locations />} />
               <Route path="services" element={<Services />} />
               <Route path="city-services" element={<CityServices />} />
+              <Route path="products" element={<Products />} />
             </Route>
             
             <Route path="/" element={<Index />} />
