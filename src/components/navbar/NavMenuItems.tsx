@@ -25,12 +25,6 @@ export const oplossingenItems: MenuSection[] = [
   { label: 'Gevelbekleding', href: '/gevelbekleding' },
 ];
 
-export const staticProductenItems: MenuSection[] = [
-  { label: 'HSB wanden', href: '#hsb-wanden' },
-  { label: 'Hellend dak', href: '#hellend-dak' },
-  { label: 'Plat dak', href: '#plat-dak' },
-];
-
 export const overOnsItems: MenuSection[] = [
   { label: 'Ons team', href: '/over-ons/team' },
   { label: 'Onze missie', href: '/over-ons/missie' },
@@ -71,8 +65,6 @@ export const NavMenuItems = () => {
     href: `/${product.slug}`
   }));
 
-  const allProductenItems = [...dynamicProductItems, ...staticProductenItems];
-
   return (
     <>
       <NavigationMenuItem>
@@ -95,7 +87,7 @@ export const NavMenuItems = () => {
               <div className="flex-1">
                 <h4 className="font-medium text-gray-900 mb-2">Producten</h4>
                 <ul className="space-y-1">
-                  {allProductenItems.map((item) => (
+                  {dynamicProductItems.map((item) => (
                     <li key={item.label}>
                       {renderMenuLink(item)}
                     </li>
