@@ -36,7 +36,19 @@ interface Region extends BaseItem {
   slug: string;
 }
 
-type EntityItem = FAQ | Project | Region;
+// Use a more generic type to avoid deep type instantiation
+type EntityItem = BaseItem & {
+  question?: string;
+  answer?: string;
+  category?: string;
+  title?: string;
+  description?: string;
+  image_url?: string;
+  location?: string;
+  project_type?: string;
+  name?: string;
+  slug?: string;
+};
 
 interface RelatedEntitySelectorProps {
   label: string;
@@ -82,11 +94,11 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
   const getItemLabel = (item: EntityItem): string => {
     switch (entityType) {
       case 'faqs':
-        return (item as FAQ).question;
+        return item.question || 'Unknown FAQ';
       case 'projects':
-        return (item as Project).title;
+        return item.title || 'Unknown Project';
       case 'regions':
-        return (item as Region).name;
+        return item.name || 'Unknown Region';
       default:
         return 'Unknown item';
     }
@@ -98,7 +110,8 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
         ...item,
         sort_order: selectedItems.length
       };
-      onSelectionChange([...selectedItems, newItem]);
+      // Use concat instead of spread to avoid type inference issues
+      onSelectionChange(selectedItems.concat([newItem]));
     } else {
       onSelectionChange(selectedItems.filter(selected => selected.id !== item.id));
     }
