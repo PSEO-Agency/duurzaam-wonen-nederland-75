@@ -3,7 +3,6 @@ import React from 'react';
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
-import { useProducts } from '@/hooks/useProducts';
 
 interface MenuSection {
   label: string;
@@ -25,6 +24,13 @@ export const oplossingenItems: MenuSection[] = [
   { label: 'Gevelbekleding', href: '/gevelbekleding' },
 ];
 
+export const productenItems: MenuSection[] = [
+  { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
+  { label: 'HSB wanden', href: '#hsb-wanden' },
+  { label: 'Hellend dak', href: '#hellend-dak' },
+  { label: 'Plat dak', href: '#plat-dak' },
+];
+
 export const overOnsItems: MenuSection[] = [
   { label: 'Ons team', href: '/over-ons/team' },
   { label: 'Onze missie', href: '/over-ons/missie' },
@@ -38,13 +44,9 @@ export const adminItems: MenuSection[] = [
   { label: 'Locaties', href: '/admin/locations' },
   { label: 'Diensten', href: '/admin/services' },
   { label: 'Stad Diensten', href: '/admin/city-services' },
-  { label: 'Oplossingen', href: '/admin/solutions' },
-  { label: 'Producten', href: '/admin/products' },
 ];
 
 export const NavMenuItems = () => {
-  const { data: products = [] } = useProducts();
-
   const renderMenuLink = (item: MenuSection) => {
     if (item.href.startsWith('#')) {
       return (
@@ -68,10 +70,11 @@ export const NavMenuItems = () => {
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Oplossingen
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="w-auto min-w-0">
-          <div className="bg-white p-4 min-w-fit">
-            <div className="grid grid-cols-2 gap-6 min-w-0">
-              <div className="min-w-0">
+        <NavigationMenuContent>
+          <div className="w-[400px] bg-white p-4">
+            <h3 className="font-semibold text-lg mb-2">Ontdek onze oplossingen</h3>
+            <div className="grid grid-cols-2 gap-6">
+              <div>
                 <h4 className="font-medium text-gray-900 mb-2">Oplossingen</h4>
                 <ul className="space-y-1">
                   {oplossingenItems.map((item) => (
@@ -81,35 +84,16 @@ export const NavMenuItems = () => {
                   ))}
                 </ul>
               </div>
-              <div className="min-w-0">
-                <h4 className="font-medium text-gray-900 mb-2">
-                  Producten {products.length > 0 && `(${products.length})`}
-                </h4>
+              <div>
+                <h4 className="font-medium text-gray-900 mb-2">Producten</h4>
                 <ul className="space-y-1">
-                  {products.map((product) => (
-                    <li key={product.slug}>
-                      <Link to={`/products/${product.slug}`} className={dropdownItemClass}>
-                        <ChevronRight size={16} className="mr-2 flex-shrink-0" />
-                        <span>{product.name}</span>
-                      </Link>
+                  {productenItems.map((item) => (
+                    <li key={item.label}>
+                      {renderMenuLink(item)}
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
-            <div className="mt-4 pt-4 border-t">
-              <Link 
-                to="/oplossingen" 
-                className="text-brand-green font-medium hover:underline mr-4"
-              >
-                Bekijk alle oplossingen →
-              </Link>
-              <Link 
-                to="/products" 
-                className="text-brand-green font-medium hover:underline"
-              >
-                Bekijk alle producten →
-              </Link>
             </div>
           </div>
         </NavigationMenuContent>

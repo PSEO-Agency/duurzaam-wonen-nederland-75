@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import SearchCommandMenu from '@/components/search/SearchCommandMenu';
-import { mainNavItems, oplossingenItems } from './NavMenuItems';
-import { useProducts } from '@/hooks/useProducts';
+import { mainNavItems, oplossingenItems, productenItems } from './NavMenuItems';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -12,8 +11,6 @@ interface MobileMenuProps {
 }
 
 export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
-  const { data: products = [] } = useProducts();
-
   if (!isOpen) return null;
 
   return (
@@ -48,19 +45,17 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
               </div>
               
               <div className="pl-4 py-2 mt-4">
-                <h4 className="font-medium text-sm text-gray-500 mb-2">
-                  Producten {products.length > 0 && `(${products.length})`}
-                </h4>
+                <h4 className="font-medium text-sm text-gray-500 mb-2">Producten</h4>
                 <ul className="space-y-3">
-                  {products.map((product) => (
-                    <li key={product.slug}>
+                  {productenItems.map((item) => (
+                    <li key={item.label}>
                       <Link 
-                        to={`/products/${product.slug}`} 
+                        to={item.href} 
                         className="flex items-center text-gray-700 hover:text-brand-green"
                         onClick={onClose}
                       >
                         <ChevronRight size={16} className="mr-2" />
-                        <span>{product.name}</span>
+                        <span>{item.label}</span>
                       </Link>
                     </li>
                   ))}
