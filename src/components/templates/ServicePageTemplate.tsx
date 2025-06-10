@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check } from 'lucide-react';
@@ -77,8 +76,8 @@ export interface ServicePageTemplateProps {
     ctaLink: string;
   };
   
-  // Options Section
-  options: {
+  // Options Section (optional)
+  options?: {
     title: string;
     description: string;
     categories: Array<{
@@ -103,8 +102,8 @@ export interface ServicePageTemplateProps {
     }>;
   };
   
-  // Information Section
-  information: {
+  // Information Section (optional)
+  information?: {
     title: string;
     image: string;
     imageAlt: string;
@@ -374,41 +373,43 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
           </div>
         </section>
         
-        {/* Options Section */}
-        <section className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold mb-6">{options.title}</h2>
-              <p className="text-lg text-gray-700 mb-8 max-w-3xl">{options.description}</p>
-            </AnimatedSection>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              {options.categories.map((category, index) => (
-                <AnimatedSection key={index} animation="fade-in" delay={index * 100}>
-                  <Card className="h-full hover:shadow-md transition-shadow">
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold mb-4">{category.title}</h3>
-                      <ul className="space-y-2">
-                        {category.items.map((item, itemIndex) => (
-                          <li key={itemIndex} className="flex items-center">
-                            <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-4">
-                        <Link to={category.linkUrl} className="text-brand-green flex items-center hover:underline">
-                          <span>{category.linkText}</span>
-                          <ArrowRight className="ml-1 h-4 w-4" />
-                        </Link>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              ))}
+        {/* Options Section - Only render if options prop is provided */}
+        {options && (
+          <section className="py-12 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <AnimatedSection animation="fade-in">
+                <h2 className="text-3xl font-bold mb-6">{options.title}</h2>
+                <p className="text-lg text-gray-700 mb-8 max-w-3xl">{options.description}</p>
+              </AnimatedSection>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                {options.categories.map((category, index) => (
+                  <AnimatedSection key={index} animation="fade-in" delay={index * 100}>
+                    <Card className="h-full hover:shadow-md transition-shadow">
+                      <CardContent className="p-6">
+                        <h3 className="text-xl font-semibold mb-4">{category.title}</h3>
+                        <ul className="space-y-2">
+                          {category.items.map((item, itemIndex) => (
+                            <li key={itemIndex} className="flex items-center">
+                              <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-4">
+                          <Link to={category.linkUrl} className="text-brand-green flex items-center hover:underline">
+                            <span>{category.linkText}</span>
+                            <ArrowRight className="ml-1 h-4 w-4" />
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </AnimatedSection>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
         
         {/* Services Section */}
         <section className="py-12">
@@ -459,56 +460,58 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         {/* Projects Section */}
         <Projects />
         
-        {/* Information Section */}
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col lg:flex-row gap-12">
-              <div className="lg:w-1/2">
-                <AnimatedSection animation="fade-in">
-                  <h2 className="text-3xl font-bold mb-6">{information.title}</h2>
-                  
-                  <Tabs defaultValue={information.tabs[0]?.id} className="w-full">
-                    <TabsList className="mb-6">
-                      {information.tabs.map((tab) => (
-                        <TabsTrigger key={tab.id} value={tab.id}>{tab.title}</TabsTrigger>
-                      ))}
-                    </TabsList>
+        {/* Information Section - Only render if information prop is provided */}
+        {information && (
+          <section className="py-12">
+            <div className="container mx-auto px-4">
+              <div className="flex flex-col lg:flex-row gap-12">
+                <div className="lg:w-1/2">
+                  <AnimatedSection animation="fade-in">
+                    <h2 className="text-3xl font-bold mb-6">{information.title}</h2>
                     
-                    {information.tabs.map((tab) => (
-                      <TabsContent key={tab.id} value={tab.id} className="space-y-4">
-                        {tab.content.map((paragraph, index) => (
-                          <p key={index}>{paragraph}</p>
+                    <Tabs defaultValue={information.tabs[0]?.id} className="w-full">
+                      <TabsList className="mb-6">
+                        {information.tabs.map((tab) => (
+                          <TabsTrigger key={tab.id} value={tab.id}>{tab.title}</TabsTrigger>
                         ))}
-                      </TabsContent>
-                    ))}
-                  </Tabs>
-                </AnimatedSection>
-              </div>
-              
-              <div className="lg:w-1/2">
-                <AnimatedSection className="rounded-lg overflow-hidden shadow-md" animation="fade-in" delay={200}>
-                  <img 
-                    src={information.image}
-                    alt={information.imageAlt}
-                    className="w-full h-auto"
-                  />
-                </AnimatedSection>
+                      </TabsList>
+                      
+                      {information.tabs.map((tab) => (
+                        <TabsContent key={tab.id} value={tab.id} className="space-y-4">
+                          {tab.content.map((paragraph, index) => (
+                            <p key={index}>{paragraph}</p>
+                          ))}
+                        </TabsContent>
+                      ))}
+                    </Tabs>
+                  </AnimatedSection>
+                </div>
                 
-                <AnimatedSection className="mt-6 bg-gray-50 p-6 rounded-lg" animation="fade-in" delay={300}>
-                  <h3 className="text-xl font-semibold mb-3">{information.didYouKnow.title}</h3>
-                  <ul className="space-y-3">
-                    {information.didYouKnow.facts.map((fact, index) => (
-                      <li key={index} className="flex items-start">
-                        <Check size={18} className="text-brand-green mr-2 mt-1" />
-                        <span>{fact}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </AnimatedSection>
+                <div className="lg:w-1/2">
+                  <AnimatedSection className="rounded-lg overflow-hidden shadow-md" animation="fade-in" delay={200}>
+                    <img 
+                      src={information.image}
+                      alt={information.imageAlt}
+                      className="w-full h-auto"
+                    />
+                  </AnimatedSection>
+                  
+                  <AnimatedSection className="mt-6 bg-gray-50 p-6 rounded-lg" animation="fade-in" delay={300}>
+                    <h3 className="text-xl font-semibold mb-3">{information.didYouKnow.title}</h3>
+                    <ul className="space-y-3">
+                      {information.didYouKnow.facts.map((fact, index) => (
+                        <li key={index} className="flex items-start">
+                          <Check size={18} className="text-brand-green mr-2 mt-1" />
+                          <span>{fact}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </AnimatedSection>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
         
         {/* FAQ Section */}
         <section className="py-12 bg-gray-50">

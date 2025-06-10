@@ -122,6 +122,31 @@ export const kunststofKozijnenConfig: ServicePageTemplateProps = {
     ]
   },
   
+  options: {
+    title: "Kunststof Kozijn Opties",
+    description: "Verschillende opties voor kunststof kozijnen.",
+    categories: [
+      {
+        title: "Types",
+        items: ["Draai-kiep", "Vast", "Schuifpui"],
+        linkText: "Bekijk types",
+        linkUrl: "/kunststof-kozijnen/types"
+      },
+      {
+        title: "Kleuren",
+        items: ["Wit", "Antraciet", "Houtlook"],
+        linkText: "Bekijk kleuren",
+        linkUrl: "/kunststof-kozijnen/kleuren"
+      },
+      {
+        title: "Montage",
+        items: ["Volledig service", "Inmeten", "Plaatsen"],
+        linkText: "Meer over montage",
+        linkUrl: "/kunststof-kozijnen/montage"
+      }
+    ]
+  },
+  
   information: {
     title: "Informatie over kunststof kozijnen",
     image: "/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png",
