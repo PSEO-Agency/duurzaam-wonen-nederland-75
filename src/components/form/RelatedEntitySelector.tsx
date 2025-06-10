@@ -9,24 +9,11 @@ import { Trash2, Plus, GripVertical } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-// Simplified base type
+// Simple interface without optional chaining complexity
 interface RelatedEntity {
   id: string;
-  sort_order?: number;
-  is_active?: boolean;
-  created_at?: string;
-  updated_at?: string;
-  // Entity-specific fields
-  question?: string;      // FAQ
-  answer?: string;        // FAQ
-  category?: string;      // FAQ
-  title?: string;         // Project
-  description?: string;   // Project
-  image_url?: string;     // Project
-  location?: string;      // Project
-  project_type?: string;  // Project
-  name?: string;          // Region
-  slug?: string;          // Region
+  sort_order: number;
+  [key: string]: any; // Allow any additional properties
 }
 
 interface RelatedEntitySelectorProps {
@@ -44,7 +31,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
   selectedItems,
   onSelectionChange
 }) => {
-  const [availableItems, setAvailableItems] = useState<RelatedEntity[]>([]);
+  const [availableItems, setAvailableItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -70,7 +57,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
     }
   };
 
-  const getItemLabel = (item: RelatedEntity): string => {
+  const getItemLabel = (item: any): string => {
     switch (entityType) {
       case 'faqs':
         return item.question || 'Unknown FAQ';
@@ -83,37 +70,22 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
     }
   };
 
-  const handleItemToggle = (item: RelatedEntity, checked: boolean) => {
+  const handleItemToggle = (item: any, checked: boolean) => {
     if (checked) {
       const newItem: RelatedEntity = {
         id: item.id,
         sort_order: selectedItems.length,
-        is_active: item.is_active,
-        created_at: item.created_at,
-        updated_at: item.updated_at,
-        question: item.question,
-        answer: item.answer,
-        category: item.category,
-        title: item.title,
-        description: item.description,
-        image_url: item.image_url,
-        location: item.location,
-        project_type: item.project_type,
-        name: item.name,
-        slug: item.slug
+        ...item
       };
       
-      const newItems: RelatedEntity[] = [...selectedItems, newItem];
-      onSelectionChange(newItems);
+      onSelectionChange([...selectedItems, newItem]);
     } else {
-      const filteredItems = selectedItems.filter(selected => selected.id !== item.id);
-      onSelectionChange(filteredItems);
+      onSelectionChange(selectedItems.filter(selected => selected.id !== item.id));
     }
   };
 
   const handleRemoveItem = (itemId: string) => {
-    const filteredItems = selectedItems.filter(item => item.id !== itemId);
-    onSelectionChange(filteredItems);
+    onSelectionChange(selectedItems.filter(item => item.id !== itemId));
   };
 
   const handleSortOrderChange = (itemId: string, sortOrder: number) => {
@@ -136,7 +108,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
         <div className="space-y-2">
           <Label className="text-sm text-gray-600">Geselecteerde items:</Label>
           {selectedItems
-            .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
+            .sort((a, b) => a.sort_order - b.sort_order)
             .map((item) => (
             <Card key={item.id} className="p-3">
               <div className="flex items-center gap-3">
@@ -148,7 +120,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
                   <Label className="text-xs">Volgorde:</Label>
                   <Input
                     type="number"
-                    value={item.sort_order || 0}
+                    value={item.sort_order}
                     onChange={(e) => handleSortOrderChange(item.id, parseInt(e.target.value) || 0)}
                     className="w-20"
                     min={0}
