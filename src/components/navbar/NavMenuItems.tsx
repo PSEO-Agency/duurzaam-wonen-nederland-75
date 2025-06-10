@@ -1,7 +1,9 @@
+
 import React from 'react';
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import { useProducts } from '@/hooks/useProducts';
 
 interface MenuSection {
   label: string;
@@ -23,8 +25,7 @@ export const oplossingenItems: MenuSection[] = [
   { label: 'Gevelbekleding', href: '/gevelbekleding' },
 ];
 
-export const productenItems: MenuSection[] = [
-  { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
+export const staticProductenItems: MenuSection[] = [
   { label: 'HSB wanden', href: '#hsb-wanden' },
   { label: 'Hellend dak', href: '#hellend-dak' },
   { label: 'Plat dak', href: '#plat-dak' },
@@ -46,6 +47,8 @@ export const adminItems: MenuSection[] = [
 ];
 
 export const NavMenuItems = () => {
+  const { data: products = [] } = useProducts();
+
   const renderMenuLink = (item: MenuSection) => {
     if (item.href.startsWith('#')) {
       return (
@@ -63,6 +66,13 @@ export const NavMenuItems = () => {
     );
   };
 
+  const dynamicProductItems = products.map(product => ({
+    label: product.name,
+    href: `/${product.slug}`
+  }));
+
+  const allProductenItems = [...dynamicProductItems, ...staticProductenItems];
+
   return (
     <>
       <NavigationMenuItem>
@@ -70,9 +80,9 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="w-[400px] bg-white p-4">
-            <div className="grid grid-cols-2 gap-6">
-              <div>
+          <div className="bg-white p-4 min-w-[500px]">
+            <div className="grid grid-cols-2 gap-8">
+              <div className="flex-1">
                 <h4 className="font-medium text-gray-900 mb-2">Oplossingen</h4>
                 <ul className="space-y-1">
                   {oplossingenItems.map((item) => (
@@ -82,10 +92,10 @@ export const NavMenuItems = () => {
                   ))}
                 </ul>
               </div>
-              <div>
+              <div className="flex-1">
                 <h4 className="font-medium text-gray-900 mb-2">Producten</h4>
                 <ul className="space-y-1">
-                  {productenItems.map((item) => (
+                  {allProductenItems.map((item) => (
                     <li key={item.label}>
                       {renderMenuLink(item)}
                     </li>
