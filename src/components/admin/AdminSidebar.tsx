@@ -11,7 +11,8 @@ import {
   Home,
   MapPin,
   Briefcase,
-  Building
+  Building,
+  Package
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -29,6 +30,7 @@ const AdminSidebar: React.FC = () => {
     { label: "Pages", icon: FileText, path: "/admin/pages" },
     { label: "Templates", icon: Layers, path: "/admin/templates" },
     { label: "Sections", icon: Puzzle, path: "/admin/sections" },
+    { label: "Products", icon: Package, path: "/admin/products" },
     { label: "Locations", icon: MapPin, path: "/admin/locations" },
     { label: "Services", icon: Briefcase, path: "/admin/services" },
     { label: "City Services", icon: Building, path: "/admin/city-services" },
