@@ -14,6 +14,7 @@ import Projects from '@/components/Projects';
 import Workflow from '@/components/Workflow';
 import Reviews from '@/components/Reviews';
 import ContactCTA from '@/components/ContactCTA';
+import RegionsSection from '@/components/RegionsSection';
 
 export interface ServicePageTemplateProps {
   // SEO Data
@@ -547,18 +548,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         <Reviews />
         
         {/* Regions Section (conditional) */}
-        {showRegions && (
-          <section className="py-12 bg-gray-50">
-            <div className="container mx-auto px-4">
-              <AnimatedSection animation="fade-in">
-                <h2 className="text-3xl font-bold mb-6 text-center">Werkgebied</h2>
-                <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto text-center">
-                  Wij zijn actief in heel Nederland. Neem contact met ons op voor meer informatie over uw regio.
-                </p>
-              </AnimatedSection>
-            </div>
-          </section>
-        )}
+        {showRegions && <RegionsSection />}
         
         {/* Contact CTA Section */}
         <ContactCTA />
