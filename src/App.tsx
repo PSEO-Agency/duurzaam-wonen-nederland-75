@@ -55,6 +55,7 @@ import Locations from "./pages/admin/Locations";
 import Services from "./pages/admin/Services";
 import CityServices from "./pages/admin/CityServices";
 import Products from "./pages/admin/Products";
+import ProductEditor from "./pages/admin/ProductEditor";
 import CityServicePage from "./pages/CityServicePage";
 
 const queryClient = new QueryClient();
@@ -81,6 +82,8 @@ const App = () => (
               <Route path="services" element={<Services />} />
               <Route path="city-services" element={<CityServices />} />
               <Route path="products" element={<Products />} />
+              <Route path="products/edit/:productId" element={<ProductEditor />} />
+              <Route path="products/create" element={<ProductEditor />} />
             </Route>
             
             <Route path="/" element={<Index />} />
