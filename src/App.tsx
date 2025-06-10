@@ -9,6 +9,7 @@ import { SearchProvider } from "./contexts/SearchContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import KunststofKozijnen from "./pages/KunststofKozijnen";
+import KunststofSchuifpuien from "./pages/KunststofSchuifpuien";
 import ColorOptions from "./pages/ColorOptions";
 import ColorDetail from "./pages/ColorDetail";
 import KozijnTypes from "./pages/KozijnTypes";
@@ -83,6 +84,7 @@ const App = () => (
             <Route path="/offerte" element={<Offerte />} />
             <Route path="/offerte/success" element={<OfferteSuccess />} />
             <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
+            <Route path="/kunststof-schuifpuien" element={<KunststofSchuifpuien />} />
             <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
             <Route path="/kunststof-kozijnen/kleuren/:colorSlug" element={<ColorDetail />} />
             <Route path="/kunststof-kozijnen/types" element={<KozijnTypes />} />
