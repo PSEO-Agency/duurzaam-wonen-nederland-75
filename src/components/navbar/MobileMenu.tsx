@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import SearchCommandMenu from '@/components/search/SearchCommandMenu';
-import { mainNavItems, oplossingenItems, productenItems } from './NavMenuItems';
+import { mainNavItems, oplossingenItems, staticProductenItems } from './NavMenuItems';
+import { useProducts } from '@/hooks/useProducts';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -11,7 +12,16 @@ interface MobileMenuProps {
 }
 
 export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
+  const { data: products = [] } = useProducts();
+  
   if (!isOpen) return null;
+
+  const dynamicProductItems = products.map(product => ({
+    label: product.name,
+    href: `/${product.slug}`
+  }));
+
+  const allProductenItems = [...dynamicProductItems, ...staticProductenItems];
 
   return (
     <div className="md:hidden bg-white shadow-lg overflow-y-auto max-h-[80vh]">
@@ -47,7 +57,7 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
               <div className="pl-4 py-2 mt-4">
                 <h4 className="font-medium text-sm text-gray-500 mb-2">Producten</h4>
                 <ul className="space-y-3">
-                  {productenItems.map((item) => (
+                  {allProductenItems.map((item) => (
                     <li key={item.label}>
                       <Link 
                         to={item.href} 
