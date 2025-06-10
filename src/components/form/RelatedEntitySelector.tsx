@@ -9,11 +9,17 @@ import { Trash2, Plus, GripVertical } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-// Simple interface without optional chaining complexity
+// Simple interface for selected items
 interface RelatedEntity {
   id: string;
   sort_order: number;
-  [key: string]: any; // Allow any additional properties
+  [key: string]: any;
+}
+
+// Simple interface for available items from database
+interface AvailableItem {
+  id: string;
+  [key: string]: any;
 }
 
 interface RelatedEntitySelectorProps {
@@ -31,7 +37,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
   selectedItems,
   onSelectionChange
 }) => {
-  const [availableItems, setAvailableItems] = useState<any[]>([]);
+  const [availableItems, setAvailableItems] = useState<AvailableItem[]>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -57,7 +63,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
     }
   };
 
-  const getItemLabel = (item: any): string => {
+  const getItemLabel = (item: AvailableItem): string => {
     switch (entityType) {
       case 'faqs':
         return item.question || 'Unknown FAQ';
@@ -70,7 +76,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
     }
   };
 
-  const handleItemToggle = (item: any, checked: boolean) => {
+  const handleItemToggle = (item: AvailableItem, checked: boolean) => {
     if (checked) {
       const newItem: RelatedEntity = {
         id: item.id,
