@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,6 +23,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   bucketName = 'product-images'
 }) => {
   const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,17 +37,29 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       const fileExt = file.name.split('.').pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
       
+      console.log('Uploading file:', fileName, 'to bucket:', bucketName);
+      
       const { data, error } = await supabase.storage
         .from(bucketName)
-        .upload(fileName, file);
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Upload error:', error);
+        throw error;
+      }
+
+      console.log('Upload successful:', data);
 
       // Get public URL
       const { data: urlData } = supabase.storage
         .from(bucketName)
         .getPublicUrl(fileName);
 
+      console.log('Public URL:', urlData.publicUrl);
+      
       onChange(urlData.publicUrl);
       
       toast({
@@ -57,12 +70,20 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       console.error('Error uploading file:', error);
       toast({
         title: "Upload fout",
-        description: "Er is een fout opgetreden bij het uploaden van de afbeelding.",
+        description: `Er is een fout opgetreden bij het uploaden van de afbeelding: ${error.message}`,
         variant: "destructive"
       });
     } finally {
       setUploading(false);
+      // Reset the input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
+  };
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
   };
 
   const clearImage = () => {
@@ -96,19 +117,20 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           className="flex-1"
         />
         
-        <div className="relative">
+        <div>
           <input
+            ref={fileInputRef}
             type="file"
             accept="image/*"
             onChange={handleFileUpload}
-            className="absolute inset-0 opacity-0 cursor-pointer"
+            className="hidden"
             disabled={uploading}
           />
           <Button
             type="button"
             variant="outline"
             disabled={uploading}
-            className="relative"
+            onClick={handleUploadClick}
           >
             <Upload size={16} className="mr-2" />
             {uploading ? 'Uploading...' : 'Upload'}
