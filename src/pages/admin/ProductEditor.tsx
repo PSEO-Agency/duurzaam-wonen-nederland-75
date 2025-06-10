@@ -12,26 +12,12 @@ import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, Save } from 'lucide-react';
 import JsonArrayEditor from '@/components/form/JsonArrayEditor';
 import ImageUpload from '@/components/form/ImageUpload';
-import RelatedEntitySelector from '@/components/form/RelatedEntitySelector';
-import { useProductById } from '@/hooks/useProducts';
-import { useProductFaqs } from '@/hooks/useFaqs';
-import { useProductProjects } from '@/hooks/useProjects';
-import { useProductRegions } from '@/hooks/useRegions';
 
 const ProductEditor: React.FC = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [selectedFaqs, setSelectedFaqs] = useState<any[]>([]);
-  const [selectedProjects, setSelectedProjects] = useState<any[]>([]);
-  const [selectedRegions, setSelectedRegions] = useState<any[]>([]);
-
-  // Load related data when editing existing product
-  const { data: productFaqs } = useProductFaqs(productId || '');
-  const { data: productProjects } = useProductProjects(productId || '');
-  const { data: productRegions } = useProductRegions(productId || '');
-
   const [product, setProduct] = useState({
     // Basic Information
     name: '',
@@ -112,24 +98,6 @@ const ProductEditor: React.FC = () => {
     }
   }, [productId]);
 
-  useEffect(() => {
-    if (productFaqs) {
-      setSelectedFaqs(productFaqs.map(pf => ({ ...pf.faqs, sort_order: pf.sort_order })));
-    }
-  }, [productFaqs]);
-
-  useEffect(() => {
-    if (productProjects) {
-      setSelectedProjects(productProjects.map(pp => ({ ...pp.projects, sort_order: pp.sort_order })));
-    }
-  }, [productProjects]);
-
-  useEffect(() => {
-    if (productRegions) {
-      setSelectedRegions(productRegions.map(pr => ({ ...pr.regions, sort_order: pr.sort_order })));
-    }
-  }, [productRegions]);
-
   const loadProduct = async () => {
     try {
       setLoading(true);
@@ -205,73 +173,6 @@ const ProductEditor: React.FC = () => {
     }
   };
 
-  const saveRelatedEntities = async (productId: string) => {
-    try {
-      // Save FAQs
-      if (selectedFaqs.length > 0) {
-        // Delete existing relationships
-        await supabase
-          .from('product_faqs')
-          .delete()
-          .eq('product_id', productId);
-
-        // Insert new relationships
-        const faqData = selectedFaqs.map(faq => ({
-          product_id: productId,
-          faq_id: faq.id,
-          sort_order: faq.sort_order || 0
-        }));
-
-        await supabase
-          .from('product_faqs')
-          .insert(faqData);
-      }
-
-      // Save Projects
-      if (selectedProjects.length > 0) {
-        // Delete existing relationships
-        await supabase
-          .from('product_projects')
-          .delete()
-          .eq('product_id', productId);
-
-        // Insert new relationships
-        const projectData = selectedProjects.map(project => ({
-          product_id: productId,
-          project_id: project.id,
-          sort_order: project.sort_order || 0
-        }));
-
-        await supabase
-          .from('product_projects')
-          .insert(projectData);
-      }
-
-      // Save Regions
-      if (selectedRegions.length > 0) {
-        // Delete existing relationships
-        await supabase
-          .from('product_locations')
-          .delete()
-          .eq('product_id', productId);
-
-        // Insert new relationships
-        const regionData = selectedRegions.map(region => ({
-          product_id: productId,
-          region_id: region.id,
-          sort_order: region.sort_order || 0
-        }));
-
-        await supabase
-          .from('product_locations')
-          .insert(regionData);
-      }
-    } catch (error) {
-      console.error('Error saving related entities:', error);
-      throw error;
-    }
-  };
-
   const handleSave = async () => {
     try {
       setLoading(true);
@@ -328,8 +229,6 @@ const ProductEditor: React.FC = () => {
         updated_at: new Date().toISOString()
       };
 
-      let currentProductId = productId;
-
       if (isEditing) {
         const { error } = await supabase
           .from('products')
@@ -343,24 +242,16 @@ const ProductEditor: React.FC = () => {
           description: "Het product is succesvol bijgewerkt.",
         });
       } else {
-        const { data, error } = await supabase
+        const { error } = await supabase
           .from('products')
-          .insert(productData)
-          .select()
-          .single();
+          .insert(productData);
 
         if (error) throw error;
-        currentProductId = data.id;
 
         toast({
           title: "Product aangemaakt",
           description: "Het product is succesvol aangemaakt.",
         });
-      }
-
-      // Save related entities
-      if (currentProductId) {
-        await saveRelatedEntities(currentProductId);
       }
 
       navigate('/admin/products');
@@ -430,14 +321,13 @@ const ProductEditor: React.FC = () => {
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="basic" className="w-full">
-            <TabsList className="grid w-full grid-cols-8">
+            <TabsList className="grid w-full grid-cols-7">
               <TabsTrigger value="basic">Basis</TabsTrigger>
               <TabsTrigger value="seo">SEO</TabsTrigger>
               <TabsTrigger value="hero">Hero</TabsTrigger>
               <TabsTrigger value="content">Content</TabsTrigger>
               <TabsTrigger value="benefits">Voordelen</TabsTrigger>
               <TabsTrigger value="services">Services</TabsTrigger>
-              <TabsTrigger value="relations">Relaties</TabsTrigger>
               <TabsTrigger value="settings">Instellingen</TabsTrigger>
             </TabsList>
 
@@ -933,33 +823,6 @@ const ProductEditor: React.FC = () => {
                   />
                 </div>
               </div>
-            </TabsContent>
-
-            {/* New Relations Tab */}
-            <TabsContent value="relations" className="space-y-6">
-              <RelatedEntitySelector
-                label="Gekoppelde FAQs"
-                entityType="faqs"
-                productId={productId}
-                selectedItems={selectedFaqs}
-                onSelectionChange={setSelectedFaqs}
-              />
-              
-              <RelatedEntitySelector
-                label="Gekoppelde Projecten"
-                entityType="projects"
-                productId={productId}
-                selectedItems={selectedProjects}
-                onSelectionChange={setSelectedProjects}
-              />
-              
-              <RelatedEntitySelector
-                label="Gekoppelde Regio's"
-                entityType="regions"
-                productId={productId}
-                selectedItems={selectedRegions}
-                onSelectionChange={setSelectedRegions}
-              />
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-6">
