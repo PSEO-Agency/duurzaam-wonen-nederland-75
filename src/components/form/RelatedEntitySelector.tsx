@@ -9,12 +9,41 @@ import { Trash2, Plus, GripVertical } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
+interface BaseItem {
+  id: string;
+  sort_order?: number;
+  is_active?: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+interface FAQ extends BaseItem {
+  question: string;
+  answer: string;
+  category?: string;
+}
+
+interface Project extends BaseItem {
+  title: string;
+  description?: string;
+  image_url?: string;
+  location?: string;
+  project_type?: string;
+}
+
+interface Region extends BaseItem {
+  name: string;
+  slug: string;
+}
+
+type EntityItem = FAQ | Project | Region;
+
 interface RelatedEntitySelectorProps {
   label: string;
   entityType: 'faqs' | 'projects' | 'regions';
   productId?: string;
-  selectedItems: any[];
-  onSelectionChange: (items: any[]) => void;
+  selectedItems: EntityItem[];
+  onSelectionChange: (items: EntityItem[]) => void;
 }
 
 const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
@@ -24,7 +53,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
   selectedItems,
   onSelectionChange
 }) => {
-  const [availableItems, setAvailableItems] = useState<any[]>([]);
+  const [availableItems, setAvailableItems] = useState<EntityItem[]>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -50,22 +79,22 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
     }
   };
 
-  const getItemLabel = (item: any) => {
+  const getItemLabel = (item: EntityItem): string => {
     switch (entityType) {
       case 'faqs':
-        return item.question;
+        return (item as FAQ).question;
       case 'projects':
-        return item.title;
+        return (item as Project).title;
       case 'regions':
-        return item.name;
+        return (item as Region).name;
       default:
-        return item.name || item.title || item.question;
+        return 'Unknown item';
     }
   };
 
-  const handleItemToggle = (item: any, checked: boolean) => {
+  const handleItemToggle = (item: EntityItem, checked: boolean) => {
     if (checked) {
-      const newItem = {
+      const newItem: EntityItem = {
         ...item,
         sort_order: selectedItems.length
       };
@@ -86,7 +115,7 @@ const RelatedEntitySelector: React.FC<RelatedEntitySelectorProps> = ({
     onSelectionChange(updatedItems);
   };
 
-  const isSelected = (itemId: string) => {
+  const isSelected = (itemId: string): boolean => {
     return selectedItems.some(item => item.id === itemId);
   };
 

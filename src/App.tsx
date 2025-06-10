@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +9,64 @@ import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
 import LoadingScreen from "./components/LoadingScreen";
 import CookieConsent from "./components/CookieConsent";
 import AdminWrapper from "./components/admin/AdminWrapper";
+
+// Page imports
+import Index from "./pages/Index";
+import KunststofKozijnen from "./pages/KunststofKozijnen";
+import Contact from "./pages/Contact";
+import Offerte from "./pages/Offerte";
+import OfferteSuccess from "./pages/OfferteSuccess";
+import OverOns from "./pages/OverOns";
+import Projects from "./pages/Projects";
+import ProjectDetail from "./pages/ProjectDetail";
+import AluminiumKozijnen from "./pages/AluminiumKozijnen";
+import KunststofSchuifpuien from "./pages/KunststofSchuifpuien";
+import Showroom from "./pages/Showroom";
+import Werkwijze from "./pages/Werkwijze";
+import Werkgebied from "./pages/Werkgebied";
+import RentevrijeFinanciering from "./pages/RentevrijeFinanciering";
+import AlgemeneVoorwaarden from "./pages/AlgemeneVoorwaarden";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Sitemap from "./pages/Sitemap";
+import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
+import Zoeken from "./pages/Zoeken";
+import ProductPage from "./pages/ProductPage";
+import CityServicePage from "./pages/CityServicePage";
+import KozijnTypes from "./pages/KozijnTypes";
+import Draaikiepraam from "./pages/types/Draaikiepraam";
+import ColorOptions from "./pages/ColorOptions";
+import ColorDetail from "./pages/ColorDetail";
+import KozijnSizes from "./pages/KozijnSizes";
+import Kozijn100x100 from "./pages/sizes/Kozijn100x100";
+import KozijnBrands from "./pages/KozijnBrands";
+import SchucoBrand from "./pages/brands/SchucoBrand";
+import KozijnenInmeten from "./pages/services/KozijnenInmeten";
+import KozijnPrices from "./pages/KozijnPrices";
+import KozijnenAfbetaling from "./pages/prices/KozijnenAfbetaling";
+import KozijnenSubsidie from "./pages/prices/KozijnenSubsidie";
+import KozijnMontage from "./pages/KozijnMontage";
+import KozijnenEnschede from "./pages/locaties/KozijnenEnschede";
+import Team from "./pages/over-ons/Team";
+import Missie from "./pages/over-ons/Missie";
+import Duurzaamheid from "./pages/over-ons/Duurzaamheid";
+import Vacatures from "./pages/over-ons/Vacatures";
+import NotFound from "./pages/NotFound";
+
+// Admin page imports
+import Dashboard from "./pages/admin/Dashboard";
+import Pages from "./pages/admin/Pages";
+import PageEditor from "./pages/admin/PageEditor";
+import Templates from "./pages/admin/Templates";
+import Sections from "./pages/admin/Sections";
+import SectionEditor from "./pages/admin/SectionEditor";
+import AdminProducts from "./pages/admin/Products";
+import ProductEditor from "./pages/admin/ProductEditor";
+import AdminFaqs from "./pages/admin/Faqs";
+import AdminProjects from "./pages/admin/Projects";
+import Locations from "./pages/admin/Locations";
+import Services from "./pages/admin/Services";
+import CityServices from "./pages/admin/CityServices";
 
 import { SearchProvider } from "./contexts/SearchContext";
 import { CmsProvider } from "./contexts/CmsContext";
