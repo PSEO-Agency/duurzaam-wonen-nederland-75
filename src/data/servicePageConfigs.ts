@@ -107,31 +107,6 @@ export const kunststofKozijnenConfig: ServicePageTemplateProps = {
     ctaLink: "/offerte"
   },
   
-  options: {
-    title: "Kunststof Kozijnen - Alle Opties",
-    description: "Ontdek alle mogelijkheden voor kunststof kozijnen, van verschillende types en kleuren tot diverse afmetingen. Filter op uw specifieke wensen om het perfecte kozijn voor uw woning te vinden.",
-    categories: [
-      {
-        title: "Type Kozijn",
-        items: ["Vast kozijn", "Draai-kiep kozijn", "Schuifpui", "Stolpstel kozijn", "Harmonica kozijn"],
-        linkText: "Bekijk alle types",
-        linkUrl: "/kunststof-kozijnen/types"
-      },
-      {
-        title: "Kleur Kozijn",
-        items: ["Wit", "Zwart", "Antraciet", "Houtlook", "Grijs"],
-        linkText: "Bekijk alle kleuren",
-        linkUrl: "/kunststof-kozijnen/kleuren"
-      },
-      {
-        title: "Kozijn Afmeting",
-        items: ["100x100 cm", "200x100 cm", "300x100 cm", "400x100 cm", "Maatwerk"],
-        linkText: "Bekijk alle afmetingen",
-        linkUrl: "/kunststof-kozijnen/afmetingen"
-      }
-    ]
-  },
-  
   services: {
     title: "Onze Diensten",
     description: "Wij bieden een compleet pakket aan diensten voor uw kunststof kozijnen project.",
@@ -275,7 +250,7 @@ export const kunststofSchuifpuienConfig: ServicePageTemplateProps = {
     quickLinks: [
       { href: "#wat-zijn", text: "Wat zijn Kunststof Schuifpuien?" },
       { href: "#voordelen", text: "Voordelen Kunststof Schuifpuien" },
-      { href: "#diensten", text: "Onze Diensten" },
+      { href: "#diensten", text: "Onze Oplossingen" },
       { href: "#soorten", text: "Soorten Kunststof Schuifpuien" },
       { href: "#kleuren", text: "Verschillende Kleuren" },
       { href: "#montage", text: "Montage Opties" }
@@ -317,85 +292,27 @@ export const kunststofSchuifpuienConfig: ServicePageTemplateProps = {
     ctaLink: "/offerte"
   },
   
-  options: {
-    title: "Kunststof Schuifpuien - Alle Opties",
-    description: "Ontdek alle mogelijkheden voor kunststof schuifpuien, van verschillende types en kleuren tot diverse afmetingen. Filter op uw specifieke wensen om de perfecte schuifpui voor uw woning te vinden.",
-    categories: [
-      {
-        title: "Type Schuifpui",
-        items: ["Parallel schuivend", "Lift & slide", "Pocket doors", "Hoek schuifpui", "Vouwwand"],
-        linkText: "Bekijk alle types",
-        linkUrl: "/kunststof-schuifpuien/types"
-      },
-      {
-        title: "Kleur Schuifpui",
-        items: ["Wit", "Zwart", "Antraciet", "Houtlook", "Grijs"],
-        linkText: "Bekijk alle kleuren",
-        linkUrl: "/kunststof-schuifpuien/kleuren"
-      },
-      {
-        title: "Schuifpui Afmeting",
-        items: ["300x240 cm", "400x240 cm", "500x240 cm", "600x240 cm", "Maatwerk"],
-        linkText: "Bekijk alle afmetingen",
-        linkUrl: "/kunststof-schuifpuien/afmetingen"
-      }
-    ]
-  },
-  
   services: {
-    title: "Onze Diensten",
-    description: "Wij bieden een compleet pakket aan diensten voor uw kunststof schuifpuien project.",
+    title: "Onze oplossingen",
+    description: "Duurzaam Wonen Nederland biedt een breed scala aan hoogwaardige verduurzamingsoplossingen",
     serviceItems: [
       {
-        image: "/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png",
-        title: "Kunststof schuifpuien",
-        description: "Hoogwaardige schuifpuien met uitstekende warmte- en geluidsisolatie.",
-        features: ["HR++ of triple glas", "Onderhoudsvrij", "Diverse kleuren en stijlen"],
+        image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+        title: 'Kunststof kozijnen',
+        description: 'Hoogwaardige kozijnen met uitstekende warmte- en geluidsisolatie.',
+        features: ['HR++ of triple glas', 'Onderhoudsvrij', 'Diverse kleuren en stijlen'],
         linkText: "Meer informatie",
-        linkUrl: "/kunststof-schuifpuien"
+        linkUrl: "/kunststof-kozijnen"
+      },
+      {
+        image: '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png',
+        title: 'Gevelbekleding',
+        description: 'Duurzame gevelbekleding voor verbeterde isolatie en een moderne uitstraling.',
+        features: ['Onderhoudsarm', '64 kleuropties', 'Verbetert isolatiewaarde'],
+        linkText: "Meer informatie",
+        linkUrl: "/gevelbekleding"
       }
     ]
-  },
-  
-  information: {
-    title: "Informatie over kunststof schuifpuien",
-    image: "/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png",
-    imageAlt: "Kunststof schuifpui detail",
-    tabs: [
-      {
-        id: "algemeen",
-        title: "Algemeen",
-        content: [
-          "Kunststof schuifpuien zijn een populaire keuze geworden voor huiseigenaren die op zoek zijn naar een duurzame, onderhoudsarme en energiebesparende oplossing voor hun woning.",
-          "Onze schuifpuien worden op maat gemaakt en kunnen worden voorzien van verschillende soorten beglazing, waaronder HR++, triple glas en geluidsisolerend glas."
-        ]
-      },
-      {
-        id: "materiaal",
-        title: "Materiaal",
-        content: [
-          "De kunststof schuifpuien worden gemaakt van hoogwaardig PVC. Dit materiaal is uiterst duurzaam, weerbestendig en heeft een lange levensduur.",
-          "Onze schuifpuien zijn verkrijgbaar in diverse kleuren en afwerkingen, waaronder houtnerf-uitvoeringen die niet te onderscheiden zijn van echte houten schuifpuien."
-        ]
-      },
-      {
-        id: "montage",
-        title: "Montage",
-        content: [
-          "De montage van kunststof schuifpuien is precisiewerk dat door onze ervaren monteurs wordt uitgevoerd.",
-          "Onze monteurs zorgen ervoor dat de schuifpuien waterdicht worden geplaatst en goed worden aangesloten op de bestaande constructie."
-        ]
-      }
-    ],
-    didYouKnow: {
-      title: "Wist u dat?",
-      facts: [
-        "Kunststof schuifpuien kunnen tot 30% besparing opleveren op uw energierekening.",
-        "Moderne kunststof schuifpuien zijn 100% recyclebaar en daarmee een milieuvriendelijke keuze.",
-        "De gemiddelde levensduur van kunststof schuifpuien is minimaal 30 jaar.",
-        "Kunststof schuifpuien kunnen bijdragen aan een betere energielabel voor uw woning."
-      ]
-    }
   },
   
   faq: {
@@ -428,7 +345,7 @@ export const aluminiumKozijnenConfig: ServicePageTemplateProps = {
     description: "Hoogwaardige aluminium kozijnen voor moderne woningen. Sterk, duurzaam en onderhoudsvriendelijk.",
     canonicalUrl: "https://duurzaamwonen.info/aluminium-kozijnen"
   },
-  // ... rest of the configuration would be similar but with aluminium-specific content
+  
   hero: {
     backgroundImage: "/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png",
     badge: "Specialist in aluminium kozijnen",
@@ -459,7 +376,7 @@ export const aluminiumKozijnenConfig: ServicePageTemplateProps = {
       }
     ]
   },
-  // ... continue with other sections adapted for aluminium
+  
   introduction: {
     title: "Aluminium Kozijnen - Modern en Stijlvol",
     content: [
@@ -474,7 +391,7 @@ export const aluminiumKozijnenConfig: ServicePageTemplateProps = {
     ctaText: "Vraag nu vrijblijvend een offerte aan",
     ctaLink: "/offerte"
   },
-  // ... and so on for all other sections
+  
   whatAre: {
     title: "Wat zijn Aluminium Kozijnen?",
     content: [
