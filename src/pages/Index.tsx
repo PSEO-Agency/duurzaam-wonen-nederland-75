@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
@@ -15,6 +16,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import CookieConsent from '@/components/CookieConsent';
 import LoadingScreen from '@/components/LoadingScreen';
 import { SearchProvider } from '@/contexts/SearchContext';
+import { Link } from 'react-router-dom';
 
 const Index: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -145,6 +147,59 @@ const Index: React.FC = () => {
         <main className="flex-grow">
           <Hero />
           <Benefits />
+          
+          {/* Internal Links Section for SEO */}
+          <section className="py-12 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="max-w-6xl mx-auto">
+                <h2 className="text-2xl font-bold mb-8 text-center">Ontdek al onze diensten en producten</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  <div>
+                    <h3 className="font-semibold mb-3 text-brand-green">Kunststof Kozijnen</h3>
+                    <ul className="space-y-2 text-sm">
+                      <li><Link to="/kunststof-kozijnen" className="text-gray-600 hover:text-brand-green">Kunststof Kozijnen</Link></li>
+                      <li><Link to="/kunststof-kozijnen/kleuren" className="text-gray-600 hover:text-brand-green">Kleuren</Link></li>
+                      <li><Link to="/kunststof-kozijnen/types" className="text-gray-600 hover:text-brand-green">Types</Link></li>
+                      <li><Link to="/kunststof-kozijnen/afmetingen" className="text-gray-600 hover:text-brand-green">Afmetingen</Link></li>
+                      <li><Link to="/kunststof-kozijnen/montage" className="text-gray-600 hover:text-brand-green">Montage</Link></li>
+                      <li><Link to="/kunststof-kozijnen/prijzen" className="text-gray-600 hover:text-brand-green">Prijzen</Link></li>
+                      <li><Link to="/kunststof-kozijnen/merken" className="text-gray-600 hover:text-brand-green">Merken</Link></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-3 text-brand-green">Producten</h3>
+                    <ul className="space-y-2 text-sm">
+                      <li><Link to="/kunststof-schuifpuien" className="text-gray-600 hover:text-brand-green">Kunststof Schuifpuien</Link></li>
+                      <li><Link to="/kunststof-deuren" className="text-gray-600 hover:text-brand-green">Kunststof Deuren</Link></li>
+                      <li><Link to="/gevelbekleding" className="text-gray-600 hover:text-brand-green">Gevelbekleding</Link></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-3 text-brand-green">Over Ons</h3>
+                    <ul className="space-y-2 text-sm">
+                      <li><Link to="/over-ons" className="text-gray-600 hover:text-brand-green">Over Ons</Link></li>
+                      <li><Link to="/over-ons/team" className="text-gray-600 hover:text-brand-green">Ons Team</Link></li>
+                      <li><Link to="/over-ons/missie" className="text-gray-600 hover:text-brand-green">Onze Missie</Link></li>
+                      <li><Link to="/over-ons/duurzaamheid" className="text-gray-600 hover:text-brand-green">Duurzaamheid</Link></li>
+                      <li><Link to="/over-ons/vacatures" className="text-gray-600 hover:text-brand-green">Vacatures</Link></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-3 text-brand-green">Service & Info</h3>
+                    <ul className="space-y-2 text-sm">
+                      <li><Link to="/projecten" className="text-gray-600 hover:text-brand-green">Projecten</Link></li>
+                      <li><Link to="/werkwijze" className="text-gray-600 hover:text-brand-green">Werkwijze</Link></li>
+                      <li><Link to="/rentevrije-financiering" className="text-gray-600 hover:text-brand-green">Rentevrije Financiering</Link></li>
+                      <li><Link to="/werkgebied" className="text-gray-600 hover:text-brand-green">Werkgebied</Link></li>
+                      <li><Link to="/blog" className="text-gray-600 hover:text-brand-green">Blog</Link></li>
+                      <li><Link to="/contact" className="text-gray-600 hover:text-brand-green">Contact</Link></li>
+                      <li><Link to="/offerte" className="text-gray-600 hover:text-brand-green">Offerte Aanvragen</Link></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
           
           {/* Review Widget Section */}
           <section className="py-8 bg-gray-50">
