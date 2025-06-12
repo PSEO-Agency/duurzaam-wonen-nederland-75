@@ -1,9 +1,0 @@
-
-User-agent: *
-Allow: /
-
-# Sitemap location
-Sitemap: https://duurzaamwonen.info/sitemap.xml
-
-# Crawl-delay (optional - helps prevent overloading the server)
-Crawl-delay: 1
