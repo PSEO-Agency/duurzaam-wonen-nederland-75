@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
@@ -15,6 +14,7 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import CookieConsent from '@/components/CookieConsent';
 import LoadingScreen from '@/components/LoadingScreen';
+import SEOOptimizer from '@/components/SEOOptimizer';
 import { SearchProvider } from '@/contexts/SearchContext';
 import { Link } from 'react-router-dom';
 
@@ -22,6 +22,13 @@ const Index: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
+    // Skip loading screen for React-snap
+    const isReactSnap = typeof window !== 'undefined' && window.navigator.userAgent === 'ReactSnap';
+    if (isReactSnap) {
+      setIsLoading(false);
+      return;
+    }
+    
     // Preload critical images and resources
     const preloadImages = [
       '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png', // Hero background
@@ -89,6 +96,7 @@ const Index: React.FC = () => {
   
   return (
     <SearchProvider>
+      <SEOOptimizer />
       {isLoading && <LoadingScreen />}
       <div className={`min-h-screen flex flex-col ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}`}>
         <Helmet>
