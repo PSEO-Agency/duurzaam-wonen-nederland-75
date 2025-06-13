@@ -16,6 +16,7 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Offerte = lazy(() => import('./pages/Offerte'));
 const OfferteSuccess = lazy(() => import('./pages/OfferteSuccess'));
 const Werkwijze = lazy(() => import('./pages/Werkwijze'));
+const Werkgebied = lazy(() => import('./pages/Werkgebied'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const Zoeken = lazy(() => import('./pages/Zoeken'));
@@ -47,6 +48,7 @@ function App() {
               <Route path="/offerte" element={<Offerte />} />
               <Route path="/offerte/success" element={<OfferteSuccess />} />
               <Route path="/werkwijze" element={<Werkwijze />} />
+              <Route path="/werkgebied" element={<Werkgebied />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/sitemap" element={<Sitemap />} />
               <Route path="/zoeken" element={<Zoeken />} />

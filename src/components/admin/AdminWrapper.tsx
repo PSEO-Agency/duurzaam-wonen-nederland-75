@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import AdminBar from './AdminBar';
 
 interface AdminWrapperProps {
@@ -7,10 +8,10 @@ interface AdminWrapperProps {
 }
 
 const AdminWrapper: React.FC<AdminWrapperProps> = ({ children }) => {
-  // In a real-world application, you would check if the user is an admin here
-  const isAdmin = true; // Hardcoded for demonstration
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
   
-  if (!isAdmin) {
+  if (!isAdminRoute) {
     return <>{children}</>;
   }
   
