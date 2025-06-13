@@ -96,24 +96,31 @@ const Index: React.FC = () => {
           <meta property="og:description" content="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten." />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://duurzaamwonen.info" />
-          <meta property="og:image" content="/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png" />
+          <meta property="og:image" content="https://duurzaamwonen.info/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png" />
           <link rel="canonical" href="https://duurzaamwonen.info" />
           <meta name="robots" content="index, follow" />
+          
+          {/* Enhanced structured data */}
           <script type="application/ld+json">
             {`
               {
                 "@context": "https://schema.org",
                 "@type": "HomeAndConstructionBusiness",
                 "name": "Duurzaam Wonen Nederland",
-                "image": "/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png",
+                "alternateName": "DWN",
+                "description": "Specialist in woningverduurzaming met meer dan 20 jaar ervaring. Wij bieden hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten.",
+                "image": "https://duurzaamwonen.info/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png",
+                "logo": "https://duurzaamwonen.info/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png",
                 "url": "https://duurzaamwonen.info",
                 "telephone": "053 303 0213",
+                "email": "info@duurzaamwonen.info",
                 "address": {
                   "@type": "PostalAddress",
                   "streetAddress": "Twenteweg 24",
                   "addressLocality": "Enschede",
                   "postalCode": "7532 ST",
-                  "addressCountry": "NL"
+                  "addressCountry": "NL",
+                  "addressRegion": "Overijssel"
                 },
                 "geo": {
                   "@type": "GeoCoordinates",
@@ -132,10 +139,57 @@ const Index: React.FC = () => {
                   "opens": "09:00",
                   "closes": "17:00"
                 },
+                "priceRange": "€€",
+                "serviceArea": {
+                  "@type": "GeoCircle",
+                  "geoMidpoint": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 52.2215,
+                    "longitude": 6.8937
+                  },
+                  "geoRadius": "100000"
+                },
+                "hasOfferCatalog": {
+                  "@type": "OfferCatalog",
+                  "name": "Woningverduurzaming Services",
+                  "itemListElement": [
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Kunststof Kozijnen",
+                        "description": "Energiezuinige kunststof kozijnen met HR++ glas"
+                      }
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Aluminium Kozijnen",
+                        "description": "Duurzame aluminium kozijnen voor moderne woningen"
+                      }
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Kunststof Schuifpuien",
+                        "description": "Moderne schuifpuien voor meer licht en ruimte"
+                      }
+                    }
+                  ]
+                },
                 "sameAs": [
                   "https://www.facebook.com/duurzaamwonennederland",
                   "https://www.instagram.com/duurzaamwonen.nl"
-                ]
+                ],
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.8",
+                  "reviewCount": "150",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                }
               }
             `}
           </script>
