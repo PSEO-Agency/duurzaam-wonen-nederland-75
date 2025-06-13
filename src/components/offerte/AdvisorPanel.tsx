@@ -7,13 +7,11 @@ const AdvisorPanel: React.FC = () => {
   const advisors = [
     {
       name: "Ronald",
-      title: "Kozijnen Specialist",
-      image: "/lovable-uploads/98dbf74b-4dcd-42b6-871d-ee776a8b5625.png",
+      title: "Adviseur",
     },
     {
       name: "Youri",
-      title: "Kozijnen Adviseur",
-      image: "/lovable-uploads/98dbf74b-4dcd-42b6-871d-ee776a8b5625.png",
+      title: "Adviseur",
     }
   ];
 
@@ -29,13 +27,6 @@ const AdvisorPanel: React.FC = () => {
           {advisors.map((advisor, index) => (
             <div key={index} className="flex-1">
               <div className="flex flex-col items-center">
-                <div className="w-20 h-20 rounded-full overflow-hidden mb-3">
-                  <img 
-                    src={advisor.image}
-                    alt={`Adviseur ${advisor.name}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
                 <h4 className="text-base font-medium">{advisor.name}</h4>
                 <p className="text-gray-500 text-xs">{advisor.title}</p>
               </div>
@@ -51,7 +42,7 @@ const AdvisorPanel: React.FC = () => {
             </div>
             <div>
               <p className="text-xs text-gray-500">Telefoon</p>
-              <p className="text-sm font-medium">085 - 020 5500</p>
+              <p className="text-sm font-medium">053 303 0213</p>
             </div>
           </div>
           

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, ArrowRight, CheckCircle, Info, Zap } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -71,35 +71,6 @@ const initialFormData: OfferteFormData = {
   availability: [],
   availabilitySchedule: '',
   termsAccepted: false
-};
-
-const demoFormData: OfferteFormData = {
-  // Project info
-  projectType: 'renovatie',
-  propertyType: 'eengezinswoning',
-  timeline: 'binnen 3 maanden',
-  
-  // Window details
-  windowTypes: ['draaikiepraam', 'vast'],
-  quantity: '4 ramen, 1 deur',
-  dimensions: '120x150 cm',
-  color: 'antraciet',
-  additionalInfo: 'Ik zoek kozijnen met hoge isolatiewaarde',
-  
-  // Contact info
-  firstName: 'Demo',
-  lastName: 'Gebruiker',
-  email: 'demo@example.com',
-  phone: '0612345678',
-  address: 'Voorbeeldstraat 123',
-  postalCode: '1234 AB',
-  city: 'Amsterdam',
-  
-  // Preferences
-  preferredContact: 'email',
-  availability: ['ochtend', 'middag'],
-  availabilitySchedule: '{}',
-  termsAccepted: true
 };
 
 // Define webhook URLs
@@ -374,37 +345,6 @@ const Offerte: React.FC = () => {
     }
   };
 
-  // Updated submitDemoForm to use the same webhook path as regular submissions
-  const submitDemoForm = async () => {
-    setIsSubmitting(true);
-    
-    try {
-      // Try GHL webhook first
-      const ghlSuccess = await sendToGHLWebhook(demoFormData);
-      
-      // If GHL webhook fails, use N8N as backup
-      if (!ghlSuccess) {
-        await sendFormData(demoFormData);
-      }
-      
-      toast({
-        title: "Demo aanvraag verzonden!",
-        description: "De demo is succesvol verzonden.",
-      });
-      
-      navigate('/offerte/success');
-    } catch (error) {
-      console.error('Error during demo submission:', error);
-      toast({
-        variant: "destructive",
-        title: "Er is een fout opgetreden",
-        description: "Kon de demo aanvraag niet verzenden.",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   const handleNavigate = (e: React.FormEvent) => {
     e.preventDefault();
     nextStep();
@@ -470,18 +410,6 @@ const Offerte: React.FC = () => {
             <p className="text-lg text-gray-600 mt-3">
               Maak gebruik van onze handige wizard om in enkele minuten een offerte en/of adviesgesprek aan te vragen.
             </p>
-            
-            <div className="mt-6">
-              <Button 
-                onClick={submitDemoForm} 
-                disabled={isSubmitting}
-                variant="outline"
-                className="bg-amber-50 hover:bg-amber-100 border-amber-200"
-              >
-                <Zap className="mr-2 h-4 w-4 text-amber-500" />
-                Demo Aanvraag
-              </Button>
-            </div>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">

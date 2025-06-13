@@ -82,12 +82,6 @@ const Hero: React.FC = () => {
                   <div className="bg-brand-green/20 p-1 rounded-full">
                     <Check className="h-4 w-4 text-brand-green" />
                   </div>
-                  <span>10 jaar garantie</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="bg-brand-green/20 p-1 rounded-full">
-                    <Check className="h-4 w-4 text-brand-green" />
-                  </div>
                   <span>Gratis advies</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -107,7 +101,7 @@ const Hero: React.FC = () => {
                   {isKozijnenPage ? 'Voordelen van kunststof kozijnen' : 'Voordelen'}
                 </h3>
                 <ul className="space-y-3">
-                  {(isKozijnenPage ? ['Energiebesparend - Warmte blijft binnen', 'Onderhoudsarm - Nooit meer schilderen', 'Lange levensduur - Minimaal 30 jaar', 'Uitstekende isolatie - Minder geluid', 'Diverse kleuren en stijlen beschikbaar', '10 jaar garantie op al onze producten'] : ['Energiebesparend - Lagere energiekosten', 'Onderhoudsarm en duurzaam - Geen schilderwerk', 'Waardeverhoging van de woning', 'Veilig en innovatief - Hoogwaardige sloten', 'Ruime keuze aan kleuren en stijlen', '10 jaar garantie op al onze producten']).map((item, index) => <li key={index} className="flex items-start gap-3">
+                  {(isKozijnenPage ? ['Energiebesparend - Warmte blijft binnen', 'Onderhoudsarm - Nooit meer schilderen', 'Lange levensduur - Minimaal 30 jaar', 'Uitstekende isolatie - Minder geluid', 'Diverse kleuren en stijlen beschikbaar', '10 jaar servicegarantie en 15 jaar productgarantie'] : ['Energiebesparend - Lagere energiekosten', 'Onderhoudsarm en duurzaam - Geen schilderwerk', 'Waardeverhoging van de woning', 'Veilig en innovatief - Hoogwaardige sloten', 'Ruime keuze aan kleuren en stijlen', '10 jaar servicegarantie en 15 jaar productgarantie']).map((item, index) => <li key={index} className="flex items-start gap-3">
                       <div className="bg-brand-green p-1 rounded-full mt-1 flex-shrink-0">
                         <Check className="h-3 w-3 text-white" />
                       </div>
@@ -120,19 +114,22 @@ const Hero: React.FC = () => {
                       <h4 className="text-sm font-medium text-white mb-3">Keurmerken:</h4>
                       <div className="grid grid-cols-3 gap-4">
                         <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="KOMO-certificaat">
-                          <img src="/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png" alt="KOMO" className="h-10 max-w-full object-contain" />
+                          <img src="/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png" alt="KOMO-certificaat" className="h-10 max-w-full object-contain" />
                         </div>
                         <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="CE-markering">
-                          <img src="/lovable-uploads/10906789-676e-4aef-b797-6bc0815255ea.png" alt="CE" className="h-10 max-w-full object-contain" />
+                          <img src="/lovable-uploads/10906789-676e-4aef-b797-6bc0815255ea.png" alt="CE-markering" className="h-10 max-w-full object-contain" />
                         </div>
                         <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="PKVW Keurmerk">
-                          <img src="/lovable-uploads/a680436d-6948-4799-a383-6aad791b1e0e.png" alt="PKVW" className="h-12 max-w-full object-contain" />
+                          <img src="/lovable-uploads/a680436d-6948-4799-a383-6aad791b1e0e.png" alt="PKVW Keurmerk" className="h-12 max-w-full object-contain" />
                         </div>
                         <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Nationaal Warmtefonds">
-                          <img src="/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png" alt="Warmtefonds" className="h-12 max-w-full object-contain" />
+                          <img src="/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png" alt="Nationaal Warmtefonds" className="h-12 max-w-full object-contain" />
                         </div>
                         <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Schüco">
                           <img src="/lovable-uploads/4d42855f-0a4b-48ef-b632-25f5f01975fc.png" alt="Schüco" className="h-10 max-w-full object-contain" />
+                        </div>
+                        <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Keralit">
+                          <img src="/lovable-uploads/16c4e987-ea24-4f28-adf8-f1e4a100cc98.png" alt="Keralit" className="h-10 max-w-full object-contain" />
                         </div>
                       </div>
                     </div>

@@ -10,7 +10,7 @@ import AnimatedSection from '@/components/AnimatedSection';
 import ContactCTA from '@/components/ContactCTA';
 
 const Werkwijze: React.FC = () => {
-  // Workflow steps
+  // Workflow steps - reordered as requested
   const workflowSteps = [
     {
       step: 1,
@@ -22,19 +22,19 @@ const Werkwijze: React.FC = () => {
     },
     {
       step: 2,
+      title: "Aantrekkelijke offerte",
+      description: "U ontvangt direct ter plekke een aantrekkelijke offerte zonder verrassingen, volledig toegespitst op uw situatie. U hoeft er niet op te wachten!",
+      icon: ClipboardCheck,
+      color: "bg-green-50 border-green-200",
+      iconColor: "text-green-500",
+    },
+    {
+      step: 3,
       title: "Inmeten",
       description: "Onze expert komt bij u langs om nauwkeurige metingen te verrichten voor een passend resultaat.",
       icon: Ruler,
       color: "bg-purple-50 border-purple-200",
       iconColor: "text-purple-500",
-    },
-    {
-      step: 3,
-      title: "Offerte op maat",
-      description: "U ontvangt een gedetailleerde offerte zonder verrassingen, volledig toegespitst op uw situatie.",
-      icon: ClipboardCheck,
-      color: "bg-green-50 border-green-200",
-      iconColor: "text-green-500",
     },
     {
       step: 4,
