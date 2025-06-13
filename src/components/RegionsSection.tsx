@@ -75,7 +75,7 @@ const RegionsSection: React.FC<RegionsSectionProps> = ({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {isLoadingRegions ? (
-            Array(12).fill(0).map((_, index) => (
+            Array(7).fill(0).map((_, index) => (
               <AnimatedSection key={index} animation="fade-in">
                 <Card className="h-full hover:shadow-md transition-shadow overflow-hidden">
                   <div className="bg-brand-green/5 p-4">
@@ -98,7 +98,7 @@ const RegionsSection: React.FC<RegionsSectionProps> = ({
               return (
                 <AnimatedSection key={region.id} animation="fade-in">
                   <Card 
-                    className="h-full hover:shadow-md transition-shadow overflow-hidden"
+                    className="h-full hover:shadow-md transition-shadow overflow-hidden cursor-pointer"
                     onClick={() => setSelectedRegion(selectedRegion === region.id ? null : region.id)}
                   >
                     <div className="bg-brand-green/5 p-4">
@@ -110,12 +110,12 @@ const RegionsSection: React.FC<RegionsSectionProps> = ({
                     
                     <CardContent className="pt-4">
                       <div className="flex flex-wrap gap-2">
-                        {regionCities.map((city) => (
+                        {regionCities.slice(0, 6).map((city) => (
                           <Button 
                             key={city.id} 
                             variant="outline" 
                             size="sm" 
-                            className="text-sm"
+                            className="text-sm hover:bg-brand-green hover:text-white"
                             asChild
                           >
                             <Link to={`/diensten/${city.slug}/${currentServiceSlug}`}>
@@ -123,7 +123,32 @@ const RegionsSection: React.FC<RegionsSectionProps> = ({
                             </Link>
                           </Button>
                         ))}
+                        {regionCities.length > 6 && (
+                          <span className="text-sm text-gray-500 self-center">
+                            +{regionCities.length - 6} meer...
+                          </span>
+                        )}
                       </div>
+                      
+                      {selectedRegion === region.id && regionCities.length > 6 && (
+                        <div className="mt-4 pt-4 border-t border-gray-200">
+                          <div className="flex flex-wrap gap-2">
+                            {regionCities.slice(6).map((city) => (
+                              <Button 
+                                key={city.id} 
+                                variant="outline" 
+                                size="sm" 
+                                className="text-sm hover:bg-brand-green hover:text-white"
+                                asChild
+                              >
+                                <Link to={`/diensten/${city.slug}/${currentServiceSlug}`}>
+                                  {city.name}
+                                </Link>
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </CardContent>
                   </Card>
                 </AnimatedSection>
