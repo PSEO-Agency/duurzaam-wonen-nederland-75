@@ -11,7 +11,8 @@ const AdminWrapper: React.FC<AdminWrapperProps> = ({ children }) => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
   
-  if (!isAdminRoute) {
+  // For admin routes, don't add the admin bar as AdminLayout handles it
+  if (isAdminRoute) {
     return <>{children}</>;
   }
   

@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from "@/components/ui/toaster";
 import AdminWrapper from './components/admin/AdminWrapper';
+import AdminLayout from './components/admin/AdminLayout';
 
 // Lazy load pages
 const Index = lazy(() => import('./pages/Index'));
@@ -77,12 +78,14 @@ function App() {
                 {/* Old URL structure for backward compatibility - /diensten/{city}/{service} */}
                 <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
                 
-                {/* Admin routes */}
-                <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                <Route path="/admin/pages" element={<AdminPages />} />
-                <Route path="/admin/locations" element={<AdminLocations />} />
-                <Route path="/admin/services" element={<AdminServices />} />
-                <Route path="/admin/city-services" element={<AdminCityServices />} />
+                {/* Admin routes with AdminLayout wrapper */}
+                <Route path="/admin/*" element={<AdminLayout />}>
+                  <Route path="dashboard" element={<AdminDashboard />} />
+                  <Route path="pages" element={<AdminPages />} />
+                  <Route path="locations" element={<AdminLocations />} />
+                  <Route path="services" element={<AdminServices />} />
+                  <Route path="city-services" element={<AdminCityServices />} />
+                </Route>
               </Routes>
             </Suspense>
           </AdminWrapper>
