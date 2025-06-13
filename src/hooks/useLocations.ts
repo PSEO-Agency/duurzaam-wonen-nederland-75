@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -409,5 +408,78 @@ export const useUpdateCityService = () => {
         variant: "destructive",
       });
     }
+  });
+};
+
+export const useRegion = (slug: string) => {
+  return useQuery({
+    queryKey: ['region', slug],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('regions')
+        .select('*')
+        .eq('slug', slug)
+        .maybeSingle();
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!slug
+  });
+};
+
+export const useCitiesByRegion = (regionId: string) => {
+  return useQuery({
+    queryKey: ['cities-by-region', regionId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('cities')
+        .select('*')
+        .eq('region_id', regionId)
+        .order('name');
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!regionId
+  });
+};
+
+export const useCityServiceNew = (citySlug: string, serviceSlug: string) => {
+  return useQuery({
+    queryKey: ['city-service-new', citySlug, serviceSlug],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('city_services')
+        .select(`
+          *,
+          cities!inner(
+            id,
+            name,
+            slug,
+            description,
+            meta_title,
+            meta_description,
+            region_id
+          ),
+          services!inner(
+            id,
+            name,
+            slug,
+            description,
+            icon_name,
+            meta_title,
+            meta_description
+          )
+        `)
+        .eq('cities.slug', citySlug)
+        .eq('services.slug', serviceSlug)
+        .eq('is_active', true)
+        .maybeSingle();
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!citySlug && !!serviceSlug
   });
 };

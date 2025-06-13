@@ -24,6 +24,10 @@ const Sitemap = lazy(() => import('./pages/Sitemap'));
 const Zoeken = lazy(() => import('./pages/Zoeken'));
 const CityServicePage = lazy(() => import('./pages/CityServicePage'));
 
+// New location pages
+const RegionServicePage = lazy(() => import('./pages/RegionServicePage'));
+const CityServicePageNew = lazy(() => import('./pages/CityServicePageNew'));
+
 // Job detail pages
 const KunststofKozijnenMonteur = lazy(() => import('./pages/vacatures/KunststofKozijnenMonteur'));
 const CommercieeelMedewerker = lazy(() => import('./pages/vacatures/CommercieeelMedewerker'));
@@ -66,7 +70,11 @@ function App() {
                 <Route path="/vacatures/kunststof-kozijnen-monteur" element={<KunststofKozijnenMonteur />} />
                 <Route path="/vacatures/commercieel-medewerker" element={<CommercieeelMedewerker />} />
                 
-                {/* City service routes */}
+                {/* New URL structure - /{service}/{region}/{city} */}
+                <Route path="/:serviceSlug/:regionSlug/:citySlug" element={<CityServicePageNew />} />
+                <Route path="/:serviceSlug/:regionSlug" element={<RegionServicePage />} />
+                
+                {/* Old URL structure for backward compatibility - /diensten/{city}/{service} */}
                 <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
                 
                 {/* Admin routes */}

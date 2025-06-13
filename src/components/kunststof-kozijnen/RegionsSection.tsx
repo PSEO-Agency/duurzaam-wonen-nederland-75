@@ -72,7 +72,7 @@ const RegionsSection: React.FC = () => {
                             className="text-sm"
                             asChild
                           >
-                            <Link to={`/diensten/${city.slug}/kunststof-kozijnen`}>
+                            <Link to={`/kunststof-kozijnen/${region.slug}/${city.slug}`}>
                               {city.name}
                             </Link>
                           </Button>

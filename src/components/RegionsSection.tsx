@@ -118,7 +118,7 @@ const RegionsSection: React.FC<RegionsSectionProps> = ({
                             className="text-sm hover:bg-brand-green hover:text-white"
                             asChild
                           >
-                            <Link to={`/diensten/${city.slug}/${currentServiceSlug}`}>
+                            <Link to={`/${currentServiceSlug}/${region.slug}/${city.slug}`}>
                               {city.name}
                             </Link>
                           </Button>
@@ -141,7 +141,7 @@ const RegionsSection: React.FC<RegionsSectionProps> = ({
                                 className="text-sm hover:bg-brand-green hover:text-white"
                                 asChild
                               >
-                                <Link to={`/diensten/${city.slug}/${currentServiceSlug}`}>
+                                <Link to={`/${currentServiceSlug}/${region.slug}/${city.slug}`}>
                                   {city.name}
                                 </Link>
                               </Button>
