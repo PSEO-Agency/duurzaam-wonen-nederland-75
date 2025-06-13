@@ -7,7 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedSection from '@/components/AnimatedSection';
-import RegionsSection from '@/components/kunststof-kozijnen/RegionsSection';
+import RegionsSection from '@/components/RegionsSection';
 import ContactCTA from '@/components/ContactCTA';
 
 const Werkgebied: React.FC = () => {
@@ -103,7 +103,11 @@ const Werkgebied: React.FC = () => {
         </section>
         
         {/* Regions Section */}
-        <RegionsSection />
+        <RegionsSection 
+          title="Onze werkgebieden"
+          description="Wij zijn actief in heel Nederland. Bekijk hieronder of wij ook in uw regio actief zijn."
+          serviceSlug="kunststof-kozijnen"
+        />
         
         {/* Service Highlights */}
         <section className="py-16 bg-gray-50">
