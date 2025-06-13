@@ -17,6 +17,7 @@ export const mainNavItems: MenuSection[] = [
   { label: 'Projecten', href: '/projecten' },
   { label: 'Rentevrije Financiering*', href: '/rentevrije-financiering' },
   { label: 'Werkwijze', href: '/werkwijze' },
+  { label: 'Vacatures', href: '/vacatures' },
 ];
 
 export const oplossingenItems: MenuSection[] = [
