@@ -113,11 +113,11 @@ const Hero: React.FC = () => {
                     <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
                       <h4 className="text-sm font-medium text-white mb-3">Keurmerken:</h4>
                       <div className="grid grid-cols-3 gap-4">
-                        <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="CE Keurmerk">
-                          <img src="/lovable-uploads/10906789-676e-4aef-b797-6bc0815255ea.png" alt="CE Keurmerk" className="h-10 max-w-full object-contain" />
-                        </div>
                         <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Schüco Kozijnen">
-                          <img src="/lovable-uploads/4d42855f-0a4b-48ef-b632-25f5f01975fc.png" alt="Schuco Kozijnen" className="h-10 max-w-full object-contain" />
+                          <img src="/lovable-uploads/10906789-676e-4aef-b797-6bc0815255ea.png" alt="Schuco Kozijnen" className="h-10 max-w-full object-contain" />
+                        </div>
+                        <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="KOMO Keurmerk">
+                          <img src="/lovable-uploads/4d42855f-0a4b-48ef-b632-25f5f01975fc.png" alt="KOMO Keurmerk" className="h-10 max-w-full object-contain" />
                         </div>
                         <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Politiekeurmerk">
                           <img src="/lovable-uploads/a680436d-6948-4799-a383-6aad791b1e0e.png" alt="Politiekeurmerk" className="h-12 max-w-full object-contain" />
@@ -125,8 +125,8 @@ const Hero: React.FC = () => {
                         <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Nationaal Warmtefonds">
                           <img src="/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png" alt="Nationaal Warmtefonds" className="h-12 max-w-full object-contain" />
                         </div>
-                        <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="KOMO Keurmerk">
-                          <img src="/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png" alt="KOMO Keurmerk" className="h-10 max-w-full object-contain" />
+                        <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="CE Keurmerk">
+                          <img src="/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png" alt="CE Keurmerk" className="h-10 max-w-full object-contain" />
                         </div>
                         <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Keralit Keurmerk">
                           <img src="/lovable-uploads/98a9ef9a-6f19-4139-bb2b-e081b52e6637.png" alt="Keralit Keurmerk" className="h-10 max-w-full object-contain" />
