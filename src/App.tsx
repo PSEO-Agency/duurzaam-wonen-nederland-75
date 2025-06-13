@@ -24,6 +24,10 @@ const Sitemap = lazy(() => import('./pages/Sitemap'));
 const Zoeken = lazy(() => import('./pages/Zoeken'));
 const CityServicePage = lazy(() => import('./pages/CityServicePage'));
 
+// Job detail pages
+const KunststofKozijnenMonteur = lazy(() => import('./pages/vacatures/KunststofKozijnenMonteur'));
+const CommercieeelMedewerker = lazy(() => import('./pages/vacatures/CommercieeelMedewerker'));
+
 // Admin pages
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
 const AdminPages = lazy(() => import('./pages/admin/Pages'));
@@ -57,6 +61,10 @@ function App() {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/sitemap" element={<Sitemap />} />
                 <Route path="/zoeken" element={<Zoeken />} />
+                
+                {/* Job detail routes */}
+                <Route path="/vacatures/kunststof-kozijnen-monteur" element={<KunststofKozijnenMonteur />} />
+                <Route path="/vacatures/commercieel-medewerker" element={<CommercieeelMedewerker />} />
                 
                 {/* City service routes */}
                 <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
