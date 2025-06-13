@@ -12,6 +12,20 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MapPin, CheckIcon, ArrowRight, PhoneCall, ArrowLeft } from 'lucide-react';
 
+// Type guards for JSON data
+const isArray = (value: any): value is any[] => Array.isArray(value);
+
+interface Benefit {
+  id: string;
+  text: string;
+}
+
+interface Feature {
+  id: string;
+  title: string;
+  description: string;
+}
+
 const CityServicePageNew: React.FC = () => {
   const { citySlug, serviceSlug, regionSlug } = useParams<{ 
     citySlug: string; 
@@ -88,8 +102,9 @@ const CityServicePageNew: React.FC = () => {
   const metaDescription = cityService.custom_meta_description || 
     `Specialistische ${serviceData.name} in ${cityData.name} op maat. Vraag nu een vrijblijvende offerte aan.`;
   
-  const benefits = cityService.benefits || [];
-  const features = cityService.features || [];
+  // Safely parse benefits and features with type guards
+  const benefits: Benefit[] = isArray(cityService.benefits) ? cityService.benefits as Benefit[] : [];
+  const features: Feature[] = isArray(cityService.features) ? cityService.features as Feature[] : [];
 
   return (
     <div className="min-h-screen flex flex-col">
