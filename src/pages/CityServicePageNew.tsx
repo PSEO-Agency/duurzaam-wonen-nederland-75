@@ -67,6 +67,13 @@ const CityServicePageNew: React.FC = () => {
   const { data: service } = useService(serviceSlug || '');
   const { data: region } = useRegion(regionSlug || '');
   
+  // Debug logging
+  console.log('CityServicePageNew - URL params:', { citySlug, serviceSlug, regionSlug });
+  console.log('CityServicePageNew - cityService data:', cityService);
+  console.log('CityServicePageNew - city data:', city);
+  console.log('CityServicePageNew - service data:', service);
+  console.log('CityServicePageNew - region data:', region);
+  
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col">
@@ -81,6 +88,207 @@ const CityServicePageNew: React.FC = () => {
           </div>
         </main>
         <Footer />
+      </div>
+    );
+  }
+  
+  // If we have city and service data but no city service record, create a generic page
+  if (!cityService && city && service) {
+    console.log('No city service record found, but city and service exist. Creating generic page.');
+    
+    const title = `${service.name} in ${city.name}`;
+    const description = `Hoogwaardige ${service.name} in ${city.name} en omgeving. Professionele installatie met garantie.`;
+    
+    const metaTitle = `${service.name} in ${city.name} | Duurzaam Wonen Nederland`;
+    const metaDescription = `Specialistische ${service.name} in ${city.name} op maat. Vraag nu een vrijblijvende offerte aan.`;
+
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Helmet>
+          <title>{metaTitle}</title>
+          <meta name="description" content={metaDescription} />
+          <link rel="canonical" href={`https://duurzaamwonen.info/${serviceSlug}/${regionSlug}/${citySlug}`} />
+        </Helmet>
+        
+        <Navbar />
+        
+        <main className="flex-grow pt-20">
+          {/* Breadcrumb */}
+          <section className="bg-gray-50 py-4">
+            <div className="container mx-auto px-4">
+              <nav className="flex items-center space-x-2 text-sm text-gray-600">
+                <Link to="/" className="hover:text-brand-green">Home</Link>
+                <span>/</span>
+                <Link to={`/${serviceSlug}`} className="hover:text-brand-green">{service.name}</Link>
+                <span>/</span>
+                {region && (
+                  <>
+                    <Link to={`/${serviceSlug}/${regionSlug}`} className="hover:text-brand-green">{region.name}</Link>
+                    <span>/</span>
+                  </>
+                )}
+                <span className="text-gray-900">{city.name}</span>
+              </nav>
+            </div>
+          </section>
+
+          {/* Hero Section */}
+          <section className="bg-gradient-to-b from-brand-green/10 to-white py-16 md:py-24">
+            <div className="container mx-auto px-4">
+              <AnimatedSection animation="fade-in">
+                <div className="max-w-4xl mx-auto text-center">
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <span className="inline-block px-4 py-1 bg-brand-green/90 text-white rounded-full text-sm font-medium">
+                      {city.name}
+                    </span>
+                    {region && (
+                      <span className="inline-block px-4 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">
+                        {region.name}
+                      </span>
+                    )}
+                  </div>
+                  <h1 className="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
+                  <p className="text-lg md:text-xl text-gray-700 mb-8">
+                    {description}
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button 
+                      size="lg" 
+                      className="bg-brand-green hover:bg-brand-green-dark text-white"
+                      asChild
+                    >
+                      <Link to="/offerte">
+                        <span>Gratis offerte</span>
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button 
+                      size="lg"
+                      variant="outline"
+                      className="text-brand-green border-brand-green hover:bg-brand-green/10"
+                      asChild
+                    >
+                      <a href="tel:0533030213">
+                        <PhoneCall className="mr-2 h-4 w-4" />
+                        <span>Bel 053 303 0213</span>
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+              </AnimatedSection>
+            </div>
+          </section>
+
+          {/* Main Content Section */}
+          <section className="py-12 md:py-16">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Main Content */}
+                <div className="lg:col-span-2">
+                  <AnimatedSection animation="fade-in-right">
+                    <h2 className="text-3xl font-bold mb-6">{service.name} in {city.name}</h2>
+                    
+                    <div className="prose max-w-none">
+                      <p className="text-lg text-gray-700 mb-6">
+                        Duurzaam Wonen Nederland is uw specialist voor {service.name.toLowerCase()} in {city.name} en omgeving. 
+                        Met jarenlange ervaring en vakmanschap bieden wij hoogwaardige oplossingen die perfect passen bij uw woning.
+                      </p>
+                      
+                      <p className="mb-4">
+                        Wij begrijpen dat elke woning in {city.name} uniek is. Daarom bieden wij maatwerk 
+                        oplossingen die perfect aansluiten bij uw specifieke wensen en de architecturale stijl 
+                        van uw huis. Onze producten combineren kwaliteit, duurzaamheid en een stijlvol design.
+                      </p>
+                      <p className="mb-4">
+                        Als inwoner van {city.name} kunt u rekenen op onze lokale expertise en kennis 
+                        van de regionale bouwstijlen. Onze installatieteams werken snel, schoon en met oog 
+                        voor detail om zo min mogelijk overlast te veroorzaken tijdens de werkzaamheden.
+                      </p>
+                    </div>
+                  </AnimatedSection>
+                </div>
+                
+                {/* Sidebar */}
+                <div className="lg:col-span-1">
+                  <AnimatedSection animation="fade-in-left" delay={200}>
+                    <div className="sticky top-24 space-y-6">
+                      {/* Navigation Card */}
+                      {region && (
+                        <Card>
+                          <CardContent className="p-6">
+                            <h3 className="text-xl font-semibold mb-4">Navigatie</h3>
+                            <div className="space-y-3">
+                              <Button variant="outline" className="w-full justify-start" asChild>
+                                <Link to={`/${serviceSlug}/${regionSlug}`}>
+                                  <ArrowLeft className="mr-2 h-4 w-4" />
+                                  Terug naar {region.name}
+                                </Link>
+                              </Button>
+                              <Button variant="outline" className="w-full justify-start" asChild>
+                                <Link to={`/${serviceSlug}`}>
+                                  Alle {service.name}
+                                </Link>
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      )}
+                      
+                      {/* Location Info Card */}
+                      <Card>
+                        <CardContent className="p-6">
+                          <h3 className="text-xl font-semibold mb-4">Werkgebied {city.name}</h3>
+                          <div className="flex items-center gap-2 mb-4">
+                            <MapPin className="h-5 w-5 text-brand-green" />
+                            <span>{city.name} en omgeving</span>
+                          </div>
+                          <p className="text-gray-700 mb-6">
+                            Wij zijn actief in heel {city.name} en de omliggende gebieden. 
+                            Onze monteurs komen graag bij u langs voor een vrijblijvend adviesgesprek.
+                          </p>
+                          <Button className="w-full" asChild>
+                            <Link to="/offerte">
+                              <span>Plan een afspraak</span>
+                              <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                      
+                      {/* Contact Card */}
+                      <Card>
+                        <CardContent className="p-6">
+                          <h3 className="text-xl font-semibold mb-4">Direct contact</h3>
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <PhoneCall className="h-5 w-5 text-brand-green" />
+                              <span className="font-medium">053 303 0213</span>
+                            </div>
+                            <p className="text-gray-700">
+                              Heeft u vragen over {service.name.toLowerCase()} in {city.name}? 
+                              Neem direct contact met ons op voor meer informatie of een vrijblijvende offerte.
+                            </p>
+                            <Button variant="outline" className="w-full" asChild>
+                              <a href="tel:0533030213">
+                                <PhoneCall className="mr-2 h-4 w-4" />
+                                <span>Bel ons nu</span>
+                              </a>
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </AnimatedSection>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <ContactCTA />
+        </main>
+        
+        <Footer />
+        <ScrollToTop />
       </div>
     );
   }

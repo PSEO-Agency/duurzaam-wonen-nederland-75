@@ -449,6 +449,8 @@ export const useCityServiceNew = (citySlug: string, serviceSlug: string) => {
   return useQuery({
     queryKey: ['city-service-new', citySlug, serviceSlug],
     queryFn: async () => {
+      console.log('Fetching city service for:', { citySlug, serviceSlug });
+      
       const { data, error } = await supabase
         .from('city_services')
         .select(`
@@ -477,7 +479,12 @@ export const useCityServiceNew = (citySlug: string, serviceSlug: string) => {
         .eq('is_active', true)
         .maybeSingle();
       
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+      
+      console.log('Query result:', data);
       return data;
     },
     enabled: !!citySlug && !!serviceSlug
