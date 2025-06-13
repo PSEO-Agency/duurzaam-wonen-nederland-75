@@ -26,6 +26,33 @@ interface Feature {
   description: string;
 }
 
+// Type guards for validating benefit and feature objects
+const isBenefit = (item: any): item is Benefit => {
+  return typeof item === 'object' && 
+         item !== null && 
+         typeof item.id === 'string' && 
+         typeof item.text === 'string';
+};
+
+const isFeature = (item: any): item is Feature => {
+  return typeof item === 'object' && 
+         item !== null && 
+         typeof item.id === 'string' && 
+         typeof item.title === 'string' && 
+         typeof item.description === 'string';
+};
+
+// Helper functions to safely parse JSON arrays
+const parseBenefits = (value: any): Benefit[] => {
+  if (!isArray(value)) return [];
+  return value.filter(isBenefit);
+};
+
+const parseFeatures = (value: any): Feature[] => {
+  if (!isArray(value)) return [];
+  return value.filter(isFeature);
+};
+
 const CityServicePageNew: React.FC = () => {
   const { citySlug, serviceSlug, regionSlug } = useParams<{ 
     citySlug: string; 
@@ -102,9 +129,9 @@ const CityServicePageNew: React.FC = () => {
   const metaDescription = cityService.custom_meta_description || 
     `Specialistische ${serviceData.name} in ${cityData.name} op maat. Vraag nu een vrijblijvende offerte aan.`;
   
-  // Safely parse benefits and features with type guards
-  const benefits: Benefit[] = isArray(cityService.benefits) ? cityService.benefits as Benefit[] : [];
-  const features: Feature[] = isArray(cityService.features) ? cityService.features as Feature[] : [];
+  // Safely parse benefits and features with proper type validation
+  const benefits: Benefit[] = parseBenefits(cityService.benefits);
+  const features: Feature[] = parseFeatures(cityService.features);
 
   return (
     <div className="min-h-screen flex flex-col">
