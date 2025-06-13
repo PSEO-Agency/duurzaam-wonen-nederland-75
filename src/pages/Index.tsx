@@ -14,7 +14,6 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import CookieConsent from '@/components/CookieConsent';
 import LoadingScreen from '@/components/LoadingScreen';
-import { SearchProvider } from '@/contexts/SearchContext';
 
 const Index: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -86,7 +85,7 @@ const Index: React.FC = () => {
   }, []);
   
   return (
-    <SearchProvider>
+    <>
       {isLoading && <LoadingScreen />}
       <div className={`min-h-screen flex flex-col ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}`}>
         <Helmet>
@@ -178,7 +177,7 @@ const Index: React.FC = () => {
         <ScrollToTop />
         <CookieConsent />
       </div>
-    </SearchProvider>
+    </>
   );
 };
 
