@@ -10,12 +10,9 @@ const Index = lazy(() => import('./pages/Index'));
 const KunststofKozijnen = lazy(() => import('./pages/KunststofKozijnen'));
 const AluminiumKozijnen = lazy(() => import('./pages/AluminiumKozijnen'));
 const KunststofSchuifpuien = lazy(() => import('./pages/KunststofSchuifpuien'));
-const KunststofDeuren = lazy(() => import('./pages/KunststofDeuren'));
-const Gevelbekleding = lazy(() => import('./pages/Gevelbekleding'));
 const RentevrijeFinanciering = lazy(() => import('./pages/RentevrijeFinanciering'));
 const OverOns = lazy(() => import('./pages/OverOns'));
 const Contact = lazy(() => import('./pages/Contact'));
-const Projecten = lazy(() => import('./pages/Projecten'));
 const Offerte = lazy(() => import('./pages/Offerte'));
 const OfferteSuccess = lazy(() => import('./pages/OfferteSuccess'));
 const Werkwijze = lazy(() => import('./pages/Werkwijze'));
@@ -43,12 +40,9 @@ function App() {
               <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
               <Route path="/aluminium-kozijnen" element={<AluminiumKozijnen />} />
               <Route path="/kunststof-schuifpuien" element={<KunststofSchuifpuien />} />
-              <Route path="/kunststof-deuren" element={<KunststofDeuren />} />
-              <Route path="/gevelbekleding" element={<Gevelbekleding />} />
               <Route path="/rentevrije-financiering" element={<RentevrijeFinanciering />} />
               <Route path="/over-ons" element={<OverOns />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/projecten" element={<Projecten />} />
               <Route path="/offerte" element={<Offerte />} />
               <Route path="/offerte/success" element={<OfferteSuccess />} />
               <Route path="/werkwijze" element={<Werkwijze />} />
