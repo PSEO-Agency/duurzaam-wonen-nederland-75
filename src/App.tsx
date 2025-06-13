@@ -1,3 +1,4 @@
+
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -33,6 +34,7 @@ const KunststofKozijnenMonteur = lazy(() => import('./pages/vacatures/KunststofK
 const CommercieeelMedewerker = lazy(() => import('./pages/vacatures/CommercieeelMedewerker'));
 
 // Admin pages
+const AdminLogin = lazy(() => import('./pages/admin/Login'));
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
 const AdminPages = lazy(() => import('./pages/admin/Pages'));
 const AdminLocations = lazy(() => import('./pages/admin/Locations'));
@@ -81,7 +83,8 @@ function App() {
                 {/* Old URL structure for backward compatibility - /diensten/{city}/{service} */}
                 <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
                 
-                {/* Admin routes with AdminLayout wrapper */}
+                {/* Admin routes */}
+                <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin/*" element={<AdminLayout />}>
                   <Route path="dashboard" element={<AdminDashboard />} />
                   <Route path="pages" element={<AdminPages />} />
