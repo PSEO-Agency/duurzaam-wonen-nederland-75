@@ -1,3 +1,4 @@
+
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -40,8 +41,6 @@ const AdminServices = lazy(() => import('./pages/admin/Services'));
 const AdminCityServices = lazy(() => import('./pages/admin/CityServices'));
 const AdminProjects = lazy(() => import('./pages/admin/Projects'));
 
-const SitemapXml = lazy(() => import('./pages/SitemapXml'));
-
 const queryClient = new QueryClient();
 
 function App() {
@@ -67,7 +66,6 @@ function App() {
                 <Route path="/werkgebied" element={<Werkgebied />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/sitemap" element={<Sitemap />} />
-                <Route path="/sitemap.xml" element={<SitemapXml />} />
                 <Route path="/zoeken" element={<Zoeken />} />
                 
                 {/* Job detail routes */}
