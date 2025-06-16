@@ -4,48 +4,46 @@ import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
 import { Link } from 'react-router-dom';
-
-const projectsData = [
-  {
-    image: 'https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-    title: 'Renovatie jaren \'70 woning',
-    description: 'Complete verduurzaming met nieuwe kozijnen, gevelbekleding en hr++ glas',
-    location: 'Enschede',
-    slug: 'renovatie-jaren-70-woning'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1560184897-502a475f7a0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-    title: 'Dakkapel uitbouw',
-    description: 'Plaatsing dakkapel met kunststof kozijnen en triple glas voor maximale isolatie',
-    location: 'Zwolle',
-    slug: 'dakkapel-uitbouw'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-    title: 'Gevelrenovatie hoekwoning',
-    description: 'Vernieuwing complete gevel met Keralit gevelbekleding en nieuwe kozijnen',
-    location: 'Arnhem',
-    slug: 'gevelrenovatie-hoekwoning'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-    title: 'Zonwering installatie',
-    description: 'Slimme zonwering met app-bediening voor optimale klimaatbeheersing',
-    location: 'Hengelo',
-    slug: 'zonwering-installatie'
-  }
-];
+import { useProjects } from '@/hooks/useProjects';
 
 const Projects: React.FC = () => {
+  const { data: projects, isLoading } = useProjects();
   const [currentSlide, setCurrentSlide] = useState(0);
   
+  const featuredProjects = projects?.filter(project => project.is_featured) || [];
+  const displayProjects = featuredProjects.length > 0 ? featuredProjects : projects?.slice(0, 4) || [];
+  
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === projectsData.length - 1 ? 0 : prev + 1));
+    setCurrentSlide((prev) => (prev === displayProjects.length - 1 ? 0 : prev + 1));
   };
   
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? projectsData.length - 1 : prev - 1));
+    setCurrentSlide((prev) => (prev === 0 ? displayProjects.length - 1 : prev - 1));
   };
+
+  if (isLoading) {
+    return (
+      <section id="projects" className="section-container bg-gradient-to-b from-gray-50 to-white py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Array(4).fill(0).map((_, index) => (
+              <div key={index} className="glass-card h-full overflow-hidden animate-pulse">
+                <div className="h-64 bg-gray-200"></div>
+                <div className="p-4">
+                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+  
+  if (!displayProjects.length) {
+    return null;
+  }
   
   return (
     <section id="projects" className="section-container bg-gradient-to-b from-gray-50 to-white py-20">
@@ -81,13 +79,13 @@ const Projects: React.FC = () => {
         
         {/* Desktop Carousel */}
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {projectsData.map((project, index) => (
-            <AnimatedSection key={index} delay={index * 100}>
-              <Link to="/projecten/moderne-villa-kunststof-kozijnen" className="block h-full">
+          {displayProjects.map((project, index) => (
+            <AnimatedSection key={project.id} delay={index * 100}>
+              <Link to={`/projecten/${project.id}`} className="block h-full">
                 <div className="glass-card h-full overflow-hidden group cursor-pointer">
                   <div className="relative h-64 overflow-hidden">
                     <img 
-                      src={project.image} 
+                      src={project.featured_image || project.image_url || '/placeholder.svg'} 
                       alt={project.title} 
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
@@ -98,7 +96,7 @@ const Projects: React.FC = () => {
                     </div>
                   </div>
                   <div className="p-4">
-                    <p className="text-gray-600 text-sm">{project.description}</p>
+                    <p className="text-gray-600 text-sm line-clamp-2">{project.description}</p>
                   </div>
                 </div>
               </Link>
@@ -114,13 +112,13 @@ const Projects: React.FC = () => {
               transform: `translateX(-${currentSlide * 100}%)`,
             }}
           >
-            {projectsData.map((project, index) => (
-              <div key={index} className="w-full flex-shrink-0 px-4">
-                <Link to="/projecten/moderne-villa-kunststof-kozijnen" className="block h-full">
+            {displayProjects.map((project, index) => (
+              <div key={project.id} className="w-full flex-shrink-0 px-4">
+                <Link to={`/projecten/${project.id}`} className="block h-full">
                   <div className="glass-card h-full overflow-hidden">
                     <div className="relative h-64 overflow-hidden">
                       <img 
-                        src={project.image} 
+                        src={project.featured_image || project.image_url || '/placeholder.svg'} 
                         alt={project.title} 
                         className="w-full h-full object-cover"
                       />
@@ -131,7 +129,7 @@ const Projects: React.FC = () => {
                       </div>
                     </div>
                     <div className="p-4">
-                      <p className="text-gray-600 text-sm">{project.description}</p>
+                      <p className="text-gray-600 text-sm line-clamp-2">{project.description}</p>
                     </div>
                   </div>
                 </Link>
@@ -141,7 +139,7 @@ const Projects: React.FC = () => {
           
           {/* Pagination Dots */}
           <div className="flex justify-center mt-6 gap-2">
-            {projectsData.map((_, index) => (
+            {displayProjects.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}

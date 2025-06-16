@@ -39,6 +39,7 @@ const AdminPages = lazy(() => import('./pages/admin/Pages'));
 const AdminLocations = lazy(() => import('./pages/admin/Locations'));
 const AdminServices = lazy(() => import('./pages/admin/Services'));
 const AdminCityServices = lazy(() => import('./pages/admin/CityServices'));
+const AdminProjects = lazy(() => import('./pages/admin/Projects'));
 
 const queryClient = new QueryClient();
 
@@ -85,6 +86,7 @@ function App() {
                   <Route path="locations" element={<AdminLocations />} />
                   <Route path="services" element={<AdminServices />} />
                   <Route path="city-services" element={<AdminCityServices />} />
+                  <Route path="projects" element={<AdminProjects />} />
                 </Route>
               </Routes>
             </Suspense>
