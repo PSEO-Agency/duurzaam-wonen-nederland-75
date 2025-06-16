@@ -53,7 +53,7 @@ export default defineConfig(({ mode }) => {
           headless: true,
         },
         // Post-process the rendered HTML
-        postProcess: (renderedRoute) => {
+        postProcess: (renderedRoute: any) => {
           // Add any post-processing logic here
           return renderedRoute;
         },
