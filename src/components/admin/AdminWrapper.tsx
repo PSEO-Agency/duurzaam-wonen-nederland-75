@@ -10,14 +10,8 @@ interface AdminWrapperProps {
 const AdminWrapper: React.FC<AdminWrapperProps> = ({ children }) => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
-  const isLoginRoute = location.pathname === '/admin/login';
   
-  // For admin login route, don't show the admin bar
-  if (isLoginRoute) {
-    return <>{children}</>;
-  }
-  
-  // For other admin routes, don't add the admin bar as AdminLayout handles it
+  // For admin routes, don't add the admin bar as AdminLayout handles it
   if (isAdminRoute) {
     return <>{children}</>;
   }
