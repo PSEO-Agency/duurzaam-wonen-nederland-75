@@ -252,9 +252,30 @@ const Sitemap: React.FC = () => {
         <div className="container mx-auto px-4">
           <AnimatedSection animation="fade-in">
             <h1 className="text-3xl md:text-4xl font-bold mb-6">Sitemap</h1>
-            <p className="text-gray-600 mb-12 max-w-3xl">
+            <p className="text-gray-600 mb-8 max-w-3xl">
               Hieronder vindt u een overzicht van alle pagina's op onze website. Gebruik deze sitemap om snel te navigeren naar de informatie die u zoekt.
             </p>
+            
+            {/* XML Sitemap Link */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+              <div className="flex items-center gap-3">
+                <ListTree className="h-5 w-5 text-blue-600" />
+                <div>
+                  <h3 className="font-semibold text-blue-900">XML Sitemap voor zoekmachines</h3>
+                  <p className="text-sm text-blue-700 mb-2">
+                    Voor zoekmachines en automatische indexering is er ook een XML sitemap beschikbaar.
+                  </p>
+                  <a 
+                    href="/sitemap.xml" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline text-sm font-medium"
+                  >
+                    Bekijk XML Sitemap →
+                  </a>
+                </div>
+              </div>
+            </div>
           </AnimatedSection>
           
           <AnimatedSection animation="fade-in" delay={100}>

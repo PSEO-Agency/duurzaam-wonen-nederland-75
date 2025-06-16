@@ -22,6 +22,8 @@ const Vacatures = lazy(() => import('./pages/over-ons/Vacatures'));
 const Werkgebied = lazy(() => import('./pages/Werkgebied'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Sitemap = lazy(() => import('./pages/Sitemap'));
+const SitemapXML = lazy(() => import('./pages/SitemapXML'));
+const RobotsTxt = lazy(() => import('./pages/RobotsTxt'));
 const Zoeken = lazy(() => import('./pages/Zoeken'));
 const CityServicePage = lazy(() => import('./pages/CityServicePage'));
 
@@ -51,6 +53,10 @@ function App() {
           <AdminWrapper>
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
+                {/* SEO Routes */}
+                <Route path="/sitemap.xml" element={<SitemapXML />} />
+                <Route path="/robots.txt" element={<RobotsTxt />} />
+                
                 {/* Main pages */}
                 <Route path="/" element={<Index />} />
                 <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
