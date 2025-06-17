@@ -17,13 +17,13 @@ import ImageUpload from '@/components/form/ImageUpload';
 interface Project {
   id: string;
   title: string;
-  description: string;
-  location: string;
-  project_type: string;
-  completion_date: string;
-  image_url: string;
-  featured_image: string;
-  gallery_images: string[];
+  description: string | null;
+  location: string | null;
+  project_type: string | null;
+  completion_date: string | null;
+  image_url: string | null;
+  featured_image: string | null;
+  gallery_images: any;
   is_featured: boolean;
   is_active: boolean;
   sort_order: number;
@@ -64,6 +64,7 @@ const Projects: React.FC = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-projects'] });
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
       setIsCreateDialogOpen(false);
       toast({
         title: "Project aangemaakt",
@@ -71,6 +72,7 @@ const Projects: React.FC = () => {
       });
     },
     onError: (error) => {
+      console.error('Create project error:', error);
       toast({
         title: "Fout bij aanmaken",
         description: `Er is een fout opgetreden: ${error.message}`,
@@ -93,6 +95,7 @@ const Projects: React.FC = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-projects'] });
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
       setIsEditDialogOpen(false);
       setSelectedProject(null);
       toast({
@@ -101,6 +104,7 @@ const Projects: React.FC = () => {
       });
     },
     onError: (error) => {
+      console.error('Update project error:', error);
       toast({
         title: "Fout bij bijwerken",
         description: `Er is een fout opgetreden: ${error.message}`,
@@ -120,12 +124,14 @@ const Projects: React.FC = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-projects'] });
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
       toast({
         title: "Project verwijderd",
         description: "Het project is succesvol verwijderd.",
       });
     },
     onError: (error) => {
+      console.error('Delete project error:', error);
       toast({
         title: "Fout bij verwijderen",
         description: `Er is een fout opgetreden: ${error.message}`,
@@ -156,10 +162,15 @@ const Projects: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       
-      // Clean up the data before submitting
+      // Clean up the data before submitting, convert empty strings to null
       const cleanedData = {
         ...formData,
+        description: formData.description.trim() || null,
+        location: formData.location.trim() || null,
+        project_type: formData.project_type.trim() || null,
         completion_date: formData.completion_date || null,
+        image_url: formData.image_url.trim() || null,
+        featured_image: formData.featured_image.trim() || null,
       };
       
       onSubmit(cleanedData);
@@ -334,7 +345,7 @@ const Projects: React.FC = () => {
             <CardHeader className="pb-2">
               <CardTitle className="text-lg">{project.title}</CardTitle>
               <CardDescription className="line-clamp-2">
-                {project.description}
+                {project.description || 'Geen beschrijving'}
               </CardDescription>
             </CardHeader>
             <CardContent>

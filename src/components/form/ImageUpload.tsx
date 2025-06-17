@@ -20,7 +20,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   value,
   onChange,
   placeholder,
-  bucketName = 'product-images'
+  bucketName = 'project-images'
 }) => {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
