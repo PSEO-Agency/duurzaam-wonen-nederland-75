@@ -15,16 +15,17 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useProjects } from '@/hooks/useProjects';
 
+// Update the Project interface to match Supabase types
 interface Project {
   id: string;
   title: string;
-  description: string;
-  location: string;
-  project_type: string;
-  completion_date: string;
-  image_url: string;
-  featured_image: string;
-  gallery_images: string[];
+  description: string | null;
+  location: string | null;
+  project_type: string | null;
+  completion_date: string | null;
+  image_url: string | null;
+  featured_image: string | null;
+  gallery_images: any; // Using any to match Json type from Supabase
   is_featured: boolean;
   is_active: boolean;
   sort_order: number;
