@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, MapPin } from 'lucide-react';
@@ -144,7 +143,7 @@ const Werkgebied: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-semibold mb-3">Consistente kwaliteit</h3>
                   <p className="text-gray-700">
-                    Of u nu in Groningen of Maastricht woont, u kunt rekenen op dezelfde hoge kwaliteit producten en installatie. 
+                    Of u nu in Groningen of Enschede woont, u kunt rekenen op dezelfde hoge kwaliteit producten en installatie. 
                     Onze teams werken volgens strikte kwaliteitsnormen in heel Nederland.
                   </p>
                 </div>
