@@ -42,6 +42,8 @@ const AdminLocations = lazy(() => import('./pages/admin/Locations'));
 const AdminServices = lazy(() => import('./pages/admin/Services'));
 const AdminCityServices = lazy(() => import('./pages/admin/CityServices'));
 const AdminProjects = lazy(() => import('./pages/admin/Projects'));
+const AdminProducts = lazy(() => import('./pages/admin/Products'));
+const AdminProductEditor = lazy(() => import('./pages/admin/ProductEditor'));
 
 const queryClient = new QueryClient();
 
@@ -89,6 +91,9 @@ function App() {
                 <Route path="/admin/*" element={<AdminLayout />}>
                   <Route path="dashboard" element={<AdminDashboard />} />
                   <Route path="pages" element={<AdminPages />} />
+                  <Route path="products" element={<AdminProducts />} />
+                  <Route path="products/create" element={<AdminProductEditor />} />
+                  <Route path="products/edit/:productId" element={<AdminProductEditor />} />
                   <Route path="locations" element={<AdminLocations />} />
                   <Route path="services" element={<AdminServices />} />
                   <Route path="city-services" element={<AdminCityServices />} />

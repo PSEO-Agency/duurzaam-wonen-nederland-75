@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, FileText, MapPin, Settings, Building2, Image } from 'lucide-react';
+import { LayoutDashboard, FileText, MapPin, Settings, Building2, Image, Package } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const AdminSidebar: React.FC = () => {
@@ -17,6 +17,11 @@ const AdminSidebar: React.FC = () => {
       title: 'Pagina\'s',
       href: '/admin/pages',
       icon: FileText
+    },
+    {
+      title: 'Products',
+      href: '/admin/products',
+      icon: Package
     },
     {
       title: 'Locaties',
