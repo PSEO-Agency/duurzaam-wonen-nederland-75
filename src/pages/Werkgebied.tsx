@@ -56,7 +56,7 @@ const Werkgebied: React.FC = () => {
                   Bij Duurzaam Wonen Nederland zijn we trots op onze landelijke dekking. Onze professionele teams zijn actief in elke provincie van Nederland, wat betekent dat we onze hoogwaardige duurzame oplossingen kunnen leveren en installeren, waar u ook woont.
                 </p>
                 <p className="text-lg text-gray-700 mb-4">
-                  Of u nu in een drukke stad of een rustig dorp woont, onze experts komen bij u langs voor een vrijblijvend adviesgesprek, nauwkeurige meting en professionele installatie. Zo garanderen we dezelfde uitstekende service en kwaliteit in heel Nederland.
+                  Of u nu in Groningen of Enschede woont, u kunt rekenen op dezelfde hoge kwaliteit producten en installatie. Onze teams werken volgens strikte kwaliteitsnormen in heel Nederland.
                 </p>
                 <p className="text-lg text-gray-700 mb-6">
                   Bekijk hieronder de provincies en steden waar we actief zijn, en ontdek of we ook in uw regio werken. Heeft u vragen over uw specifieke locatie? Neem dan gerust contact met ons op.
@@ -67,12 +67,6 @@ const Werkgebied: React.FC = () => {
                       <MapPin className="h-4 w-4 text-brand-green" />
                     </div>
                     <span className="font-medium">Hoofdkantoor: Enschede</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="bg-brand-green/20 p-1 rounded-full">
-                      <MapPin className="h-4 w-4 text-brand-green" />
-                    </div>
-                    <span className="font-medium">Regio: Heel Nederland</span>
                   </div>
                 </div>
               </AnimatedSection>
