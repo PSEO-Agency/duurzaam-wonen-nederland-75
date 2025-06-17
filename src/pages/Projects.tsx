@@ -13,19 +13,38 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { projects, getProjectCategories } from '@/data/projects';
-import { Project, ProjectCategory } from '@/types/project';
+import { useProjects } from '@/hooks/useProjects';
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  project_type: string;
+  completion_date: string;
+  image_url: string;
+  featured_image: string;
+  gallery_images: string[];
+  is_featured: boolean;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
 
 const Projects: React.FC = () => {
-  const categories = getProjectCategories();
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
+  const { data: projects = [], isLoading } = useProjects();
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'all'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [sortOption, setSortOption] = useState<'newest' | 'oldest' | 'az' | 'za'>('newest');
 
-  // All unique tags from projects
-  const allTags = Array.from(new Set(projects.flatMap(project => project.tags)));
+  // Get unique categories and tags
+  const categories = Array.from(new Set(projects.map(project => project.project_type).filter(Boolean)));
+  const allTags = Array.from(new Set(projects.flatMap(project => 
+    project.project_type ? [project.project_type] : []
+  )));
 
   // Handle filtering and sorting
   useEffect(() => {
@@ -37,31 +56,31 @@ const Projects: React.FC = () => {
       result = result.filter(
         project => 
           project.title.toLowerCase().includes(query) || 
-          project.description.toLowerCase().includes(query) ||
-          project.location.toLowerCase().includes(query) ||
-          project.tags.some(tag => tag.toLowerCase().includes(query))
+          (project.description && project.description.toLowerCase().includes(query)) ||
+          (project.location && project.location.toLowerCase().includes(query)) ||
+          (project.project_type && project.project_type.toLowerCase().includes(query))
       );
     }
     
     // Filter by category
     if (selectedCategory !== 'all') {
-      result = result.filter(project => project.category === selectedCategory);
+      result = result.filter(project => project.project_type === selectedCategory);
     }
     
     // Filter by selected tags
     if (selectedTags.length > 0) {
       result = result.filter(project => 
-        selectedTags.some(tag => project.tags.includes(tag))
+        selectedTags.some(tag => project.project_type === tag)
       );
     }
     
     // Sort results
     switch (sortOption) {
       case 'newest':
-        result = result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        result = result.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
         break;
       case 'oldest':
-        result = result.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+        result = result.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
         break;
       case 'az':
         result = result.sort((a, b) => a.title.localeCompare(b.title));
@@ -72,7 +91,7 @@ const Projects: React.FC = () => {
     }
     
     setFilteredProjects(result);
-  }, [searchQuery, selectedCategory, selectedTags, sortOption]);
+  }, [projects, searchQuery, selectedCategory, selectedTags, sortOption]);
 
   const handleTagToggle = (tag: string) => {
     setSelectedTags(prev => 
@@ -88,6 +107,28 @@ const Projects: React.FC = () => {
     setSelectedTags([]);
     setSortOption('newest');
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow pt-24">
+          <div className="container mx-auto px-4 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array(6).fill(0).map((_, index) => (
+                <div key={index} className="animate-pulse">
+                  <div className="bg-gray-200 h-48 rounded-lg mb-4"></div>
+                  <div className="bg-gray-200 h-4 rounded mb-2"></div>
+                  <div className="bg-gray-200 h-3 rounded"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -172,27 +213,29 @@ const Projects: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold mb-3 flex items-center">
-                      <Tag className="h-4 w-4 mr-2" />
-                      Tags
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {allTags.map((tag) => (
-                        <Badge 
-                          key={tag} 
-                          variant={selectedTags.includes(tag) ? "default" : "outline"}
-                          className="cursor-pointer"
-                          onClick={() => handleTagToggle(tag)}
-                        >
-                          {tag}
-                          {selectedTags.includes(tag) && (
-                            <X className="ml-1 h-3 w-3" />
-                          )}
-                        </Badge>
-                      ))}
+                  {allTags.length > 0 && (
+                    <div className="mb-6">
+                      <h3 className="text-lg font-semibold mb-3 flex items-center">
+                        <Tag className="h-4 w-4 mr-2" />
+                        Tags
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {allTags.map((tag) => (
+                          <Badge 
+                            key={tag} 
+                            variant={selectedTags.includes(tag) ? "default" : "outline"}
+                            className="cursor-pointer"
+                            onClick={() => handleTagToggle(tag)}
+                          >
+                            {tag}
+                            {selectedTags.includes(tag) && (
+                              <X className="ml-1 h-3 w-3" />
+                            )}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
                   
                   <div className="mb-6">
                     <h3 className="text-lg font-semibold mb-3 flex items-center">
@@ -229,15 +272,6 @@ const Projects: React.FC = () => {
                   <h2 className="text-2xl font-bold">
                     {filteredProjects.length} Projecten gevonden
                   </h2>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-500">Weergave:</span>
-                    <Tabs defaultValue="grid" className="w-[200px]">
-                      <TabsList>
-                        <TabsTrigger value="grid">Grid</TabsTrigger>
-                        <TabsTrigger value="list">Lijst</TabsTrigger>
-                      </TabsList>
-                    </Tabs>
-                  </div>
                 </div>
                 
                 {filteredProjects.length === 0 ? (
@@ -247,104 +281,54 @@ const Projects: React.FC = () => {
                     <Button onClick={clearFilters}>Filters wissen</Button>
                   </div>
                 ) : (
-                  <Tabs defaultValue="grid">
-                    <TabsContent value="grid" className="mt-0">
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {filteredProjects.map((project) => (
-                          <Link to={`/projecten/${project.slug}`} key={project.id} className="group">
-                            <Card className="h-full overflow-hidden hover:shadow-md transition-shadow">
-                              <div className="relative h-48 overflow-hidden">
-                                <img 
-                                  src={project.featuredImage} 
-                                  alt={project.title} 
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                />
-                                <Badge className="absolute top-3 right-3 capitalize">
-                                  {project.category}
-                                </Badge>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredProjects.map((project) => (
+                      <Link to={`/projecten/${project.id}`} key={project.id} className="group">
+                        <Card className="h-full overflow-hidden hover:shadow-md transition-shadow">
+                          <div className="relative h-48 overflow-hidden">
+                            <img 
+                              src={project.featured_image || project.image_url || '/placeholder.svg'} 
+                              alt={project.title} 
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            {project.project_type && (
+                              <Badge className="absolute top-3 right-3 capitalize">
+                                {project.project_type}
+                              </Badge>
+                            )}
+                          </div>
+                          <CardHeader className="pb-2">
+                            <CardTitle className="text-xl group-hover:text-brand-green transition-colors">
+                              {project.title}
+                            </CardTitle>
+                            {project.location && (
+                              <CardDescription className="flex items-center text-sm">
+                                <MapPin className="h-4 w-4 mr-1" />
+                                {project.location}
+                              </CardDescription>
+                            )}
+                          </CardHeader>
+                          <CardContent className="pb-2">
+                            <p className="text-gray-600 line-clamp-2">{project.description}</p>
+                          </CardContent>
+                          <CardFooter className="flex justify-between items-center pt-0">
+                            {project.completion_date && (
+                              <div className="flex items-center text-sm text-gray-500">
+                                <Calendar className="h-4 w-4 mr-1" />
+                                {new Date(project.completion_date).toLocaleDateString('nl-NL', {
+                                  year: 'numeric',
+                                  month: 'short'
+                                })}
                               </div>
-                              <CardHeader className="pb-2">
-                                <CardTitle className="text-xl group-hover:text-brand-green transition-colors">
-                                  {project.title}
-                                </CardTitle>
-                                <CardDescription className="flex items-center text-sm">
-                                  <MapPin className="h-4 w-4 mr-1" />
-                                  {project.location}
-                                </CardDescription>
-                              </CardHeader>
-                              <CardContent className="pb-2">
-                                <p className="text-gray-600 line-clamp-2">{project.shortDescription}</p>
-                              </CardContent>
-                              <CardFooter className="flex justify-between items-center pt-0">
-                                <div className="flex items-center text-sm text-gray-500">
-                                  <Calendar className="h-4 w-4 mr-1" />
-                                  {new Date(project.completionDate).toLocaleDateString('nl-NL', {
-                                    year: 'numeric',
-                                    month: 'short'
-                                  })}
-                                </div>
-                                <Button variant="ghost" size="sm" className="text-brand-green">
-                                  Bekijk project
-                                </Button>
-                              </CardFooter>
-                            </Card>
-                          </Link>
-                        ))}
-                      </div>
-                    </TabsContent>
-                    
-                    <TabsContent value="list" className="mt-0">
-                      <div className="space-y-6">
-                        {filteredProjects.map((project) => (
-                          <Link to={`/projecten/${project.slug}`} key={project.id} className="group">
-                            <Card className="overflow-hidden hover:shadow-md transition-shadow">
-                              <div className="flex flex-col md:flex-row">
-                                <div className="md:w-1/3 relative">
-                                  <img 
-                                    src={project.featuredImage} 
-                                    alt={project.title} 
-                                    className="w-full h-56 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                  />
-                                  <Badge className="absolute top-3 right-3 capitalize">
-                                    {project.category}
-                                  </Badge>
-                                </div>
-                                <div className="md:w-2/3 p-6">
-                                  <h3 className="text-xl font-semibold mb-2 group-hover:text-brand-green transition-colors">
-                                    {project.title}
-                                  </h3>
-                                  <div className="flex items-center text-sm text-gray-500 mb-3">
-                                    <MapPin className="h-4 w-4 mr-1" />
-                                    {project.location}
-                                    <Separator orientation="vertical" className="mx-2 h-4" />
-                                    <Calendar className="h-4 w-4 mr-1" />
-                                    {new Date(project.completionDate).toLocaleDateString('nl-NL', {
-                                      year: 'numeric',
-                                      month: 'short'
-                                    })}
-                                  </div>
-                                  <p className="text-gray-600 mb-4">{project.shortDescription}</p>
-                                  <div className="flex flex-wrap gap-2 mb-4">
-                                    {project.tags.slice(0, 3).map((tag) => (
-                                      <Badge key={tag} variant="outline">{tag}</Badge>
-                                    ))}
-                                    {project.tags.length > 3 && (
-                                      <Badge variant="outline">+{project.tags.length - 3}</Badge>
-                                    )}
-                                  </div>
-                                  <div className="flex justify-end">
-                                    <Button size="sm" className="bg-brand-green hover:bg-brand-green-dark">
-                                      Bekijk project
-                                    </Button>
-                                  </div>
-                                </div>
-                              </div>
-                            </Card>
-                          </Link>
-                        ))}
-                      </div>
-                    </TabsContent>
-                  </Tabs>
+                            )}
+                            <Button variant="ghost" size="sm" className="text-brand-green">
+                              Bekijk project
+                            </Button>
+                          </CardFooter>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
                 )}
               </div>
             </div>

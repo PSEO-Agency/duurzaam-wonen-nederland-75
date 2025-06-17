@@ -10,41 +10,102 @@ import CookieConsent from '@/components/CookieConsent';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Separator } from '@/components/ui/separator';
-import { getProjectBySlug, getRelatedProjects } from '@/data/projects';
-import { Project } from '@/types/project';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  project_type: string;
+  completion_date: string;
+  image_url: string;
+  featured_image: string;
+  gallery_images: string[];
+  is_featured: boolean;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
 
 const ProjectDetail: React.FC = () => {
-  const { projectSlug } = useParams<{ projectSlug: string }>();
+  const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
-  const [project, setProject] = useState<Project | null>(null);
-  const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
   const [activeImage, setActiveImage] = useState<string>('');
   
-  useEffect(() => {
-    if (projectSlug) {
-      const foundProject = getProjectBySlug(projectSlug);
-      if (foundProject) {
-        setProject(foundProject);
-        setActiveImage(foundProject.featuredImage);
-        
-        // Get related projects
-        const related = getRelatedProjects(foundProject.id, foundProject.category);
-        setRelatedProjects(related);
-      } else {
-        navigate('/projecten');
-      }
-    }
-  }, [projectSlug, navigate]);
+  const { data: project, isLoading, error } = useQuery({
+    queryKey: ['project', projectId],
+    queryFn: async () => {
+      if (!projectId) throw new Error('Project ID is required');
+      
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('id', projectId)
+        .eq('is_active', true)
+        .single();
+      
+      if (error) throw error;
+      return data as Project;
+    },
+    enabled: !!projectId
+  });
+
+  const { data: relatedProjects = [] } = useQuery({
+    queryKey: ['related-projects', project?.project_type],
+    queryFn: async () => {
+      if (!project) return [];
+      
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('is_active', true)
+        .eq('project_type', project.project_type)
+        .neq('id', project.id)
+        .limit(3);
+      
+      if (error) throw error;
+      return data as Project[];
+    },
+    enabled: !!project
+  });
   
-  if (!project) {
+  useEffect(() => {
+    if (project) {
+      setActiveImage(project.featured_image || project.image_url || '');
+    }
+  }, [project]);
+
+  useEffect(() => {
+    if (error) {
+      navigate('/projecten');
+    }
+  }, [error, navigate]);
+  
+  if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow pt-24 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Project wordt geladen...</h1>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!project) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow pt-24 flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">Project niet gevonden</h1>
             <Button asChild variant="outline">
               <Link to="/projecten">Terug naar projecten</Link>
             </Button>
@@ -54,12 +115,18 @@ const ProjectDetail: React.FC = () => {
       </div>
     );
   }
+
+  const galleryImages = [
+    ...(project.featured_image ? [project.featured_image] : []),
+    ...(project.image_url ? [project.image_url] : []),
+    ...(project.gallery_images || [])
+  ].filter((img, index, arr) => arr.indexOf(img) === index); // Remove duplicates
   
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>{project.title} | Duurzaam Wonen Nederland</title>
-        <meta name="description" content={project.shortDescription} />
+        <meta name="description" content={project.description || `Project ${project.title} in ${project.location}`} />
       </Helmet>
       <Navbar />
       <main className="flex-grow pt-24">
@@ -89,26 +156,28 @@ const ProjectDetail: React.FC = () => {
                 </Button>
                 <h1 className="text-3xl md:text-4xl font-bold mb-2">{project.title}</h1>
                 <div className="flex flex-wrap items-center gap-4 text-gray-600">
-                  <div className="flex items-center">
-                    <MapPin className="h-4 w-4 mr-1 text-brand-green" />
-                    {project.location}
-                  </div>
-                  <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-1 text-brand-green" />
-                    {new Date(project.completionDate).toLocaleDateString('nl-NL', {
-                      year: 'numeric',
-                      month: 'long'
-                    })}
-                  </div>
-                  <div className="flex items-center">
-                    <Users className="h-4 w-4 mr-1 text-brand-green" />
-                    {project.clientName}
-                  </div>
+                  {project.location && (
+                    <div className="flex items-center">
+                      <MapPin className="h-4 w-4 mr-1 text-brand-green" />
+                      {project.location}
+                    </div>
+                  )}
+                  {project.completion_date && (
+                    <div className="flex items-center">
+                      <Calendar className="h-4 w-4 mr-1 text-brand-green" />
+                      {new Date(project.completion_date).toLocaleDateString('nl-NL', {
+                        year: 'numeric',
+                        month: 'long'
+                      })}
+                    </div>
+                  )}
                 </div>
               </div>
-              <Badge className="text-sm capitalize self-start md:self-auto">
-                {project.category}
-              </Badge>
+              {project.project_type && (
+                <Badge className="text-sm capitalize self-start md:self-auto">
+                  {project.project_type}
+                </Badge>
+              )}
             </div>
           </div>
         </section>
@@ -119,30 +188,34 @@ const ProjectDetail: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Gallery */}
               <div className="lg:col-span-2">
-                <div className="mb-4 rounded-lg overflow-hidden aspect-video">
-                  <img 
-                    src={activeImage} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="grid grid-cols-5 gap-2">
-                  {project.images.map((image, index) => (
-                    <div 
-                      key={index}
-                      className={`rounded-md overflow-hidden cursor-pointer border-2 ${
-                        activeImage === image ? 'border-brand-green' : 'border-transparent'
-                      }`}
-                      onClick={() => setActiveImage(image)}
-                    >
-                      <img 
-                        src={image} 
-                        alt={`${project.title} - afbeelding ${index + 1}`} 
-                        className="w-full h-20 object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
+                {activeImage && (
+                  <div className="mb-4 rounded-lg overflow-hidden aspect-video">
+                    <img 
+                      src={activeImage} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+                {galleryImages.length > 1 && (
+                  <div className="grid grid-cols-5 gap-2">
+                    {galleryImages.map((image, index) => (
+                      <div 
+                        key={index}
+                        className={`rounded-md overflow-hidden cursor-pointer border-2 ${
+                          activeImage === image ? 'border-brand-green' : 'border-transparent'
+                        }`}
+                        onClick={() => setActiveImage(image)}
+                      >
+                        <img 
+                          src={image} 
+                          alt={`${project.title} - afbeelding ${index + 1}`} 
+                          className="w-full h-20 object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               
               {/* Project Details Sidebar */}
@@ -152,38 +225,32 @@ const ProjectDetail: React.FC = () => {
                     <CardTitle>Project Details</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">Categorie</h3>
-                      <p className="capitalize">{project.category}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">Locatie</h3>
-                      <p>{project.location}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">Opdrachtgever</h3>
-                      <p>{project.clientName}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">Opleverdatum</h3>
-                      <p>{new Date(project.completionDate).toLocaleDateString('nl-NL', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500">Tags</h3>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {project.tags.map(tag => (
-                          <Badge key={tag} variant="outline">{tag}</Badge>
-                        ))}
+                    {project.project_type && (
+                      <div>
+                        <h3 className="text-sm font-medium text-gray-500">Categorie</h3>
+                        <p className="capitalize">{project.project_type}</p>
                       </div>
-                    </div>
+                    )}
+                    {project.location && (
+                      <div>
+                        <h3 className="text-sm font-medium text-gray-500">Locatie</h3>
+                        <p>{project.location}</p>
+                      </div>
+                    )}
+                    {project.completion_date && (
+                      <div>
+                        <h3 className="text-sm font-medium text-gray-500">Opleverdatum</h3>
+                        <p>{new Date(project.completion_date).toLocaleDateString('nl-NL', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}</p>
+                      </div>
+                    )}
                   </CardContent>
                   <CardFooter>
-                    <Button className="w-full bg-brand-green hover:bg-brand-green-dark">
-                      Soortgelijk project aanvragen
+                    <Button className="w-full bg-brand-green hover:bg-brand-green-dark" asChild>
+                      <Link to="/offerte">Soortgelijk project aanvragen</Link>
                     </Button>
                   </CardFooter>
                 </Card>
@@ -193,12 +260,16 @@ const ProjectDetail: React.FC = () => {
         </section>
         
         {/* Project Description */}
-        <section className="py-8 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-bold mb-6">Projectbeschrijving</h2>
-            <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: project.description }} />
-          </div>
-        </section>
+        {project.description && (
+          <section className="py-8 bg-white">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl font-bold mb-6">Projectbeschrijving</h2>
+              <div className="prose prose-lg max-w-none">
+                <p>{project.description}</p>
+              </div>
+            </div>
+          </section>
+        )}
         
         {/* Related Projects */}
         {relatedProjects.length > 0 && (
@@ -207,29 +278,33 @@ const ProjectDetail: React.FC = () => {
               <h2 className="text-2xl font-bold mb-8">Gerelateerde Projecten</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedProjects.map((relatedProject) => (
-                  <Link to={`/projecten/${relatedProject.slug}`} key={relatedProject.id} className="group">
+                  <Link to={`/projecten/${relatedProject.id}`} key={relatedProject.id} className="group">
                     <Card className="h-full overflow-hidden hover:shadow-md transition-shadow">
                       <div className="relative h-48 overflow-hidden">
                         <img 
-                          src={relatedProject.featuredImage} 
+                          src={relatedProject.featured_image || relatedProject.image_url || '/placeholder.svg'} 
                           alt={relatedProject.title} 
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
-                        <Badge className="absolute top-3 right-3 capitalize">
-                          {relatedProject.category}
-                        </Badge>
+                        {relatedProject.project_type && (
+                          <Badge className="absolute top-3 right-3 capitalize">
+                            {relatedProject.project_type}
+                          </Badge>
+                        )}
                       </div>
                       <CardHeader className="pb-2">
                         <CardTitle className="text-xl group-hover:text-brand-green transition-colors">
                           {relatedProject.title}
                         </CardTitle>
-                        <CardDescription className="flex items-center text-sm">
-                          <MapPin className="h-4 w-4 mr-1" />
-                          {relatedProject.location}
-                        </CardDescription>
+                        {relatedProject.location && (
+                          <CardDescription className="flex items-center text-sm">
+                            <MapPin className="h-4 w-4 mr-1" />
+                            {relatedProject.location}
+                          </CardDescription>
+                        )}
                       </CardHeader>
                       <CardContent className="pb-2">
-                        <p className="text-gray-600 line-clamp-2">{relatedProject.shortDescription}</p>
+                        <p className="text-gray-600 line-clamp-2">{relatedProject.description}</p>
                       </CardContent>
                       <CardFooter className="pt-0">
                         <Button variant="ghost" size="sm" className="text-brand-green">

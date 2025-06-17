@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { Plus, Edit, Trash2, Eye, Calendar, MapPin } from 'lucide-react';
+import { Plus, Edit, Trash2, Calendar, MapPin } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import ImageUpload from '@/components/form/ImageUpload';
 
@@ -155,7 +155,14 @@ const Projects: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      onSubmit(formData);
+      
+      // Clean up the data before submitting
+      const cleanedData = {
+        ...formData,
+        completion_date: formData.completion_date || null,
+      };
+      
+      onSubmit(cleanedData);
     };
 
     return (
@@ -215,7 +222,7 @@ const Projects: React.FC = () => {
               id="sort_order"
               type="number"
               value={formData.sort_order}
-              onChange={(e) => setFormData(prev => ({ ...prev, sort_order: parseInt(e.target.value) }))}
+              onChange={(e) => setFormData(prev => ({ ...prev, sort_order: parseInt(e.target.value) || 0 }))}
             />
           </div>
         </div>
