@@ -17,7 +17,7 @@ Disallow: /api/
 Crawl-delay: 1`;
 
   useEffect(() => {
-    document.contentType = 'text/plain';
+    // Set document title for this page
     document.title = 'Robots.txt';
   }, []);
 

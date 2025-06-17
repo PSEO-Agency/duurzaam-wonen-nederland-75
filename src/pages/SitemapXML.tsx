@@ -24,11 +24,9 @@ const SitemapXML: React.FC = () => {
     generateSitemap();
   }, []);
 
-  // Set content type to XML
+  // Set document title when sitemap is loaded
   useEffect(() => {
     if (sitemapXML && !isLoading) {
-      document.contentType = 'application/xml';
-      // Set the document title to indicate this is XML
       document.title = 'Sitemap XML';
     }
   }, [sitemapXML, isLoading]);
