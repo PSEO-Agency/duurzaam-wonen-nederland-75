@@ -14,6 +14,7 @@ import Footer from '@/components/Footer';
 import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
 import ContactCTA from '@/components/ContactCTA';
 import ProductDetails from '@/components/kunststof-kozijnen/ProductDetails';
+import { Link } from 'react-router-dom';
 
 interface ColorOption {
   name: string;
@@ -157,6 +158,30 @@ const ColorOptions: React.FC = () => {
                         <Card>
                           <CardContent className="p-6">
                             <h3 className="text-xl font-semibold mb-4 flex items-center">
+                              <Layers className="h-5 w-5 mr-2 text-brand-green" />
+                              Kies profiel
+                            </h3>
+                            
+                            <Select value={selectedProfile} onValueChange={setSelectedProfile}>
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Selecteer een profiel" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {profileOptions.map((profile) => (
+                                  <SelectItem key={profile.id} value={profile.id}>
+                                    {profile.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </CardContent>
+                        </Card>
+                      </AnimatedSection>
+
+                      <AnimatedSection animation="fade-in" delay={100}>
+                        <Card>
+                          <CardContent className="p-6">
+                            <h3 className="text-xl font-semibold mb-4 flex items-center">
                               <Palette className="h-5 w-5 mr-2 text-brand-green" />
                               Kies een kleur
                             </h3>
@@ -262,36 +287,12 @@ const ColorOptions: React.FC = () => {
                           </CardContent>
                         </Card>
                       </AnimatedSection>
-
-                      <AnimatedSection animation="fade-in" delay={100}>
-                        <Card>
-                          <CardContent className="p-6">
-                            <h3 className="text-xl font-semibold mb-4 flex items-center">
-                              <Layers className="h-5 w-5 mr-2 text-brand-green" />
-                              Kies profiel
-                            </h3>
-                            
-                            <Select value={selectedProfile} onValueChange={setSelectedProfile}>
-                              <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Selecteer een profiel" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {profileOptions.map((profile) => (
-                                  <SelectItem key={profile.id} value={profile.id}>
-                                    {profile.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </CardContent>
-                        </Card>
-                      </AnimatedSection>
                     </div>
                     
                     <div className="lg:col-span-2">
                       <AnimatedSection animation="fade-in" delay={200}>
                         <ProductDetails 
-                          selectedColor={selectedColor?.name || null} 
+                          selectedColor={selectedColor || null} 
                           selectedProfile={selectedProfile}
                         />
                       </AnimatedSection>
@@ -339,9 +340,11 @@ const ColorOptions: React.FC = () => {
                               </Accordion>
                               
                               <div className="mt-6 flex justify-center sm:justify-end">
-                                <Button className="bg-brand-green hover:bg-brand-green-dark">
-                                  <Paintbrush className="h-4 w-4 mr-2" />
-                                  Kleuradvies aanvragen
+                                <Button asChild className="bg-brand-green hover:bg-brand-green-dark">
+                                  <Link to="/offerte">
+                                    <Paintbrush className="h-4 w-4 mr-2" />
+                                    Kleuradvies aanvragen
+                                  </Link>
                                 </Button>
                               </div>
                             </CardContent>

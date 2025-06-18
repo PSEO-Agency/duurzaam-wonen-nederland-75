@@ -3,25 +3,35 @@ import React, { useState } from 'react';
 import { ExternalLink, Paintbrush, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Link } from 'react-router-dom';
 
+interface ColorOption {
+  name: string;
+  hex: string;
+  image?: string;
+  description?: string;
+  category: string;
+  popular?: boolean;
+  ralCode?: string;
+}
+
 interface ProductDetailProps {
-  selectedColor: string | null;
+  selectedColor: ColorOption | null;
   selectedProfile?: string;
 }
 
 const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedProfile = "living-82" }) => {
-  const [isSpecsOpen, setIsSpecsOpen] = useState(false);
-
   const profileData = {
     "living-82": {
       name: "Schüco LivIng 82",
-      slug: "living-82"
+      slug: "living-82",
+      image: "/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png"
     },
     "ct-70-as": {
       name: "Schüco CT 70 AS", 
-      slug: "ct-70-as"
+      slug: "ct-70-as",
+      image: "/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png"
     }
   };
 
@@ -34,14 +44,28 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
         <div className="lg:col-span-1">
           <div className="relative h-48 lg:h-full">
             <img 
-              src="/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png"
-              alt="Kunststof kozijn doorsnede"
+              src={currentProfile.image}
+              alt={`${currentProfile.name} doorsnede`}
               className="w-full h-full object-cover"
             />
             {!selectedColor && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                 <div className="text-center text-white p-4">
                   <p className="text-sm">Selecteer een kleur om preview te zien</p>
+                </div>
+              </div>
+            )}
+            {selectedColor && (
+              <div className="absolute top-4 left-4 bg-white/90 p-2 rounded-md shadow-sm">
+                <div className="flex items-center gap-2">
+                  <div 
+                    className="w-4 h-4 rounded-full border" 
+                    style={{ 
+                      backgroundColor: selectedColor.hex,
+                      borderColor: selectedColor.hex === '#FFFFFF' ? '#e5e7eb' : 'transparent'
+                    }}
+                  ></div>
+                  <span className="text-xs font-medium">{selectedColor.name}</span>
                 </div>
               </div>
             )}
@@ -71,18 +95,63 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
             </Button>
           </div>
           
-          <Collapsible
-            open={isSpecsOpen}
-            onOpenChange={setIsSpecsOpen}
-            className="w-full"
-          >
-            <CollapsibleTrigger asChild>
-              <Button variant="outline" className="flex items-center w-full mb-4 justify-between">
-                <span>Bekijk specificaties</span>
-                {isSpecsOpen ? <ChevronUp className="h-4 w-4 ml-2" /> : <ChevronDown className="h-4 w-4 ml-2" />}
-              </Button>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
+          {selectedColor && (
+            <div className="mb-4 flex items-center gap-2">
+              <span className="text-sm text-gray-600">Geselecteerde kleur:</span>
+              <div className="flex items-center gap-2">
+                <div 
+                  className="w-4 h-4 rounded-full border" 
+                  style={{ 
+                    backgroundColor: selectedColor.hex,
+                    borderColor: selectedColor.hex === '#FFFFFF' ? '#e5e7eb' : 'transparent'
+                  }}
+                ></div>
+                <span className="font-medium text-sm">{selectedColor.name}</span>
+              </div>
+            </div>
+          )}
+          
+          <div className="mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <Button asChild className="bg-brand-green hover:bg-brand-green-dark">
+              <Link to="/offerte">
+                Offerte Aanvragen
+                <Paintbrush className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+          
+          <div className="mt-6 pt-4 border-t border-gray-200">
+            <h4 className="font-medium mb-2 text-base">Snelle toegang</h4>
+            <div className="space-y-2">
+              <div className="flex items-center text-brand-green hover:underline">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                <a href="#" className="text-sm">Galerij</a>
+              </div>
+              <div className="flex items-center text-brand-green hover:underline">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                <a href="#" className="text-sm">Technische informatie</a>
+              </div>
+              <div className="flex items-center text-brand-green hover:underline">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                <a href="#" className="text-sm">Documentatie</a>
+              </div>
+              <div className="flex items-center text-brand-green hover:underline">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                <a href="#" className="text-sm">CAD-gegevens</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Specifications Section - Moved below preview */}
+      <div className="border-t border-gray-200 p-6">
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="specifications">
+            <AccordionTrigger className="text-lg font-semibold">
+              Bekijk specificaties
+            </AccordionTrigger>
+            <AccordionContent>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-4">
                 <div>
                   <div className="space-y-2">
@@ -162,58 +231,9 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
                   </div>
                 </div>
               </div>
-            </CollapsibleContent>
-          </Collapsible>
-          
-          <div className="mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            {selectedColor && (
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">Geselecteerde kleur:</span>
-                <div className="flex items-center gap-2">
-                  <div 
-                    className="w-4 h-4 rounded-full border" 
-                    style={{ 
-                      backgroundColor: selectedColor === 'Puur Wit' ? '#FFFFFF' : 
-                                     selectedColor === 'Antraciet' ? '#293133' : 
-                                     selectedColor === 'Golden Oak' ? '#C19A6B' : '#666',
-                      borderColor: selectedColor === 'Puur Wit' ? '#e5e7eb' : 'transparent'
-                    }}
-                  ></div>
-                  <span className="font-medium text-sm">{selectedColor}</span>
-                </div>
-              </div>
-            )}
-            
-            <Button asChild className="bg-brand-green hover:bg-brand-green-dark">
-              <Link to="/offerte">
-                Offerte Aanvragen
-                <Paintbrush className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-          
-          <div className="mt-6 pt-4 border-t border-gray-200">
-            <h4 className="font-medium mb-2 text-base">Snelle toegang</h4>
-            <div className="space-y-2">
-              <div className="flex items-center text-brand-green hover:underline">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                <a href="#" className="text-sm">Galerij</a>
-              </div>
-              <div className="flex items-center text-brand-green hover:underline">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                <a href="#" className="text-sm">Technische informatie</a>
-              </div>
-              <div className="flex items-center text-brand-green hover:underline">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                <a href="#" className="text-sm">Documentatie</a>
-              </div>
-              <div className="flex items-center text-brand-green hover:underline">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                <a href="#" className="text-sm">CAD-gegevens</a>
-              </div>
-            </div>
-          </div>
-        </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
     </Card>
   );
