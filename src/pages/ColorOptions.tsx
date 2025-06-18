@@ -2,7 +2,6 @@
 import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Slider } from "@/components/ui/slider";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -28,13 +27,11 @@ interface ColorOption {
 
 const ColorOptions: React.FC = () => {
   const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null);
-  const [intensity, setIntensity] = useState<number>(50);
   const [filterCategory, setFilterCategory] = useState<string>("all");
   const [activeTab, setActiveTab] = useState<string>("visualizer");
 
   const visualizerTitleRef = useRef<HTMLHeadingElement>(null);
   const collectionTitleRef = useRef<HTMLHeadingElement>(null);
-  const combinationsTitleRef = useRef<HTMLHeadingElement>(null);
 
   const colorOptions: ColorOption[] = [
     { name: 'Puur Wit', hex: '#FFFFFF', category: 'standard', popular: true, description: 'De klassieke en meest gekozen kleur, tijdloos en past bij elke woning.', ralCode: 'RAL 9016' },
@@ -68,21 +65,12 @@ const ColorOptions: React.FC = () => {
   
   const popularColors = colorOptions.filter(color => color.popular);
 
-  const getOverlayColor = (hex: string, intensity: number) => {
-    const opacity = (intensity / 100) * 0.8;
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
-  };
-
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
     
     const sectionRef = 
       sectionId === "visualizer" ? visualizerTitleRef :
-      sectionId === "collection" ? collectionTitleRef :
-      combinationsTitleRef;
+      collectionTitleRef;
     
     if (sectionRef.current) {
       const yOffset = -120;
@@ -123,7 +111,7 @@ const ColorOptions: React.FC = () => {
         <div className="sticky top-[80px] z-10 bg-white border-b shadow-sm">
           <div className="container mx-auto px-4">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="py-2">
-              <TabsList className="grid w-full grid-cols-3">
+              <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger 
                   value="visualizer" 
                   className="flex items-center gap-2"
@@ -139,14 +127,6 @@ const ColorOptions: React.FC = () => {
                 >
                   <Droplet className="h-4 w-4" />
                   <span className="hidden sm:inline">Kleurencollectie</span>
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="combinations" 
-                  className="flex items-center gap-2"
-                  onClick={() => scrollToSection("combinations")}
-                >
-                  <Layers className="h-4 w-4" />
-                  <span className="hidden sm:inline">Kleurcombinaties</span>
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -270,41 +250,6 @@ const ColorOptions: React.FC = () => {
                           </CardContent>
                         </Card>
                       </AnimatedSection>
-                      
-                      <AnimatedSection animation="fade-in" delay={100}>
-                        <Card>
-                          <CardContent className="p-6">
-                            <h3 className="text-xl font-semibold mb-4 flex items-center">
-                              <Droplet className="h-5 w-5 mr-2 text-brand-green" />
-                              Kleurintensiteit aanpassen
-                            </h3>
-                            
-                            <div className="space-y-4">
-                              <div className="px-2">
-                                <Slider
-                                  defaultValue={[50]}
-                                  max={100}
-                                  step={1}
-                                  value={[intensity]}
-                                  onValueChange={(values) => setIntensity(values[0])}
-                                  disabled={!selectedColor}
-                                />
-                              </div>
-                              <div className="flex justify-between text-xs text-gray-500">
-                                <span>Subtiel</span>
-                                <span>Intens</span>
-                              </div>
-                            </div>
-                            
-                            <div className="mt-6">
-                              <p className="text-sm text-gray-600">
-                                Deze visualisatie geeft een indicatie van hoe de kleur eruit zal zien op uw kozijnen. 
-                                De werkelijke kleur kan afwijken afhankelijk van het gekozen materiaal en lichtomstandigheden.
-                              </p>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </AnimatedSection>
                     </div>
                     
                     <div className="lg:col-span-2">
@@ -324,13 +269,13 @@ const ColorOptions: React.FC = () => {
                                   style={{ 
                                     backgroundColor: selectedColor.image 
                                       ? 'transparent' 
-                                      : getOverlayColor(selectedColor.hex, intensity),
+                                      : selectedColor.hex,
                                     backgroundImage: selectedColor.image 
                                       ? `url(${selectedColor.image})` 
                                       : 'none',
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center',
-                                    opacity: selectedColor.image ? intensity / 100 : 1
+                                    opacity: selectedColor.image ? 0.5 : 0.4
                                   }}
                                 ></div>
                               )}
@@ -584,108 +529,6 @@ const ColorOptions: React.FC = () => {
                           ))}
                         </TooltipProvider>
                       </div>
-                    </AnimatedSection>
-                  </div>
-                </div>
-                
-                <div id="combinations" className="space-y-8">
-                  <AnimatedSection animation="fade-in">
-                    <div className="text-center max-w-3xl mx-auto mb-8">
-                      <h2 ref={combinationsTitleRef} className="text-2xl font-bold mb-4">Populaire kleurcombinaties</h2>
-                      <p className="text-gray-600">
-                        Ontdek onze meest gevraagde binnen- en buitenzijde combinaties voor kunststof kozijnen.
-                      </p>
-                    </div>
-                  </AnimatedSection>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <AnimatedSection animation="fade-in" delay={100}>
-                      <Card className="h-full hover:shadow-md transition-shadow">
-                        <CardContent className="p-6">
-                          <div className="flex space-x-2 mb-4">
-                            <div className="w-full h-20 bg-[#293133] rounded-l-md flex items-end justify-start p-2">
-                              <span className="text-xs text-white">Buiten</span>
-                            </div>
-                            <div className="w-full h-20 bg-white border border-gray-200 rounded-r-md flex items-end justify-end p-2">
-                              <span className="text-xs text-gray-700">Binnen</span>
-                            </div>
-                          </div>
-                          <h3 className="font-semibold text-lg mb-1">Antraciet buiten, Wit binnen</h3>
-                          <p className="text-gray-600 text-sm mb-4">De meest populaire combinatie voor een modern uiterlijk met een licht interieur.</p>
-                          <div className="flex justify-between text-sm text-gray-500">
-                            <span>Kozijn: K70</span>
-                            <span>Meerprijs: + €0</span>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </AnimatedSection>
-                    
-                    <AnimatedSection animation="fade-in" delay={150}>
-                      <Card className="h-full hover:shadow-md transition-shadow">
-                        <CardContent className="p-6">
-                          <div className="flex space-x-2 mb-4">
-                            <div className="w-full h-20 rounded-l-md flex items-end justify-start p-2 bg-cover" 
-                                 style={{backgroundImage: "url('/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png')"}}>
-                              <span className="text-xs text-white">Buiten</span>
-                            </div>
-                            <div className="w-full h-20 bg-white border border-gray-200 rounded-r-md flex items-end justify-end p-2">
-                              <span className="text-xs text-gray-700">Binnen</span>
-                            </div>
-                          </div>
-                          <h3 className="font-semibold text-lg mb-1">Golden Oak buiten, Wit binnen</h3>
-                          <p className="text-gray-600 text-sm mb-4">Perfect voor een natuurlijke uitstraling met een fris interieur.</p>
-                          <div className="flex justify-between text-sm text-gray-500">
-                            <span>Kozijn: K70/K90</span>
-                            <span>Meerprijs: + €120/m²</span>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </AnimatedSection>
-                    
-                    <AnimatedSection animation="fade-in" delay={200}>
-                      <Card className="h-full hover:shadow-md transition-shadow">
-                        <CardContent className="p-6">
-                          <div className="flex space-x-2 mb-4">
-                            <div className="w-full h-20 bg-[#2D5E40] rounded-l-md flex items-end justify-start p-2">
-                              <span className="text-xs text-white">Buiten</span>
-                            </div>
-                            <div className="w-full h-20 bg-[#F5F5DC] border border-gray-200 rounded-r-md flex items-end justify-end p-2">
-                              <span className="text-xs text-gray-700">Binnen</span>
-                            </div>
-                          </div>
-                          <h3 className="font-semibold text-lg mb-1">Monumentengroen buiten, Crème binnen</h3>
-                          <p className="text-gray-600 text-sm mb-4">Klassieke combinatie voor monumentale en landelijke woningen.</p>
-                          <div className="flex justify-between text-sm text-gray-500">
-                            <span>Kozijn: K90</span>
-                            <span>Meerprijs: + €100/m²</span>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </AnimatedSection>
-                    
-                    <AnimatedSection animation="fade-in" delay={250}>
-                      <Card className="h-full hover:shadow-md transition-shadow">
-                        <CardContent className="p-6">
-                          <div className="flex space-x-2 mb-4">
-                            <div className="w-full h-20 bg-[#B4B4B4] rounded-l-md flex items-end justify-start p-2"
-                                 style={{
-                                   backgroundImage: "linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent)",
-                                   backgroundSize: "10px 10px"
-                                 }}>
-                              <span className="text-xs text-white">Buiten</span>
-                            </div>
-                            <div className="w-full h-20 bg-white border border-gray-200 rounded-r-md flex items-end justify-end p-2">
-                              <span className="text-xs text-gray-700">Binnen</span>
-                            </div>
-                          </div>
-                          <h3 className="font-semibold text-lg mb-1">Rvs-look buiten, Wit binnen</h3>
-                          <p className="text-gray-600 text-sm mb-4">Moderne combinatie met een industriële uitstraling aan de buitenzijde en een neutrale binnenzijde.</p>
-                          <div className="flex justify-between text-sm text-gray-500">
-                            <span>Kozijn: K70/K90</span>
-                            <span>Meerprijs: + €150/m²</span>
-                          </div>
-                        </CardContent>
-                      </Card>
                     </AnimatedSection>
                   </div>
                 </div>
