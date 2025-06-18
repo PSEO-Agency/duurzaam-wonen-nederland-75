@@ -65,11 +65,11 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="bg-white p-4 min-w-[300px]">
-            <ul className="space-y-1">
+          <div className="bg-white p-3 w-max">
+            <ul className="space-y-1 min-w-0">
               {products.map((product) => (
                 <li key={product.slug}>
-                  <Link to={`/${product.slug}`} className={dropdownItemClass}>
+                  <Link to={`/${product.slug}`} className="flex items-center text-gray-700 hover:text-brand-green transition-colors duration-200 py-2 text-sm whitespace-nowrap">
                     <ChevronRight size={16} className="mr-2 flex-shrink-0" />
                     <span>{product.name}</span>
                   </Link>
