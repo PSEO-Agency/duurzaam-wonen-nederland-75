@@ -21,6 +21,7 @@ const AdminLogin: React.FC = () => {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
+      console.log('User already authenticated, redirecting to dashboard');
       navigate('/admin/dashboard');
     }
   }, [isAuthenticated, navigate]);
@@ -30,13 +31,24 @@ const AdminLogin: React.FC = () => {
     setError('');
     setLoading(true);
 
+    console.log('Login form submitted');
+
+    if (!email.trim() || !password.trim()) {
+      setError('Please enter both email and password');
+      setLoading(false);
+      return;
+    }
+
     try {
+      console.log('Attempting login...');
       const success = await login(email, password);
       
       if (success) {
+        console.log('Login successful, redirecting to dashboard');
         navigate('/admin/dashboard');
       } else {
-        setError('Invalid email or password');
+        console.log('Login failed');
+        setError('Invalid email or password. Please check your credentials and try again.');
       }
     } catch (err) {
       console.error('Login error:', err);
@@ -82,6 +94,7 @@ const AdminLogin: React.FC = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
                   required
+                  disabled={loading}
                 />
               </div>
             </div>
@@ -98,6 +111,7 @@ const AdminLogin: React.FC = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10"
                   required
+                  disabled={loading}
                 />
               </div>
             </div>

@@ -39,33 +39,42 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
     try {
       const { supabase } = await import('@/integrations/supabase/client');
       
-      console.log('Attempting login with:', { email });
+      console.log('Attempting admin login with email:', email);
       
       // Query the admin_auth table to validate credentials
       const { data, error } = await supabase
         .from('admin_auth')
         .select('email, password_hash, is_active')
-        .eq('email', email)
+        .eq('email', email.trim())
         .eq('is_active', true)
-        .single();
+        .maybeSingle();
 
-      console.log('Database response:', { data, error });
+      console.log('Database query result:', { data, error });
 
-      if (error || !data) {
-        console.log('No user found or database error:', error);
+      if (error) {
+        console.error('Database error during login:', error);
         return false;
       }
 
+      if (!data) {
+        console.log('No admin user found with email:', email);
+        return false;
+      }
+
+      console.log('Found admin user, verifying password...');
+      
       // Simple password verification (plaintext for now)
-      const isPasswordValid = password === data.password_hash;
+      const isPasswordValid = password.trim() === data.password_hash.trim();
       
       if (isPasswordValid) {
-        console.log('Login successful!');
+        console.log('Admin login successful!');
         setIsAuthenticated(true);
         localStorage.setItem('adminAuthenticated', 'true');
         return true;
       } else {
         console.log('Password verification failed');
+        console.log('Expected:', data.password_hash);
+        console.log('Received:', password);
         return false;
       }
     } catch (err) {
@@ -75,6 +84,7 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
   };
 
   const logout = () => {
+    console.log('Admin logout initiated');
     setIsAuthenticated(false);
     setIsAdminMode(false);
     localStorage.removeItem('adminAuthenticated');
