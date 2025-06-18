@@ -12,14 +12,42 @@ interface ProductDetailProps {
 }
 
 const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedProfile = "living-82" }) => {
+  const getColorValue = (colorName: string): string => {
+    const colorMap: { [key: string]: string } = {
+      'Puur Wit': '#FFFFFF',
+      'Verkeerswit': '#F5F5F5',
+      'Crème': '#F5F5DC',
+      'Lichtgrijs': '#D3D3D3',
+      'Antraciet': '#293133',
+      'Monumentengroen': '#2D5E40',
+      'Staalblauw': '#4682B4',
+      'Zwart': '#121212',
+      'Golden Oak': '#C19A6B',
+      'Noten': '#654321',
+      'Mahonie': '#C04000',
+      'Oregon Pine': '#D8B28E',
+      'Eiken Naturel': '#D2B48C',
+      'Aluminium Metallic': '#A9A9A9',
+      'Geborsteld Rvs Look': '#B4B4B4',
+      'Brons Metallic': '#CD7F32',
+      'Wijnrood': '#722F37',
+      'Mosgroen': '#607D3B',
+      'Monumentenblauw': '#27548E',
+      'Leisteengrijs': '#708090'
+    };
+    return colorMap[colorName] || '#666';
+  };
+
   const profileData = {
     "living-82": {
       name: "Schüco LivIng 82",
-      slug: "living-82"
+      slug: "living-82",
+      image: "/lovable-uploads/59bc8ed5-3639-402b-8eac-33fa699bdb9a.png"
     },
     "ct-70-as": {
       name: "Schüco CT 70 AS", 
-      slug: "ct-70-as"
+      slug: "ct-70-as",
+      image: "/lovable-uploads/59bc8ed5-3639-402b-8eac-33fa699bdb9a.png"
     }
   };
 
@@ -33,8 +61,8 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
           <div className="lg:col-span-1">
             <div className="relative h-48 lg:h-full">
               <img 
-                src="/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png"
-                alt="Kunststof kozijn doorsnede"
+                src={currentProfile.image}
+                alt={`${currentProfile.name} doorsnede`}
                 className="w-full h-full object-cover"
               />
               {!selectedColor && (
@@ -78,9 +106,7 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
                     <div 
                       className="w-4 h-4 rounded-full border" 
                       style={{ 
-                        backgroundColor: selectedColor === 'Puur Wit' ? '#FFFFFF' : 
-                                       selectedColor === 'Antraciet' ? '#293133' : 
-                                       selectedColor === 'Golden Oak' ? '#C19A6B' : '#666',
+                        backgroundColor: getColorValue(selectedColor),
                         borderColor: selectedColor === 'Puur Wit' ? '#e5e7eb' : 'transparent'
                       }}
                     ></div>

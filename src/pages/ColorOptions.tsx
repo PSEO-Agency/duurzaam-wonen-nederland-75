@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -8,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Palette, Home, CheckCircle2, Image, Droplet, PanelRight, Paintbrush, Layers, Star, Info } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import AnimatedSection from '@/components/AnimatedSection';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -339,9 +341,11 @@ const ColorOptions: React.FC = () => {
                               </Accordion>
                               
                               <div className="mt-6 flex justify-center sm:justify-end">
-                                <Button className="bg-brand-green hover:bg-brand-green-dark">
-                                  <Paintbrush className="h-4 w-4 mr-2" />
-                                  Kleuradvies aanvragen
+                                <Button asChild className="bg-brand-green hover:bg-brand-green-dark">
+                                  <Link to="/offerte">
+                                    <Paintbrush className="h-4 w-4 mr-2" />
+                                    Kleuradvies aanvragen
+                                  </Link>
                                 </Button>
                               </div>
                             </CardContent>
