@@ -13,7 +13,7 @@ const Assortiment: React.FC = () => {
       name: 'Schüco Living 82',
       brand: 'SCHÜCO',
       description: 'Premium profiel met uitstekende isolatiewaarden en moderne uitstraling',
-      image: '/lovable-uploads/59bc8ed5-3639-402b-8eac-33fa699bdb9a.png',
+      image: '/lovable-uploads/3ce3b546-696d-41e9-a2d1-1a74fd134b54.png',
       slug: 'living-82'
     },
     {
@@ -21,7 +21,7 @@ const Assortiment: React.FC = () => {
       name: 'Schüco CT 70 AS',
       brand: 'SCHÜCO',
       description: 'Veelzijdig profiel voor renovatie en nieuwbouw projecten',
-      image: '/lovable-uploads/59bc8ed5-3639-402b-8eac-33fa699bdb9a.png',
+      image: '/lovable-uploads/310f311d-b20f-4540-96db-985b9867e2d5.png',
       slug: 'ct-70-as'
     }
   ];

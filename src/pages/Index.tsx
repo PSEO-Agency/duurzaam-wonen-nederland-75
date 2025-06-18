@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
@@ -56,10 +57,10 @@ const ProductsSection: React.FC = () => {
               delay={index * 100}
             >
               <Card className="h-full hover:shadow-lg transition-shadow group">
-                {product.image_url && (
+                {product.hero_image_url && (
                   <div className="relative h-48 bg-gray-100 rounded-t-lg overflow-hidden">
                     <img 
-                      src={product.image_url} 
+                      src={product.hero_image_url} 
                       alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
