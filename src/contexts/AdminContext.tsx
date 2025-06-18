@@ -1,5 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import bcrypt from 'bcryptjs';
 
 interface AdminContextType {
   isAuthenticated: boolean;
@@ -63,8 +64,8 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
 
       console.log('Found admin user, verifying password...');
       
-      // Simple password verification (plaintext for now)
-      const isPasswordValid = password.trim() === data.password_hash.trim();
+      // Verify password using bcrypt
+      const isPasswordValid = await bcrypt.compare(password.trim(), data.password_hash);
       
       if (isPasswordValid) {
         console.log('Admin login successful!');
@@ -73,8 +74,6 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
         return true;
       } else {
         console.log('Password verification failed');
-        console.log('Expected:', data.password_hash);
-        console.log('Received:', password);
         return false;
       }
     } catch (err) {
