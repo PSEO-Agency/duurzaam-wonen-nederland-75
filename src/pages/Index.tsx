@@ -1,9 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Benefits from '@/components/Benefits';
+import Services from '@/components/Services';
 import Projects from '@/components/Projects';
 import AboutUs from '@/components/AboutUs';
 import Workflow from '@/components/Workflow';
@@ -14,82 +14,6 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import CookieConsent from '@/components/CookieConsent';
 import LoadingScreen from '@/components/LoadingScreen';
-import Assortiment from '@/components/kunststof-kozijnen/Assortiment';
-import { useProducts } from '@/hooks/useProducts';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import AnimatedSection from '@/components/AnimatedSection';
-
-const ProductsSection: React.FC = () => {
-  const { data: products, isLoading } = useProducts();
-
-  if (isLoading) {
-    return (
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <div className="animate-pulse">Loading products...</div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <section id="products" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <AnimatedSection animation="fade-in">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Products</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-              Ontdek onze uitgebreide collectie van hoogwaardige producten voor woningverduurzaming
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products?.map((product, index) => (
-            <AnimatedSection
-              key={product.id}
-              animation="fade-in"
-              delay={index * 100}
-            >
-              <Card className="h-full hover:shadow-lg transition-shadow group">
-                {product.hero_image_url && (
-                  <div className="relative h-48 bg-gray-100 rounded-t-lg overflow-hidden">
-                    <img 
-                      src={product.hero_image_url} 
-                      alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                )}
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-3">{product.name}</h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {product.description}
-                  </p>
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-gray-300 hover:border-brand-green hover:text-brand-green group"
-                    asChild
-                  >
-                    <Link to={`/products/${product.slug}`}>
-                      Meer informatie
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </AnimatedSection>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const Index: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -221,8 +145,28 @@ const Index: React.FC = () => {
         <main className="flex-grow">
           <Hero />
           <Benefits />
-          <ProductsSection />
-          <Assortiment />
+          
+          {/* Review Widget Section */}
+          <section className="py-8 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <iframe 
+                  className="lc_reviews_widget w-full h-[600px] md:h-[600px]" 
+                  src="https://reputationhub.site/reputation/widgets/review_widget/3aRsj8TT2qcU3nkx3kWm" 
+                  frameBorder="0" 
+                  scrolling="yes"
+                  style={{ 
+                    minWidth: '100%', 
+                    width: '100%', 
+                    height: '600px'
+                  }}
+                  title="Customer Reviews - Quick Preview"
+                />
+              </div>
+            </div>
+          </section>
+          
+          <Services />
           <Projects />
           <AboutUs />
           <Workflow />
