@@ -33,8 +33,8 @@ const Services: React.FC = () => {
         image: product.hero_image_url || product.hero_background_image || fallbackData[0].image,
         title: product.name,
         description: product.description || product.hero_description || '',
-        features: product.features ? 
-          (Array.isArray(product.features) ? product.features.slice(0, 3) : []) :
+        features: product.features && Array.isArray(product.features) ? 
+          product.features.slice(0, 3).map(feature => String(feature)) : 
           fallbackData[0].features,
         slug: product.slug
       }))
