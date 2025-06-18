@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, Filter, ArrowRight, ArrowDown, Star, ChevronDown } from 'lucide-react';
@@ -19,6 +20,7 @@ import Workflow from '@/components/Workflow';
 import Reviews from '@/components/Reviews';
 import ContactCTA from '@/components/ContactCTA';
 import KozijnenHero from '@/components/kunststof-kozijnen/KozijnenHero';
+import ProductFilters from '@/components/kunststof-kozijnen/ProductFilters';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 
