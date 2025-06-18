@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { AdminProvider } from "@/contexts/AdminContext";
 import { SearchProvider } from "@/contexts/SearchContext";
-import LoadingScreen from "@/components/LoadingScreen";
 import ScrollToTopOnNavigate from "@/components/ScrollToTopOnNavigate";
 import CookieConsent from "@/components/CookieConsent";
 import AdminWrapper from "@/components/admin/AdminWrapper";
@@ -110,7 +109,6 @@ const App = () => {
             <AdminProvider>
               <SearchProvider>
                 <ScrollToTopOnNavigate />
-                <LoadingScreen />
                 <Routes>
                   {/* Admin routes */}
                   <Route path="/admin/login" element={<AdminLogin />} />
