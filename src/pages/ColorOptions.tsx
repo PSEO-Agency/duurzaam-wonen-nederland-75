@@ -157,30 +157,6 @@ const ColorOptions: React.FC = () => {
                         <Card>
                           <CardContent className="p-6">
                             <h3 className="text-xl font-semibold mb-4 flex items-center">
-                              <Layers className="h-5 w-5 mr-2 text-brand-green" />
-                              Kies profiel
-                            </h3>
-                            
-                            <Select value={selectedProfile} onValueChange={setSelectedProfile}>
-                              <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Selecteer een profiel" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {profileOptions.map((profile) => (
-                                  <SelectItem key={profile.id} value={profile.id}>
-                                    {profile.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </CardContent>
-                        </Card>
-                      </AnimatedSection>
-
-                      <AnimatedSection animation="fade-in" delay={100}>
-                        <Card>
-                          <CardContent className="p-6">
-                            <h3 className="text-xl font-semibold mb-4 flex items-center">
                               <Palette className="h-5 w-5 mr-2 text-brand-green" />
                               Kies een kleur
                             </h3>
@@ -283,6 +259,30 @@ const ColorOptions: React.FC = () => {
                                 </Button>
                               </div>
                             )}
+                          </CardContent>
+                        </Card>
+                      </AnimatedSection>
+
+                      <AnimatedSection animation="fade-in" delay={100}>
+                        <Card>
+                          <CardContent className="p-6">
+                            <h3 className="text-xl font-semibold mb-4 flex items-center">
+                              <Layers className="h-5 w-5 mr-2 text-brand-green" />
+                              Kies profiel
+                            </h3>
+                            
+                            <Select value={selectedProfile} onValueChange={setSelectedProfile}>
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Selecteer een profiel" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {profileOptions.map((profile) => (
+                                  <SelectItem key={profile.id} value={profile.id}>
+                                    {profile.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
                           </CardContent>
                         </Card>
                       </AnimatedSection>
