@@ -1,9 +1,11 @@
+
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Benefits from '@/components/Benefits';
 import Services from '@/components/Services';
+import ProductFilters from '@/components/kunststof-kozijnen/ProductFilters';
 import Projects from '@/components/Projects';
 import AboutUs from '@/components/AboutUs';
 import Workflow from '@/components/Workflow';
@@ -146,6 +148,7 @@ const Index: React.FC = () => {
           <Hero />
           <Benefits />
           <Services />
+          <ProductFilters />
           <Projects />
           <AboutUs />
           <Workflow />
