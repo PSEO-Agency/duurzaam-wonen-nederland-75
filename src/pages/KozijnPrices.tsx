@@ -67,12 +67,37 @@ const KozijnPrices: React.FC = () => {
     }
   ];
 
-  const sizePrices = [
-    { size: '60x60 cm', kunststof: '€400-600', hout: '€600-900', aluminium: '€800-1200' },
-    { size: '80x100 cm', kunststof: '€500-750', hout: '€750-1150', aluminium: '€950-1450' },
-    { size: '100x120 cm', kunststof: '€650-950', hout: '€950-1450', aluminium: '€1200-1800' },
-    { size: '120x140 cm', kunststof: '€800-1200', hout: '€1200-1800', aluminium: '€1500-2250' },
-    { size: '150x180 cm', kunststof: '€1000-1500', hout: '€1500-2250', aluminium: '€1900-2850' }
+  const materialComparison = [
+    {
+      aspect: 'Onderhoud',
+      kunststof: 'Minimaal onderhoud, alleen schoonmaken',
+      hout: 'Regelmatig schilderwerk en behandeling nodig',
+      aluminium: 'Weinig onderhoud, incidenteel reinigen'
+    },
+    {
+      aspect: 'Levensduur',
+      kunststof: '40-50 jaar bij goed onderhoud',
+      hout: '25-40 jaar afhankelijk van onderhoud',
+      aluminium: '50+ jaar, zeer duurzaam'
+    },
+    {
+      aspect: 'Isolatie',
+      kunststof: 'Uitstekende isolatie door meerkamersysteem',
+      hout: 'Goede natuurlijke isolatie-eigenschappen',
+      aluminium: 'Goede isolatie met thermische onderbreking'
+    },
+    {
+      aspect: 'Uitstraling',
+      kunststof: 'Modern, verkrijgbaar in vele kleuren',
+      hout: 'Klassiek en natuurlijk, authentieke uitstraling',
+      aluminium: 'Strak en modern, elegante afwerking'
+    },
+    {
+      aspect: 'Duurzaamheid',
+      kunststof: '100% recyclebaar, energiezuinig',
+      hout: 'Duurzaam bij verantwoorde bosbouw (FSC)',
+      aluminium: '100% recyclebaar, lange levensduur'
+    }
   ];
 
   return (
@@ -424,6 +449,79 @@ const KozijnPrices: React.FC = () => {
                 </AnimatedSection>
               </div>
             </div>
+          </div>
+        </section>
+        
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-in">
+              <h2 className="text-3xl font-bold mb-2 text-center">Materiaalvergelijking</h2>
+              <p className="text-gray-500 mb-8 text-center">Vergelijk de eigenschappen van verschillende kozijnmaterialen</p>
+              
+              <div className="overflow-x-auto bg-white rounded-lg shadow-sm">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-1/4">Eigenschap</TableHead>
+                      <TableHead className="w-1/4">Kunststof</TableHead>
+                      <TableHead className="w-1/4">Hout</TableHead>
+                      <TableHead className="w-1/4">Aluminium</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {materialComparison.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">{item.aspect}</TableCell>
+                        <TableCell>{item.kunststof}</TableCell>
+                        <TableCell>{item.hout}</TableCell>
+                        <TableCell>{item.aluminium}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+              
+              <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card className="text-center">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-3 text-brand-green">Kunststof Kozijnen</h3>
+                    <p className="text-gray-700 mb-4">
+                      De meest populaire keuze vanwege de uitstekende prijs-kwaliteitverhouding, 
+                      minimaal onderhoud en goede isolatie-eigenschappen.
+                    </p>
+                    <Button asChild variant="outline" className="w-full">
+                      <Link to="/kunststof-kozijnen">Meer informatie</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+                
+                <Card className="text-center">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-3 text-amber-600">Houten Kozijnen</h3>
+                    <p className="text-gray-700 mb-4">
+                      Klassieke en natuurlijke uitstraling met goede isolatie, 
+                      maar vereist meer onderhoud en heeft een hogere prijs.
+                    </p>
+                    <Button asChild variant="outline" className="w-full">
+                      <Link to="/offerte">Offerte aanvragen</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+                
+                <Card className="text-center">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-3 text-slate-600">Aluminium Kozijnen</h3>
+                    <p className="text-gray-700 mb-4">
+                      Moderne en strakke uitstraling met lange levensduur, 
+                      ideaal voor grote glasoppervlakken en eigentijdse architectuur.
+                    </p>
+                    <Button asChild variant="outline" className="w-full">
+                      <Link to="/aluminium-kozijnen">Meer informatie</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </AnimatedSection>
           </div>
         </section>
         
