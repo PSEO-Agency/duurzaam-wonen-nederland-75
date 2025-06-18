@@ -65,13 +65,13 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="bg-white p-3 w-max">
-            <ul className="space-y-1 min-w-0">
+          <div className="bg-white p-3 shadow-lg rounded-md">
+            <ul className="space-y-1 min-w-[200px] max-w-[250px]">
               {products.map((product) => (
                 <li key={product.slug}>
                   <Link to={`/${product.slug}`} className="flex items-center text-gray-700 hover:text-brand-green transition-colors duration-200 py-2 text-sm whitespace-nowrap">
                     <ChevronRight size={16} className="mr-2 flex-shrink-0" />
-                    <span>{product.name}</span>
+                    <span className="truncate">{product.name}</span>
                   </Link>
                 </li>
               ))}
@@ -95,8 +95,8 @@ export const NavMenuItems = () => {
           <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
             Admin
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="right-0">
-            <div className="bg-white p-4 w-auto">
+          <NavigationMenuContent>
+            <div className="bg-white p-4 shadow-lg rounded-md min-w-[200px] max-w-[250px]">
               <h3 className="font-semibold text-lg mb-2">Admin Panel</h3>
               <div className="mb-3">
                 <AdminModeToggle />
