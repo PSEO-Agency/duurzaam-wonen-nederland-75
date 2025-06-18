@@ -23,7 +23,6 @@ const KozijnTypes: React.FC = () => {
     {
       id: 'vast',
       name: 'Vast Kozijn',
-      image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
       description: 'Vaste kozijnen zijn kozijnen zonder bewegende delen. Ze bieden maximale isolatie en lichtinval.',
       benefits: ['Maximale isolatie', 'Optimale lichtinval', 'Onderhoudsarm', 'Lage kosten', 'Lange levensduur'],
       applications: ['Woonkamers', 'Slaapkamers', 'Aanbouw', 'Dakkapel'],
@@ -31,7 +30,6 @@ const KozijnTypes: React.FC = () => {
     {
       id: 'draai',
       name: 'Draai-Kiep Kozijn',
-      image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
       description: 'Draai-kiep kozijnen kunnen zowel volledig open draaien als in kiepstand worden gezet voor ventilatie.',
       benefits: ['Flexibele ventilatie', 'Makkelijk schoon te maken', 'Inbraakwerend', 'Meerdere standen', 'Complete opening mogelijk'],
       applications: ['Slaapkamers', 'Woonkamers', 'Badkamers', 'Keukens'],
@@ -39,7 +37,6 @@ const KozijnTypes: React.FC = () => {
     {
       id: 'schuif',
       name: 'Schuifpui',
-      image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
       description: 'Schuifpuien creëren een naadloze overgang tussen binnen en buiten zonder ruimteverlies bij het openen.',
       benefits: ['Ruimtebesparend', 'Grote glasoppervlakken', 'Toegang tot tuin/balkon', 'Maximale lichtinval', 'Modern design'],
       applications: ['Woonkamers', 'Tuinen', 'Terrassen', 'Balkons'],
@@ -47,7 +44,6 @@ const KozijnTypes: React.FC = () => {
     {
       id: 'stolp',
       name: 'Stolpstel Kozijn',
-      image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
       description: 'Stolpstel kozijnen bestaan uit twee ramen die in het midden samenkomen, waarbij één raam als hoofddeur fungeert.',
       benefits: ['Brede opening mogelijk', 'Klassieke uitstraling', 'Flexibel in gebruik', 'Goede ventilatie', 'Statige uitstraling'],
       applications: ['Woonkamers', 'Erkers', 'Klassieke woningen', 'Voorgevels'],
@@ -55,7 +51,6 @@ const KozijnTypes: React.FC = () => {
     {
       id: 'harmonica',
       name: 'Harmonica Kozijn',
-      image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
       description: 'Harmonica kozijnen vouwen open als een accordeon, ideaal om een volledig open verbinding te creëren.',
       benefits: ['Volledige opening mogelijk', 'Maximale doorgang', 'Flexibel in gebruik', 'Perfect voor binnen-buiten verbinding', 'Uniek design'],
       applications: ['Veranda\'s', 'Woonkamers met tuin', 'Commerciële ruimtes', 'Horecagelegenheden'],
@@ -100,18 +95,16 @@ const KozijnTypes: React.FC = () => {
                 {types.map((type, index) => (
                   <AnimatedSection key={type.id} animation="fade-in" delay={index * 100}>
                     <Card className="h-full hover:shadow-md transition-shadow overflow-hidden">
-                      <div className="relative">
-                        <img 
-                          src={type.image} 
-                          alt={type.name} 
-                          className="w-full h-48 object-cover"
-                        />
-                        <div className="absolute top-4 right-4">
-                          <img 
-                            src="/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png" 
-                            alt="Schüco logo" 
-                            className="h-8 opacity-90"
-                          />
+                      <div className="relative bg-gray-100 h-48 flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="text-6xl text-gray-400 mb-2">🏠</div>
+                          <div className="absolute top-4 right-4">
+                            <img 
+                              src="/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png" 
+                              alt="Schüco logo" 
+                              className="h-8 opacity-90"
+                            />
+                          </div>
                         </div>
                       </div>
                       <CardContent className="p-6">
@@ -137,9 +130,11 @@ const KozijnTypes: React.FC = () => {
                           ))}
                         </div>
                         <div className="mt-4 pt-4 border-t">
-                          <Button variant="link" className="text-brand-green p-0 h-auto">
-                            <span>Meer informatie</span>
-                            <ArrowRight className="ml-2 h-4 w-4" />
+                          <Button asChild variant="link" className="text-brand-green p-0 h-auto">
+                            <Link to="/offerte">
+                              <span>Meer informatie</span>
+                              <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
                           </Button>
                         </div>
                       </CardContent>
@@ -230,9 +225,11 @@ const KozijnTypes: React.FC = () => {
                     <p className="text-gray-700 mb-4">
                       Twijfelt u nog over welk type kozijn het beste bij uw situatie past? Onze adviseurs helpen u graag bij het maken van de juiste keuze, passend bij uw wensen, budget en woningtype.
                     </p>
-                    <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
-                      <span>Vraag gratis advies aan</span>
-                      <ArrowRight className="ml-2 h-4 w-4" />
+                    <Button asChild className="bg-brand-green hover:bg-brand-green-dark text-white">
+                      <Link to="/offerte">
+                        <span>Vraag gratis advies aan</span>
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
                     </Button>
                   </div>
                 </AnimatedSection>
@@ -247,11 +244,11 @@ const KozijnTypes: React.FC = () => {
                   />
                   
                   <div className="mt-8">
-                    <h3 className="text-xl font-semibold mb-4">Meest gestelde vragen over kozijntypes</h3>
+                    <h3 className="text-2xl font-semibold mb-4">Meest gestelde vragen over kozijntypes</h3>
                     
                     <Accordion type="single" collapsible className="w-full">
                       <AccordionItem value="item-1">
-                        <AccordionTrigger className="text-left font-medium">
+                        <AccordionTrigger className="text-left font-medium text-lg">
                           Wat is het verschil tussen een draai- en een kiepfunctie?
                         </AccordionTrigger>
                         <AccordionContent>
@@ -262,7 +259,7 @@ const KozijnTypes: React.FC = () => {
                       </AccordionItem>
                       
                       <AccordionItem value="item-2">
-                        <AccordionTrigger className="text-left font-medium">
+                        <AccordionTrigger className="text-left font-medium text-lg">
                           Welk type kozijn is het meest energiezuinig?
                         </AccordionTrigger>
                         <AccordionContent>
@@ -273,7 +270,7 @@ const KozijnTypes: React.FC = () => {
                       </AccordionItem>
                       
                       <AccordionItem value="item-3">
-                        <AccordionTrigger className="text-left font-medium">
+                        <AccordionTrigger className="text-left font-medium text-lg">
                           Zijn schuifpuien inbraakwerend?
                         </AccordionTrigger>
                         <AccordionContent>
