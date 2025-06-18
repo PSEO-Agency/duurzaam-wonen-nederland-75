@@ -3,8 +3,10 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface AdminContextType {
   isAuthenticated: boolean;
+  isAdminMode: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
+  toggleAdminMode: () => void;
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
@@ -23,6 +25,7 @@ interface AdminProviderProps {
 
 export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdminMode, setIsAdminMode] = useState(false);
 
   // Load authentication state from localStorage on mount
   useEffect(() => {
@@ -73,14 +76,21 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
 
   const logout = () => {
     setIsAuthenticated(false);
+    setIsAdminMode(false);
     localStorage.removeItem('adminAuthenticated');
+  };
+
+  const toggleAdminMode = () => {
+    setIsAdminMode(prev => !prev);
   };
 
   return (
     <AdminContext.Provider value={{ 
       isAuthenticated, 
+      isAdminMode,
       login, 
-      logout 
+      logout,
+      toggleAdminMode
     }}>
       {children}
     </AdminContext.Provider>

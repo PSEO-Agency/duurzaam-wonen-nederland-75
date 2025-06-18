@@ -6,31 +6,26 @@ import { useAdmin } from '@/contexts/AdminContext';
 import { Settings } from 'lucide-react';
 
 const AdminModeToggle: React.FC = () => {
-  const { isAdminMode, isAuthenticated, toggleAdminMode } = useAdmin();
+  const { isAuthenticated } = useAdmin();
   const navigate = useNavigate();
 
-  const handleToggle = () => {
-    if (!isAdminMode) {
-      // Activating admin mode - redirect to login if not authenticated
-      toggleAdminMode();
-      if (!isAuthenticated) {
-        navigate('/admin/login');
-      }
+  const handleAdminClick = () => {
+    if (isAuthenticated) {
+      navigate('/admin/dashboard');
     } else {
-      // Deactivating admin mode
-      toggleAdminMode();
+      navigate('/admin/login');
     }
   };
 
   return (
     <Button
-      variant={isAdminMode ? "destructive" : "outline"}
+      variant="outline"
       size="sm"
-      onClick={handleToggle}
+      onClick={handleAdminClick}
       className="fixed bottom-4 right-4 z-50"
     >
       <Settings className="h-4 w-4 mr-2" />
-      {isAdminMode ? 'Exit Admin' : 'Admin'}
+      {isAuthenticated ? 'Admin Panel' : 'Admin Login'}
     </Button>
   );
 };

@@ -39,7 +39,7 @@ export const adminItems: MenuSection[] = [
 
 export const NavMenuItems = () => {
   const { data: products = [] } = useProducts();
-  const { isAdminMode } = useAdmin();
+  const { isAuthenticated } = useAdmin();
 
   const renderMenuLink = (item: MenuSection) => {
     if (item.href.startsWith('#')) {
@@ -100,7 +100,7 @@ export const NavMenuItems = () => {
             <div className="mb-3">
               <AdminModeToggle />
             </div>
-            {isAdminMode && (
+            {isAuthenticated && (
               <ul className="space-y-1">
                 {adminItems.map((item) => (
                   <li key={item.label}>
