@@ -1,90 +1,74 @@
 
 import React from 'react';
-import { Check, TrendingUp, Award, Users } from 'lucide-react';
+import { Users, Award, Clock, Heart } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 
 const AboutUs: React.FC = () => {
+  const stats = [
+    {
+      icon: Users,
+      number: "1000+",
+      label: "Tevreden klanten"
+    },
+    {
+      icon: Award,
+      number: "20+",
+      label: "Jaar ervaring"
+    },
+    {
+      icon: Clock,
+      number: "2-4",
+      label: "Weken levertijd"
+    },
+    {
+      icon: Heart,
+      number: "100%",
+      label: "Tevredenheid"
+    }
+  ];
+
   return (
-    <section id="about" className="section-container">
+    <section id="about" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <AnimatedSection animation="fade-in-right">
-            <div className="relative">
-              <div className="absolute -top-4 -left-4 w-64 h-64 bg-brand-green/10 rounded-lg"></div>
-              <img
-                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                alt="Over Duurzaam Wonen Nederland"
-                className="w-full h-auto object-cover rounded-lg shadow-lg relative z-10"
-              />
-              <div className="absolute -bottom-6 -right-6 glass-card p-4 shadow-lg">
-                <div className="flex gap-4 items-center">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brand-green">20+</div>
-                    <div className="text-sm text-gray-600">Jaar ervaring</div>
-                  </div>
-                  <div className="h-12 w-px bg-gray-200"></div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brand-green">1000+</div>
-                    <div className="text-sm text-gray-600">Projecten</div>
-                  </div>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <AnimatedSection animation="fade-in">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Over Duurzaam Wonen Nederland
+              </h2>
+              <p className="text-gray-600 text-lg mb-6 leading-relaxed">
+                Met meer dan 20 jaar ervaring in de woningverduurzaming zijn wij uw specialist 
+                voor kunststof kozijnen, HR++ glas, dakkapellen en gevelbekleding. Ons vakkundige 
+                team zorgt voor een zorgeloze ervaring van advies tot montage.
+              </p>
+              <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                We werken uitsluitend met A-merken en bieden hoogwaardige, onderhoudsarme 
+                oplossingen die zorgen voor een comfortabeler huis en lagere energiekosten.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-6">
+                {stats.map((stat, index) => (
+                  <AnimatedSection key={index} animation="fade-in" delay={index * 100}>
+                    <div className="text-center">
+                      <div className="bg-brand-green/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <stat.icon className="h-6 w-6 text-brand-green" />
+                      </div>
+                      <div className="text-2xl font-bold text-brand-green mb-1">{stat.number}</div>
+                      <div className="text-sm text-gray-600">{stat.label}</div>
+                    </div>
+                  </AnimatedSection>
+                ))}
               </div>
             </div>
           </AnimatedSection>
-          
-          <AnimatedSection animation="fade-in-left" delay={200}>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Over Duurzaam Wonen Nederland</h2>
-            <p className="text-gray-600 mb-6">
-              Wat begon als een klein bedrijf gespecialiseerd in kunststof kozijnen, is uitgegroeid tot een gerenommeerde onderneming in woningverduurzaming. Innovatie en kwaliteit staan centraal, waarbij altijd de nieuwste technieken en trends worden toegepast.
-            </p>
-            <p className="text-gray-600 mb-8">
-              Het bedrijf streeft ernaar om woningen comfortabeler, energiezuiniger en onderhoudsvriendelijker te maken. Met ons team van ervaren vakmensen bieden wij hoogwaardige maatwerkoplossingen voor elke woning.
-            </p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div className="flex items-start">
-                <div className="bg-brand-green/10 p-2 rounded-full mr-3 mt-1">
-                  <TrendingUp className="h-5 w-5 text-brand-green" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Innovatieve oplossingen</h4>
-                  <p className="text-sm text-gray-600">Toepassing van moderne technieken</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <div className="bg-brand-green/10 p-2 rounded-full mr-3 mt-1">
-                  <Award className="h-5 w-5 text-brand-green" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Hoogste kwaliteit</h4>
-                  <p className="text-sm text-gray-600">Premium materialen en afwerking</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <div className="bg-brand-green/10 p-2 rounded-full mr-3 mt-1">
-                  <Users className="h-5 w-5 text-brand-green" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Eigen montageteam</h4>
-                  <p className="text-sm text-gray-600">Professionele en zorgvuldige installatie</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <div className="bg-brand-green/10 p-2 rounded-full mr-3 mt-1">
-                  <Check className="h-5 w-5 text-brand-green" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Maatwerk oplossingen</h4>
-                  <p className="text-sm text-gray-600">Afgestemd op uw specifieke wensen</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="p-4 bg-gray-50 rounded-lg border border-gray-100">
-              <p className="italic text-gray-700">
-                "Wij geloven in groei op de lange termijn. Door de juiste samenwerkingen aan te gaan en technische expertise in huis te halen, kan iedereen elke dag Duurzaam wonen."
-              </p>
-              <p className="text-right text-brand-green-dark font-medium mt-2">- Directeur Duurzaam Wonen Nederland</p>
+
+          <AnimatedSection animation="fade-in" delay={200}>
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/e39f3289-8c7c-49f2-a6e4-bf9295d9e482.png" 
+                alt="Kunststof Kozijnen Team Duurzaam Wonen Nederland"
+                className="w-full h-auto rounded-lg shadow-lg"
+              />
             </div>
           </AnimatedSection>
         </div>
