@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -7,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Palette, Home, CheckCircle2, Image, Droplet, PanelRight, Paintbrush, Layers, Star, Info } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import Navbar from '@/components/Navbar';
@@ -25,13 +25,25 @@ interface ColorOption {
   ralCode?: string;
 }
 
+interface ProfileOption {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 const ColorOptions: React.FC = () => {
   const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null);
   const [filterCategory, setFilterCategory] = useState<string>("all");
   const [activeTab, setActiveTab] = useState<string>("visualizer");
+  const [selectedProfile, setSelectedProfile] = useState<string>("living-82");
 
   const visualizerTitleRef = useRef<HTMLHeadingElement>(null);
   const collectionTitleRef = useRef<HTMLHeadingElement>(null);
+
+  const profileOptions: ProfileOption[] = [
+    { id: "living-82", name: "Schüco LivIng 82", slug: "living-82" },
+    { id: "ct-70-as", name: "Schüco CT 70 AS", slug: "ct-70-as" }
+  ];
 
   const colorOptions: ColorOption[] = [
     { name: 'Puur Wit', hex: '#FFFFFF', category: 'standard', popular: true, description: 'De klassieke en meest gekozen kleur, tijdloos en past bij elke woning.', ralCode: 'RAL 9016' },
@@ -250,57 +262,38 @@ const ColorOptions: React.FC = () => {
                           </CardContent>
                         </Card>
                       </AnimatedSection>
+
+                      <AnimatedSection animation="fade-in" delay={100}>
+                        <Card>
+                          <CardContent className="p-6">
+                            <h3 className="text-xl font-semibold mb-4 flex items-center">
+                              <Layers className="h-5 w-5 mr-2 text-brand-green" />
+                              Kies profiel
+                            </h3>
+                            
+                            <Select value={selectedProfile} onValueChange={setSelectedProfile}>
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Selecteer een profiel" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {profileOptions.map((profile) => (
+                                  <SelectItem key={profile.id} value={profile.id}>
+                                    {profile.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </CardContent>
+                        </Card>
+                      </AnimatedSection>
                     </div>
                     
                     <div className="lg:col-span-2">
                       <AnimatedSection animation="fade-in" delay={200}>
-                        <Card className="overflow-hidden h-full">
-                          <CardContent className="p-0 relative">
-                            <div className="relative">
-                              <img 
-                                src="/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png"
-                                alt="Kunststof kozijn doorsnede"
-                                className="w-full object-cover"
-                              />
-                              
-                              {selectedColor && (
-                                <div 
-                                  className="absolute inset-0 mix-blend-multiply"
-                                  style={{ 
-                                    backgroundColor: selectedColor.image 
-                                      ? 'transparent' 
-                                      : selectedColor.hex,
-                                    backgroundImage: selectedColor.image 
-                                      ? `url(${selectedColor.image})` 
-                                      : 'none',
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center',
-                                    opacity: selectedColor.image ? 0.5 : 0.4
-                                  }}
-                                ></div>
-                              )}
-                              
-                              {!selectedColor && (
-                                <div 
-                                  className="absolute inset-0 flex items-center justify-center"
-                                  style={{
-                                    backgroundImage: "url('/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png')",
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center'
-                                  }}
-                                >
-                                  <div className="text-center bg-white/90 backdrop-blur-sm p-6 rounded-lg max-w-md">
-                                    <Palette className="h-12 w-12 mx-auto mb-4 text-brand-green" />
-                                    <h3 className="text-xl font-semibold mb-2">Selecteer een kleur</h3>
-                                    <p>Kies een kleur in het paneel links om te zien hoe het eruit ziet op kunststof kozijnen.</p>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                            
-                            <ProductDetails selectedColor={selectedColor?.name || null} />
-                          </CardContent>
-                        </Card>
+                        <ProductDetails 
+                          selectedColor={selectedColor?.name || null} 
+                          selectedProfile={selectedProfile}
+                        />
                       </AnimatedSection>
                       
                       <div className="mt-6">
@@ -314,7 +307,7 @@ const ColorOptions: React.FC = () => {
                               
                               <Accordion type="single" collapsible className="w-full">
                                 <AccordionItem value="item-1">
-                                  <AccordionTrigger>Binnen- en buitenzijde in verschillende kleuren</AccordionTrigger>
+                                  <AccordionTrigger className="text-base">Binnen- en buitenzijde in verschillende kleuren</AccordionTrigger>
                                   <AccordionContent>
                                     <p className="mb-2">Het is mogelijk om de binnen- en buitenzijde van uw kunststof kozijnen in verschillende kleuren uit te voeren.</p>
                                     <p>Populaire combinaties zijn:</p>
@@ -326,14 +319,14 @@ const ColorOptions: React.FC = () => {
                                   </AccordionContent>
                                 </AccordionItem>
                                 <AccordionItem value="item-2">
-                                  <AccordionTrigger>Onderhoud van gekleurde kozijnen</AccordionTrigger>
+                                  <AccordionTrigger className="text-base">Onderhoud van gekleurde kozijnen</AccordionTrigger>
                                   <AccordionContent>
                                     <p>Gekleurde kunststof kozijnen zijn net zo onderhoudsvriendelijk als witte kozijnen. Ze hoeven niet geschilderd te worden en zijn eenvoudig schoon te maken met water en een mild reinigingsmiddel.</p>
                                     <p className="mt-2">Bij donkere kleuren kan in direct zonlicht de temperatuur van het kozijn oplopen. Dit heeft geen invloed op de kwaliteit of levensduur.</p>
                                   </AccordionContent>
                                 </AccordionItem>
                                 <AccordionItem value="item-3">
-                                  <AccordionTrigger>Levertijd en beschikbaarheid</AccordionTrigger>
+                                  <AccordionTrigger className="text-base">Levertijd en beschikbaarheid</AccordionTrigger>
                                   <AccordionContent>
                                     <p>De levertijd voor kunststof kozijnen is afhankelijk van de gekozen kleur:</p>
                                     <ul className="list-disc pl-5 mt-2 space-y-1">

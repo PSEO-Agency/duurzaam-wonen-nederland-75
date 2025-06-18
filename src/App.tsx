@@ -55,6 +55,10 @@ const SchucoBrand = lazy(() => import('./pages/brands/SchucoBrand'));
 const KozijnenEnschede = lazy(() => import('./pages/locaties/KozijnenEnschede'));
 const KozijnenInmeten = lazy(() => import('./pages/services/KozijnenInmeten'));
 
+// Profile pages
+const Living82 = lazy(() => import('./pages/profielen/Living82'));
+const CT70AS = lazy(() => import('./pages/profielen/CT70AS'));
+
 // Admin pages
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
 const AdminPages = lazy(() => import('./pages/admin/Pages'));
@@ -119,6 +123,10 @@ function App() {
                 <Route path="/kunststof-kozijnen/merken/schuco" element={<SchucoBrand />} />
                 <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />
                 <Route path="/kunststof-kozijnen/services/inmeten" element={<KozijnenInmeten />} />
+                
+                {/* Profile routes */}
+                <Route path="/kunststof-kozijnen/profielen/living-82" element={<Living82 />} />
+                <Route path="/kunststof-kozijnen/profielen/ct-70-as" element={<CT70AS />} />
                 
                 {/* New URL structure - /{service}/{region}/{city} */}
                 <Route path="/:serviceSlug/:regionSlug/:citySlug" element={<CityServicePageNew />} />
