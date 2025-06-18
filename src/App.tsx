@@ -1,3 +1,4 @@
+
 import React, { Suspense } from 'react';
 import {
   BrowserRouter,
@@ -5,8 +6,8 @@ import {
   Route,
 } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
-import { Toaster } from 'react-hot-toast';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { Toaster } from '@/components/ui/toaster';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import ScrollToTop from '@/components/ScrollToTop';
 import ScrollToTopOnNavigate from '@/components/ScrollToTopOnNavigate';
@@ -28,15 +29,12 @@ import Sections from '@/pages/admin/Sections';
 import SectionEditor from '@/pages/admin/SectionEditor';
 import Templates from '@/pages/admin/Templates';
 
-import Home from '@/pages/Home';
-import About from '@/pages/About';
+import Index from '@/pages/Index';
+import OverOns from '@/pages/OverOns';
 import Contact from '@/pages/Contact';
 import ProductPage from '@/pages/ProductPage';
-import ServicePage from '@/pages/ServicePage';
 import CityServicePage from '@/pages/CityServicePage';
-import LocationsPage from '@/pages/LocationsPage';
-import ProjectsPage from '@/pages/ProjectsPage';
-import GenericPage from '@/pages/GenericPage';
+import Projects as ProjectsPage from '@/pages/Projects';
 import NotFound from '@/pages/NotFound';
 
 import { AdminProvider } from '@/contexts/AdminContext';
@@ -57,18 +55,14 @@ function App() {
                 <AdminBar />
                 <ScrollToTopOnNavigate />
                 <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
+                  <Route path="/" element={<Index />} />
+                  <Route path="/over-ons" element={<OverOns />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/products" element={<ProductPage />} />
                   <Route path="/products/:id" element={<ProductPage />} />
-                  <Route path="/services" element={<ServicePage />} />
-                  <Route path="/services/:slug" element={<ServicePage />} />
                   <Route path="/city-services" element={<CityServicePage />} />
                   <Route path="/city-services/:city/:service" element={<CityServicePage />} />
-                  <Route path="/locations" element={<LocationsPage />} />
                   <Route path="/projects" element={<ProjectsPage />} />
-                  <Route path="/:slug" element={<GenericPage />} />
                   
                   {/* Admin Login Route - unprotected */}
                   <Route path="/admin/login" element={<AdminLogin />} />
