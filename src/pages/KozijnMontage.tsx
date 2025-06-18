@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Check, Wrench, Clock, Hammer, ShieldCheck, Star, X, Ruler, Settings, Paintbrush, CheckCircle } from 'lucide-react';
+import { ArrowRight, Check, Wrench, Hammer, ShieldCheck, Star, X, Ruler, Settings, Paintbrush, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -22,43 +22,37 @@ const KozijnMontage: React.FC = () => {
       id: 1,
       title: 'Inmeten',
       description: 'Nauwkeurige opmeting van alle kozijnopeningen om de exacte maten te bepalen.',
-      icon: <Ruler className="h-8 w-8 text-brand-green" />,
-      duration: '1 dag'
+      icon: <Ruler className="h-8 w-8 text-brand-green" />
     },
     {
       id: 2,
       title: 'Productie',
       description: 'Uw kozijnen worden op maat gemaakt in onze fabriek volgens de afgesproken specificaties.',
-      icon: <Settings className="h-8 w-8 text-brand-green" />,
-      duration: '4-6 weken'
+      icon: <Settings className="h-8 w-8 text-brand-green" />
     },
     {
       id: 3,
       title: 'Oude kozijnen verwijderen',
       description: 'De bestaande kozijnen worden zorgvuldig gedemonteerd en afgevoerd.',
-      icon: <Wrench className="h-8 w-8 text-brand-green" />,
-      duration: '1-2 dagen'
+      icon: <Wrench className="h-8 w-8 text-brand-green" />
     },
     {
       id: 4,
       title: 'Nieuwe kozijnen plaatsen',
       description: 'De nieuwe kunststof kozijnen worden waterpas en luchtdicht gemonteerd.',
-      icon: <Hammer className="h-8 w-8 text-brand-green" />,
-      duration: '1-2 dagen'
+      icon: <Hammer className="h-8 w-8 text-brand-green" />
     },
     {
       id: 5,
       title: 'Afwerking',
       description: 'Alle naden worden netjes afgewerkt met kit en eventueel worden nieuwe vensterbanken geplaatst.',
-      icon: <Paintbrush className="h-8 w-8 text-brand-green" />,
-      duration: '1 dag'
+      icon: <Paintbrush className="h-8 w-8 text-brand-green" />
     },
     {
       id: 6,
       title: 'Eindcontrole',
       description: 'Controle op werking, luchtdichtheid en afwerking van alle gemonteerde kozijnen.',
-      icon: <CheckCircle className="h-8 w-8 text-brand-green" />,
-      duration: 'Direct na montage'
+      icon: <CheckCircle className="h-8 w-8 text-brand-green" />
     }
   ];
 
@@ -116,10 +110,6 @@ const KozijnMontage: React.FC = () => {
                         <p className="text-gray-700 mb-4">
                           {step.description}
                         </p>
-                        <div className="flex items-center text-gray-500 text-sm">
-                          <Clock className="h-4 w-4 mr-2" />
-                          <span>Duur: {step.duration}</span>
-                        </div>
                       </CardContent>
                     </Card>
                   </AnimatedSection>
@@ -177,7 +167,7 @@ const KozijnMontage: React.FC = () => {
                       
                       <div className="bg-white p-4 rounded-lg shadow-sm">
                         <p className="text-gray-700">
-                          <strong>Prijs: </strong>Vanaf €300 per kozijn, afhankelijk van situatie en complexiteit
+                          <strong>Prijs: </strong>Vanaf €X per kozijn, afhankelijk van situatie en complexiteit
                         </p>
                       </div>
                     </TabsContent>
@@ -205,7 +195,7 @@ const KozijnMontage: React.FC = () => {
                       
                       <div className="bg-white p-4 rounded-lg shadow-sm">
                         <p className="text-gray-700">
-                          <strong>Prijs: </strong>Vanaf €200 per kozijn, afhankelijk van situatie en complexiteit
+                          <strong>Prijs: </strong>Vanaf €X per kozijn, afhankelijk van situatie en complexiteit
                         </p>
                       </div>
                     </TabsContent>
@@ -319,7 +309,7 @@ const KozijnMontage: React.FC = () => {
                           <span className="ml-2 text-sm font-medium">Familie De Vries, Enschede</span>
                         </div>
                         <p className="text-gray-700 text-sm italic">
-                          "De monteurs werkten ongelooflijk netjes en precies. Alles werd perfect afgewerkt en ze ruimden alles keurig op. Zeer tevreden!"
+                          "De monteurs werkten ongelooflijk netjes en precies. Alles werd perfect afgewerkt en zeer keurig op. Zeer tevreden!"
                         </p>
                       </div>
                       

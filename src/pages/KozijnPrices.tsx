@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Check, Euro, PiggyBank, BarChart4, Calculator, BadgePercent } from 'lucide-react';
+import { ArrowRight, Check, Euro, PiggyBank, BarChart4, Calculator, TrendingUp, Lightbulb, Home, Wrench, Shield, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -19,51 +18,67 @@ import ContactCTA from '@/components/ContactCTA';
 import { Link } from 'react-router-dom';
 
 const KozijnPrices: React.FC = () => {
-  const kozijnTypes = [
+  const priceRanges = [
     {
-      category: 'Vast kozijn',
-      sizes: '60x60 cm tot 120x120 cm',
-      features: 'Maximale isolatie, vaste ruit'
+      type: 'Kunststof kozijnen',
+      priceRange: '€400 - €1.200',
+      description: 'Uitstekende isolatie, onderhoudsvrij, lange levensduur',
+      features: [
+        'Zeer goede isolatiewaarde',
+        'Onderhoudsvrij materiaal',
+        'Lange levensduur (40+ jaar)',
+        'Grote kleurkeuze',
+        'Uitstekende prijs-kwaliteitverhouding'
+      ],
+      icon: <Home className="h-8 w-8 text-brand-green" />,
+      popular: true,
+      hasButton: true
     },
     {
-      category: 'Draai-kiep kozijn',
-      sizes: '60x80 cm tot 100x160 cm',
-      features: 'Ventilatie mogelijk, draaibaar'
+      type: 'Houten kozijnen',
+      priceRange: '€600 - €2.000',
+      description: 'Natuurlijk materiaal, klassieke uitstraling, duurzaam',
+      features: [
+        'Natuurlijk en duurzaam materiaal',
+        'Klassieke en warme uitstraling',
+        'Goede isolatiewaarde',
+        'Volledig recyclebaar',
+        'Traditionele Nederlandse kwaliteit'
+      ],
+      icon: <Lightbulb className="h-8 w-8 text-amber-600" />,
+      popular: false,
+      hasButton: false
     },
     {
-      category: 'Stolpstel kozijn',
-      sizes: '120x120 cm tot 200x200 cm',
-      features: 'Brede opening, klassieke uitstraling'
-    },
-    {
-      category: 'Schuifpui',
-      sizes: '180x210 cm tot 400x210 cm',
-      features: 'Ruimtebesparend, grote glaspartijen'
-    },
-    {
-      category: 'Harmonica kozijn',
-      sizes: '240x210 cm tot 600x250 cm',
-      features: 'Maximale opening, flexibel'
+      type: 'Aluminium kozijnen',
+      priceRange: '€800 - €2.500',
+      description: 'Modern design, zeer duurzaam, minimaal onderhoud',
+      features: [
+        'Modern en strak design',
+        'Zeer lange levensduur',
+        'Minimaal onderhoud nodig',
+        'Geschikt voor grote glasoppervlakken',
+        'Hoge sterkte en stabiliteit'
+      ],
+      icon: <TrendingUp className="h-8 w-8 text-gray-600" />,
+      popular: false,
+      hasButton: false
     }
   ];
 
-  const additionalOptions = [
-    { option: 'Triple beglazing', feature: 'Superieure isolatie' },
-    { option: 'Geluidsisolerend glas', feature: 'Optimale geluidswering' },
-    { option: 'Veiligheidsglas', feature: 'Extra bescherming' },
-    { option: 'Zonwerend glas', feature: 'Vermindert warmtetoetreding' },
-    { option: 'Roedes tussen glas', feature: 'Klassieke uitstraling' },
-    { option: 'Inbouw-/opbouwrolluiken', feature: 'Privacy en isolatie' },
-    { option: 'Ventilatieroosters', feature: 'Gecontroleerde luchtcirculatie' },
-    { option: 'Horren', feature: 'Insectenwerend' },
-    { option: 'Speciale grepen/krukken', feature: 'Uniek design' },
+  const sizePrices = [
+    { size: '60x60 cm', kunststof: '€400-600', hout: '€600-900', aluminium: '€800-1200' },
+    { size: '80x100 cm', kunststof: '€500-750', hout: '€750-1150', aluminium: '€950-1450' },
+    { size: '100x120 cm', kunststof: '€650-950', hout: '€950-1450', aluminium: '€1200-1800' },
+    { size: '120x140 cm', kunststof: '€800-1200', hout: '€1200-1800', aluminium: '€1500-2250' },
+    { size: '150x180 cm', kunststof: '€1000-1500', hout: '€1500-2250', aluminium: '€1900-2850' }
   ];
 
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>Kunststof Kozijnen Prijzen | Duurzaam Wonen Nederland</title>
-        <meta name="description" content="Vraag vrijblijvend een offerte aan voor kunststof kozijnen. Elke prijsopgave wordt op maat gemaakt op basis van uw specifieke wensen en situatie." />
+        <meta name="description" content="Ontdek de prijzen van kunststof kozijnen en vergelijk verschillende opties. Vraag een vrijblijvende offerte aan voor de beste prijs." />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/prijzen" />
       </Helmet>
       
@@ -74,13 +89,13 @@ const KozijnPrices: React.FC = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <span className="inline-block px-4 py-1 bg-brand-green/90 text-white rounded-full text-sm font-medium mb-4">
-                Kunststof Kozijnen
+                Prijzen Kunststof Kozijnen
               </span>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Prijsinformatie Kunststof Kozijnen
+                Transparante Prijzen Voor Uw Kunststof Kozijnen
               </h1>
               <p className="text-lg text-gray-700 mb-8">
-                Voor kunststof kozijnen werken wij uitsluitend met gepersonaliseerde prijsopgaves op basis van uw specifieke situatie en wensen.
+                Ontdek onze eerlijke en transparante prijzen voor kunststof kozijnen. Inclusief montage, garantie en service voor de beste prijs-kwaliteitverhouding.
               </p>
             </div>
           </div>
@@ -89,6 +104,64 @@ const KozijnPrices: React.FC = () => {
         <StickyNavigation />
         
         <section className="py-12">
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-in">
+              <h2 className="text-3xl font-bold mb-8 text-center">Prijsvergelijking Kozijnmaterialen</h2>
+              <p className="text-lg text-gray-700 mb-10 text-center max-w-3xl mx-auto">
+                Vergelijk de prijzen van verschillende kozijnmaterialen en ontdek welke optie het beste bij uw budget en wensen past.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                {priceRanges.map((item, index) => (
+                  <AnimatedSection key={index} animation="fade-in" delay={index * 100}>
+                    <Card className={`h-full relative ${item.popular ? 'ring-2 ring-brand-green border-brand-green' : ''}`}>
+                      {item.popular && (
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                          <span className="bg-brand-green text-white px-4 py-1 rounded-full text-sm font-medium">
+                            Meest gekozen
+                          </span>
+                        </div>
+                      )}
+                      <CardContent className="p-6">
+                        <div className="flex items-center mb-4">
+                          {item.icon}
+                          <h3 className="text-xl font-semibold ml-3">{item.type}</h3>
+                        </div>
+                        
+                        <div className="mb-4">
+                          <div className="text-3xl font-bold text-gray-900 mb-2">{item.priceRange}</div>
+                          <p className="text-gray-600 text-sm">per kozijn, inclusief montage</p>
+                        </div>
+                        
+                        <p className="text-gray-700 mb-4">{item.description}</p>
+                        
+                        <ul className="space-y-2 mb-6">
+                          {item.features.map((feature, featureIndex) => (
+                            <li key={featureIndex} className="flex items-start">
+                              <Check className="h-5 w-5 text-brand-green mt-0.5 mr-2 shrink-0" />
+                              <span className="text-gray-700 text-sm">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        
+                        {item.hasButton && (
+                          <Button asChild className="w-full bg-brand-green hover:bg-brand-green-dark">
+                            <Link to="/offerte">
+                              Offerte aanvragen
+                              <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
+                          </Button>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </AnimatedSection>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+        
+        <section className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
               <h2 className="text-3xl font-bold mb-2 text-center">Kozijnen op maat van hoogwaardige kwaliteit</h2>
@@ -633,6 +706,8 @@ const KozijnPrices: React.FC = () => {
         </section>
         
         <Services />
+        
+        <Reviews />
         
         <ContactCTA />
       </main>

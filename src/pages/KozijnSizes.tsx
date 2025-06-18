@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, ChevronDown, Ruler, Maximize2, Minimize2 } from 'lucide-react';
@@ -147,9 +146,11 @@ const KozijnSizes: React.FC = () => {
                   </Tabs>
                   
                   <div className="mt-8">
-                    <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
-                      <span>Vraag een inmeting aan</span>
-                      <ArrowRight className="ml-2 h-4 w-4" />
+                    <Button asChild className="bg-brand-green hover:bg-brand-green-dark text-white">
+                      <Link to="/offerte">
+                        <span>Vraag adviesgesprek aan</span>
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
                     </Button>
                   </div>
                 </AnimatedSection>
