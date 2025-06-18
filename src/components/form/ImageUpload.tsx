@@ -26,9 +26,26 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
+  const validateUrl = (url: string): boolean => {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+
+    console.log('=== IMAGE UPLOAD DEBUG START ===');
+    console.log('File selected:', {
+      name: file.name,
+      size: file.size,
+      type: file.type
+    });
+    console.log('Target bucket:', bucketName);
 
     try {
       setUploading(true);
@@ -37,8 +54,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       const fileExt = file.name.split('.').pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
       
-      console.log('Uploading file:', fileName, 'to bucket:', bucketName);
+      console.log('Generated filename:', fileName);
       
+      // Upload file to Supabase storage
       const { data, error } = await supabase.storage
         .from(bucketName)
         .upload(fileName, file, {
@@ -46,28 +64,60 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           upsert: false
         });
 
+      console.log('Upload response:', { data, error });
+
       if (error) {
-        console.error('Upload error:', error);
+        console.error('Upload error details:', error);
         throw error;
       }
 
-      console.log('Upload successful:', data);
+      console.log('Upload successful, data path:', data.path);
 
       // Get public URL
       const { data: urlData } = supabase.storage
         .from(bucketName)
         .getPublicUrl(fileName);
 
-      console.log('Public URL:', urlData.publicUrl);
+      console.log('Public URL data:', urlData);
+      console.log('Generated URL:', urlData.publicUrl);
       
+      // Validate the URL
+      if (!validateUrl(urlData.publicUrl)) {
+        throw new Error('Generated URL is invalid');
+      }
+
+      // Test if the URL is accessible
+      try {
+        const response = await fetch(urlData.publicUrl, { method: 'HEAD' });
+        console.log('URL accessibility test:', {
+          status: response.status,
+          ok: response.ok,
+          headers: Object.fromEntries(response.headers.entries())
+        });
+        
+        if (!response.ok) {
+          console.warn('URL might not be immediately accessible:', response.status);
+        }
+      } catch (fetchError) {
+        console.warn('Could not test URL accessibility:', fetchError);
+      }
+
+      // Call onChange with the URL
+      console.log('Calling onChange with URL:', urlData.publicUrl);
       onChange(urlData.publicUrl);
       
+      console.log('=== IMAGE UPLOAD DEBUG END ===');
+
       toast({
         title: "Afbeelding geüpload",
         description: "De afbeelding is succesvol geüpload.",
       });
-    } catch (error) {
-      console.error('Error uploading file:', error);
+    } catch (error: any) {
+      console.error('=== IMAGE UPLOAD ERROR ===');
+      console.error('Error details:', error);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+      
       toast({
         title: "Upload fout",
         description: `Er is een fout opgetreden bij het uploaden van de afbeelding: ${error.message}`,
@@ -83,12 +133,23 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   };
 
   const handleUploadClick = () => {
+    console.log('Upload button clicked');
     fileInputRef.current?.click();
   };
 
   const clearImage = () => {
+    console.log('Clearing image, current value:', value);
     onChange('');
   };
+
+  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newUrl = e.target.value;
+    console.log('Manual URL change:', newUrl);
+    onChange(newUrl);
+  };
+
+  // Debug current value
+  console.log('ImageUpload render - current value:', value);
 
   return (
     <div className="space-y-2">
@@ -96,7 +157,16 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       
       {value && (
         <div className="relative inline-block">
-          <img src={value} alt="Preview" className="w-32 h-32 object-cover rounded border" />
+          <img 
+            src={value} 
+            alt="Preview" 
+            className="w-32 h-32 object-cover rounded border"
+            onLoad={() => console.log('Image loaded successfully:', value)}
+            onError={(e) => {
+              console.error('Image failed to load:', value);
+              console.error('Image error event:', e);
+            }}
+          />
           <Button
             type="button"
             variant="destructive"
@@ -112,7 +182,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       <div className="flex gap-2">
         <Input
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={handleUrlChange}
           placeholder={placeholder || "Afbeelding URL"}
           className="flex-1"
         />
@@ -137,6 +207,15 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           </Button>
         </div>
       </div>
+      
+      {/* Debug info in development */}
+      {process.env.NODE_ENV === 'development' && value && (
+        <div className="text-xs text-gray-500 mt-2">
+          <strong>Debug - Current URL:</strong> {value}
+          <br />
+          <strong>Valid URL:</strong> {validateUrl(value) ? 'Yes' : 'No'}
+        </div>
+      )}
     </div>
   );
 };

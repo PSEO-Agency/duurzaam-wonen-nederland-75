@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -159,8 +158,14 @@ const Projects: React.FC = () => {
       sort_order: project?.sort_order || 0
     });
 
+    // Debug form data changes
+    console.log('ProjectForm render - formData:', formData);
+
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
+      
+      console.log('=== FORM SUBMIT DEBUG ===');
+      console.log('Raw form data:', formData);
       
       // Clean up the data before submitting, convert empty strings to null
       const cleanedData = {
@@ -173,7 +178,28 @@ const Projects: React.FC = () => {
         featured_image: formData.featured_image.trim() || null,
       };
       
+      console.log('Cleaned form data:', cleanedData);
+      console.log('=== FORM SUBMIT DEBUG END ===');
+      
       onSubmit(cleanedData);
+    };
+
+    const handleImageUrlChange = (url: string) => {
+      console.log('Image URL changed:', url);
+      setFormData(prev => {
+        const newData = { ...prev, image_url: url };
+        console.log('Updated formData with image_url:', newData);
+        return newData;
+      });
+    };
+
+    const handleFeaturedImageChange = (url: string) => {
+      console.log('Featured image URL changed:', url);
+      setFormData(prev => {
+        const newData = { ...prev, featured_image: url };
+        console.log('Updated formData with featured_image:', newData);
+        return newData;
+      });
     };
 
     return (
@@ -241,14 +267,14 @@ const Projects: React.FC = () => {
         <ImageUpload
           label="Hoofdafbeelding"
           value={formData.image_url}
-          onChange={(url) => setFormData(prev => ({ ...prev, image_url: url }))}
+          onChange={handleImageUrlChange}
           bucketName="project-images"
         />
 
         <ImageUpload
           label="Featured Afbeelding"
           value={formData.featured_image}
-          onChange={(url) => setFormData(prev => ({ ...prev, featured_image: url }))}
+          onChange={handleFeaturedImageChange}
           bucketName="project-images"
         />
 
