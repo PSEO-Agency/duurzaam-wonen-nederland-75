@@ -93,7 +93,7 @@ const Services: React.FC = () => {
               Add Service
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Add New Service</DialogTitle>
               <DialogDescription>
@@ -211,7 +211,7 @@ const Services: React.FC = () => {
                           <Edit2Icon className="h-4 w-4" />
                         </Button>
                       </DialogTrigger>
-                      <DialogContent>
+                      <DialogContent className="max-h-[90vh] overflow-y-auto">
                         <DialogHeader>
                           <DialogTitle>Edit Service</DialogTitle>
                           <DialogDescription>
