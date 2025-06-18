@@ -89,7 +89,7 @@ const AdminLogin: React.FC = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="admin@duurzaamwonen.info"
+                  placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
@@ -126,9 +126,8 @@ const AdminLogin: React.FC = () => {
           </form>
           
           <div className="mt-4 p-3 bg-blue-50 rounded-md text-sm text-blue-800">
-            <strong>Test Credentials:</strong><br />
-            Email: admin@duurzaamwonen.info<br />
-            Password: pSEODWNAdmin@1
+            <strong>Note:</strong><br />
+            This now uses standard Supabase authentication. You'll need to create an admin user account in the Supabase dashboard or implement a signup flow.
           </div>
         </CardContent>
       </Card>

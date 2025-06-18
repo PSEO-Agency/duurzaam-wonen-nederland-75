@@ -3,10 +3,10 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useAdmin } from '@/contexts/AdminContext';
-import { Settings, LogOut, Home } from 'lucide-react';
+import { Settings, LogOut, Home, User } from 'lucide-react';
 
 const AdminBar: React.FC = () => {
-  const { isAuthenticated, logout } = useAdmin();
+  const { isAuthenticated, user, logout } = useAdmin();
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -15,8 +15,8 @@ const AdminBar: React.FC = () => {
     return null;
   }
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     navigate('/');
   };
 
@@ -39,6 +39,12 @@ const AdminBar: React.FC = () => {
         </Button>
       </div>
       <div className="flex items-center gap-2">
+        {user && (
+          <div className="flex items-center gap-2 text-sm">
+            <User className="h-4 w-4" />
+            <span>{user.email}</span>
+          </div>
+        )}
         <Button
           variant="ghost"
           size="sm"
