@@ -27,14 +27,14 @@ const KunststofKozijnen = () => {
       name: "Schüco LivIng 82",
       slug: "living-82",
       description: "Premium profiel met uitstekende isolatiewaarden en moderne uitstraling",
-      image: "/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png"
+      image: "/lovable-uploads/651c14c4-00b2-4f06-8f31-60accb52464d.png"
     },
     {
       id: "ct-70-as", 
       name: "Schüco CT 70 AS",
       slug: "ct-70-as",
       description: "Veelzijdig profiel voor renovatie en nieuwbouw projecten",
-      image: "/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png"
+      image: "/lovable-uploads/a7eb24e5-febb-40e5-a6f2-a535f1bc62ef.png"
     }
   ];
 
