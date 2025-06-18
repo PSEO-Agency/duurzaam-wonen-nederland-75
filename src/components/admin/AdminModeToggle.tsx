@@ -1,30 +1,36 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Shield, ShieldOff } from 'lucide-react';
 import { useAdmin } from '@/contexts/AdminContext';
+import { Settings } from 'lucide-react';
 
 const AdminModeToggle: React.FC = () => {
-  const { isAdminMode, toggleAdminMode } = useAdmin();
+  const { isAdminMode, isAuthenticated, toggleAdminMode } = useAdmin();
+  const navigate = useNavigate();
+
+  const handleToggle = () => {
+    if (!isAdminMode) {
+      // Activating admin mode - redirect to login if not authenticated
+      toggleAdminMode();
+      if (!isAuthenticated) {
+        navigate('/admin/login');
+      }
+    } else {
+      // Deactivating admin mode
+      toggleAdminMode();
+    }
+  };
 
   return (
     <Button
-      variant="ghost"
+      variant={isAdminMode ? "destructive" : "outline"}
       size="sm"
-      onClick={toggleAdminMode}
-      className="text-white hover:bg-slate-700"
+      onClick={handleToggle}
+      className="fixed bottom-4 right-4 z-50"
     >
-      {isAdminMode ? (
-        <>
-          <ShieldOff size={16} className="mr-2" />
-          Exit Admin
-        </>
-      ) : (
-        <>
-          <Shield size={16} className="mr-2" />
-          Admin Mode
-        </>
-      )}
+      <Settings className="h-4 w-4 mr-2" />
+      {isAdminMode ? 'Exit Admin' : 'Admin'}
     </Button>
   );
 };

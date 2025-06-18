@@ -1,67 +1,58 @@
 
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Lock } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import AdminModeToggle from './AdminModeToggle';
 import { useAdmin } from '@/contexts/AdminContext';
+import { Settings, LogOut, Eye } from 'lucide-react';
 
 const AdminBar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { isAdminMode } = useAdmin();
+  const { isAdminMode, isAuthenticated, toggleAdminMode, logout } = useAdmin();
+  const navigate = useNavigate();
 
-  // Don't render if admin mode is not enabled
-  if (!isAdminMode) {
-    return null;
-  }
+  if (!isAdminMode) return null;
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
-    <div className={cn(
-      "w-full bg-slate-800 text-white transition-all duration-300",
-      isOpen ? "h-12" : "h-8"
-    )}>
-      <div className="container mx-auto px-4 h-full flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Lock size={16} />
-          <span className="text-sm font-medium">Site Admin Mode</span>
-        </div>
-        
-        <div className="flex items-center gap-4">
-          <Button 
-            asChild 
-            variant="ghost" 
-            size="sm" 
-            className="text-white hover:bg-slate-700"
+    <div className="fixed top-0 left-0 right-0 bg-red-600 text-white px-4 py-2 z-50 flex items-center justify-between">
+      <div className="flex items-center gap-4">
+        <span className="font-medium">Admin Mode Active</span>
+        {isAuthenticated && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate('/admin/dashboard')}
+            className="text-white hover:bg-red-700"
           >
-            <Link to="/admin/dashboard">
-              <LayoutDashboard size={16} className="mr-2" />
-              Dashboard
-            </Link>
+            <Settings className="h-4 w-4 mr-2" />
+            Dashboard
           </Button>
-          
-          <Button 
-            asChild 
-            variant="ghost" 
-            size="sm" 
-            className="text-white hover:bg-slate-700"
+        )}
+      </div>
+      <div className="flex items-center gap-2">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={toggleAdminMode}
+          className="text-white hover:bg-red-700"
+        >
+          <Eye className="h-4 w-4 mr-2" />
+          Exit Admin
+        </Button>
+        {isAuthenticated && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleLogout}
+            className="text-white hover:bg-red-700"
           >
-            <Link to="/">
-              View Site
-            </Link>
+            <LogOut className="h-4 w-4 mr-2" />
+            Logout
           </Button>
-          
-          <AdminModeToggle />
-          
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="text-white hover:bg-slate-700"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? "Collapse" : "Expand"}
-          </Button>
-        </div>
+        )}
       </div>
     </div>
   );
