@@ -2,10 +2,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface AdminContextType {
-  isAdminMode: boolean;
   isAuthenticated: boolean;
-  toggleAdminMode: () => void;
-  setAdminMode: (enabled: boolean) => void;
+  login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
 }
 
@@ -24,55 +22,64 @@ interface AdminProviderProps {
 }
 
 export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
-  const [isAdminMode, setIsAdminMode] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Load admin mode and authentication state from localStorage on mount
+  // Load authentication state from localStorage on mount
   useEffect(() => {
-    const savedAdminMode = localStorage.getItem('adminMode');
     const savedAuth = localStorage.getItem('adminAuthenticated');
-    
-    if (savedAdminMode === 'true') {
-      setIsAdminMode(true);
-    }
-    
     if (savedAuth === 'true') {
       setIsAuthenticated(true);
     }
   }, []);
 
-  // Save admin mode state to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('adminMode', isAdminMode.toString());
-  }, [isAdminMode]);
+  const login = async (email: string, password: string): Promise<boolean> => {
+    try {
+      const { supabase } = await import('@/integrations/supabase/client');
+      
+      console.log('Attempting login with:', { email });
+      
+      // Query the admin_auth table to validate credentials
+      const { data, error } = await supabase
+        .from('admin_auth')
+        .select('email, password_hash, is_active')
+        .eq('email', email)
+        .eq('is_active', true)
+        .single();
 
-  // Save authentication state to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('adminAuthenticated', isAuthenticated.toString());
-  }, [isAuthenticated]);
+      console.log('Database response:', { data, error });
 
-  const toggleAdminMode = () => {
-    setIsAdminMode(prev => !prev);
-  };
+      if (error || !data) {
+        console.log('No user found or database error:', error);
+        return false;
+      }
 
-  const setAdminMode = (enabled: boolean) => {
-    setIsAdminMode(enabled);
-    setIsAuthenticated(enabled);
+      // Simple password verification (plaintext for now)
+      const isPasswordValid = password === data.password_hash;
+      
+      if (isPasswordValid) {
+        console.log('Login successful!');
+        setIsAuthenticated(true);
+        localStorage.setItem('adminAuthenticated', 'true');
+        return true;
+      } else {
+        console.log('Password verification failed');
+        return false;
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      return false;
+    }
   };
 
   const logout = () => {
-    setIsAdminMode(false);
     setIsAuthenticated(false);
-    localStorage.removeItem('adminMode');
     localStorage.removeItem('adminAuthenticated');
   };
 
   return (
     <AdminContext.Provider value={{ 
-      isAdminMode, 
       isAuthenticated, 
-      toggleAdminMode, 
-      setAdminMode, 
+      login, 
       logout 
     }}>
       {children}

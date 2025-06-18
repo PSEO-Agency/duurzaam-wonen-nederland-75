@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { supabase } from '@/integrations/supabase/client';
 import { useAdmin } from '@/contexts/AdminContext';
 import { Lock, User } from 'lucide-react';
 
@@ -17,7 +16,7 @@ const AdminLogin: React.FC = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { isAuthenticated, setAdminMode } = useAdmin();
+  const { isAuthenticated, login } = useAdmin();
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -26,68 +25,17 @@ const AdminLogin: React.FC = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  // Simple password verification function (for demonstration - in production use proper bcrypt)
-  const verifyPassword = async (inputPassword: string, storedHash: string): Promise<boolean> => {
-    // For now, we'll use the known password hash for 'pSEODWNAdmin@1'
-    // The hash we stored: $2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
-    const expectedHash = '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
-    
-    console.log('Verifying password:', {
-      inputPassword,
-      storedHash,
-      expectedHash,
-      passwordMatch: inputPassword === 'pSEODWNAdmin@1',
-      hashMatch: storedHash === expectedHash
-    });
-    
-    // Since we can't use bcrypt on the frontend, we'll check if the input password 
-    // is 'pSEODWNAdmin@1' and the stored hash matches our expected hash
-    return inputPassword === 'pSEODWNAdmin@1' && storedHash === expectedHash;
-  };
-
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
     try {
-      console.log('Attempting login with:', { email });
+      const success = await login(email, password);
       
-      // First, let's see what records exist in the table
-      const { data: allRecords, error: allError } = await supabase
-        .from('admin_auth')
-        .select('*');
-      
-      console.log('All admin_auth records:', { allRecords, allError });
-      
-      // Query the admin_auth table to validate credentials
-      const { data, error } = await supabase
-        .from('admin_auth')
-        .select('email, password_hash, is_active')
-        .eq('email', email)
-        .eq('is_active', true)
-        .single();
-
-      console.log('Database response:', { data, error });
-
-      if (error || !data) {
-        console.log('No user found or database error:', error);
-        setError('Invalid email or password');
-        setLoading(false);
-        return;
-      }
-
-      // Verify the password against the stored hash
-      const isPasswordValid = await verifyPassword(password, data.password_hash);
-      
-      if (isPasswordValid) {
-        console.log('Login successful!');
-        // Set admin mode and store in localStorage
-        setAdminMode(true);
-        localStorage.setItem('adminAuthenticated', 'true');
+      if (success) {
         navigate('/admin/dashboard');
       } else {
-        console.log('Password verification failed');
         setError('Invalid email or password');
       }
     } catch (err) {
@@ -162,6 +110,12 @@ const AdminLogin: React.FC = () => {
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
+          
+          <div className="mt-4 p-3 bg-blue-50 rounded-md text-sm text-blue-800">
+            <strong>Test Credentials:</strong><br />
+            Email: admin@duurzaamwonen.info<br />
+            Password: pSEODWNAdmin@1
+          </div>
         </CardContent>
       </Card>
     </div>
