@@ -32,6 +32,7 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
   useEffect(() => {
     const savedAuth = localStorage.getItem('adminAuthenticated');
     if (savedAuth === 'true') {
+      console.log('Admin authentication loaded from localStorage');
       setIsAuthenticated(true);
     }
   }, []);
@@ -43,6 +44,7 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
       console.log('Attempting admin login with email:', email);
       
       // Query the admin_auth table to validate credentials
+      // Note: RLS is now disabled, so this query should work without authentication
       const { data, error } = await supabase
         .from('admin_auth')
         .select('email, password_hash, is_active')
@@ -53,7 +55,7 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
       console.log('Database query result:', { data, error });
 
       if (error) {
-        console.error('Database error during login:', error);
+        console.error('Database error during login:', error.message);
         return false;
       }
 
