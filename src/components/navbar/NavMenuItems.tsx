@@ -20,12 +20,6 @@ export const mainNavItems: MenuSection[] = [
   { label: 'Vacatures', href: '/vacatures' },
 ];
 
-export const oplossingenItems: MenuSection[] = [
-  { label: 'Kunststof Schuifpuien', href: '/kunststof-schuifpuien' },
-  { label: 'Kunststof Deuren', href: '/kunststof-deuren' },
-  { label: 'Gevelbekleding', href: '/gevelbekleding' },
-];
-
 export const overOnsItems: MenuSection[] = [
   { label: 'Ons team', href: '/over-ons/team' },
   { label: 'Onze missie', href: '/over-ons/missie' },
@@ -61,11 +55,6 @@ export const NavMenuItems = () => {
     );
   };
 
-  const dynamicProductItems = products.map(product => ({
-    label: product.name,
-    href: `/${product.slug}`
-  }));
-
   return (
     <>
       <NavigationMenuItem>
@@ -73,29 +62,18 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="bg-white p-4 min-w-[500px]">
-            <div className="grid grid-cols-2 gap-8">
-              <div className="flex-1">
-                <h4 className="font-medium text-gray-900 mb-2">Oplossingen</h4>
-                <ul className="space-y-1">
-                  {oplossingenItems.map((item) => (
-                    <li key={item.label}>
-                      {renderMenuLink(item)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex-1">
-                <h4 className="font-medium text-gray-900 mb-2">Producten</h4>
-                <ul className="space-y-1">
-                  {dynamicProductItems.map((item) => (
-                    <li key={item.label}>
-                      {renderMenuLink(item)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+          <div className="bg-white p-4 min-w-[300px]">
+            <h4 className="font-medium text-gray-900 mb-2">Onze Oplossingen</h4>
+            <ul className="space-y-1">
+              {products.map((product) => (
+                <li key={product.slug}>
+                  <Link to={`/${product.slug}`} className={dropdownItemClass}>
+                    <ChevronRight size={16} className="mr-2 flex-shrink-0" />
+                    <span>{product.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </NavigationMenuContent>
       </NavigationMenuItem>

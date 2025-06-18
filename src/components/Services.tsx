@@ -9,17 +9,15 @@ import { useProducts } from '@/hooks/useProducts';
 const Services: React.FC = () => {
   const { data: products, isLoading, error } = useProducts();
 
-  // Manual item for Kunststof Kozijnen (always first)
-  const manualKunststofKozijnen = {
-    image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-    title: 'Kunststof kozijnen',
-    description: 'Hoogwaardige kozijnen met uitstekende warmte- en geluidsisolatie.',
-    features: ['HR++ of triple glas', 'Onderhoudsvrij', 'Diverse kleuren en stijlen'],
-    slug: 'kunststof-kozijnen'
-  };
-
-  // Fallback data for other CMS items
+  // Fallback data for when CMS is not available
   const fallbackData = [
+    {
+      image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+      title: 'Kunststof kozijnen',
+      description: 'Hoogwaardige kozijnen met uitstekende warmte- en geluidsisolatie.',
+      features: ['HR++ of triple glas', 'Onderhoudsvrij', 'Diverse kleuren en stijlen'],
+      slug: 'kunststof-kozijnen'
+    },
     {
       image: '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png',
       title: 'Gevelbekleding',
@@ -29,8 +27,8 @@ const Services: React.FC = () => {
     }
   ];
 
-  // Transform ALL CMS products to match the current UI structure
-  const dynamicProducts = products && products.length > 0 
+  // Transform CMS products to match the current UI structure
+  const displayProducts = products && products.length > 0 
     ? products.map(product => ({
         image: product.hero_image_url || product.hero_background_image || fallbackData[0].image,
         title: product.name,
@@ -41,9 +39,6 @@ const Services: React.FC = () => {
         slug: product.slug
       }))
     : fallbackData;
-
-  // Combine manual item with ALL dynamic products
-  const displayProducts = [manualKunststofKozijnen, ...dynamicProducts];
 
   if (isLoading) {
     return (
