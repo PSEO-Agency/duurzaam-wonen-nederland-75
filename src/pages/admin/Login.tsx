@@ -17,14 +17,14 @@ const AdminLogin: React.FC = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { isAdminMode, setAdminMode } = useAdmin();
+  const { isAuthenticated, setAdminMode } = useAdmin();
 
   // Redirect if already authenticated
   useEffect(() => {
-    if (isAdminMode) {
+    if (isAuthenticated) {
       navigate('/admin/dashboard');
     }
-  }, [isAdminMode, navigate]);
+  }, [isAuthenticated, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +32,8 @@ const AdminLogin: React.FC = () => {
     setLoading(true);
 
     try {
+      console.log('Attempting login with:', { email, password });
+      
       // Query the admin_auth table to validate credentials
       const { data, error } = await supabase
         .from('admin_auth')
@@ -40,20 +42,27 @@ const AdminLogin: React.FC = () => {
         .eq('is_active', true)
         .single();
 
+      console.log('Database response:', { data, error });
+
       if (error || !data) {
+        console.log('No user found or database error:', error);
         setError('Invalid email or password');
         setLoading(false);
         return;
       }
 
-      // For simplicity, we'll check if the password matches (in a real app, you'd hash it)
-      // Since we're using hardcoded credentials, we'll do a simple comparison
-      if (password === 'pSEODWNAdmin@1') {
+      // For now, let's check if the credentials match exactly what we expect
+      // The hardcoded credentials should be:
+      // Email: admin@duurzaamwonen.info
+      // Password: pSEODWNAdmin@1
+      if (email === 'admin@duurzaamwonen.info' && password === 'pSEODWNAdmin@1') {
+        console.log('Login successful!');
         // Set admin mode and store in localStorage
         setAdminMode(true);
         localStorage.setItem('adminAuthenticated', 'true');
         navigate('/admin/dashboard');
       } else {
+        console.log('Credentials do not match expected values');
         setError('Invalid email or password');
       }
     } catch (err) {
