@@ -10,25 +10,11 @@ const AboutUs: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <AnimatedSection animation="fade-in-right">
             <div className="relative">
-              <div className="absolute -top-4 -left-4 w-64 h-64 bg-brand-green/10 rounded-lg"></div>
               <img
-                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                alt="Over Duurzaam Wonen Nederland"
-                className="w-full h-auto object-cover rounded-lg shadow-lg relative z-10"
+                src="/lovable-uploads/1166ab9a-7034-4e82-9cdf-a4b05f23168f.png"
+                alt="Kunststof Kozijnen Team Duurzaam Wonen Nederland"
+                className="w-full h-auto object-cover rounded-lg shadow-lg"
               />
-              <div className="absolute -bottom-6 -right-6 glass-card p-4 shadow-lg">
-                <div className="flex gap-4 items-center">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brand-green">20+</div>
-                    <div className="text-sm text-gray-600">Jaar ervaring</div>
-                  </div>
-                  <div className="h-12 w-px bg-gray-200"></div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brand-green">1000+</div>
-                    <div className="text-sm text-gray-600">Projecten</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </AnimatedSection>
           
