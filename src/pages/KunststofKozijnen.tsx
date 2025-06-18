@@ -110,7 +110,7 @@ const KunststofKozijnen = () => {
         <Colors />
         <Brands />
         
-        {/* Werkwijze section with only the specific sentence changed */}
+        {/* Werkwijze section with the specific sentence changed */}
         <section id="werkwijze" className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
