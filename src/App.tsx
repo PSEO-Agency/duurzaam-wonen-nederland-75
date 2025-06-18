@@ -39,6 +39,22 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const KunststofKozijnenMonteur = lazy(() => import('./pages/vacatures/KunststofKozijnenMonteur'));
 const CommercieeelMedewerker = lazy(() => import('./pages/vacatures/CommercieeelMedewerker'));
 
+// Kunststof Kozijnen subpages
+const KozijnTypes = lazy(() => import('./pages/KozijnTypes'));
+const ColorOptions = lazy(() => import('./pages/ColorOptions'));
+const ColorDetail = lazy(() => import('./pages/ColorDetail'));
+const KozijnSizes = lazy(() => import('./pages/KozijnSizes'));
+const KozijnMontage = lazy(() => import('./pages/KozijnMontage'));
+const KozijnPrices = lazy(() => import('./pages/KozijnPrices'));
+const KozijnBrands = lazy(() => import('./pages/KozijnBrands'));
+const Draaikiepraam = lazy(() => import('./pages/types/Draaikiepraam'));
+const Kozijn100x100 = lazy(() => import('./pages/sizes/Kozijn100x100'));
+const KozijnenAfbetaling = lazy(() => import('./pages/prices/KozijnenAfbetaling'));
+const KozijnenSubsidie = lazy(() => import('./pages/prices/KozijnenSubsidie'));
+const SchucoBrand = lazy(() => import('./pages/brands/SchucoBrand'));
+const KozijnenEnschede = lazy(() => import('./pages/locaties/KozijnenEnschede'));
+const KozijnenInmeten = lazy(() => import('./pages/services/KozijnenInmeten'));
+
 // Admin pages
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
 const AdminPages = lazy(() => import('./pages/admin/Pages'));
@@ -87,6 +103,22 @@ function App() {
                 {/* Job detail routes */}
                 <Route path="/vacatures/kunststof-kozijnen-monteur" element={<KunststofKozijnenMonteur />} />
                 <Route path="/vacatures/commercieel-medewerker" element={<CommercieeelMedewerker />} />
+                
+                {/* Kunststof Kozijnen subpage routes */}
+                <Route path="/kunststof-kozijnen/types" element={<KozijnTypes />} />
+                <Route path="/kunststof-kozijnen/types/draaikiepraam" element={<Draaikiepraam />} />
+                <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
+                <Route path="/kunststof-kozijnen/kleuren/:colorSlug" element={<ColorDetail />} />
+                <Route path="/kunststof-kozijnen/afmetingen" element={<KozijnSizes />} />
+                <Route path="/kunststof-kozijnen/afmetingen/100x100" element={<Kozijn100x100 />} />
+                <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />
+                <Route path="/kunststof-kozijnen/prijzen" element={<KozijnPrices />} />
+                <Route path="/kunststof-kozijnen/prijzen/afbetaling" element={<KozijnenAfbetaling />} />
+                <Route path="/kunststof-kozijnen/prijzen/subsidie" element={<KozijnenSubsidie />} />
+                <Route path="/kunststof-kozijnen/merken" element={<KozijnBrands />} />
+                <Route path="/kunststof-kozijnen/merken/schuco" element={<SchucoBrand />} />
+                <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />
+                <Route path="/kunststof-kozijnen/services/inmeten" element={<KozijnenInmeten />} />
                 
                 {/* New URL structure - /{service}/{region}/{city} */}
                 <Route path="/:serviceSlug/:regionSlug/:citySlug" element={<CityServicePageNew />} />
