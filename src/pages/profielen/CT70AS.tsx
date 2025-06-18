@@ -92,42 +92,42 @@ const CT70AS: React.FC = () => {
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Goede prijs-kwaliteit</h3>
+                            <h4 className="font-medium">Goede prijs-kwaliteit</h4>
                             <p className="text-sm text-gray-600">Betaalbaar zonder in te boeten op kwaliteit</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Bewezen kwaliteit</h3>
+                            <h4 className="font-medium">Bewezen kwaliteit</h4>
                             <p className="text-sm text-gray-600">Jarenlange ervaring en betrouwbaarheid</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Eenvoudige montage</h3>
+                            <h4 className="font-medium">Eenvoudige montage</h4>
                             <p className="text-sm text-gray-600">Vertrouwd systeem voor snelle installatie</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Onderhoudsvrij</h3>
+                            <h4 className="font-medium">Onderhoudsvrij</h4>
                             <p className="text-sm text-gray-600">Geen schilderwerk, alleen af en toe schoonmaken</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Veelzijdige toepassing</h3>
+                            <h4 className="font-medium">Veelzijdige toepassing</h4>
                             <p className="text-sm text-gray-600">Geschikt voor verschillende kozijntypen</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Kleurbereik</h3>
+                            <h4 className="font-medium">Kleurbereik</h4>
                             <p className="text-sm text-gray-600">Standaard kleuren beschikbaar</p>
                           </div>
                         </div>

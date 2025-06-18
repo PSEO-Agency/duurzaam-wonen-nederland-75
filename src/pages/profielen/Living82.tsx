@@ -92,42 +92,42 @@ const Living82: React.FC = () => {
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Uitstekende isolatie</h3>
+                            <h4 className="font-medium">Uitstekende isolatie</h4>
                             <p className="text-sm text-gray-600">Uf-waarde tot 0,96 W/(m²·K) voor optimale energiebesparing</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Moderne uitstraling</h3>
+                            <h4 className="font-medium">Moderne uitstraling</h4>
                             <p className="text-sm text-gray-600">Strakke lijnen en grote glasoppervlakken</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Veiligheid</h3>
+                            <h4 className="font-medium">Veiligheid</h4>
                             <p className="text-sm text-gray-600">Tot RC2 inbraakwering standaard mogelijk</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Duurzaam</h3>
+                            <h4 className="font-medium">Duurzaam</h4>
                             <p className="text-sm text-gray-600">Lange levensduur en onderhoudsvrij</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Veelzijdig</h3>
+                            <h4 className="font-medium">Veelzijdig</h4>
                             <p className="text-sm text-gray-600">Geschikt voor ramen, deuren en vaste delen</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold">Kleurkeuze</h3>
+                            <h4 className="font-medium">Kleurkeuze</h4>
                             <p className="text-sm text-gray-600">Beschikbaar in vele kleuren en afwerkingen</p>
                           </div>
                         </div>
