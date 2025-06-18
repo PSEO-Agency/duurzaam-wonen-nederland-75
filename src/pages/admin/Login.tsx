@@ -30,8 +30,15 @@ const AdminLogin: React.FC = () => {
   const verifyPassword = async (inputPassword: string, storedHash: string): Promise<boolean> => {
     // For now, we'll use the known password hash for 'pSEODWNAdmin@1'
     // The hash we stored: $2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
-    // This is the bcrypt hash for 'pSEODWNAdmin@1'
     const expectedHash = '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+    
+    console.log('Verifying password:', {
+      inputPassword,
+      storedHash,
+      expectedHash,
+      passwordMatch: inputPassword === 'pSEODWNAdmin@1',
+      hashMatch: storedHash === expectedHash
+    });
     
     // Since we can't use bcrypt on the frontend, we'll check if the input password 
     // is 'pSEODWNAdmin@1' and the stored hash matches our expected hash
@@ -45,6 +52,13 @@ const AdminLogin: React.FC = () => {
 
     try {
       console.log('Attempting login with:', { email });
+      
+      // First, let's see what records exist in the table
+      const { data: allRecords, error: allError } = await supabase
+        .from('admin_auth')
+        .select('*');
+      
+      console.log('All admin_auth records:', { allRecords, allError });
       
       // Query the admin_auth table to validate credentials
       const { data, error } = await supabase
