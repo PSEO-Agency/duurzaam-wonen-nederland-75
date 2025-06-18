@@ -90,17 +90,17 @@ export const NavMenuItems = () => {
         </NavigationMenuItem>
       ))}
 
-      <NavigationMenuItem>
-        <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
-          Admin
-        </NavigationMenuTrigger>
-        <NavigationMenuContent className="right-0">
-          <div className="bg-white p-4 w-auto">
-            <h3 className="font-semibold text-lg mb-2">Admin Panel</h3>
-            <div className="mb-3">
-              <AdminModeToggle />
-            </div>
-            {isAuthenticated && (
+      {isAuthenticated && (
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
+            Admin
+          </NavigationMenuTrigger>
+          <NavigationMenuContent className="right-0">
+            <div className="bg-white p-4 w-auto">
+              <h3 className="font-semibold text-lg mb-2">Admin Panel</h3>
+              <div className="mb-3">
+                <AdminModeToggle />
+              </div>
               <ul className="space-y-1">
                 {adminItems.map((item) => (
                   <li key={item.label}>
@@ -108,10 +108,10 @@ export const NavMenuItems = () => {
                   </li>
                 ))}
               </ul>
-            )}
-          </div>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
+            </div>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+      )}
     </>
   );
 };
