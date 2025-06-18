@@ -63,7 +63,6 @@ export const NavMenuItems = () => {
         </NavigationMenuTrigger>
         <NavigationMenuContent>
           <div className="bg-white p-4 min-w-[300px]">
-            <h4 className="font-medium text-gray-900 mb-2">Onze Oplossingen</h4>
             <ul className="space-y-1">
               {products.map((product) => (
                 <li key={product.slug}>
