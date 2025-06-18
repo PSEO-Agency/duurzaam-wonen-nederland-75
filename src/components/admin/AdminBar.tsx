@@ -4,9 +4,17 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { LayoutDashboard, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import AdminModeToggle from './AdminModeToggle';
+import { useAdmin } from '@/contexts/AdminContext';
 
 const AdminBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAdminMode } = useAdmin();
+
+  // Don't render if admin mode is not enabled
+  if (!isAdminMode) {
+    return null;
+  }
 
   return (
     <div className={cn(
@@ -42,6 +50,8 @@ const AdminBar: React.FC = () => {
               View Site
             </Link>
           </Button>
+          
+          <AdminModeToggle />
           
           <Button 
             variant="ghost" 

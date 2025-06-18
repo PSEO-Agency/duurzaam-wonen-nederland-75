@@ -4,6 +4,8 @@ import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, Navigati
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
+import { useAdmin } from '@/contexts/AdminContext';
+import AdminModeToggle from '@/components/admin/AdminModeToggle';
 
 interface MenuSection {
   label: string;
@@ -37,6 +39,7 @@ export const adminItems: MenuSection[] = [
 
 export const NavMenuItems = () => {
   const { data: products = [] } = useProducts();
+  const { isAdminMode } = useAdmin();
 
   const renderMenuLink = (item: MenuSection) => {
     if (item.href.startsWith('#')) {
@@ -94,13 +97,18 @@ export const NavMenuItems = () => {
         <NavigationMenuContent className="right-0">
           <div className="bg-white p-4 w-auto">
             <h3 className="font-semibold text-lg mb-2">Admin Panel</h3>
-            <ul className="space-y-1">
-              {adminItems.map((item) => (
-                <li key={item.label}>
-                  {renderMenuLink(item)}
-                </li>
-              ))}
-            </ul>
+            <div className="mb-3">
+              <AdminModeToggle />
+            </div>
+            {isAdminMode && (
+              <ul className="space-y-1">
+                {adminItems.map((item) => (
+                  <li key={item.label}>
+                    {renderMenuLink(item)}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </NavigationMenuContent>
       </NavigationMenuItem>
