@@ -4,35 +4,69 @@ import { CornerDownRight, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from './AnimatedSection';
 import { Link } from 'react-router-dom';
-
-const servicesData = [
-  {
-    image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-    title: 'Kunststof kozijnen',
-    description: 'Hoogwaardige kozijnen met uitstekende warmte- en geluidsisolatie.',
-    features: ['HR++ of triple glas', 'Onderhoudsvrij', 'Diverse kleuren en stijlen']
-  },
-  {
-    image: '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png',
-    title: 'Gevelbekleding',
-    description: 'Duurzame gevelbekleding voor verbeterde isolatie en een moderne uitstraling.',
-    features: ['Onderhoudsarm', '64 kleuropties', 'Verbetert isolatiewaarde']
-  }
-];
+import { useProducts } from '@/hooks/useProducts';
 
 const Services: React.FC = () => {
+  const { data: products, isLoading, error } = useProducts();
+
+  // Fallback data in case CMS data is not available
+  const fallbackData = [
+    {
+      image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+      title: 'Kunststof kozijnen',
+      description: 'Hoogwaardige kozijnen met uitstekende warmte- en geluidsisolatie.',
+      features: ['HR++ of triple glas', 'Onderhoudsvrij', 'Diverse kleuren en stijlen'],
+      slug: 'kunststof-kozijnen'
+    },
+    {
+      image: '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png',
+      title: 'Gevelbekleding',
+      description: 'Duurzame gevelbekleding voor verbeterde isolatie en een moderne uitstraling.',
+      features: ['Onderhoudsarm', '64 kleuropties', 'Verbetert isolatiewaarde'],
+      slug: 'gevelbekleding'
+    }
+  ];
+
+  // Transform CMS products to match the current UI structure
+  const displayProducts = products && products.length > 0 
+    ? products.slice(0, 2).map(product => ({
+        image: product.hero_image_url || product.hero_background_image || fallbackData[0].image,
+        title: product.name,
+        description: product.description || product.hero_description || '',
+        features: product.features ? 
+          (Array.isArray(product.features) ? product.features.slice(0, 3) : []) :
+          fallbackData[0].features,
+        slug: product.slug
+      }))
+    : fallbackData;
+
+  if (isLoading) {
+    return (
+      <section id="services" className="section-container">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-300 rounded w-48 mx-auto mb-4"></div>
+              <div className="h-4 bg-gray-300 rounded w-96 mx-auto"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="services" className="section-container">
       <div className="container mx-auto px-4">
         <AnimatedSection>
-          <h2 className="section-title">Onze oplossingen</h2>
+          <h2 className="section-title">Products</h2>
           <p className="section-subtitle">
             Duurzaam Wonen Nederland biedt een breed scala aan hoogwaardige verduurzamingsoplossingen
           </p>
         </AnimatedSection>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-          {servicesData.map((service, index) => (
+          {displayProducts.map((service, index) => (
             <AnimatedSection key={index} delay={index * 100}>
               <div className="glass-card overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-xl group">
                 <div className="relative h-64 overflow-hidden">
@@ -57,7 +91,7 @@ const Services: React.FC = () => {
                 </div>
                 <div className="p-6 pt-0 mt-auto">
                   <Button variant="ghost" asChild className="text-brand-green hover:text-brand-green-dark hover:bg-brand-green/10 -ml-3">
-                    <Link to="/kunststof-kozijnen">
+                    <Link to={`/${service.slug}`}>
                       Meer informatie <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
