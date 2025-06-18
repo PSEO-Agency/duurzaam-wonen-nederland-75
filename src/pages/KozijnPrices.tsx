@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Check, Euro, PiggyBank, BarChart4, Calculator, TrendingUp, Lightbulb, Home, Wrench, Shield, Star } from 'lucide-react';
+import { ArrowRight, Check, Euro, PiggyBank, BarChart4, Calculator, TrendingUp, Lightbulb, Home, Wrench, Shield, Star, BadgePercent } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -63,6 +63,56 @@ const KozijnPrices: React.FC = () => {
       icon: <TrendingUp className="h-8 w-8 text-gray-600" />,
       popular: false,
       hasButton: false
+    }
+  ];
+
+  const kozijnTypes = [
+    {
+      category: 'Draai-kiep kozijnen',
+      sizes: 'Verschillende afmetingen beschikbaar',
+      features: 'Ventilatie en onderhoud, energiebesparend'
+    },
+    {
+      category: 'Vaste kozijnen',
+      sizes: 'Op maat gemaakt',
+      features: 'Maximale isolatie, kosteneffectief'
+    },
+    {
+      category: 'Schuifpuien',
+      sizes: 'Grote glasoppervlakken mogelijk',
+      features: 'Ruimtebesparend, modern design'
+    },
+    {
+      category: 'Stolpstellen',
+      sizes: 'Traditionele afmetingen',
+      features: 'Klassieke uitstraling, authentiek'
+    }
+  ];
+
+  const additionalOptions = [
+    {
+      option: 'Ventilatieroosters',
+      feature: 'Gezonde binnenlucht en vochtregulatie'
+    },
+    {
+      option: 'Inbraakwerende beglazing',
+      feature: 'Extra veiligheid en bescherming'
+    },
+    {
+      option: 'Zonwering geïntegreerd',
+      feature: 'Automatische temperatuurregeling'
+    },
+    {
+      option: 'Elektrische bediening',
+      feature: 'Gemak en comfort bij opening'
+    },
+    {
+      option: 'Decoratieve roedes',
+      feature: 'Klassieke of moderne uitstraling'
+    },
+    {
+      option: 'Horren',
+      feature: 'Insectenvrij ventileren'
     }
   ];
 
