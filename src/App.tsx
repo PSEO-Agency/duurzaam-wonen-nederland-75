@@ -34,7 +34,7 @@ import OverOns from '@/pages/OverOns';
 import Contact from '@/pages/Contact';
 import ProductPage from '@/pages/ProductPage';
 import CityServicePage from '@/pages/CityServicePage';
-import Projects as ProjectsPage from '@/pages/Projects';
+import PublicProjects from '@/pages/Projects';
 import NotFound from '@/pages/NotFound';
 
 import { AdminProvider } from '@/contexts/AdminContext';
@@ -62,7 +62,7 @@ function App() {
                   <Route path="/products/:id" element={<ProductPage />} />
                   <Route path="/city-services" element={<CityServicePage />} />
                   <Route path="/city-services/:city/:service" element={<CityServicePage />} />
-                  <Route path="/projects" element={<ProjectsPage />} />
+                  <Route path="/projects" element={<PublicProjects />} />
                   
                   {/* Admin Login Route - unprotected */}
                   <Route path="/admin/login" element={<AdminLogin />} />
