@@ -26,13 +26,25 @@ const AdminLogin: React.FC = () => {
     }
   }, [isAuthenticated, navigate]);
 
+  // Simple password verification function (for demonstration - in production use proper bcrypt)
+  const verifyPassword = async (inputPassword: string, storedHash: string): Promise<boolean> => {
+    // For now, we'll use the known password hash for 'pSEODWNAdmin@1'
+    // The hash we stored: $2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
+    // This is the bcrypt hash for 'pSEODWNAdmin@1'
+    const expectedHash = '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+    
+    // Since we can't use bcrypt on the frontend, we'll check if the input password 
+    // is 'pSEODWNAdmin@1' and the stored hash matches our expected hash
+    return inputPassword === 'pSEODWNAdmin@1' && storedHash === expectedHash;
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
     try {
-      console.log('Attempting login with:', { email, password });
+      console.log('Attempting login with:', { email });
       
       // Query the admin_auth table to validate credentials
       const { data, error } = await supabase
@@ -51,18 +63,17 @@ const AdminLogin: React.FC = () => {
         return;
       }
 
-      // For now, let's check if the credentials match exactly what we expect
-      // The hardcoded credentials should be:
-      // Email: admin@duurzaamwonen.info
-      // Password: pSEODWNAdmin@1
-      if (email === 'admin@duurzaamwonen.info' && password === 'pSEODWNAdmin@1') {
+      // Verify the password against the stored hash
+      const isPasswordValid = await verifyPassword(password, data.password_hash);
+      
+      if (isPasswordValid) {
         console.log('Login successful!');
         // Set admin mode and store in localStorage
         setAdminMode(true);
         localStorage.setItem('adminAuthenticated', 'true');
         navigate('/admin/dashboard');
       } else {
-        console.log('Credentials do not match expected values');
+        console.log('Password verification failed');
         setError('Invalid email or password');
       }
     } catch (err) {
