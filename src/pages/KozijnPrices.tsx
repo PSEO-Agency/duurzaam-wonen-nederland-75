@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Check, Euro, PiggyBank, BarChart4, Calculator, TrendingUp, Lightbulb, Home, Wrench, Shield, Star, BadgePercent } from 'lucide-react';
+import { ArrowRight, Check, PiggyBank, Calculator, BadgePercent } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -12,60 +12,11 @@ import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedSection from '@/components/AnimatedSection';
 import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
 import Services from '@/components/kunststof-kozijnen/Services';
-import Projects from '@/components/Projects';
 import Reviews from '@/components/Reviews';
 import ContactCTA from '@/components/ContactCTA';
 import { Link } from 'react-router-dom';
 
 const KozijnPrices: React.FC = () => {
-  const priceRanges = [
-    {
-      type: 'Kunststof kozijnen',
-      priceRange: '€400 - €1.200',
-      description: 'Uitstekende isolatie, onderhoudsvrij, lange levensduur',
-      features: [
-        'Zeer goede isolatiewaarde',
-        'Onderhoudsvrij materiaal',
-        'Lange levensduur (40+ jaar)',
-        'Grote kleurkeuze',
-        'Uitstekende prijs-kwaliteitverhouding'
-      ],
-      icon: <Home className="h-8 w-8 text-brand-green" />,
-      popular: true,
-      hasButton: true
-    },
-    {
-      type: 'Houten kozijnen',
-      priceRange: '€600 - €2.000',
-      description: 'Natuurlijk materiaal, klassieke uitstraling, duurzaam',
-      features: [
-        'Natuurlijk en duurzaam materiaal',
-        'Klassieke en warme uitstraling',
-        'Goede isolatiewaarde',
-        'Volledig recyclebaar',
-        'Traditionele Nederlandse kwaliteit'
-      ],
-      icon: <Lightbulb className="h-8 w-8 text-amber-600" />,
-      popular: false,
-      hasButton: false
-    },
-    {
-      type: 'Aluminium kozijnen',
-      priceRange: '€800 - €2.500',
-      description: 'Modern design, zeer duurzaam, minimaal onderhoud',
-      features: [
-        'Modern en strak design',
-        'Zeer lange levensduur',
-        'Minimaal onderhoud nodig',
-        'Geschikt voor grote glasoppervlakken',
-        'Hoge sterkte en stabiliteit'
-      ],
-      icon: <TrendingUp className="h-8 w-8 text-gray-600" />,
-      popular: false,
-      hasButton: false
-    }
-  ];
-
   const kozijnTypes = [
     {
       category: 'Draai-kiep kozijnen',
@@ -152,64 +103,6 @@ const KozijnPrices: React.FC = () => {
         </section>
         
         <StickyNavigation />
-        
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold mb-8 text-center">Prijsvergelijking Kozijnmaterialen</h2>
-              <p className="text-lg text-gray-700 mb-10 text-center max-w-3xl mx-auto">
-                Vergelijk de prijzen van verschillende kozijnmaterialen en ontdek welke optie het beste bij uw budget en wensen past.
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                {priceRanges.map((item, index) => (
-                  <AnimatedSection key={index} animation="fade-in" delay={index * 100}>
-                    <Card className={`h-full relative ${item.popular ? 'ring-2 ring-brand-green border-brand-green' : ''}`}>
-                      {item.popular && (
-                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                          <span className="bg-brand-green text-white px-4 py-1 rounded-full text-sm font-medium">
-                            Meest gekozen
-                          </span>
-                        </div>
-                      )}
-                      <CardContent className="p-6">
-                        <div className="flex items-center mb-4">
-                          {item.icon}
-                          <h3 className="text-xl font-semibold ml-3">{item.type}</h3>
-                        </div>
-                        
-                        <div className="mb-4">
-                          <div className="text-3xl font-bold text-gray-900 mb-2">{item.priceRange}</div>
-                          <p className="text-gray-600 text-sm">per kozijn, inclusief montage</p>
-                        </div>
-                        
-                        <p className="text-gray-700 mb-4">{item.description}</p>
-                        
-                        <ul className="space-y-2 mb-6">
-                          {item.features.map((feature, featureIndex) => (
-                            <li key={featureIndex} className="flex items-start">
-                              <Check className="h-5 w-5 text-brand-green mt-0.5 mr-2 shrink-0" />
-                              <span className="text-gray-700 text-sm">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        
-                        {item.hasButton && (
-                          <Button asChild className="w-full bg-brand-green hover:bg-brand-green-dark">
-                            <Link to="/offerte">
-                              Offerte aanvragen
-                              <ArrowRight className="ml-2 h-4 w-4" />
-                            </Link>
-                          </Button>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
         
         <section className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
@@ -531,148 +424,6 @@ const KozijnPrices: React.FC = () => {
                 </AnimatedSection>
               </div>
             </div>
-          </div>
-        </section>
-        
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold mb-8 text-center">Vergelijk materialen</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <AnimatedSection animation="fade-in" delay={100}>
-                  <Card className="h-full hover:shadow-md transition-shadow">
-                    <div className="p-4 bg-brand-green text-white text-center">
-                      <h3 className="text-xl font-semibold">Kunststof Kozijnen</h3>
-                    </div>
-                    <CardContent className="p-6">
-                      <div className="text-center mb-4">
-                        <span className="text-lg font-bold">Prijs op offertebasis</span>
-                        <p className="text-sm text-gray-500">Vraag een vrijblijvende offerte aan</p>
-                      </div>
-                      
-                      <ul className="space-y-3 mb-6">
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Onderhoudsarm</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Uitstekende isolatie</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Lange levensduur (30+ jaar)</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Diverse kleuren beschikbaar</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Weinig tot geen schilderwerk</span>
-                        </li>
-                      </ul>
-                      
-                      <Button asChild className="w-full bg-brand-green hover:bg-brand-green-dark text-white">
-                        <Link to="/offerte">
-                          <span>Offerte aanvragen</span>
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-                
-                <AnimatedSection animation="fade-in" delay={200}>
-                  <Card className="h-full hover:shadow-md transition-shadow">
-                    <div className="p-4 bg-gray-700 text-white text-center">
-                      <h3 className="text-xl font-semibold">Houten Kozijnen</h3>
-                    </div>
-                    <CardContent className="p-6">
-                      <div className="text-center mb-4">
-                        <span className="text-lg font-bold">Prijs op offertebasis</span>
-                        <p className="text-sm text-gray-500">Vraag een vrijblijvende offerte aan</p>
-                      </div>
-                      
-                      <ul className="space-y-3 mb-6">
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Natuurlijke uitstraling</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Goede isolatie mogelijk</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Lange levensduur bij goed onderhoud</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-gray-700 mt-1 mr-2 shrink-0 opacity-30" />
-                          <span className="text-gray-400">Regelmatig onderhoud nodig</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-gray-700 mt-1 mr-2 shrink-0 opacity-30" />
-                          <span className="text-gray-400">Minder duurzaam zonder onderhoud</span>
-                        </li>
-                      </ul>
-                      
-                      <Button variant="outline" asChild className="w-full">
-                        <Link to="/offerte">
-                          <span>Offerte aanvragen</span>
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-                
-                <AnimatedSection animation="fade-in" delay={300}>
-                  <Card className="h-full hover:shadow-md transition-shadow">
-                    <div className="p-4 bg-gray-700 text-white text-center">
-                      <h3 className="text-xl font-semibold">Aluminium Kozijnen</h3>
-                    </div>
-                    <CardContent className="p-6">
-                      <div className="text-center mb-4">
-                        <span className="text-lg font-bold">Prijs op offertebasis</span>
-                        <p className="text-sm text-gray-500">Vraag een vrijblijvende offerte aan</p>
-                      </div>
-                      
-                      <ul className="space-y-3 mb-6">
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Zeer duurzaam</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Onderhoudsarm</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Slanke profielen mogelijk</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-gray-700 mt-1 mr-2 shrink-0 opacity-30" />
-                          <span className="text-gray-400">Hogere aanschafprijs</span>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-gray-700 mt-1 mr-2 shrink-0 opacity-30" />
-                          <span className="text-gray-400">Minder goede isolatie zonder thermische onderbreking</span>
-                        </li>
-                      </ul>
-                      
-                      <Button variant="outline" asChild className="w-full">
-                        <Link to="/offerte">
-                          <span>Offerte aanvragen</span>
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              </div>
-            </AnimatedSection>
           </div>
         </section>
         
