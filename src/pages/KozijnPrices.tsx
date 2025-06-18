@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, PiggyBank, Calculator, BadgePercent } from 'lucide-react';
@@ -148,6 +149,120 @@ const KozijnPrices: React.FC = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-in">
+              <h2 className="text-3xl font-bold mb-8 text-center">Materiaalvergelijking</h2>
+              <p className="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto">
+                Vergelijk de eigenschappen en prijzen van verschillende kozijnmaterialen om de beste keuze voor uw woning te maken.
+              </p>
+              
+              <div className="overflow-x-auto bg-white rounded-lg shadow-sm">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-1/5">Afmeting</TableHead>
+                      <TableHead className="w-1/5">Kunststof</TableHead>
+                      <TableHead className="w-1/5">Hout</TableHead>
+                      <TableHead className="w-1/5">Aluminium</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {sizePrices.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">{item.size}</TableCell>
+                        <TableCell>
+                          <span className="text-brand-green font-medium">{item.kunststof}</span>
+                        </TableCell>
+                        <TableCell>
+                          <span className="text-amber-600 font-medium">{item.hout}</span>
+                        </TableCell>
+                        <TableCell>
+                          <span className="text-gray-600 font-medium">{item.aluminium}</span>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+              
+              <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-4 text-brand-green">Kunststof</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Onderhoudsarm</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Energiezuinig</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Betaalbaar</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Lange levensduur</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-4 text-amber-600">Hout</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-amber-600 mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Natuurlijk materiaal</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-amber-600 mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Klassieke uitstraling</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-amber-600 mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Goede isolatie</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-amber-600 mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Meer onderhoud</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-4 text-gray-600">Aluminium</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-gray-600 mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Sterk en duurzaam</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-gray-600 mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Moderne uitstraling</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-gray-600 mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Slanke profielen</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Check className="h-5 w-5 text-gray-600 mt-1 mr-2 shrink-0" />
+                        <span className="text-gray-700">Hogere investering</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
               </div>
             </AnimatedSection>
           </div>

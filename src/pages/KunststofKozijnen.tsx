@@ -1,6 +1,3 @@
-
-// Only updating the links to the new pages (section with Card links to specific types)
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, Filter, ArrowRight, ArrowDown, Star, ChevronDown } from 'lucide-react';
@@ -21,94 +18,56 @@ import Projects from '@/components/Projects';
 import Workflow from '@/components/Workflow';
 import Reviews from '@/components/Reviews';
 import ContactCTA from '@/components/ContactCTA';
-import ProductFilters from '@/components/kunststof-kozijnen/ProductFilters';
 import KozijnenHero from '@/components/kunststof-kozijnen/KozijnenHero';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 
-const products = [
+const kozijnProfielen = [
   {
     id: 1,
-    name: 'Trocal 76 Kozijn',
+    name: 'Schüco Living 82',
     image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
-    rating: 4.9,
-    reviewCount: 123,
-    features: ['Uitstekende isolatie', 'Nederlands fabricaat', 'Onderhoudsarm'],
-    price: '€199',
-    perUnit: 'per m²',
-    category: 'draai-kiep',
-    material: 'kunststof',
-    color: 'wit',
+    description: 'Premium profiel met 6 kamers en uitstekende isolatie',
+    link: '/profielen/living82'
   },
   {
     id: 2,
-    name: 'Trocal 88 Premium Kozijn',
+    name: 'Schüco CT 70 AS',
     image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
-    rating: 5.0,
-    reviewCount: 87,
-    features: ['Topprestaties in isolatie', 'Slanke profielen', 'Onderhoudsarm'],
-    price: '€249',
-    perUnit: 'per m²',
-    category: 'vast',
-    material: 'kunststof',
-    color: 'antraciet',
+    description: 'Hoogwaardig profiel met 5 kamers voor optimaal comfort',
+    link: '/profielen/ct70as'
   },
   {
     id: 3,
-    name: 'Gealan S9000 Kozijn',
+    name: 'Veka Softline 82',
     image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
-    rating: 4.7,
-    reviewCount: 56,
-    features: ['Triple beglazing mogelijk', 'Duits fabricaat', 'Duurzaam'],
-    price: '€229',
-    perUnit: 'per m²',
-    category: 'schuif',
-    material: 'kunststof',
-    color: 'grijs',
+    description: 'Energiezuinig profiel met inbraakwerende eigenschappen',
+    link: '/kunststof-kozijnen/merken'
   },
   {
     id: 4,
-    name: 'Veka Softline 82 Kozijn',
+    name: 'Gealan S9000',
     image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
-    rating: 4.8,
-    reviewCount: 92,
-    features: ['Energiezuinig', 'Inbraakwerend', 'Geluidsisolerend'],
-    price: '€239',
-    perUnit: 'per m²',
-    category: 'draai-kiep',
-    material: 'kunststof',
-    color: 'houtlook',
+    description: 'Premium profiel met triple beglazing mogelijk',
+    link: '/kunststof-kozijnen/merken'
   },
+  {
+    id: 5,
+    name: 'Kömmerling 88',
+    image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
+    description: 'Topkwaliteit profiel voor maximale isolatie',
+    link: '/kunststof-kozijnen/merken'
+  },
+  {
+    id: 6,
+    name: 'Trocal 76',
+    image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
+    description: 'Nederlands fabricaat met uitstekende eigenschappen',
+    link: '/kunststof-kozijnen/merken'
+  }
 ];
 
-const filters = {
-  type: ['Vast kozijn', 'Draai-kiep kozijn', 'Schuifpui'],
-  material: ['Kunststof', 'Kunststof met aluminium look'],
-  color: ['Wit', 'Antraciet', 'Grijs', 'Crème', 'Houtlook'],
-  features: ['Triple beglazing', 'Inbraakwerend', 'Geluidsisolerend', 'Onderhoudsarm'],
-};
-
 const KunststofKozijnen: React.FC = () => {
-  const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({
-    type: [],
-    material: [],
-    color: [],
-    features: [],
-  });
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-
-  const toggleFilter = (category: string, value: string) => {
-    setActiveFilters(prev => {
-      const newFilters = { ...prev };
-      if (newFilters[category].includes(value)) {
-        newFilters[category] = newFilters[category].filter(item => item !== value);
-      } else {
-        newFilters[category] = [...newFilters[category], value];
-      }
-      return newFilters;
-    });
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
@@ -120,7 +79,115 @@ const KunststofKozijnen: React.FC = () => {
       <Navbar />
       
       <main className="flex-grow pt-20">
-        <KozijnenHero />
+        <section 
+          className="relative min-h-screen pt-20 flex items-center"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png")`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+          
+          <div className="container mx-auto px-4 py-16 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7">
+                <AnimatedSection animation="fade-in-right">
+                  <span className="inline-block px-4 py-1 bg-brand-green/90 text-white rounded-full text-sm font-medium mb-4">
+                    Specialist in kunststof kozijnen
+                  </span>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                    Kunststof Kozijnen - Duurzaam, Betaalbaar en Stijlvol
+                  </h1>
+                  <p className="text-lg md:text-xl text-white/90 mb-8 max-w-xl">
+                    Hoogwaardige, energiezuinige en onderhoudsarme kunststof kozijnen voor uw woning. Met meer dan 20 jaar ervaring leveren wij kwaliteitsproducten die duurzaam en betrouwbaar zijn.
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                    <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
+                      <Link to="/offerte">
+                        <span>Offerte aanvragen</span>
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-white/20">
+                      Ontdek alles over kunststof kozijnen
+                    </Button>
+                  </div>
+                  
+                  <div className="flex items-center gap-6 text-white mb-8">
+                    <div className="flex items-center gap-2">
+                      <div className="bg-brand-green/20 p-1 rounded-full">
+                        <Check className="h-4 w-4 text-brand-green" />
+                      </div>
+                      <span>Gratis advies</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="bg-brand-green/20 p-1 rounded-full">
+                        <Check className="h-4 w-4 text-brand-green" />
+                      </div>
+                      <span>Vakkundige montage</span>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              </div>
+              
+              <div className="lg:col-span-5">
+                <AnimatedSection animation="fade-in-left" delay={300}>
+                  <div className="glass-card p-6 backdrop-blur-lg bg-white/10 border border-white/20">
+                    <h3 className="text-xl font-semibold text-white mb-4">
+                      Voordelen van kunststof kozijnen
+                    </h3>
+                    <ul className="space-y-3">
+                      {[
+                        'Energiebesparend - Warmte blijft binnen',
+                        'Onderhoudsarm - Nooit meer schilderen',
+                        'Lange levensduur - 15 jaar fabrieksgarantie',
+                        'Uitstekende isolatie - Minder geluid',
+                        'Diverse kleuren en stijlen beschikbaar',
+                        '10 jaar service- en montagegarantie'
+                      ].map((item, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <div className="bg-brand-green p-1 rounded-full mt-1 flex-shrink-0">
+                            <Check className="h-3 w-3 text-white" />
+                          </div>
+                          <span className="text-white/90">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-6 pt-4 border-t border-white/20">
+                      <div className="flex flex-col gap-4">
+                        <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+                          <h4 className="text-sm font-medium text-white mb-3">Keurmerken:</h4>
+                          <div className="grid grid-cols-3 gap-4">
+                            <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Schüco Kozijnen">
+                              <img src="/lovable-uploads/10906789-676e-4aef-b797-6bc0815255ea.png" alt="Schuco Kozijnen" className="h-10 max-w-full object-contain" />
+                            </div>
+                            <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="KOMO Keurmerk">
+                              <img src="/lovable-uploads/4d42855f-0a4b-48ef-b632-25f5f01975fc.png" alt="KOMO Keurmerk" className="h-10 max-w-full object-contain" />
+                            </div>
+                            <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Politiekeurmerk">
+                              <img src="/lovable-uploads/a680436d-6948-4799-a383-6aad791b1e0e.png" alt="Politiekeurmerk" className="h-12 max-w-full object-contain" />
+                            </div>
+                            <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Nationaal Warmtefonds">
+                              <img src="/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png" alt="Nationaal Warmtefonds" className="h-12 max-w-full object-contain" />
+                            </div>
+                            <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="CE Keurmerk">
+                              <img src="/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png" alt="CE Keurmerk" className="h-10 max-w-full object-contain" />
+                            </div>
+                            <div className="bg-white rounded p-2 h-16 flex items-center justify-center" title="Keralit Keurmerk">
+                              <img src="/lovable-uploads/98a9ef9a-6f19-4139-bb2b-e081b52e6637.png" alt="Keralit Keurmerk" className="h-10 max-w-full object-contain" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              </div>
+            </div>
+          </div>
+        </section>
         
         <StickyNavigation />
         
@@ -201,6 +268,80 @@ const KunststofKozijnen: React.FC = () => {
         
         <WhatAreKozijnen />
         
+        <section id="wat-zijn" className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col lg:flex-row gap-10 items-center">
+              <div className="lg:w-1/2">
+                <AnimatedSection animation="fade-in">
+                  <h2 className="text-3xl font-bold mb-6">Wat zijn Kunststof Kozijnen?</h2>
+                  <p className="text-lg text-gray-700 mb-6">
+                    Kunststof kozijnen zijn raamkozijnen gemaakt van PVC (polyvinylchloride), een duurzaam en onderhoudsarm 
+                    materiaal. Ze bieden uitstekende isolatie, zijn energiezuinig en verkrijgbaar in verschillende kleuren 
+                    en stijlen. Door hun samenstelling zijn ze weerbestendig en gaan ze jaren mee zonder groot onderhoud.
+                  </p>
+                  
+                  <h3 className="text-xl font-semibold mb-4">Belangrijkste eigenschappen:</h3>
+                  
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                      <span className="text-gray-700">Gemaakt van hoogwaardig PVC materiaal</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                      <span className="text-gray-700">Uitstekende thermische isolatie</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                      <span className="text-gray-700">Weerbestendig en UV-stabiel</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                      <span className="text-gray-700">Verkrijgbaar in vele kleuren en afwerkingen</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
+                      <span className="text-gray-700">Inbraakwerend en veilig</span>
+                    </li>
+                  </ul>
+                  
+                  <div className="mt-4">
+                    <Button asChild className="bg-brand-green hover:bg-brand-green-dark text-white">
+                      <Link to="/offerte">
+                        <span>Meer weten over kunststof kozijnen? Vraag vrijblijvend een offerte aan!</span>
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                </AnimatedSection>
+              </div>
+              
+              <div className="lg:w-1/2">
+                <AnimatedSection animation="fade-in" delay={200}>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-gray-50 rounded-lg p-5 shadow-sm">
+                      <div className="text-3xl font-bold text-brand-green mb-2">A++</div>
+                      <p className="text-gray-700">Energielabel voor optimale isolatie</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-5 shadow-sm">
+                      <div className="text-3xl font-bold text-brand-green mb-2">15+</div>
+                      <p className="text-gray-700">Jaar fabrieksgarantie op materialen</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-5 shadow-sm">
+                      <div className="text-3xl font-bold text-brand-green mb-2">100%</div>
+                      <p className="text-gray-700">Recyclebaar en milieuvriendelijk</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-5 shadow-sm">
+                      <div className="text-3xl font-bold text-brand-green mb-2">RC2</div>
+                      <p className="text-gray-700">Inbraakwerende classificatie</p>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              </div>
+            </div>
+          </div>
+        </section>
+        
         <section id="voordelen" className="py-12 bg-white">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-10 items-center">
@@ -239,9 +380,11 @@ const KunststofKozijnen: React.FC = () => {
                   </ul>
                   
                   <div className="mt-4">
-                    <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
-                      <span>Overweeg kunststof kozijnen? Vraag vrijblijvend een offerte aan!</span>
-                      <ArrowRight className="ml-2 h-4 w-4" />
+                    <Button asChild className="bg-brand-green hover:bg-brand-green-dark text-white">
+                      <Link to="/offerte">
+                        <span>Overweeg kunststof kozijnen? Vraag vrijblijvend een offerte aan!</span>
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
                     </Button>
                   </div>
                 </AnimatedSection>
@@ -703,6 +846,47 @@ const KunststofKozijnen: React.FC = () => {
                   </AccordionItem>
                 </AnimatedSection>
               </Accordion>
+            </div>
+          </div>
+        </section>
+        
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <AnimatedSection animation="fade-in">
+                <h2 className="text-3xl font-bold mb-6">Nazorg & garantie</h2>
+                <p className="text-lg text-gray-700 mb-8">
+                  Bij Duurzaam Wonen Nederland staan kwaliteit en klanttevredenheid centraal. 
+                  Daarom bieden wij uitgebreide service en ondersteuning, zowel tijdens als na de installatie van uw kozijnen.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold mb-3">15 jaar productgarantie</h3>
+                    <p className="text-gray-700">Uitgebreide garantie op alle materialen en fabricage.</p>
+                  </div>
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold mb-3">10 jaar montagegarantie</h3>
+                    <p className="text-gray-700">Vakkundige montage met volledige garantie op de installatie.</p>
+                  </div>
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold mb-3">Goede nazorg en waarborging van volledige tevredenheid</h3>
+                    <p className="text-gray-700">Persoonlijke service en ondersteuning wanneer u ons nodig heeft.</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-700 mb-6">
+                  Onze ervaren monteurs zorgen voor een professionele installatie en geven u graag advies over het 
+                  onderhoud van uw nieuwe kozijnen. Ook na de installatie staan wij voor u klaar voor vragen of service.
+                </p>
+                
+                <Button asChild className="bg-brand-green hover:bg-brand-green-dark text-white">
+                  <Link to="/offerte">
+                    <span>Vraag een offerte aan</span>
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </AnimatedSection>
             </div>
           </div>
         </section>
