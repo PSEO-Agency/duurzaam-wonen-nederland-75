@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
@@ -44,8 +43,8 @@ interface FeatureItem {
 }
 
 const CityServices: React.FC = () => {
-  const [selectedCityId, setSelectedCityId] = useState<string>('');
-  const [selectedServiceId, setSelectedServiceId] = useState<string>('');
+  const [selectedCityId, setSelectedCityId] = useState<string>('all');
+  const [selectedServiceId, setSelectedServiceId] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   
   const [newCityService, setNewCityService] = useState({
@@ -83,8 +82,8 @@ const CityServices: React.FC = () => {
   const { data: cities } = useCities();
   const { data: services } = useServices();
   const { data: cityServices, isLoading: isLoadingCityServices } = useCityServices(
-    selectedCityId || undefined, 
-    selectedServiceId || undefined
+    selectedCityId === 'all' ? undefined : selectedCityId, 
+    selectedServiceId === 'all' ? undefined : selectedServiceId
   );
   
   const createCityServiceMutation = useCreateCityService();
@@ -491,7 +490,7 @@ const CityServices: React.FC = () => {
                   <SelectValue placeholder="All cities" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All cities</SelectItem>
+                  <SelectItem value="all">All cities</SelectItem>
                   {cities?.map(city => (
                     <SelectItem key={city.id} value={city.id}>{city.name}</SelectItem>
                   ))}
@@ -509,7 +508,7 @@ const CityServices: React.FC = () => {
                   <SelectValue placeholder="All services" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All services</SelectItem>
+                  <SelectItem value="all">All services</SelectItem>
                   {services?.map(service => (
                     <SelectItem key={service.id} value={service.id}>{service.name}</SelectItem>
                   ))}
