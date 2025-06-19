@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ExternalLink, Download, CheckCircle2 } from 'lucide-react';
@@ -39,7 +38,7 @@ const CT70AS: React.FC = () => {
                   <div className="flex items-center gap-4 mb-4">
                     <h1 className="text-4xl font-bold">Schüco CT 70 AS</h1>
                     <img 
-                      src="/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png" 
+                      src="/lovable-uploads/551be695-56bb-469d-8d61-1712a04a4f2e.png" 
                       alt="Schüco" 
                       className="h-8 w-auto"
                     />
@@ -70,7 +69,7 @@ const CT70AS: React.FC = () => {
                 
                 <div>
                   <img 
-                    src="/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png"
+                    src="/lovable-uploads/551be695-56bb-469d-8d61-1712a04a4f2e.png"
                     alt="Schüco CT 70 AS doorsnede"
                     className="w-full rounded-lg shadow-lg"
                   />
