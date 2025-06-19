@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Download, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Download, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -24,12 +25,21 @@ const CT70AS: React.FC = () => {
         <section className="py-12 bg-gradient-to-br from-gray-50 to-gray-100">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
+              <div className="flex items-center gap-4 mb-6">
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/kunststof-kozijnen/kleuren">
+                    <ArrowLeft className="h-4 w-4 mr-2" />
+                    Terug naar kleuren
+                  </Link>
+                </Button>
+              </div>
+              
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div>
                   <div className="flex items-center gap-4 mb-4">
                     <h1 className="text-4xl font-bold">Schüco CT 70 AS</h1>
                     <img 
-                      src="/lovable-uploads/c96c9358-8e27-44e7-9fcd-8f265517446f.png" 
+                      src="/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png" 
                       alt="Schüco" 
                       className="h-8 w-auto"
                     />
@@ -40,7 +50,7 @@ const CT70AS: React.FC = () => {
                   
                   <div className="flex flex-wrap gap-2 mb-6">
                     <Badge variant="secondary">70mm profieldiepte</Badge>
-                    <Badge variant="secondary">Uf ≤ 1,2 W/(m²·K)</Badge>
+                    <Badge variant="secondary">Uf ≤ 1,3 W/(m²·K)</Badge>
                     <Badge variant="secondary">Klasse 4 luchtdichtheid</Badge>
                     <Badge variant="secondary">Betaalbaar</Badge>
                   </div>
@@ -60,7 +70,7 @@ const CT70AS: React.FC = () => {
                 
                 <div>
                   <img 
-                    src="/lovable-uploads/c96c9358-8e27-44e7-9fcd-8f265517446f.png"
+                    src="/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png"
                     alt="Schüco CT 70 AS doorsnede"
                     className="w-full rounded-lg shadow-lg"
                   />
@@ -132,81 +142,45 @@ const CT70AS: React.FC = () => {
                       <h2 className="text-2xl font-bold mb-4">Technische specificaties</h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                          <h3 className="font-semibold mb-3">Afmetingen & Prestaties</h3>
+                          <h3 className="font-semibold mb-3">Algemeen</h3>
                           <div className="space-y-2">
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Aanzichtsbreedte min.</span>
-                              <span className="font-medium">120 mm</span>
+                              <span className="text-gray-600">Profieldiepte</span>
+                              <span className="font-medium">70 mm</span>
                             </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Aanzichtsbreedte min.</span>
+                              <span className="font-medium">112 mm</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Kamers</span>
+                              <span className="font-medium">5 kamers</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Versterking</span>
+                              <span className="font-medium">Gegalvaniseerd staal</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h3 className="font-semibold mb-3">Prestaties</h3>
+                          <div className="space-y-2">
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                               <span className="text-gray-600">Uf-waarde frame ≥</span>
-                              <span className="font-medium">1,2 W/(m²·K)</span>
+                              <span className="font-medium">1,3 W/(m²·K)</span>
                             </div>
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Glas-/paneeldikte max.</span>
-                              <span className="font-medium">42 mm</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Vleugelbreedte max.</span>
-                              <span className="font-medium">1500 mm</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Vleugelhoogte max.</span>
-                              <span className="font-medium">2600 mm</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Geluidsisolatie RwP max.</span>
-                              <span className="font-medium">49 dB(A)</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Luchtdoorlaatbaarheid</span>
+                              <span className="text-gray-600">Luchtdichtheid</span>
                               <span className="font-medium">Klasse 4</span>
                             </div>
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                               <span className="text-gray-600">Slagregendichtheid</span>
                               <span className="font-medium">Klasse 9A</span>
                             </div>
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <h3 className="font-semibold mb-3">Veiligheid & Variatie</h3>
-                          <div className="space-y-2">
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Inbraakwering</span>
-                              <span className="font-medium">tot RC 2</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Windbelastingsweerstand</span>
-                              <span className="font-medium">Klasse C5/B5</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Vleugelgewicht max.</span>
-                              <span className="font-medium">250 kg</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Vleugelhoogte min.-max.</span>
-                              <span className="font-medium">400...2600 mm</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Vleugelbreedte min.-max.</span>
-                              <span className="font-medium">400...1500 mm</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Glas-/paneeldikte min.-max.</span>
-                              <span className="font-medium">6...42 mm</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Dorpelloze oplossing</span>
-                              <span className="font-medium">Ja</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Oppervlakken</span>
-                              <span className="font-medium">TopAlu, Decoratiefolie</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Afdichtniveaus</span>
-                              <span className="font-medium">2</span>
+                              <span className="text-gray-600">Windbelasting</span>
+                              <span className="font-medium">Klasse C4/B4</span>
                             </div>
                           </div>
                         </div>
@@ -217,10 +191,36 @@ const CT70AS: React.FC = () => {
               </div>
 
               <div className="space-y-6">
+                <AnimatedSection animation="fade-in" delay={200}>
+                  <Card>
+                    <CardContent className="p-6">
+                      <h3 className="text-lg font-semibold mb-4">Meer informatie</h3>
+                      <div className="space-y-3">
+                        <Button variant="outline" className="w-full justify-start">
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          Technische documenten
+                        </Button>
+                        <Button variant="outline" className="w-full justify-start">
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          CAD bestanden
+                        </Button>
+                        <Button variant="outline" className="w-full justify-start">
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          Montage instructies
+                        </Button>
+                        <Button variant="outline" className="w-full justify-start">
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          Certificaten
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </AnimatedSection>
+
                 <AnimatedSection animation="fade-in" delay={300}>
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-lg font-semibold mb-4">Gerelateerd</h3>
+                      <h3 className="text-lg font-semibold mb-4">Gerelateerde producten</h3>
                       <div className="space-y-3">
                         <Button variant="outline" className="w-full justify-start" asChild>
                           <Link to="/kunststof-kozijnen/profielen/living-82">

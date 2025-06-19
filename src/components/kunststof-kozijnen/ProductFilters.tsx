@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -19,7 +20,7 @@ const ProductFilters: React.FC = () => {
       id: 'ct-70-as',
       name: 'Schüco CT 70 AS',
       slug: 'ct-70-as', 
-      image: '/lovable-uploads/c96c9358-8e27-44e7-9fcd-8f265517446f.png',
+      image: '/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png',
       description: 'Veelzijdig profiel voor renovatie en nieuwbouw projecten',
       logo: '/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png'
     }
