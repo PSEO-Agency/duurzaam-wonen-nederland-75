@@ -1,68 +1,57 @@
 
-import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { useAdmin } from '@/contexts/AdminContext';
-import { Settings, LogOut, Home, User } from 'lucide-react';
+import { LayoutDashboard, Lock } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const AdminBar: React.FC = () => {
-  const { isAuthenticated, user, logout } = useAdmin();
-  const navigate = useNavigate();
-  const location = useLocation();
-  
-  // Only show on admin routes when authenticated
-  if (!isAuthenticated || !location.pathname.startsWith('/admin')) {
-    return null;
-  }
-
-  const handleLogout = async () => {
-    await logout();
-    navigate('/');
-  };
-
-  const handleGoHome = () => {
-    navigate('/');
-  };
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-blue-600 text-white px-4 py-2 flex items-center justify-between">
-      <div className="flex items-center gap-4">
-        <span className="font-medium">Admin Panel</span>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => navigate('/admin/dashboard')}
-          className="text-white hover:bg-blue-700"
-        >
-          <Settings className="h-4 w-4 mr-2" />
-          Dashboard
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        {user && (
-          <div className="flex items-center gap-2 text-sm">
-            <User className="h-4 w-4" />
-            <span>{user.email}</span>
-          </div>
-        )}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={handleGoHome}
-          className="text-white hover:bg-blue-700"
-        >
-          <Home className="h-4 w-4 mr-2" />
-          View Site
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={handleLogout}
-          className="text-white hover:bg-blue-700"
-        >
-          <LogOut className="h-4 w-4 mr-2" />
-          Logout
-        </Button>
+    <div className={cn(
+      "w-full bg-slate-800 text-white transition-all duration-300",
+      isOpen ? "h-12" : "h-8"
+    )}>
+      <div className="container mx-auto px-4 h-full flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Lock size={16} />
+          <span className="text-sm font-medium">Site Admin Mode</span>
+        </div>
+        
+        <div className="flex items-center gap-4">
+          <Button 
+            asChild 
+            variant="ghost" 
+            size="sm" 
+            className="text-white hover:bg-slate-700"
+          >
+            <Link to="/admin/dashboard">
+              <LayoutDashboard size={16} className="mr-2" />
+              Dashboard
+            </Link>
+          </Button>
+          
+          <Button 
+            asChild 
+            variant="ghost" 
+            size="sm" 
+            className="text-white hover:bg-slate-700"
+          >
+            <Link to="/">
+              View Site
+            </Link>
+          </Button>
+          
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-white hover:bg-slate-700"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? "Collapse" : "Expand"}
+          </Button>
+        </div>
       </div>
     </div>
   );

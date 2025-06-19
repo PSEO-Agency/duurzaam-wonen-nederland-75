@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
@@ -43,8 +44,8 @@ interface FeatureItem {
 }
 
 const CityServices: React.FC = () => {
-  const [selectedCityId, setSelectedCityId] = useState<string>('all');
-  const [selectedServiceId, setSelectedServiceId] = useState<string>('all');
+  const [selectedCityId, setSelectedCityId] = useState<string>('');
+  const [selectedServiceId, setSelectedServiceId] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState<string>('');
   
   const [newCityService, setNewCityService] = useState({
@@ -82,8 +83,8 @@ const CityServices: React.FC = () => {
   const { data: cities } = useCities();
   const { data: services } = useServices();
   const { data: cityServices, isLoading: isLoadingCityServices } = useCityServices(
-    selectedCityId === 'all' ? undefined : selectedCityId, 
-    selectedServiceId === 'all' ? undefined : selectedServiceId
+    selectedCityId || undefined, 
+    selectedServiceId || undefined
   );
   
   const createCityServiceMutation = useCreateCityService();
@@ -242,7 +243,7 @@ const CityServices: React.FC = () => {
               Add City Service
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-3xl">
             <DialogHeader>
               <DialogTitle>Add New City Service</DialogTitle>
               <DialogDescription>
@@ -490,7 +491,7 @@ const CityServices: React.FC = () => {
                   <SelectValue placeholder="All cities" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All cities</SelectItem>
+                  <SelectItem value="">All cities</SelectItem>
                   {cities?.map(city => (
                     <SelectItem key={city.id} value={city.id}>{city.name}</SelectItem>
                   ))}
@@ -508,7 +509,7 @@ const CityServices: React.FC = () => {
                   <SelectValue placeholder="All services" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All services</SelectItem>
+                  <SelectItem value="">All services</SelectItem>
                   {services?.map(service => (
                     <SelectItem key={service.id} value={service.id}>{service.name}</SelectItem>
                   ))}
@@ -576,7 +577,7 @@ const CityServices: React.FC = () => {
                           <Edit2Icon className="h-4 w-4" />
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+                      <DialogContent className="max-w-3xl">
                         <DialogHeader>
                           <DialogTitle>Edit City Service</DialogTitle>
                           <DialogDescription>

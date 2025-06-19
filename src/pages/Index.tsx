@@ -21,8 +21,6 @@ const Index: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    console.log('Index page loading started');
-    
     // Preload critical images and resources
     const preloadImages = [
       '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png', // Hero background
@@ -37,32 +35,21 @@ const Index: React.FC = () => {
       img.src = src;
       img.onload = () => {
         loadedCount++;
-        console.log(`Image loaded: ${src} (${loadedCount}/${preloadImages.length})`);
         if (loadedCount === preloadImages.length) {
           // Small timeout to ensure smooth transition
-          setTimeout(() => {
-            console.log('All images loaded, hiding loading screen');
-            setIsLoading(false);
-          }, 300);
+          setTimeout(() => setIsLoading(false), 300);
         }
       };
       img.onerror = () => {
         loadedCount++;
-        console.log(`Image failed to load: ${src} (${loadedCount}/${preloadImages.length})`);
         if (loadedCount === preloadImages.length) {
-          setTimeout(() => {
-            console.log('All images processed (some failed), hiding loading screen');
-            setIsLoading(false);
-          }, 300);
+          setTimeout(() => setIsLoading(false), 300);
         }
       };
     });
     
     // Fallback in case images don't load
-    const timeout = setTimeout(() => {
-      console.log('Fallback timeout reached, hiding loading screen');
-      setIsLoading(false);
-    }, 2000);
+    const timeout = setTimeout(() => setIsLoading(false), 2000);
     
     // Intersection Observer for reveal animations
     const observer = new IntersectionObserver(
@@ -76,12 +63,9 @@ const Index: React.FC = () => {
       { threshold: 0.1 }
     );
     
-    // Wait a bit before observing to ensure DOM is ready
-    setTimeout(() => {
-      document.querySelectorAll('.reveal-up').forEach((el) => {
-        observer.observe(el);
-      });
-    }, 100);
+    document.querySelectorAll('.reveal-up').forEach((el) => {
+      observer.observe(el);
+    });
 
     // Load review widget script
     const script = document.createElement('script');
@@ -101,8 +85,6 @@ const Index: React.FC = () => {
       }
     };
   }, []);
-  
-  console.log('Index page render, isLoading:', isLoading);
   
   return (
     <>

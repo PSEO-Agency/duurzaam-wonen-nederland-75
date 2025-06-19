@@ -1,278 +1,160 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AdminProvider } from "@/contexts/AdminContext";
-import { SearchProvider } from "@/contexts/SearchContext";
-import ScrollToTopOnNavigate from "@/components/ScrollToTopOnNavigate";
-import CookieConsent from "@/components/CookieConsent";
-import AdminWrapper from "@/components/admin/AdminWrapper";
-import AdminLayout from "@/components/admin/AdminLayout";
-import ProtectedAdminRoute from "@/components/admin/ProtectedAdminRoute";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from "@/components/ui/toaster";
+import AdminWrapper from './components/admin/AdminWrapper';
+import AdminLayout from './components/admin/AdminLayout';
 
-// Import all pages
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Contact from "./pages/Contact";
-import OverOns from "./pages/OverOns";
-import KunststofKozijnen from "./pages/KunststofKozijnen";
-import AluminiumKozijnen from "./pages/AluminiumKozijnen";
-import KunststofSchuifpuien from "./pages/KunststofSchuifpuien";
-import Werkwijze from "./pages/Werkwijze";
-import RentevrijeFinanciering from "./pages/RentevrijeFinanciering";
-import Projects from "./pages/Projects";
-import ProjectDetail from "./pages/ProjectDetail";
-import Offerte from "./pages/Offerte";
-import OfferteSuccess from "./pages/OfferteSuccess";
-import Werkgebied from "./pages/Werkgebied";
-import Showroom from "./pages/Showroom";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import ProductPage from "./pages/ProductPage";
-import CityServicePage from "./pages/CityServicePage";
-import CityServicePageNew from "./pages/CityServicePageNew";
-import RegionServicePage from "./pages/RegionServicePage";
-import ColorOptions from "./pages/ColorOptions";
-import ColorDetail from "./pages/ColorDetail";
-import KozijnTypes from "./pages/KozijnTypes";
-import KozijnBrands from "./pages/KozijnBrands";
-import KozijnSizes from "./pages/KozijnSizes";
-import KozijnPrices from "./pages/KozijnPrices";
-import KozijnMontage from "./pages/KozijnMontage";
-import Sitemap from "./pages/Sitemap";
-import SitemapXML from "./pages/SitemapXML";
-import RobotsTxt from "./pages/RobotsTxt";
+// Lazy load pages
+const Index = lazy(() => import('./pages/Index'));
+const KunststofKozijnen = lazy(() => import('./pages/KunststofKozijnen'));
+const AluminiumKozijnen = lazy(() => import('./pages/AluminiumKozijnen'));
+const KunststofSchuifpuien = lazy(() => import('./pages/KunststofSchuifpuien'));
+const RentevrijeFinanciering = lazy(() => import('./pages/RentevrijeFinanciering'));
+const OverOns = lazy(() => import('./pages/OverOns'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Offerte = lazy(() => import('./pages/Offerte'));
+const OfferteSuccess = lazy(() => import('./pages/OfferteSuccess'));
+const Werkwijze = lazy(() => import('./pages/Werkwijze'));
+const Vacatures = lazy(() => import('./pages/over-ons/Vacatures'));
+const Werkgebied = lazy(() => import('./pages/Werkgebied'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const Sitemap = lazy(() => import('./pages/Sitemap'));
+const SitemapXML = lazy(() => import('./pages/SitemapXML'));
+const RobotsTxt = lazy(() => import('./pages/RobotsTxt'));
+const Zoeken = lazy(() => import('./pages/Zoeken'));
+const CityServicePage = lazy(() => import('./pages/CityServicePage'));
+
+// New location pages
+const RegionServicePage = lazy(() => import('./pages/RegionServicePage'));
+const CityServicePageNew = lazy(() => import('./pages/CityServicePageNew'));
+
+// Project pages
+const Projects = lazy(() => import('./pages/Projects'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+
+// Job detail pages
+const KunststofKozijnenMonteur = lazy(() => import('./pages/vacatures/KunststofKozijnenMonteur'));
+const CommercieeelMedewerker = lazy(() => import('./pages/vacatures/CommercieeelMedewerker'));
+
+// Kunststof Kozijnen subpages
+const KozijnTypes = lazy(() => import('./pages/KozijnTypes'));
+const ColorOptions = lazy(() => import('./pages/ColorOptions'));
+const ColorDetail = lazy(() => import('./pages/ColorDetail'));
+const KozijnSizes = lazy(() => import('./pages/KozijnSizes'));
+const KozijnMontage = lazy(() => import('./pages/KozijnMontage'));
+const KozijnPrices = lazy(() => import('./pages/KozijnPrices'));
+const KozijnBrands = lazy(() => import('./pages/KozijnBrands'));
+const Draaikiepraam = lazy(() => import('./pages/types/Draaikiepraam'));
+const Kozijn100x100 = lazy(() => import('./pages/sizes/Kozijn100x100'));
+const KozijnenAfbetaling = lazy(() => import('./pages/prices/KozijnenAfbetaling'));
+const KozijnenSubsidie = lazy(() => import('./pages/prices/KozijnenSubsidie'));
+const SchucoBrand = lazy(() => import('./pages/brands/SchucoBrand'));
+const KozijnenEnschede = lazy(() => import('./pages/locaties/KozijnenEnschede'));
+const KozijnenInmeten = lazy(() => import('./pages/services/KozijnenInmeten'));
+
+// Profile pages
+const Living82 = lazy(() => import('./pages/profielen/Living82'));
+const CT70AS = lazy(() => import('./pages/profielen/CT70AS'));
 
 // Admin pages
-import AdminLogin from "./pages/admin/Login";
-import Dashboard from "./pages/admin/Dashboard";
-import Pages from "./pages/admin/Pages";
-import PageEditor from "./pages/admin/PageEditor";
-import Templates from "./pages/admin/Templates";
-import Sections from "./pages/admin/Sections";
-import SectionEditor from "./pages/admin/SectionEditor";
-import Products from "./pages/admin/Products";
-import ProductEditor from "./pages/admin/ProductEditor";
-import Locations from "./pages/admin/Locations";
-import Services from "./pages/admin/Services";
-import CityServices from "./pages/admin/CityServices";
-import AdminProjects from "./pages/admin/Projects";
-
-// Location-specific pages
-import KozijnenEnschede from "./pages/locaties/KozijnenEnschede";
-
-// Over ons subpages
-import Team from "./pages/over-ons/Team";
-import Missie from "./pages/over-ons/Missie";
-import Duurzaamheid from "./pages/over-ons/Duurzaamheid";
-import Vacatures from "./pages/over-ons/Vacatures";
-
-// Vacature pages
-import CommercieeelMedewerker from "./pages/vacatures/CommercieeelMedewerker";
-import KunststofKozijnenMonteur from "./pages/vacatures/KunststofKozijnenMonteur";
-
-// Service-specific pages
-import KozijnenInmeten from "./pages/services/KozijnenInmeten";
-
-// Price-specific pages
-import KozijnenAfbetaling from "./pages/prices/KozijnenAfbetaling";
-import KozijnenSubsidie from "./pages/prices/KozijnenSubsidie";
-
-// Size-specific pages
-import Kozijn100x100 from "./pages/sizes/Kozijn100x100";
-
-// Profile-specific pages
-import CT70AS from "./pages/profielen/CT70AS";
-import Living82 from "./pages/profielen/Living82";
-
-// Type-specific pages
-import Draaikiepraam from "./pages/types/Draaikiepraam";
-
-// Brand-specific pages
-import SchucoBrand from "./pages/brands/SchucoBrand";
+const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
+const AdminPages = lazy(() => import('./pages/admin/Pages'));
+const AdminLocations = lazy(() => import('./pages/admin/Locations'));
+const AdminServices = lazy(() => import('./pages/admin/Services'));
+const AdminCityServices = lazy(() => import('./pages/admin/CityServices'));
+const AdminProjects = lazy(() => import('./pages/admin/Projects'));
+const AdminProducts = lazy(() => import('./pages/admin/Products'));
+const AdminProductEditor = lazy(() => import('./pages/admin/ProductEditor'));
 
 const queryClient = new QueryClient();
 
-const App = () => {
+function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <TooltipProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <div className="App">
+          <AdminWrapper>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                {/* SEO Routes */}
+                <Route path="/sitemap.xml" element={<SitemapXML />} />
+                <Route path="/robots.txt" element={<RobotsTxt />} />
+                
+                {/* Main pages */}
+                <Route path="/" element={<Index />} />
+                <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
+                <Route path="/aluminium-kozijnen" element={<AluminiumKozijnen />} />
+                <Route path="/kunststof-schuifpuien" element={<KunststofSchuifpuien />} />
+                <Route path="/rentevrije-financiering" element={<RentevrijeFinanciering />} />
+                <Route path="/over-ons" element={<OverOns />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/offerte" element={<Offerte />} />
+                <Route path="/offerte/success" element={<OfferteSuccess />} />
+                <Route path="/werkwijze" element={<Werkwijze />} />
+                <Route path="/vacatures" element={<Vacatures />} />
+                <Route path="/werkgebied" element={<Werkgebied />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/sitemap" element={<Sitemap />} />
+                <Route path="/zoeken" element={<Zoeken />} />
+                
+                {/* Project routes */}
+                <Route path="/projecten" element={<Projects />} />
+                <Route path="/projecten/:projectId" element={<ProjectDetail />} />
+                
+                {/* Job detail routes */}
+                <Route path="/vacatures/kunststof-kozijnen-monteur" element={<KunststofKozijnenMonteur />} />
+                <Route path="/vacatures/commercieel-medewerker" element={<CommercieeelMedewerker />} />
+                
+                {/* Kunststof Kozijnen subpage routes */}
+                <Route path="/kunststof-kozijnen/types" element={<KozijnTypes />} />
+                <Route path="/kunststof-kozijnen/types/draaikiepraam" element={<Draaikiepraam />} />
+                <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
+                <Route path="/kunststof-kozijnen/kleuren/:colorSlug" element={<ColorDetail />} />
+                <Route path="/kunststof-kozijnen/afmetingen" element={<KozijnSizes />} />
+                <Route path="/kunststof-kozijnen/afmetingen/100x100" element={<Kozijn100x100 />} />
+                <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />
+                <Route path="/kunststof-kozijnen/prijzen" element={<KozijnPrices />} />
+                <Route path="/kunststof-kozijnen/prijzen/afbetaling" element={<KozijnenAfbetaling />} />
+                <Route path="/kunststof-kozijnen/prijzen/subsidie" element={<KozijnenSubsidie />} />
+                <Route path="/kunststof-kozijnen/merken" element={<KozijnBrands />} />
+                <Route path="/kunststof-kozijnen/merken/schuco" element={<SchucoBrand />} />
+                <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />
+                <Route path="/kunststof-kozijnen/services/inmeten" element={<KozijnenInmeten />} />
+                
+                {/* Profile routes */}
+                <Route path="/kunststof-kozijnen/profielen/living-82" element={<Living82 />} />
+                <Route path="/kunststof-kozijnen/profielen/ct-70-as" element={<CT70AS />} />
+                
+                {/* New URL structure - /{service}/{region}/{city} */}
+                <Route path="/:serviceSlug/:regionSlug/:citySlug" element={<CityServicePageNew />} />
+                <Route path="/:serviceSlug/:regionSlug" element={<RegionServicePage />} />
+                
+                {/* Old URL structure for backward compatibility - /diensten/{city}/{service} */}
+                <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
+                
+                {/* Admin routes with AdminLayout wrapper */}
+                <Route path="/admin/*" element={<AdminLayout />}>
+                  <Route path="dashboard" element={<AdminDashboard />} />
+                  <Route path="pages" element={<AdminPages />} />
+                  <Route path="products" element={<AdminProducts />} />
+                  <Route path="products/create" element={<AdminProductEditor />} />
+                  <Route path="products/edit/:productId" element={<AdminProductEditor />} />
+                  <Route path="locations" element={<AdminLocations />} />
+                  <Route path="services" element={<AdminServices />} />
+                  <Route path="city-services" element={<AdminCityServices />} />
+                  <Route path="projects" element={<AdminProjects />} />
+                </Route>
+              </Routes>
+            </Suspense>
+          </AdminWrapper>
           <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <AdminProvider>
-              <SearchProvider>
-                <ScrollToTopOnNavigate />
-                <Routes>
-                  {/* Admin routes */}
-                  <Route path="/admin/login" element={<AdminLogin />} />
-                  <Route path="/admin/dashboard" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <Dashboard />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/pages" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <Pages />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/pages/:id" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <PageEditor />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/templates" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <Templates />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/sections" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <Sections />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/sections/:id" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <SectionEditor />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/products" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <Products />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/products/:id" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <ProductEditor />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/locations" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <Locations />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/services" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <Services />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/city-services" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <CityServices />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-                  <Route path="/admin/projects" element={
-                    <ProtectedAdminRoute>
-                      <AdminLayout>
-                        <AdminProjects />
-                      </AdminLayout>
-                    </ProtectedAdminRoute>
-                  } />
-
-                  {/* Public routes */}
-                  <Route path="/" element={<AdminWrapper><Index /></AdminWrapper>} />
-                  <Route path="/contact" element={<AdminWrapper><Contact /></AdminWrapper>} />
-                  <Route path="/over-ons" element={<AdminWrapper><OverOns /></AdminWrapper>} />
-                  <Route path="/over-ons/team" element={<AdminWrapper><Team /></AdminWrapper>} />
-                  <Route path="/over-ons/missie" element={<AdminWrapper><Missie /></AdminWrapper>} />
-                  <Route path="/over-ons/duurzaamheid" element={<AdminWrapper><Duurzaamheid /></AdminWrapper>} />
-                  <Route path="/over-ons/vacatures" element={<AdminWrapper><Vacatures /></AdminWrapper>} />
-                  <Route path="/kunststof-kozijnen" element={<AdminWrapper><KunststofKozijnen /></AdminWrapper>} />
-                  <Route path="/aluminium-kozijnen" element={<AdminWrapper><AluminiumKozijnen /></AdminWrapper>} />
-                  <Route path="/kunststof-schuifpuien" element={<AdminWrapper><KunststofSchuifpuien /></AdminWrapper>} />
-                  <Route path="/werkwijze" element={<AdminWrapper><Werkwijze /></AdminWrapper>} />
-                  <Route path="/rentevrije-financiering" element={<AdminWrapper><RentevrijeFinanciering /></AdminWrapper>} />
-                  <Route path="/projecten" element={<AdminWrapper><Projects /></AdminWrapper>} />
-                  <Route path="/projecten/:id" element={<AdminWrapper><ProjectDetail /></AdminWrapper>} />
-                  <Route path="/offerte" element={<AdminWrapper><Offerte /></AdminWrapper>} />
-                  <Route path="/offerte/success" element={<AdminWrapper><OfferteSuccess /></AdminWrapper>} />
-                  <Route path="/werkgebied" element={<AdminWrapper><Werkgebied /></AdminWrapper>} />
-                  <Route path="/showroom" element={<AdminWrapper><Showroom /></AdminWrapper>} />
-                  <Route path="/privacy-policy" element={<AdminWrapper><PrivacyPolicy /></AdminWrapper>} />
-                  <Route path="/sitemap" element={<AdminWrapper><Sitemap /></AdminWrapper>} />
-                  <Route path="/sitemap.xml" element={<SitemapXML />} />
-                  <Route path="/robots.txt" element={<RobotsTxt />} />
-
-                  {/* Dynamic product routes */}
-                  <Route path="/:productSlug" element={<AdminWrapper><ProductPage /></AdminWrapper>} />
-                  <Route path="/:productSlug/locaties/:citySlug" element={<AdminWrapper><CityServicePage /></AdminWrapper>} />
-                  <Route path="/:productSlug/locatie/:citySlug" element={<AdminWrapper><CityServicePageNew /></AdminWrapper>} />
-                  <Route path="/:productSlug/regio/:regionSlug" element={<AdminWrapper><RegionServicePage /></AdminWrapper>} />
-
-                  {/* Location routes */}
-                  <Route path="/kunststof-kozijnen/locaties/enschede" element={<AdminWrapper><KozijnenEnschede /></AdminWrapper>} />
-
-                  {/* Service routes */}
-                  <Route path="/kozijnen-inmeten" element={<AdminWrapper><KozijnenInmeten /></AdminWrapper>} />
-
-                  {/* Color routes */}
-                  <Route path="/kleuren" element={<AdminWrapper><ColorOptions /></AdminWrapper>} />
-                  <Route path="/kleuren/:colorSlug" element={<AdminWrapper><ColorDetail /></AdminWrapper>} />
-
-                  {/* Type routes */}
-                  <Route path="/types" element={<AdminWrapper><KozijnTypes /></AdminWrapper>} />
-                  <Route path="/types/:typeSlug" element={<AdminWrapper><Draaikiepraam /></AdminWrapper>} />
-
-                  {/* Brand routes */}
-                  <Route path="/merken" element={<AdminWrapper><KozijnBrands /></AdminWrapper>} />
-                  <Route path="/merken/:brandSlug" element={<AdminWrapper><SchucoBrand /></AdminWrapper>} />
-
-                  {/* Size routes */}
-                  <Route path="/afmetingen" element={<AdminWrapper><KozijnSizes /></AdminWrapper>} />
-                  <Route path="/afmetingen/:sizeSlug" element={<AdminWrapper><Kozijn100x100 /></AdminWrapper>} />
-
-                  {/* Price routes */}
-                  <Route path="/prijzen" element={<AdminWrapper><KozijnPrices /></AdminWrapper>} />
-                  <Route path="/kozijnen-afbetaling" element={<AdminWrapper><KozijnenAfbetaling /></AdminWrapper>} />
-                  <Route path="/kozijnen-subsidie" element={<AdminWrapper><KozijnenSubsidie /></AdminWrapper>} />
-
-                  {/* Profile routes */}
-                  <Route path="/profielen/ct70as" element={<AdminWrapper><CT70AS /></AdminWrapper>} />
-                  <Route path="/profielen/living82" element={<AdminWrapper><Living82 /></AdminWrapper>} />
-
-                  {/* Assembly routes */}
-                  <Route path="/kozijnen-montage" element={<AdminWrapper><KozijnMontage /></AdminWrapper>} />
-
-                  {/* Vacature routes */}
-                  <Route path="/vacatures/commercieel-medewerker" element={<AdminWrapper><CommercieeelMedewerker /></AdminWrapper>} />
-                  <Route path="/vacatures/kunststof-kozijnen-monteur" element={<AdminWrapper><KunststofKozijnenMonteur /></AdminWrapper>} />
-
-                  {/* 404 Route */}
-                  <Route path="*" element={<AdminWrapper><NotFound /></AdminWrapper>} />
-                </Routes>
-                <CookieConsent />
-              </SearchProvider>
-            </AdminProvider>
-          </BrowserRouter>
-        </TooltipProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
+        </div>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
-};
+}
 
 export default App;

@@ -47,33 +47,21 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/kunststof-kozijnen" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Oplossingen
+                </Link>
+              </li>
+              <li>
                 <Link to="/projecten" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
                   <ChevronRight className="h-4 w-4 mr-2" />
                   Projecten
                 </Link>
               </li>
               <li>
-                <Link to="/rentevrije-financiering" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                <Link to="/over-ons" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
                   <ChevronRight className="h-4 w-4 mr-2" />
-                  Rentevrije Financiering*
-                </Link>
-              </li>
-              <li>
-                <Link to="/werkwijze" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
-                  <ChevronRight className="h-4 w-4 mr-2" />
-                  Werkwijze
-                </Link>
-              </li>
-              <li>
-                <Link to="/vacatures" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
-                  <ChevronRight className="h-4 w-4 mr-2" />
-                  Vacatures
-                </Link>
-              </li>
-              <li>
-                <Link to="/werkgebied" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
-                  <ChevronRight className="h-4 w-4 mr-2" />
-                  Werkgebied
+                  Over ons
                 </Link>
               </li>
               <li>

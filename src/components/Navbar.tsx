@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
   NavigationMenu,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
+import SearchCommandMenu from '@/components/search/SearchCommandMenu';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Logo } from './navbar/Logo';
 import { NavMenuItems } from './navbar/NavMenuItems';
@@ -32,6 +33,7 @@ const Navbar: React.FC = () => {
   };
 
   const topNavItems = [
+    { label: 'Blog', href: '/blog' },
     { label: 'Werkgebied', href: '/werkgebied' },
     { label: 'Contact', href: '/contact' },
   ];
@@ -96,6 +98,8 @@ const Navbar: React.FC = () => {
             </NavigationMenu>
 
             <div className="flex items-center gap-2 md:gap-3">
+              <SearchCommandMenu />
+              
               <Button 
                 asChild 
                 size={isMobile ? "sm" : "lg"}

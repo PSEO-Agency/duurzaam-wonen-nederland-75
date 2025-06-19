@@ -3,12 +3,16 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Edit, Trash2, Calendar, MapPin } from 'lucide-react';
-import ProjectForm from '@/components/admin/ProjectForm';
+import { Checkbox } from '@/components/ui/checkbox';
+import ImageUpload from '@/components/form/ImageUpload';
 
 interface Project {
   id: string;
@@ -135,6 +139,144 @@ const Projects: React.FC = () => {
       });
     }
   });
+
+  const ProjectForm: React.FC<{ 
+    project?: Project | null; 
+    onSubmit: (data: any) => void; 
+    isLoading?: boolean;
+  }> = ({ project, onSubmit, isLoading = false }) => {
+    const [formData, setFormData] = useState({
+      title: project?.title || '',
+      description: project?.description || '',
+      location: project?.location || '',
+      project_type: project?.project_type || '',
+      completion_date: project?.completion_date || '',
+      image_url: project?.image_url || '',
+      featured_image: project?.featured_image || '',
+      gallery_images: project?.gallery_images || [],
+      is_featured: project?.is_featured || false,
+      is_active: project?.is_active ?? true,
+      sort_order: project?.sort_order || 0
+    });
+
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      
+      // Clean up the data before submitting, convert empty strings to null
+      const cleanedData = {
+        ...formData,
+        description: formData.description.trim() || null,
+        location: formData.location.trim() || null,
+        project_type: formData.project_type.trim() || null,
+        completion_date: formData.completion_date || null,
+        image_url: formData.image_url.trim() || null,
+        featured_image: formData.featured_image.trim() || null,
+      };
+      
+      onSubmit(cleanedData);
+    };
+
+    return (
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <Label htmlFor="title">Titel *</Label>
+          <Input
+            id="title"
+            value={formData.title}
+            onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+            required
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="description">Beschrijving</Label>
+          <Textarea
+            id="description"
+            value={formData.description}
+            onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+            rows={3}
+          />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="location">Locatie</Label>
+            <Input
+              id="location"
+              value={formData.location}
+              onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
+            />
+          </div>
+          <div>
+            <Label htmlFor="project_type">Project Type</Label>
+            <Input
+              id="project_type"
+              value={formData.project_type}
+              onChange={(e) => setFormData(prev => ({ ...prev, project_type: e.target.value }))}
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="completion_date">Opleverdatum</Label>
+            <Input
+              id="completion_date"
+              type="date"
+              value={formData.completion_date}
+              onChange={(e) => setFormData(prev => ({ ...prev, completion_date: e.target.value }))}
+            />
+          </div>
+          <div>
+            <Label htmlFor="sort_order">Sorteervolgorde</Label>
+            <Input
+              id="sort_order"
+              type="number"
+              value={formData.sort_order}
+              onChange={(e) => setFormData(prev => ({ ...prev, sort_order: parseInt(e.target.value) || 0 }))}
+            />
+          </div>
+        </div>
+
+        <ImageUpload
+          label="Hoofdafbeelding"
+          value={formData.image_url}
+          onChange={(url) => setFormData(prev => ({ ...prev, image_url: url }))}
+          bucketName="project-images"
+        />
+
+        <ImageUpload
+          label="Featured Afbeelding"
+          value={formData.featured_image}
+          onChange={(url) => setFormData(prev => ({ ...prev, featured_image: url }))}
+          bucketName="project-images"
+        />
+
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="is_featured"
+              checked={formData.is_featured}
+              onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_featured: !!checked }))}
+            />
+            <Label htmlFor="is_featured">Uitgelicht</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="is_active"
+              checked={formData.is_active}
+              onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_active: !!checked }))}
+            />
+            <Label htmlFor="is_active">Actief</Label>
+          </div>
+        </div>
+
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? 'Bezig...' : (project ? 'Bijwerken' : 'Aanmaken')}
+        </Button>
+      </form>
+    );
+  };
 
   if (isLoading) {
     return (

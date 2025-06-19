@@ -4,8 +4,6 @@ import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, Navigati
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
-import { useAdmin } from '@/contexts/AdminContext';
-import AdminModeToggle from '@/components/admin/AdminModeToggle';
 
 interface MenuSection {
   label: string;
@@ -20,6 +18,12 @@ export const mainNavItems: MenuSection[] = [
   { label: 'Rentevrije Financiering*', href: '/rentevrije-financiering' },
   { label: 'Werkwijze', href: '/werkwijze' },
   { label: 'Vacatures', href: '/vacatures' },
+];
+
+export const oplossingenItems: MenuSection[] = [
+  { label: 'Kunststof Schuifpuien', href: '/kunststof-schuifpuien' },
+  { label: 'Kunststof Deuren', href: '/kunststof-deuren' },
+  { label: 'Gevelbekleding', href: '/gevelbekleding' },
 ];
 
 export const overOnsItems: MenuSection[] = [
@@ -39,7 +43,6 @@ export const adminItems: MenuSection[] = [
 
 export const NavMenuItems = () => {
   const { data: products = [] } = useProducts();
-  const { isAuthenticated } = useAdmin();
 
   const renderMenuLink = (item: MenuSection) => {
     if (item.href.startsWith('#')) {
@@ -58,6 +61,11 @@ export const NavMenuItems = () => {
     );
   };
 
+  const dynamicProductItems = products.map(product => ({
+    label: product.name,
+    href: `/${product.slug}`
+  }));
+
   return (
     <>
       <NavigationMenuItem>
@@ -65,17 +73,29 @@ export const NavMenuItems = () => {
           Oplossingen
         </NavigationMenuTrigger>
         <NavigationMenuContent>
-          <div className="bg-white p-3 shadow-lg rounded-md">
-            <ul className="space-y-1 min-w-[200px] max-w-[250px]">
-              {products.map((product) => (
-                <li key={product.slug}>
-                  <Link to={`/${product.slug}`} className="flex items-center text-gray-700 hover:text-brand-green transition-colors duration-200 py-2 text-sm whitespace-nowrap">
-                    <ChevronRight size={16} className="mr-2 flex-shrink-0" />
-                    <span className="truncate">{product.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="bg-white p-4 min-w-[500px]">
+            <div className="grid grid-cols-2 gap-8">
+              <div className="flex-1">
+                <h4 className="font-medium text-gray-900 mb-2">Oplossingen</h4>
+                <ul className="space-y-1">
+                  {oplossingenItems.map((item) => (
+                    <li key={item.label}>
+                      {renderMenuLink(item)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex-1">
+                <h4 className="font-medium text-gray-900 mb-2">Producten</h4>
+                <ul className="space-y-1">
+                  {dynamicProductItems.map((item) => (
+                    <li key={item.label}>
+                      {renderMenuLink(item)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </NavigationMenuContent>
       </NavigationMenuItem>
@@ -90,28 +110,23 @@ export const NavMenuItems = () => {
         </NavigationMenuItem>
       ))}
 
-      {isAuthenticated && (
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
-            Admin
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <div className="bg-white p-4 shadow-lg rounded-md min-w-[200px] max-w-[250px]">
-              <h3 className="font-semibold text-lg mb-2">Admin Panel</h3>
-              <div className="mb-3">
-                <AdminModeToggle />
-              </div>
-              <ul className="space-y-1">
-                {adminItems.map((item) => (
-                  <li key={item.label}>
-                    {renderMenuLink(item)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      )}
+      <NavigationMenuItem>
+        <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
+          Admin
+        </NavigationMenuTrigger>
+        <NavigationMenuContent className="right-0">
+          <div className="bg-white p-4 w-auto">
+            <h3 className="font-semibold text-lg mb-2">Admin Panel</h3>
+            <ul className="space-y-1">
+              {adminItems.map((item) => (
+                <li key={item.label}>
+                  {renderMenuLink(item)}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
     </>
   );
 };
