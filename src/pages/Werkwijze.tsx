@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, MessagesSquare, Ruler, ClipboardCheck, Truck, Wrench, ThumbsUp, Calendar, Check, MessageCircle } from 'lucide-react';
+import { ArrowRight, MessageSquare, Ruler, ClipboardCheck, Truck, Wrench, ThumbsUp, Calendar, Check, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -16,7 +16,7 @@ const Werkwijze: React.FC = () => {
       step: 1,
       title: "Vrijblijvend adviesgesprek",
       description: "In een persoonlijk gesprek bespreken we uw wensen en mogelijkheden voor uw woning.",
-      icon: MessagesSquare,
+      icon: MessageSquare,
       color: "bg-blue-50 border-blue-200",
       iconColor: "text-blue-500",
     },
@@ -103,82 +103,85 @@ const Werkwijze: React.FC = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <div className="space-y-12">
-                {workflowSteps.map((step, index) => (
-                  <AnimatedSection key={index} animation={index % 2 === 0 ? "fade-in-right" : "fade-in-left"} delay={index * 100}>
-                    <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
-                      {/* Step number and icon */}
-                      <div className="flex-shrink-0">
-                        <div className="relative">
-                          <div className={`w-24 h-24 rounded-full flex items-center justify-center ${step.color} border-2`}>
-                            <step.icon className={`h-12 w-12 ${step.iconColor}`} />
-                          </div>
-                          <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center font-bold text-lg border-2 border-white shadow-lg">
-                            {step.step}
+                {workflowSteps.map((step, index) => {
+                  const IconComponent = step.icon;
+                  return (
+                    <AnimatedSection key={index} animation={index % 2 === 0 ? "fade-in-right" : "fade-in-left"} delay={index * 100}>
+                      <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                        {/* Step number and icon */}
+                        <div className="flex-shrink-0">
+                          <div className="relative">
+                            <div className={`w-24 h-24 rounded-full flex items-center justify-center ${step.color} border-2`}>
+                              <IconComponent className={`h-12 w-12 ${step.iconColor}`} />
+                            </div>
+                            <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center font-bold text-lg border-2 border-white shadow-lg">
+                              {step.step}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      
-                      {/* Content */}
-                      <div className="flex-grow md:border-l-2 md:border-gray-200 md:pl-10">
-                        <h3 className="text-2xl font-bold mb-2">{step.title}</h3>
-                        <p className="text-lg text-gray-600 mb-4">{step.description}</p>
                         
-                        {/* Additional details for specific steps */}
-                        {step.step === 1 && (
-                          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                            <h4 className="font-medium text-blue-800 mb-2">Wat kunt u verwachten?</h4>
-                            <ul className="space-y-2 text-blue-700">
-                              <li className="flex items-start gap-2">
-                                <div className="rounded-full bg-blue-200 p-1 mt-1">
-                                  <Check className="h-3 w-3 text-blue-700" />
-                                </div>
-                                <span>Persoonlijk gesprek met onze adviseur</span>
-                              </li>
-                              <li className="flex items-start gap-2">
-                                <div className="rounded-full bg-blue-200 p-1 mt-1">
-                                  <Check className="h-3 w-3 text-blue-700" />
-                                </div>
-                                <span>Inventarisatie van uw wensen en eisen</span>
-                              </li>
-                              <li className="flex items-start gap-2">
-                                <div className="rounded-full bg-blue-200 p-1 mt-1">
-                                  <Check className="h-3 w-3 text-blue-700" />
-                                </div>
-                                <span>Advies over mogelijkheden en materialen</span>
-                              </li>
-                            </ul>
-                          </div>
-                        )}
-                        
-                        {step.step === 5 && (
-                          <div className="bg-red-50 p-4 rounded-lg border border-red-200">
-                            <h4 className="font-medium text-red-800 mb-2">Onze montageservice:</h4>
-                            <ul className="space-y-2 text-red-700">
-                              <li className="flex items-start gap-2">
-                                <div className="rounded-full bg-red-200 p-1 mt-1">
-                                  <Check className="h-3 w-3 text-red-700" />
-                                </div>
-                                <span>Eigen, ervaren montageteams</span>
-                              </li>
-                              <li className="flex items-start gap-2">
-                                <div className="rounded-full bg-red-200 p-1 mt-1">
-                                  <Check className="h-3 w-3 text-red-700" />
-                                </div>
-                                <span>Nette en schone werkomgeving</span>
-                              </li>
-                              <li className="flex items-start gap-2">
-                                <div className="rounded-full bg-red-200 p-1 mt-1">
-                                  <Check className="h-3 w-3 text-red-700" />
-                                </div>
-                                <span>Volledige afwerking en afvoer van oude materialen</span>
-                              </li>
-                            </ul>
-                          </div>
-                        )}
+                        {/* Content */}
+                        <div className="flex-grow md:border-l-2 md:border-gray-200 md:pl-10">
+                          <h3 className="text-2xl font-bold mb-2">{step.title}</h3>
+                          <p className="text-lg text-gray-600 mb-4">{step.description}</p>
+                          
+                          {/* Additional details for specific steps */}
+                          {step.step === 1 && (
+                            <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                              <h4 className="font-medium text-blue-800 mb-2">Wat kunt u verwachten?</h4>
+                              <ul className="space-y-2 text-blue-700">
+                                <li className="flex items-start gap-2">
+                                  <div className="rounded-full bg-blue-200 p-1 mt-1">
+                                    <Check className="h-3 w-3 text-blue-700" />
+                                  </div>
+                                  <span>Persoonlijk gesprek met onze adviseur</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <div className="rounded-full bg-blue-200 p-1 mt-1">
+                                    <Check className="h-3 w-3 text-blue-700" />
+                                  </div>
+                                  <span>Inventarisatie van uw wensen en eisen</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <div className="rounded-full bg-blue-200 p-1 mt-1">
+                                    <Check className="h-3 w-3 text-blue-700" />
+                                  </div>
+                                  <span>Advies over mogelijkheden en materialen</span>
+                                </li>
+                              </ul>
+                            </div>
+                          )}
+                          
+                          {step.step === 5 && (
+                            <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                              <h4 className="font-medium text-red-800 mb-2">Onze montageservice:</h4>
+                              <ul className="space-y-2 text-red-700">
+                                <li className="flex items-start gap-2">
+                                  <div className="rounded-full bg-red-200 p-1 mt-1">
+                                    <Check className="h-3 w-3 text-red-700" />
+                                  </div>
+                                  <span>Eigen, ervaren montageteams</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <div className="rounded-full bg-red-200 p-1 mt-1">
+                                    <Check className="h-3 w-3 text-red-700" />
+                                  </div>
+                                  <span>Nette en schone werkomgeving</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <div className="rounded-full bg-red-200 p-1 mt-1">
+                                    <Check className="h-3 w-3 text-red-700" />
+                                  </div>
+                                  <span>Volledige afwerking en afvoer van oude materialen</span>
+                                </li>
+                              </ul>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </AnimatedSection>
-                ))}
+                    </AnimatedSection>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -200,7 +203,7 @@ const Werkwijze: React.FC = () => {
               <AnimatedSection animation="fade-in" delay={100}>
                 <div className="bg-white p-6 rounded-lg shadow-sm h-full">
                   <div className="bg-brand-green/10 p-3 rounded-full w-fit mb-4">
-                    <MessagesSquare className="h-6 w-6 text-brand-green" />
+                    <MessageSquare className="h-6 w-6 text-brand-green" />
                   </div>
                   <h3 className="text-xl font-semibold mb-3">Transparante communicatie</h3>
                   <p className="text-gray-700">
