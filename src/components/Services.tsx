@@ -29,15 +29,29 @@ const Services: React.FC = () => {
 
   // Transform CMS products to match the current UI structure
   const displayProducts = products && products.length > 0 
-    ? products.map(product => ({
-        image: product.hero_image_url || product.hero_background_image || fallbackData[0].image,
-        title: product.name,
-        description: product.description || product.hero_description || '',
-        features: product.features && Array.isArray(product.features) ? 
-          product.features.slice(0, 3).map(feature => String(feature)) : 
-          fallbackData[0].features,
-        slug: product.slug
-      }))
+    ? products.map(product => {
+        // Extract feature titles from the features array
+        let productFeatures = fallbackData[0].features; // Default fallback
+        
+        if (product.features && Array.isArray(product.features)) {
+          productFeatures = product.features.slice(0, 3).map(feature => {
+            // If feature is an object with a title property, extract it
+            if (typeof feature === 'object' && feature !== null && 'title' in feature) {
+              return String(feature.title);
+            }
+            // If feature is already a string, use it directly
+            return String(feature);
+          });
+        }
+        
+        return {
+          image: product.hero_image_url || product.hero_background_image || fallbackData[0].image,
+          title: product.name,
+          description: product.description || product.hero_description || '',
+          features: productFeatures,
+          slug: product.slug
+        };
+      })
     : fallbackData;
 
   if (isLoading) {
