@@ -59,9 +59,27 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/over-ons" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                <Link to="/rentevrije-financiering" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
                   <ChevronRight className="h-4 w-4 mr-2" />
-                  Over ons
+                  Rentevrije Financiering
+                </Link>
+              </li>
+              <li>
+                <Link to="/werkwijze" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Werkwijze
+                </Link>
+              </li>
+              <li>
+                <Link to="/vacatures" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Vacatures
+                </Link>
+              </li>
+              <li>
+                <Link to="/werkgebied" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <ChevronRight className="h-4 w-4 mr-2" />
+                  Werkgebied
                 </Link>
               </li>
               <li>

@@ -24,7 +24,6 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const SitemapXML = lazy(() => import('./pages/SitemapXML'));
 const RobotsTxt = lazy(() => import('./pages/RobotsTxt'));
-const Zoeken = lazy(() => import('./pages/Zoeken'));
 const CityServicePage = lazy(() => import('./pages/CityServicePage'));
 
 // New location pages
@@ -98,7 +97,6 @@ function App() {
                 <Route path="/werkgebied" element={<Werkgebied />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/sitemap" element={<Sitemap />} />
-                <Route path="/zoeken" element={<Zoeken />} />
                 
                 {/* Project routes */}
                 <Route path="/projecten" element={<Projects />} />

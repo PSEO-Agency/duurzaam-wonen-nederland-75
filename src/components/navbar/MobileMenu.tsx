@@ -2,7 +2,6 @@
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import SearchCommandMenu from '@/components/search/SearchCommandMenu';
 import { mainNavItems, oplossingenItems } from './NavMenuItems';
 import { useProducts } from '@/hooks/useProducts';
 
@@ -24,10 +23,6 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
   return (
     <div className="md:hidden bg-white shadow-lg overflow-y-auto max-h-[80vh]">
       <div className="container mx-auto px-4 py-3">
-        <div className="mb-4">
-          <SearchCommandMenu isMobile={true} />
-        </div>
-        
         <Accordion type="single" collapsible className="w-full mb-4">
           <AccordionItem value="oplossingen" className="border-b">
             <AccordionTrigger className="py-3 text-base font-medium">
