@@ -2,6 +2,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import url from 'node:url'
+import { createClient } from '@supabase/supabase-js'
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 const toAbsolute = (p) => path.resolve(__dirname, p)
@@ -9,13 +10,36 @@ const toAbsolute = (p) => path.resolve(__dirname, p)
 const template = fs.readFileSync(toAbsolute('dist/index.html'), 'utf-8')
 const { render } = await import('./dist/server/entry-server.js')
 
-// Define all routes from App.tsx
-const routesToPrerender = [
+// Initialize Supabase client
+const SUPABASE_URL = "https://izfiqwptfuvoswxocujw.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml6Zmlxd3B0ZnV2b3N3eG9jdWp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYwMDIyNzEsImV4cCI6MjA2MTU3ODI3MX0.zEWKXIangrt3Wlpsr_aPQ8VQ40LEeMo-U1PCtM82cLw";
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Fetch active products from database
+const getActiveProducts = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .select('slug')
+      .eq('is_active', true)
+      .order('sort_order');
+    
+    if (error) {
+      console.error('Error fetching products:', error);
+      return [];
+    }
+    
+    return data || [];
+  } catch (error) {
+    console.error('Error connecting to database:', error);
+    return [];
+  }
+};
+
+// Static routes that don't depend on database
+const staticRoutes = [
   // Main pages
   '/',
-  '/kunststof-kozijnen',
-  '/aluminium-kozijnen',
-  '/kunststof-schuifpuien',
   '/rentevrije-financiering',
   '/over-ons',
   '/contact',
@@ -88,6 +112,21 @@ const getOutputPath = (url) => {
 
 ;(async () => {
   console.log('Starting prerendering...');
+  
+  // Fetch dynamic product routes
+  console.log('Fetching active products from database...');
+  const products = await getActiveProducts();
+  const productRoutes = products.map(product => `/${product.slug}`);
+  
+  console.log(`Found ${products.length} active products`);
+  if (products.length > 0) {
+    console.log('Product slugs:', products.map(p => p.slug).join(', '));
+  }
+  
+  // Combine static and dynamic routes
+  const routesToPrerender = [...staticRoutes, ...productRoutes];
+  
+  console.log(`Total routes to prerender: ${routesToPrerender.length}`);
   
   for (const url of routesToPrerender) {
     try {
