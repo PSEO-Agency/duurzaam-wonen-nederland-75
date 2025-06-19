@@ -1,9 +1,11 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ExternalLink, Download, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -11,11 +13,29 @@ import AnimatedSection from '@/components/AnimatedSection';
 import ContactCTA from '@/components/ContactCTA';
 
 const CT70AS: React.FC = () => {
+  const galleryImages = [
+    {
+      src: '/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png',
+      alt: 'Schüco CT70 kozijnprofiel doorsnede',
+      title: 'Profiel doorsnede'
+    },
+    {
+      src: '/lovable-uploads/49ce4bb5-fc38-4600-93bf-01b70a03b953.png',
+      alt: 'Schüco CT70 kozijn detail',
+      title: 'Kozijn detail'
+    },
+    {
+      src: '/lovable-uploads/8e1ff821-1985-43c5-ba67-1040cef24077.png',
+      alt: 'Schüco CT70 kozijn afwerking',
+      title: 'Afwerking detail'
+    }
+  ];
+
   return (
     <>
       <Helmet>
-        <title>Schüco CT 70 AS | Kunststof Kozijn Profiel</title>
-        <meta name="description" content="Ontdek het Schüco CT 70 AS kunststof kozijn profiel. Betaalbaar en betrouwbaar voor iedere toepassing. Bekijk specificaties en voordelen." />
+        <title>Schüco CT70 Kozijnprofiel | Duurzaam en Energiezuinig</title>
+        <meta name="description" content="Ontdek het Schüco CT70 kozijnprofiel. Perfecte balans tussen duurzaamheid, energie-efficiëntie en design. 5-kamersysteem met 70mm inbouwdiepte." />
       </Helmet>
       
       <Navbar />
@@ -36,22 +56,22 @@ const CT70AS: React.FC = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div>
                   <div className="flex items-center gap-4 mb-4">
-                    <h1 className="text-4xl font-bold">Schüco CT 70 AS</h1>
+                    <h1 className="text-4xl font-bold">Schüco CT70 Kozijnprofiel</h1>
                     <img 
-                      src="/lovable-uploads/551be695-56bb-469d-8d61-1712a04a4f2e.png" 
+                      src="/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png" 
                       alt="Schüco" 
                       className="h-8 w-auto"
                     />
                   </div>
                   <p className="text-xl text-gray-600 mb-6">
-                    Het betrouwbare kunststof kozijn systeem met uitstekende prijs-kwaliteitverhouding. Ideaal voor standaard toepassingen in woningbouw.
+                    Het kiezen van het juiste raamsysteem is essentieel voor het comfort, de veiligheid en de esthetiek van uw woning. Het Schüco CT70 systeem biedt een perfecte balans tussen duurzaamheid, energie-efficiëntie en design.
                   </p>
                   
                   <div className="flex flex-wrap gap-2 mb-6">
-                    <Badge variant="secondary">70mm profieldiepte</Badge>
-                    <Badge variant="secondary">Uf ≤ 1,3 W/(m²·K)</Badge>
-                    <Badge variant="secondary">Klasse 4 luchtdichtheid</Badge>
-                    <Badge variant="secondary">Betaalbaar</Badge>
+                    <Badge variant="secondary">5-kamersysteem</Badge>
+                    <Badge variant="secondary">70mm inbouwdiepte</Badge>
+                    <Badge variant="secondary">Uitstekende isolatie</Badge>
+                    <Badge variant="secondary">Slanke profielen</Badge>
                   </div>
                   
                   <div className="flex gap-4">
@@ -69,11 +89,46 @@ const CT70AS: React.FC = () => {
                 
                 <div>
                   <img 
-                    src="/lovable-uploads/551be695-56bb-469d-8d61-1712a04a4f2e.png"
-                    alt="Schüco CT 70 AS doorsnede"
+                    src="/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png"
+                    alt="Schüco CT70 kozijnprofiel doorsnede"
                     className="w-full rounded-lg shadow-lg"
                   />
                 </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        {/* Gallery Section */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-in">
+              <h2 className="text-2xl font-bold text-center mb-8">Productgalerij</h2>
+              <div className="max-w-4xl mx-auto px-12">
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    {galleryImages.map((image, index) => (
+                      <CarouselItem key={index}>
+                        <div className="p-1">
+                          <Card>
+                            <CardContent className="flex aspect-video items-center justify-center p-6">
+                              <div className="text-center">
+                                <img 
+                                  src={image.src} 
+                                  alt={image.alt}
+                                  className="w-full h-auto max-h-96 object-contain rounded-lg mb-4"
+                                />
+                                <h3 className="text-lg font-medium text-gray-800">{image.title}</h3>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
               </div>
             </AnimatedSection>
           </div>
@@ -86,48 +141,52 @@ const CT70AS: React.FC = () => {
                 <AnimatedSection animation="fade-in">
                   <Card>
                     <CardContent className="p-6">
-                      <h2 className="text-2xl font-bold mb-4">Voordelen van Schüco CT 70 AS</h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <h2 className="text-2xl font-bold mb-4">Uitstekende thermische isolatie</h2>
+                      <p className="text-gray-700 mb-4">
+                        Het Schüco CT70 raamsysteem is gebaseerd op een geavanceerde 5-kamertechnologie met een inbouwdiepte van 70 mm. Deze constructie zorgt voor uitstekende thermische isolatie, waardoor warmteverlies wordt geminimaliseerd en uw woning energie-efficiënter wordt. Dit leidt tot lagere stookkosten en een comfortabel binnenklimaat, ongeacht het seizoen.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </AnimatedSection>
+
+                <AnimatedSection animation="fade-in" delay={50}>
+                  <Card>
+                    <CardContent className="p-6">
+                      <h2 className="text-2xl font-bold mb-4">Voordelen van Schüco CT70</h2>
+                      <div className="space-y-4">
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h4 className="font-medium">Goede prijs-kwaliteit</h4>
-                            <p className="text-sm text-gray-600">Betaalbaar zonder in te boeten op kwaliteit</p>
+                            <h4 className="font-medium mb-2">Veelzijdig design & esthetiek</h4>
+                            <p className="text-sm text-gray-600">Het systeem biedt diverse ontwerpopties met verschillende vleugelprofielen zoals Classic, Rondo en Cava, plus een breed scala aan kleuren en afwerkingen.</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h4 className="font-medium">Bewezen kwaliteit</h4>
-                            <p className="text-sm text-gray-600">Jarenlange ervaring en betrouwbaarheid</p>
+                            <h4 className="font-medium mb-2">Optimale lichtinval</h4>
+                            <p className="text-sm text-gray-600">Dankzij de smalle aanzichtbreedten profiteert u van maximale lichtinval en een moderne uitstraling.</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h4 className="font-medium">Eenvoudige montage</h4>
-                            <p className="text-sm text-gray-600">Vertrouwd systeem voor snelle installatie</p>
+                            <h4 className="font-medium mb-2">Duurzaamheid & milieuvriendelijkheid</h4>
+                            <p className="text-sm text-gray-600">Hoogwaardige materialen bestand tegen diverse weersomstandigheden, recyclebaar en minimaal onderhoud.</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h4 className="font-medium">Onderhoudsvrij</h4>
-                            <p className="text-sm text-gray-600">Geen schilderwerk, alleen af en toe schoonmaken</p>
+                            <h4 className="font-medium mb-2">Verbeterde geluidsisolatie</h4>
+                            <p className="text-sm text-gray-600">Uitstekende geluidsisolerende eigenschappen voor een serene en comfortabele woonomgeving.</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                           <div>
-                            <h4 className="font-medium">Veelzijdige toepassing</h4>
-                            <p className="text-sm text-gray-600">Geschikt voor verschillende kozijntypen</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <CheckCircle2 className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
-                          <div>
-                            <h4 className="font-medium">Kleurbereik</h4>
-                            <p className="text-sm text-gray-600">Standaard kleuren beschikbaar</p>
+                            <h4 className="font-medium mb-2">Eenvoudig onderhoud</h4>
+                            <p className="text-sm text-gray-600">Gladde, weerbestendige oppervlakken die eenvoudig schoon te maken zijn en hun uitstraling behouden.</p>
                           </div>
                         </div>
                       </div>
@@ -144,20 +203,20 @@ const CT70AS: React.FC = () => {
                           <h3 className="font-semibold mb-3">Algemeen</h3>
                           <div className="space-y-2">
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Profieldiepte</span>
+                              <span className="text-gray-600">Inbouwdiepte</span>
                               <span className="font-medium">70 mm</span>
                             </div>
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Aanzichtsbreedte min.</span>
-                              <span className="font-medium">112 mm</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Kamers</span>
+                              <span className="text-gray-600">Kamersysteem</span>
                               <span className="font-medium">5 kamers</span>
                             </div>
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Versterking</span>
-                              <span className="font-medium">Gegalvaniseerd staal</span>
+                              <span className="text-gray-600">Materiaal</span>
+                              <span className="font-medium">Hoogwaardig PVC</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Recyclebaar</span>
+                              <span className="font-medium">Ja</span>
                             </div>
                           </div>
                         </div>
@@ -166,20 +225,20 @@ const CT70AS: React.FC = () => {
                           <h3 className="font-semibold mb-3">Prestaties</h3>
                           <div className="space-y-2">
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Uf-waarde frame ≥</span>
-                              <span className="font-medium">1,3 W/(m²·K)</span>
+                              <span className="text-gray-600">Thermische isolatie</span>
+                              <span className="font-medium">Uitstekend</span>
                             </div>
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Luchtdichtheid</span>
-                              <span className="font-medium">Klasse 4</span>
+                              <span className="text-gray-600">Geluidsisolatie</span>
+                              <span className="font-medium">Verbeterd</span>
                             </div>
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Slagregendichtheid</span>
-                              <span className="font-medium">Klasse 9A</span>
+                              <span className="text-gray-600">Onderhoud</span>
+                              <span className="font-medium">Eenvoudig</span>
                             </div>
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Windbelasting</span>
-                              <span className="font-medium">Klasse C4/B4</span>
+                              <span className="text-gray-600">Lichtinval</span>
+                              <span className="font-medium">Optimaal</span>
                             </div>
                           </div>
                         </div>

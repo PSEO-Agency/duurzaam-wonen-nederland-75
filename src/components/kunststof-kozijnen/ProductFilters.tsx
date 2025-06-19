@@ -18,10 +18,10 @@ const ProductFilters: React.FC = () => {
     },
     {
       id: 'ct-70-as',
-      name: 'Schüco CT 70 AS',
+      name: 'Schüco CT70 Kozijnprofiel',
       slug: 'ct-70-as', 
-      image: '/lovable-uploads/551be695-56bb-469d-8d61-1712a04a4f2e.png',
-      description: 'Veelzijdig profiel voor renovatie en nieuwbouw projecten',
+      image: '/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png',
+      description: 'Perfecte balans tussen duurzaamheid, energie-efficiëntie en design met 5-kamersysteem',
       logo: '/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png'
     }
   ];

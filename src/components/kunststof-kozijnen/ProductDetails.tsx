@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ExternalLink, Paintbrush, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -29,9 +28,9 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
       image: "/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png"
     },
     "ct-70-as": {
-      name: "Schüco CT 70 AS", 
+      name: "Schüco CT70 Kozijnprofiel", 
       slug: "ct-70-as",
-      image: "/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png"
+      image: "/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png"
     }
   };
 
