@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { mainNavItems, oplossingenItems } from './NavMenuItems';
+import { mainNavItems } from './NavMenuItems';
 import { useProducts } from '@/hooks/useProducts';
 
 interface MobileMenuProps {
@@ -30,25 +30,6 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
             </AccordionTrigger>
             <AccordionContent>
               <div className="pl-4 py-2">
-                <h4 className="font-medium text-sm text-gray-500 mb-2">Oplossingen</h4>
-                <ul className="space-y-3">
-                  {oplossingenItems.map((item) => (
-                    <li key={item.label}>
-                      <Link 
-                        to={item.href} 
-                        className="flex items-center text-gray-700 hover:text-brand-green"
-                        onClick={onClose}
-                      >
-                        <ChevronRight size={16} className="mr-2" />
-                        <span>{item.label}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className="pl-4 py-2 mt-4">
-                <h4 className="font-medium text-sm text-gray-500 mb-2">Producten</h4>
                 <ul className="space-y-3">
                   {dynamicProductItems.map((item) => (
                     <li key={item.label}>
