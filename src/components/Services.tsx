@@ -9,6 +9,26 @@ import { useProducts } from '@/hooks/useProducts';
 const Services: React.FC = () => {
   const { data: products, isLoading, error } = useProducts();
 
+  // Helper function to extract feature text from various formats
+  const extractFeatureText = (feature: any): string => {
+    if (typeof feature === 'string') {
+      return feature;
+    }
+    if (typeof feature === 'object' && feature !== null) {
+      // If it's an object with title or description, extract the text
+      if (feature.title) {
+        return feature.title;
+      }
+      if (feature.description) {
+        return feature.description;
+      }
+      // If it's an object but no clear text property, stringify it
+      return JSON.stringify(feature);
+    }
+    // Fallback for other types
+    return String(feature);
+  };
+
   // Transform all CMS products to match the current UI structure
   const displayProducts = products && products.length > 0 
     ? products.map(product => ({
@@ -16,7 +36,7 @@ const Services: React.FC = () => {
         title: product.name,
         description: product.description || product.hero_description || '',
         features: product.features && Array.isArray(product.features) ? 
-          product.features.slice(0, 3).map(feature => String(feature)) : 
+          product.features.slice(0, 3).map(feature => extractFeatureText(feature)) : 
           ['Hoogwaardige kwaliteit', 'Onderhoudsvrij', 'Diverse opties'],
         slug: product.slug
       }))
