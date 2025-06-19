@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import AdminBar from './AdminBar';
 
 interface AdminWrapperProps {
   children: React.ReactNode;
@@ -11,19 +10,8 @@ const AdminWrapper: React.FC<AdminWrapperProps> = ({ children }) => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
   
-  // For admin routes, don't add the admin bar as AdminLayout handles it
-  if (isAdminRoute) {
-    return <>{children}</>;
-  }
-  
-  return (
-    <div className="flex flex-col min-h-screen">
-      <AdminBar />
-      <div className="flex-1">
-        {children}
-      </div>
-    </div>
-  );
+  // Admin routes are handled by AdminLayout, public routes don't get admin UI
+  return <>{children}</>;
 };
 
 export default AdminWrapper;

@@ -1,14 +1,12 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Lock, LogOut } from 'lucide-react';
+import { LayoutDashboard, Lock, LogOut, ExternalLink } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { cn } from '@/lib/utils';
 
 const AdminBar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -31,14 +29,11 @@ const AdminBar: React.FC = () => {
   };
 
   return (
-    <div className={cn(
-      "w-full bg-slate-800 text-white transition-all duration-300",
-      isOpen ? "h-12" : "h-8"
-    )}>
+    <div className="w-full bg-slate-800 text-white h-12">
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Lock size={16} />
-          <span className="text-sm font-medium">Site Admin Mode</span>
+          <span className="text-sm font-medium">Admin Panel</span>
         </div>
         
         <div className="flex items-center gap-4">
@@ -60,7 +55,8 @@ const AdminBar: React.FC = () => {
             size="sm" 
             className="text-white hover:bg-slate-700"
           >
-            <Link to="/">
+            <Link to="/" target="_blank">
+              <ExternalLink size={16} className="mr-2" />
               View Site
             </Link>
           </Button>
@@ -73,15 +69,6 @@ const AdminBar: React.FC = () => {
           >
             <LogOut size={16} className="mr-2" />
             Logout
-          </Button>
-          
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="text-white hover:bg-slate-700"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? "Collapse" : "Expand"}
           </Button>
         </div>
       </div>

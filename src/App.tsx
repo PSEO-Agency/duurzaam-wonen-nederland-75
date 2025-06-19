@@ -134,11 +134,12 @@ function App() {
                 {/* Old URL structure for backward compatibility - /diensten/{city}/{service} */}
                 <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
                 
-                {/* Admin login route (outside of AdminLayout) */}
+                {/* Admin login route (standalone, not in AdminLayout) */}
                 <Route path="/admin/login" element={<AdminLogin />} />
                 
-                {/* Admin routes with AdminLayout wrapper */}
-                <Route path="/admin/*" element={<AdminLayout />}>
+                {/* Admin routes with AdminLayout wrapper - all protected by AdminAuthGuard */}
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route index element={<AdminDashboard />} />
                   <Route path="dashboard" element={<AdminDashboard />} />
                   <Route path="pages" element={<AdminPages />} />
                   <Route path="products" element={<AdminProducts />} />

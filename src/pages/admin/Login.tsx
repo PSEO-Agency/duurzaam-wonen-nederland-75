@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,24 +15,29 @@ const AdminLogin: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
+
+  const from = (location.state as any)?.from || '/admin/dashboard';
 
   useEffect(() => {
     // Check if user is already logged in
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        navigate('/admin/dashboard');
+        console.log('AdminLogin: User already authenticated, redirecting');
+        navigate(from, { replace: true });
       }
     };
     checkAuth();
-  }, [navigate]);
+  }, [navigate, from]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
+      console.log('AdminLogin: Attempting login for:', email);
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -43,14 +48,15 @@ const AdminLogin: React.FC = () => {
       }
 
       if (data.user) {
+        console.log('AdminLogin: Login successful, redirecting to:', from);
         toast({
           title: "Inloggen succesvol",
           description: "Welkom terug in het admin panel.",
         });
-        navigate('/admin/dashboard');
+        navigate(from, { replace: true });
       }
     } catch (error: any) {
-      console.error('Login error:', error);
+      console.error('AdminLogin: Login error:', error);
       toast({
         title: "Inloggen mislukt",
         description: error.message || "Er is een fout opgetreden bij het inloggen.",
@@ -70,7 +76,7 @@ const AdminLogin: React.FC = () => {
           </div>
           <CardTitle className="text-2xl font-bold">Admin Login</CardTitle>
           <CardDescription>
-            Log in om toegang te krijgen tot het CMS
+            Log in om toegang te krijgen tot het admin panel
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -125,6 +131,17 @@ const AdminLogin: React.FC = () => {
               {isLoading ? 'Bezig met inloggen...' : 'Inloggen'}
             </Button>
           </form>
+          
+          <div className="mt-4 text-center">
+            <Button 
+              asChild 
+              variant="ghost" 
+              size="sm" 
+              className="text-sm text-gray-600 hover:text-gray-900"
+            >
+              <a href="/">← Terug naar website</a>
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>
