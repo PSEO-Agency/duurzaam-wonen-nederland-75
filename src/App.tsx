@@ -1,11 +1,10 @@
 
 import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.css';
 import LoadingScreen from './components/LoadingScreen';
-import ScrollToTopOnNavigate from './components/ScrollToTopOnNavigate';
 import CookieConsent from './components/CookieConsent';
 import AdminWrapper from './components/admin/AdminWrapper';
 
@@ -56,45 +55,42 @@ function App() {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <Router>
-          <ScrollToTopOnNavigate />
-          <Suspense fallback={<LoadingScreen />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/over-ons" element={<AboutPage />} />
-              <Route path="/diensten" element={<Services />} />
-              <Route path="/projecten" element={<ProjectsPage />} />
-              <Route path="/werkwijze" element={<Werkwijze />} />
-              <Route path="/regio" element={<RegioPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/offerte" element={<OffertePage />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
-              <Route path="/kunststof-kozijnen/types" element={<KozijnTypes />} />
-              <Route path="/kunststof-kozijnen/kleuren" element={<KozijnColors />} />
-              <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />
-              <Route path="/schuco" element={<Schuco />} />
-              <Route path="/kunststof-kozijnen/profielen" element={<ProfilesOverview />} />
-              <Route path="/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel" element={<Living82 />} />
-              <Route path="/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel" element={<CT70AS />} />
-              <Route path="/kunststof-schuifpuien" element={<KunststofSchuifpuien />} />
-              <Route path="/kunststof-schuifpuien/types" element={<SchuifpuiTypes />} />
-              <Route path="/kunststof-schuifpuien/kleuren" element={<SchuifpuiColors />} />
-              <Route path="/kunststof-schuifpuien/montage" element={<SchuifpuiMontage />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/admin/projects" element={<AdminProjects />} />
-              <Route path="/admin/projects/new" element={<AdminProjectCreate />} />
-              <Route path="/admin/projects/:id/edit" element={<AdminProjectEdit />} />
-              <Route path="/admin/blog" element={<AdminBlog />} />
-              <Route path="/admin/blog/new" element={<AdminBlogCreate />} />
-              <Route path="/admin/blog/:id/edit" element={<AdminBlogEdit />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-          <CookieConsent />
-        </Router>
+        <Suspense fallback={<LoadingScreen />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/over-ons" element={<AboutPage />} />
+            <Route path="/diensten" element={<Services />} />
+            <Route path="/projecten" element={<ProjectsPage />} />
+            <Route path="/werkwijze" element={<Werkwijze />} />
+            <Route path="/regio" element={<RegioPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/offerte" element={<OffertePage />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
+            <Route path="/kunststof-kozijnen/types" element={<KozijnTypes />} />
+            <Route path="/kunststof-kozijnen/kleuren" element={<KozijnColors />} />
+            <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />
+            <Route path="/schuco" element={<Schuco />} />
+            <Route path="/kunststof-kozijnen/profielen" element={<ProfilesOverview />} />
+            <Route path="/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel" element={<Living82 />} />
+            <Route path="/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel" element={<CT70AS />} />
+            <Route path="/kunststof-schuifpuien" element={<KunststofSchuifpuien />} />
+            <Route path="/kunststof-schuifpuien/types" element={<SchuifpuiTypes />} />
+            <Route path="/kunststof-schuifpuien/kleuren" element={<SchuifpuiColors />} />
+            <Route path="/kunststof-schuifpuien/montage" element={<SchuifpuiMontage />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/projects" element={<AdminProjects />} />
+            <Route path="/admin/projects/new" element={<AdminProjectCreate />} />
+            <Route path="/admin/projects/:id/edit" element={<AdminProjectEdit />} />
+            <Route path="/admin/blog" element={<AdminBlog />} />
+            <Route path="/admin/blog/new" element={<AdminBlogCreate />} />
+            <Route path="/admin/blog/:id/edit" element={<AdminBlogEdit />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+        <CookieConsent />
       </QueryClientProvider>
     </HelmetProvider>
   );
