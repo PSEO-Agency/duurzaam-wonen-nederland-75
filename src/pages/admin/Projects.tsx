@@ -10,9 +10,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { Plus, Edit, Trash2, Calendar, MapPin } from 'lucide-react';
+import { Plus, Edit, Trash2, Calendar, MapPin, AlertCircle, Images } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import ImageUpload from '@/components/form/ImageUpload';
+import GalleryImageUpload from '@/components/form/GalleryImageUpload';
 
 interface Project {
   id: string;
@@ -23,7 +25,7 @@ interface Project {
   completion_date: string | null;
   image_url: string | null;
   featured_image: string | null;
-  gallery_images: any;
+  gallery_images: string[];
   is_featured: boolean;
   is_active: boolean;
   sort_order: number;
@@ -35,10 +37,11 @@ const Projects: React.FC = () => {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [showGallery, setShowGallery] = useState<{ [key: string]: boolean }>({});
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const { data: projects, isLoading } = useQuery({
+  const { data: projects, isLoading, error } = useQuery({
     queryKey: ['admin-projects'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -47,7 +50,10 @@ const Projects: React.FC = () => {
         .order('sort_order', { ascending: true });
       
       if (error) throw error;
-      return data as Project[];
+      return data.map(project => ({
+        ...project,
+        gallery_images: Array.isArray(project.gallery_images) ? project.gallery_images : []
+      })) as Project[];
     }
   });
 
@@ -71,7 +77,7 @@ const Projects: React.FC = () => {
         description: "Het project is succesvol aangemaakt.",
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error('Create project error:', error);
       toast({
         title: "Fout bij aanmaken",
@@ -103,7 +109,7 @@ const Projects: React.FC = () => {
         description: "Het project is succesvol bijgewerkt.",
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error('Update project error:', error);
       toast({
         title: "Fout bij bijwerken",
@@ -130,7 +136,7 @@ const Projects: React.FC = () => {
         description: "Het project is succesvol verwijderd.",
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error('Delete project error:', error);
       toast({
         title: "Fout bij verwijderen",
@@ -139,6 +145,13 @@ const Projects: React.FC = () => {
       });
     }
   });
+
+  const toggleGallery = (projectId: string) => {
+    setShowGallery(prev => ({
+      ...prev,
+      [projectId]: !prev[projectId]
+    }));
+  };
 
   const ProjectForm: React.FC<{ 
     project?: Project | null; 
@@ -162,7 +175,15 @@ const Projects: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       
-      // Clean up the data before submitting, convert empty strings to null
+      if (!formData.title.trim()) {
+        toast({
+          title: "Validatiefout",
+          description: "Titel is verplicht.",
+          variant: "destructive"
+        });
+        return;
+      }
+      
       const cleanedData = {
         ...formData,
         description: formData.description.trim() || null,
@@ -177,7 +198,7 @@ const Projects: React.FC = () => {
     };
 
     return (
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <Label htmlFor="title">Titel *</Label>
           <Input
@@ -185,6 +206,7 @@ const Projects: React.FC = () => {
             value={formData.title}
             onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
             required
+            className="mt-1"
           />
         </div>
 
@@ -195,16 +217,18 @@ const Projects: React.FC = () => {
             value={formData.description}
             onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
             rows={3}
+            className="mt-1"
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="location">Locatie</Label>
             <Input
               id="location"
               value={formData.location}
               onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
+              className="mt-1"
             />
           </div>
           <div>
@@ -213,11 +237,12 @@ const Projects: React.FC = () => {
               id="project_type"
               value={formData.project_type}
               onChange={(e) => setFormData(prev => ({ ...prev, project_type: e.target.value }))}
+              className="mt-1"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="completion_date">Opleverdatum</Label>
             <Input
@@ -225,6 +250,7 @@ const Projects: React.FC = () => {
               type="date"
               value={formData.completion_date}
               onChange={(e) => setFormData(prev => ({ ...prev, completion_date: e.target.value }))}
+              className="mt-1"
             />
           </div>
           <div>
@@ -234,6 +260,7 @@ const Projects: React.FC = () => {
               type="number"
               value={formData.sort_order}
               onChange={(e) => setFormData(prev => ({ ...prev, sort_order: parseInt(e.target.value) || 0 }))}
+              className="mt-1"
             />
           </div>
         </div>
@@ -252,7 +279,14 @@ const Projects: React.FC = () => {
           bucketName="project-images"
         />
 
-        <div className="flex items-center space-x-4">
+        <GalleryImageUpload
+          label="Galerij Afbeeldingen"
+          images={formData.gallery_images}
+          onChange={(images) => setFormData(prev => ({ ...prev, gallery_images: images }))}
+          bucketName="project-images"
+        />
+
+        <div className="flex items-center space-x-6">
           <div className="flex items-center space-x-2">
             <Checkbox
               id="is_featured"
@@ -271,9 +305,21 @@ const Projects: React.FC = () => {
           </div>
         </div>
 
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? 'Bezig...' : (project ? 'Bijwerken' : 'Aanmaken')}
-        </Button>
+        <div className="flex justify-end space-x-2 pt-4">
+          <Button 
+            type="button" 
+            variant="outline" 
+            onClick={() => {
+              setIsCreateDialogOpen(false);
+              setIsEditDialogOpen(false);
+            }}
+          >
+            Annuleren
+          </Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? 'Bezig...' : (project ? 'Bijwerken' : 'Aanmaken')}
+          </Button>
+        </div>
       </form>
     );
   };
@@ -284,7 +330,28 @@ const Projects: React.FC = () => {
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold">Projecten</h1>
         </div>
-        <div>Loading...</div>
+        <div className="flex items-center justify-center h-64">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-green mx-auto mb-4"></div>
+            <p className="text-gray-600">Projecten laden...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl font-bold">Projecten</h1>
+        </div>
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>
+            Er is een fout opgetreden bij het laden van de projecten: {error.message}
+          </AlertDescription>
+        </Alert>
       </div>
     );
   }
@@ -303,7 +370,7 @@ const Projects: React.FC = () => {
               Nieuw Project
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Nieuw Project Aanmaken</DialogTitle>
               <DialogDescription>
@@ -367,7 +434,39 @@ const Projects: React.FC = () => {
                     {project.project_type}
                   </Badge>
                 )}
+                {project.gallery_images.length > 0 && (
+                  <div className="flex items-center gap-1">
+                    <Images className="h-3 w-3" />
+                    <button
+                      onClick={() => toggleGallery(project.id)}
+                      className="text-brand-green hover:underline text-xs"
+                    >
+                      {project.gallery_images.length} galerij afbeeldingen
+                    </button>
+                  </div>
+                )}
               </div>
+              
+              {showGallery[project.id] && project.gallery_images.length > 0 && (
+                <div className="mb-4">
+                  <div className="grid grid-cols-2 gap-2">
+                    {project.gallery_images.slice(0, 4).map((imageUrl, index) => (
+                      <img
+                        key={index}
+                        src={imageUrl}
+                        alt={`Gallery ${index + 1}`}
+                        className="w-full h-20 object-cover rounded"
+                      />
+                    ))}
+                  </div>
+                  {project.gallery_images.length > 4 && (
+                    <p className="text-xs text-gray-500 mt-1">
+                      +{project.gallery_images.length - 4} meer afbeeldingen
+                    </p>
+                  )}
+                </div>
+              )}
+              
               <div className="flex gap-2">
                 <Button
                   variant="outline"
@@ -382,7 +481,12 @@ const Projects: React.FC = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => deleteProjectMutation.mutate(project.id)}
+                  onClick={() => {
+                    if (confirm('Weet je zeker dat je dit project wilt verwijderen?')) {
+                      deleteProjectMutation.mutate(project.id);
+                    }
+                  }}
+                  disabled={deleteProjectMutation.isPending}
                 >
                   <Trash2 className="h-3 w-3" />
                 </Button>
@@ -392,9 +496,19 @@ const Projects: React.FC = () => {
         ))}
       </div>
 
+      {projects?.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-gray-500 mb-4">Nog geen projecten aangemaakt.</p>
+          <Button onClick={() => setIsCreateDialogOpen(true)}>
+            <Plus className="h-4 w-4 mr-2" />
+            Eerste Project Aanmaken
+          </Button>
+        </div>
+      )}
+
       {/* Edit Dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Project Bewerken</DialogTitle>
             <DialogDescription>
