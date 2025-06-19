@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, ExternalLink, Download, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Download, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -248,40 +248,14 @@ const CT70AS: React.FC = () => {
               </div>
 
               <div className="space-y-6">
-                <AnimatedSection animation="fade-in" delay={200}>
-                  <Card>
-                    <CardContent className="p-6">
-                      <h3 className="text-lg font-semibold mb-4">Meer informatie</h3>
-                      <div className="space-y-3">
-                        <Button variant="outline" className="w-full justify-start">
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          Technische documenten
-                        </Button>
-                        <Button variant="outline" className="w-full justify-start">
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          CAD bestanden
-                        </Button>
-                        <Button variant="outline" className="w-full justify-start">
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          Montage instructies
-                        </Button>
-                        <Button variant="outline" className="w-full justify-start">
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          Certificaten
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-
                 <AnimatedSection animation="fade-in" delay={300}>
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-lg font-semibold mb-4">Gerelateerde producten</h3>
+                      <h3 className="text-lg font-semibold mb-4">Gerelateerd</h3>
                       <div className="space-y-3">
                         <Button variant="outline" className="w-full justify-start" asChild>
                           <Link to="/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel">
-                            Schüco LivIng 82
+                            Schüco Living Kozijnprofiel
                           </Link>
                         </Button>
                         <Button variant="outline" className="w-full justify-start" asChild>
