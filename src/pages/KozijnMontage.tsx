@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Wrench, Hammer, ShieldCheck, Star, X, Ruler, Settings, Paintbrush, CheckCircle } from 'lucide-react';
@@ -280,7 +281,7 @@ const KozijnMontage: React.FC = () => {
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
                           <div>
                             <strong className="block text-gray-800">Garantie</strong>
-                            <p className="text-gray-700 text-sm">Bij professionele montage krijgt u tot 10 jaar garantie op zowel de kozijnen als de montage.</p>
+                            <p className="text-gray-700 text-sm">Bij professionele montage krijgt u 15 jaar productgarantie op de kozijnen en 10 jaar servicegarantie op de montage.</p>
                           </div>
                         </li>
                         <li className="flex items-start">
