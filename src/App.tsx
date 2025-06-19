@@ -30,8 +30,6 @@ import OfferteSuccess from "./pages/OfferteSuccess";
 import Werkgebied from "./pages/Werkgebied";
 import Showroom from "./pages/Showroom";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
-import Blog from "./pages/Blog";
-import BlogDetail from "./pages/BlogDetail";
 import ProductPage from "./pages/ProductPage";
 import CityServicePage from "./pages/CityServicePage";
 import CityServicePageNew from "./pages/CityServicePageNew";
@@ -43,7 +41,6 @@ import KozijnBrands from "./pages/KozijnBrands";
 import KozijnSizes from "./pages/KozijnSizes";
 import KozijnPrices from "./pages/KozijnPrices";
 import KozijnMontage from "./pages/KozijnMontage";
-import Zoeken from "./pages/Zoeken";
 import Sitemap from "./pages/Sitemap";
 import SitemapXML from "./pages/SitemapXML";
 import RobotsTxt from "./pages/RobotsTxt";
@@ -217,9 +214,6 @@ const App = () => {
                   <Route path="/werkgebied" element={<AdminWrapper><Werkgebied /></AdminWrapper>} />
                   <Route path="/showroom" element={<AdminWrapper><Showroom /></AdminWrapper>} />
                   <Route path="/privacy-policy" element={<AdminWrapper><PrivacyPolicy /></AdminWrapper>} />
-                  <Route path="/blog" element={<AdminWrapper><Blog /></AdminWrapper>} />
-                  <Route path="/blog/:slug" element={<AdminWrapper><BlogDetail /></AdminWrapper>} />
-                  <Route path="/zoeken" element={<AdminWrapper><Zoeken /></AdminWrapper>} />
                   <Route path="/sitemap" element={<AdminWrapper><Sitemap /></AdminWrapper>} />
                   <Route path="/sitemap.xml" element={<SitemapXML />} />
                   <Route path="/robots.txt" element={<RobotsTxt />} />
