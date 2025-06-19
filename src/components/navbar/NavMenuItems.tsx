@@ -20,12 +20,6 @@ export const mainNavItems: MenuSection[] = [
   { label: 'Vacatures', href: '/vacatures' },
 ];
 
-export const oplossingenItems: MenuSection[] = [
-  { label: 'Kunststof Schuifpuien', href: '/kunststof-schuifpuien' },
-  { label: 'Kunststof Deuren', href: '/kunststof-deuren' },
-  { label: 'Gevelbekleding', href: '/gevelbekleding' },
-];
-
 export const overOnsItems: MenuSection[] = [
   { label: 'Ons team', href: '/over-ons/team' },
   { label: 'Onze missie', href: '/over-ons/missie' },
@@ -53,10 +47,16 @@ export const NavMenuItems = () => {
     );
   };
 
-  const dynamicProductItems = products.map(product => ({
+  // Transform all products to menu items
+  const allProductItems = products.map(product => ({
     label: product.name,
     href: `/${product.slug}`
   }));
+
+  // Split products into two columns
+  const midPoint = Math.ceil(allProductItems.length / 2);
+  const leftColumnItems = allProductItems.slice(0, midPoint);
+  const rightColumnItems = allProductItems.slice(midPoint);
 
   return (
     <>
@@ -68,9 +68,8 @@ export const NavMenuItems = () => {
           <div className="bg-white p-4 min-w-[500px]">
             <div className="grid grid-cols-2 gap-8">
               <div className="flex-1">
-                <h4 className="font-medium text-gray-900 mb-2">Oplossingen</h4>
                 <ul className="space-y-1">
-                  {oplossingenItems.map((item) => (
+                  {leftColumnItems.map((item) => (
                     <li key={item.label}>
                       {renderMenuLink(item)}
                     </li>
@@ -78,9 +77,8 @@ export const NavMenuItems = () => {
                 </ul>
               </div>
               <div className="flex-1">
-                <h4 className="font-medium text-gray-900 mb-2">Producten</h4>
                 <ul className="space-y-1">
-                  {dynamicProductItems.map((item) => (
+                  {rightColumnItems.map((item) => (
                     <li key={item.label}>
                       {renderMenuLink(item)}
                     </li>
