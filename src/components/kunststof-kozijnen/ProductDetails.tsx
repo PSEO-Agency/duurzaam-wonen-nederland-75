@@ -24,9 +24,9 @@ interface ProductDetailProps {
 const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedProfile = "living-82" }) => {
   const profileData = {
     "living-82": {
-      name: "Schüco LivIng 82",
+      name: "Schüco Living Kozijnprofiel",
       slug: "living-82",
-      image: "/lovable-uploads/97291a33-75bc-4a31-9791-a3e0610a5963.png"
+      image: "/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png"
     },
     "ct-70-as": {
       name: "Schüco CT 70 AS", 
@@ -144,7 +144,7 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
         </div>
       </div>
       
-      {/* Specifications Section - Moved below preview */}
+      {/* Specifications Section - Updated with new specs */}
       <div className="border-t border-gray-200 p-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="specifications">
@@ -156,36 +156,28 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
                 <div>
                   <div className="space-y-2">
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Aanzichtsbreedte min.</span>
+                      <span className="text-gray-600">Inbouwdiepte</span>
                       <span className="font-medium">120 mm</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Uf-waarde frame ≥</span>
-                      <span className="font-medium">0,96 W/(m²·K)</span>
+                      <span className="text-gray-600">U-waarde</span>
+                      <span className="font-medium">1,1 W/(m²·K)</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Glas-/paneeldikte max.</span>
-                      <span className="font-medium">52 mm</span>
+                      <span className="text-gray-600">Kamersysteem</span>
+                      <span className="font-medium">7 kamers</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Vleugelbreedte max.</span>
-                      <span className="font-medium">1500 mm</span>
+                      <span className="text-gray-600">Energielabel</span>
+                      <span className="font-medium">A</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Vleugelhoogte max.</span>
-                      <span className="font-medium">2600 mm</span>
+                      <span className="text-gray-600">Kleuren</span>
+                      <span className="font-medium">170+ opties</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Vleugelgewicht max.</span>
-                      <span className="font-medium">120 kg</span>
-                    </div>
-                    <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Vleugelhoogte min.-max.</span>
-                      <span className="font-medium">400...2600 mm</span>
-                    </div>
-                    <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Vleugelbreedte min.-max.</span>
-                      <span className="font-medium">400...1500 mm</span>
+                      <span className="text-gray-600">Dichtingen</span>
+                      <span className="font-medium">EPDM rubber</span>
                     </div>
                   </div>
                 </div>
@@ -193,40 +185,28 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
                 <div>
                   <div className="space-y-2">
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Geluidsisolatie RwP max.</span>
-                      <span className="font-medium">47 dB(A)</span>
+                      <span className="text-gray-600">Materiaal</span>
+                      <span className="font-medium">Hoogwaardig PVC</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Luchtdichtheid</span>
-                      <span className="font-medium">Klasse 4</span>
+                      <span className="text-gray-600">Onderhoud</span>
+                      <span className="font-medium">Onderhoudsarm</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Slagregendichtheid</span>
-                      <span className="font-medium">Klasse 9A</span>
+                      <span className="text-gray-600">Geluidsisolatie</span>
+                      <span className="font-medium">Uitstekend</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Inbraakwering</span>
-                      <span className="font-medium">tot RC 2</span>
+                      <span className="text-gray-600">Veiligheid</span>
+                      <span className="font-medium">Geavanceerd</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Weerstand tegen windbelasting</span>
-                      <span className="font-medium">Klasse C5/B5</span>
+                      <span className="text-gray-600">Luchtcirculatie</span>
+                      <span className="font-medium">Geoptimaliseerd</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Glas-/paneeldikte min.-max.</span>
-                      <span className="font-medium">24...52 mm</span>
-                    </div>
-                    <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Barrièrevrij (≤ 20 mm)</span>
+                      <span className="text-gray-600">Recyclebaar</span>
                       <span className="font-medium">Ja</span>
-                    </div>
-                    <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Dorpelloze oplossing</span>
-                      <span className="font-medium">Ja</span>
-                    </div>
-                    <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                      <span className="text-gray-600">Oppervlakken</span>
-                      <span className="font-medium">TopAlu, Decoratiefolie</span>
                     </div>
                   </div>
                 </div>
