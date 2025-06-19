@@ -49,7 +49,7 @@ const Benefits: React.FC = () => {
         <AnimatedSection animation="slide-up">
           <h2 className="section-title">
             <span className="relative inline-block">
-              Vo ordelen 
+              Voordelen 
               <span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-brand-green to-transparent"></span>
             </span>
             {' '}van Duurzaam Wonen Nederland

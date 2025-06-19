@@ -86,11 +86,11 @@ export const convertProductToServicePageConfig = (product: ProductData): Service
       primaryButtonLink: product.hero_primary_button_link || '/offerte',
       secondaryButtonText: product.hero_secondary_button_text || 'Meer informatie',
       secondaryButtonLink: product.hero_secondary_button_link,
-      guarantees: parseJSON(product.hero_guarantees, ['10 jaar garantie', 'Gratis advies', 'Vakkundige montage']),
+      guarantees: parseJSON(product.hero_guarantees, ['15 jaar productgarantie', 'Gratis advies', '10 jaar servicegarantie']),
       benefits: parseJSON(product.benefits, [
         'Energiebesparend - Warmte blijft binnen',
         'Onderhoudsarm - Nooit meer schilderen',
-        'Lange levensduur - 15 jaar fabrieksgarantie'
+        'Lange levensduur - 15 jaar productgarantie'
       ]),
       certificationLogos: parseJSON(product.hero_certification_logos, [])
     },

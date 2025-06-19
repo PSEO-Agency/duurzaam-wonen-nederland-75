@@ -1,3 +1,4 @@
+
 import { ServicePageTemplateProps } from '@/components/templates/ServicePageTemplate';
 
 // Example configuration for Kunststof Kozijnen page
@@ -17,14 +18,14 @@ export const kunststofKozijnenConfig: ServicePageTemplateProps = {
     primaryButtonLink: "/offerte",
     secondaryButtonText: "Ontdek alles over kunststof kozijnen",
     secondaryButtonLink: "/kunststof-kozijnen/types",
-    guarantees: ["10 jaar garantie", "Gratis advies", "Vakkundige montage"],
+    guarantees: ["15 jaar productgarantie", "Gratis advies", "10 jaar servicegarantie"],
     benefits: [
       "Energiebesparend - Warmte blijft binnen",
       "Onderhoudsarm - Nooit meer schilderen",
-      "Lange levensduur - 15 jaar fabrieksgarantie",
+      "Lange levensduur - 15 jaar productgarantie",
       "Uitstekende isolatie - Minder geluid",
       "Diverse kleuren en stijlen beschikbaar",
-      "10 jaar service- en montagegarantie"
+      "10 jaar servicegarantie op montage"
     ],
     certificationLogos: [
       {
@@ -227,14 +228,14 @@ export const kunststofSchuifpuienConfig: ServicePageTemplateProps = {
     primaryButtonLink: "/offerte",
     secondaryButtonText: "Ontdek alles over kunststof schuifpuien",
     secondaryButtonLink: "/kunststof-schuifpuien/types",
-    guarantees: ["10 jaar garantie", "Gratis advies", "Vakkundige montage"],
+    guarantees: ["15 jaar productgarantie", "Gratis advies", "10 jaar servicegarantie"],
     benefits: [
       "Energiebesparend - Warmte blijft binnen",
       "Onderhoudsarm - Nooit meer schilderen",
-      "Lange levensduur - 15 jaar fabrieksgarantie",
+      "Lange levensduur - 15 jaar productgarantie",
       "Uitstekende isolatie - Minder geluid",
       "Diverse kleuren en stijlen beschikbaar",
-      "10 jaar service- en montagegarantie"
+      "10 jaar servicegarantie op montage"
     ],
     certificationLogos: [
       {
@@ -379,7 +380,7 @@ export const aluminiumKozijnenConfig: ServicePageTemplateProps = {
     primaryButtonText: "Offerte aanvragen",
     primaryButtonLink: "/offerte",
     secondaryButtonText: "Bekijk aluminium opties",
-    guarantees: ["10 jaar garantie", "Gratis advies", "Vakkundige montage"],
+    guarantees: ["15 jaar productgarantie", "Gratis advies", "10 jaar servicegarantie"],
     benefits: [
       "Extreem sterk en stabiel",
       "Moderne uitstraling",

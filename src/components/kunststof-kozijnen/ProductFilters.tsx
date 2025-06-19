@@ -76,6 +76,20 @@ const ProductFilters: React.FC = () => {
             </AnimatedSection>
           ))}
         </div>
+        
+        <AnimatedSection animation="fade-in" delay={300} className="mt-12">
+          <div className="text-center bg-gray-50 rounded-lg p-6 max-w-4xl mx-auto">
+            <h3 className="text-xl font-semibold mb-3">Garantie op al onze profielen</h3>
+            <p className="text-gray-600 mb-4">
+              Op alle Schüco profielen bieden wij 15 jaar productgarantie en 10 jaar servicegarantie op de montage.
+            </p>
+            <Button asChild className="bg-brand-green hover:bg-brand-green-dark">
+              <Link to="/offerte">
+                Vraag vrijblijvend een offerte aan
+              </Link>
+            </Button>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );

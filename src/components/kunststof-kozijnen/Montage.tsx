@@ -97,6 +97,12 @@ const Montage: React.FC = () => {
                     Vraag een offerte aan inclusief montage
                   </Button>
                 </div>
+                
+                <div className="mt-6 pt-4 border-t border-gray-300">
+                  <p className="text-sm text-gray-600">
+                    <strong>Garantie:</strong> 15 jaar productgarantie op de kozijnen en 10 jaar servicegarantie op de montage
+                  </p>
+                </div>
               </div>
             </AnimatedSection>
           </div>

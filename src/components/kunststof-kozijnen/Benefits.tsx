@@ -60,7 +60,7 @@ const Benefits: React.FC = () => {
     <section id="voordelen" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="fade-in">
-          <h2 className="text-3xl font-bold text-center mb-4">Voordelen van Kunststof Kozijnen</h2>
+          <h2 className="text-3xl font-bold text-center mb-4">Voor delen van Kunststof Kozijnen</h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-12 px-2">
             Ontdek waarom steeds meer huiseigenaren kiezen voor kunststof kozijnen als duurzame en praktische oplossing.
           </p>
@@ -79,6 +79,12 @@ const Benefits: React.FC = () => {
         </div>
         
         <AnimatedSection animation="fade-in" delay={600} className="text-center">
+          <div className="bg-white rounded-lg p-6 shadow-sm max-w-2xl mx-auto mb-8">
+            <h3 className="text-xl font-semibold mb-3">Garantie op onze kunststof kozijnen</h3>
+            <p className="text-gray-600 mb-4">
+              Wij bieden 15 jaar productgarantie op alle kozijnen en 10 jaar servicegarantie op de montage voor uw volledige gemoedsrust.
+            </p>
+          </div>
           <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark">
             <Link to="/offerte">
               Vraag vrijblijvend een offerte aan
