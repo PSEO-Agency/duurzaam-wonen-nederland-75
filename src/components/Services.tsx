@@ -29,9 +29,9 @@ const Services: React.FC = () => {
     }
   ];
 
-  // Transform CMS products to match the current UI structure (excluding the first manual item)
+  // Transform ALL CMS products to match the current UI structure
   const dynamicProducts = products && products.length > 0 
-    ? products.slice(0, 1).map(product => ({
+    ? products.map(product => ({
         image: product.hero_image_url || product.hero_background_image || fallbackData[0].image,
         title: product.name,
         description: product.description || product.hero_description || '',
@@ -42,7 +42,7 @@ const Services: React.FC = () => {
       }))
     : fallbackData;
 
-  // Combine manual item with dynamic products
+  // Combine manual item with ALL dynamic products
   const displayProducts = [manualKunststofKozijnen, ...dynamicProducts];
 
   if (isLoading) {
