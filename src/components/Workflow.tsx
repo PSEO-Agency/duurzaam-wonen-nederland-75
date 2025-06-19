@@ -31,7 +31,7 @@ const workflowSteps = [
   {
     number: '06',
     title: 'Nazorg & garantie',
-    description: '10 jaar garantie en volledige tevredenheidswaarborg'
+    description: '15 jaar productgarantie en 10 jaar servicegarantie voor volledige zekerheid'
   }
 ];
 

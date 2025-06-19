@@ -33,8 +33,8 @@ const benefitsData = [
   },
   {
     icon: <Award className="h-8 w-8 text-brand-green" />,
-    title: '10 jaar garantie',
-    description: 'Volledige tevredenheidsgarantie op al onze producten en installaties.'
+    title: '15 jaar productgarantie',
+    description: '15 jaar garantie op materialen en 10 jaar servicegarantie op installatie.'
   }
 ];
 
@@ -49,7 +49,7 @@ const Benefits: React.FC = () => {
         <AnimatedSection animation="slide-up">
           <h2 className="section-title">
             <span className="relative inline-block">
-              Voordelen 
+              Vo ordelen 
               <span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-brand-green to-transparent"></span>
             </span>
             {' '}van Duurzaam Wonen Nederland

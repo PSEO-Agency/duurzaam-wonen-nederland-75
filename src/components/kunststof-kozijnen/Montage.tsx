@@ -37,7 +37,7 @@ const Montage: React.FC = () => {
     'Minimale overlast en snelle werkwijze',
     'Inclusief opruimen en afvoeren van oude kozijnen',
     'Netjes afgewerkt aan binnen- en buitenzijde',
-    '10 jaar garantie op montage',
+    '10 jaar servicegarantie op montage',
     'Keurmerk Erkend Montagebedrijf'
   ];
 

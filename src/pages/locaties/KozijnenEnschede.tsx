@@ -1,4 +1,3 @@
-
 import React from 'react';
 import SubpageHero from '@/components/kunststof-kozijnen/SubpageHero';
 import Navbar from '@/components/Navbar';
@@ -41,7 +40,7 @@ const KozijnenEnschede: React.FC = () => {
     },
     {
       question: 'Hoe lang is de garantie op kunststof kozijnen in Enschede?',
-      answer: 'Wij bieden 10 jaar garantie op onze kunststof kozijnen in Enschede. Deze garantie dekt fabrieksfouten, verkleuring en functionele gebreken. Op het hang- en sluitwerk geldt een garantie van 2 jaar.'
+      answer: 'Wij bieden 15 jaar productgarantie op onze kunststof kozijnen in Enschede. Deze garantie dekt fabrieksfouten, verkleuring en functionele gebreken. Op de montage en het hang- en sluitwerk geldt een servicegarantie van 10 jaar.'
     }
   ];
 
@@ -50,7 +49,7 @@ const KozijnenEnschede: React.FC = () => {
     "Lokale monteurs met ervaring",
     "Perfecte isolatie voor het Twentse klimaat",
     "Kennis van lokale regelgeving",
-    "10 jaar garantie op materiaal en montage",
+    "15 jaar productgarantie, 10 jaar servicegarantie",
     "Showroom in Enschede om kozijnen te bekijken"
   ];
 
@@ -69,14 +68,7 @@ const KozijnenEnschede: React.FC = () => {
           title="Kunststof Kozijnen Enschede" 
           description="Specialist in kunststof kozijnen voor Enschede en omgeving. Vakkundige montage, uitstekende service en lokale expertise voor uw nieuwe kozijnen."
           imageUrl="/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png"
-          benefits={[
-            'Gratis inmeten in Enschede',
-            'Lokale monteurs met ervaring',
-            'Perfecte isolatie voor het Twentse klimaat',
-            'Kennis van lokale regelgeving',
-            '10 jaar garantie op materiaal en montage',
-            'Showroom in Enschede om kozijnen te bekijken'
-          ]}
+          benefits={benefits}
         />
         
         <StickyNavigation />

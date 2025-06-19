@@ -19,10 +19,10 @@ const SubpageHero: React.FC<SubpageHeroProps> = ({
   benefits = [
     'Energiebesparend - Warmte blijft binnen',
     'Onderhoudsarm - Nooit meer schilderen',
-    'Lange levensduur - 15 jaar fabrieksgarantie',
+    'Lange levensduur - 15 jaar productgarantie',
     'Uitstekende isolatie - Minder geluid',
     'Diverse kleuren en stijlen beschikbaar',
-    '10 jaar service- en montagegarantie'
+    '10 jaar servicegarantie op montage'
   ] 
 }) => {
   return (
@@ -69,7 +69,7 @@ const SubpageHero: React.FC<SubpageHeroProps> = ({
                   <div className="bg-brand-green/20 p-1 rounded-full">
                     <Check className="h-4 w-4 text-brand-green" />
                   </div>
-                  <span>10 jaar garantie</span>
+                  <span>15 jaar productgarantie</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="bg-brand-green/20 p-1 rounded-full">
@@ -81,7 +81,7 @@ const SubpageHero: React.FC<SubpageHeroProps> = ({
                   <div className="bg-brand-green/20 p-1 rounded-full">
                     <Check className="h-4 w-4 text-brand-green" />
                   </div>
-                  <span>Vakkundige montage</span>
+                  <span>10 jaar servicegarantie</span>
                 </div>
               </div>
             </AnimatedSection>
