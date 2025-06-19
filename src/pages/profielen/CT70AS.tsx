@@ -41,7 +41,7 @@ const CT70AS: React.FC = () => {
                   
                   <div className="flex flex-wrap gap-2 mb-6">
                     <Badge variant="secondary">70mm profieldiepte</Badge>
-                    <Badge variant="secondary">Uf ≤ 1,3 W/(m²·K)</Badge>
+                    <Badge variant="secondary">Uf ≤ 1,2 W/(m²·K)</Badge>
                     <Badge variant="secondary">Klasse 4 luchtdichtheid</Badge>
                     <Badge variant="secondary">Betaalbaar</Badge>
                   </div>
@@ -133,45 +133,81 @@ const CT70AS: React.FC = () => {
                       <h2 className="text-2xl font-bold mb-4">Technische specificaties</h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                          <h3 className="font-semibold mb-3">Algemeen</h3>
+                          <h3 className="font-semibold mb-3">Afmetingen & Prestaties</h3>
                           <div className="space-y-2">
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Profieldiepte</span>
-                              <span className="font-medium">70 mm</span>
-                            </div>
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                               <span className="text-gray-600">Aanzichtsbreedte min.</span>
-                              <span className="font-medium">112 mm</span>
+                              <span className="font-medium">120 mm</span>
                             </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Kamers</span>
-                              <span className="font-medium">5 kamers</span>
-                            </div>
-                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Versterking</span>
-                              <span className="font-medium">Gegalvaniseerd staal</span>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <h3 className="font-semibold mb-3">Prestaties</h3>
-                          <div className="space-y-2">
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                               <span className="text-gray-600">Uf-waarde frame ≥</span>
-                              <span className="font-medium">1,3 W/(m²·K)</span>
+                              <span className="font-medium">1,2 W/(m²·K)</span>
                             </div>
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Luchtdichtheid</span>
+                              <span className="text-gray-600">Glas-/paneeldikte max.</span>
+                              <span className="font-medium">42 mm</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Vleugelbreedte max.</span>
+                              <span className="font-medium">1500 mm</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Vleugelhoogte max.</span>
+                              <span className="font-medium">2600 mm</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Geluidsisolatie RwP max.</span>
+                              <span className="font-medium">49 dB(A)</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Luchtdoorlaatbaarheid</span>
                               <span className="font-medium">Klasse 4</span>
                             </div>
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                               <span className="text-gray-600">Slagregendichtheid</span>
                               <span className="font-medium">Klasse 9A</span>
                             </div>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h3 className="font-semibold mb-3">Veiligheid & Variatie</h3>
+                          <div className="space-y-2">
                             <div className="grid grid-cols-2 py-2 border-b border-gray-100">
-                              <span className="text-gray-600">Windbelasting</span>
-                              <span className="font-medium">Klasse C4/B4</span>
+                              <span className="text-gray-600">Inbraakwering</span>
+                              <span className="font-medium">tot RC 2</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Windbelastingsweerstand</span>
+                              <span className="font-medium">Klasse C5/B5</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Vleugelgewicht max.</span>
+                              <span className="font-medium">250 kg</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Vleugelhoogte min.-max.</span>
+                              <span className="font-medium">400...2600 mm</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Vleugelbreedte min.-max.</span>
+                              <span className="font-medium">400...1500 mm</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Glas-/paneeldikte min.-max.</span>
+                              <span className="font-medium">6...42 mm</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Dorpelloze oplossing</span>
+                              <span className="font-medium">Ja</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Oppervlakken</span>
+                              <span className="font-medium">TopAlu, Decoratiefolie</span>
+                            </div>
+                            <div className="grid grid-cols-2 py-2 border-b border-gray-100">
+                              <span className="text-gray-600">Afdichtniveaus</span>
+                              <span className="font-medium">2</span>
                             </div>
                           </div>
                         </div>
