@@ -26,12 +26,42 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
+  const ensureBucketExists = async (bucket: string) => {
+    try {
+      // Try to get bucket info to see if it exists
+      const { data: buckets, error } = await supabase.storage.listBuckets();
+      
+      if (error) {
+        console.error('Error listing buckets:', error);
+        return false;
+      }
+
+      const bucketExists = buckets?.find(b => b.name === bucket);
+      
+      if (!bucketExists) {
+        console.log(`Bucket ${bucket} does not exist, but we'll try to upload anyway`);
+        // Note: In production, the bucket should be created via SQL migrations
+        // This is just a fallback for development
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error checking bucket existence:', error);
+      return false;
+    }
+  };
+
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
     try {
       setUploading(true);
+      
+      console.log('Starting file upload:', file.name, 'to bucket:', bucketName);
+      
+      // Ensure bucket exists
+      await ensureBucketExists(bucketName);
       
       // Create unique filename
       const fileExt = file.name.split('.').pop();
@@ -66,7 +96,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         title: "Afbeelding geüpload",
         description: "De afbeelding is succesvol geüpload.",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error uploading file:', error);
       toast({
         title: "Upload fout",
@@ -87,6 +117,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   };
 
   const clearImage = () => {
+    console.log('Clearing image for field');
     onChange('');
   };
 
@@ -96,7 +127,15 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       
       {value && (
         <div className="relative inline-block">
-          <img src={value} alt="Preview" className="w-32 h-32 object-cover rounded border" />
+          <img 
+            src={value} 
+            alt="Preview" 
+            className="w-32 h-32 object-cover rounded border"
+            onError={(e) => {
+              console.error('Preview image failed to load:', value);
+              e.currentTarget.style.display = 'none';
+            }}
+          />
           <Button
             type="button"
             variant="destructive"
