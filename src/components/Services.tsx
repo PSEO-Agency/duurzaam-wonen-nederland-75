@@ -41,7 +41,7 @@ const Services: React.FC = () => {
     <section id="services" className="section-container">
       <div className="container mx-auto px-4">
         <AnimatedSection>
-          <h2 className="section-title">Oplossingen</h2>
+          <h2 className="section-title">Products</h2>
           <p className="section-subtitle">
             Duurzaam Wonen Nederland biedt een breed scala aan hoogwaardige verduurzamingsoplossingen
           </p>
