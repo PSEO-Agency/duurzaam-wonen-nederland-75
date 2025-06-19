@@ -10,36 +10,75 @@ const Services: React.FC = () => {
   const { data: products, isLoading, error } = useProducts();
 
   // Helper function to extract feature text from various formats
-  const extractFeatureText = (feature: any): string => {
+  const extractFeatureText = (feature: any, index: number = 0): string => {
+    console.log(`Processing feature ${index}:`, feature, typeof feature);
+    
     if (typeof feature === 'string') {
       return feature;
     }
+    
     if (typeof feature === 'object' && feature !== null) {
-      // If it's an object with title or description, extract the text
-      if (feature.title) {
+      // If it's an object with title, use title
+      if (feature.title && typeof feature.title === 'string') {
         return feature.title;
       }
-      if (feature.description) {
+      // If it's an object with description, use description
+      if (feature.description && typeof feature.description === 'string') {
         return feature.description;
       }
-      // If it's an object but no clear text property, stringify it
-      return JSON.stringify(feature);
+      // If it's an object with name, use name
+      if (feature.name && typeof feature.name === 'string') {
+        return feature.name;
+      }
+      // If it's an object with text, use text
+      if (feature.text && typeof feature.text === 'string') {
+        return feature.text;
+      }
+      // If it's an object but no clear text property, return a fallback
+      console.warn('Feature object has no recognizable text property:', feature);
+      return 'Feature beschrijving';
     }
-    // Fallback for other types
+    
+    // Fallback for other types (numbers, booleans, etc.)
+    if (feature === null || feature === undefined) {
+      return 'Feature beschrijving';
+    }
+    
     return String(feature);
   };
 
   // Transform all CMS products to match the current UI structure
   const displayProducts = products && products.length > 0 
-    ? products.map(product => ({
-        image: product.hero_image_url || product.hero_background_image || 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-        title: product.name,
-        description: product.description || product.hero_description || '',
-        features: product.features && Array.isArray(product.features) ? 
-          product.features.slice(0, 3).map(feature => extractFeatureText(feature)) : 
-          ['Hoogwaardige kwaliteit', 'Onderhoudsvrij', 'Diverse opties'],
-        slug: product.slug
-      }))
+    ? products.map(product => {
+        console.log('Processing product:', product.name, 'Features:', product.features);
+        
+        let processedFeatures = ['Hoogwaardige kwaliteit', 'Onderhoudsvrij', 'Diverse opties'];
+        
+        if (product.features && Array.isArray(product.features)) {
+          try {
+            processedFeatures = product.features
+              .slice(0, 3)
+              .map((feature, index) => extractFeatureText(feature, index))
+              .filter(feature => feature && typeof feature === 'string');
+            
+            // Ensure we have at least some features
+            if (processedFeatures.length === 0) {
+              processedFeatures = ['Hoogwaardige kwaliteit', 'Onderhoudsvrij', 'Diverse opties'];
+            }
+          } catch (err) {
+            console.error('Error processing features for product:', product.name, err);
+            processedFeatures = ['Hoogwaardige kwaliteit', 'Onderhoudsvrij', 'Diverse opties'];
+          }
+        }
+        
+        return {
+          image: product.hero_image_url || product.hero_background_image || 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+          title: product.name,
+          description: product.description || product.hero_description || '',
+          features: processedFeatures,
+          slug: product.slug
+        };
+      })
     : [];
 
   if (isLoading) {
@@ -83,12 +122,22 @@ const Services: React.FC = () => {
                 <div className="p-6 flex-grow">
                   <p className="text-gray-700 mb-4">{service.description}</p>
                   <ul className="space-y-2 mb-6">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start">
-                        <CornerDownRight className="h-5 w-5 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-600">{feature}</span>
-                      </li>
-                    ))}
+                    {service.features.map((feature, idx) => {
+                      console.log(`Rendering feature ${idx}:`, feature, typeof feature);
+                      
+                      // Extra safety check to ensure we're only rendering strings
+                      if (typeof feature !== 'string') {
+                        console.error('Non-string feature detected:', feature);
+                        return null;
+                      }
+                      
+                      return (
+                        <li key={idx} className="flex items-start">
+                          <CornerDownRight className="h-5 w-5 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
+                          <span className="text-gray-600">{feature}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
                 <div className="p-6 pt-0 mt-auto">
