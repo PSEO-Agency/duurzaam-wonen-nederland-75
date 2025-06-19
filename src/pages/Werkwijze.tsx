@@ -112,7 +112,7 @@ const Werkwijze: React.FC = () => {
                           <div className={`w-24 h-24 rounded-full flex items-center justify-center ${step.color} border-2`}>
                             <step.icon className={`h-12 w-12 ${step.iconColor}`} />
                           </div>
-                          <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-brand-green text-white flex items-center justify-center font-bold text-sm">
+                          <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center font-bold text-lg border-2 border-white shadow-lg">
                             {step.step}
                           </div>
                         </div>
