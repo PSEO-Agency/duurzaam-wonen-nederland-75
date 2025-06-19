@@ -1,3 +1,4 @@
+
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -9,21 +10,21 @@ import CookieConsent from './components/CookieConsent';
 import AdminWrapper from './components/admin/AdminWrapper';
 
 // Lazy load components for better performance
-const Home = React.lazy(() => import('./pages/Home'));
-const AboutPage = React.lazy(() => import('./pages/AboutPage'));
-const Services = React.lazy(() => import('./pages/ServicesPage'));
-const ProjectsPage = React.lazy(() => import('./pages/ProjectsPage'));
+const Home = React.lazy(() => import('./pages/Index'));
+const AboutPage = React.lazy(() => import('./pages/OverOns'));
+const Services = React.lazy(() => import('./pages/KunststofKozijnen'));
+const ProjectsPage = React.lazy(() => import('./pages/Projects'));
 const Werkwijze = React.lazy(() => import('./pages/Werkwijze'));
-const RegioPage = React.lazy(() => import('./pages/RegioPage'));
-const ContactPage = React.lazy(() => import('./pages/ContactPage'));
-const OffertePage = React.lazy(() => import('./pages/OffertePage'));
-const Privacy = React.lazy(() => import('./pages/Privacy'));
+const RegioPage = React.lazy(() => import('./pages/Werkgebied'));
+const ContactPage = React.lazy(() => import('./pages/Contact'));
+const OffertePage = React.lazy(() => import('./pages/Offerte'));
+const Privacy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 // Kunststof kozijnen pages
 const KunststofKozijnen = React.lazy(() => import('./pages/KunststofKozijnen'));
 const KozijnTypes = React.lazy(() => import('./pages/KozijnTypes'));
-const KozijnColors = React.lazy(() => import('./pages/KozijnColors'));
+const KozijnColors = React.lazy(() => import('./pages/ColorOptions'));
 const KozijnMontage = React.lazy(() => import('./pages/KozijnMontage'));
 const Schuco = React.lazy(() => import('./pages/Schuco'));
 const ProfilesOverview = React.lazy(() => import('./pages/ProfilesOverview'));
@@ -32,22 +33,22 @@ const CT70AS = React.lazy(() => import('./pages/profielen/CT70AS'));
 
 // Kunststof schuifpuien pages
 const KunststofSchuifpuien = React.lazy(() => import('./pages/KunststofSchuifpuien'));
-const SchuifpuiTypes = React.lazy(() => import('./pages/SchuifpuiTypes'));
-const SchuifpuiColors = React.lazy(() => import('./pages/SchuifpuiColors'));
-const SchuifpuiMontage = React.lazy(() => import('./pages/SchuifpuiMontage'));
+const SchuifpuiTypes = React.lazy(() => import('./pages/KunststofSchuifpuien'));
+const SchuifpuiColors = React.lazy(() => import('./pages/ColorOptions'));
+const SchuifpuiMontage = React.lazy(() => import('./pages/KozijnMontage'));
 
 // Blog pages
 const Blog = React.lazy(() => import('./pages/Blog'));
-const BlogPost = React.lazy(() => import('./pages/BlogPost'));
+const BlogPost = React.lazy(() => import('./pages/BlogDetail'));
 
 // Admin pages
-const AdminDashboard = React.lazy(() => import('./pages/admin/AdminDashboard'));
-const AdminProjects = React.lazy(() => import('./pages/admin/AdminProjects'));
-const AdminProjectCreate = React.lazy(() => import('./pages/admin/AdminProjectCreate'));
-const AdminProjectEdit = React.lazy(() => import('./pages/admin/AdminProjectEdit'));
-const AdminBlog = React.lazy(() => import('./pages/admin/AdminBlog'));
-const AdminBlogCreate = React.lazy(() => import('./pages/admin/AdminBlogCreate'));
-const AdminBlogEdit = React.lazy(() => import('./pages/admin/AdminBlogEdit'));
+const AdminDashboard = React.lazy(() => import('./pages/admin/Dashboard'));
+const AdminProjects = React.lazy(() => import('./pages/admin/Projects'));
+const AdminProjectCreate = React.lazy(() => import('./pages/admin/Projects'));
+const AdminProjectEdit = React.lazy(() => import('./pages/admin/Projects'));
+const AdminBlog = React.lazy(() => import('./pages/Blog'));
+const AdminBlogCreate = React.lazy(() => import('./pages/Blog'));
+const AdminBlogEdit = React.lazy(() => import('./pages/Blog'));
 
 const queryClient = new QueryClient();
 
