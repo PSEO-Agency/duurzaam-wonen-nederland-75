@@ -10,6 +10,7 @@ import AdminLayout from './components/admin/AdminLayout';
 // Lazy load pages
 const Index = lazy(() => import('./pages/Index'));
 const ProductPage = lazy(() => import('./pages/ProductPage'));
+const KunststofKozijnen = lazy(() => import('./pages/KunststofKozijnen'));
 const RentevrijeFinanciering = lazy(() => import('./pages/RentevrijeFinanciering'));
 const OverOns = lazy(() => import('./pages/OverOns'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -84,6 +85,7 @@ function App() {
                 
                 {/* Main pages */}
                 <Route path="/" element={<Index />} />
+                <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
                 <Route path="/rentevrije-financiering" element={<RentevrijeFinanciering />} />
                 <Route path="/over-ons" element={<OverOns />} />
                 <Route path="/contact" element={<Contact />} />
