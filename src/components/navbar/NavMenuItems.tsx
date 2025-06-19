@@ -27,6 +27,31 @@ export const overOnsItems: MenuSection[] = [
   { label: 'Vacatures', href: '/over-ons/vacatures' },
 ];
 
+// Kunststof Kozijnen menu items organized in 3 columns
+const kunststofKozijnenItems = {
+  column1: [
+    { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
+    { label: 'Types Kozijnen', href: '/kunststof-kozijnen/types' },
+    { label: 'Kleuren', href: '/kunststof-kozijnen/kleuren' },
+    { label: 'Afmetingen', href: '/kunststof-kozijnen/afmetingen' },
+    { label: 'Prijzen', href: '/kunststof-kozijnen/prijzen' },
+  ],
+  column2: [
+    { label: 'Schüco Kozijnen', href: '/kunststof-kozijnen/schuco' },
+    { label: 'Merken', href: '/kunststof-kozijnen/merken' },
+    { label: 'Profielen', href: '/kunststof-kozijnen/profielen' },
+    { label: 'Montage', href: '/kunststof-kozijnen/montage' },
+    { label: 'Onderhoud', href: '/kunststof-kozijnen/onderhoud' },
+  ],
+  column3: [
+    { label: 'Schuifpuien', href: '/kunststof-schuifpuien' },
+    { label: 'Draai-kiep Ramen', href: '/kunststof-kozijnen/types/draai-kiep' },
+    { label: 'Vaste Ramen', href: '/kunststof-kozijnen/types/vast' },
+    { label: 'Subsidies', href: '/kunststof-kozijnen/subsidies' },
+    { label: 'Garantie', href: '/kunststof-kozijnen/garantie' },
+  ]
+};
+
 export const NavMenuItems = () => {
   const { data: products = [] } = useProducts();
 
@@ -60,6 +85,48 @@ export const NavMenuItems = () => {
 
   return (
     <>
+      <NavigationMenuItem>
+        <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
+          Kunststof Kozijnen
+        </NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <div className="bg-white p-4 min-w-[600px]">
+            <div className="grid grid-cols-3 gap-6">
+              <div className="flex-1">
+                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Algemeen</h4>
+                <ul className="space-y-1">
+                  {kunststofKozijnenItems.column1.map((item) => (
+                    <li key={item.label}>
+                      {renderMenuLink(item)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex-1">
+                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Merken & Profielen</h4>
+                <ul className="space-y-1">
+                  {kunststofKozijnenItems.column2.map((item) => (
+                    <li key={item.label}>
+                      {renderMenuLink(item)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex-1">
+                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Specialisaties</h4>
+                <ul className="space-y-1">
+                  {kunststofKozijnenItems.column3.map((item) => (
+                    <li key={item.label}>
+                      {renderMenuLink(item)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+
       <NavigationMenuItem>
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Oplossingen
