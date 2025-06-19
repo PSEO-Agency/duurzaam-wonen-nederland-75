@@ -33,14 +33,6 @@ export const overOnsItems: MenuSection[] = [
   { label: 'Vacatures', href: '/over-ons/vacatures' },
 ];
 
-export const adminItems: MenuSection[] = [
-  { label: 'Dashboard', href: '/admin/dashboard' },
-  { label: 'Pagina\'s', href: '/admin/pages' },
-  { label: 'Locaties', href: '/admin/locations' },
-  { label: 'Diensten', href: '/admin/services' },
-  { label: 'Stad Diensten', href: '/admin/city-services' },
-];
-
 export const NavMenuItems = () => {
   const { data: products = [] } = useProducts();
 
@@ -109,24 +101,6 @@ export const NavMenuItems = () => {
           </NavigationMenuLink>
         </NavigationMenuItem>
       ))}
-
-      <NavigationMenuItem>
-        <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
-          Admin
-        </NavigationMenuTrigger>
-        <NavigationMenuContent className="right-0">
-          <div className="bg-white p-4 w-auto">
-            <h3 className="font-semibold text-lg mb-2">Admin Panel</h3>
-            <ul className="space-y-1">
-              {adminItems.map((item) => (
-                <li key={item.label}>
-                  {renderMenuLink(item)}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
     </>
   );
 };

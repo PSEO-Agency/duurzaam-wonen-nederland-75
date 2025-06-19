@@ -12,6 +12,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Logo } from './navbar/Logo';
 import { NavMenuItems } from './navbar/NavMenuItems';
 import { MobileMenu } from './navbar/MobileMenu';
+import AdminPortalButton from './navbar/AdminPortalButton';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -96,6 +97,8 @@ const Navbar: React.FC = () => {
             </NavigationMenu>
 
             <div className="flex items-center gap-2 md:gap-3">
+              <AdminPortalButton />
+              
               <Button 
                 asChild 
                 size={isMobile ? "sm" : "lg"}
