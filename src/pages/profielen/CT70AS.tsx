@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ExternalLink, Download, CheckCircle2 } from 'lucide-react';
@@ -46,9 +45,9 @@ const CT70AS: React.FC = () => {
             <AnimatedSection animation="fade-in">
               <div className="flex items-center gap-4 mb-6">
                 <Button variant="outline" size="sm" asChild>
-                  <Link to="/kunststof-kozijnen/kleuren">
+                  <Link to="/kunststof-kozijnen/profielen">
                     <ArrowLeft className="h-4 w-4 mr-2" />
-                    Terug naar kleuren
+                    Terug naar profielen
                   </Link>
                 </Button>
               </div>
@@ -281,7 +280,7 @@ const CT70AS: React.FC = () => {
                       <h3 className="text-lg font-semibold mb-4">Gerelateerde producten</h3>
                       <div className="space-y-3">
                         <Button variant="outline" className="w-full justify-start" asChild>
-                          <Link to="/kunststof-kozijnen/profielen/living-82">
+                          <Link to="/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel">
                             Schüco LivIng 82
                           </Link>
                         </Button>

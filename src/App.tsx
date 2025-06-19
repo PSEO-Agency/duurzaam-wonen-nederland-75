@@ -54,6 +54,7 @@ const KozijnenEnschede = lazy(() => import('./pages/locaties/KozijnenEnschede'))
 const KozijnenInmeten = lazy(() => import('./pages/services/KozijnenInmeten'));
 
 // Profile pages
+const ProfilesOverview = lazy(() => import('./pages/ProfilesOverview'));
 const Living82 = lazy(() => import('./pages/profielen/Living82'));
 const CT70AS = lazy(() => import('./pages/profielen/CT70AS'));
 
@@ -123,8 +124,9 @@ function App() {
                 <Route path="/kunststof-kozijnen/services/inmeten" element={<KozijnenInmeten />} />
                 
                 {/* Profile routes */}
-                <Route path="/kunststof-kozijnen/profielen/living-82" element={<Living82 />} />
-                <Route path="/kunststof-kozijnen/profielen/ct-70-as" element={<CT70AS />} />
+                <Route path="/kunststof-kozijnen/profielen" element={<ProfilesOverview />} />
+                <Route path="/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel" element={<Living82 />} />
+                <Route path="/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel" element={<CT70AS />} />
                 
                 {/* New URL structure - /{service}/{region}/{city} */}
                 <Route path="/:serviceSlug/:regionSlug/:citySlug" element={<CityServicePageNew />} />
