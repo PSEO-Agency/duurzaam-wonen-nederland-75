@@ -30,25 +30,19 @@ export const overOnsItems: MenuSection[] = [
 // Kunststof Kozijnen menu items organized in 3 columns
 const kunststofKozijnenItems = {
   column1: [
-    { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
-    { label: 'Types Kozijnen', href: '/kunststof-kozijnen/types' },
-    { label: 'Kleuren', href: '/kunststof-kozijnen/kleuren' },
-    { label: 'Afmetingen', href: '/kunststof-kozijnen/afmetingen' },
-    { label: 'Prijzen', href: '/kunststof-kozijnen/prijzen' },
+    { label: 'Wat zijn kunststof kozijnen?', href: '/kunststof-kozijnen#wat-zijn' },
+    { label: 'Voordelen kunststof kozijnen', href: '/kunststof-kozijnen#voordelen' },
+    { label: 'Schüco Kozijnen', href: '/kunststof-kozijnen/schuco' },
   ],
   column2: [
-    { label: 'Schüco Kozijnen', href: '/kunststof-kozijnen/schuco' },
-    { label: 'Merken', href: '/kunststof-kozijnen/merken' },
-    { label: 'Profielen', href: '/kunststof-kozijnen/profielen' },
-    { label: 'Montage', href: '/kunststof-kozijnen/montage' },
-    { label: 'Onderhoud', href: '/kunststof-kozijnen/onderhoud' },
+    { label: 'Kozijnen Montage', href: '/kunststof-kozijnen/montage' },
+    { label: 'Kozijnen Prijzen', href: '/kunststof-kozijnen/prijzen' },
+    { label: 'Type Kozijn', href: '/kunststof-kozijnen/types' },
   ],
   column3: [
-    { label: 'Schuifpuien', href: '/kunststof-schuifpuien' },
-    { label: 'Draai-kiep Ramen', href: '/kunststof-kozijnen/types/draai-kiep' },
-    { label: 'Vaste Ramen', href: '/kunststof-kozijnen/types/vast' },
-    { label: 'Subsidies', href: '/kunststof-kozijnen/subsidies' },
-    { label: 'Garantie', href: '/kunststof-kozijnen/garantie' },
+    { label: 'Kleur Kozijn', href: '/kunststof-kozijnen/kleuren' },
+    { label: 'Kozijn Afmeting', href: '/kunststof-kozijnen/afmetingen' },
+    { label: 'Kozijn Profielen', href: '/kunststof-kozijnen/profielen' },
   ]
 };
 
@@ -103,7 +97,7 @@ export const NavMenuItems = () => {
                 </ul>
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Merken & Profielen</h4>
+                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Services</h4>
                 <ul className="space-y-1">
                   {kunststofKozijnenItems.column2.map((item) => (
                     <li key={item.label}>
@@ -113,7 +107,7 @@ export const NavMenuItems = () => {
                 </ul>
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Specialisaties</h4>
+                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Opties</h4>
                 <ul className="space-y-1">
                   {kunststofKozijnenItems.column3.map((item) => (
                     <li key={item.label}>

@@ -22,16 +22,15 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 
   // Kunststof Kozijnen mobile menu items
   const kunststofKozijnenItems = [
-    { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
-    { label: 'Types Kozijnen', href: '/kunststof-kozijnen/types' },
-    { label: 'Kleuren', href: '/kunststof-kozijnen/kleuren' },
-    { label: 'Afmetingen', href: '/kunststof-kozijnen/afmetingen' },
-    { label: 'Prijzen', href: '/kunststof-kozijnen/prijzen' },
+    { label: 'Wat zijn kunststof kozijnen?', href: '/kunststof-kozijnen#wat-zijn' },
+    { label: 'Voordelen kunststof kozijnen', href: '/kunststof-kozijnen#voordelen' },
     { label: 'Schüco Kozijnen', href: '/kunststof-kozijnen/schuco' },
-    { label: 'Merken', href: '/kunststof-kozijnen/merken' },
-    { label: 'Profielen', href: '/kunststof-kozijnen/profielen' },
-    { label: 'Montage', href: '/kunststof-kozijnen/montage' },
-    { label: 'Schuifpuien', href: '/kunststof-schuifpuien' },
+    { label: 'Kozijnen Montage', href: '/kunststof-kozijnen/montage' },
+    { label: 'Kozijnen Prijzen', href: '/kunststof-kozijnen/prijzen' },
+    { label: 'Type Kozijn', href: '/kunststof-kozijnen/types' },
+    { label: 'Kleur Kozijn', href: '/kunststof-kozijnen/kleuren' },
+    { label: 'Kozijn Afmeting', href: '/kunststof-kozijnen/afmetingen' },
+    { label: 'Kozijn Profielen', href: '/kunststof-kozijnen/profielen' },
   ];
 
   return (
