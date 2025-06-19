@@ -1,4 +1,3 @@
-
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -9,7 +8,9 @@ import AdminLayout from './components/admin/AdminLayout';
 
 // Lazy load pages
 const Index = lazy(() => import('./pages/Index'));
-const ProductPage = lazy(() => import('./pages/ProductPage'));
+const KunststofKozijnen = lazy(() => import('./pages/KunststofKozijnen'));
+const AluminiumKozijnen = lazy(() => import('./pages/AluminiumKozijnen'));
+const KunststofSchuifpuien = lazy(() => import('./pages/KunststofSchuifpuien'));
 const RentevrijeFinanciering = lazy(() => import('./pages/RentevrijeFinanciering'));
 const OverOns = lazy(() => import('./pages/OverOns'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -23,7 +24,6 @@ const Sitemap = lazy(() => import('./pages/Sitemap'));
 const SitemapXML = lazy(() => import('./pages/SitemapXML'));
 const RobotsTxt = lazy(() => import('./pages/RobotsTxt'));
 const CityServicePage = lazy(() => import('./pages/CityServicePage'));
-const NotFound = lazy(() => import('./pages/NotFound'));
 
 // New location pages
 const RegionServicePage = lazy(() => import('./pages/RegionServicePage'));
@@ -84,6 +84,9 @@ function App() {
                 
                 {/* Main pages */}
                 <Route path="/" element={<Index />} />
+                <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
+                <Route path="/aluminium-kozijnen" element={<AluminiumKozijnen />} />
+                <Route path="/kunststof-schuifpuien" element={<KunststofSchuifpuien />} />
                 <Route path="/rentevrije-financiering" element={<RentevrijeFinanciering />} />
                 <Route path="/over-ons" element={<OverOns />} />
                 <Route path="/contact" element={<Contact />} />
@@ -130,9 +133,6 @@ function App() {
                 {/* Old URL structure for backward compatibility - /diensten/{city}/{service} */}
                 <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
                 
-                {/* Dynamic product routes - must come after specific routes */}
-                <Route path="/:productSlug" element={<ProductPage />} />
-                
                 {/* Admin login route (standalone, not in AdminLayout) */}
                 <Route path="/admin/login" element={<AdminLogin />} />
                 
@@ -149,9 +149,6 @@ function App() {
                   <Route path="city-services" element={<AdminCityServices />} />
                   <Route path="projects" element={<AdminProjects />} />
                 </Route>
-
-                {/* 404 Not Found - must be last */}
-                <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
           </AdminWrapper>
