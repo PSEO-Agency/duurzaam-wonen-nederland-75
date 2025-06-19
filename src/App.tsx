@@ -1,3 +1,4 @@
+
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -44,12 +45,11 @@ const ColorDetail = lazy(() => import('./pages/ColorDetail'));
 const KozijnSizes = lazy(() => import('./pages/KozijnSizes'));
 const KozijnMontage = lazy(() => import('./pages/KozijnMontage'));
 const KozijnPrices = lazy(() => import('./pages/KozijnPrices'));
-const KozijnBrands = lazy(() => import('./pages/KozijnBrands'));
+const SchucoBrand = lazy(() => import('./pages/brands/SchucoBrand'));
 const Draaikiepraam = lazy(() => import('./pages/types/Draaikiepraam'));
 const Kozijn100x100 = lazy(() => import('./pages/sizes/Kozijn100x100'));
 const KozijnenAfbetaling = lazy(() => import('./pages/prices/KozijnenAfbetaling'));
 const KozijnenSubsidie = lazy(() => import('./pages/prices/KozijnenSubsidie'));
-const SchucoBrand = lazy(() => import('./pages/brands/SchucoBrand'));
 const KozijnenEnschede = lazy(() => import('./pages/locaties/KozijnenEnschede'));
 const KozijnenInmeten = lazy(() => import('./pages/services/KozijnenInmeten'));
 
@@ -118,8 +118,7 @@ function App() {
                 <Route path="/kunststof-kozijnen/prijzen" element={<KozijnPrices />} />
                 <Route path="/kunststof-kozijnen/prijzen/afbetaling" element={<KozijnenAfbetaling />} />
                 <Route path="/kunststof-kozijnen/prijzen/subsidie" element={<KozijnenSubsidie />} />
-                <Route path="/kunststof-kozijnen/merken" element={<KozijnBrands />} />
-                <Route path="/kunststof-kozijnen/merken/schuco" element={<SchucoBrand />} />
+                <Route path="/kunststof-kozijnen/schuco" element={<SchucoBrand />} />
                 <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />
                 <Route path="/kunststof-kozijnen/services/inmeten" element={<KozijnenInmeten />} />
                 

@@ -3,6 +3,8 @@ import React from 'react';
 import AnimatedSection from '../AnimatedSection';
 import { Card, CardContent } from '@/components/ui/card';
 import { Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 interface Brand {
   name: string;
@@ -10,6 +12,7 @@ interface Brand {
   description: string;
   rating: number;
   features: string[];
+  slug?: string;
 }
 
 const Brands: React.FC = () => {
@@ -19,7 +22,8 @@ const Brands: React.FC = () => {
       logo: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
       description: 'Hoogwaardige Duitse kwaliteit met uitstekende isolatiewaarden en innovatieve oplossingen.',
       rating: 4.9,
-      features: ['Uitstekende isolatie', 'Premium uitstraling', 'Innovatieve technologie']
+      features: ['Uitstekende isolatie', 'Premium uitstraling', 'Innovatieve technologie'],
+      slug: '/kunststof-kozijnen/schuco'
     },
     {
       name: 'Veka',
@@ -86,7 +90,7 @@ const Brands: React.FC = () => {
                     <span className="ml-2 text-sm text-gray-600">{brand.rating}</span>
                   </div>
                   <p className="text-gray-600 text-center mb-4">{brand.description}</p>
-                  <ul className="space-y-1">
+                  <ul className="space-y-1 mb-6">
                     {brand.features.map((feature, idx) => (
                       <li key={idx} className="text-sm flex items-center">
                         <div className="h-1.5 w-1.5 rounded-full bg-brand-green mr-2"></div>
@@ -94,6 +98,13 @@ const Brands: React.FC = () => {
                       </li>
                     ))}
                   </ul>
+                  {brand.slug && (
+                    <Button asChild className="w-full bg-brand-green hover:bg-brand-green-dark">
+                      <Link to={brand.slug}>
+                        Meer over {brand.name}
+                      </Link>
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             </AnimatedSection>

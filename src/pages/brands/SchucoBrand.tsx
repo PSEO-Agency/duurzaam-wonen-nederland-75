@@ -7,19 +7,16 @@ import ScrollToTop from '@/components/ScrollToTop';
 import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
 import AnimatedSection from '@/components/AnimatedSection';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, Star, ShieldCheck, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Link } from 'react-router-dom';
 import ContactCTA from '@/components/ContactCTA';
+import Services from '@/components/kunststof-kozijnen/Services';
+import Reviews from '@/components/Reviews';
 
-const relatedBrands = [
-  { title: 'Veka Kozijnen', slug: '/kunststof-kozijnen/merken/veka', excerpt: 'Hoogwaardige Duitse kwaliteit met uitstekende isolatiewaarden.' },
-  { title: 'Rehau Kozijnen', slug: '/kunststof-kozijnen/merken/rehau', excerpt: 'Innovatieve kozijnsystemen met diverse profielopties.' },
-  { title: 'Kömmerling Kozijnen', slug: '/kunststof-kozijnen/merken/kommerling', excerpt: 'Premium kozijnen met geavanceerde technologie.' },
-  { title: 'Deceuninck Kozijnen', slug: '/kunststof-kozijnen/merken/deceuninck', excerpt: 'Duurzame kozijnen met innovatieve recyclingsmogelijkheden.' },
-];
-
-// Product data for the Schüco assortment
+// Schüco product data
 const schucoProducts = [
   {
     id: 1,
@@ -92,12 +89,37 @@ const SchucoBrand: React.FC = () => {
     "Tot 40% energiebesparing mogelijk"
   ];
 
+  const certifications = [
+    {
+      title: "KOMO-certificaat",
+      description: "Het KOMO-keurmerk garandeert dat de koz­ijnen voldoen aan de Nederlandse eisen voor kwaliteit, veiligheid en duurzaamheid.",
+      icon: ShieldCheck
+    },
+    {
+      title: "CE-markering",
+      description: "De CE-markering geeft aan dat de kozijnen voldoen aan de Europese richtlijnen voor bouwproducten.",
+      icon: Award
+    },
+    {
+      title: "RAL Gütezeichen",
+      description: "Het Duitse RAL-keurmerk staat voor hoogwaardige kwaliteit en strenge eisen wat betreft materiaalgebruik.",
+      icon: Star
+    }
+  ];
+
+  const relatedPages = [
+    { title: 'Kunststof Kozijnen Types', slug: '/kunststof-kozijnen/types', excerpt: 'Ontdek alle verschillende types kunststof kozijnen en hun toepassingen.' },
+    { title: 'Kozijn Kleuren', slug: '/kunststof-kozijnen/kleuren', excerpt: 'Bekijk het uitgebreide kleurenaanbod voor uw nieuwe kozijnen.' },
+    { title: 'Kozijn Prijzen', slug: '/kunststof-kozijnen/prijzen', excerpt: 'Informatie over prijzen en financieringsmogelijkheden.' },
+    { title: 'Kozijn Montage', slug: '/kunststof-kozijnen/montage', excerpt: 'Alles over de professionele montage van uw nieuwe kozijnen.' },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Schüco Kunststof Kozijnen | Duurzaam Wonen Nederland</title>
-        <meta name="description" content="Schüco kunststof kozijnen van topkwaliteit. Ontdek het premium assortiment met uitstekende isolatiewaarden, modern design en Duitse kwaliteit." />
-        <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/merken/schuco" />
+        <title>Schüco Kunststof Kozijnen | Premium Duitse Kwaliteit | Duurzaam Wonen Nederland</title>
+        <meta name="description" content="Schüco kunststof kozijnen van topkwaliteit. Ontdek het premium assortiment met uitstekende isolatiewaarden, modern design en Duitse kwaliteit. Vraag vrijblijvend een offerte aan." />
+        <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/schuco" />
       </Helmet>
       
       <Navbar />
@@ -107,14 +129,7 @@ const SchucoBrand: React.FC = () => {
           title="Schüco Kunststof Kozijnen" 
           description="Premium kozijnen met Duitse kwaliteit en innovatieve technologie. Ontdek het Schüco assortiment met uitstekende isolatiewaarden en slank design."
           imageUrl="/lovable-uploads/ab9628a0-733d-4736-833b-7a03e543c615.png"
-          benefits={[
-            'Duitse topkwaliteit met uitstekende isolatie',
-            'Slanke profielen voor maximaal glasoppervlak',
-            'Uitgebreid kleurenaanbod inclusief houtlook',
-            'Hoge inbraakwerendheid tot RC3',
-            'Geluiddempende eigenschappen',
-            'Tot 40% energiebesparing mogelijk'
-          ]}
+          benefits={benefits}
         />
         
         <StickyNavigation />
@@ -125,14 +140,14 @@ const SchucoBrand: React.FC = () => {
             <div className="flex flex-col lg:flex-row gap-12">
               <div className="lg:w-2/3">
                 <AnimatedSection animation="fade-in">
-                  <h2 className="text-3xl font-bold mb-6">Schüco Kunststof Kozijnen</h2>
+                  <h2 className="text-3xl font-bold mb-6">Waarom kiezen voor Schüco?</h2>
                   <p className="text-lg text-gray-700 mb-6">
                     Schüco behoort tot de absolute wereldtop op het gebied van kunststof kozijnen. Het Duitse merk staat bekend om 
                     zijn innovatieve technologieën, hoogwaardige materialen en vooruitstrevende designs. Als officiële Schüco partner 
                     levert Duurzaam Wonen Nederland het complete assortiment Schüco kozijnen, inclusief vakkundige montage en service.
                   </p>
 
-                  <h3 className="text-2xl font-semibold mt-8 mb-4">Waarom kiezen voor Schüco?</h3>
+                  <h3 className="text-2xl font-semibold mt-8 mb-4">Deutsche Qualität</h3>
                   <ul className="list-disc pl-6 mb-6 space-y-2 text-gray-700">
                     <li><strong>Uitstekende isolatie</strong> - Schüco profielen hebben uitzonderlijk lage U-waarden voor maximale energiebesparing</li>
                     <li><strong>Slank design</strong> - De slanke profielen maximaliseren het glasoppervlak voor meer lichtinval</li>
@@ -141,7 +156,7 @@ const SchucoBrand: React.FC = () => {
                     <li><strong>Duurzaamheid</strong> - Milieuvriendelijke productieprocessen en recyclebare materialen</li>
                   </ul>
 
-                  <h3 className="text-2xl font-semibold mt-8 mb-4">De juiste kozijnen voor uw woning</h3>
+                  <h3 className="text-2xl font-semibold mt-8 mb-4">Voor elke woning het juiste systeem</h3>
                   <p className="text-gray-700 mb-6">
                     Of u nu een nieuwbouwwoning heeft, een jaren '30 herenhuis of een moderne villa, Schüco biedt voor elke situatie 
                     de perfecte kozijnoplossing. De kozijnen zijn verkrijgbaar in verschillende profieldieptes (70mm en 82mm), 
@@ -164,7 +179,7 @@ const SchucoBrand: React.FC = () => {
                 </AnimatedSection>
                 
                 <AnimatedSection animation="fade-in" delay={300} className="bg-gray-50 p-6 rounded-lg mb-8">
-                  <h3 className="text-xl font-semibold mb-4">Voordelen</h3>
+                  <h3 className="text-xl font-semibold mb-4">Voordelen van Schüco</h3>
                   <ul className="space-y-3">
                     {benefits.map((benefit, index) => (
                       <li key={index} className="flex items-start">
@@ -196,6 +211,10 @@ const SchucoBrand: React.FC = () => {
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
               <h2 className="text-3xl font-bold mb-8 text-center">Schüco Assortiment</h2>
+              <p className="text-lg text-gray-700 text-center mb-12 max-w-3xl mx-auto">
+                Schüco biedt verschillende profielsystemen, elk met hun eigen kenmerken en toepassingsgebieden. 
+                Ontdek welk systeem het beste past bij uw woning en wensen.
+              </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {schucoProducts.map((product) => (
                   <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
@@ -230,39 +249,99 @@ const SchucoBrand: React.FC = () => {
             </AnimatedSection>
           </div>
         </section>
-        
-        {/* FAQs Section */}
+
+        {/* Certifications Section */}
         <section className="py-12 bg-white">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold mb-8 text-center">Veelgestelde vragen over Schüco kozijnen</h2>
-              <div className="max-w-3xl mx-auto">
-                {faqs.map((faq, index) => (
-                  <div key={index} className="mb-6">
-                    <h3 className="text-xl font-semibold mb-2">{faq.question}</h3>
-                    <p className="text-gray-700">{faq.answer}</p>
-                  </div>
+              <h2 className="text-3xl font-bold mb-8 text-center">Keurmerken en Certificeringen</h2>
+              <p className="text-lg text-gray-700 text-center mb-12 max-w-3xl mx-auto">
+                Schüco kozijnen beschikken over alle belangrijke keurmerken en certificeringen die garant staan 
+                voor kwaliteit, veiligheid en duurzaamheid.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                {certifications.map((cert, index) => (
+                  <AnimatedSection key={cert.title} animation="fade-in" delay={index * 100}>
+                    <Card className="h-full hover:shadow-md transition-shadow">
+                      <CardContent className="p-6">
+                        <div className="flex items-center mb-4">
+                          <div className="bg-brand-green/10 p-2 rounded-full mr-3">
+                            <cert.icon className="h-6 w-6 text-brand-green" />
+                          </div>
+                          <h3 className="text-xl font-semibold">{cert.title}</h3>
+                        </div>
+                        <p className="text-gray-700">{cert.description}</p>
+                      </CardContent>
+                    </Card>
+                  </AnimatedSection>
                 ))}
+              </div>
+              
+              {/* Certification Logos */}
+              <div className="bg-gray-50 p-8 rounded-lg">
+                <h3 className="text-xl font-semibold mb-6 text-center">Onze certificeringen</h3>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+                  <div className="bg-white rounded p-4 h-20 flex items-center justify-center">
+                    <img src="/lovable-uploads/f1d54abc-69ab-4254-931b-2ff6d32891f1.png" alt="KOMO" className="h-12 max-w-full object-contain" />
+                  </div>
+                  <div className="bg-white rounded p-4 h-20 flex items-center justify-center">
+                    <img src="/lovable-uploads/10906789-676e-4aef-b797-6bc0815255ea.png" alt="CE" className="h-12 max-w-full object-contain" />
+                  </div>
+                  <div className="bg-white rounded p-4 h-20 flex items-center justify-center">
+                    <img src="/lovable-uploads/a680436d-6948-4799-a383-6aad791b1e0e.png" alt="PKVW" className="h-14 max-w-full object-contain" />
+                  </div>
+                  <div className="bg-white rounded p-4 h-20 flex items-center justify-center">
+                    <img src="/lovable-uploads/84861c8c-4187-4055-a956-1249dbe30fe3.png" alt="Warmtefonds" className="h-14 max-w-full object-contain" />
+                  </div>
+                  <div className="bg-white rounded p-4 h-20 flex items-center justify-center">
+                    <img src="/lovable-uploads/4d42855f-0a4b-48ef-b632-25f5f01975fc.png" alt="Schüco" className="h-12 max-w-full object-contain" />
+                  </div>
+                </div>
               </div>
             </AnimatedSection>
           </div>
         </section>
         
-        {/* Related Brands Section */}
+        {/* FAQs Section */}
         <section className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold mb-8">Andere kozijnmerken</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {relatedBrands.map((brand, index) => (
-                  <div key={index} className="bg-white rounded-lg p-6 hover:shadow-md transition-shadow">
-                    <h3 className="text-xl font-semibold mb-2">{brand.title}</h3>
-                    {brand.excerpt && <p className="text-gray-700 mb-4">{brand.excerpt}</p>}
+              <h2 className="text-3xl font-bold mb-8 text-center">Veelgestelde vragen over Schüco kozijnen</h2>
+              
+              <div className="max-w-4xl mx-auto">
+                <Accordion type="single" collapsible className="w-full">
+                  {faqs.map((faq, index) => (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                      <AccordionTrigger className="text-lg font-semibold">
+                        {faq.question}
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <p className="text-gray-700">{faq.answer}</p>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+        
+        {/* Related Pages Section */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-in">
+              <h2 className="text-3xl font-bold mb-8">Gerelateerde informatie</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                {relatedPages.map((page, index) => (
+                  <div key={index} className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
+                    <h3 className="text-xl font-semibold mb-2">{page.title}</h3>
+                    {page.excerpt && <p className="text-gray-700 mb-4">{page.excerpt}</p>}
                     <Link 
-                      to={brand.slug} 
+                      to={page.slug} 
                       className="text-brand-green flex items-center hover:underline"
                     >
-                      <span>Meer over {brand.title}</span>
+                      <span>Meer informatie</span>
                       <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
                   </div>
@@ -271,6 +350,10 @@ const SchucoBrand: React.FC = () => {
             </AnimatedSection>
           </div>
         </section>
+        
+        <Services />
+        
+        <Reviews />
         
         <ContactCTA />
       </main>

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
@@ -64,15 +65,8 @@ const StickyNavigation: React.FC = () => {
           currentPage = 'Subsidie';
         }
       }
-    } else if (path.includes('/merken')) {
-      currentPage = 'Merken';
-      if (path.includes('/merken/')) {
-        isNestedSubPage = true;
-        parentPage = 'Merken';
-        if (path.includes('schuco')) {
-          currentPage = 'Schüco';
-        }
-      }
+    } else if (path.includes('/schuco')) {
+      currentPage = 'Schüco';
     } else if (path.includes('/locaties/')) {
       isNestedSubPage = true;
       parentPage = 'Locaties';
@@ -84,6 +78,17 @@ const StickyNavigation: React.FC = () => {
       parentPage = 'Services';
       if (path.includes('inmeten')) {
         currentPage = 'Inmeten';
+      }
+    } else if (path.includes('/profielen')) {
+      currentPage = 'Profielen';
+      if (path.includes('/profielen/')) {
+        isNestedSubPage = true;
+        parentPage = 'Profielen';
+        if (path.includes('schuco-living-kozijnprofiel')) {
+          currentPage = 'Schüco Living';
+        } else if (path.includes('schuco-ct70-kozijnprofiel')) {
+          currentPage = 'Schüco CT70';
+        }
       }
     }
   }
