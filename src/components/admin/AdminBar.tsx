@@ -1,12 +1,34 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, Lock } from 'lucide-react';
+import { LayoutDashboard, Lock, LogOut } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
 const AdminBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast({
+        title: "Uitgelogd",
+        description: "Je bent succesvol uitgelogd.",
+      });
+      navigate('/admin/login');
+    } catch (error) {
+      console.error('Logout error:', error);
+      toast({
+        title: "Fout bij uitloggen",
+        description: "Er is een fout opgetreden bij het uitloggen.",
+        variant: "destructive"
+      });
+    }
+  };
 
   return (
     <div className={cn(
@@ -41,6 +63,16 @@ const AdminBar: React.FC = () => {
             <Link to="/">
               View Site
             </Link>
+          </Button>
+
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-white hover:bg-slate-700"
+            onClick={handleLogout}
+          >
+            <LogOut size={16} className="mr-2" />
+            Logout
           </Button>
           
           <Button 

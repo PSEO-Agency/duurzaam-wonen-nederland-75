@@ -59,6 +59,7 @@ const Living82 = lazy(() => import('./pages/profielen/Living82'));
 const CT70AS = lazy(() => import('./pages/profielen/CT70AS'));
 
 // Admin pages
+const AdminLogin = lazy(() => import('./pages/admin/Login'));
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
 const AdminPages = lazy(() => import('./pages/admin/Pages'));
 const AdminLocations = lazy(() => import('./pages/admin/Locations'));
@@ -132,6 +133,9 @@ function App() {
                 
                 {/* Old URL structure for backward compatibility - /diensten/{city}/{service} */}
                 <Route path="/diensten/:citySlug/:serviceSlug" element={<CityServicePage />} />
+                
+                {/* Admin login route (outside of AdminLayout) */}
+                <Route path="/admin/login" element={<AdminLogin />} />
                 
                 {/* Admin routes with AdminLayout wrapper */}
                 <Route path="/admin/*" element={<AdminLayout />}>
