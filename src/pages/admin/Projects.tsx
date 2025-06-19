@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -144,20 +143,55 @@ const Projects: React.FC = () => {
     project?: Project | null; 
     onSubmit: (data: any) => void; 
     isLoading?: boolean;
+    key?: string;
   }> = ({ project, onSubmit, isLoading = false }) => {
     const [formData, setFormData] = useState({
-      title: project?.title || '',
-      description: project?.description || '',
-      location: project?.location || '',
-      project_type: project?.project_type || '',
-      completion_date: project?.completion_date || '',
-      image_url: project?.image_url || '',
-      featured_image: project?.featured_image || '',
-      gallery_images: project?.gallery_images || [],
-      is_featured: project?.is_featured || false,
-      is_active: project?.is_active ?? true,
-      sort_order: project?.sort_order || 0
+      title: '',
+      description: '',
+      location: '',
+      project_type: '',
+      completion_date: '',
+      image_url: '',
+      featured_image: '',
+      gallery_images: [],
+      is_featured: false,
+      is_active: true,
+      sort_order: 0
     });
+
+    // Reset form data when project changes
+    useEffect(() => {
+      console.log('ProjectForm useEffect triggered, project:', project);
+      if (project) {
+        setFormData({
+          title: project.title || '',
+          description: project.description || '',
+          location: project.location || '',
+          project_type: project.project_type || '',
+          completion_date: project.completion_date || '',
+          image_url: project.image_url || '',
+          featured_image: project.featured_image || '',
+          gallery_images: project.gallery_images || [],
+          is_featured: project.is_featured || false,
+          is_active: project.is_active ?? true,
+          sort_order: project.sort_order || 0
+        });
+      } else {
+        setFormData({
+          title: '',
+          description: '',
+          location: '',
+          project_type: '',
+          completion_date: '',
+          image_url: '',
+          featured_image: '',
+          gallery_images: [],
+          is_featured: false,
+          is_active: true,
+          sort_order: 0
+        });
+      }
+    }, [project]);
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -278,6 +312,17 @@ const Projects: React.FC = () => {
     );
   };
 
+  const handleEditProject = (project: Project) => {
+    console.log('handleEditProject called with:', project);
+    setSelectedProject(project);
+    setIsEditDialogOpen(true);
+  };
+
+  const handleCloseEditDialog = () => {
+    setIsEditDialogOpen(false);
+    setSelectedProject(null);
+  };
+
   if (isLoading) {
     return (
       <div className="space-y-6">
@@ -311,6 +356,7 @@ const Projects: React.FC = () => {
               </DialogDescription>
             </DialogHeader>
             <ProjectForm 
+              key="create"
               onSubmit={(data) => createProjectMutation.mutate(data)}
               isLoading={createProjectMutation.isPending}
             />
@@ -372,10 +418,7 @@ const Projects: React.FC = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => {
-                    setSelectedProject(project);
-                    setIsEditDialogOpen(true);
-                  }}
+                  onClick={() => handleEditProject(project)}
                 >
                   <Edit className="h-3 w-3" />
                 </Button>
@@ -393,7 +436,7 @@ const Projects: React.FC = () => {
       </div>
 
       {/* Edit Dialog */}
-      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+      <Dialog open={isEditDialogOpen} onOpenChange={handleCloseEditDialog}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Project Bewerken</DialogTitle>
@@ -401,13 +444,12 @@ const Projects: React.FC = () => {
               Bewerk de projectgegevens.
             </DialogDescription>
           </DialogHeader>
-          {selectedProject && (
-            <ProjectForm 
-              project={selectedProject}
-              onSubmit={(data) => updateProjectMutation.mutate({ ...data, id: selectedProject.id })}
-              isLoading={updateProjectMutation.isPending}
-            />
-          )}
+          <ProjectForm 
+            key={selectedProject?.id || 'edit'}
+            project={selectedProject}
+            onSubmit={(data) => updateProjectMutation.mutate({ ...data, id: selectedProject!.id })}
+            isLoading={updateProjectMutation.isPending}
+          />
         </DialogContent>
       </Dialog>
     </div>
