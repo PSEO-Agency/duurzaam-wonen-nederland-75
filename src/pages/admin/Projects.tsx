@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -159,42 +159,71 @@ const Projects: React.FC = () => {
       sort_order: 0
     });
 
-    // Reset form data when project changes
+    // Keep track of the current project ID to detect actual project changes
+    const currentProjectIdRef = useRef<string | null>(null);
+    const isInitializedRef = useRef(false);
+
+    // Reset form data only when project ID actually changes
     useEffect(() => {
-      console.log('ProjectForm useEffect triggered, project:', project);
-      if (project) {
-        setFormData({
-          title: project.title || '',
-          description: project.description || '',
-          location: project.location || '',
-          project_type: project.project_type || '',
-          completion_date: project.completion_date || '',
-          image_url: project.image_url || '',
-          featured_image: project.featured_image || '',
-          gallery_images: project.gallery_images || [],
-          is_featured: project.is_featured || false,
-          is_active: project.is_active ?? true,
-          sort_order: project.sort_order || 0
-        });
+      const projectId = project?.id || null;
+      const hasProjectChanged = currentProjectIdRef.current !== projectId;
+      
+      console.log('ProjectForm useEffect triggered:', {
+        project: project ? { id: project.id, title: project.title } : null,
+        currentProjectId: currentProjectIdRef.current,
+        newProjectId: projectId,
+        hasProjectChanged,
+        isInitialized: isInitializedRef.current
+      });
+
+      // Only reset form data if:
+      // 1. This is the first initialization, OR
+      // 2. The project ID has actually changed (switching between different projects)
+      if (!isInitializedRef.current || hasProjectChanged) {
+        console.log('Resetting form data due to project change');
+        
+        if (project) {
+          setFormData({
+            title: project.title || '',
+            description: project.description || '',
+            location: project.location || '',
+            project_type: project.project_type || '',
+            completion_date: project.completion_date || '',
+            image_url: project.image_url || '',
+            featured_image: project.featured_image || '',
+            gallery_images: project.gallery_images || [],
+            is_featured: project.is_featured || false,
+            is_active: project.is_active ?? true,
+            sort_order: project.sort_order || 0
+          });
+        } else {
+          setFormData({
+            title: '',
+            description: '',
+            location: '',
+            project_type: '',
+            completion_date: '',
+            image_url: '',
+            featured_image: '',
+            gallery_images: [],
+            is_featured: false,
+            is_active: true,
+            sort_order: 0
+          });
+        }
+        
+        // Update refs to track current state
+        currentProjectIdRef.current = projectId;
+        isInitializedRef.current = true;
       } else {
-        setFormData({
-          title: '',
-          description: '',
-          location: '',
-          project_type: '',
-          completion_date: '',
-          image_url: '',
-          featured_image: '',
-          gallery_images: [],
-          is_featured: false,
-          is_active: true,
-          sort_order: 0
-        });
+        console.log('Skipping form reset - same project, form state preserved');
       }
-    }, [project]);
+    }, [project?.id]); // Only depend on project ID, not the entire project object
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
+      
+      console.log('Form submission with data:', formData);
       
       // Clean up the data before submitting, convert empty strings to null
       const cleanedData = {
@@ -208,6 +237,15 @@ const Projects: React.FC = () => {
       };
       
       onSubmit(cleanedData);
+    };
+
+    const handleImageUpload = (field: 'image_url' | 'featured_image') => (url: string) => {
+      console.log(`Image upload for ${field}:`, url);
+      setFormData(prev => {
+        const newData = { ...prev, [field]: url };
+        console.log('Updated form data after image upload:', newData);
+        return newData;
+      });
     };
 
     return (
@@ -275,14 +313,14 @@ const Projects: React.FC = () => {
         <ImageUpload
           label="Hoofdafbeelding"
           value={formData.image_url}
-          onChange={(url) => setFormData(prev => ({ ...prev, image_url: url }))}
+          onChange={handleImageUpload('image_url')}
           bucketName="project-images"
         />
 
         <ImageUpload
           label="Featured Afbeelding"
           value={formData.featured_image}
-          onChange={(url) => setFormData(prev => ({ ...prev, featured_image: url }))}
+          onChange={handleImageUpload('featured_image')}
           bucketName="project-images"
         />
 
