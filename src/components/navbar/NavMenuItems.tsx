@@ -32,14 +32,14 @@ const kunststofKozijnenItems = {
   column1: [
     { label: 'Wat zijn kunststof kozijnen?', href: '/kunststof-kozijnen#wat-zijn' },
     { label: 'Voordelen kunststof kozijnen', href: '/kunststof-kozijnen#voordelen' },
-    { label: 'Schüco Kozijnen', href: '/kunststof-kozijnen/schuco' },
   ],
   column2: [
+    { label: 'Schüco Kozijnen', href: '/kunststof-kozijnen/schuco' },
     { label: 'Kozijnen Montage', href: '/kunststof-kozijnen/montage' },
     { label: 'Kozijnen Prijzen', href: '/kunststof-kozijnen/prijzen' },
-    { label: 'Type Kozijn', href: '/kunststof-kozijnen/types' },
   ],
   column3: [
+    { label: 'Type Kozijn', href: '/kunststof-kozijnen/types' },
     { label: 'Kleur Kozijn', href: '/kunststof-kozijnen/kleuren' },
     { label: 'Kozijn Afmeting', href: '/kunststof-kozijnen/afmetingen' },
     { label: 'Kozijn Profielen', href: '/kunststof-kozijnen/profielen' },
