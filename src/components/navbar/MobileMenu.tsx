@@ -10,7 +10,7 @@ interface MobileMenuProps {
   onClose: () => void;
 }
 
-export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
+const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
   const { data: products = [] } = useProducts();
   
   if (!isOpen) return null;
@@ -105,3 +105,5 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
     </div>
   );
 };
+
+export { MobileMenu };
