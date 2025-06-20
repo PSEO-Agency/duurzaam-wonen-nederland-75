@@ -15,6 +15,7 @@ import Workflow from '@/components/Workflow';
 import Reviews from '@/components/Reviews';
 import ContactCTA from '@/components/ContactCTA';
 import RegionsSection from '@/components/RegionsSection';
+import ProductStickyNavigation from '@/components/ProductStickyNavigation';
 import { useAllProducts } from '@/hooks/useAllProducts';
 
 export interface ServicePageTemplateProps {
@@ -132,6 +133,10 @@ export interface ServicePageTemplateProps {
   
   // Regions/Locations (optional)
   showRegions?: boolean;
+  
+  // Product info for breadcrumbs
+  productName?: string;
+  productSlug?: string;
 }
 
 // Helper function to safely parse content arrays
@@ -177,7 +182,9 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   services,
   information,
   faq,
-  showRegions = true
+  showRegions = true,
+  productName,
+  productSlug
 }) => {
   const { data: allProducts = [], isLoading: productsLoading } = useAllProducts();
 
@@ -202,6 +209,14 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
       </Helmet>
       
       <Navbar />
+      
+      {/* Add ProductStickyNavigation if we have product info */}
+      {productName && productSlug && (
+        <ProductStickyNavigation 
+          productName={productName} 
+          productSlug={productSlug} 
+        />
+      )}
       
       <main className="flex-grow pt-20">
         {/* Hero Section */}
