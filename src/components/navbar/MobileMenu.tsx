@@ -20,6 +20,10 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
     href: `/${product.slug}`
   }));
 
+  // Add Kunststof Kozijnen as the first item in Oplossingen
+  const kunststofKozijnenItem = { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' };
+  const allOplossingenItems = [kunststofKozijnenItem, ...dynamicProductItems];
+
   // Kunststof Kozijnen mobile menu items
   const kunststofKozijnenItems = [
     { label: 'Wat zijn kunststof kozijnen?', href: '/kunststof-kozijnen#wat-zijn' },
@@ -68,7 +72,7 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
             <AccordionContent>
               <div className="pl-4 py-2">
                 <ul className="space-y-3">
-                  {dynamicProductItems.map((item) => (
+                  {allOplossingenItems.map((item) => (
                     <li key={item.label}>
                       <Link 
                         to={item.href} 

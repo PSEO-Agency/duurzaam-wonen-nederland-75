@@ -72,10 +72,14 @@ export const NavMenuItems = () => {
     href: `/${product.slug}`
   }));
 
-  // Split products into two columns
-  const midPoint = Math.ceil(allProductItems.length / 2);
-  const leftColumnItems = allProductItems.slice(0, midPoint);
-  const rightColumnItems = allProductItems.slice(midPoint);
+  // Add Kunststof Kozijnen as the first item
+  const kunststofKozijnenItem = { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' };
+  const allItemsWithKozijnen = [kunststofKozijnenItem, ...allProductItems];
+
+  // Split products into two columns (including the kunststof kozijnen item)
+  const midPoint = Math.ceil(allItemsWithKozijnen.length / 2);
+  const leftColumnItems = allItemsWithKozijnen.slice(0, midPoint);
+  const rightColumnItems = allItemsWithKozijnen.slice(midPoint);
 
   return (
     <>
