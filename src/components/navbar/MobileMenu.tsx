@@ -1,107 +1,179 @@
 
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { mainNavItems } from './NavMenuItems';
-import { useProducts } from '@/hooks/useProducts';
+import { Button } from '@/components/ui/button';
+import { 
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import { ChevronDown, ArrowRight } from 'lucide-react';
 
 interface MobileMenuProps {
   isOpen: boolean;
-  onClose: () => void;
+  onItemClick: () => void;
 }
 
-export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
-  const { data: products = [] } = useProducts();
-  
+const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onItemClick }) => {
   if (!isOpen) return null;
 
-  const dynamicProductItems = products.map(product => ({
-    label: product.name,
-    href: `/${product.slug}`
-  }));
-
-  // Add Kunststof Kozijnen as the first item in Oplossingen
-  const kunststofKozijnenItem = { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' };
-  const allOplossingenItems = [kunststofKozijnenItem, ...dynamicProductItems];
-
-  // Kunststof Kozijnen mobile menu items
-  const kunststofKozijnenItems = [
-    { label: 'Wat zijn kunststof kozijnen?', href: '/kunststof-kozijnen#wat-zijn' },
-    { label: 'Voordelen kunststof kozijnen', href: '/kunststof-kozijnen#voordelen' },
-    { label: 'Schüco Kozijnen', href: '/kunststof-kozijnen/schuco' },
-    { label: 'Kozijnen Montage', href: '/kunststof-kozijnen/montage' },
-    { label: 'Kozijnen Prijzen', href: '/kunststof-kozijnen/prijzen' },
-    { label: 'Type Kozijn', href: '/kunststof-kozijnen/types' },
-    { label: 'Kleur Kozijn', href: '/kunststof-kozijnen/kleuren' },
-    { label: 'Kozijn Afmeting', href: '/kunststof-kozijnen/afmetingen' },
-    { label: 'Kozijn Profielen', href: '/kunststof-kozijnen/profielen' },
-  ];
-
   return (
-    <div className="md:hidden bg-white shadow-lg overflow-y-auto max-h-[80vh]">
-      <div className="container mx-auto px-4 py-3">
-        <Accordion type="single" collapsible className="w-full mb-4">
-          <AccordionItem value="kunststof-kozijnen" className="border-b">
-            <AccordionTrigger className="py-3 text-base font-medium">
-              Kunststof Kozijnen
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="pl-4 py-2">
-                <ul className="space-y-3">
-                  {kunststofKozijnenItems.map((item) => (
-                    <li key={item.label}>
-                      <Link 
-                        to={item.href} 
-                        className="flex items-center text-gray-700 hover:text-brand-green"
-                        onClick={onClose}
-                      >
-                        <ChevronRight size={16} className="mr-2" />
-                        <span>{item.label}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+    <div className="lg:hidden border-t border-gray-200 bg-white">
+      <div className="container mx-auto px-4 py-6 space-y-4">
+        <Link
+          to="/oplossingen"
+          className="block py-3 text-gray-700 hover:text-brand-green transition-colors font-medium border-b border-gray-100"
+          onClick={onItemClick}
+        >
+          Oplossingen
+        </Link>
 
-          <AccordionItem value="oplossingen" className="border-b">
-            <AccordionTrigger className="py-3 text-base font-medium">
-              Oplossingen
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="pl-4 py-2">
-                <ul className="space-y-3">
-                  {allOplossingenItems.map((item) => (
-                    <li key={item.label}>
-                      <Link 
-                        to={item.href} 
-                        className="flex items-center text-gray-700 hover:text-brand-green"
-                        onClick={onClose}
-                      >
-                        <ChevronRight size={16} className="mr-2" />
-                        <span>{item.label}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-          
-          {mainNavItems.map((item) => (
-            <div key={item.label} className="py-3 border-b">
-              <Link 
-                to={item.href} 
-                className="block font-medium text-base"
-                onClick={onClose}
-              >
-                {item.label}
-              </Link>
-            </div>
-          ))}
-        </Accordion>
+        <Collapsible>
+          <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-gray-700 hover:text-brand-green transition-colors font-medium border-b border-gray-100">
+            Kozijnen
+            <ChevronDown className="h-4 w-4" />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="pl-4 space-y-2 mt-2">
+            <Link
+              to="/kunststof-kozijnen"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Kunststof Kozijnen
+            </Link>
+            <Link
+              to="/aluminium-kozijnen"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Aluminium Kozijnen
+            </Link>
+            <Link
+              to="/kozijn-types"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Kozijn Types
+            </Link>
+            <Link
+              to="/kozijn-merken"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Kozijn Merken
+            </Link>
+          </CollapsibleContent>
+        </Collapsible>
+
+        <Collapsible>
+          <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-gray-700 hover:text-brand-green transition-colors font-medium border-b border-gray-100">
+            Diensten
+            <ChevronDown className="h-4 w-4" />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="pl-4 space-y-2 mt-2">
+            <Link
+              to="/kozijnen-inmeten"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Kozijnen Inmeten
+            </Link>
+            <Link
+              to="/kozijn-montage"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Kozijn Montage
+            </Link>
+            <Link
+              to="/werkwijze"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Werkwijze
+            </Link>
+            <Link
+              to="/showroom"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Showroom
+            </Link>
+          </CollapsibleContent>
+        </Collapsible>
+
+        <Link
+          to="/projecten"
+          className="block py-3 text-gray-700 hover:text-brand-green transition-colors font-medium border-b border-gray-100"
+          onClick={onItemClick}
+        >
+          Projecten
+        </Link>
+
+        <Link
+          to="/werkgebied"
+          className="block py-3 text-gray-700 hover:text-brand-green transition-colors font-medium border-b border-gray-100"
+          onClick={onItemClick}
+        >
+          Werkgebied
+        </Link>
+
+        <Collapsible>
+          <CollapsibleTrigger className="flex w-full items-center justify-between py-3 text-gray-700 hover:text-brand-green transition-colors font-medium border-b border-gray-100">
+            Over Ons
+            <ChevronDown className="h-4 w-4" />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="pl-4 space-y-2 mt-2">
+            <Link
+              to="/over-ons"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Over Ons
+            </Link>
+            <Link
+              to="/over-ons/team"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Ons Team
+            </Link>
+            <Link
+              to="/over-ons/duurzaamheid"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Duurzaamheid
+            </Link>
+            <Link
+              to="/blog"
+              className="block py-2 text-gray-600 hover:text-brand-green transition-colors"
+              onClick={onItemClick}
+            >
+              Blog
+            </Link>
+          </CollapsibleContent>
+        </Collapsible>
+
+        <Link
+          to="/contact"
+          className="block py-3 text-gray-700 hover:text-brand-green transition-colors font-medium border-b border-gray-100"
+          onClick={onItemClick}
+        >
+          Contact
+        </Link>
+
+        <div className="pt-4">
+          <Button asChild className="w-full bg-brand-green hover:bg-brand-green-dark">
+            <Link to="/offerte" onClick={onItemClick}>
+              Offerte Aanvragen
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );
 };
+
+export default MobileMenu;

@@ -1,169 +1,224 @@
 
 import React from 'react';
-import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
-import { useProducts } from '@/hooks/useProducts';
+import { 
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu';
+import { ChevronDown } from 'lucide-react';
 
-interface MenuSection {
-  label: string;
-  href: string;
+interface NavMenuItemsProps {
+  onItemClick?: () => void;
 }
 
-const menuItemClass = "text-gray-700 hover:text-brand-green transition-colors duration-200 text-sm font-medium px-2";
-const dropdownItemClass = "flex items-center text-gray-700 hover:text-brand-green transition-colors duration-200 py-2 text-sm";
-
-export const mainNavItems: MenuSection[] = [
-  { label: 'Projecten', href: '/projecten' },
-  { label: 'Rentevrije Financiering*', href: '/rentevrije-financiering' },
-  { label: 'Werkwijze', href: '/werkwijze' },
-  { label: 'Vacatures', href: '/vacatures' },
-];
-
-export const overOnsItems: MenuSection[] = [
-  { label: 'Ons team', href: '/over-ons/team' },
-  { label: 'Onze missie', href: '/over-ons/missie' },
-  { label: 'Duurzaamheid', href: '/over-ons/duurzaamheid' },
-  { label: 'Vacatures', href: '/over-ons/vacatures' },
-];
-
-// Kunststof Kozijnen menu items organized in 3 columns
-const kunststofKozijnenItems = {
-  column1: [
-    { label: 'Wat zijn kunststof kozijnen?', href: '/kunststof-kozijnen#wat-zijn' },
-    { label: 'Voordelen kunststof kozijnen', href: '/kunststof-kozijnen#voordelen' },
-  ],
-  column2: [
-    { label: 'Schüco Kozijnen', href: '/kunststof-kozijnen/schuco' },
-    { label: 'Kozijnen Montage', href: '/kunststof-kozijnen/montage' },
-    { label: 'Kozijnen Prijzen', href: '/kunststof-kozijnen/prijzen' },
-  ],
-  column3: [
-    { label: 'Type Kozijn', href: '/kunststof-kozijnen/types' },
-    { label: 'Kleur Kozijn', href: '/kunststof-kozijnen/kleuren' },
-    { label: 'Kozijn Afmeting', href: '/kunststof-kozijnen/afmetingen' },
-    { label: 'Kozijn Profielen', href: '/kunststof-kozijnen/profielen' },
-  ]
-};
-
-export const NavMenuItems = () => {
-  const { data: products = [] } = useProducts();
-
-  const renderMenuLink = (item: MenuSection) => {
-    if (item.href.startsWith('#')) {
-      return (
-        <a href={item.href} className={dropdownItemClass}>
-          <ChevronRight size={16} className="mr-2 flex-shrink-0" />
-          <span>{item.label}</span>
-        </a>
-      );
-    }
-    return (
-      <Link to={item.href} className={dropdownItemClass}>
-        <ChevronRight size={16} className="mr-2 flex-shrink-0" />
-        <span>{item.label}</span>
-      </Link>
-    );
-  };
-
-  // Transform all products to menu items
-  const allProductItems = products.map(product => ({
-    label: product.name,
-    href: `/${product.slug}`
-  }));
-
-  // Add Kunststof Kozijnen as the first item
-  const kunststofKozijnenItem = { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' };
-  const allItemsWithKozijnen = [kunststofKozijnenItem, ...allProductItems];
-
-  // Split products into two columns (including the kunststof kozijnen item)
-  const midPoint = Math.ceil(allItemsWithKozijnen.length / 2);
-  const leftColumnItems = allItemsWithKozijnen.slice(0, midPoint);
-  const rightColumnItems = allItemsWithKozijnen.slice(midPoint);
-
+const NavMenuItems: React.FC<NavMenuItemsProps> = ({ onItemClick }) => {
   return (
-    <>
-      <NavigationMenuItem>
-        <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
-          Kunststof Kozijnen
-        </NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <div className="bg-white p-4 min-w-[600px]">
-            <div className="grid grid-cols-3 gap-6">
-              <div className="flex-1">
-                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Algemeen</h4>
-                <ul className="space-y-1">
-                  {kunststofKozijnenItems.column1.map((item) => (
-                    <li key={item.label}>
-                      {renderMenuLink(item)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex-1">
-                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Services</h4>
-                <ul className="space-y-1">
-                  {kunststofKozijnenItems.column2.map((item) => (
-                    <li key={item.label}>
-                      {renderMenuLink(item)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex-1">
-                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Opties</h4>
-                <ul className="space-y-1">
-                  {kunststofKozijnenItems.column3.map((item) => (
-                    <li key={item.label}>
-                      {renderMenuLink(item)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-
-      <NavigationMenuItem>
-        <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
-          Oplossingen
-        </NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <div className="bg-white p-4 min-w-[500px]">
-            <div className="grid grid-cols-2 gap-8">
-              <div className="flex-1">
-                <ul className="space-y-1">
-                  {leftColumnItems.map((item) => (
-                    <li key={item.label}>
-                      {renderMenuLink(item)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex-1">
-                <ul className="space-y-1">
-                  {rightColumnItems.map((item) => (
-                    <li key={item.label}>
-                      {renderMenuLink(item)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-
-      {mainNavItems.map((item) => (
-        <NavigationMenuItem key={item.label}>
-          <NavigationMenuLink asChild>
-            <Link to={item.href} className={`${menuItemClass}`}>
-              {item.label}
-            </Link>
-          </NavigationMenuLink>
+    <NavigationMenu>
+      <NavigationMenuList className="space-x-6">
+        <NavigationMenuItem>
+          <Link 
+            to="/oplossingen" 
+            className="text-gray-700 hover:text-brand-green transition-colors font-medium"
+            onClick={onItemClick}
+          >
+            Oplossingen
+          </Link>
         </NavigationMenuItem>
-      ))}
-    </>
+
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="text-gray-700 hover:text-brand-green transition-colors font-medium bg-transparent hover:bg-transparent data-[state=open]:bg-transparent">
+            Kozijnen
+            <ChevronDown className="ml-1 h-4 w-4" />
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              <div className="row-span-3">
+                <Link
+                  to="/kunststof-kozijnen"
+                  className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                  onClick={onItemClick}
+                >
+                  <div className="mb-2 mt-4 text-lg font-medium">
+                    Kunststof Kozijnen
+                  </div>
+                  <p className="text-sm leading-tight text-muted-foreground">
+                    Energiezuinige en onderhoudsarme kunststof kozijnen voor uw woning.
+                  </p>
+                </Link>
+              </div>
+              <div className="grid gap-1">
+                <Link
+                  to="/aluminium-kozijnen"
+                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                  onClick={onItemClick}
+                >
+                  <div className="text-sm font-medium leading-none">Aluminium Kozijnen</div>
+                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                    Stijlvolle en duurzame aluminium kozijnen.
+                  </p>
+                </Link>
+                <Link
+                  to="/kozijn-types"
+                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                  onClick={onItemClick}
+                >
+                  <div className="text-sm font-medium leading-none">Kozijn Types</div>
+                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                    Overzicht van alle beschikbare kozijn types.
+                  </p>
+                </Link>
+                <Link
+                  to="/kozijn-merken"
+                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                  onClick={onItemClick}
+                >
+                  <div className="text-sm font-medium leading-none">Kozijn Merken</div>
+                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                    Bekende merken en hun specialiteiten.
+                  </p>
+                </Link>
+              </div>
+            </div>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="text-gray-700 hover:text-brand-green transition-colors font-medium bg-transparent hover:bg-transparent data-[state=open]:bg-transparent">
+            Diensten
+            <ChevronDown className="ml-1 h-4 w-4" />
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-2">
+              <Link
+                to="/kozijnen-inmeten"
+                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                onClick={onItemClick}
+              >
+                <div className="text-sm font-medium leading-none">Kozijnen Inmeten</div>
+                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  Professioneel inmeten van uw kozijnen.
+                </p>
+              </Link>
+              <Link
+                to="/kozijn-montage"
+                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                onClick={onItemClick}
+              >
+                <div className="text-sm font-medium leading-none">Kozijn Montage</div>
+                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  Vakkundige montage door ervaren specialisten.
+                </p>
+              </Link>
+              <Link
+                to="/werkwijze"
+                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                onClick={onItemClick}
+              >
+                <div className="text-sm font-medium leading-none">Werkwijze</div>
+                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  Hoe wij te werk gaan bij uw project.
+                </p>
+              </Link>
+              <Link
+                to="/showroom"
+                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                onClick={onItemClick}
+              >
+                <div className="text-sm font-medium leading-none">Showroom</div>
+                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  Bezoek onze showroom voor inspiratie.
+                </p>
+              </Link>
+            </div>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <Link 
+            to="/projecten" 
+            className="text-gray-700 hover:text-brand-green transition-colors font-medium"
+            onClick={onItemClick}
+          >
+            Projecten
+          </Link>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <Link 
+            to="/werkgebied" 
+            className="text-gray-700 hover:text-brand-green transition-colors font-medium"
+            onClick={onItemClick}
+          >
+            Werkgebied
+          </Link>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="text-gray-700 hover:text-brand-green transition-colors font-medium bg-transparent hover:bg-transparent data-[state=open]:bg-transparent">
+            Over Ons
+            <ChevronDown className="ml-1 h-4 w-4" />
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-2">
+              <Link
+                to="/over-ons"
+                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                onClick={onItemClick}
+              >
+                <div className="text-sm font-medium leading-none">Over Ons</div>
+                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  Leer meer over ons bedrijf en onze missie.
+                </p>
+              </Link>
+              <Link
+                to="/over-ons/team"
+                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                onClick={onItemClick}
+              >
+                <div className="text-sm font-medium leading-none">Ons Team</div>
+                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  Ontmoet de mensen achter ons bedrijf.
+                </p>
+              </Link>
+              <Link
+                to="/over-ons/duurzaamheid"
+                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                onClick={onItemClick}
+              >
+                <div className="text-sm font-medium leading-none">Duurzaamheid</div>
+                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  Onze inzet voor een duurzame toekomst.
+                </p>
+              </Link>
+              <Link
+                to="/blog"
+                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                onClick={onItemClick}
+              >
+                <div className="text-sm font-medium leading-none">Blog</div>
+                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  Tips, trends en nieuws over kozijnen.
+                </p>
+              </Link>
+            </div>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <Link 
+            to="/contact" 
+            className="text-gray-700 hover:text-brand-green transition-colors font-medium"
+            onClick={onItemClick}
+          >
+            Contact
+          </Link>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 };
+
+export default NavMenuItems;
