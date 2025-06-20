@@ -34,7 +34,7 @@ export interface ServicePageTemplateProps {
     description: string;
     primaryButtonText: string;
     primaryButtonLink: string;
-    secondaryButtonText: string;
+    secondaryButtonText?: string;
     secondaryButtonLink?: string;
     guarantees: string[];
     benefits: string[];
@@ -170,21 +170,17 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
 }) => {
   const { data: allProducts = [], isLoading: productsLoading } = useAllProducts();
 
-  // Create service items from all products if services.serviceItems is empty or only has placeholder data
-  const shouldUseAllProducts = !services?.serviceItems || services.serviceItems.length === 0 || 
-    services.serviceItems.some(item => item.title.includes('placeholder') || item.description.includes('placeholder'));
-
-  const displayServiceItems = shouldUseAllProducts ? 
-    allProducts.map(product => ({
-      image: product.hero_background_image || '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png',
-      title: product.name,
-      description: product.description || `Ontdek onze hoogwaardige ${product.name.toLowerCase()} oplossingen voor uw woning.`,
-      features: Array.isArray(product.features) ? product.features : 
-        typeof product.features === 'string' ? JSON.parse(product.features || '[]') : 
-        ['Hoogwaardige kwaliteit', 'Professionele montage', 'Uitstekende service'],
-      linkText: `Meer over ${product.name}`,
-      linkUrl: `/${product.slug}`
-    })) : safeArray(services.serviceItems);
+  // Always use all products for the services section
+  const displayServiceItems = allProducts.map(product => ({
+    image: product.hero_background_image || '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png',
+    title: product.name,
+    description: product.description || `Ontdek onze hoogwaardige ${product.name.toLowerCase()} oplossingen voor uw woning.`,
+    features: Array.isArray(product.features) ? product.features : 
+      typeof product.features === 'string' ? JSON.parse(product.features || '[]') : 
+      ['Hoogwaardige kwaliteit', 'Professionele montage', 'Uitstekende service'],
+    linkText: `Meer over ${product.name}`,
+    linkUrl: `/${product.slug}`
+  }));
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -229,13 +225,6 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
-                    {hero?.secondaryButtonLink && (
-                      <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-white/20">
-                        <Link to={hero.secondaryButtonLink}>
-                          {hero?.secondaryButtonText || 'Learn More'}
-                        </Link>
-                      </Button>
-                    )}
                   </div>
                   
                   <div className="flex items-center gap-6 text-white mb-8">
@@ -446,12 +435,6 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                             </li>
                           ))}
                         </ul>
-                        <div className="mt-4">
-                          <Link to={category.linkUrl} className="text-brand-green flex items-center hover:underline">
-                            <span>{category.linkText}</span>
-                            <ArrowRight className="ml-1 h-4 w-4" />
-                          </Link>
-                        </div>
                       </CardContent>
                     </Card>
                   </AnimatedSection>
