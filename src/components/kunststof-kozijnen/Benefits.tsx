@@ -85,10 +85,10 @@ const Benefits: React.FC = () => {
               Wij bieden 15 jaar productgarantie op alle kozijnen en 10 jaar servicegarantie op de montage voor uw volledige gemoedsrust.
             </p>
           </div>
-          <Button asChild size={isMobile ? "default" : "lg"} className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto">
-            <Link to="/offerte">
-              Vraag vrijblijvend een offerte aan
-              <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+          <Button asChild size={isMobile ? "default" : "lg"} className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto px-2 sm:px-6 py-3 min-h-[48px] sm:min-h-[44px]">
+            <Link to="/offerte" className="flex items-center justify-center gap-1 sm:gap-2">
+              <span className="text-center leading-snug text-xs sm:text-sm md:text-base hyphens-auto break-words">Vraag vrijblijvend een offerte aan</span>
+              <ArrowRight className="h-3 w-3 sm:h-4 sm:w-5 flex-shrink-0" />
             </Link>
           </Button>
         </AnimatedSection>
