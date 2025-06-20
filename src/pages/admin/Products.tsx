@@ -1,20 +1,31 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, Plus, Search, Check, X, ExternalLink, Copy } from 'lucide-react';
+import { ArrowRight, Plus, Search, Check, X, ExternalLink, Copy, Trash2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useProducts } from '@/hooks/useProducts';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 
 const Products: React.FC = () => {
   const { data: products, isLoading, refetch } = useProducts();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState('');
+  const [deletingProductId, setDeletingProductId] = useState<string | null>(null);
 
   // Handle search functionality
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +76,36 @@ const Products: React.FC = () => {
     }
   };
 
-  // Function to open the product page in a new tab
+  // Handle delete product
+  const handleDeleteProduct = async (productId: string) => {
+    setDeletingProductId(productId);
+    try {
+      const { error } = await supabase
+        .from('products')
+        .delete()
+        .eq('id', productId);
+
+      if (error) throw error;
+
+      toast({
+        title: "Product verwijderd",
+        description: "Het product is succesvol verwijderd.",
+      });
+
+      refetch();
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      toast({
+        title: "Fout",
+        description: "Er is een fout opgetreden bij het verwijderen van het product.",
+        variant: "destructive"
+      });
+    } finally {
+      setDeletingProductId(null);
+    }
+  };
+
+  // Handle preview product
   const handlePreviewProduct = (slug: string) => {
     window.open(`/${slug}`, '_blank');
   };
@@ -178,6 +218,36 @@ const Products: React.FC = () => {
                         <Copy size={16} />
                         <span className="sr-only">Duplicate</span>
                       </Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="text-gray-500 hover:text-red-600"
+                            disabled={deletingProductId === product.id}
+                          >
+                            <Trash2 size={16} />
+                            <span className="sr-only">Delete</span>
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Bent u zeker?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Deze actie kan niet ongedaan worden gemaakt. Dit zal het product "{product.name}" permanent verwijderen.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Annuleren</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => handleDeleteProduct(product.id)}
+                              className="bg-red-600 hover:bg-red-700"
+                            >
+                              Verwijderen
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                       <Link 
                         to={`/admin/products/edit/${product.id}`}
                         className="text-brand-green hover:text-brand-green-dark inline-flex items-center"
