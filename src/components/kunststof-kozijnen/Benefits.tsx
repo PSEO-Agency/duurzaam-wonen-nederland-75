@@ -15,12 +15,12 @@ interface BenefitProps {
 
 const Benefit: React.FC<BenefitProps> = ({ icon, title, description, delay = 0 }) => (
   <AnimatedSection animation="fade-in" delay={delay}>
-    <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-      <div className="bg-brand-green/10 p-4 rounded-full mb-4">
+    <div className="flex flex-col items-center text-center p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow h-full">
+      <div className="bg-brand-green/10 p-3 sm:p-4 rounded-full mb-3 sm:mb-4">
         {icon}
       </div>
-      <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className="text-gray-600 text-sm md:text-base">{description}</p>
+      <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{title}</h3>
+      <p className="text-gray-600 text-sm sm:text-base leading-relaxed">{description}</p>
     </div>
   </AnimatedSection>
 );
@@ -30,43 +30,43 @@ const Benefits: React.FC = () => {
   
   const benefits = [
     {
-      icon: <ShieldCheck className="h-8 w-8 text-brand-green" />,
+      icon: <ShieldCheck className="h-6 w-6 sm:h-8 sm:w-8 text-brand-green" />,
       title: "Onderhoudsarm",
       description: "Geen schilderwerk nodig, alleen schoonmaken met water en zeep voor langdurig gebruik."
     },
     {
-      icon: <Leaf className="h-8 w-8 text-brand-green" />,
+      icon: <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-brand-green" />,
       title: "Energiezuinig",
       description: "Uitstekende isolatie zorgt voor lagere energiekosten en comfortabel binnenklimaat."
     },
     {
-      icon: <Clock className="h-8 w-8 text-brand-green" />,
+      icon: <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-brand-green" />,
       title: "Lange levensduur",
       description: "Gaat 30-50 jaar mee zonder functieverlies, rot niet en verkleurt nauwelijks."
     },
     {
-      icon: <PiggyBank className="h-8 w-8 text-brand-green" />,
+      icon: <PiggyBank className="h-6 w-6 sm:h-8 sm:w-8 text-brand-green" />,
       title: "Betaalbaar",
       description: "Gunstiger in aanschaf en door lage onderhoudskosten zeer kosteneffectief."
     },
     {
-      icon: <Recycle className="h-8 w-8 text-brand-green" />,
+      icon: <Recycle className="h-6 w-6 sm:h-8 sm:w-8 text-brand-green" />,
       title: "Duurzaam",
       description: "Volledig recyclebaar met uitstekende isolatie voor lagere CO2-uitstoot."
     }
   ];
 
   return (
-    <section id="voordelen" className="py-16 bg-gray-50">
+    <section id="voordelen" className="py-12 sm:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="fade-in">
-          <h2 className="text-3xl font-bold text-center mb-4">Voor delen van Kunststof Kozijnen</h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-12 px-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-4">Voordelen van Kunststof Kozijnen</h2>
+          <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto text-center mb-8 sm:mb-12 px-2 leading-relaxed">
             Ontdek waarom steeds meer huiseigenaren kiezen voor kunststof kozijnen als duurzame en praktische oplossing.
           </p>
         </AnimatedSection>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {benefits.map((benefit, index) => (
             <Benefit 
               key={index} 
@@ -79,16 +79,16 @@ const Benefits: React.FC = () => {
         </div>
         
         <AnimatedSection animation="fade-in" delay={600} className="text-center">
-          <div className="bg-white rounded-lg p-6 shadow-sm max-w-2xl mx-auto mb-8">
-            <h3 className="text-xl font-semibold mb-3">Garantie op onze kunststof kozijnen</h3>
-            <p className="text-gray-600 mb-4">
+          <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm max-w-2xl mx-auto mb-6 sm:mb-8">
+            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Garantie op onze kunststof kozijnen</h3>
+            <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
               Wij bieden 15 jaar productgarantie op alle kozijnen en 10 jaar servicegarantie op de montage voor uw volledige gemoedsrust.
             </p>
           </div>
-          <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark">
+          <Button asChild size={isMobile ? "default" : "lg"} className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto">
             <Link to="/offerte">
               Vraag vrijblijvend een offerte aan
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
             </Link>
           </Button>
         </AnimatedSection>

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { ServicePageTemplateProps } from '@/components/templates/ServicePageTemplate';
-import ServicePageTemplate from '@/components/templates/ServicePageTemplate';
+import MobileOptimizedServicePage from '@/components/templates/MobileOptimizedServicePage';
 
 interface ProductData {
   id: string;
@@ -158,7 +158,7 @@ export const createServicePageFromProduct = (product: ProductData) => {
   const config = convertProductToServicePageConfig(product);
   
   const ServicePage: React.FC = () => {
-    return <ServicePageTemplate {...config} />;
+    return <MobileOptimizedServicePage {...config} />;
   };
   
   return ServicePage;

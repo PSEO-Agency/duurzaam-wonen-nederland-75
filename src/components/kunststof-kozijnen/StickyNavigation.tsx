@@ -94,74 +94,77 @@ const StickyNavigation: React.FC = () => {
   }
 
   const renderBreadcrumbs = () => (
-    <Breadcrumb>
-      <BreadcrumbList className={`text-sm ${isMobile ? 'flex-nowrap whitespace-nowrap' : ''}`}>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link to="/" className="flex items-center hover:text-brand-green transition-colors">
-              <Home className="h-3.5 w-3.5" />
-            </Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator>
-          <ChevronRight className="h-3.5 w-3.5" />
-        </BreadcrumbSeparator>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link to="/oplossingen" className="hover:text-brand-green transition-colors">
-              Oplossingen
-            </Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator>
-          <ChevronRight className="h-3.5 w-3.5" />
-        </BreadcrumbSeparator>
-        <BreadcrumbItem>
-          {isSubPage ? (
+    <div className={`${isMobile ? 'overflow-x-auto' : ''}`}>
+      <Breadcrumb>
+        <BreadcrumbList className={`text-xs sm:text-sm ${isMobile ? 'flex-nowrap whitespace-nowrap min-w-max' : ''}`}>
+          <BreadcrumbItem className="flex-shrink-0">
             <BreadcrumbLink asChild>
-              <Link to="/kunststof-kozijnen" className="hover:text-brand-green transition-colors">
-                Kunststof Kozijnen
+              <Link to="/" className="flex items-center hover:text-brand-green transition-colors">
+                <Home className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                {!isMobile && <span className="ml-1">Home</span>}
               </Link>
             </BreadcrumbLink>
-          ) : (
-            <BreadcrumbPage>Kunststof Kozijnen</BreadcrumbPage>
-          )}
-        </BreadcrumbItem>
-        {isSubPage && !isNestedSubPage && (
-          <>
-            <BreadcrumbSeparator>
-              <ChevronRight className="h-3.5 w-3.5" />
-            </BreadcrumbSeparator>
-            <BreadcrumbItem>
-              <BreadcrumbPage>{currentPage}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </>
-        )}
-        {isNestedSubPage && (
-          <>
-            <BreadcrumbSeparator>
-              <ChevronRight className="h-3.5 w-3.5" />
-            </BreadcrumbSeparator>
-            <BreadcrumbItem>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator className="flex-shrink-0">
+            <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+          </BreadcrumbSeparator>
+          <BreadcrumbItem className="flex-shrink-0">
+            <BreadcrumbLink asChild>
+              <Link to="/oplossingen" className="hover:text-brand-green transition-colors">
+                {isMobile ? 'Opl.' : 'Oplossingen'}
+              </Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator className="flex-shrink-0">
+            <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+          </BreadcrumbSeparator>
+          <BreadcrumbItem className="flex-shrink-0">
+            {isSubPage ? (
               <BreadcrumbLink asChild>
-                <Link 
-                  to={`/kunststof-kozijnen/${parentPage.toLowerCase()}`} 
-                  className="hover:text-brand-green transition-colors"
-                >
-                  {parentPage}
+                <Link to="/kunststof-kozijnen" className="hover:text-brand-green transition-colors">
+                  {isMobile ? 'Kozijnen' : 'Kunststof Kozijnen'}
                 </Link>
               </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator>
-              <ChevronRight className="h-3.5 w-3.5" />
-            </BreadcrumbSeparator>
-            <BreadcrumbItem>
-              <BreadcrumbPage>{currentPage}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </>
-        )}
-      </BreadcrumbList>
-    </Breadcrumb>
+            ) : (
+              <BreadcrumbPage>{isMobile ? 'Kozijnen' : 'Kunststof Kozijnen'}</BreadcrumbPage>
+            )}
+          </BreadcrumbItem>
+          {isSubPage && !isNestedSubPage && (
+            <>
+              <BreadcrumbSeparator className="flex-shrink-0">
+                <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem className="flex-shrink-0">
+                <BreadcrumbPage className="truncate max-w-[100px] sm:max-w-none">{currentPage}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </>
+          )}
+          {isNestedSubPage && (
+            <>
+              <BreadcrumbSeparator className="flex-shrink-0">
+                <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem className="flex-shrink-0">
+                <BreadcrumbLink asChild>
+                  <Link 
+                    to={`/kunststof-kozijnen/${parentPage.toLowerCase()}`} 
+                    className="hover:text-brand-green transition-colors"
+                  >
+                    {parentPage}
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className="flex-shrink-0">
+                <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem className="flex-shrink-0">
+                <BreadcrumbPage className="truncate max-w-[100px] sm:max-w-none">{currentPage}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </>
+          )}
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
   );
 
   return (
@@ -169,16 +172,16 @@ const StickyNavigation: React.FC = () => {
       <nav className="bg-white border-b shadow-sm">
         <div ref={ref} className="absolute invisible" />
         <div className="container mx-auto px-4">
-          <div className="py-2 overflow-x-auto">
+          <div className="py-2">
             {renderBreadcrumbs()}
           </div>
         </div>
       </nav>
       
       {!inView && (
-        <nav className="fixed top-[109px] left-0 right-0 z-20 bg-white border-b shadow-md">
+        <nav className="fixed top-[85px] sm:top-[109px] left-0 right-0 z-20 bg-white border-b shadow-md">
           <div className="container mx-auto px-4">
-            <div className="py-2 overflow-x-auto">
+            <div className="py-2">
               {renderBreadcrumbs()}
             </div>
           </div>
