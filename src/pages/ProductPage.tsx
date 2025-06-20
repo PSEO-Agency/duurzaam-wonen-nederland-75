@@ -1,14 +1,17 @@
 
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProducts';
 import { createServicePageFromProduct } from '@/utils/createServicePageFromProduct';
-import { kunststofSchuifpuienConfig } from '@/data/servicePageConfigs';
-import { createServicePage } from '@/utils/createServicePage';
 
 const ProductPage: React.FC = () => {
   const { productSlug } = useParams<{ productSlug: string }>();
-  const { data: product, isLoading, error } = useProduct(productSlug || '');
+  const location = useLocation();
+  
+  // Extract slug from URL path if not available in params
+  const slug = productSlug || location.pathname.replace('/', '');
+  
+  const { data: product, isLoading, error } = useProduct(slug);
 
   // Show loading state
   if (isLoading) {
@@ -40,7 +43,7 @@ const ProductPage: React.FC = () => {
 
   // If no product found in database, show not found
   if (!product) {
-    console.warn('No product found in database for slug:', productSlug);
+    console.warn('No product found in database for slug:', slug);
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -53,6 +56,8 @@ const ProductPage: React.FC = () => {
       </div>
     );
   }
+
+  console.log('Rendering product page for:', product.name, 'with slug:', slug);
 
   // Create and render the page from database product data
   const DatabaseServicePage = createServicePageFromProduct(product);
