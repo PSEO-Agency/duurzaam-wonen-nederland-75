@@ -80,6 +80,11 @@ export const NavMenuItems = () => {
   return (
     <>
       <NavigationMenuItem>
+        <NavigationMenuLink asChild>
+          <Link to="/kunststof-kozijnen" className={`${menuItemClass}`}>
+            Kunststof Kozijnen
+          </Link>
+        </NavigationMenuLink>
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Kunststof Kozijnen
         </NavigationMenuTrigger>
