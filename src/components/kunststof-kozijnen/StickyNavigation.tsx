@@ -108,8 +108,8 @@ const StickyNavigation: React.FC = () => {
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link to="/producten" className="hover:text-brand-green transition-colors">
-              Producten
+            <Link to="/oplossingen" className="hover:text-brand-green transition-colors">
+              Oplossingen
             </Link>
           </BreadcrumbLink>
         </BreadcrumbItem>

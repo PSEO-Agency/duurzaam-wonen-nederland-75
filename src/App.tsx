@@ -9,6 +9,7 @@ import AdminLayout from './components/admin/AdminLayout';
 
 // Lazy load pages
 const Index = lazy(() => import('./pages/Index'));
+const Oplossingen = lazy(() => import('./pages/Oplossingen'));
 const KunststofKozijnen = lazy(() => import('./pages/KunststofKozijnen'));
 const AluminiumKozijnen = lazy(() => import('./pages/AluminiumKozijnen'));
 const KunststofSchuifpuien = lazy(() => import('./pages/KunststofSchuifpuien'));
@@ -88,6 +89,7 @@ function App() {
                 
                 {/* Main pages */}
                 <Route path="/" element={<Index />} />
+                <Route path="/oplossingen" element={<Oplossingen />} />
                 <Route path="/kunststof-kozijnen" element={<KunststofKozijnen />} />
                 <Route path="/aluminium-kozijnen" element={<AluminiumKozijnen />} />
                 <Route path="/kunststof-schuifpuien" element={<KunststofSchuifpuien />} />

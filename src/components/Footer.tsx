@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Facebook, Instagram, MapPin, Phone, Mail, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -40,7 +41,7 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-semibold mb-6">Snelle links</h4>
             <ul className="space-y-3">
               <li>
-                <Link to="/kunststof-kozijnen" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                <Link to="/oplossingen" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
                   <ChevronRight className="h-4 w-4 mr-2" />
                   Oplossingen
                 </Link>
@@ -94,10 +95,10 @@ const Footer: React.FC = () => {
                 'Gevelbekleding', 
                 'Zonwering', 
                 'Voordeuren',
-                'Schuifpuien'
+                'Schu­if­puien'
               ].map((service) => (
                 <li key={service}>
-                  <Link to="/kunststof-kozijnen" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+                  <Link to="/oplossingen" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
                     <ChevronRight className="h-4 w-4 mr-2" />
                     {service}
                   </Link>
