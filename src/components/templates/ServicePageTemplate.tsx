@@ -156,6 +156,18 @@ const safeArray = (arr: any): any[] => {
   return Array.isArray(arr) ? arr : [];
 };
 
+// Helper function to safely render strings only
+const safeString = (value: any): string => {
+  if (typeof value === 'string') return value;
+  if (typeof value === 'number') return String(value);
+  return '';
+};
+
+// Helper function to safely access object properties
+const safeObject = (obj: any, fallback: any = {}): any => {
+  return (obj && typeof obj === 'object' && !Array.isArray(obj)) ? obj : fallback;
+};
+
 const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   seo,
   hero,
@@ -173,21 +185,21 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   // Always use all products for the services section
   const displayServiceItems = allProducts.map(product => ({
     image: product.hero_background_image || '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png',
-    title: product.name,
-    description: product.description || `Ontdek onze hoogwaardige ${product.name.toLowerCase()} oplossingen voor uw woning.`,
-    features: Array.isArray(product.features) ? product.features : 
-      typeof product.features === 'string' ? JSON.parse(product.features || '[]') : 
+    title: safeString(product.name),
+    description: safeString(product.description) || `Ontdek onze hoogwaardige ${safeString(product.name).toLowerCase()} oplossingen voor uw woning.`,
+    features: Array.isArray(product.features) ? product.features.map(f => safeString(f)) : 
+      typeof product.features === 'string' ? JSON.parse(product.features || '[]').map((f: any) => safeString(f)) : 
       ['Hoogwaardige kwaliteit', 'Professionele montage', 'Uitstekende service'],
-    linkText: `Meer over ${product.name}`,
-    linkUrl: `/${product.slug}`
+    linkText: `Meer over ${safeString(product.name)}`,
+    linkUrl: `/${product.slug || ''}`
   }));
 
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>{seo?.title || 'Service Page'}</title>
-        <meta name="description" content={seo?.description || ''} />
-        <link rel="canonical" href={seo?.canonicalUrl || ''} />
+        <title>{safeString(seo?.title) || 'Service Page'}</title>
+        <meta name="description" content={safeString(seo?.description) || ''} />
+        <link rel="canonical" href={safeString(seo?.canonicalUrl) || ''} />
       </Helmet>
       
       <Navbar />
@@ -197,7 +209,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         <section 
           className="relative min-h-screen pt-20 flex items-center"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${hero?.backgroundImage || ''}")`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${safeString(hero?.backgroundImage) || ''}")`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
@@ -209,19 +221,19 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
               <div className="lg:col-span-7">
                 <AnimatedSection animation="fade-in-right">
                   <span className="inline-block px-4 py-1 bg-brand-green/90 text-white rounded-full text-sm font-medium mb-4">
-                    {hero?.badge || 'Service'}
+                    {safeString(hero?.badge) || 'Service'}
                   </span>
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                    {hero?.title || 'Our Service'}
+                    {safeString(hero?.title) || 'Our Service'}
                   </h1>
                   <p className="text-lg md:text-xl text-white/90 mb-8 max-w-xl">
-                    {hero?.description || 'High-quality service for your home.'}
+                    {safeString(hero?.description) || 'High-quality service for your home.'}
                   </p>
                   
                   <div className="flex flex-col sm:flex-row gap-4 mb-8">
                     <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
-                      <Link to={hero?.primaryButtonLink || '/offerte'}>
-                        <span>{hero?.primaryButtonText || 'Get Quote'}</span>
+                      <Link to={safeString(hero?.primaryButtonLink) || '/offerte'}>
+                        <span>{safeString(hero?.primaryButtonText) || 'Get Quote'}</span>
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
@@ -233,7 +245,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                         <div className="bg-brand-green/20 p-1 rounded-full">
                           <Check className="h-4 w-4 text-brand-green" />
                         </div>
-                        <span>{guarantee}</span>
+                        <span>{safeString(guarantee)}</span>
                       </div>
                     ))}
                   </div>
@@ -252,7 +264,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                           <div className="bg-brand-green p-1 rounded-full mt-1 flex-shrink-0">
                             <Check className="h-3 w-3 text-white" />
                           </div>
-                          <span className="text-white/90">{benefit}</span>
+                          <span className="text-white/90">{safeString(benefit)}</span>
                         </li>
                       ))}
                     </ul>
@@ -260,11 +272,14 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                       <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
                         <h4 className="text-sm font-medium text-white mb-3">Keurmerken:</h4>
                         <div className="grid grid-cols-3 gap-4">
-                          {safeArray(hero?.certificationLogos).map((logo, index) => (
-                            <div key={index} className="bg-white rounded p-2 h-16 flex items-center justify-center" title={logo.title}>
-                              <img src={logo.src} alt={logo.alt} className="h-10 max-w-full object-contain" />
-                            </div>
-                          ))}
+                          {safeArray(hero?.certificationLogos).map((logo, index) => {
+                            const logoObj = safeObject(logo);
+                            return (
+                              <div key={index} className="bg-white rounded p-2 h-16 flex items-center justify-center" title={safeString(logoObj.title)}>
+                                <img src={safeString(logoObj.src)} alt={safeString(logoObj.alt)} className="h-10 max-w-full object-contain" />
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
@@ -281,10 +296,10 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
             <div className="container mx-auto px-4">
               <AnimatedSection animation="fade-in">
                 <div className="max-w-4xl mx-auto">
-                  <h2 className="text-3xl font-bold mb-6 text-center">{introduction.title}</h2>
+                  <h2 className="text-3xl font-bold mb-6 text-center">{safeString(introduction.title)}</h2>
                   <div className="space-y-4 text-gray-700">
                     {safeArray(introduction.content).map((paragraph, index) => (
-                      <p key={index} className="text-lg">{paragraph}</p>
+                      <p key={index} className="text-lg">{safeString(paragraph)}</p>
                     ))}
                   </div>
                   
@@ -292,20 +307,23 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                     <div className="mt-8 bg-white rounded-lg shadow-sm p-6 border border-gray-100">
                       <h3 className="text-xl font-semibold mb-4">Ga direct naar de volgende onderwerpen:</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                        {introduction.quickLinks.map((link, index) => (
-                          <a key={index} href={link.href} className="flex items-center py-2 px-3 hover:bg-gray-50 rounded-md transition-colors">
-                            <ArrowRight className="h-4 w-4 text-brand-green mr-2" />
-                            <span>{link.text}</span>
-                          </a>
-                        ))}
+                        {introduction.quickLinks.map((link, index) => {
+                          const linkObj = safeObject(link);
+                          return (
+                            <a key={index} href={safeString(linkObj.href)} className="flex items-center py-2 px-3 hover:bg-gray-50 rounded-md transition-colors">
+                              <ArrowRight className="h-4 w-4 text-brand-green mr-2" />
+                              <span>{safeString(linkObj.text)}</span>
+                            </a>
+                          );
+                        })}
                       </div>
                     </div>
                   )}
                   
                   <div className="mt-8 text-center">
                     <Button className="bg-brand-green hover:bg-brand-green-dark text-white px-6">
-                      <Link to={introduction.ctaLink}>
-                        <span>{introduction.ctaText}</span>
+                      <Link to={safeString(introduction.ctaLink)}>
+                        <span>{safeString(introduction.ctaText)}</span>
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
@@ -323,16 +341,16 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
               <div className="flex flex-col lg:flex-row gap-10 items-center">
                 <div className="lg:w-1/2">
                   <AnimatedSection animation="fade-in">
-                    <h2 className="text-3xl font-bold mb-6">{whatAre.title}</h2>
+                    <h2 className="text-3xl font-bold mb-6">{safeString(whatAre.title)}</h2>
                     {safeArray(whatAre.content).map((paragraph, index) => (
-                      <p key={index} className="text-lg text-gray-700 mb-6">{paragraph}</p>
+                      <p key={index} className="text-lg text-gray-700 mb-6">{safeString(paragraph)}</p>
                     ))}
                     
                     <ul className="space-y-3 mb-6">
                       {safeArray(whatAre.features).map((feature, index) => (
                         <li key={index} className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">{feature}</span>
+                          <span className="text-gray-700">{safeString(feature)}</span>
                         </li>
                       ))}
                     </ul>
@@ -345,8 +363,8 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                       <div className="relative rounded-lg overflow-hidden shadow-lg bg-gray-900 aspect-video">
                         <iframe 
                           className="absolute inset-0 w-full h-full"
-                          src={whatAre.videoUrl}
-                          title={whatAre.videoTitle || "Video"}
+                          src={safeString(whatAre.videoUrl)}
+                          title={safeString(whatAre.videoTitle) || "Video"}
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
@@ -354,7 +372,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                         
                         {whatAre.videoTitle && (
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                            <p className="text-white font-medium">{whatAre.videoTitle}</p>
+                            <p className="text-white font-medium">{safeString(whatAre.videoTitle)}</p>
                           </div>
                         )}
                       </div>
@@ -377,17 +395,17 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
               <div className="flex flex-col lg:flex-row gap-10 items-center">
                 <div className="lg:w-1/2">
                   <AnimatedSection animation="fade-in">
-                    <h2 className="text-3xl font-bold mb-6">{benefits.title}</h2>
-                    <p className="text-lg text-gray-700 mb-6">{benefits.description}</p>
+                    <h2 className="text-3xl font-bold mb-6">{safeString(benefits.title)}</h2>
+                    <p className="text-lg text-gray-700 mb-6">{safeString(benefits.description)}</p>
                     
                     {safeArray(benefits.mainContent).map((content, index) => (
-                      <p key={index} className="text-lg text-gray-700 mb-6">{content}</p>
+                      <p key={index} className="text-lg text-gray-700 mb-6">{safeString(content)}</p>
                     ))}
                     
                     <div className="mt-4">
                       <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
-                        <Link to={benefits.ctaLink}>
-                          <span>{benefits.ctaText}</span>
+                        <Link to={safeString(benefits.ctaLink)}>
+                          <span>{safeString(benefits.ctaText)}</span>
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                       </Button>
@@ -398,12 +416,15 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                 <div className="lg:w-1/2">
                   <AnimatedSection animation="fade-in" delay={200}>
                     <div className="grid grid-cols-2 gap-4">
-                      {safeArray(benefits.stats).map((stat, index) => (
-                        <div key={index} className="bg-gray-50 rounded-lg p-5 shadow-sm">
-                          <div className="text-3xl font-bold text-brand-green mb-2">{stat.value}</div>
-                          <p className="text-gray-700">{stat.label}</p>
-                        </div>
-                      ))}
+                      {safeArray(benefits.stats).map((stat, index) => {
+                        const statObj = safeObject(stat);
+                        return (
+                          <div key={index} className="bg-gray-50 rounded-lg p-5 shadow-sm">
+                            <div className="text-3xl font-bold text-brand-green mb-2">{safeString(statObj.value)}</div>
+                            <p className="text-gray-700">{safeString(statObj.label)}</p>
+                          </div>
+                        );
+                      })}
                     </div>
                   </AnimatedSection>
                 </div>
@@ -417,28 +438,31 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
           <section className="py-12 bg-gray-50">
             <div className="container mx-auto px-4">
               <AnimatedSection animation="fade-in">
-                <h2 className="text-3xl font-bold mb-6">{options.title}</h2>
-                <p className="text-lg text-gray-700 mb-8 max-w-3xl">{options.description}</p>
+                <h2 className="text-3xl font-bold mb-6">{safeString(options.title)}</h2>
+                <p className="text-lg text-gray-700 mb-8 max-w-3xl">{safeString(options.description)}</p>
               </AnimatedSection>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-                {safeArray(options.categories).map((category, index) => (
-                  <AnimatedSection key={index} animation="fade-in" delay={index * 100}>
-                    <Card className="h-full hover:shadow-md transition-shadow">
-                      <CardContent className="p-6">
-                        <h3 className="text-xl font-semibold mb-4">{category.title}</h3>
-                        <ul className="space-y-2">
-                          {safeArray(category.items).map((item, itemIndex) => (
-                            <li key={itemIndex} className="flex items-center">
-                              <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
-                ))}
+                {safeArray(options.categories).map((category, index) => {
+                  const categoryObj = safeObject(category);
+                  return (
+                    <AnimatedSection key={index} animation="fade-in" delay={index * 100}>
+                      <Card className="h-full hover:shadow-md transition-shadow">
+                        <CardContent className="p-6">
+                          <h3 className="text-xl font-semibold mb-4">{safeString(categoryObj.title)}</h3>
+                          <ul className="space-y-2">
+                            {safeArray(categoryObj.items).map((item, itemIndex) => (
+                              <li key={itemIndex} className="flex items-center">
+                                <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
+                                <span>{safeString(item)}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                      </Card>
+                    </AnimatedSection>
+                  );
+                })}
               </div>
             </div>
           </section>
@@ -476,7 +500,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                           {safeArray(service.features).map((feature, idx) => (
                             <li key={idx} className="flex items-start">
                               <Check className="h-5 w-5 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
-                              <span className="text-gray-600">{feature}</span>
+                              <span className="text-gray-600">{safeString(feature)}</span>
                             </li>
                           ))}
                         </ul>
@@ -506,23 +530,31 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
               <div className="flex flex-col lg:flex-row gap-12">
                 <div className="lg:w-1/2">
                   <AnimatedSection animation="fade-in">
-                    <h2 className="text-3xl font-bold mb-6">{information.title}</h2>
+                    <h2 className="text-3xl font-bold mb-6">{safeString(information.title)}</h2>
                     
                     {information.tabs && information.tabs.length > 0 && (
                       <Tabs defaultValue={information.tabs[0]?.id} className="w-full">
                         <TabsList className="mb-6">
-                          {information.tabs.map((tab) => (
-                            <TabsTrigger key={tab.id} value={tab.id}>{tab.title}</TabsTrigger>
-                          ))}
+                          {information.tabs.map((tab) => {
+                            const tabObj = safeObject(tab);
+                            return (
+                              <TabsTrigger key={safeString(tabObj.id)} value={safeString(tabObj.id)}>
+                                {safeString(tabObj.title)}
+                              </TabsTrigger>
+                            );
+                          })}
                         </TabsList>
                         
-                        {information.tabs.map((tab) => (
-                          <TabsContent key={tab.id} value={tab.id} className="space-y-4">
-                            {parseContentArray(tab.content).map((paragraph, index) => (
-                              <p key={index}>{paragraph}</p>
-                            ))}
-                          </TabsContent>
-                        ))}
+                        {information.tabs.map((tab) => {
+                          const tabObj = safeObject(tab);
+                          return (
+                            <TabsContent key={safeString(tabObj.id)} value={safeString(tabObj.id)} className="space-y-4">
+                              {parseContentArray(tabObj.content).map((paragraph, index) => (
+                                <p key={index}>{safeString(paragraph)}</p>
+                              ))}
+                            </TabsContent>
+                          );
+                        })}
                       </Tabs>
                     )}
                   </AnimatedSection>
@@ -531,23 +563,30 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                 <div className="lg:w-1/2">
                   <AnimatedSection className="rounded-lg overflow-hidden shadow-md" animation="fade-in" delay={200}>
                     <img 
-                      src={information.image}
-                      alt={information.imageAlt}
+                      src={safeString(information.image)}
+                      alt={safeString(information.imageAlt)}
                       className="w-full h-auto"
                     />
                   </AnimatedSection>
                   
                   {information.didYouKnow && (
                     <AnimatedSection className="mt-6 bg-gray-50 p-6 rounded-lg" animation="fade-in" delay={300}>
-                      <h3 className="text-xl font-semibold mb-3">{information.didYouKnow.title}</h3>
-                      <ul className="space-y-3">
-                        {safeArray(information.didYouKnow.facts).map((fact, index) => (
-                          <li key={index} className="flex items-start">
-                            <Check size={18} className="text-brand-green mr-2 mt-1" />
-                            <span>{fact}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      {(() => {
+                        const didYouKnowObj = safeObject(information.didYouKnow, { title: '', facts: [] });
+                        return (
+                          <>
+                            <h3 className="text-xl font-semibold mb-3">{safeString(didYouKnowObj.title)}</h3>
+                            <ul className="space-y-3">
+                              {safeArray(didYouKnowObj.facts).map((fact, index) => (
+                                <li key={index} className="flex items-start">
+                                  <Check size={18} className="text-brand-green mr-2 mt-1" />
+                                  <span>{safeString(fact)}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </>
+                        );
+                      })()}
                     </AnimatedSection>
                   )}
                 </div>
@@ -561,24 +600,27 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
           <section className="py-12 bg-gray-50">
             <div className="container mx-auto px-4">
               <AnimatedSection className="text-center mb-10" animation="fade-in">
-                <h2 className="text-3xl font-bold mb-4">{faq.title}</h2>
-                <p className="text-lg text-gray-700 max-w-3xl mx-auto">{faq.description}</p>
+                <h2 className="text-3xl font-bold mb-4">{safeString(faq.title)}</h2>
+                <p className="text-lg text-gray-700 max-w-3xl mx-auto">{safeString(faq.description)}</p>
               </AnimatedSection>
               
               <div className="max-w-4xl mx-auto">
                 <Accordion type="single" collapsible className="w-full">
-                  {safeArray(faq.questions).map((item, index) => (
-                    <AnimatedSection key={index} animation="fade-in" delay={index * 100}>
-                      <AccordionItem value={`item-${index}`}>
-                        <AccordionTrigger className="text-lg font-semibold">
-                          {item.question}
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          <p className="text-gray-700">{item.answer}</p>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </AnimatedSection>
-                  ))}
+                  {safeArray(faq.questions).map((item, index) => {
+                    const questionObj = safeObject(item);
+                    return (
+                      <AnimatedSection key={index} animation="fade-in" delay={index * 100}>
+                        <AccordionItem value={`item-${index}`}>
+                          <AccordionTrigger className="text-lg font-semibold">
+                            {safeString(questionObj.question)}
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <p className="text-gray-700">{safeString(questionObj.answer)}</p>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </AnimatedSection>
+                    );
+                  })}
                 </Accordion>
               </div>
             </div>
