@@ -41,7 +41,7 @@ const Oplossingen: React.FC = () => {
                   Alle Oplossingen
                 </span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                  Onze Bouwoplossingen
+                  Onze Oplossingen
                 </h1>
                 <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl">
                   Ontdek ons complete aanbod van hoogwaardige bouwoplossingen. Van kunststof kozijnen tot gevelbekleding en dakkapellen - alles voor de verduurzaming van uw woning.
@@ -54,7 +54,7 @@ const Oplossingen: React.FC = () => {
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
-                  <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-gray-900">
+                  <Button asChild variant="outline" size="lg" className="bg-black hover:bg-gray-800 text-white border-black">
                     <Link to="/contact">
                       Neem contact op
                     </Link>
