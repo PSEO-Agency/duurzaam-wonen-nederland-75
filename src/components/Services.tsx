@@ -11,36 +11,25 @@ const Services: React.FC = () => {
 
   // Manual item for Kunststof Kozijnen (always first)
   const manualKunststofKozijnen = {
-    image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
     title: 'Kunststof kozijnen',
     description: 'Hoogwaardige kozijnen met uitstekende warmte- en geluidsisolatie.',
     features: ['HR++ of triple glas', 'Onderhoudsvrij', 'Diverse kleuren en stijlen'],
     slug: 'kunststof-kozijnen'
   };
 
-  // Fallback data for other CMS items
-  const fallbackData = [
-    {
-      image: '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png',
-      title: 'Gevelbekleding',
-      description: 'Duurzame gevelbekleding voor verbeterde isolatie en een moderne uitstraling.',
-      features: ['Onderhoudsarm', '64 kleuropties', 'Verbetert isolatiewaarde'],
-      slug: 'gevelbekleding'
-    }
-  ];
-
   // Transform ALL CMS products to match the current UI structure
   const dynamicProducts = products && products.length > 0 
     ? products.map(product => ({
-        image: product.hero_image_url || product.hero_background_image || fallbackData[0].image,
+        image: product.hero_image_url || product.hero_background_image || '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png',
         title: product.name,
         description: product.description || product.hero_description || '',
         features: product.features && Array.isArray(product.features) ? 
           product.features.slice(0, 3).map(feature => String(feature)) : 
-          fallbackData[0].features,
+          ['Hoogwaardige materialen', 'Professionele montage', 'Lange garantie'],
         slug: product.slug
       }))
-    : fallbackData;
+    : [];
 
   // Combine manual item with ALL dynamic products
   const displayProducts = [manualKunststofKozijnen, ...dynamicProducts];

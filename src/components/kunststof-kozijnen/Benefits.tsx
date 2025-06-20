@@ -32,27 +32,27 @@ const Benefits: React.FC = () => {
     {
       icon: <ShieldCheck className="h-8 w-8 text-brand-green" />,
       title: "Onderhoudsarm",
-      description: "Geen schilderwerk nodig, alleen af en toe schoonmaken met water en zeep. Bespaart tijd en geld op langere termijn."
+      description: "Geen schilderwerk nodig, alleen schoonmaken met water en zeep voor langdurig gebruik."
     },
     {
       icon: <Leaf className="h-8 w-8 text-brand-green" />,
       title: "Energiezuinig",
-      description: "Uitstekende isolerende eigenschappen die zorgen voor lagere energiekosten en een comfortabel binnenklimaat."
+      description: "Uitstekende isolatie zorgt voor lagere energiekosten en comfortabel binnenklimaat."
     },
     {
       icon: <Clock className="h-8 w-8 text-brand-green" />,
       title: "Lange levensduur",
-      description: "Gaat gemiddeld 30-50 jaar mee zonder functieverlies. Rot of vervormt niet, verkleurt nauwelijks."
+      description: "Gaat 30-50 jaar mee zonder functieverlies, rot niet en verkleurt nauwelijks."
     },
     {
       icon: <PiggyBank className="h-8 w-8 text-brand-green" />,
       title: "Betaalbaar",
-      description: "Gunstiger in aanschaf dan sommige alternatieven en door lage onderhoudskosten op lange termijn zeer kosteneffectief."
+      description: "Gunstiger in aanschaf en door lage onderhoudskosten zeer kosteneffectief."
     },
     {
       icon: <Recycle className="h-8 w-8 text-brand-green" />,
       title: "Duurzaam",
-      description: "Volledig recyclebaar en biedt uitstekende isolatie die bijdraagt aan een lagere CO2-uitstoot."
+      description: "Volledig recyclebaar met uitstekende isolatie voor lagere CO2-uitstoot."
     }
   ];
 
