@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check } from 'lucide-react';
@@ -388,22 +387,24 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
           </section>
         )}
         
-        {/* Benefits Section */}
+        {/* Benefits Section - Updated for better responsiveness */}
         {benefits && (
-          <section className="py-12 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-4">
-              <div className="flex flex-col lg:flex-row gap-10 items-center">
-                <div className="lg:w-1/2">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div className="order-2 lg:order-1">
                   <AnimatedSection animation="fade-in">
-                    <h2 className="text-3xl font-bold mb-6">{safeString(benefits.title)}</h2>
-                    <p className="text-lg text-gray-700 mb-6">{safeString(benefits.description)}</p>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">{safeString(benefits.title)}</h2>
+                    <p className="text-base md:text-lg text-gray-700 mb-4 md:mb-6">{safeString(benefits.description)}</p>
                     
-                    {safeArray(benefits.mainContent).map((content, index) => (
-                      <p key={index} className="text-lg text-gray-700 mb-6">{safeString(content)}</p>
-                    ))}
+                    <div className="space-y-3 md:space-y-4 mb-6">
+                      {safeArray(benefits.mainContent).map((content, index) => (
+                        <p key={index} className="text-base md:text-lg text-gray-700">{safeString(content)}</p>
+                      ))}
+                    </div>
                     
-                    <div className="mt-4">
-                      <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
+                    <div className="mt-6">
+                      <Button className="bg-brand-green hover:bg-brand-green-dark text-white w-full sm:w-auto">
                         <Link to={safeString(benefits.ctaLink)}>
                           <span>{safeString(benefits.ctaText)}</span>
                           <ArrowRight className="ml-2 h-4 w-4" />
@@ -413,15 +414,15 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                   </AnimatedSection>
                 </div>
                 
-                <div className="lg:w-1/2">
+                <div className="order-1 lg:order-2">
                   <AnimatedSection animation="fade-in" delay={200}>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                       {safeArray(benefits.stats).map((stat, index) => {
                         const statObj = safeObject(stat);
                         return (
-                          <div key={index} className="bg-gray-50 rounded-lg p-5 shadow-sm">
-                            <div className="text-3xl font-bold text-brand-green mb-2">{safeString(statObj.value)}</div>
-                            <p className="text-gray-700">{safeString(statObj.label)}</p>
+                          <div key={index} className="bg-gray-50 rounded-lg p-4 md:p-6 shadow-sm text-center">
+                            <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-green mb-2">{safeString(statObj.value)}</div>
+                            <p className="text-sm md:text-base text-gray-700 leading-tight">{safeString(statObj.label)}</p>
                           </div>
                         );
                       })}
