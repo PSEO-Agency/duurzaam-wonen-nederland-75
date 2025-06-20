@@ -135,6 +135,22 @@ export interface ServicePageTemplateProps {
   showRegions?: boolean;
 }
 
+// Helper function to safely parse content arrays
+const parseContentArray = (content: any): string[] => {
+  if (Array.isArray(content)) {
+    return content;
+  }
+  if (typeof content === 'string') {
+    try {
+      const parsed = JSON.parse(content);
+      return Array.isArray(parsed) ? parsed : [content];
+    } catch {
+      return [content];
+    }
+  }
+  return [];
+};
+
 const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   seo,
   hero,
@@ -507,7 +523,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
                       
                       {information.tabs.map((tab) => (
                         <TabsContent key={tab.id} value={tab.id} className="space-y-4">
-                          {tab.content.map((paragraph, index) => (
+                          {parseContentArray(tab.content).map((paragraph, index) => (
                             <p key={index}>{paragraph}</p>
                           ))}
                         </TabsContent>
