@@ -110,10 +110,10 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
                   </p>
                   
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
-                    <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white w-full sm:w-auto text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3">
-                      <Link to={safeString(hero?.primaryButtonLink) || '/offerte'}>
-                        <span className="whitespace-nowrap">{safeString(hero?.primaryButtonText) || 'Get Quote'}</span>
-                        <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
+                    <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white w-full sm:w-auto text-sm sm:text-base px-3 sm:px-6 py-3 sm:py-3 min-h-[44px]">
+                      <Link to={safeString(hero?.primaryButtonLink) || '/offerte'} className="flex items-center justify-center gap-2">
+                        <span className="text-center leading-tight">{safeString(hero?.primaryButtonText) || 'Get Quote'}</span>
+                        <ArrowRight className="h-4 w-4 flex-shrink-0" />
                       </Link>
                     </Button>
                   </div>
@@ -202,10 +202,10 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
                   )}
                   
                   <div className="mt-6 sm:mt-8 text-center">
-                    <Button className="bg-brand-green hover:bg-brand-green-dark text-white px-4 sm:px-6 w-full sm:w-auto text-sm sm:text-base">
-                      <Link to={safeString(introduction.ctaLink)} className="flex items-center justify-center">
-                        <span className="whitespace-nowrap">{safeString(introduction.ctaText)}</span>
-                        <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
+                    <Button className="bg-brand-green hover:bg-brand-green-dark text-white px-3 sm:px-6 w-full sm:w-auto text-sm sm:text-base py-3 min-h-[44px]">
+                      <Link to={safeString(introduction.ctaLink)} className="flex items-center justify-center gap-2">
+                        <span className="text-center leading-tight">{safeString(introduction.ctaText)}</span>
+                        <ArrowRight className="h-4 w-4 flex-shrink-0" />
                       </Link>
                     </Button>
                   </div>
@@ -285,10 +285,10 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
                     </div>
         
                     <div className="mt-4 sm:mt-6">
-                      <Button className="bg-brand-green hover:bg-brand-green-dark text-white w-full sm:w-auto text-sm sm:text-base px-4 sm:px-6">
-                        <Link to={safeString(benefits.ctaLink)} className="flex items-center justify-center">
-                          <span className="whitespace-nowrap">{safeString(benefits.ctaText)}</span>
-                          <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
+                      <Button className="bg-brand-green hover:bg-brand-green-dark text-white w-full sm:w-auto text-sm sm:text-base px-3 sm:px-6 py-3 min-h-[44px]">
+                        <Link to={safeString(benefits.ctaLink)} className="flex items-center justify-center gap-2">
+                          <span className="text-center leading-tight">{safeString(benefits.ctaText)}</span>
+                          <ArrowRight className="h-4 w-4 flex-shrink-0" />
                         </Link>
                       </Button>
                     </div>
@@ -387,10 +387,10 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
                         </ul>
                       </div>
                       <div className="p-4 sm:p-6 pt-0 mt-auto">
-                        <Button variant="ghost" asChild className="text-brand-green hover:text-brand-green-dark hover:bg-brand-green/10 -ml-3 text-sm sm:text-base w-full justify-start">
-                          <Link to={service.linkUrl} className="flex items-center">
-                            <span className="truncate">{service.linkText}</span>
-                            <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                        <Button variant="ghost" asChild className="text-brand-green hover:text-brand-green-dark hover:bg-brand-green/10 text-sm sm:text-base w-full justify-start p-2 min-h-[40px]">
+                          <Link to={service.linkUrl} className="flex items-center gap-2">
+                            <span className="break-words text-left leading-tight flex-1">{service.linkText}</span>
+                            <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                           </Link>
                         </Button>
                       </div>
