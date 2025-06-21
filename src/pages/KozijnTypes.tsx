@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
@@ -42,9 +41,9 @@ const KozijnTypes: React.FC = () => {
       applications: ['Woonkamers', 'Tuinen', 'Terrassen', 'Balkons'],
     },
     {
-      id: 'stolp',
-      name: 'Stolpstel Kozijn',
-      description: 'Stolpstel kozijnen bestaan uit twee ramen die in het midden samenkomen, waarbij één raam als hoofddeur fungeert.',
+      id: 'verhuis',
+      name: 'Verhuis Kozijn',
+      description: 'Verhuis kozijnen bestaan uit twee ramen die in het midden samenkomen, waarbij één raam als hoofddeur fungeert.',
       benefits: ['Brede opening mogelijk', 'Klassieke uitstraling', 'Flexibel in gebruik', 'Goede ventilatie', 'Statige uitstraling'],
       applications: ['Woonkamers', 'Erkers', 'Klassieke woningen', 'Voorgevels'],
     },
@@ -61,7 +60,7 @@ const KozijnTypes: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>Type Kunststof Kozijnen | Duurzaam Wonen Nederland</title>
-        <meta name="description" content="Ontdek de verschillende types kunststof kozijnen: vast, draai-kiep, schuifpui, stolpstel en harmonica kozijnen voor uw woning." />
+        <meta name="description" content="Ontdek de verschillende types kunststof kozijnen: vast, draai-kiep, schuifpui, verhuis en harmonica kozijnen voor uw woning." />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/types" />
       </Helmet>
       
@@ -207,7 +206,7 @@ const KozijnTypes: React.FC = () => {
                       <ul className="space-y-2">
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <span className="text-gray-700">Stolpstel kozijnen passen uitstekend bij klassieke architectuur en geven een statige uitstraling.</span>
+                          <span className="text-gray-700">Verhuis kozijnen passen uitstekend bij klassieke architectuur en geven een statige uitstraling.</span>
                         </li>
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
