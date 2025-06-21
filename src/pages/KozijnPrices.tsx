@@ -34,7 +34,7 @@ const KozijnPrices: React.FC = () => {
       features: 'Ruimtebesparend, modern design'
     },
     {
-      category: 'Stolpstellen',
+      category: 'Verhuis kozijnen',
       sizes: 'Traditionele afmetingen',
       features: 'Klassieke uitstraling, authentiek'
     }
