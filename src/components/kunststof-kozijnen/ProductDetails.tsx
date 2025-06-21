@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ExternalLink, Paintbrush, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -20,21 +21,50 @@ interface ProductDetailProps {
   selectedProfile?: string;
 }
 
-const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedProfile = "living-82" }) => {
+const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedProfile = "living-kozijnprofiel" }) => {
   const profileData = {
-    "living-82": {
+    "living-kozijnprofiel": {
       name: "Schüco Living Kozijnprofiel",
       slug: "living-82",
-      image: "/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png"
+      image: "/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png",
+      specifications: {
+        inbouwdiepte: "82 mm",
+        uWaarde: "0,8 W/(m²·K)",
+        kamersysteem: "6 kamers",
+        energielabel: "A++",
+        kleuren: "200+ opties",
+        dichtingen: "EPDM rubber",
+        materiaal: "Hoogwaardig PVC",
+        onderhoud: "Onderhoudsarm",
+        geluidsisolatie: "Tot 47 dB",
+        veiligheid: "RC2 mogelijk",
+        luchtcirculatie: "Geoptimaliseerd",
+        recyclebaar: "Ja"
+      }
     },
-    "ct-70-as": {
-      name: "Schüco CT70 Kozijnprofiel", 
+    "ct70-as-kozijnprofiel": {
+      name: "Schüco CT70 AS Kozijnprofiel", 
       slug: "ct-70-as",
-      image: "/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png"
+      image: "/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png",
+      specifications: {
+        inbouwdiepte: "70 mm",
+        uWaarde: "1,0 W/(m²·K)",
+        kamersysteem: "5 kamers",
+        energielabel: "A+",
+        kleuren: "170+ opties",
+        dichtingen: "EPDM rubber",
+        materiaal: "Hoogwaardig PVC",
+        onderhoud: "Onderhoudsarm",
+        geluidsisolatie: "Tot 45 dB",
+        veiligheid: "RC2 mogelijk",
+        luchtcirculatie: "Geoptimaliseerd",
+        recyclebaar: "Ja"
+      }
     }
   };
 
-  const currentProfile = profileData[selectedProfile as keyof typeof profileData] || profileData["living-82"];
+  const currentProfile = profileData[selectedProfile as keyof typeof profileData] || profileData["living-kozijnprofiel"];
+  const specs = currentProfile.specifications;
 
   return (
     <Card className="overflow-hidden">
@@ -143,7 +173,7 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
         </div>
       </div>
       
-      {/* Specifications Section - Updated with new specs */}
+      {/* Specifications Section - Updated with profile-specific specs */}
       <div className="border-t border-gray-200 p-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="specifications">
@@ -156,27 +186,27 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
                   <div className="space-y-2">
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Inbouwdiepte</span>
-                      <span className="font-medium">120 mm</span>
+                      <span className="font-medium">{specs.inbouwdiepte}</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">U-waarde</span>
-                      <span className="font-medium">1,1 W/(m²·K)</span>
+                      <span className="font-medium">{specs.uWaarde}</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Kamersysteem</span>
-                      <span className="font-medium">7 kamers</span>
+                      <span className="font-medium">{specs.kamersysteem}</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Energielabel</span>
-                      <span className="font-medium">A</span>
+                      <span className="font-medium">{specs.energielabel}</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Kleuren</span>
-                      <span className="font-medium">170+ opties</span>
+                      <span className="font-medium">{specs.kleuren}</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Dichtingen</span>
-                      <span className="font-medium">EPDM rubber</span>
+                      <span className="font-medium">{specs.dichtingen}</span>
                     </div>
                   </div>
                 </div>
@@ -185,27 +215,27 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
                   <div className="space-y-2">
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Materiaal</span>
-                      <span className="font-medium">Hoogwaardig PVC</span>
+                      <span className="font-medium">{specs.materiaal}</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Onderhoud</span>
-                      <span className="font-medium">Onderhoudsarm</span>
+                      <span className="font-medium">{specs.onderhoud}</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Geluidsisolatie</span>
-                      <span className="font-medium">Uitstekend</span>
+                      <span className="font-medium">{specs.geluidsisolatie}</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Veiligheid</span>
-                      <span className="font-medium">Geavanceerd</span>
+                      <span className="font-medium">{specs.veiligheid}</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Luchtcirculatie</span>
-                      <span className="font-medium">Geoptimaliseerd</span>
+                      <span className="font-medium">{specs.luchtcirculatie}</span>
                     </div>
                     <div className="grid grid-cols-2 py-2 border-b border-gray-100">
                       <span className="text-gray-600">Recyclebaar</span>
-                      <span className="font-medium">Ja</span>
+                      <span className="font-medium">{specs.recyclebaar}</span>
                     </div>
                   </div>
                 </div>

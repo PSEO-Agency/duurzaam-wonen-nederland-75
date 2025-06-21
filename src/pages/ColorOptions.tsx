@@ -36,14 +36,14 @@ const ColorOptions: React.FC = () => {
   const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null);
   const [filterCategory, setFilterCategory] = useState<string>("all");
   const [activeTab, setActiveTab] = useState<string>("visualizer");
-  const [selectedProfile, setSelectedProfile] = useState<string>("living-82");
+  const [selectedProfile, setSelectedProfile] = useState<string>("living-kozijnprofiel");
 
   const visualizerTitleRef = useRef<HTMLHeadingElement>(null);
   const collectionTitleRef = useRef<HTMLHeadingElement>(null);
 
   const profileOptions: ProfileOption[] = [
-    { id: "living-82", name: "Schüco LivIng 82", slug: "living-82" },
-    { id: "ct-70-as", name: "Schüco CT 70 AS", slug: "ct-70-as" }
+    { id: "living-kozijnprofiel", name: "Schüco Living Kozijnprofiel", slug: "living-82" },
+    { id: "ct70-as-kozijnprofiel", name: "Schüco CT70 AS Kozijnprofiel", slug: "ct-70-as" }
   ];
 
   const colorOptions: ColorOption[] = [
