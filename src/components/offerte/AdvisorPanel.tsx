@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Phone, Mail, MessageSquare } from 'lucide-react';
@@ -52,7 +51,7 @@ const AdvisorPanel: React.FC = () => {
             </div>
             <div>
               <p className="text-xs text-gray-500">E-mail</p>
-              <p className="text-sm font-medium">info@duurzaamwonen.info</p>
+              <p className="text-sm font-medium">aanvraag@duurzaamwonen.info</p>
             </div>
           </div>
           
