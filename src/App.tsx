@@ -109,7 +109,6 @@ function App() {
                 <Route path="/hr-beglazing" element={<ProductPage />} />
                 <Route path="/dakkapel" element={<ProductPage />} />
                 <Route path="/kunststof-deuren" element={<ProductPage />} />
-                <Route path="/raamdecoratie" element={<ProductPage />} />
                 
                 {/* Project routes */}
                 <Route path="/projecten" element={<Projects />} />
