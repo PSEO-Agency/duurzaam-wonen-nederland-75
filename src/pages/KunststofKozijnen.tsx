@@ -442,7 +442,7 @@ const KunststofKozijnen: React.FC = () => {
                     </ul>
                     <div className="mt-4">
                       <Link to="/kunststof-kozijnen/prijzen" className="text-brand-green flex items-center hover:underline">
-                        <span>Bekijk prijssegmenten</span>
+                        <span>Bekijk prijsopbouw</span>
                         <ArrowRight className="ml-1 h-4 w-4" />
                       </Link>
                     </div>
