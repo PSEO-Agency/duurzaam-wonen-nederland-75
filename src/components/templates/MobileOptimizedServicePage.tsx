@@ -151,12 +151,12 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
                       <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/20">
                         <div className="bg-white/10 p-3 sm:p-4 rounded-lg backdrop-blur-sm">
                           <h4 className="text-xs sm:text-sm font-medium text-white mb-2 sm:mb-3">Keurmerken:</h4>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
+                          <div className="grid grid-cols-2 gap-2 sm:gap-3">
                             {safeArray(hero?.certificationLogos).map((logo, index) => {
                               const logoObj = safeObject(logo);
                               return (
-                                <div key={index} className="bg-white rounded p-1 sm:p-2 h-12 sm:h-16 flex items-center justify-center" title={safeString(logoObj.title)}>
-                                  <img src={safeString(logoObj.src)} alt={safeString(logoObj.alt)} className="h-6 sm:h-10 max-w-full object-contain" />
+                                <div key={index} className="bg-white rounded p-1 sm:p-2 h-10 sm:h-12 flex items-center justify-center" title={safeString(logoObj.title)}>
+                                  <img src={safeString(logoObj.src)} alt={safeString(logoObj.alt)} className="h-6 sm:h-8 max-w-full object-contain" />
                                 </div>
                               );
                             })}
