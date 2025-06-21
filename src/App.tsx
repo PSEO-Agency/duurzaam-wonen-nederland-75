@@ -33,6 +33,7 @@ const CityServicePageNew = lazy(() => import('./pages/CityServicePageNew'));
 
 // Product pages
 const ProductPage = lazy(() => import('./pages/ProductPage'));
+const Raamdecoratie = lazy(() => import('./pages/Raamdecoratie'));
 
 // Project pages
 const Projects = lazy(() => import('./pages/Projects'));
@@ -104,12 +105,12 @@ function App() {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/sitemap" element={<Sitemap />} />
                 
-                {/* Product routes - using ProductPage component */}
+                {/* Product routes - using dedicated components or ProductPage */}
                 <Route path="/gevelbekleding" element={<ProductPage />} />
                 <Route path="/hr-beglazing" element={<ProductPage />} />
                 <Route path="/dakkapel" element={<ProductPage />} />
                 <Route path="/kunststof-deuren" element={<ProductPage />} />
-                <Route path="/raamdecoratie" element={<ProductPage />} />
+                <Route path="/raamdecoratie" element={<Raamdecoratie />} />
                 
                 {/* Project routes */}
                 <Route path="/projecten" element={<Projects />} />
