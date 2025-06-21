@@ -40,8 +40,8 @@ const ContactCTA: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="font-medium mb-1">E-mail</h4>
-                      <a href="mailto:kantoor@duurzaamwonen.info" className="text-brand-green hover:underline">
-                        kantoor@duurzaamwonen.info
+                      <a href="mailto:aanvraag@duurzaamwonen.info" className="text-brand-green hover:underline">
+                        aanvraag@duurzaamwonen.info
                       </a>
                     </div>
                   </div>
