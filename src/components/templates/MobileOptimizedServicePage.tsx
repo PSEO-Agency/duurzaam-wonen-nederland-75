@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, Filter, ArrowRight, ArrowDown, Star, ChevronDown } from 'lucide-react';
@@ -118,7 +119,6 @@ export interface ServicePageTemplateProps {
   };
   
   showRegions?: boolean;
-  customHero?: React.ComponentType;
 }
 
 const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
@@ -131,8 +131,7 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
   services,
   information,
   faq,
-  showRegions = true,
-  customHero: CustomHero
+  showRegions = true
 }) => {
   // Helper function to render buttons with proper link handling
   const renderButton = (text: string, link: string, variant: 'primary' | 'secondary' = 'primary') => {
@@ -177,55 +176,51 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
       <Navbar />
       
       <main className="flex-grow pt-20">
-        {/* Hero Section - Use custom hero if provided, otherwise use default */}
-        {CustomHero ? (
-          <CustomHero />
-        ) : (
-          <section 
-            className="relative py-20 bg-cover bg-center bg-no-repeat"
-            style={{ 
-              backgroundImage: hero.backgroundImage ? `url(${hero.backgroundImage})` : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-            }}
-          >
-            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-            <div className="container mx-auto px-4 relative z-10">
-              <div className="max-w-4xl mx-auto text-center text-white">
-                <AnimatedSection animation="fade-in">
-                  {hero.badge && (
-                    <div className="inline-block bg-brand-green text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
-                      {hero.badge}
-                    </div>
-                  )}
-                  <h1 className="text-4xl md:text-6xl font-bold mb-6">{hero.title}</h1>
-                  <p className="text-xl md:text-2xl mb-8 opacity-90">{hero.description}</p>
-                  
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                    {hero.primaryButtonText && hero.primaryButtonLink && 
-                      renderButton(hero.primaryButtonText, hero.primaryButtonLink, 'primary')
-                    }
-                    {hero.secondaryButtonText && hero.secondaryButtonLink && 
-                      renderButton(hero.secondaryButtonText, hero.secondaryButtonLink, 'secondary')
-                    }
+        {/* Hero Section */}
+        <section 
+          className="relative py-20 bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: hero.backgroundImage ? `url(${hero.backgroundImage})` : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+          }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-4xl mx-auto text-center text-white">
+              <AnimatedSection animation="fade-in">
+                {hero.badge && (
+                  <div className="inline-block bg-brand-green text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    {hero.badge}
                   </div>
-                  
-                  {hero.guarantees && hero.guarantees.length > 0 && (
-                    <div className="flex flex-wrap justify-center gap-6 text-sm">
-                      {hero.guarantees.map((guarantee, index) => (
-                        <div key={index} className="flex items-center">
-                          <Check className="h-4 w-4 mr-2 text-brand-green" />
-                          <span>{guarantee}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </AnimatedSection>
-              </div>
+                )}
+                <h1 className="text-4xl md:text-6xl font-bold mb-6">{hero.title}</h1>
+                <p className="text-xl md:text-2xl mb-8 opacity-90">{hero.description}</p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                  {hero.primaryButtonText && hero.primaryButtonLink && 
+                    renderButton(hero.primaryButtonText, hero.primaryButtonLink, 'primary')
+                  }
+                  {hero.secondaryButtonText && hero.secondaryButtonLink && 
+                    renderButton(hero.secondaryButtonText, hero.secondaryButtonLink, 'secondary')
+                  }
+                </div>
+                
+                {hero.guarantees && hero.guarantees.length > 0 && (
+                  <div className="flex flex-wrap justify-center gap-6 text-sm">
+                    {hero.guarantees.map((guarantee, index) => (
+                      <div key={index} className="flex items-center">
+                        <Check className="h-4 w-4 mr-2 text-brand-green" />
+                        <span>{guarantee}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </AnimatedSection>
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
         {/* Benefits Bar */}
-        {hero.benefits && hero.benefits.length > 0 && !CustomHero && (
+        {hero.benefits && hero.benefits.length > 0 && (
           <section className="py-6 bg-brand-green text-white">
             <div className="container mx-auto px-4">
               <div className="flex flex-wrap justify-center gap-6 text-center">
@@ -493,7 +488,7 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
                 {faq.questions.map((item, index) => (
                   <AnimatedSection key={index} animation="fade-in" delay={100 * (index + 1)}>
                     <AccordionItem value={`item-${index}`}>
-                      <AccordionTrigger className="text-lg font-semibold">
+                      <Acc ordionTrigger className="text-lg font-semibold">
                         {item.question}
                       </AccordionTrigger>
                       <AccordionContent>

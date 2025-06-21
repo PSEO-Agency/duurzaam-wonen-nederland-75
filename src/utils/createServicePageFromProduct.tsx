@@ -70,15 +70,6 @@ export const convertProductToServicePageConfig = (product: ProductData): Service
     return field;
   };
 
-  // Transform quick links to match the expected interface
-  const transformQuickLinks = (quickLinks: any) => {
-    const parsed = parseJSON(quickLinks, []);
-    return parsed.map((link: any) => ({
-      label: link.text || link.label || '',
-      href: link.href || ''
-    }));
-  };
-
   return {
     seo: {
       title: product.seo_title || product.name,
@@ -107,7 +98,7 @@ export const convertProductToServicePageConfig = (product: ProductData): Service
     introduction: {
       title: product.introduction_title || 'Introductie',
       content: parseJSON(product.introduction_content, [product.description || '']),
-      quickLinks: transformQuickLinks(product.introduction_quick_links),
+      quickLinks: parseJSON(product.introduction_quick_links, []),
       ctaText: product.introduction_cta_text || 'Vraag nu vrijblijvend een offerte aan',
       ctaLink: product.introduction_cta_link || '/offerte'
     },
