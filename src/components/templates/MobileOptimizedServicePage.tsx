@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Check, Filter, ArrowRight, ArrowDown, Star, ChevronDown } from 'lucide-react';
@@ -488,7 +487,7 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
                 {faq.questions.map((item, index) => (
                   <AnimatedSection key={index} animation="fade-in" delay={100 * (index + 1)}>
                     <AccordionItem value={`item-${index}`}>
-                      <Acc ordionTrigger className="text-lg font-semibold">
+                      <AccordionTrigger className="text-lg font-semibold">
                         {item.question}
                       </AccordionTrigger>
                       <AccordionContent>
