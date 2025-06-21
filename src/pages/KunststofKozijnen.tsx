@@ -293,7 +293,7 @@ const KunststofKozijnen: React.FC = () => {
                       </li>
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Stolpstel kozijn</span>
+                        <span>Verhuis kozijn</span>
                       </li>
                     </ul>
                     <div className="mt-4">
