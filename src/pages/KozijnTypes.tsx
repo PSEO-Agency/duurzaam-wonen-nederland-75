@@ -47,20 +47,13 @@ const KozijnTypes: React.FC = () => {
       benefits: ['Brede opening mogelijk', 'Klassieke uitstraling', 'Flexibel in gebruik', 'Goede ventilatie', 'Statige uitstraling'],
       applications: ['Woonkamers', 'Erkers', 'Klassieke woningen', 'Voorgevels'],
     },
-    {
-      id: 'harmonica',
-      name: 'Harmonica Kozijn',
-      description: 'Harmonica kozijnen vouwen open als een accordeon, ideaal om een volledig open verbinding te creëren.',
-      benefits: ['Volledige opening mogelijk', 'Maximale doorgang', 'Flexibel in gebruik', 'Perfect voor binnen-buiten verbinding', 'Uniek design'],
-      applications: ['Veranda\'s', 'Woonkamers met tuin', 'Commerciële ruimtes', 'Horecagelegenheden'],
-    },
   ];
 
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>Type Kunststof Kozijnen | Duurzaam Wonen Nederland</title>
-        <meta name="description" content="Ontdek de verschillende types kunststof kozijnen: vast, draai-kiep, schuifpui, verhuis en harmonica kozijnen voor uw woning." />
+        <meta name="description" content="Ontdek de verschillende types kunststof kozijnen: vast, draai-kiep, schuifpui en verhuis kozijnen voor uw woning." />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/types" />
       </Helmet>
       
@@ -88,9 +81,9 @@ const KozijnTypes: React.FC = () => {
         <section className="py-12">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold mb-8 text-center">De 5 Meest Gekozen Types Kunststof Kozijnen</h2>
+              <h2 className="text-3xl font-bold mb-8 text-center">De 4 Meest Gekozen Types Kunststof Kozijnen</h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
                 {types.map((type, index) => (
                   <AnimatedSection key={type.id} animation="fade-in" delay={index * 100}>
                     <Card className="h-full hover:shadow-md transition-shadow overflow-hidden">
