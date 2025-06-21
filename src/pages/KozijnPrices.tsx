@@ -366,13 +366,6 @@ const KozijnPrices: React.FC = () => {
                         <li className="flex items-start">
                           <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
                           <div>
-                            <strong className="block text-gray-800">Kies voor standaardmaten</strong>
-                            <p className="text-gray-700 text-sm">Standaardmaten zijn voordeliger dan maatwerk. Als uw kozijnopeningen standaard afmetingen hebben, kunt u besparen op de kosten.</p>
-                          </div>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <div>
                             <strong className="block text-gray-800">Meerdere kozijnen tegelijk vervangen</strong>
                             <p className="text-gray-700 text-sm">Door meerdere kozijnen tegelijk te laten plaatsen, kunt u besparen op transport- en montagekosten. Vaak bieden leveranciers korting bij grotere orders.</p>
                           </div>
@@ -389,13 +382,6 @@ const KozijnPrices: React.FC = () => {
                           <div>
                             <strong className="block text-gray-800">Let op subsidies</strong>
                             <p className="text-gray-700 text-sm">Controleer of er subsidies beschikbaar zijn voor energiebesparende maatregelen in uw gemeente. Dit kan uw investering aanzienlijk verlagen.</p>
-                          </div>
-                        </li>
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-brand-green mt-1 mr-2 shrink-0" />
-                          <div>
-                            <strong className="block text-gray-800">Vergelijk offertes</strong>
-                            <p className="text-gray-700 text-sm">Vraag een offerte aan en laat u goed informeren over de verschillende opties. Kijk niet alleen naar de prijs, maar ook naar wat precies wordt geleverd.</p>
                           </div>
                         </li>
                       </ul>
@@ -440,7 +426,7 @@ const KozijnPrices: React.FC = () => {
                         </h4>
                         <div className="bg-green-50 p-4 rounded-md border border-green-100">
                           <p className="text-gray-700 text-sm">
-                            <strong>Voorjaarsactie 2025:</strong> Bij aanschaf van onze kozijnen, krijgt u altijd Gratis Houtnerf, Horren en Vensterbanken.
+                            <strong>Actie:</strong> Bij aanschaf van onze kozijnen, krijgt u altijd Gratis Houtnerf, Horren en Vensterbanken.
                           </p>
                         </div>
                       </div>
