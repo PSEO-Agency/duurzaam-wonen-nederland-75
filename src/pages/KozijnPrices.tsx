@@ -459,34 +459,6 @@ const KozijnPrices: React.FC = () => {
                   </TableBody>
                 </Table>
               </div>
-              
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="text-center">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-3 text-brand-green">Kunststof Kozijnen</h3>
-                    <p className="text-gray-700 mb-4">
-                      De meest populaire keuze vanwege de uitstekende prijs-kwaliteitverhouding, 
-                      minimaal onderhoud en goede isolatie-eigenschappen.
-                    </p>
-                    <Button asChild variant="outline" className="w-full">
-                      <Link to="/kunststof-kozijnen">Meer informatie</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-                
-                <Card className="text-center">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-3 text-amber-600">Houten Kozijnen</h3>
-                    <p className="text-gray-700 mb-4">
-                      Klassieke en natuurlijke uitstraling met goede isolatie, 
-                      maar vereist meer onderhoud en heeft een hogere prijs.
-                    </p>
-                    <Button asChild variant="outline" className="w-full">
-                      <Link to="/offerte">Offerte aanvragen</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
             </AnimatedSection>
           </div>
         </section>
