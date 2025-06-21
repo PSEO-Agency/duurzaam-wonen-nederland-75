@@ -14,20 +14,19 @@ import ContactInfoStep from '@/components/offerte/ContactInfoStep';
 import FinalStep from '@/components/offerte/FinalStep';
 import ReviewStep from '@/components/offerte/ReviewStep';
 import AdvisorPanel from '@/components/offerte/AdvisorPanel';
-
 export type OfferteFormData = {
   // Project info
   projectType: 'nieuwbouw' | 'renovatie' | 'vervanging' | '';
   propertyType: 'eengezinswoning' | 'appartement' | 'twee-onder-een-kap' | 'bedrijfspand' | '';
   timeline: string;
-  
+
   // Window details
   windowTypes: string[];
   quantity: string;
   dimensions: string;
   color: string;
   additionalInfo: string;
-  
+
   // Contact info
   firstName: string;
   lastName: string;
@@ -36,27 +35,24 @@ export type OfferteFormData = {
   address: string;
   postalCode: string;
   city: string;
-  
+
   // Preferences
   preferredContact: 'email' | 'phone' | 'whatsapp' | '';
   availability: string[];
   availabilitySchedule: string; // Serialized JSON of the schedule
   termsAccepted: boolean;
 };
-
 const initialFormData: OfferteFormData = {
   // Project info
   projectType: '',
   propertyType: '',
   timeline: '',
-  
   // Window details
   windowTypes: [],
   quantity: '',
   dimensions: '',
   color: '',
   additionalInfo: '',
-  
   // Contact info
   firstName: '',
   lastName: '',
@@ -65,7 +61,6 @@ const initialFormData: OfferteFormData = {
   address: '',
   postalCode: '',
   city: '',
-  
   // Preferences
   preferredContact: '',
   availability: [],
@@ -78,36 +73,34 @@ const FORM_SUBMISSION_ENDPOINT = 'https://n8n.virtualmin.programmaticseobuilder.
 // GoHighLevel webhook URL - Actual webhook URL from GoHighLevel
 const GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/3aRsj8TT2qcU3nkx3kWm/webhook-trigger/fe83d1b1-2118-455d-bc33-55e085692dbf';
 const WEBHOOK_RETRY_ATTEMPTS = 3;
-
 const Offerte: React.FC = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<OfferteFormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const totalSteps = 5;
   const navigate = useNavigate();
-
   const updateFormData = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
-
   const nextStep = () => {
     if (validateCurrentStep()) {
       setStep(prev => Math.min(prev + 1, totalSteps));
       window.scrollTo(0, 0);
     }
   };
-
   const prevStep = () => {
     setStep(prev => Math.max(prev - 1, 1));
     window.scrollTo(0, 0);
   };
-
   const validateCurrentStep = (): boolean => {
     let isValid = true;
     let errorMessage = '';
-
     switch (step) {
-      case 1: // Project Type
+      case 1:
+        // Project Type
         if (!formData.projectType) {
           isValid = false;
           errorMessage = 'Selecteer het type project';
@@ -116,10 +109,12 @@ const Offerte: React.FC = () => {
           errorMessage = 'Selecteer het type eigendom';
         }
         break;
-      case 2: // Window Details
+      case 2:
+        // Window Details
         // Window types are optional
         break;
-      case 3: // Contact Info
+      case 3:
+        // Contact Info
         if (!formData.firstName || !formData.lastName) {
           isValid = false;
           errorMessage = 'Vul uw voor- en achternaam in';
@@ -134,7 +129,8 @@ const Offerte: React.FC = () => {
           errorMessage = 'Vul uw adresgegevens in';
         }
         break;
-      case 4: // Final Step
+      case 4:
+        // Final Step
         if (!formData.preferredContact) {
           isValid = false;
           errorMessage = 'Selecteer uw voorkeur voor contact';
@@ -143,7 +139,8 @@ const Offerte: React.FC = () => {
           errorMessage = 'U moet akkoord gaan met de voorwaarden';
         }
         break;
-      case 5: // Review
+      case 5:
+        // Review
         if (!formData.termsAccepted) {
           isValid = false;
           errorMessage = 'U moet akkoord gaan met de voorwaarden';
@@ -152,15 +149,13 @@ const Offerte: React.FC = () => {
       default:
         break;
     }
-
     if (!isValid) {
       toast({
         variant: "destructive",
         title: "Er ontbreken gegevens",
-        description: errorMessage,
+        description: errorMessage
       });
     }
-
     return isValid;
   };
 
@@ -168,7 +163,6 @@ const Offerte: React.FC = () => {
   const sendFormData = async (data: OfferteFormData) => {
     try {
       const params = new URLSearchParams();
-      
       for (const [key, value] of Object.entries(data)) {
         if (typeof value === 'object') {
           params.append(key, JSON.stringify(value));
@@ -176,17 +170,14 @@ const Offerte: React.FC = () => {
           params.append(key, String(value));
         }
       }
-      
       params.append('timestamp', new Date().toISOString());
       params.append('source', window.location.origin);
-      
       const response = await fetch(`${FORM_SUBMISSION_ENDPOINT}?${params.toString()}`, {
         method: 'GET',
         headers: {
-          'Accept': 'application/json',
-        },
+          'Accept': 'application/json'
+        }
       });
-      
       console.log('Form data submitted successfully to N8N');
       return true;
     } catch (error) {
@@ -216,8 +207,10 @@ const Offerte: React.FC = () => {
         // Opportunity Information
         opportunity: {
           name: `Offerte Aanvraag - ${data.firstName} ${data.lastName}`,
-          value: 0, // Set an estimated value if known
-          pipelineStageId: "new", // Replace with your actual pipeline stage ID
+          value: 0,
+          // Set an estimated value if known
+          pipelineStageId: "new",
+          // Replace with your actual pipeline stage ID
           status: "open",
           source: "Website Offerte"
         },
@@ -227,22 +220,20 @@ const Offerte: React.FC = () => {
           projectType: data.projectType,
           propertyType: data.propertyType,
           timeline: data.timeline,
-          
           // Window Details
           windowTypes: Array.isArray(data.windowTypes) ? data.windowTypes.join(", ") : data.windowTypes,
           quantity: data.quantity,
           dimensions: data.dimensions,
           color: data.color,
           additionalInfo: data.additionalInfo || "Geen extra informatie",
-          
           // Contact Preferences
           preferredContact: data.preferredContact,
           termsAccepted: data.termsAccepted ? "Ja" : "Nee",
-          
           // Availability details
           availabilityTimes: Array.isArray(data.availability) ? data.availability.join(", ") : data.availability,
-          availabilityDetails: data.availabilitySchedule || "{}", // The full schedule JSON
-          
+          availabilityDetails: data.availabilitySchedule || "{}",
+          // The full schedule JSON
+
           // Additional form metadata
           formSubmissionDate: new Date().toISOString(),
           formSubmissionOrigin: window.location.origin,
@@ -255,27 +246,23 @@ const Offerte: React.FC = () => {
           formType: "Offerte Aanvraag"
         }
       };
-
       console.log("Sending to GHL webhook:", JSON.stringify(ghlPayload, null, 2));
-
       const response = await fetch(GHL_WEBHOOK_URL, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(ghlPayload)
       });
-
       if (!response.ok) {
         const responseText = await response.text();
         throw new Error(`GHL webhook error: ${response.status} - ${responseText}`);
       }
-
       console.log('Form data submitted successfully to GoHighLevel webhook');
       return true;
     } catch (error) {
       console.error('Error submitting to GoHighLevel webhook:', error);
-      
+
       // Implement retry logic for transient errors
       if (retryCount < WEBHOOK_RETRY_ATTEMPTS) {
         console.log(`Retrying GHL webhook submission (${retryCount + 1}/${WEBHOOK_RETRY_ATTEMPTS})...`);
@@ -283,7 +270,6 @@ const Offerte: React.FC = () => {
         await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, retryCount)));
         return sendToGHLWebhook(data, retryCount + 1);
       }
-      
       return false;
     }
   };
@@ -291,46 +277,39 @@ const Offerte: React.FC = () => {
   // Updated submitForm function to use both webhooks with N8N as fallback
   const submitForm = async () => {
     if (!validateCurrentStep()) return;
-    
     setIsSubmitting(true);
-    
     try {
       // Create a flag to track overall success status
       let submissionSuccess = false;
-      
+
       // Try the GoHighLevel webhook first
       const ghlSuccess = await sendToGHLWebhook(formData);
-      
       if (ghlSuccess) {
         submissionSuccess = true;
         console.log('GoHighLevel webhook submission successful');
       } else {
         console.warn('GoHighLevel webhook submission failed, trying backup N8N webhook...');
-        
+
         // If GHL webhook fails, fall back to N8N webhook
         const n8nSuccess = await sendFormData(formData);
-        
         if (n8nSuccess) {
           submissionSuccess = true;
           console.log('Backup N8N webhook submission successful');
         }
       }
-      
+
       // If all submission methods failed
       if (!submissionSuccess) {
         throw new Error('All submission methods failed');
       }
-      
+
       // Add slight delay for better UX
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
       toast({
         title: "Offerte aanvraag verzonden!",
-        description: "We nemen zo spoedig mogelijk contact met u op.",
+        description: "We nemen zo spoedig mogelijk contact met u op."
       });
-      
       navigate('/offerte/success');
-      
       setFormData(initialFormData);
       setStep(1);
     } catch (error) {
@@ -338,67 +317,36 @@ const Offerte: React.FC = () => {
       toast({
         variant: "destructive",
         title: "Er is een fout opgetreden",
-        description: "Probeer het later opnieuw of neem telefonisch contact op.",
+        description: "Probeer het later opnieuw of neem telefonisch contact op."
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
   const handleNavigate = (e: React.FormEvent) => {
     e.preventDefault();
     nextStep();
   };
-
   const renderStepContent = () => {
     switch (step) {
       case 1:
-        return (
-          <ProjectTypeStep 
-            formData={formData} 
-            updateFormData={updateFormData} 
-          />
-        );
+        return <ProjectTypeStep formData={formData} updateFormData={updateFormData} />;
       case 2:
-        return (
-          <WindowDetailsStep 
-            formData={formData} 
-            updateFormData={updateFormData} 
-          />
-        );
+        return <WindowDetailsStep formData={formData} updateFormData={updateFormData} />;
       case 3:
-        return (
-          <ContactInfoStep 
-            formData={formData} 
-            updateFormData={updateFormData} 
-          />
-        );
+        return <ContactInfoStep formData={formData} updateFormData={updateFormData} />;
       case 4:
-        return (
-          <FinalStep 
-            formData={formData} 
-            updateFormData={updateFormData} 
-          />
-        );
+        return <FinalStep formData={formData} updateFormData={updateFormData} />;
       case 5:
-        return (
-          <ReviewStep 
-            formData={formData} 
-          />
-        );
+        return <ReviewStep formData={formData} />;
       default:
         return null;
     }
   };
-
-  return (
-    <>
+  return <>
       <Helmet>
         <title>Offerte Aanvragen | Duurzaam Wonen Nederland</title>
-        <meta 
-          name="description" 
-          content="Vraag vrijblijvend een offerte aan voor kunststof kozijnen op maat. Vul onze eenvoudige wizard in en ontvang een gepersonaliseerde offerte."
-        />
+        <meta name="description" content="Vraag vrijblijvend een offerte aan voor kunststof kozijnen op maat. Vul onze eenvoudige wizard in en ontvang een gepersonaliseerde offerte." />
       </Helmet>
       
       <Navbar />
@@ -416,14 +364,13 @@ const Offerte: React.FC = () => {
             <div className="lg:col-span-3">
               <Card className="bg-white shadow-sm border-0">
                 <CardContent className="p-6 sm:p-8">
-                  {step < totalSteps ? (
-                    <form onSubmit={handleNavigate}>
+                  {step < totalSteps ? <form onSubmit={handleNavigate}>
                       <div className="mb-8">
                         <div className="flex justify-between mb-2">
                           <span className="text-sm font-medium">Stap {step} van {totalSteps}</span>
-                          <span className="text-sm font-medium">{Math.round((step / totalSteps) * 100)}% voltooid</span>
+                          <span className="text-sm font-medium">{Math.round(step / totalSteps * 100)}% voltooid</span>
                         </div>
-                        <Progress value={(step / totalSteps) * 100} className="h-2" />
+                        <Progress value={step / totalSteps * 100} className="h-2" />
                       </div>
                       
                       <div className="min-h-[400px]">
@@ -431,38 +378,23 @@ const Offerte: React.FC = () => {
                       </div>
                       
                       <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 mt-8">
-                        {step > 1 ? (
-                          <Button
-                            type="button"
-                            variant="outline"
-                            onClick={prevStep}
-                            disabled={isSubmitting}
-                            className="w-full sm:w-auto"
-                          >
+                        {step > 1 ? <Button type="button" variant="outline" onClick={prevStep} disabled={isSubmitting} className="w-full sm:w-auto">
                             <ArrowLeft className="mr-2 h-4 w-4" />
                             Vorige
-                          </Button>
-                        ) : (
-                          <div></div>
-                        )}
+                          </Button> : <div></div>}
                         
-                        <Button 
-                          type="submit"
-                          className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto"
-                        >
+                        <Button type="submit" className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto">
                           Volgende
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
                       </div>
-                    </form>
-                  ) : (
-                    <div>
+                    </form> : <div>
                       <div className="mb-8">
                         <div className="flex justify-between mb-2">
                           <span className="text-sm font-medium">Stap {step} van {totalSteps}</span>
-                          <span className="text-sm font-medium">{Math.round((step / totalSteps) * 100)}% voltooid</span>
+                          <span className="text-sm font-medium">{Math.round(step / totalSteps * 100)}% voltooid</span>
                         </div>
-                        <Progress value={(step / totalSteps) * 100} className="h-2" />
+                        <Progress value={step / totalSteps * 100} className="h-2" />
                       </div>
                       
                       <div className="min-h-[400px]">
@@ -470,35 +402,19 @@ const Offerte: React.FC = () => {
                       </div>
                       
                       <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 mt-8">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={prevStep}
-                          disabled={isSubmitting}
-                          className="w-full sm:w-auto"
-                        >
+                        <Button type="button" variant="outline" onClick={prevStep} disabled={isSubmitting} className="w-full sm:w-auto">
                           <ArrowLeft className="mr-2 h-4 w-4" />
                           Vorige
                         </Button>
                         
-                        <Button 
-                          type="button"
-                          className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto"
-                          onClick={submitForm}
-                          disabled={isSubmitting}
-                        >
-                          {isSubmitting ? (
-                            <>Verzenden...</>
-                          ) : (
-                            <>
+                        <Button type="button" className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto" onClick={submitForm} disabled={isSubmitting}>
+                          {isSubmitting ? <>Verzenden...</> : <>
                               <CheckCircle className="mr-2 h-4 w-4" />
                               Offerte aanvragen
-                            </>
-                          )}
+                            </>}
                         </Button>
                       </div>
-                    </div>
-                  )}
+                    </div>}
                 </CardContent>
               </Card>
             </div>
@@ -524,7 +440,7 @@ const Offerte: React.FC = () => {
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="bg-brand-green text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium flex-shrink-0">3</span>
-                    <span>We plannen een vrijblijvende inmeting bij u thuis</span>
+                    <span>We plannen een vrijblijvend adviesgesprek bij u thuis</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="bg-brand-green text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium flex-shrink-0">4</span>
@@ -538,8 +454,6 @@ const Offerte: React.FC = () => {
       </div>
       
       <Footer />
-    </>
-  );
+    </>;
 };
-
 export default Offerte;
