@@ -1,4 +1,3 @@
-
 // Only updating the links to the new pages (section with Card links to specific types)
 
 import React, { useState } from 'react';
@@ -25,81 +24,74 @@ import ProductFilters from '@/components/kunststof-kozijnen/ProductFilters';
 import KozijnenHero from '@/components/kunststof-kozijnen/KozijnenHero';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-
-const products = [
-  {
-    id: 1,
-    name: 'Trocal 76 Kozijn',
-    image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
-    rating: 4.9,
-    reviewCount: 123,
-    features: ['Uitstekende isolatie', 'Nederlands fabricaat', 'Onderhoudsarm'],
-    price: '€199',
-    perUnit: 'per m²',
-    category: 'draai-kiep',
-    material: 'kunststof',
-    color: 'wit',
-  },
-  {
-    id: 2,
-    name: 'Trocal 88 Premium Kozijn',
-    image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
-    rating: 5.0,
-    reviewCount: 87,
-    features: ['Topprestaties in isolatie', 'Slanke profielen', 'Onderhoudsarm'],
-    price: '€249',
-    perUnit: 'per m²',
-    category: 'vast',
-    material: 'kunststof',
-    color: 'antraciet',
-  },
-  {
-    id: 3,
-    name: 'Gealan S9000 Kozijn',
-    image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
-    rating: 4.7,
-    reviewCount: 56,
-    features: ['Triple beglazing mogelijk', 'Duits fabricaat', 'Duurzaam'],
-    price: '€229',
-    perUnit: 'per m²',
-    category: 'schuif',
-    material: 'kunststof',
-    color: 'grijs',
-  },
-  {
-    id: 4,
-    name: 'Veka Softline 82 Kozijn',
-    image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
-    rating: 4.8,
-    reviewCount: 92,
-    features: ['Energiezuinig', 'Inbraakwerend', 'Geluidsisolerend'],
-    price: '€239',
-    perUnit: 'per m²',
-    category: 'draai-kiep',
-    material: 'kunststof',
-    color: 'houtlook',
-  },
-];
-
+const products = [{
+  id: 1,
+  name: 'Trocal 76 Kozijn',
+  image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
+  rating: 4.9,
+  reviewCount: 123,
+  features: ['Uitstekende isolatie', 'Nederlands fabricaat', 'Onderhoudsarm'],
+  price: '€199',
+  perUnit: 'per m²',
+  category: 'draai-kiep',
+  material: 'kunststof',
+  color: 'wit'
+}, {
+  id: 2,
+  name: 'Trocal 88 Premium Kozijn',
+  image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
+  rating: 5.0,
+  reviewCount: 87,
+  features: ['Topprestaties in isolatie', 'Slanke profielen', 'Onderhoudsarm'],
+  price: '€249',
+  perUnit: 'per m²',
+  category: 'vast',
+  material: 'kunststof',
+  color: 'antraciet'
+}, {
+  id: 3,
+  name: 'Gealan S9000 Kozijn',
+  image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
+  rating: 4.7,
+  reviewCount: 56,
+  features: ['Triple beglazing mogelijk', 'Duits fabricaat', 'Duurzaam'],
+  price: '€229',
+  perUnit: 'per m²',
+  category: 'schuif',
+  material: 'kunststof',
+  color: 'grijs'
+}, {
+  id: 4,
+  name: 'Veka Softline 82 Kozijn',
+  image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png',
+  rating: 4.8,
+  reviewCount: 92,
+  features: ['Energiezuinig', 'Inbraakwerend', 'Geluidsisolerend'],
+  price: '€239',
+  perUnit: 'per m²',
+  category: 'draai-kiep',
+  material: 'kunststof',
+  color: 'houtlook'
+}];
 const filters = {
   type: ['Vast kozijn', 'Draai-kiep kozijn', 'Schuifpui'],
   material: ['Kunststof', 'Kunststof met aluminium look'],
   color: ['Wit', 'Antraciet', 'Grijs', 'Crème', 'Houtlook'],
-  features: ['Triple beglazing', 'Inbraakwerend', 'Geluidsisolerend', 'Onderhoudsarm'],
+  features: ['Triple beglazing', 'Inbraakwerend', 'Geluidsisolerend', 'Onderhoudsarm']
 };
-
 const KunststofKozijnen: React.FC = () => {
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({
     type: [],
     material: [],
     color: [],
-    features: [],
+    features: []
   });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-
   const toggleFilter = (category: string, value: string) => {
     setActiveFilters(prev => {
-      const newFilters = { ...prev };
+      const newFilters = {
+        ...prev
+      };
       if (newFilters[category].includes(value)) {
         newFilters[category] = newFilters[category].filter(item => item !== value);
       } else {
@@ -108,9 +100,7 @@ const KunststofKozijnen: React.FC = () => {
       return newFilters;
     });
   };
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>Kunststof Kozijnen | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Bekijk ons assortiment kunststof kozijnen. Hoogwaardige, energiezuinige en onderhoudsarme kozijnen voor uw woning." />
@@ -483,7 +473,7 @@ const KunststofKozijnen: React.FC = () => {
                       </li>
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Premium kwaliteit</span>
+                        <span>Uitgebreid kleurenaanbod</span>
                       </li>
                     </ul>
                     <div className="mt-4">
@@ -570,11 +560,7 @@ const KunststofKozijnen: React.FC = () => {
               
               <div className="lg:w-1/2">
                 <AnimatedSection className="rounded-lg overflow-hidden shadow-md" animation="fade-in" delay={200}>
-                  <img 
-                    src="/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png" 
-                    alt="Kunststof kozijn detail" 
-                    className="w-full h-auto"
-                  />
+                  <img src="/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png" alt="Kunststof kozijn detail" className="w-full h-auto" />
                 </AnimatedSection>
                 
                 <AnimatedSection className="mt-6 bg-gray-50 p-6 rounded-lg" animation="fade-in" delay={300}>
@@ -714,8 +700,6 @@ const KunststofKozijnen: React.FC = () => {
       
       <Footer />
       <ScrollToTop />
-    </div>
-  );
+    </div>;
 };
-
 export default KunststofKozijnen;
