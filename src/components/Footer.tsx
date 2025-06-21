@@ -126,7 +126,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 text-brand-green mr-3 flex-shrink-0" />
-                <a href="mailto:info@duurzaamwonen.info" className="text-gray-300 hover:text-brand-green">info@duurzaamwonen.info</a>
+                <a href="mailto:kantoor@duurzaamwonen.info" className="text-gray-300 hover:text-brand-green">kantoor@duurzaamwonen.info</a>
               </li>
             </ul>
           </div>
