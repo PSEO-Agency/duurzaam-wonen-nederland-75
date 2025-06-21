@@ -1,4 +1,3 @@
-
 // Only updating the links to the new pages (section with Card links to specific types)
 
 import React, { useState } from 'react';
@@ -305,10 +304,6 @@ const KunststofKozijnen: React.FC = () => {
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
                         <span>Stolpstel kozijn</span>
                       </li>
-                      <li className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Harmonica kozijn</span>
-                      </li>
                     </ul>
                     <div className="mt-4">
                       <Link to="/kunststof-kozijnen/types" className="text-brand-green flex items-center hover:underline">
@@ -431,7 +426,7 @@ const KunststofKozijnen: React.FC = () => {
               <AnimatedSection animation="fade-in" delay={500}>
                 <Card className="h-full hover:shadow-md transition-shadow">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-4">Prijssegment</h3>
+                    <h3 className="text-xl font-semibold mb-4">Prijzen</h3>
                     <ul className="space-y-2">
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
@@ -467,32 +462,32 @@ const KunststofKozijnen: React.FC = () => {
               <AnimatedSection animation="fade-in" delay={600}>
                 <Card className="h-full hover:shadow-md transition-shadow">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-4">(Keur)Merken</h3>
+                    <h3 className="text-xl font-semibold mb-4">Schüco</h3>
                     <ul className="space-y-2">
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Schüco</span>
+                        <span>Schüco CT 70</span>
                       </li>
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Veka</span>
+                        <span>Schüco LivIng</span>
                       </li>
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Kömmerling</span>
+                        <span>Schüco Corona</span>
                       </li>
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Deceuninck</span>
+                        <span>Schüco AWS</span>
                       </li>
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Gealan</span>
+                        <span>Premium kwaliteit</span>
                       </li>
                     </ul>
                     <div className="mt-4">
-                      <Link to="/kunststof-kozijnen/merken" className="text-brand-green flex items-center hover:underline">
-                        <span>Bekijk alle merken</span>
+                      <Link to="/brands/schuco" className="text-brand-green flex items-center hover:underline">
+                        <span>Bekijk Schüco producten</span>
                         <ArrowRight className="ml-1 h-4 w-4" />
                       </Link>
                     </div>
