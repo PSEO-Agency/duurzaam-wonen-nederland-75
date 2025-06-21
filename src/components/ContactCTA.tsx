@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -41,8 +40,8 @@ const ContactCTA: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="font-medium mb-1">E-mail</h4>
-                      <a href="mailto:info@duurzaamwonen.info" className="text-brand-green hover:underline">
-                        info@duurzaamwonen.info
+                      <a href="mailto:kantoor@duurzaamwonen.info" className="text-brand-green hover:underline">
+                        kantoor@duurzaamwonen.info
                       </a>
                     </div>
                   </div>

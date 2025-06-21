@@ -76,7 +76,7 @@ const Contact: React.FC = () => {
                       <div>
                         <h3 className="font-semibold text-lg">E-mail</h3>
                         <p className="text-gray-600 mb-2">We reageren binnen 24 uur op uw bericht</p>
-                        <a href="mailto:info@duurzaamwonen.info" className="text-brand-green font-medium hover:underline">info@duurzaamwonen.info</a>
+                        <a href="mailto:kantoor@duurzaamwonen.info" className="text-brand-green font-medium hover:underline">kantoor@duurzaamwonen.info</a>
                       </div>
                     </div>
                     
