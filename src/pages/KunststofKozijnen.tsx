@@ -1,3 +1,4 @@
+
 // Only updating the links to the new pages (section with Card links to specific types)
 
 import React, { useState } from 'react';
@@ -466,19 +467,19 @@ const KunststofKozijnen: React.FC = () => {
                     <ul className="space-y-2">
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Schüco CT 70</span>
+                        <span>CT70</span>
                       </li>
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Schüco LivIng</span>
+                        <span>Living</span>
                       </li>
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Schüco Corona</span>
+                        <span>Duitse Topkwaliteit</span>
                       </li>
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
-                        <span>Schüco AWS</span>
+                        <span>Uitstekende isolatie</span>
                       </li>
                       <li className="flex items-center">
                         <div className="w-3 h-3 rounded-full bg-brand-green mr-2"></div>
