@@ -15,6 +15,7 @@ import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
 import ContactCTA from '@/components/ContactCTA';
 import ProductDetails from '@/components/kunststof-kozijnen/ProductDetails';
 import { Link } from 'react-router-dom';
+import { ralColorCategories } from '@/data/ralColors';
 
 interface ColorOption {
   name: string;
@@ -532,7 +533,7 @@ const ColorOptions: React.FC = () => {
                           </div>
                         </TabsContent>
 
-                        {Object.entries(ralColorCategories).map(([categoryKey, categoryName]) => (
+                        {(Object.entries(ralColorCategories) as [string, string][]).map(([categoryKey, categoryName]) => (
                           <TabsContent key={categoryKey} value={categoryKey}>
                             <div className="mb-4">
                               <h4 className="text-lg font-semibold mb-2">{categoryName} kleuren</h4>
