@@ -444,7 +444,7 @@ const Offerte: React.FC = () => {
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="bg-brand-green text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium flex-shrink-0">4</span>
-                    <span>U ontvangt een gedetailleerde offerte op maat</span>
+                    <span>U ontvangt een aantrekkelijke offerte op maat</span>
                   </li>
                 </ol>
               </div>
