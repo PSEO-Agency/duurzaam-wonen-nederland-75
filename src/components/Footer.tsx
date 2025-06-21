@@ -2,9 +2,21 @@
 import React from 'react';
 import { Facebook, Instagram, MapPin, Phone, Mail, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useProducts } from '@/hooks/useProducts';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const { data: products = [] } = useProducts();
+  
+  // Create dynamic service items - same as in Services component
+  const dynamicServices = products.map(product => ({
+    label: product.name,
+    href: `/${product.slug}`
+  }));
+
+  // Add Kunststof Kozijnen as the first item (same as in other components)
+  const kunststofKozijnenItem = { label: 'Kunststof kozijnen', href: '/kunststof-kozijnen' };
+  const allServiceItems = [kunststofKozijnenItem, ...dynamicServices];
   
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8">
@@ -85,22 +97,15 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           
-          {/* Services */}
+          {/* Services - Now Dynamic */}
           <div>
             <h4 className="text-lg font-semibold mb-6">Onze oplossingen</h4>
             <ul className="space-y-3">
-              {[
-                'Kunststof kozijnen', 
-                'Dakkapellen', 
-                'Gevelbekleding', 
-                'Zonwering', 
-                'Voordeuren',
-                'Schu­if­puien'
-              ].map((service) => (
-                <li key={service}>
-                  <Link to="/oplossingen" className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
+              {allServiceItems.map((service) => (
+                <li key={service.label}>
+                  <Link to={service.href} className="text-gray-300 hover:text-brand-green transition-colors duration-200 flex items-center">
                     <ChevronRight className="h-4 w-4 mr-2" />
-                    {service}
+                    {service.label}
                   </Link>
                 </li>
               ))}
