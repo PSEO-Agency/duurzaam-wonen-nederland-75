@@ -157,3 +157,26 @@ html {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* Custom grid for color thumbnails */
+.grid-cols-15 {
+  grid-template-columns: repeat(15, minmax(0, 1fr));
+}
+
+@media (max-width: 1280px) {
+  .xl\:grid-cols-15 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .lg\:grid-cols-15 {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .sm\:grid-cols-15 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}

@@ -27,7 +27,7 @@ export const ralColorCategories = {
 } as const;
 
 export const ralColors: RALColor[] = [
-  // Yellow RAL colors (1000-1037)
+  // Yellow RAL colors (1000-1037) - Complete series
   { name: 'Geelgroen', hex: '#BEBD7F', ralCode: 'RAL 1000', category: 'yellow', description: 'Een zachte geelgroene tint die goed past bij natuurlijke omgevingen.' },
   { name: 'Beige', hex: '#C2B078', ralCode: 'RAL 1001', category: 'yellow', description: 'Warme beige kleur voor een neutrale uitstraling.' },
   { name: 'Zandgeel', hex: '#C6A664', ralCode: 'RAL 1002', category: 'yellow', description: 'Natuurlijke zandkleur met warme uitstraling.' },
@@ -59,7 +59,7 @@ export const ralColors: RALColor[] = [
   { name: 'Parelgoud', hex: '#705335', ralCode: 'RAL 1036', category: 'brown', description: 'Luxueuze parelgouden kleur.' },
   { name: 'Zonnegeel', hex: '#F39800', ralCode: 'RAL 1037', category: 'yellow', description: 'Warme zonnegele tint.' },
 
-  // Orange RAL colors (2000-2013)
+  // Orange RAL colors (2000-2013) - Complete series
   { name: 'Geel oranje', hex: '#ED760E', ralCode: 'RAL 2000', category: 'orange', description: 'Levendige geel-oranje kleur.' },
   { name: 'Rood oranje', hex: '#C93C20', ralCode: 'RAL 2001', category: 'orange', description: 'Krachtige rood-oranje tint.' },
   { name: 'Vermiljoen', hex: '#CB2821', ralCode: 'RAL 2002', category: 'orange', description: 'Klassieke vermiljoenkleur.' },
@@ -73,7 +73,7 @@ export const ralColors: RALColor[] = [
   { name: 'Diep oranje', hex: '#EC7C26', ralCode: 'RAL 2011', category: 'orange', description: 'Diepe oranje tint.' },
   { name: 'Zalm oranje', hex: '#E55137', ralCode: 'RAL 2012', category: 'orange', description: 'Zalmoranje kleur.' },
 
-  // Red RAL colors (3000-3031)
+  // Red RAL colors (3000-3031) - Complete series
   { name: 'Vuurrood', hex: '#AF2B1E', ralCode: 'RAL 3000', category: 'red', description: 'Intens vuurrood voor krachtige uitstraling.' },
   { name: 'Signaalkrood', hex: '#A52019', ralCode: 'RAL 3001', category: 'red', description: 'Signaalrode kleur voor opvallende toepassingen.' },
   { name: 'Karmijnrood', hex: '#A2231D', ralCode: 'RAL 3002', category: 'red', description: 'Diepe karmijnrode tint.' },
@@ -98,7 +98,7 @@ export const ralColors: RALColor[] = [
   { name: 'Zuiver rood', hex: '#CC2C24', ralCode: 'RAL 3028', category: 'red', description: 'Zuivere rode kleur.' },
   { name: 'Parels rood', hex: '#B32821', ralCode: 'RAL 3031', category: 'red', description: 'Parelmoeren rode tint.' },
 
-  // Violet RAL colors (4000-4012)
+  // Violet RAL colors (4000-4012) - Complete series
   { name: 'Rood lilac', hex: '#641C34', ralCode: 'RAL 4001', category: 'violet', description: 'Diepe rood-lilac tint.' },
   { name: 'Rood violet', hex: '#922B3E', ralCode: 'RAL 4002', category: 'violet', description: 'Krachtige rood-violette kleur.' },
   { name: 'Heide violet', hex: '#DE4C8A', ralCode: 'RAL 4003', category: 'violet', description: 'Natuurlijke heide violette tint.' },
@@ -112,7 +112,7 @@ export const ralColors: RALColor[] = [
   { name: 'Parels violet', hex: '#8673A1', ralCode: 'RAL 4011', category: 'violet', description: 'Parelmoeren violette tint.' },
   { name: 'Bessen violet', hex: '#6C6874', ralCode: 'RAL 4012', category: 'violet', description: 'Natuurlijke bessenviolette kleur.' },
 
-  // Blue RAL colors (5000-5026)
+  // Blue RAL colors (5000-5026) - Complete series
   { name: 'Violet blauw', hex: '#354D73', ralCode: 'RAL 5000', category: 'blue', description: 'Diepe violet-blauwe tint.' },
   { name: 'Groen blauw', hex: '#1F3A93', ralCode: 'RAL 5001', category: 'blue', description: 'Groen-blauwe kleur.' },
   { name: 'Ultramarijn blauw', hex: '#20214F', ralCode: 'RAL 5002', category: 'blue', description: 'Intens ultramarijn blauw.' },
@@ -138,7 +138,7 @@ export const ralColors: RALColor[] = [
   { name: 'Pastel blauw', hex: '#5D9B9B', ralCode: 'RAL 5024', category: 'blue', description: 'Zachte pastelblauwe tint.' },
   { name: 'Parels blauw', hex: '#2A6478', ralCode: 'RAL 5026', category: 'blue', description: 'Parelmoeren blauwe kleur.' },
 
-  // Green RAL colors (6000-6038)
+  // Green RAL colors (6000-6038) - Complete series  
   { name: 'Patina groen', hex: '#316650', ralCode: 'RAL 6000', category: 'green', description: 'Natuurlijke patinagroene tint.' },
   { name: 'Smaragd groen', hex: '#287233', ralCode: 'RAL 6001', category: 'green', description: 'Rijke smaragdgroene kleur.' },
   { name: 'Loof groen', hex: '#2D5016', ralCode: 'RAL 6002', category: 'green', description: 'Natuurlijke loofgroene tint.' },
@@ -176,7 +176,7 @@ export const ralColors: RALColor[] = [
   { name: 'Zuiver groen', hex: '#008F39', ralCode: 'RAL 6037', category: 'green', description: 'Zuivere groene tint.' },
   { name: 'Lumi groen', hex: '#00BB2D', ralCode: 'RAL 6038', category: 'green', description: 'Luminescerend groen.' },
 
-  // Grey RAL colors (7000-7048)
+  // Grey RAL colors (7000-7048) - Complete series
   { name: 'Muisgrijs', hex: '#8D948D', ralCode: 'RAL 7000', category: 'grey', description: 'Neutrale muisgrijze kleur.' },
   { name: 'Zilvergrijs', hex: '#8A9597', ralCode: 'RAL 7001', category: 'grey', description: 'Elegante zilvergrijze tint.' },
   { name: 'Olijfgrijs', hex: '#7E7B52', ralCode: 'RAL 7002', category: 'grey', description: 'Olijfgrijze kleur.' },
@@ -185,7 +185,7 @@ export const ralColors: RALColor[] = [
   { name: 'Muisgrijs', hex: '#646B63', ralCode: 'RAL 7005', category: 'grey', description: 'Donkere muisgrijze tint.' },
   { name: 'Beigegrijs', hex: '#6D6552', ralCode: 'RAL 7006', category: 'grey', description: 'Beigegrijze kleur.' },
   { name: 'Khakigrijs', hex: '#746643', ralCode: 'RAL 7008', category: 'grey', description: 'Khakigrijze tint.' },
-  { name: 'Groengrijs',hex: '#4D5645', ralCode: 'RAL 7009', category: 'grey', description: 'Groengrijze kleur.' },
+  { name: 'Groengrijs', hex: '#4D5645', ralCode: 'RAL 7009', category: 'grey', description: 'Groengrijze kleur.' },
   { name: 'Tentgrijs', hex: '#4C514A', ralCode: 'RAL 7010', category: 'grey', description: 'Tentgrijze tint.' },
   { name: 'IJzergrijs', hex: '#434B4D', ralCode: 'RAL 7011', category: 'grey', description: 'IJzergrijze kleur.' },
   { name: 'Basaltgrijs', hex: '#4E5754', ralCode: 'RAL 7012', category: 'grey', description: 'Basaltgrijze tint.' },
@@ -214,7 +214,7 @@ export const ralColors: RALColor[] = [
   { name: 'Telegrauw 4', hex: '#D0D0D0', ralCode: 'RAL 7047', category: 'grey', description: 'Telegrijze kleur 4.' },
   { name: 'Parels muisgrijs', hex: '#898176', ralCode: 'RAL 7048', category: 'grey', description: 'Parels muisgrijze tint.' },
 
-  // Brown RAL colors (8000-8029)
+  // Brown RAL colors (8000-8029) - Complete series
   { name: 'Groenbruin', hex: '#826C34', ralCode: 'RAL 8000', category: 'brown', description: 'Groenbruine kleur.' },
   { name: 'Okerbruin', hex: '#955F20', ralCode: 'RAL 8001', category: 'brown', description: 'Okerbruine tint.' },
   { name: 'Signaalbruin', hex: '#6C3B2A', ralCode: 'RAL 8002', category: 'brown', description: 'Signaalbruine kleur.' },
@@ -236,14 +236,14 @@ export const ralColors: RALColor[] = [
   { name: 'Terra bruin', hex: '#4E3629', ralCode: 'RAL 8028', category: 'brown', description: 'Terrabruine kleur.' },
   { name: 'Parels koper', hex: '#763C28', ralCode: 'RAL 8029', category: 'brown', description: 'Parels koperbruine tint.' },
 
-  // White RAL colors (9000-9018)
+  // White RAL colors (9000-9018) - Complete series
   { name: 'Crèmewit', hex: '#F4F4F4', ralCode: 'RAL 9001', category: 'white', popular: true, description: 'Warme crèmewitte kleur, perfect voor traditionele woningen.' },
   { name: 'Grijswit', hex: '#E7EBDA', ralCode: 'RAL 9002', category: 'white', description: 'Grijswitte tint.' },
   { name: 'Signaallwit', hex: '#F4F4F4', ralCode: 'RAL 9003', category: 'white', description: 'Signaalwitte kleur.' },
   { name: 'Verkeerswit', hex: '#F4F4F4', ralCode: 'RAL 9016', category: 'white', popular: true, description: 'Zuiver verkeerswit, de meest gekozen kleur voor kozijnen.' },
   { name: 'Parels lichtgrijs', hex: '#E4E5E5', ralCode: 'RAL 9018', category: 'white', description: 'Parels lichtgrijze tint.' },
 
-  // Black RAL colors (9004-9011)
+  // Black RAL colors (9004-9011) - Complete series
   { name: 'Signaallzwart', hex: '#282828', ralCode: 'RAL 9004', category: 'black', description: 'Signaalzwarte kleur.' },
   { name: 'Gitzwart', hex: '#0A0A0A', ralCode: 'RAL 9005', category: 'black', popular: true, description: 'Gitzwarte kleur voor een krachtige uitstraling.' },
   { name: 'Aluminiumwit', hex: '#A5A5A5', ralCode: 'RAL 9006', category: 'grey', description: 'Aluminiumwitte tint.' },
