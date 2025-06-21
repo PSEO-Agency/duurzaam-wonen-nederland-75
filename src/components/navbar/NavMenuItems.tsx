@@ -1,69 +1,89 @@
-
 import React from 'react';
 import { NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu";
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
-
 interface MenuSection {
   label: string;
   href: string;
 }
-
 const menuItemClass = "text-gray-700 hover:text-brand-green transition-colors duration-200 text-sm font-medium px-2";
 const dropdownItemClass = "flex items-center text-gray-700 hover:text-brand-green transition-colors duration-200 py-2 text-sm";
-
-export const mainNavItems: MenuSection[] = [
-  { label: 'Projecten', href: '/projecten' },
-  { label: 'Rentevrije Financiering*', href: '/rentevrije-financiering' },
-  { label: 'Werkwijze', href: '/werkwijze' },
-  { label: 'Vacatures', href: '/vacatures' },
-];
-
-export const overOnsItems: MenuSection[] = [
-  { label: 'Ons team', href: '/over-ons/team' },
-  { label: 'Onze missie', href: '/over-ons/missie' },
-  { label: 'Duurzaamheid', href: '/over-ons/duurzaamheid' },
-  { label: 'Vacatures', href: '/over-ons/vacatures' },
-];
+export const mainNavItems: MenuSection[] = [{
+  label: 'Projecten',
+  href: '/projecten'
+}, {
+  label: 'Rentevrije Financiering*',
+  href: '/rentevrije-financiering'
+}, {
+  label: 'Werkwijze',
+  href: '/werkwijze'
+}, {
+  label: 'Vacatures',
+  href: '/vacatures'
+}];
+export const overOnsItems: MenuSection[] = [{
+  label: 'Ons team',
+  href: '/over-ons/team'
+}, {
+  label: 'Onze missie',
+  href: '/over-ons/missie'
+}, {
+  label: 'Duurzaamheid',
+  href: '/over-ons/duurzaamheid'
+}, {
+  label: 'Vacatures',
+  href: '/over-ons/vacatures'
+}];
 
 // Kunststof Kozijnen menu items organized in 3 columns
 const kunststofKozijnenItems = {
-  column1: [
-    { label: 'Wat zijn kunststof kozijnen?', href: '/kunststof-kozijnen#wat-zijn' },
-    { label: 'Voordelen kunststof kozijnen', href: '/kunststof-kozijnen#voordelen' },
-  ],
-  column2: [
-    { label: 'Schüco Kozijnen', href: '/kunststof-kozijnen/schuco' },
-    { label: 'Kozijnen Montage', href: '/kunststof-kozijnen/montage' },
-    { label: 'Kozijnen Prijzen', href: '/kunststof-kozijnen/prijzen' },
-  ],
-  column3: [
-    { label: 'Type Kozijn', href: '/kunststof-kozijnen/types' },
-    { label: 'Kleur Kozijn', href: '/kunststof-kozijnen/kleuren' },
-    { label: 'Kozijn Afmeting', href: '/kunststof-kozijnen/afmetingen' },
-    { label: 'Kozijn Profielen', href: '/kunststof-kozijnen/profielen' },
-  ]
+  column1: [{
+    label: 'Wat zijn kunststof kozijnen?',
+    href: '/kunststof-kozijnen#wat-zijn'
+  }, {
+    label: 'Voordelen kunststof kozijnen',
+    href: '/kunststof-kozijnen#voordelen'
+  }],
+  column2: [{
+    label: 'Schüco Kozijnen',
+    href: '/kunststof-kozijnen/schuco'
+  }, {
+    label: 'Kozijnen Montage',
+    href: '/kunststof-kozijnen/montage'
+  }, {
+    label: 'Kozijnen Prijzen',
+    href: '/kunststof-kozijnen/prijzen'
+  }],
+  column3: [{
+    label: 'Type Kozijn',
+    href: '/kunststof-kozijnen/types'
+  }, {
+    label: 'Kleur Kozijn',
+    href: '/kunststof-kozijnen/kleuren'
+  }, {
+    label: 'Kozijn Afmeting',
+    href: '/kunststof-kozijnen/afmetingen'
+  }, {
+    label: 'Kozijn Profielen',
+    href: '/kunststof-kozijnen/profielen'
+  }]
 };
-
 export const NavMenuItems = () => {
-  const { data: products = [] } = useProducts();
-
+  const {
+    data: products = []
+  } = useProducts();
   const renderMenuLink = (item: MenuSection) => {
     if (item.href.startsWith('#')) {
-      return (
-        <a href={item.href} className={dropdownItemClass}>
+      return <a href={item.href} className={dropdownItemClass}>
           <ChevronRight size={16} className="mr-2 flex-shrink-0" />
           <span>{item.label}</span>
-        </a>
-      );
+        </a>;
     }
-    return (
-      <Link to={item.href} className={dropdownItemClass}>
+    return <Link to={item.href} className={dropdownItemClass}>
         <ChevronRight size={16} className="mr-2 flex-shrink-0" />
         <span>{item.label}</span>
-      </Link>
-    );
+      </Link>;
   };
 
   // Transform all products to menu items
@@ -73,16 +93,17 @@ export const NavMenuItems = () => {
   }));
 
   // Add Kunststof Kozijnen as the first item
-  const kunststofKozijnenItem = { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' };
+  const kunststofKozijnenItem = {
+    label: 'Kunststof Kozijnen',
+    href: '/kunststof-kozijnen'
+  };
   const allItemsWithKozijnen = [kunststofKozijnenItem, ...allProductItems];
 
   // Split products into two columns (including the kunststof kozijnen item)
   const midPoint = Math.ceil(allItemsWithKozijnen.length / 2);
   const leftColumnItems = allItemsWithKozijnen.slice(0, midPoint);
   const rightColumnItems = allItemsWithKozijnen.slice(midPoint);
-
-  return (
-    <>
+  return <>
       <NavigationMenuItem>
         <NavigationMenuTrigger className={`${menuItemClass} bg-transparent`}>
           Kunststof Kozijnen
@@ -93,31 +114,25 @@ export const NavMenuItems = () => {
               <div className="flex-1">
                 <h4 className="font-semibold text-gray-900 mb-3 text-sm">Algemeen</h4>
                 <ul className="space-y-1">
-                  {kunststofKozijnenItems.column1.map((item) => (
-                    <li key={item.label}>
+                  {kunststofKozijnenItems.column1.map(item => <li key={item.label}>
                       {renderMenuLink(item)}
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Services</h4>
+                <h4 className="font-semibold text-gray-900 mb-3 text-sm">Diensten</h4>
                 <ul className="space-y-1">
-                  {kunststofKozijnenItems.column2.map((item) => (
-                    <li key={item.label}>
+                  {kunststofKozijnenItems.column2.map(item => <li key={item.label}>
                       {renderMenuLink(item)}
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </div>
               <div className="flex-1">
                 <h4 className="font-semibold text-gray-900 mb-3 text-sm">Opties</h4>
                 <ul className="space-y-1">
-                  {kunststofKozijnenItems.column3.map((item) => (
-                    <li key={item.label}>
+                  {kunststofKozijnenItems.column3.map(item => <li key={item.label}>
                       {renderMenuLink(item)}
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </div>
             </div>
@@ -134,20 +149,16 @@ export const NavMenuItems = () => {
             <div className="grid grid-cols-2 gap-8">
               <div className="flex-1">
                 <ul className="space-y-1">
-                  {leftColumnItems.map((item) => (
-                    <li key={item.label}>
+                  {leftColumnItems.map(item => <li key={item.label}>
                       {renderMenuLink(item)}
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </div>
               <div className="flex-1">
                 <ul className="space-y-1">
-                  {rightColumnItems.map((item) => (
-                    <li key={item.label}>
+                  {rightColumnItems.map(item => <li key={item.label}>
                       {renderMenuLink(item)}
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </div>
             </div>
@@ -155,15 +166,12 @@ export const NavMenuItems = () => {
         </NavigationMenuContent>
       </NavigationMenuItem>
 
-      {mainNavItems.map((item) => (
-        <NavigationMenuItem key={item.label}>
+      {mainNavItems.map(item => <NavigationMenuItem key={item.label}>
           <NavigationMenuLink asChild>
             <Link to={item.href} className={`${menuItemClass}`}>
               {item.label}
             </Link>
           </NavigationMenuLink>
-        </NavigationMenuItem>
-      ))}
-    </>
-  );
+        </NavigationMenuItem>)}
+    </>;
 };
