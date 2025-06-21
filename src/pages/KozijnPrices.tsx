@@ -71,32 +71,27 @@ const KozijnPrices: React.FC = () => {
     {
       aspect: 'Onderhoud',
       kunststof: 'Minimaal onderhoud, alleen schoonmaken',
-      hout: 'Regelmatig schilderwerk en behandeling nodig',
-      aluminium: 'Weinig onderhoud, incidenteel reinigen'
+      hout: 'Regelmatig schilderwerk en behandeling nodig'
     },
     {
       aspect: 'Levensduur',
       kunststof: '40-50 jaar bij goed onderhoud',
-      hout: '25-40 jaar afhankelijk van onderhoud',
-      aluminium: '50+ jaar, zeer duurzaam'
+      hout: '25-40 jaar afhankelijk van onderhoud'
     },
     {
       aspect: 'Isolatie',
       kunststof: 'Uitstekende isolatie door meerkamersysteem',
-      hout: 'Goede natuurlijke isolatie-eigenschappen',
-      aluminium: 'Goede isolatie met thermische onderbreking'
+      hout: 'Goede natuurlijke isolatie-eigenschappen'
     },
     {
       aspect: 'Uitstraling',
       kunststof: 'Modern, verkrijgbaar in vele kleuren',
-      hout: 'Klassiek en natuurlijk, authentieke uitstraling',
-      aluminium: 'Strak en modern, elegante afwerking'
+      hout: 'Klassiek en natuurlijk, authentieke uitstraling'
     },
     {
       aspect: 'Duurzaamheid',
       kunststof: '100% recyclebaar, energiezuinig',
-      hout: 'Duurzaam bij verantwoorde bosbouw (FSC)',
-      aluminium: '100% recyclebaar, lange levensduur'
+      hout: 'Duurzaam bij verantwoorde bosbouw (FSC)'
     }
   ];
 
@@ -442,16 +437,15 @@ const KozijnPrices: React.FC = () => {
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
               <h2 className="text-3xl font-bold mb-2 text-center">Materiaalvergelijking</h2>
-              <p className="text-gray-500 mb-8 text-center">Vergelijk de eigenschappen van verschillende kozijnmaterialen</p>
+              <p className="text-gray-500 mb-8 text-center">Vergelijk de eigenschappen van kunststof en houten kozijnen</p>
               
               <div className="overflow-x-auto bg-white rounded-lg shadow-sm">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="w-1/4">Eigenschap</TableHead>
-                      <TableHead className="w-1/4">Kunststof</TableHead>
-                      <TableHead className="w-1/4">Hout</TableHead>
-                      <TableHead className="w-1/4">Aluminium</TableHead>
+                      <TableHead className="w-1/3">Eigenschap</TableHead>
+                      <TableHead className="w-1/3">Kunststof</TableHead>
+                      <TableHead className="w-1/3">Hout</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -460,14 +454,13 @@ const KozijnPrices: React.FC = () => {
                         <TableCell className="font-medium">{item.aspect}</TableCell>
                         <TableCell>{item.kunststof}</TableCell>
                         <TableCell>{item.hout}</TableCell>
-                        <TableCell>{item.aluminium}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
               </div>
               
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="text-center">
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold mb-3 text-brand-green">Kunststof Kozijnen</h3>
@@ -490,19 +483,6 @@ const KozijnPrices: React.FC = () => {
                     </p>
                     <Button asChild variant="outline" className="w-full">
                       <Link to="/offerte">Offerte aanvragen</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-                
-                <Card className="text-center">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-3 text-slate-600">Aluminium Kozijnen</h3>
-                    <p className="text-gray-700 mb-4">
-                      Moderne en strakke uitstraling met lange levensduur, 
-                      ideaal voor grote glasoppervlakken en eigentijdse architectuur.
-                    </p>
-                    <Button asChild variant="outline" className="w-full">
-                      <Link to="/aluminium-kozijnen">Meer informatie</Link>
                     </Button>
                   </CardContent>
                 </Card>
