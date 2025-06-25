@@ -187,6 +187,42 @@ export type Database = {
           },
         ]
       }
+      og_images: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string
+          page_id: string | null
+          page_slug: string | null
+          page_type: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url: string
+          page_id?: string | null
+          page_slug?: string | null
+          page_type: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string
+          page_id?: string | null
+          page_slug?: string | null
+          page_type?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       product_categories: {
         Row: {
           created_at: string

@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -10,6 +9,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedSection from '@/components/AnimatedSection';
 import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
 import ContactCTA from '@/components/ContactCTA';
+import SEOHead from '@/components/SEOHead';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface RelatedItem {
@@ -33,6 +33,10 @@ interface SubpageTemplateProps {
   relatedItemsType?: string;
   breadcrumbTitle?: string;
   showContactCTA?: boolean;
+  pageType?: string;
+  pageSlug?: string;
+  pageId?: string;
+  keywords?: string[];
 }
 
 const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
@@ -50,16 +54,25 @@ const SubpageTemplate: React.FC<SubpageTemplateProps> = ({
   relatedItemsType = "kozijnen",
   breadcrumbTitle,
   showContactCTA = true,
+  pageType = 'page',
+  pageSlug,
+  pageId,
+  keywords = [],
 }) => {
   const isMobile = useIsMobile();
   
   return (
     <div className="min-h-screen flex flex-col">
-      <Helmet>
-        <title>{title} | Duurzaam Wonen Nederland</title>
-        <meta name="description" content={metaDescription} />
-        <link rel="canonical" href={`https://duurzaamwonen.info${canonicalUrl}`} />
-      </Helmet>
+      <SEOHead
+        title={title}
+        description={metaDescription}
+        canonicalUrl={canonicalUrl}
+        pageType={pageType}
+        pageSlug={pageSlug}
+        pageId={pageId}
+        imageUrl={mainImageUrl}
+        keywords={keywords}
+      />
       
       <Navbar />
       

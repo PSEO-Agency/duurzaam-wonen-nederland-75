@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { ArrowRight, MapPin, Calendar, Clock, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
@@ -8,15 +7,20 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedSection from '@/components/AnimatedSection';
 import ContactCTA from '@/components/ContactCTA';
+import SEOHead from '@/components/SEOHead';
 
 const Showroom: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Helmet>
-        <title>Showroom | Duurzaam Wonen Nederland</title>
-        <meta name="description" content="Bezoek onze showroom in Enschede en ontdek het volledige assortiment van Duurzaam Wonen Nederland. Plan eenvoudig een bezoek en laat u inspireren." />
-        <link rel="canonical" href="https://duurzaamwonen.info/showroom" />
-      </Helmet>
+      <SEOHead
+        title="Showroom - Ervaar onze producten in het echt"
+        description="Bezoek onze showroom in Enschede en ontdek het volledige assortiment van Duurzaam Wonen Nederland. Plan eenvoudig een bezoek en laat u inspireren."
+        canonicalUrl="/showroom"
+        pageType="page"
+        pageSlug="showroom"
+        imageUrl="/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png"
+        keywords={['showroom', 'Enschede', 'kunststof kozijnen', 'bezoek', 'ervaring', 'producten bekijken']}
+      />
       
       <Navbar />
       
