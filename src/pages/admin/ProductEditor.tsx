@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -373,7 +372,6 @@ const ProductEditor: React.FC = () => {
                 value={product.preview_image}
                 onChange={(url) => handleInputChange('preview_image', url)}
                 placeholder="/lovable-uploads/image.png"
-                helpText="Deze afbeelding wordt getoond in de Services sectie op de homepage"
               />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
