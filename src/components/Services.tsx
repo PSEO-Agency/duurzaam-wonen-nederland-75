@@ -11,8 +11,8 @@ const Services: React.FC = () => {
 
   // Manual item for Kunststof Kozijnen (always first)
   const manualKunststofKozijnen = {
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
-    title: 'Kunststof kozijnen',
+    image: '/lovable-uploads/76cef3dd-0b09-4d08-a7ff-78880edcb1f7.png',
+    title: 'Kunststof Kozijnen',
     description: 'Hoogwaardige kozijnen met uitstekende warmte- en geluidsisolatie.',
     features: ['HR++ of triple glas', 'Onderhoudsvrij', 'Diverse kleuren en stijlen'],
     slug: 'kunststof-kozijnen'
