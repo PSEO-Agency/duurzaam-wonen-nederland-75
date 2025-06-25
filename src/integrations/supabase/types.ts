@@ -387,6 +387,7 @@ export type Database = {
           options_categories: Json | null
           options_description: string | null
           options_title: string | null
+          preview_image: string | null
           pricing_info: string | null
           quick_links: Json | null
           seo_canonical_url: string | null
@@ -453,6 +454,7 @@ export type Database = {
           options_categories?: Json | null
           options_description?: string | null
           options_title?: string | null
+          preview_image?: string | null
           pricing_info?: string | null
           quick_links?: Json | null
           seo_canonical_url?: string | null
@@ -519,6 +521,7 @@ export type Database = {
           options_categories?: Json | null
           options_description?: string | null
           options_title?: string | null
+          preview_image?: string | null
           pricing_info?: string | null
           quick_links?: Json | null
           seo_canonical_url?: string | null

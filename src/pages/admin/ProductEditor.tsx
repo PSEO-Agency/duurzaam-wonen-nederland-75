@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -26,6 +27,7 @@ const ProductEditor: React.FC = () => {
     template_type: 'service_page',
     is_active: true,
     sort_order: 0,
+    preview_image: '',
     
     // SEO Fields
     seo_title: '',
@@ -117,6 +119,7 @@ const ProductEditor: React.FC = () => {
           template_type: data.template_type || 'service_page',
           is_active: data.is_active ?? true,
           sort_order: data.sort_order || 0,
+          preview_image: data.preview_image || '',
           seo_title: data.seo_title || '',
           seo_description: data.seo_description || '',
           seo_canonical_url: data.seo_canonical_url || '',
@@ -184,6 +187,7 @@ const ProductEditor: React.FC = () => {
         template_type: product.template_type,
         is_active: product.is_active,
         sort_order: product.sort_order,
+        preview_image: product.preview_image,
         seo_title: product.seo_title,
         seo_description: product.seo_description,
         seo_canonical_url: product.seo_canonical_url,
@@ -363,6 +367,14 @@ const ProductEditor: React.FC = () => {
                   rows={3}
                 />
               </div>
+
+              <ImageUpload
+                label="Preview Afbeelding (voor Services sectie)"
+                value={product.preview_image}
+                onChange={(url) => handleInputChange('preview_image', url)}
+                placeholder="/lovable-uploads/image.png"
+                helpText="Deze afbeelding wordt getoond in de Services sectie op de homepage"
+              />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>

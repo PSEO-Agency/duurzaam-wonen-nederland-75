@@ -8,6 +8,7 @@ interface ProductData {
   name: string;
   slug: string;
   description?: string;
+  preview_image?: string;
   seo_title?: string;
   seo_description?: string;
   seo_canonical_url?: string;

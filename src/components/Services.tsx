@@ -21,7 +21,7 @@ const Services: React.FC = () => {
   // Transform ALL CMS products to match the current UI structure
   const dynamicProducts = products && products.length > 0 
     ? products.map(product => ({
-        image: product.hero_image_url || product.hero_background_image || '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png',
+        image: product.preview_image || product.hero_image_url || product.hero_background_image || '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png',
         title: product.name,
         description: product.description || product.hero_description || '',
         features: product.features && Array.isArray(product.features) ? 
