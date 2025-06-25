@@ -2,12 +2,14 @@ import React from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from '../AnimatedSection';
+
 const RaamdecoratieHero: React.FC = () => {
-  return <section className="relative min-h-screen pt-16 sm:pt-20 flex items-center" style={{
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/8950f3c3-8de7-4c0c-8465-8bb4c566b9e2.png")`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center'
-  }}>
+  return (
+    <section className="relative min-h-screen pt-16 sm:pt-20 flex items-center" style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/8db39c70-870c-4ac1-93f1-0c5fd8a46dd0.png")`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}>
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
       
       <div className="container mx-auto px-4 py-8 sm:py-16 relative z-10">
@@ -93,6 +95,8 @@ const RaamdecoratieHero: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default RaamdecoratieHero;
