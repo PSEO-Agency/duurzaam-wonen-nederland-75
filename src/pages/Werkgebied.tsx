@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, MapPin } from 'lucide-react';
@@ -85,7 +86,7 @@ const Werkgebied: React.FC = () => {
                     </div>
                   </div>
                   <img 
-                    src="/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png"
+                    src="/lovable-uploads/8950f3c3-8de7-4c0c-8465-8bb4c566b9e2.png"
                     alt="Duurzaam Wonen Nederland werkgebied"
                     className="object-cover w-full h-full"
                   />
