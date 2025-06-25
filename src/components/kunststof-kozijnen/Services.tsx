@@ -1,30 +1,25 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Ruler, Wrench, Settings } from 'lucide-react';
 import AnimatedSection from '../AnimatedSection';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 
 const Services: React.FC = () => {
   const services = [
     {
       icon: <Ruler className="h-10 w-10 text-brand-green" />,
       title: "Kozijnen Inmeten",
-      description: "Onze experts komen bij u thuis voor nauwkeurig inmeten. Perfect passende kozijnen gegarandeerd, rekening houdend met alle bouwkundige details.",
-      link: "/kunststof-kozijnen/services/inmeten"
+      description: "Onze experts komen bij u thuis voor nauwkeurig inmeten. Perfect passende kozijnen gegarandeerd, rekening houdend met alle bouwkundige details."
     },
     {
       icon: <Wrench className="h-10 w-10 text-brand-green" />,
       title: "Kozijnen Montage",
-      description: "Vakkundige montage door ons ervaren team. Snel, schoon en met minimale overlast. Inclusief afwerking en oplevering volgens de hoogste standaarden.",
-      link: "/kunststof-kozijnen/services/montage"
+      description: "Vakkundige montage door ons ervaren team. Snel, schoon en met minimale overlast. Inclusief afwerking en oplevering volgens de hoogste standaarden."
     },
     {
       icon: <Settings className="h-10 w-10 text-brand-green" />,
       title: "Kozijnen Reparatie",
-      description: "Professionele reparatie- en onderhoudsdienst. Ook voor kozijnen die niet door ons zijn geplaatst. Snelle service en eerlijke prijzen.",
-      link: "/kunststof-kozijnen/services/reparatie"
+      description: "Professionele reparatie- en onderhoudsdienst. Ook voor kozijnen die niet door ons zijn geplaatst. Snelle service en eerlijke prijzen."
     },
   ];
 
@@ -47,12 +42,7 @@ const Services: React.FC = () => {
                     {service.icon}
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                  <p className="text-gray-600 text-sm md:text-base mb-4">{service.description}</p>
-                  <Link to={service.link} className="mt-auto">
-                    <Button variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green hover:text-white">
-                      Meer informatie
-                    </Button>
-                  </Link>
+                  <p className="text-gray-600 text-sm md:text-base">{service.description}</p>
                 </CardContent>
               </Card>
             </AnimatedSection>

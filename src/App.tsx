@@ -55,7 +55,6 @@ const Kozijn100x100 = lazy(() => import('./pages/sizes/Kozijn100x100'));
 const KozijnenAfbetaling = lazy(() => import('./pages/prices/KozijnenAfbetaling'));
 const KozijnenSubsidie = lazy(() => import('./pages/prices/KozijnenSubsidie'));
 const KozijnenEnschede = lazy(() => import('./pages/locaties/KozijnenEnschede'));
-const KozijnenInmeten = lazy(() => import('./pages/services/KozijnenInmeten'));
 
 // Profile pages
 const ProfilesOverview = lazy(() => import('./pages/ProfilesOverview'));
@@ -132,7 +131,6 @@ function App() {
                 <Route path="/kunststof-kozijnen/prijzen/subsidie" element={<KozijnenSubsidie />} />
                 <Route path="/kunststof-kozijnen/schuco" element={<SchucoBrand />} />
                 <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />
-                <Route path="/kunststof-kozijnen/services/inmeten" element={<KozijnenInmeten />} />
                 
                 {/* Profile routes */}
                 <Route path="/kunststof-kozijnen/profielen" element={<ProfilesOverview />} />
