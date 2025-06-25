@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import Navbar from '../Navbar';
 import RaamdecoratieHero from './RaamdecoratieHero';
 import Footer from '../Footer';
 
@@ -17,7 +18,10 @@ const RaamdecoratiePageContent: React.FC = () => {
         <link rel="canonical" href="https://www.example.com/raamdecoratie" />
       </Helmet>
       
-      <RaamdecoratieHero />
+      <Navbar />
+      <main className="min-h-screen pt-20">
+        <RaamdecoratieHero />
+      </main>
       <Footer />
     </>
   );
