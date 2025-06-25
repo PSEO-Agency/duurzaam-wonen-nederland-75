@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
@@ -15,7 +14,7 @@ const ProfilesOverview: React.FC = () => {
       id: 'living-82',
       name: 'Schüco Living Kozijnprofiel',
       slug: 'schuco-living-kozijnprofiel',
-      image: '/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png',
+      image: '/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png',
       description: 'Ramen zijn een essentieel onderdeel van uw woning en dienen niet alleen aanwezig te zijn, maar ook praktisch, stijlvol en kwalitatief te zijn.',
       logo: '/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png'
     },
@@ -23,7 +22,7 @@ const ProfilesOverview: React.FC = () => {
       id: 'ct-70-as',
       name: 'Schüco CT70 Kozijnprofiel',
       slug: 'schuco-ct70-kozijnprofiel', 
-      image: '/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png',
+      image: '/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png',
       description: 'Het kiezen van het juiste raamsysteem is essentieel voor het comfort, de veiligheid en de esthetiek van uw woning.',
       logo: '/lovable-uploads/99e8ffe7-223a-46ac-be41-cb3fa5043750.png'
     }

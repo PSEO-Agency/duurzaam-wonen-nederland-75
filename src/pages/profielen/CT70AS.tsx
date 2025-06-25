@@ -14,7 +14,7 @@ import ContactCTA from '@/components/ContactCTA';
 const CT70AS: React.FC = () => {
   const galleryImages = [
     {
-      src: '/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png',
+      src: '/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png',
       alt: 'Schüco CT70 kozijnprofiel doorsnede',
       title: 'Profiel doorsnede'
     },
@@ -88,7 +88,7 @@ const CT70AS: React.FC = () => {
                 
                 <div>
                   <img 
-                    src="/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png"
+                    src="/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png"
                     alt="Schüco CT70 kozijnprofiel doorsnede"
                     className="w-full rounded-lg shadow-lg"
                   />

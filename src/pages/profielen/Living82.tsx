@@ -14,7 +14,7 @@ import ContactCTA from '@/components/ContactCTA';
 const Living82: React.FC = () => {
   const galleryImages = [
     {
-      src: '/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png',
+      src: '/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png',
       alt: 'Schüco Living kozijnprofiel doorsnede',
       title: 'Profiel doorsnede'
     },
@@ -93,7 +93,7 @@ const Living82: React.FC = () => {
                 
                 <div>
                   <img 
-                    src="/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png"
+                    src="/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png"
                     alt="Schüco Living kozijnprofiel doorsnede"
                     className="w-full rounded-lg shadow-lg"
                   />
