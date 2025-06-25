@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -48,12 +47,6 @@ const RaamdecoratieHero: React.FC = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-white mb-6 sm:mb-8">
-                <div className="flex items-center gap-2">
-                  <div className="bg-brand-green/20 p-1 rounded-full">
-                    <Check className="h-3 w-3 sm:h-4 sm:w-4 text-brand-green" />
-                  </div>
-                  <span className="text-sm sm:text-base">15 jaar productgarantie</span>
-                </div>
                 <div className="flex items-center gap-2">
                   <div className="bg-brand-green/20 p-1 rounded-full">
                     <Check className="h-3 w-3 sm:h-4 sm:w-4 text-brand-green" />
