@@ -16,6 +16,9 @@ export const useAllProducts = () => {
           slug,
           description,
           hero_background_image,
+          hero_image_url,
+          hero_description,
+          preview_image,
           features
         `)
         .eq('is_active', true)
