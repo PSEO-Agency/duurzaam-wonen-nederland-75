@@ -45,7 +45,6 @@ const CommercieeelMedewerker = lazy(() => import('./pages/vacatures/Commercieeel
 // Kunststof Kozijnen subpages
 const KozijnTypes = lazy(() => import('./pages/KozijnTypes'));
 const ColorOptions = lazy(() => import('./pages/ColorOptions'));
-const ColorDetail = lazy(() => import('./pages/ColorDetail'));
 const KozijnSizes = lazy(() => import('./pages/KozijnSizes'));
 const KozijnMontage = lazy(() => import('./pages/KozijnMontage'));
 const KozijnPrices = lazy(() => import('./pages/KozijnPrices'));
@@ -122,7 +121,6 @@ function App() {
                 <Route path="/kunststof-kozijnen/types" element={<KozijnTypes />} />
                 <Route path="/kunststof-kozijnen/types/draaikiepraam" element={<Draaikiepraam />} />
                 <Route path="/kunststof-kozijnen/kleuren" element={<ColorOptions />} />
-                <Route path="/kunststof-kozijnen/kleuren/:colorSlug" element={<ColorDetail />} />
                 <Route path="/kunststof-kozijnen/afmetingen" element={<KozijnSizes />} />
                 <Route path="/kunststof-kozijnen/afmetingen/100x100" element={<Kozijn100x100 />} />
                 <Route path="/kunststof-kozijnen/montage" element={<KozijnMontage />} />

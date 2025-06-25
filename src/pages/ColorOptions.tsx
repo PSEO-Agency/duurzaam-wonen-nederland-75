@@ -1,482 +1,396 @@
 
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Palette, Home, CheckCircle2, Image, Droplet, PanelRight, Paintbrush, Layers, Star, Info } from 'lucide-react';
-import AnimatedSection from '@/components/AnimatedSection';
+import { Palette, Check, Eye } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
+import AnimatedSection from '@/components/AnimatedSection';
 import ContactCTA from '@/components/ContactCTA';
-import ProductDetails from '@/components/kunststof-kozijnen/ProductDetails';
-import { Link } from 'react-router-dom';
-import { ralColorCategories } from '@/data/ralColors';
+import SubpageTemplate from '@/components/templates/SubpageTemplate';
 
 interface ColorOption {
   name: string;
   hex: string;
-  image?: string;
-  description?: string;
-  category: string;
-  popular?: boolean;
   ralCode?: string;
+  image?: string;
+  description: string;
+  category: 'standard' | 'woodlook' | 'premium';
+  popular?: boolean;
 }
 
-interface ProfileOption {
-  id: string;
-  name: string;
-  slug: string;
-}
+const colorOptions: ColorOption[] = [
+  {
+    name: "Wit",
+    hex: "#FFFFFF",
+    ralCode: "RAL 9016",
+    description: "De klassieke en meest gekozen kleur voor kunststof kozijnen. Tijdloos en past bij elke woning.",
+    category: "standard",
+    popular: true
+  },
+  {
+    name: "Antraciet",
+    hex: "#293133",
+    ralCode: "RAL 7016",
+    description: "Moderne en stijlvolle donkergrijze kleur, zeer populair bij nieuwbouw en renovaties.",
+    category: "standard",
+    popular: true
+  },
+  {
+    name: "Crème",
+    hex: "#F5F5DC",
+    ralCode: "RAL 9001",
+    description: "Warme, zachte kleur die perfect past bij traditionele en landelijke woningen.",
+    category: "standard"
+  },
+  {
+    name: "Golden Oak",
+    hex: "#C19A6B",
+    image: "/lovable-uploads/ab9628a0-733d-4736-833b-7a03e543c615.png",
+    description: "Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.",
+    category: "woodlook",
+    popular: true
+  },
+  {
+    name: "Donker Eiken",
+    hex: "#8B4513",
+    description: "Rijk donkere houttint voor een luxe en elegante uitstraling.",
+    category: "woodlook"
+  },
+  {
+    name: "Mahonie",
+    hex: "#C04000",
+    description: "Warme roodbruine houttint die warmte en karakter uitstraalt.",
+    category: "woodlook"
+  },
+  {
+    name: "Monumentengroen",
+    hex: "#2D5E40",
+    ralCode: "RAL 6009",
+    description: "Traditionele groentint die goed past bij klassieke woningen en landhuizen.",
+    category: "standard"
+  },
+  {
+    name: "Basalt Grijs",
+    hex: "#4A4A4A",
+    ralCode: "RAL 7012",
+    description: "Elegant middel grijs voor een moderne en neutrale uitstraling.",
+    category: "standard"
+  },
+  {
+    name: "Verkeerswit",
+    hex: "#F5F5F5",
+    ralCode: "RAL 9016",
+    description: "Helder wit met een licht grijze ondertoon voor een frisse uitstraling.",
+    category: "standard"
+  },
+  {
+    name: "Winchester",
+    hex: "#8B7355",
+    description: "Sophisticate grijsbruine tint geïnspireerd op engelste landhuizen.",
+    category: "premium"
+  },
+  {
+    name: "Nussbaum",
+    hex: "#6B4423",
+    description: "Rijke notenhout-look voor een luxe en exclusieve uitstraling.",
+    category: "woodlook"
+  },
+  {
+    name: "Zwart",
+    hex: "#1C1C1C",
+    ralCode: "RAL 9004",
+    description: "Moderne zwarte kleur voor een strakke en minimalistische uitstraling.",
+    category: "standard"
+  }
+];
+
+const categories = [
+  { key: 'all', label: 'Alle kleuren', count: colorOptions.length },
+  { key: 'standard', label: 'Standaard kleuren', count: colorOptions.filter(c => c.category === 'standard').length },
+  { key: 'woodlook', label: 'Houtlook', count: colorOptions.filter(c => c.category === 'woodlook').length },
+  { key: 'premium', label: 'Premium kleuren', count: colorOptions.filter(c => c.category === 'premium').length }
+];
 
 const ColorOptions: React.FC = () => {
-  const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null);
-  const [filterCategory, setFilterCategory] = useState<string>("all");
-  const [activeTab, setActiveTab] = useState<string>("visualizer");
-  const [selectedProfile, setSelectedProfile] = useState<string>("living-kozijnprofiel");
+  const [selectedCategory, setSelectedCategory] = React.useState<string>('all');
+  const [previewColor, setPreviewColor] = React.useState<ColorOption | null>(null);
 
-  const visualizerTitleRef = useRef<HTMLHeadingElement>(null);
-  const collectionTitleRef = useRef<HTMLHeadingElement>(null);
-
-  const profileOptions: ProfileOption[] = [
-    { id: "living-kozijnprofiel", name: "Schüco Living Kozijnprofiel", slug: "living-82" },
-    { id: "ct70-as-kozijnprofiel", name: "Schüco CT70 AS Kozijnprofiel", slug: "ct-70-as" }
-  ];
-
-  const colorOptions: ColorOption[] = [
-    { name: 'Puur Wit', hex: '#FFFFFF', category: 'standard', popular: true, description: 'De klassieke en meest gekozen kleur, tijdloos en past bij elke woning.', ralCode: 'RAL 9016' },
-    { name: 'Verkeerswit', hex: '#F5F5F5', category: 'standard', description: 'Een heldere witte tint, perfect voor een frisse en moderne uitstraling.', ralCode: 'RAL 9016' },
-    { name: 'Crème', hex: '#F5F5DC', category: 'standard', popular: true, description: 'Warme, zachte tint die perfect past bij traditionele en landelijke woningen.', ralCode: 'RAL 9001' },
-    { name: 'Lichtgrijs', hex: '#D3D3D3', category: 'standard', description: 'Subtiele grijstint voor een ingetogen uitstraling.', ralCode: 'RAL 7035' },
-    { name: 'Antraciet', hex: '#293133', category: 'standard', popular: true, description: 'Moderne en stijlvolle donkergrijze kleur, zeer populair bij nieuwbouw en renovaties.', ralCode: 'RAL 7016' },
-    { name: 'Monumentengroen', hex: '#2D5E40', category: 'standard', description: 'Traditionele groentint die goed past bij klassieke woningen en landhuizen.', ralCode: 'RAL 6009' },
-    { name: 'Staalblauw', hex: '#4682B4', category: 'standard', description: 'Krachtige blauwtint met een industriële uitstraling.', ralCode: 'RAL 5011' },
-    { name: 'Zwart', hex: '#121212', category: 'standard', description: 'Elegante en contrasterende kleur voor een krachtige uitstraling.', ralCode: 'RAL 9005' },
-    
-    { name: 'Golden Oak', hex: '#C19A6B', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', popular: true, description: 'Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.', ralCode: 'Folie 2178-001' },
-    { name: 'Noten', hex: '#654321', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Rijke, donkere houtlook die diepte en karakter aan uw woning toevoegt.', ralCode: 'Folie 2178-007' },
-    { name: 'Mahonie', hex: '#C04000', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Roodbruine houtlook met subtiele nerven voor een elegante afwerking.', ralCode: 'Folie 2097-013' },
-    { name: 'Oregon Pine', hex: '#D8B28E', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte houtlook met een subtiele nerf, perfect voor een natuurlijke uitstraling.', ralCode: 'Folie 1192-001' },
-    { name: 'Eiken Naturel', hex: '#D2B48C', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte eikenhouttint met een natuurlijke uitstraling.', ralCode: 'Folie 3149-008' },
-    
-    { name: 'Wijnrood', hex: '#722F37', category: 'special', description: 'Rijke, diepe kleur die warmte en karakter toevoegt aan uw woning.', ralCode: 'RAL 3005' },
-    { name: 'Mosgroen', hex: '#607D3B', category: 'special', description: 'Natuurlijke groentint die perfect in landelijke omgevingen past.', ralCode: 'RAL 6005' },
-    { name: 'Monumentenblauw', hex: '#27548E', category: 'special', description: 'Traditionele blauwtint, vaak gebruikt in historische gebouwen.', ralCode: 'RAL 5010' },
-    { name: 'Leisteengrijs', hex: '#708090', category: 'special', description: 'Elegante grijstint geïnspireerd door natuurlijke leisteen.', ralCode: 'RAL 7015' }
-  ];
-
-  const filteredColors = filterCategory === "all" 
+  const filteredColors = selectedCategory === 'all' 
     ? colorOptions 
-    : colorOptions.filter(color => color.category === filterCategory);
-  
-  const popularColors = colorOptions.filter(color => color.popular);
+    : colorOptions.filter(color => color.category === selectedCategory);
 
-  const scrollToSection = (sectionId: string) => {
-    setActiveTab(sectionId);
-    
-    const sectionRef = 
-      sectionId === "visualizer" ? visualizerTitleRef :
-      collectionTitleRef;
-    
-    if (sectionRef.current) {
-      const yOffset = -120;
-      const y = sectionRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      
-      window.scrollTo({
-        top: y,
-        behavior: 'smooth'
-      });
-    }
-  };
+  const popularColors = colorOptions.filter(color => color.popular);
 
   return (
     <>
       <Helmet>
-        <title>Kleuren voor Kunststof Kozijnen | Inspiratie & Advies</title>
-        <meta name="description" content="Ontdek alle kleuren en afwerkingsmogelijkheden voor kunststof kozijnen. Van standaardkleuren tot houtlook afwerkingen. Probeer onze interactieve kleurenmodule." />
+        <title>Kleuropties voor Kunststof Kozijnen | Uitgebreid Kleurenoverzicht</title>
+        <meta 
+          name="description" 
+          content="Ontdek alle beschikbare kleuren voor kunststof kozijnen. Van klassiek wit tot moderne antraciet en warme houtlook opties. Bekijk RAL-codes en vraag gratis kleuradvies aan." 
+        />
+        <meta name="keywords" content="kunststof kozijnen kleuren, RAL kleuren kozijnen, antraciet kozijnen, witte kozijnen, houtlook kozijnen, kleuradvies" />
+        <link rel="canonical" href="https://www.example.com/kunststof-kozijnen/kleuren" />
       </Helmet>
       
-      <Navbar />
-
-      <main>
-        <section className="py-20 pt-40 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center">
+      <SubpageTemplate
+        title="Kleuropties voor Kunststof Kozijnen"
+        subtitle="Ontdek de perfecte kleur voor uw kozijnen"
+        description="Van klassiek wit tot moderne antraciet en warme houtlook opties - wij hebben de perfecte kleur voor elke woning en smaak."
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
+          { label: 'Kleuren', href: '/kunststof-kozijnen/kleuren' }
+        ]}
+        features={[
+          'Uitgebreid kleurenoverzicht',
+          'RAL-codes beschikbaar',
+          'Gratis kleuradvies',
+          'Voor binnen en buiten'
+        ]}
+      >
+        {/* Populaire kleuren sectie */}
+        <section className="py-16">
           <div className="container mx-auto px-4">
-            <AnimatedSection animation="fade-in" className="flex flex-col justify-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">
-                Kleuren voor Kunststof Kozijnen
-              </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-4">
-                Ontdek de perfecte kleur voor uw kunststof kozijnen met onze interactieve kleurenmodule
-              </p>
+            <AnimatedSection animation="fade-in">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl font-bold mb-4">Populaire kleurkeuzes</h2>
+                <p className="text-gray-600 max-w-2xl mx-auto">
+                  Deze kleuren worden het vaakst gekozen door onze klanten voor hun kunststof kozijnen
+                </p>
+              </div>
             </AnimatedSection>
-          </div>
-        </section>
-        
-        <StickyNavigation />
-        
-        <div className="sticky top-[80px] z-10 bg-white border-b shadow-sm">
-          <div className="container mx-auto px-4">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="py-2">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger 
-                  value="visualizer" 
-                  className="flex items-center gap-2"
-                  onClick={() => scrollToSection("visualizer")}
-                >
-                  <Palette className="h-4 w-4" />
-                  <span className="hidden sm:inline">Kleurenmodule</span>
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="collection" 
-                  className="flex items-center gap-2"
-                  onClick={() => scrollToSection("collection")}
-                >
-                  <Droplet className="h-4 w-4" />
-                  <span className="hidden sm:inline">Kleurencollectie</span>
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </div>
-        </div>
-        
-        <section className="py-12">
-          <div className="container mx-auto px-4">            
-            <ScrollArea className="pr-4">
-              <div className="space-y-20">
-                <div id="visualizer" className="space-y-8">
-                  <h2 ref={visualizerTitleRef} className="text-2xl font-bold mb-4">Interactieve Kleurenmodule</h2>
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div className="lg:col-span-1 space-y-6">
-                      <AnimatedSection animation="fade-in">
-                        <Card>
-                          <CardContent className="p-6">
-                            <h3 className="text-xl font-semibold mb-4 flex items-center">
-                              <Layers className="h-5 w-5 mr-2 text-brand-green" />
-                              Kies profiel
-                            </h3>
-                            
-                            <Select value={selectedProfile} onValueChange={setSelectedProfile}>
-                              <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Selecteer een profiel" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {profileOptions.map((profile) => (
-                                  <SelectItem key={profile.id} value={profile.id}>
-                                    {profile.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </CardContent>
-                        </Card>
-                      </AnimatedSection>
-
-                      <AnimatedSection animation="fade-in" delay={100}>
-                        <Card>
-                          <CardContent className="p-6">
-                            <h3 className="text-xl font-semibold mb-4 flex items-center">
-                              <Palette className="h-5 w-5 mr-2 text-brand-green" />
-                              Kies een kleur
-                            </h3>
-                            
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              <Button 
-                                variant={filterCategory === "all" ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => setFilterCategory("all")}
-                                className={filterCategory === "all" ? "bg-brand-green" : ""}
-                              >
-                                Alle kleuren
-                              </Button>
-                              <Button 
-                                variant={filterCategory === "standard" ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => setFilterCategory("standard")}
-                                className={filterCategory === "standard" ? "bg-brand-green" : ""}
-                              >
-                                Standaard
-                              </Button>
-                              <Button 
-                                variant={filterCategory === "woodlook" ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => setFilterCategory("woodlook")}
-                                className={filterCategory === "woodlook" ? "bg-brand-green" : ""}
-                              >
-                                Houtlook
-                              </Button>
-                              <Button 
-                                variant={filterCategory === "special" ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => setFilterCategory("special")}
-                                className={filterCategory === "special" ? "bg-brand-green" : ""}
-                              >
-                                Speciale kleuren
-                              </Button>
-                            </div>
-                            
-                            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-3 xl:grid-cols-4 gap-2 max-h-72 overflow-y-auto p-2">
-                              <TooltipProvider>
-                                {filteredColors.map((color) => (
-                                  <Tooltip key={color.name}>
-                                    <TooltipTrigger asChild>
-                                      <button
-                                        className={`w-full aspect-square rounded-md border-2 ${selectedColor?.name === color.name ? 'border-brand-green' : 'border-transparent'} hover:border-brand-green-dark transition-all`}
-                                        style={{ 
-                                          backgroundColor: color.hex,
-                                          boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                                        }}
-                                        onClick={() => setSelectedColor(color)}
-                                      >
-                                        {selectedColor?.name === color.name && (
-                                          <CheckCircle2 className="h-5 w-5 text-brand-green bg-white rounded-full" />
-                                        )}
-                                      </button>
-                                    </TooltipTrigger>
-                                    <TooltipContent className="font-medium">
-                                      <div className="space-y-1">
-                                        <p>{color.name}</p>
-                                        <p className="text-xs text-gray-500">{color.hex}</p>
-                                      </div>
-                                    </TooltipContent>
-                                  </Tooltip>
-                                ))}
-                              </TooltipProvider>
-                            </div>
-                            
-                            {selectedColor && (
-                              <div className="mt-4 p-3 bg-gray-50 rounded-md">
-                                <div className="flex items-center gap-2 mb-2">
-                                  <div 
-                                    className="w-6 h-6 rounded-full" 
-                                    style={{ 
-                                      backgroundColor: selectedColor.hex,
-                                      boxShadow: selectedColor.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                                    }}
-                                  ></div>
-                                  <h4 className="font-semibold">{selectedColor.name}</h4>
-                                </div>
-                                {selectedColor.description && (
-                                  <p className="text-sm text-gray-600 mb-3">{selectedColor.description}</p>
-                                )}
-                                <Button 
-                                  variant="outline" 
-                                  size="sm" 
-                                  className="w-full mt-2 text-xs"
-                                  onClick={() => window.open(`/kunststof-kozijnen/kleuren/${selectedColor.name.toLowerCase().replace(/\s+/g, '-')}`, '_blank')}
-                                >
-                                  <Info className="h-3.5 w-3.5 mr-1" />
-                                  Kleur details
-                                </Button>
-                              </div>
-                            )}
-                          </CardContent>
-                        </Card>
-                      </AnimatedSection>
-                    </div>
-                    
-                    <div className="lg:col-span-2">
-                      <AnimatedSection animation="fade-in" delay={200}>
-                        <ProductDetails 
-                          selectedColor={selectedColor || null} 
-                          selectedProfile={selectedProfile}
-                        />
-                      </AnimatedSection>
-                      
-                      <div className="mt-6">
-                        <AnimatedSection animation="fade-in" delay={300}>
-                          <Card>
-                            <CardContent className="p-6">
-                              <h3 className="text-xl font-semibold mb-4 flex items-center">
-                                <PanelRight className="h-5 w-5 mr-2 text-brand-green" />
-                                Opties en informatie
-                              </h3>
-                              
-                              <Accordion type="single" collapsible className="w-full">
-                                <AccordionItem value="item-1">
-                                  <AccordionTrigger className="text-base">Binnen- en buitenzijde in verschillende kleuren</AccordionTrigger>
-                                  <AccordionContent>
-                                    <p className="mb-2">Het is mogelijk om de binnen- en buitenzijde van uw kunststof kozijnen in verschillende kleuren uit te voeren.</p>
-                                    <p>Populaire combinaties zijn:</p>
-                                    <ul className="list-disc pl-5 mt-2 space-y-1">
-                                      <li>Buiten: Antraciet | Binnen: Wit</li>
-                                      <li>Buiten: Monumentengroen | Binnen: Crème</li>
-                                      <li>Buiten: Golden Oak | Binnen: Wit</li>
-                                    </ul>
-                                  </AccordionContent>
-                                </AccordionItem>
-                                <AccordionItem value="item-2">
-                                  <AccordionTrigger className="text-base">Onderhoud van gekleurde kozijnen</AccordionTrigger>
-                                  <AccordionContent>
-                                    <p>Gekleurde kunststof kozijnen zijn net zo onderhoudsvriendelijk als witte kozijnen. Ze hoeven niet geschilderd te worden en zijn eenvoudig schoon te maken met water en een mild reinigingsmiddel.</p>
-                                    <p className="mt-2">Bij donkere kleuren kan in direct zonlicht de temperatuur van het kozijn oplopen. Dit heeft geen invloed op de kwaliteit of levensduur.</p>
-                                  </AccordionContent>
-                                </AccordionItem>
-                                <AccordionItem value="item-3">
-                                  <AccordionTrigger className="text-base">Levertijd en beschikbaarheid</AccordionTrigger>
-                                  <AccordionContent>
-                                    <p>De levertijd voor kunststof kozijnen is afhankelijk van de gekozen kleur:</p>
-                                    <ul className="list-disc pl-5 mt-2 space-y-1">
-                                      <li>Standaardkleuren: 6-8 weken</li>
-                                      <li>Speciale kleuren en houtlook: 8-10 weken</li>
-                                    </ul>
-                                    <p className="mt-2">Niet alle profielsystemen zijn in alle kleuren beschikbaar. Neem contact op voor meer informatie over specifieke combinaties.</p>
-                                  </AccordionContent>
-                                </AccordionItem>
-                              </Accordion>
-                              
-                              <div className="mt-6 flex justify-center sm:justify-end">
-                                <Button asChild className="bg-brand-green hover:bg-brand-green-dark">
-                                  <Link to="/offerte">
-                                    <Paintbrush className="h-4 w-4 mr-2" />
-                                    Kleuradvies aanvragen
-                                  </Link>
-                                </Button>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </AnimatedSection>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {popularColors.map((color, index) => (
+                <AnimatedSection key={color.name} animation="fade-in" delay={index * 100}>
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    <div 
+                      className="h-32 relative"
+                      style={{ 
+                        backgroundColor: color.hex,
+                        backgroundImage: color.image ? `url(${color.image})` : 'none',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        border: color.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none'
+                      }}
+                    >
+                      <div className="absolute top-2 right-2">
+                        <span className="bg-brand-green text-white text-xs px-2 py-1 rounded-full">
+                          Populair
+                        </span>
                       </div>
                     </div>
+                    <div className="p-4">
+                      <h3 className="font-semibold text-lg mb-2">{color.name}</h3>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs text-gray-500">
+                          {color.ralCode || color.hex}
+                        </span>
+                        <div 
+                          className="w-4 h-4 rounded border border-gray-200"
+                          style={{ backgroundColor: color.hex }}
+                        ></div>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-4">{color.description}</p>
+                      
+                      <div className="flex gap-2">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="flex-1"
+                          onClick={() => setPreviewColor(color)}
+                        >
+                          <Eye className="h-3 w-3 mr-1" />
+                          Preview
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Kleurfilters */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-in">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold mb-4">Alle beschikbare kleuren</h2>
+                <p className="text-gray-600">
+                  Filter op categorie om de perfecte kleur voor uw kozijnen te vinden
+                </p>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-in" delay={100}>
+              <div className="flex flex-wrap justify-center gap-2 mb-8">
+                {categories.map((category) => (
+                  <Button
+                    key={category.key}
+                    variant={selectedCategory === category.key ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedCategory(category.key)}
+                    className="mb-2"
+                  >
+                    <Palette className="h-3 w-3 mr-1" />
+                    {category.label} ({category.count})
+                  </Button>
+                ))}
+              </div>
+            </AnimatedSection>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredColors.map((color, index) => (
+                <AnimatedSection key={color.name} animation="fade-in" delay={index * 50}>
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    <div 
+                      className="h-24 relative"
+                      style={{ 
+                        backgroundColor: color.hex,
+                        backgroundImage: color.image ? `url(${color.image})` : 'none',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        border: color.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none'
+                      }}
+                    >
+                      {color.popular && (
+                        <div className="absolute top-2 right-2">
+                          <span className="bg-brand-green text-white text-xs px-2 py-1 rounded-full">
+                            Populair
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-semibold mb-1">{color.name}</h3>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs text-gray-500">
+                          {color.ralCode || color.hex}
+                        </span>
+                        <div 
+                          className="w-3 h-3 rounded border border-gray-200"
+                          style={{ backgroundColor: color.hex }}
+                        ></div>
+                      </div>
+                      <p className="text-xs text-gray-600 mb-3">{color.description}</p>
+                      
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full"
+                        onClick={() => setPreviewColor(color)}
+                      >
+                        <Eye className="h-3 w-3 mr-1" />
+                        Preview
+                      </Button>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Kleuradvies sectie */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="bg-gradient-to-r from-brand-green to-brand-green-dark rounded-lg p-8 text-white text-center">
+              <AnimatedSection animation="fade-in">
+                <h2 className="text-2xl font-bold mb-4">Gratis kleuradvies</h2>
+                <p className="text-lg mb-6 max-w-2xl mx-auto">
+                  Twijfelt u over de beste kleurkeuze voor uw woning? Onze kleurspecialisten helpen u graag 
+                  bij het maken van de perfecte keuze die past bij uw woning en persoonlijke smaak.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+                  <div className="flex items-center gap-2">
+                    <Check className="h-5 w-5" />
+                    <span>Persoonlijk advies</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="h-5 w-5" />
+                    <span>Kleurstalen op locatie</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="h-5 w-5" />
+                    <span>Digitale voorbeelden</span>
                   </div>
                 </div>
                 
-                <div id="collection" className="space-y-8">
-                  <AnimatedSection animation="fade-in">
-                    <div className="text-center max-w-3xl mx-auto mb-8">
-                      <h2 ref={collectionTitleRef} className="text-2xl font-bold mb-4">Onze kleurencollectie</h2>
-                      <p className="text-gray-600">
-                        Bekijk onze uitgebreide collectie van 60+ RAL kleuren voor kunststof kozijnen. Van klassiek wit tot moderne antraciet en warme houtlook afwerkingen.
-                      </p>
-                    </div>
-                  </AnimatedSection>
-                  
-                  <div className="space-y-8">
-                    <AnimatedSection animation="fade-in" delay={100}>
-                      <h3 className="text-xl font-semibold mb-4 flex items-center">
-                        <div className="w-1.5 h-6 bg-brand-green mr-2"></div>
-                        Populaire kleuren
-                      </h3>
-                      <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
-                        <TooltipProvider>
-                          {popularColors.map((color) => (
-                            <Tooltip key={color.name}>
-                              <TooltipTrigger asChild>
-                                <Card className="hover:shadow-md transition-shadow group cursor-pointer">
-                                  <div 
-                                    className="aspect-square rounded-t-md" 
-                                    style={{ 
-                                      backgroundColor: color.hex,
-                                      boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                                    }}
-                                  ></div>
-                                  <CardContent className="p-2">
-                                    <h4 className="font-medium text-xs leading-tight">{color.name}</h4>
-                                    <p className="text-xs text-gray-500">{color.ralCode}</p>
-                                  </CardContent>
-                                </Card>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <div className="space-y-1">
-                                  <p>{color.name}</p>
-                                  <p className="text-xs text-gray-500">{color.hex}</p>
-                                  <p className="text-xs text-gray-500">{color.ralCode}</p>
-                                </div>
-                              </TooltipContent>
-                            </Tooltip>
-                          ))}
-                        </TooltipProvider>
-                      </div>
-                    </AnimatedSection>
-
-                    <AnimatedSection animation="fade-in" delay={200}>
-                      <h3 className="text-xl font-semibold mb-4 flex items-center">
-                        <div className="w-1.5 h-6 bg-brand-green mr-2"></div>
-                        Standaardkleuren
-                      </h3>
-                      <div className="grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-2">
-                        <TooltipProvider>
-                          {colorOptions.filter(c => c.category === "standard").map((color) => (
-                            <Tooltip key={color.name}>
-                              <TooltipTrigger asChild>
-                                <div className="group cursor-pointer">
-                                  <div 
-                                    className="aspect-square rounded border-2 border-transparent hover:border-brand-green transition-colors" 
-                                    style={{ 
-                                      backgroundColor: color.hex,
-                                      boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                                    }}
-                                  ></div>
-                                  <p className="text-xs text-center mt-1 font-medium">{color.name}</p>
-                                </div>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <div className="space-y-1">
-                                  <p>{color.name}</p>
-                                  <p className="text-xs text-gray-500">{color.hex}</p>
-                                  <p className="text-xs text-gray-500">{color.ralCode}</p>
-                                </div>
-                              </TooltipContent>
-                            </Tooltip>
-                          ))}
-                        </TooltipProvider>
-                      </div>
-                    </AnimatedSection>
-                    
-                    <AnimatedSection animation="fade-in" delay={300}>
-                      <h3 className="text-xl font-semibold mb-4 flex items-center">
-                        <div className="w-1.5 h-6 bg-brand-green mr-2"></div>
-                        Houtlook afwerkingen
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                        <TooltipProvider>
-                          {colorOptions.filter(c => c.category === "woodlook").map((color) => (
-                            <Tooltip key={color.name}>
-                              <TooltipTrigger asChild>
-                                <Card className="hover:shadow-md transition-shadow overflow-hidden group cursor-pointer">
-                                  <div 
-                                    className="h-24"
-                                    style={{ backgroundColor: color.hex }}
-                                  ></div>
-                                  <CardContent className="p-3">
-                                    <h4 className="font-semibold text-sm mb-1 flex items-center">
-                                      {color.name}
-                                      {color.popular && <CheckCircle2 className="h-3 w-3 ml-1 text-brand-green" />}
-                                    </h4>
-                                    {color.ralCode && (
-                                      <p className="text-xs text-gray-500 mb-1">{color.ralCode}</p>
-                                    )}
-                                    <p className="text-xs text-gray-600 line-clamp-2">{color.description}</p>
-                                  </CardContent>
-                                </Card>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <div className="space-y-1">
-                                  <p>{color.name}</p>
-                                  <p className="text-xs text-gray-500">{color.hex}</p>
-                                  {color.ralCode && <p className="text-xs text-gray-500">{color.ralCode}</p>}
-                                </div>
-                              </TooltipContent>
-                            </Tooltip>
-                          ))}
-                        </TooltipProvider>
-                      </div>
-                    </AnimatedSection>
-                  </div>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button className="bg-white text-brand-green hover:bg-gray-100">
+                    Kleuradvies aanvragen
+                  </Button>
+                  <Button variant="outline" className="border-white text-white hover:bg-white/10">
+                    <Palette className="h-4 w-4 mr-2" />
+                    Offerte met kleur
+                  </Button>
                 </div>
-              </div>
-            </ScrollArea>
+              </AnimatedSection>
+            </div>
           </div>
         </section>
-        
+
         <ContactCTA />
-      </main>
-      
-      <Footer />
+      </SubpageTemplate>
+
+      {/* Preview Modal */}
+      {previewColor && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold">{previewColor.name}</h3>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => setPreviewColor(null)}
+                >
+                  ✕
+                </Button>
+              </div>
+              
+              <div 
+                className="h-48 rounded-lg mb-4"
+                style={{ 
+                  backgroundColor: previewColor.hex,
+                  backgroundImage: previewColor.image ? `url(${previewColor.image})` : 'none',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  border: previewColor.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none'
+                }}
+              ></div>
+              
+              <div className="space-y-3">
+                <div>
+                  <span className="text-sm text-gray-500">Kleurcode:</span>
+                  <span className="ml-2 font-medium">{previewColor.ralCode || previewColor.hex}</span>
+                </div>
+                
+                <div>
+                  <span className="text-sm text-gray-500">Categorie:</span>
+                  <span className="ml-2 font-medium capitalize">{previewColor.category}</span>
+                </div>
+                
+                <p className="text-gray-600">{previewColor.description}</p>
+                
+                <div className="flex gap-2 pt-4">
+                  <Button className="flex-1">
+                    Offerte aanvragen
+                  </Button>
+                  <Button variant="outline" className="flex-1">
+                    Meer info
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
