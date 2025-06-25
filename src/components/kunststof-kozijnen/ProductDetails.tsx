@@ -26,7 +26,7 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
     "living-kozijnprofiel": {
       name: "Schüco Living Kozijnprofiel",
       slug: "living-82",
-      image: "/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png",
+      image: "/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png",
       specifications: {
         inbouwdiepte: "82 mm",
         uWaarde: "0,8 W/(m²·K)",
@@ -45,7 +45,7 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
     "ct70-as-kozijnprofiel": {
       name: "Schüco CT70 AS Kozijnprofiel", 
       slug: "ct-70-as",
-      image: "/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png",
+      image: "/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png",
       specifications: {
         inbouwdiepte: "70 mm",
         uWaarde: "1,0 W/(m²·K)",
