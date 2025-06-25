@@ -29,6 +29,17 @@ const RaamdecoratieHero: React.FC = () => {
                 Hoogwaardige raamdecoratie op maat voor uw woning. Van klassieke tot moderne stijlen - wij hebben de perfecte oplossing voor elke ruimte. Realisatie door onze partner Twents Design.
               </p>
               
+              {/* Twents Design Logo */}
+              <div className="flex justify-center sm:justify-start mb-4 sm:mb-6">
+                <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-lg">
+                  <img 
+                    src="/lovable-uploads/5067fa22-85d5-4218-b58a-b597e2d181bb.png" 
+                    alt="Twents Design Logo" 
+                    className="h-16 sm:h-20 w-auto object-contain"
+                  />
+                </div>
+              </div>
+              
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
                 <Button 
                   asChild 
