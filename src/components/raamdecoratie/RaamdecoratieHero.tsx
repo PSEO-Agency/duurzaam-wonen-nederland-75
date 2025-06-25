@@ -2,17 +2,12 @@ import React from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from '../AnimatedSection';
-
 const RaamdecoratieHero: React.FC = () => {
-  return (
-    <section 
-      className="relative min-h-screen pt-16 sm:pt-20 flex items-center"
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/8950f3c3-8de7-4c0c-8465-8bb4c566b9e2.png")`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
-    >
+  return <section className="relative min-h-screen pt-16 sm:pt-20 flex items-center" style={{
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/8950f3c3-8de7-4c0c-8465-8bb4c566b9e2.png")`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }}>
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
       
       <div className="container mx-auto px-4 py-8 sm:py-16 relative z-10">
@@ -25,32 +20,18 @@ const RaamdecoratieHero: React.FC = () => {
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 Raamdecoratie op Maat
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-xl leading-relaxed">
-                Hoogwaardige raamdecoratie op maat voor uw woning. Van klassieke tot moderne stijlen - wij hebben de perfecte oplossing voor elke ruimte. Realisatie door onze partner Twents Design.
-              </p>
+              <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-xl leading-relaxed">Professionele raamdecoratie op maat voor uw woning. Van luxe in-frame raamdecoratie tot moderne jaloeziën en plisségordijnen. Realisatie door onze partner Twents Design.</p>
               
               {/* Twents Design Logo */}
               <div className="flex justify-center sm:justify-start mb-4 sm:mb-6">
                 <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 sm:p-4 shadow-lg">
-                  <img 
-                    src="/lovable-uploads/5067fa22-85d5-4218-b58a-b597e2d181bb.png" 
-                    alt="Twents Design Logo" 
-                    className="h-16 sm:h-20 w-auto object-contain"
-                  />
+                  <img src="/lovable-uploads/5067fa22-85d5-4218-b58a-b597e2d181bb.png" alt="Twents Design Logo" className="h-16 sm:h-20 w-auto object-contain" />
                 </div>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
-                <Button 
-                  asChild 
-                  size="lg" 
-                  className="bg-brand-green hover:bg-brand-green-dark text-white w-full sm:w-auto"
-                >
-                  <a 
-                    href="https://www.facebook.com/twentsdesign" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
+                <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white w-full sm:w-auto">
+                  <a href="https://www.facebook.com/twentsdesign" target="_blank" rel="noopener noreferrer">
                     <span>Offerte aanvragen</span>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
@@ -81,21 +62,12 @@ const RaamdecoratieHero: React.FC = () => {
                   Voordelen van onze raamdecoratie
                 </h3>
                 <ul className="space-y-2 sm:space-y-3">
-                  {[
-                    'Op maat gemaakt voor perfecte pasvorm',
-                    'Hoogwaardige materialen en afwerking',
-                    'Breed assortiment kleuren en stijlen',
-                    'Professionele montage door experts',
-                    'Uitstekende prijs-kwaliteitverhouding',
-                    'Persoonlijk advies en service'
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-2 sm:gap-3">
+                  {['Op maat gemaakt voor perfecte pasvorm', 'Hoogwaardige materialen en afwerking', 'Breed assortiment kleuren en stijlen', 'Professionele montage door experts', 'Uitstekende prijs-kwaliteitverhouding', 'Persoonlijk advies en service'].map((item, index) => <li key={index} className="flex items-start gap-2 sm:gap-3">
                       <div className="bg-brand-green p-0.5 sm:p-1 rounded-full mt-0.5 sm:mt-1 flex-shrink-0">
                         <Check className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-white" />
                       </div>
                       <span className="text-white/90 text-sm sm:text-base leading-relaxed">{item}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
                 <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/20">
                   <div className="bg-white/10 p-3 sm:p-4 rounded-lg backdrop-blur-sm">
@@ -121,8 +93,6 @@ const RaamdecoratieHero: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default RaamdecoratieHero;
