@@ -25,39 +25,39 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
   const profileData = {
     "living-kozijnprofiel": {
       name: "Schüco Living Kozijnprofiel",
-      slug: "living-82",
+      slug: "schuco-living-kozijnprofiel",
       image: "/lovable-uploads/b17265b8-0e61-4866-a077-8567ce7ccf9b.png",
       specifications: {
-        inbouwdiepte: "82 mm",
-        uWaarde: "0,8 W/(m²·K)",
-        kamersysteem: "6 kamers",
-        energielabel: "A++",
-        kleuren: "200+ opties",
+        inbouwdiepte: "120 mm",
+        uWaarde: "1,1 W/(m²·K)",
+        kamersysteem: "7 kamers",
+        energielabel: "A",
+        kleuren: "170+ opties",
         dichtingen: "EPDM rubber",
         materiaal: "Hoogwaardig PVC",
         onderhoud: "Onderhoudsarm",
-        geluidsisolatie: "Tot 47 dB",
-        veiligheid: "RC2 mogelijk",
-        luchtcirculatie: "Geoptimaliseerd",
+        geluidsisolatie: "Uitstekend",
+        veiligheid: "Extra veiligheid",
+        luchtcirculatie: "Gezonde luchtcirculatie",
         recyclebaar: "Ja"
       }
     },
     "ct70-as-kozijnprofiel": {
       name: "Schüco CT70 AS Kozijnprofiel", 
-      slug: "ct-70-as",
+      slug: "schuco-ct70-kozijnprofiel",
       image: "/lovable-uploads/a9f0e889-dd7f-4195-8461-661638f5fc21.png",
       specifications: {
         inbouwdiepte: "70 mm",
-        uWaarde: "1,0 W/(m²·K)",
+        uWaarde: "Uitstekende thermische isolatie",
         kamersysteem: "5 kamers",
-        energielabel: "A+",
-        kleuren: "170+ opties",
+        energielabel: "Energie-efficiënt",
+        kleuren: "Diverse ontwerpopties",
         dichtingen: "EPDM rubber",
         materiaal: "Hoogwaardig PVC",
-        onderhoud: "Onderhoudsarm",
-        geluidsisolatie: "Tot 45 dB",
-        veiligheid: "RC2 mogelijk",
-        luchtcirculatie: "Geoptimaliseerd",
+        onderhoud: "Eenvoudig onderhoud",
+        geluidsisolatie: "Verbeterde geluidsisolatie",
+        veiligheid: "Duurzaamheid",
+        luchtcirculatie: "Optimale lichtinval",
         recyclebaar: "Ja"
       }
     }
@@ -147,28 +147,6 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
                 <Paintbrush className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-          </div>
-          
-          <div className="mt-6 pt-4 border-t border-gray-200">
-            <h4 className="font-medium mb-2 text-base">Snelle toegang</h4>
-            <div className="space-y-2">
-              <div className="flex items-center text-brand-green hover:underline">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                <a href="#" className="text-sm">Galerij</a>
-              </div>
-              <div className="flex items-center text-brand-green hover:underline">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                <a href="#" className="text-sm">Technische informatie</a>
-              </div>
-              <div className="flex items-center text-brand-green hover:underline">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                <a href="#" className="text-sm">Documentatie</a>
-              </div>
-              <div className="flex items-center text-brand-green hover:underline">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                <a href="#" className="text-sm">CAD-gegevens</a>
-              </div>
-            </div>
           </div>
         </div>
       </div>

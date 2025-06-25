@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -361,7 +362,7 @@ const ColorOptions: React.FC = () => {
                     <div className="text-center max-w-3xl mx-auto mb-8">
                       <h2 ref={collectionTitleRef} className="text-2xl font-bold mb-4">Onze kleurencollectie</h2>
                       <p className="text-gray-600">
-                        Bekijk onze uitgebreide collectie van 210+ RAL kleuren voor kunststof kozijnen. Van klassiek wit tot moderne antraciet en warme houtlook afwerkingen.
+                        Bekijk onze uitgebreide collectie van 60+ RAL kleuren voor kunststof kozijnen. Van klassiek wit tot moderne antraciet en warme houtlook afwerkingen.
                       </p>
                     </div>
                   </AnimatedSection>
@@ -476,101 +477,6 @@ const ColorOptions: React.FC = () => {
                           ))}
                         </TooltipProvider>
                       </div>
-                    </AnimatedSection>
-                    
-                    <AnimatedSection animation="fade-in" delay={400}>
-                      <h3 className="text-xl font-semibold mb-4 flex items-center">
-                        <div className="w-1.5 h-6 bg-brand-green mr-2"></div>
-                        Alle RAL kleuren ({colorOptions.length} kleuren)
-                      </h3>
-                      
-                      <Tabs defaultValue="popular" className="w-full">
-                        <TabsList className="grid grid-cols-5 lg:grid-cols-10 w-full mb-6">
-                          <TabsTrigger value="popular" className="text-xs">
-                            <Star className="h-3 w-3 mr-1" />
-                            Populair
-                          </TabsTrigger>
-                          <TabsTrigger value="yellow" className="text-xs">Geel</TabsTrigger>
-                          <TabsTrigger value="orange" className="text-xs">Oranje</TabsTrigger>
-                          <TabsTrigger value="red" className="text-xs">Rood</TabsTrigger>
-                          <TabsTrigger value="violet" className="text-xs">Violet</TabsTrigger>
-                          <TabsTrigger value="blue" className="text-xs">Blauw</TabsTrigger>
-                          <TabsTrigger value="green" className="text-xs">Groen</TabsTrigger>
-                          <TabsTrigger value="grey" className="text-xs">Grijs</TabsTrigger>
-                          <TabsTrigger value="brown" className="text-xs">Bruin</TabsTrigger>
-                          <TabsTrigger value="white" className="text-xs">Wit</TabsTrigger>
-                        </TabsList>
-                        
-                        <TabsContent value="popular">
-                          <div className="grid grid-cols-6 sm:grid-cols-10 lg:grid-cols-12 xl:grid-cols-15 gap-2">
-                            <TooltipProvider>
-                              {colorOptions.filter(c => c.popular).map((color) => (
-                                <Tooltip key={color.ralCode}>
-                                  <TooltipTrigger asChild>
-                                    <div className="group cursor-pointer">
-                                      <div 
-                                        className="aspect-square rounded border-2 border-transparent hover:border-brand-green transition-colors relative" 
-                                        style={{ 
-                                          backgroundColor: color.hex,
-                                          boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                                        }}
-                                      >
-                                        <Star className="h-3 w-3 absolute top-0.5 right-0.5 text-yellow-500" />
-                                      </div>
-                                      <p className="text-xs text-center mt-1 font-medium truncate">{color.name}</p>
-                                    </div>
-                                  </TooltipTrigger>
-                                  <TooltipContent>
-                                    <div className="space-y-1">
-                                      <p>{color.name}</p>
-                                      <p className="text-xs text-gray-500">{color.hex}</p>
-                                      <p className="text-xs text-gray-500">{color.ralCode}</p>
-                                    </div>
-                                  </TooltipContent>
-                                </Tooltip>
-                              ))}
-                            </TooltipProvider>
-                          </div>
-                        </TabsContent>
-
-                        {(Object.entries(ralColorCategories) as [string, string][]).map(([categoryKey, categoryName]) => (
-                          <TabsContent key={categoryKey} value={categoryKey}>
-                            <div className="mb-4">
-                              <h4 className="text-lg font-semibold mb-2">{categoryName} kleuren</h4>
-                              <p className="text-sm text-gray-600">
-                                {colorOptions.filter(c => c.category === categoryKey).length} RAL {categoryName.toLowerCase()} kleuren beschikbaar
-                              </p>
-                            </div>
-                            <div className="grid grid-cols-6 sm:grid-cols-10 lg:grid-cols-12 xl:grid-cols-15 gap-2">
-                              <TooltipProvider>
-                                {colorOptions.filter(c => c.category === categoryKey).map((color) => (
-                                  <Tooltip key={color.ralCode}>
-                                    <TooltipTrigger asChild>
-                                      <div className="group cursor-pointer">
-                                        <div 
-                                          className="aspect-square rounded border-2 border-transparent hover:border-brand-green transition-colors" 
-                                          style={{ 
-                                            backgroundColor: color.hex,
-                                            boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                                          }}
-                                        ></div>
-                                        <p className="text-xs text-center mt-1 font-medium truncate">{color.name}</p>
-                                      </div>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                      <div className="space-y-1">
-                                        <p>{color.name}</p>
-                                        <p className="text-xs text-gray-500">{color.hex}</p>
-                                        <p className="text-xs text-gray-500">{color.ralCode}</p>
-                                      </div>
-                                    </TooltipContent>
-                                  </Tooltip>
-                                ))}
-                              </TooltipProvider>
-                            </div>
-                          </TabsContent>
-                        ))}
-                      </Tabs>
                     </AnimatedSection>
                   </div>
                 </div>

@@ -75,7 +75,7 @@ const Colors: React.FC = () => {
         <AnimatedSection animation="fade-in">
           <h2 className="text-3xl font-bold text-center mb-4">Kleuren voor Kunststof Kozijnen</h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-8">
-            Ontdek onze uitgebreide collectie van 210+ RAL kleuren voor kunststof kozijnen. 
+            Ontdek onze uitgebreide collectie van 60+ RAL kleuren voor kunststof kozijnen. 
             Van standaard kleuren tot speciale houtlook en metallic afwerkingen.
           </p>
           
@@ -172,7 +172,7 @@ const Colors: React.FC = () => {
           <div className="mt-12 text-center">
             <Card className="max-w-2xl mx-auto">
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-4">Meer dan 200 RAL kleuren beschikbaar</h3>
+                <h3 className="text-xl font-semibold mb-4">Meer dan 60 RAL kleuren beschikbaar</h3>
                 <p className="text-gray-600 mb-4">
                   Naast onze populaire kleuren hebben we toegang tot het volledige RAL kleurenpalet. 
                   Vraag naar de mogelijkheden voor uw specifieke kleurwens.
