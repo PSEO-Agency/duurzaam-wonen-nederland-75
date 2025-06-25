@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProducts';
 import { createServicePageFromProduct } from '@/utils/createServicePageFromProduct';
+import RaamdecoratiePageContent from '@/components/raamdecoratie/RaamdecoratiePageContent';
 
 const ProductPage: React.FC = () => {
   const { productSlug } = useParams<{ productSlug: string }>();
@@ -10,6 +11,11 @@ const ProductPage: React.FC = () => {
   
   // Extract slug from URL path if not available in params
   const slug = productSlug || location.pathname.replace('/', '');
+  
+  // Special case for raamdecoratie - show only hero section
+  if (slug === 'raamdecoratie') {
+    return <RaamdecoratiePageContent />;
+  }
   
   const { data: product, isLoading, error } = useProduct(slug);
 
