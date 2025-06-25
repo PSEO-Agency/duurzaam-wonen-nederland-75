@@ -42,6 +42,11 @@ const AdminSidebar: React.FC = () => {
       title: 'Projecten',
       href: '/admin/projects',
       icon: Image
+    },
+    {
+      title: 'OG Images',
+      href: '/admin/og-images',
+      icon: Image
     }
   ];
 

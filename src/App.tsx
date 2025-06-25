@@ -71,6 +71,7 @@ const AdminCityServices = lazy(() => import('./pages/admin/CityServices'));
 const AdminProjects = lazy(() => import('./pages/admin/Projects'));
 const AdminProducts = lazy(() => import('./pages/admin/Products'));
 const AdminProductEditor = lazy(() => import('./pages/admin/ProductEditor'));
+const AdminOGImages = lazy(() => import('./pages/admin/OGImages'));
 
 const queryClient = new QueryClient();
 
@@ -159,6 +160,7 @@ function App() {
                   <Route path="services" element={<AdminServices />} />
                   <Route path="city-services" element={<AdminCityServices />} />
                   <Route path="projects" element={<AdminProjects />} />
+                  <Route path="og-images" element={<AdminOGImages />} />
                 </Route>
               </Routes>
             </Suspense>
