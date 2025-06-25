@@ -352,7 +352,7 @@ const Offerte: React.FC = () => {
       <Navbar />
       
       <div className="bg-gray-50 py-16 md:py-24">
-        <div className="container max-w-6xl mx-auto px-4">
+        <div className="container max-w-6xl mx-auto px-4 py-[50px]">
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Vraag vrijblijvend een offerte aan</h1>
             <p className="text-lg text-gray-600 mt-3">
