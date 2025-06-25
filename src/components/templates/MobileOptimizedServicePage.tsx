@@ -62,16 +62,32 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
 }) => {
   const { data: allProducts = [], isLoading: productsLoading } = useAllProducts();
 
-  const displayServiceItems = allProducts.map(product => ({
-    image: product.hero_background_image || '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png',
-    title: safeString(product.name),
-    description: safeString(product.description) || `Ontdek onze hoogwaardige ${safeString(product.name).toLowerCase()} oplossingen voor uw woning.`,
-    features: Array.isArray(product.features) ? product.features.map(f => safeString(f)) : 
-      typeof product.features === 'string' ? JSON.parse(product.features || '[]').map((f: any) => safeString(f)) : 
-      ['Hoogwaardige kwaliteit', 'Professionele montage', 'Uitstekende service'],
-    linkText: `Meer over ${safeString(product.name)}`,
-    linkUrl: `/${product.slug || ''}`
-  }));
+  // Manual item for Kunststof Kozijnen (always first)
+  const manualKunststofKozijnen = {
+    image: '/lovable-uploads/76cef3dd-0b09-4d08-a7ff-78880edcb1f7.png',
+    title: 'Kunststof Kozijnen',
+    description: 'Hoogwaardige kozijnen met uitstekende warmte- en geluidsisolatie.',
+    features: ['HR++ of triple glas', 'Onderhoudsvrij', 'Diverse kleuren en stijlen'],
+    linkText: "Meer informatie",
+    linkUrl: "/kunststof-kozijnen"
+  };
+
+  // Transform ALL CMS products to match the current UI structure
+  const dynamicProducts = allProducts && allProducts.length > 0 
+    ? allProducts.map(product => ({
+        image: product.preview_image || product.hero_image_url || product.hero_background_image || '/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png',
+        title: safeString(product.name),
+        description: safeString(product.description) || safeString(product.hero_description) || '',
+        features: product.features && Array.isArray(product.features) ? 
+          product.features.slice(0, 3).map(feature => safeString(feature)) : 
+          ['Hoogwaardige materialen', 'Professionele montage', 'Lange garantie'],
+        linkText: `Meer informatie`,
+        linkUrl: `/${product.slug || ''}`
+      }))
+    : [];
+
+  // Combine manual item with ALL dynamic products (manual item first)
+  const displayServiceItems = [manualKunststofKozijnen, ...dynamicProducts];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -362,35 +378,34 @@ const MobileOptimizedServicePage: React.FC<ServicePageTemplateProps> = ({
                 <p className="text-gray-600">Oplossingen laden...</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-8 sm:mt-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
                 {displayServiceItems.map((service, index) => (
                   <AnimatedSection key={index} delay={index * 100}>
                     <div className="glass-card overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-xl group">
-                      <div className="relative h-48 sm:h-64 overflow-hidden">
+                      <div className="relative h-64 overflow-hidden">
                         <img
                           src={service.image}
                           alt={service.title}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <h3 className="absolute bottom-3 sm:bottom-4 left-4 sm:left-6 text-lg sm:text-2xl font-bold text-white">{service.title}</h3>
+                        <h3 className="absolute bottom-4 left-6 text-2xl font-bold text-white">{service.title}</h3>
                       </div>
-                      <div className="p-4 sm:p-6 flex-grow">
-                        <p className="text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base leading-relaxed">{service.description}</p>
-                        <ul className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
+                      <div className="p-6 flex-grow">
+                        <p className="text-gray-700 mb-4">{service.description}</p>
+                        <ul className="space-y-2 mb-6">
                           {safeArray(service.features).map((feature, idx) => (
                             <li key={idx} className="flex items-start">
-                              <Check className="h-4 w-4 sm:h-5 sm:w-5 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
-                              <span className="text-gray-600 text-sm sm:text-base">{safeString(feature)}</span>
+                              <Check className="h-5 w-5 text-brand-green mr-2 mt-0.5 flex-shrink-0" />
+                              <span className="text-gray-600">{safeString(feature)}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
-                      <div className="p-4 sm:p-6 pt-0 mt-auto">
-                        <Button variant="ghost" asChild className="text-brand-green hover:text-brand-green-dark hover:bg-brand-green/10 text-xs sm:text-sm md:text-base w-full justify-start p-2 min-h-[44px] sm:min-h-[40px]">
-                          <Link to={service.linkUrl} className="flex items-start gap-1 sm:gap-2">
-                            <span className="break-words text-left leading-snug flex-1 hyphens-auto">{service.linkText}</span>
-                            <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0 mt-0.5" />
+                      <div className="p-6 pt-0 mt-auto">
+                        <Button variant="ghost" asChild className="text-brand-green hover:text-brand-green-dark hover:bg-brand-green/10 -ml-3">
+                          <Link to={service.linkUrl}>
+                            {service.linkText} <ArrowRight className="ml-2 h-4 w-4" />
                           </Link>
                         </Button>
                       </div>
