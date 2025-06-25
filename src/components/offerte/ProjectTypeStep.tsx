@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -19,6 +18,35 @@ const ProjectTypeStep: React.FC<ProjectTypeStepProps> = ({ formData, updateFormD
       </div>
       
       <div className="space-y-6">
+        <div>
+          <Label className="text-base mb-3 block">Type aanvrager</Label>
+          <RadioGroup 
+            value={formData.applicantType} 
+            onValueChange={(value) => updateFormData('applicantType', value)} 
+            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          >
+            <label className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer transition-all hover:border-brand-green hover:bg-brand-green/5 data-[state=checked]:border-brand-green data-[state=checked]:bg-brand-green/5" data-state={formData.applicantType === 'particulier' ? 'checked' : 'unchecked'}>
+              <RadioGroupItem value="particulier" id="particulier" className="sr-only" />
+              <div className="rounded-full w-5 h-5 border border-gray-300 flex items-center justify-center data-[state=checked]:bg-brand-green data-[state=checked]:border-brand-green" data-state={formData.applicantType === 'particulier' ? 'checked' : 'unchecked'}>
+                {formData.applicantType === 'particulier' && (
+                  <div className="w-2.5 h-2.5 rounded-full bg-white"></div>
+                )}
+              </div>
+              <span className="ml-2">Particulier</span>
+            </label>
+            
+            <label className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer transition-all hover:border-brand-green hover:bg-brand-green/5 data-[state=checked]:border-brand-green data-[state=checked]:bg-brand-green/5" data-state={formData.applicantType === 'vve' ? 'checked' : 'unchecked'}>
+              <RadioGroupItem value="vve" id="vve" className="sr-only" />
+              <div className="rounded-full w-5 h-5 border border-gray-300 flex items-center justify-center data-[state=checked]:bg-brand-green data-[state=checked]:border-brand-green" data-state={formData.applicantType === 'vve' ? 'checked' : 'unchecked'}>
+                {formData.applicantType === 'vve' && (
+                  <div className="w-2.5 h-2.5 rounded-full bg-white"></div>
+                )}
+              </div>
+              <span className="ml-2">VvE</span>
+            </label>
+          </RadioGroup>
+        </div>
+        
         <div>
           <Label className="text-base mb-3 block">Type project</Label>
           <RadioGroup 

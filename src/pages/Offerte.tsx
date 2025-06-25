@@ -14,7 +14,11 @@ import ContactInfoStep from '@/components/offerte/ContactInfoStep';
 import FinalStep from '@/components/offerte/FinalStep';
 import ReviewStep from '@/components/offerte/ReviewStep';
 import AdvisorPanel from '@/components/offerte/AdvisorPanel';
+
 export type OfferteFormData = {
+  // Applicant type
+  applicantType: 'particulier' | 'vve' | '';
+  
   // Project info
   projectType: 'nieuwbouw' | 'renovatie' | 'vervanging' | '';
   propertyType: 'eengezinswoning' | 'appartement' | 'twee-onder-een-kap' | 'bedrijfspand' | '';
@@ -42,7 +46,11 @@ export type OfferteFormData = {
   availabilitySchedule: string; // Serialized JSON of the schedule
   termsAccepted: boolean;
 };
+
 const initialFormData: OfferteFormData = {
+  // Applicant type
+  applicantType: '',
+  
   // Project info
   projectType: '',
   propertyType: '',
@@ -101,7 +109,10 @@ const Offerte: React.FC = () => {
     switch (step) {
       case 1:
         // Project Type
-        if (!formData.projectType) {
+        if (!formData.applicantType) {
+          isValid = false;
+          errorMessage = 'Selecteer het type aanvrager';
+        } else if (!formData.projectType) {
           isValid = false;
           errorMessage = 'Selecteer het type project';
         } else if (!formData.propertyType) {
@@ -216,6 +227,9 @@ const Offerte: React.FC = () => {
         },
         // Project Details - ensure ALL form fields are included
         customFields: {
+          // Applicant Type Information
+          applicantType: data.applicantType,
+          
           // Project Type Information
           projectType: data.projectType,
           propertyType: data.propertyType,
