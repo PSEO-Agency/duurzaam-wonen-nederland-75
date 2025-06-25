@@ -64,10 +64,6 @@ const ColorOptions: React.FC = () => {
     { name: 'Oregon Pine', hex: '#D8B28E', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte houtlook met een subtiele nerf, perfect voor een natuurlijke uitstraling.', ralCode: 'Folie 1192-001' },
     { name: 'Eiken Naturel', hex: '#D2B48C', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte eikenhouttint met een natuurlijke uitstraling.', ralCode: 'Folie 3149-008' },
     
-    { name: 'Aluminium Metallic', hex: '#A9A9A9', category: 'metallic', description: 'Moderne metallic look die het beste van aluminium nabootst.', ralCode: 'RAL 9006' },
-    { name: 'Geborsteld Rvs Look', hex: '#B4B4B4', category: 'metallic', description: 'Stijlvolle metallic afwerking met een geborsteld effect.', ralCode: 'RAL 9007' },
-    { name: 'Brons Metallic', hex: '#CD7F32', category: 'metallic', description: 'Warme metallic tint met een rijke, klassieke uitstraling.', ralCode: 'RAL 8023' },
-    
     { name: 'Wijnrood', hex: '#722F37', category: 'special', description: 'Rijke, diepe kleur die warmte en karakter toevoegt aan uw woning.', ralCode: 'RAL 3005' },
     { name: 'Mosgroen', hex: '#607D3B', category: 'special', description: 'Natuurlijke groentint die perfect in landelijke omgevingen past.', ralCode: 'RAL 6005' },
     { name: 'Monumentenblauw', hex: '#27548E', category: 'special', description: 'Traditionele blauwtint, vaak gebruikt in historische gebouwen.', ralCode: 'RAL 5010' },
@@ -102,7 +98,7 @@ const ColorOptions: React.FC = () => {
     <>
       <Helmet>
         <title>Kleuren voor Kunststof Kozijnen | Inspiratie & Advies</title>
-        <meta name="description" content="Ontdek alle kleuren en afwerkingsmogelijkheden voor kunststof kozijnen. Van standaardkleuren tot houtlook en metallic afwerkingen. Probeer onze interactieve kleurenmodule." />
+        <meta name="description" content="Ontdek alle kleuren en afwerkingsmogelijkheden voor kunststof kozijnen. Van standaardkleuren tot houtlook afwerkingen. Probeer onze interactieve kleurenmodule." />
       </Helmet>
       
       <Navbar />
@@ -212,14 +208,6 @@ const ColorOptions: React.FC = () => {
                                 className={filterCategory === "woodlook" ? "bg-brand-green" : ""}
                               >
                                 Houtlook
-                              </Button>
-                              <Button 
-                                variant={filterCategory === "metallic" ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => setFilterCategory("metallic")}
-                                className={filterCategory === "metallic" ? "bg-brand-green" : ""}
-                              >
-                                Metallic
                               </Button>
                               <Button 
                                 variant={filterCategory === "special" ? "default" : "outline"}

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from '@/components/ui/badge';
 import { Info, Star, Palette } from 'lucide-react';
-import { ralColors, woodlookColors, metallicColors, ralColorCategories, RALColor } from '@/data/ralColors';
+import { ralColors, woodlookColors, ralColorCategories, RALColor } from '@/data/ralColors';
 import { Link } from 'react-router-dom';
 
 const Colors: React.FC = () => {
@@ -17,7 +17,6 @@ const Colors: React.FC = () => {
   const getCategoryColors = (category: string) => {
     if (category === 'popular') return popularColors;
     if (category === 'woodlook') return woodlookColors;
-    if (category === 'metallic') return metallicColors;
     return ralColors.filter(color => color.category === category);
   };
 
@@ -76,7 +75,7 @@ const Colors: React.FC = () => {
           <h2 className="text-3xl font-bold text-center mb-4">Kleuren voor Kunststof Kozijnen</h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-8">
             Ontdek onze uitgebreide collectie van 60+ RAL kleuren voor kunststof kozijnen. 
-            Van standaard kleuren tot speciale houtlook en metallic afwerkingen.
+            Van standaard kleuren tot speciale houtlook afwerkingen.
           </p>
           
           <div className="flex justify-center mb-8">
@@ -91,7 +90,7 @@ const Colors: React.FC = () => {
         
         <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
           <div className="flex justify-center mb-8">
-            <TabsList className="grid grid-cols-4 lg:grid-cols-8 w-full max-w-4xl">
+            <TabsList className="grid grid-cols-4 lg:grid-cols-7 w-full max-w-4xl">
               <TabsTrigger value="popular" className="text-xs">
                 <Star className="h-3 w-3 mr-1" />
                 <span className="hidden sm:inline">Populair</span>
@@ -102,7 +101,6 @@ const Colors: React.FC = () => {
               <TabsTrigger value="green" className="text-xs">Groen</TabsTrigger>
               <TabsTrigger value="blue" className="text-xs">Blauw</TabsTrigger>
               <TabsTrigger value="woodlook" className="text-xs">Houtlook</TabsTrigger>
-              <TabsTrigger value="metallic" className="text-xs">Metallic</TabsTrigger>
             </TabsList>
           </div>
           
@@ -148,20 +146,6 @@ const Colors: React.FC = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {woodlookColors.map((color) => (
-                <ColorCard key={color.ralCode} color={color} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="metallic">
-            <div className="mb-6">
-              <h3 className="text-2xl font-semibold mb-4">Metallic afwerkingen</h3>
-              <p className="text-gray-600 mb-6">
-                Moderne metallic afwerkingen voor een luxueuze en eigentijdse uitstraling.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {metallicColors.map((color) => (
                 <ColorCard key={color.ralCode} color={color} />
               ))}
             </div>
