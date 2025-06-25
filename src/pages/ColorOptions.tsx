@@ -122,6 +122,195 @@ const ColorOptions: React.FC = () => {
 
   const popularColors = colorOptions.filter(color => color.popular);
 
+  const mainContent = (
+    <>
+      {/* Populaire kleuren sectie */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fade-in">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl font-bold mb-4">Populaire kleurkeuzes</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Deze kleuren worden het vaakst gekozen door onze klanten voor hun kunststof kozijnen
+              </p>
+            </div>
+          </AnimatedSection>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {popularColors.map((color, index) => (
+              <AnimatedSection key={color.name} animation="fade-in" delay={index * 100}>
+                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                  <div 
+                    className="h-32 relative"
+                    style={{ 
+                      backgroundColor: color.hex,
+                      backgroundImage: color.image ? `url(${color.image})` : 'none',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      border: color.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none'
+                    }}
+                  >
+                    <div className="absolute top-2 right-2">
+                      <span className="bg-brand-green text-white text-xs px-2 py-1 rounded-full">
+                        Populair
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-lg mb-2">{color.name}</h3>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs text-gray-500">
+                        {color.ralCode || color.hex}
+                      </span>
+                      <div 
+                        className="w-4 h-4 rounded border border-gray-200"
+                        style={{ backgroundColor: color.hex }}
+                      ></div>
+                    </div>
+                    <p className="text-sm text-gray-600 mb-4">{color.description}</p>
+                    
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="flex-1"
+                        onClick={() => setPreviewColor(color)}
+                      >
+                        <Eye className="h-3 w-3 mr-1" />
+                        Preview
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Kleurfilters */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fade-in">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold mb-4">Alle beschikbare kleuren</h2>
+              <p className="text-gray-600">
+                Filter op categorie om de perfecte kleur voor uw kozijnen te vinden
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection animation="fade-in" delay={100}>
+            <div className="flex flex-wrap justify-center gap-2 mb-8">
+              {categories.map((category) => (
+                <Button
+                  key={category.key}
+                  variant={selectedCategory === category.key ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSelectedCategory(category.key)}
+                  className="mb-2"
+                >
+                  <Palette className="h-3 w-3 mr-1" />
+                  {category.label} ({category.count})
+                </Button>
+              ))}
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredColors.map((color, index) => (
+              <AnimatedSection key={color.name} animation="fade-in" delay={index * 50}>
+                <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                  <div 
+                    className="h-24 relative"
+                    style={{ 
+                      backgroundColor: color.hex,
+                      backgroundImage: color.image ? `url(${color.image})` : 'none',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      border: color.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none'
+                    }}
+                  >
+                    {color.popular && (
+                      <div className="absolute top-2 right-2">
+                        <span className="bg-brand-green text-white text-xs px-2 py-1 rounded-full">
+                          Populair
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-semibold mb-1">{color.name}</h3>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs text-gray-500">
+                        {color.ralCode || color.hex}
+                      </span>
+                      <div 
+                        className="w-3 h-3 rounded border border-gray-200"
+                        style={{ backgroundColor: color.hex }}
+                      ></div>
+                    </div>
+                    <p className="text-xs text-gray-600 mb-3">{color.description}</p>
+                    
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full"
+                      onClick={() => setPreviewColor(color)}
+                    >
+                      <Eye className="h-3 w-3 mr-1" />
+                      Preview
+                    </Button>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Kleuradvies sectie */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="bg-gradient-to-r from-brand-green to-brand-green-dark rounded-lg p-8 text-white text-center">
+            <AnimatedSection animation="fade-in">
+              <h2 className="text-2xl font-bold mb-4">Gratis kleuradvies</h2>
+              <p className="text-lg mb-6 max-w-2xl mx-auto">
+                Twijfelt u over de beste kleurkeuze voor uw woning? Onze kleurspecialisten helpen u graag 
+                bij het maken van de perfecte keuze die past bij uw woning en persoonlijke smaak.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+                <div className="flex items-center gap-2">
+                  <Check className="h-5 w-5" />
+                  <span>Persoonlijk advies</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="h-5 w-5" />
+                  <span>Kleurstalen op locatie</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="h-5 w-5" />
+                  <span>Digitale voorbeelden</span>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button className="bg-white text-brand-green hover:bg-gray-100">
+                  Kleuradvies aanvragen
+                </Button>
+                <Button variant="outline" className="border-white text-white hover:bg-white/10">
+                  <Palette className="h-4 w-4 mr-2" />
+                  Offerte met kleur
+                </Button>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+
   return (
     <>
       <Helmet>
@@ -135,208 +324,19 @@ const ColorOptions: React.FC = () => {
       </Helmet>
       
       <SubpageTemplate
-        title="Kleuropties voor Kunststof Kozijnen"
-        subtitle="Ontdek de perfecte kleur voor uw kozijnen"
-        description="Van klassiek wit tot moderne antraciet en warme houtlook opties - wij hebben de perfecte kleur voor elke woning en smaak."
-        breadcrumbs={[
-          { label: 'Home', href: '/' },
-          { label: 'Kunststof Kozijnen', href: '/kunststof-kozijnen' },
-          { label: 'Kleuren', href: '/kunststof-kozijnen/kleuren' }
-        ]}
-        features={[
+        title="Kleuropties voor Kunststof Kozijnen | Uitgebreid Kleurenoverzicht"
+        metaDescription="Ontdek alle beschikbare kleuren voor kunststof kozijnen. Van klassiek wit tot moderne antraciet en warme houtlook opties. Bekijk RAL-codes en vraag gratis kleuradvies aan."
+        canonicalUrl="/kunststof-kozijnen/kleuren"
+        heroTitle="Kleuropties voor Kunststof Kozijnen"
+        heroDescription="Van klassiek wit tot moderne antraciet en warme houtlook opties - wij hebben de perfecte kleur voor elke woning en smaak."
+        mainContent={mainContent}
+        benefits={[
           'Uitgebreid kleurenoverzicht',
           'RAL-codes beschikbaar',
           'Gratis kleuradvies',
           'Voor binnen en buiten'
         ]}
-      >
-        {/* Populaire kleuren sectie */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <AnimatedSection animation="fade-in">
-              <div className="text-center mb-12">
-                <h2 className="text-2xl font-bold mb-4">Populaire kleurkeuzes</h2>
-                <p className="text-gray-600 max-w-2xl mx-auto">
-                  Deze kleuren worden het vaakst gekozen door onze klanten voor hun kunststof kozijnen
-                </p>
-              </div>
-            </AnimatedSection>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-              {popularColors.map((color, index) => (
-                <AnimatedSection key={color.name} animation="fade-in" delay={index * 100}>
-                  <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    <div 
-                      className="h-32 relative"
-                      style={{ 
-                        backgroundColor: color.hex,
-                        backgroundImage: color.image ? `url(${color.image})` : 'none',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        border: color.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none'
-                      }}
-                    >
-                      <div className="absolute top-2 right-2">
-                        <span className="bg-brand-green text-white text-xs px-2 py-1 rounded-full">
-                          Populair
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold text-lg mb-2">{color.name}</h3>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xs text-gray-500">
-                          {color.ralCode || color.hex}
-                        </span>
-                        <div 
-                          className="w-4 h-4 rounded border border-gray-200"
-                          style={{ backgroundColor: color.hex }}
-                        ></div>
-                      </div>
-                      <p className="text-sm text-gray-600 mb-4">{color.description}</p>
-                      
-                      <div className="flex gap-2">
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="flex-1"
-                          onClick={() => setPreviewColor(color)}
-                        >
-                          <Eye className="h-3 w-3 mr-1" />
-                          Preview
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Kleurfilters */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <AnimatedSection animation="fade-in">
-              <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold mb-4">Alle beschikbare kleuren</h2>
-                <p className="text-gray-600">
-                  Filter op categorie om de perfecte kleur voor uw kozijnen te vinden
-                </p>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection animation="fade-in" delay={100}>
-              <div className="flex flex-wrap justify-center gap-2 mb-8">
-                {categories.map((category) => (
-                  <Button
-                    key={category.key}
-                    variant={selectedCategory === category.key ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedCategory(category.key)}
-                    className="mb-2"
-                  >
-                    <Palette className="h-3 w-3 mr-1" />
-                    {category.label} ({category.count})
-                  </Button>
-                ))}
-              </div>
-            </AnimatedSection>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredColors.map((color, index) => (
-                <AnimatedSection key={color.name} animation="fade-in" delay={index * 50}>
-                  <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    <div 
-                      className="h-24 relative"
-                      style={{ 
-                        backgroundColor: color.hex,
-                        backgroundImage: color.image ? `url(${color.image})` : 'none',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        border: color.hex === '#FFFFFF' ? '1px solid #e5e7eb' : 'none'
-                      }}
-                    >
-                      {color.popular && (
-                        <div className="absolute top-2 right-2">
-                          <span className="bg-brand-green text-white text-xs px-2 py-1 rounded-full">
-                            Populair
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold mb-1">{color.name}</h3>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xs text-gray-500">
-                          {color.ralCode || color.hex}
-                        </span>
-                        <div 
-                          className="w-3 h-3 rounded border border-gray-200"
-                          style={{ backgroundColor: color.hex }}
-                        ></div>
-                      </div>
-                      <p className="text-xs text-gray-600 mb-3">{color.description}</p>
-                      
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="w-full"
-                        onClick={() => setPreviewColor(color)}
-                      >
-                        <Eye className="h-3 w-3 mr-1" />
-                        Preview
-                      </Button>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Kleuradvies sectie */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="bg-gradient-to-r from-brand-green to-brand-green-dark rounded-lg p-8 text-white text-center">
-              <AnimatedSection animation="fade-in">
-                <h2 className="text-2xl font-bold mb-4">Gratis kleuradvies</h2>
-                <p className="text-lg mb-6 max-w-2xl mx-auto">
-                  Twijfelt u over de beste kleurkeuze voor uw woning? Onze kleurspecialisten helpen u graag 
-                  bij het maken van de perfecte keuze die past bij uw woning en persoonlijke smaak.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-                  <div className="flex items-center gap-2">
-                    <Check className="h-5 w-5" />
-                    <span>Persoonlijk advies</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-5 w-5" />
-                    <span>Kleurstalen op locatie</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="h-5 w-5" />
-                    <span>Digitale voorbeelden</span>
-                  </div>
-                </div>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button className="bg-white text-brand-green hover:bg-gray-100">
-                    Kleuradvies aanvragen
-                  </Button>
-                  <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                    <Palette className="h-4 w-4 mr-2" />
-                    Offerte met kleur
-                  </Button>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-        </section>
-
-        <ContactCTA />
-      </SubpageTemplate>
+      />
 
       {/* Preview Modal */}
       {previewColor && (
