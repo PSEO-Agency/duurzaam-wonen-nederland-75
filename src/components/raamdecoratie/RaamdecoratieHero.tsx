@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -33,7 +34,7 @@ const RaamdecoratieHero: React.FC = () => {
               
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
                 <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white w-full sm:w-auto">
-                  <a href="https://www.facebook.com/twentsdesign" target="_blank" rel="noopener noreferrer">
+                  <a href="https://facebook.com/people/Twents-Design/100094592253210/" target="_blank" rel="noopener noreferrer">
                     <span>Offerte aanvragen</span>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
