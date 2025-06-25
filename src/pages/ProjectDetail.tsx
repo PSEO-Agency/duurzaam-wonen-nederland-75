@@ -75,7 +75,23 @@ const ProjectDetail: React.FC = () => {
   
   useEffect(() => {
     if (project) {
-      setActiveImage(project.featured_image || project.image_url || '');
+      // Build gallery from featured_image and gallery_images only
+      const galleryImages = [];
+      
+      if (project.featured_image) {
+        galleryImages.push(project.featured_image);
+      }
+      
+      if (project.gallery_images && Array.isArray(project.gallery_images)) {
+        galleryImages.push(...project.gallery_images);
+      }
+      
+      // Set the first available image as active, or fallback to image_url if gallery is empty
+      if (galleryImages.length > 0) {
+        setActiveImage(galleryImages[0]);
+      } else if (project.image_url) {
+        setActiveImage(project.image_url);
+      }
     }
   }, [project]);
 
@@ -116,11 +132,19 @@ const ProjectDetail: React.FC = () => {
     );
   }
 
-  const galleryImages = [
-    ...(project.featured_image ? [project.featured_image] : []),
-    ...(project.image_url ? [project.image_url] : []),
-    ...(project.gallery_images || [])
-  ].filter((img, index, arr) => arr.indexOf(img) === index); // Remove duplicates
+  // Build gallery images from featured_image and gallery_images
+  const galleryImages = [];
+  
+  if (project.featured_image) {
+    galleryImages.push(project.featured_image);
+  }
+  
+  if (project.gallery_images && Array.isArray(project.gallery_images)) {
+    galleryImages.push(...project.gallery_images);
+  }
+
+  // Fallback to image_url if no gallery images
+  const displayImage = activeImage || project.image_url;
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -188,10 +212,10 @@ const ProjectDetail: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Gallery */}
               <div className="lg:col-span-2">
-                {activeImage && (
+                {displayImage && (
                   <div className="mb-4 rounded-lg overflow-hidden aspect-video">
                     <img 
-                      src={activeImage} 
+                      src={displayImage} 
                       alt={project.title} 
                       className="w-full h-full object-cover"
                     />

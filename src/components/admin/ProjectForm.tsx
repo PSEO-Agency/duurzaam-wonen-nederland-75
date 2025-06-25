@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import ImageUpload from '@/components/form/ImageUpload';
+import MultiImageUpload from '@/components/form/MultiImageUpload';
 
 interface Project {
   id: string;
@@ -62,7 +63,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         completion_date: project.completion_date || '',
         image_url: project.image_url || '',
         featured_image: project.featured_image || '',
-        gallery_images: project.gallery_images || [],
+        gallery_images: Array.isArray(project.gallery_images) ? project.gallery_images : [],
         is_featured: project.is_featured || false,
         is_active: project.is_active ?? true,
         sort_order: project.sort_order || 0
@@ -115,6 +116,15 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
     setFormData(prev => {
       const newData = { ...prev, [field]: url };
       console.log('ProjectForm: Updated form data after image upload:', newData);
+      return newData;
+    });
+  };
+
+  const handleGalleryImagesChange = (urls: string[]) => {
+    console.log('ProjectForm: Gallery images changed:', urls);
+    setFormData(prev => {
+      const newData = { ...prev, gallery_images: urls };
+      console.log('ProjectForm: Updated form data after gallery change:', newData);
       return newData;
     });
   };
@@ -197,6 +207,14 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         value={formData.featured_image}
         onChange={handleImageUpload('featured_image')}
         bucketName="project-images"
+      />
+
+      <MultiImageUpload
+        label="Galerij Afbeeldingen"
+        value={formData.gallery_images}
+        onChange={handleGalleryImagesChange}
+        bucketName="project-images"
+        maxImages={8}
       />
 
       <div className="flex items-center space-x-4">
