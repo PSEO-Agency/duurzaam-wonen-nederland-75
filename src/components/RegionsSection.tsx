@@ -15,7 +15,7 @@ interface RegionsSectionProps {
 
 const RegionsSection: React.FC<RegionsSectionProps> = ({ 
   title = "Werkgebied",
-  description = "Wij zijn actief in heel Nederland. Neem contact met ons op voor meer informatie over uw regio.",
+  description = "Wij zijn actief in een groot deel van Nederland. Neem contact met ons op voor meer informatie over uw regio.",
   serviceSlug
 }) => {
   const { data: regions, isLoading: isLoadingRegions } = useRegions();
@@ -36,30 +36,30 @@ const RegionsSection: React.FC<RegionsSectionProps> = ({
     
     switch (currentServiceSlug) {
       case 'kunststof-schuifpuien':
-        return 'Kunststof Schuifpuien in heel Nederland';
+        return 'Kunststof Schuifpuien in een groot deel van Nederland';
       case 'kunststof-kozijnen':
-        return 'Kunststof Kozijnen in heel Nederland';
+        return 'Kunststof Kozijnen in een groot deel van Nederland';
       case 'aluminium-kozijnen':
-        return 'Aluminium Kozijnen in heel Nederland';
+        return 'Aluminium Kozijnen in een groot deel van Nederland';
       default:
-        return 'Onze diensten in heel Nederland';
+        return 'Onze diensten in een groot deel van Nederland';
     }
   };
 
   const getServiceDescription = () => {
-    if (description !== "Wij zijn actief in heel Nederland. Neem contact met ons op voor meer informatie over uw regio.") {
+    if (description !== "Wij zijn actief in een groot deel van Nederland. Neem contact met ons op voor meer informatie over uw regio.") {
       return description;
     }
     
     switch (currentServiceSlug) {
       case 'kunststof-schuifpuien':
-        return 'Wij leveren en installeren kunststof schuifpuien in heel Nederland. Bekijk hieronder of wij ook in uw regio actief zijn.';
+        return 'Wij leveren en installeren kunststof schuifpuien in een groot deel van Nederland. Bekijk hieronder of wij ook in uw regio actief zijn.';
       case 'kunststof-kozijnen':
-        return 'Wij leveren en installeren kunststof kozijnen in heel Nederland. Bekijk hieronder of wij ook in uw regio actief zijn.';
+        return 'Wij leveren en installeren kunststof kozijnen in een groot deel van Nederland. Bekijk hieronder of wij ook in uw regio actief zijn.';
       case 'aluminium-kozijnen':
-        return 'Wij leveren en installeren aluminium kozijnen in heel Nederland. Bekijk hieronder of wij ook in uw regio actief zijn.';
+        return 'Wij leveren en installeren aluminium kozijnen in een groot deel van Nederland. Bekijk hieronder of wij ook in uw regio actief zijn.';
       default:
-        return 'Wij zijn actief in heel Nederland. Bekijk hieronder of wij ook in uw regio actief zijn.';
+        return 'Wij zijn actief in een groot deel van Nederland. Bekijk hieronder of wij ook in uw regio actief zijn.';
     }
   };
 

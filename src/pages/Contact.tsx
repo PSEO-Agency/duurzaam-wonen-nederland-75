@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
@@ -232,7 +233,7 @@ const Contact: React.FC = () => {
                   question: "Werken jullie in heel Nederland?",
                   answer: (
                     <>
-                      Ja, wij zijn actief in heel Nederland. Bekijk onze{" "}
+                      Ja, wij zijn actief in een groot deel van Nederland. Bekijk onze{" "}
                       <Link to="/werkgebied" className="text-brand-green hover:underline">
                         werkgebied
                       </Link>{" "}

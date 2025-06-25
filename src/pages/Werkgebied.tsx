@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, MapPin } from 'lucide-react';
@@ -12,7 +13,7 @@ const Werkgebied: React.FC = () => {
   return <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>Ons Werkgebied | Duurzaam Wonen Nederland</title>
-        <meta name="description" content="Bekijk in welke regio's Duurzaam Wonen Nederland actief is. Wij leveren en installeren duurzame oplossingen voor uw woning in heel Nederland." />
+        <meta name="description" content="Bekijk in welke regio's Duurzaam Wonen Nederland actief is. Wij leveren en installeren duurzame oplossingen voor uw woning in een groot deel van Nederland." />
         <link rel="canonical" href="https://duurzaamwonen.info/werkgebied" />
       </Helmet>
       
@@ -25,11 +26,11 @@ const Werkgebied: React.FC = () => {
             <AnimatedSection animation="fade-in">
               <div className="max-w-4xl mx-auto text-center">
                 <span className="inline-block px-4 py-1 bg-brand-green/90 text-white rounded-full text-sm font-medium mb-4">
-                  Landelijke dekking
+                  Uitgebreide dekking
                 </span>
                 <h1 className="text-4xl md:text-5xl font-bold mb-6">Ons Werkgebied</h1>
                 <p className="text-lg md:text-xl text-gray-700 mb-8">
-                  Duurzaam Wonen Nederland is actief in heel Nederland. Ontdek hieronder of wij ook in uw regio werken en neem vrijblijvend contact met ons op.
+                  Duurzaam Wonen Nederland is actief in een groot deel van Nederland. Ontdek hieronder of wij ook in uw regio werken en neem vrijblijvend contact met ons op.
                 </p>
                 <Button size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
                   <span>Direct contact opnemen</span>
@@ -47,10 +48,10 @@ const Werkgebied: React.FC = () => {
               <AnimatedSection animation="fade-in-right">
                 <h2 className="text-3xl font-bold mb-6">Waar werken wij?</h2>
                 <p className="text-lg text-gray-700 mb-4">
-                  Bij Duurzaam Wonen Nederland zijn we trots op onze landelijke dekking. Onze professionele teams zijn actief in elke provincie van Nederland, wat betekent dat we onze hoogwaardige duurzame oplossingen kunnen leveren en installeren, waar u ook woont.
+                  Bij Duurzaam Wonen Nederland zijn we trots op onze uitgebreide dekking. Onze professionele teams zijn actief in een groot aantal provincies van Nederland, wat betekent dat we onze hoogwaardige duurzame oplossingen kunnen leveren en installeren, waar u ook woont.
                 </p>
                 <p className="text-lg text-gray-700 mb-4">
-                  Of u nu in Groningen of Enschede woont, u kunt rekenen op dezelfde hoge kwaliteit producten en installatie. Onze teams werken volgens strikte kwaliteitsnormen in heel Nederland.
+                  Of u nu in Groningen of Enschede woont, u kunt rekenen op dezelfde hoge kwaliteit producten en installatie. Onze teams werken volgens strikte kwaliteitsnormen in een groot deel van Nederland.
                 </p>
                 <p className="text-lg text-gray-700 mb-6">
                   Bekijk hieronder de provincies en steden waar we actief zijn, en ontdek of we ook in uw regio werken. Heeft u vragen over uw specifieke locatie? Neem dan gerust contact met ons op.
@@ -87,13 +88,13 @@ const Werkgebied: React.FC = () => {
         </section>
         
         {/* Regions Section */}
-        <RegionsSection title="Onze werkgebieden" description="Wij zijn actief in heel Nederland. Bekijk hieronder of wij ook in uw regio actief zijn." serviceSlug="kunststof-kozijnen" />
+        <RegionsSection title="Onze werkgebieden" description="Wij zijn actief in een groot deel van Nederland. Bekijk hieronder of wij ook in uw regio actief zijn." serviceSlug="kunststof-kozijnen" />
         
         {/* Service Highlights */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-in">
-              <h2 className="text-3xl font-bold text-center mb-12">Onze service in heel Nederland</h2>
+              <h2 className="text-3xl font-bold text-center mb-12">Onze service in een groot deel van Nederland</h2>
             </AnimatedSection>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -117,7 +118,7 @@ const Werkgebied: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-semibold mb-3">Snelle responstijd</h3>
                   <p className="text-gray-700">
-                    Dankzij onze landelijke dekking kunnen we snel reageren op uw aanvraag. 
+                    Dankzij onze uitgebreide dekking kunnen we snel reageren op uw aanvraag. 
                     We streven ernaar om binnen 48 uur een afspraak in te plannen voor een vrijblijvend adviesgesprek.
                   </p>
                 </div>
@@ -131,7 +132,7 @@ const Werkgebied: React.FC = () => {
                   <h3 className="text-xl font-semibold mb-3">Consistente kwaliteit</h3>
                   <p className="text-gray-700">
                     Of u nu in Groningen of Enschede woont, u kunt rekenen op dezelfde hoge kwaliteit producten en installatie. 
-                    Onze teams werken volgens strikte kwaliteitsnormen in heel Nederland.
+                    Onze teams werken volgens strikte kwaliteitsnormen in een groot deel van Nederland.
                   </p>
                 </div>
               </AnimatedSection>

@@ -53,7 +53,7 @@ const Projects: React.FC = () => {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-left">Onze recente projecten</h2>
               <p className="text-lg text-gray-600 max-w-2xl">
-                Ontdek een selectie van onze recente verduurzamingsprojecten in heel Nederland
+                Ontdek een selectie van onze recente verduurzamingsprojecten in een groot deel van Nederland
               </p>
             </div>
             <div className="flex gap-2 mt-6 md:mt-0">
