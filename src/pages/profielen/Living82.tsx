@@ -19,17 +19,12 @@ const Living82: React.FC = () => {
       title: 'Profiel doorsnede'
     },
     {
-      src: '/lovable-uploads/62501faa-0bd0-42dd-9184-060b70f05901.png',
+      src: '/lovable-uploads/49ce4bb5-fc38-4600-93bf-01b70a03b953.png',
       alt: 'Schüco Living kozijn detail',
       title: 'Kozijn detail'
     },
     {
-      src: '/lovable-uploads/18b63e63-da2c-4124-b2cd-e1dfb88a1e9e.png',
-      alt: 'Schüco Living kozijn montage',
-      title: 'Montage detail'
-    },
-    {
-      src: '/lovable-uploads/ffb78dec-281c-4b32-869d-c58bf5e549fe.png',
+      src: '/lovable-uploads/8e1ff821-1985-43c5-ba67-1040cef24077.png',
       alt: 'Schüco Living kozijn afwerking',
       title: 'Afwerking detail'
     }
