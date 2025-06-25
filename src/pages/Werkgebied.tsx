@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, MapPin } from 'lucide-react';
@@ -9,10 +8,8 @@ import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedSection from '@/components/AnimatedSection';
 import RegionsSection from '@/components/RegionsSection';
 import ContactCTA from '@/components/ContactCTA';
-
 const Werkgebied: React.FC = () => {
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>Ons Werkgebied | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Bekijk in welke regio's Duurzaam Wonen Nederland actief is. Wij leveren en installeren duurzame oplossingen voor uw woning in heel Nederland." />
@@ -34,10 +31,7 @@ const Werkgebied: React.FC = () => {
                 <p className="text-lg md:text-xl text-gray-700 mb-8">
                   Duurzaam Wonen Nederland is actief in heel Nederland. Ontdek hieronder of wij ook in uw regio werken en neem vrijblijvend contact met ons op.
                 </p>
-                <Button 
-                  size="lg" 
-                  className="bg-brand-green hover:bg-brand-green-dark text-white"
-                >
+                <Button size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
                   <span>Direct contact opnemen</span>
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -81,15 +75,11 @@ const Werkgebied: React.FC = () => {
                       </p>
                       <div className="flex items-center gap-2">
                         <MapPin className="h-5 w-5 text-brand-green" />
-                        <span className="font-medium">Binnen 48 uur bij u op locatie</span>
+                        <span className="font-medium">Binnen 24 uur afspraak gepland</span>
                       </div>
                     </div>
                   </div>
-                  <img 
-                    src="/lovable-uploads/8950f3c3-8de7-4c0c-8465-8bb4c566b9e2.png"
-                    alt="Duurzaam Wonen Nederland werkgebied"
-                    className="object-cover w-full h-full"
-                  />
+                  <img src="/lovable-uploads/8950f3c3-8de7-4c0c-8465-8bb4c566b9e2.png" alt="Duurzaam Wonen Nederland werkgebied" className="object-cover w-full h-full" />
                 </div>
               </AnimatedSection>
             </div>
@@ -97,11 +87,7 @@ const Werkgebied: React.FC = () => {
         </section>
         
         {/* Regions Section */}
-        <RegionsSection 
-          title="Onze werkgebieden"
-          description="Wij zijn actief in heel Nederland. Bekijk hieronder of wij ook in uw regio actief zijn."
-          serviceSlug="kunststof-kozijnen"
-        />
+        <RegionsSection title="Onze werkgebieden" description="Wij zijn actief in heel Nederland. Bekijk hieronder of wij ook in uw regio actief zijn." serviceSlug="kunststof-kozijnen" />
         
         {/* Service Highlights */}
         <section className="py-16 bg-gray-50">
@@ -158,8 +144,6 @@ const Werkgebied: React.FC = () => {
       
       <Footer />
       <ScrollToTop />
-    </div>
-  );
+    </div>;
 };
-
 export default Werkgebied;
