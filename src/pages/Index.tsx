@@ -98,7 +98,14 @@ const Index: React.FC = () => {
           <meta property="og:description" content="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten." />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://duurzaamwonen.info" />
-          <meta property="og:image" content="/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png" />
+          <meta property="og:image" content="/lovable-uploads/2c97ee65-9c2f-460e-8712-4d6bc5632e9c.png" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content="Duurzaam Wonen Nederland - Specialist in Woningverduurzaming" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Duurzaam Wonen Nederland | Specialist in Woningverduurzaming" />
+          <meta name="twitter:description" content="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten." />
+          <meta name="twitter:image" content="/lovable-uploads/2c97ee65-9c2f-460e-8712-4d6bc5632e9c.png" />
           <link rel="canonical" href="https://duurzaamwonen.info" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
           <meta name="robots" content="index, follow" />
@@ -108,7 +115,7 @@ const Index: React.FC = () => {
                 "@context": "https://schema.org",
                 "@type": "HomeAndConstructionBusiness",
                 "name": "Duurzaam Wonen Nederland",
-                "image": "/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png",
+                "image": "/lovable-uploads/2c97ee65-9c2f-460e-8712-4d6bc5632e9c.png",
                 "url": "https://duurzaamwonen.info",
                 "telephone": "053 303 0213",
                 "address": {
