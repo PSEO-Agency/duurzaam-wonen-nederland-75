@@ -1,6 +1,4 @@
-
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Benefits from '@/components/Benefits';
@@ -16,6 +14,7 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import CookieConsent from '@/components/CookieConsent';
 import LoadingScreen from '@/components/LoadingScreen';
+import SEOHead from '@/components/SEOHead';
 
 const Index: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -90,66 +89,23 @@ const Index: React.FC = () => {
     <>
       {isLoading && <LoadingScreen />}
       <div className={`min-h-screen flex flex-col ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}`}>
-        <Helmet>
-          <title>Duurzaam Wonen Nederland | Specialist in Woningverduurzaming</title>
-          <meta name="description" content="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten." />
-          <meta name="keywords" content="woningverduurzaming, kunststof kozijnen, HR++ glas, dakkapellen, gevelbekleding, energiebesparing, Enschede" />
-          <meta property="og:title" content="Duurzaam Wonen Nederland | Specialist in Woningverduurzaming" />
-          <meta property="og:description" content="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten." />
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://duurzaamwonen.info" />
-          <meta property="og:image" content="/lovable-uploads/2c97ee65-9c2f-460e-8712-4d6bc5632e9c.png" />
-          <meta property="og:image:width" content="1200" />
-          <meta property="og:image:height" content="630" />
-          <meta property="og:image:alt" content="Duurzaam Wonen Nederland - Specialist in Woningverduurzaming" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Duurzaam Wonen Nederland | Specialist in Woningverduurzaming" />
-          <meta name="twitter:description" content="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten." />
-          <meta name="twitter:image" content="/lovable-uploads/2c97ee65-9c2f-460e-8712-4d6bc5632e9c.png" />
-          <link rel="canonical" href="https://duurzaamwonen.info" />
-          <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-          <meta name="robots" content="index, follow" />
-          <script type="application/ld+json">
-            {`
-              {
-                "@context": "https://schema.org",
-                "@type": "HomeAndConstructionBusiness",
-                "name": "Duurzaam Wonen Nederland",
-                "image": "/lovable-uploads/2c97ee65-9c2f-460e-8712-4d6bc5632e9c.png",
-                "url": "https://duurzaamwonen.info",
-                "telephone": "053 303 0213",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Twenteweg 24",
-                  "addressLocality": "Enschede",
-                  "postalCode": "7532 ST",
-                  "addressCountry": "NL"
-                },
-                "geo": {
-                  "@type": "GeoCoordinates",
-                  "latitude": 52.2215,
-                  "longitude": 6.8937
-                },
-                "openingHoursSpecification": {
-                  "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday"
-                  ],
-                  "opens": "09:00",
-                  "closes": "17:00"
-                },
-                "sameAs": [
-                  "https://www.facebook.com/duurzaamwonennederland",
-                  "https://www.instagram.com/duurzaamwonen.nl"
-                ]
-              }
-            `}
-          </script>
-        </Helmet>
+        <SEOHead
+          title="Duurzaam Wonen Nederland | Specialist in Woningverduurzaming"
+          description="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten."
+          canonicalUrl="/"
+          pageType="website"
+          imageUrl="/lovable-uploads/a38deed8-4c39-4be4-b7e9-eddc9396fe87.png"
+          keywords={[
+            'woningverduurzaming',
+            'kunststof kozijnen',
+            'HR++ glas',
+            'dakkapellen',
+            'gevelbekleding',
+            'energiebesparing',
+            'Enschede'
+          ]}
+        />
+        
         <Navbar />
         <main className="flex-grow">
           <Hero />
