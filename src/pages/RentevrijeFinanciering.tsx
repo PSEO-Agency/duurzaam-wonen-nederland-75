@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Calendar, CheckCircle, InfoIcon, Download } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle, InfoIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -48,10 +47,6 @@ const RentevrijeFinanciering: React.FC = () => {
                   <Button size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
                     <span>Vraag een lening aan</span>
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                  <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-white/20">
-                    <Download className="mr-2 h-4 w-4" />
-                    <span>Download brochure</span>
                   </Button>
                 </div>
                 
