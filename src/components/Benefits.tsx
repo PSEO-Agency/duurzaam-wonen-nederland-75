@@ -24,7 +24,7 @@ const benefitsData = [
   {
     icon: <Sparkles className="h-8 w-8 text-brand-green" />,
     title: 'Veilig en innovatief',
-    description: 'Hoogwaardige sloten en slimme bediening via smartphone voor extra veiligheid.'
+    description: 'Hoogwaardige sloten en driepunt kerntreksluiting.'
   },
   {
     icon: <Palette className="h-8 w-8 text-brand-green" />,
