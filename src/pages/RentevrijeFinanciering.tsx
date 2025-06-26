@@ -121,7 +121,7 @@ const RentevrijeFinanciering: React.FC = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="rounded-lg overflow-hidden">
                     <img
-                      src="/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png"
+                      src="/lovable-uploads/b8a79168-4b0d-486b-b906-2464ab7d1ca8.png"
                       alt="Kunststof kozijnen financiering"
                       className="w-full h-full object-cover"
                     />
