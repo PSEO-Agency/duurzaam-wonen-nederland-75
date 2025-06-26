@@ -1,7 +1,9 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Calendar, CheckCircle, InfoIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
@@ -9,6 +11,12 @@ import AnimatedSection from '@/components/AnimatedSection';
 import ContactCTA from '@/components/ContactCTA';
 
 const RentevrijeFinanciering: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleOfferteClick = () => {
+    navigate('/offerte');
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
@@ -44,7 +52,7 @@ const RentevrijeFinanciering: React.FC = () => {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <Button size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
+                  <Button size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white" onClick={handleOfferteClick}>
                     <span>Vraag een lening aan</span>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -103,7 +111,7 @@ const RentevrijeFinanciering: React.FC = () => {
                   ))}
                 </ul>
                 
-                <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
+                <Button className="bg-brand-green hover:bg-brand-green-dark text-white" onClick={handleOfferteClick}>
                   <Calendar className="mr-2 h-4 w-4" />
                   <span>Plan een adviesgesprek</span>
                 </Button>
@@ -224,7 +232,7 @@ const RentevrijeFinanciering: React.FC = () => {
                   </div>
                   
                   <div className="mt-8">
-                    <Button className="w-full bg-brand-green hover:bg-brand-green-dark text-white py-6">
+                    <Button className="w-full bg-brand-green hover:bg-brand-green-dark text-white py-6" onClick={handleOfferteClick}>
                       Doe een aanvraag
                     </Button>
                     <p className="text-sm text-gray-500 mt-3 text-center">
@@ -287,7 +295,7 @@ const RentevrijeFinanciering: React.FC = () => {
               
               <div className="mt-12 text-center">
                 <AnimatedSection animation="fade-in" delay={300}>
-                  <Button size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white">
+                  <Button size="lg" className="bg-brand-green hover:bg-brand-green-dark text-white" onClick={handleOfferteClick}>
                     Start met verduurzamen
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
