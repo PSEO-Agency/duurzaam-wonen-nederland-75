@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Calendar, CheckCircle, InfoIcon } from 'lucide-react';
@@ -118,28 +117,12 @@ const RentevrijeFinanciering: React.FC = () => {
               </AnimatedSection>
               
               <AnimatedSection animation="fade-in-left" delay={200}>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-lg overflow-hidden">
-                    <img
-                      src="/lovable-uploads/b8a79168-4b0d-486b-b906-2464ab7d1ca8.png"
-                      alt="Kunststof kozijnen financiering"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="rounded-lg overflow-hidden">
-                    <img
-                      src="/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png"
-                      alt="Duurzame kozijnen"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="rounded-lg overflow-hidden col-span-2">
-                    <img
-                      src="/lovable-uploads/e923780c-9e14-408a-a016-0b63db9b8daa.png"
-                      alt="Energiebesparende maatregelen"
-                      className="w-full h-64 object-cover"
-                    />
-                  </div>
+                <div className="rounded-lg overflow-hidden">
+                  <img
+                    src="/lovable-uploads/a38deed8-4c39-4be4-b7e9-eddc9396fe87.png"
+                    alt="Moderne kunststof kozijnen met isolatieglas"
+                    className="w-full h-96 object-cover"
+                  />
                 </div>
               </AnimatedSection>
             </div>
