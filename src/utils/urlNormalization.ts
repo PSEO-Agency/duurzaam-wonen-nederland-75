@@ -27,3 +27,37 @@ export const getPathnameFromUrl = (url: string): string => {
     return url;
   }
 };
+
+/**
+ * Validates if a redirect is working correctly
+ */
+export const validateRedirect = async (fromUrl: string, expectedToUrl: string): Promise<boolean> => {
+  try {
+    const response = await fetch(fromUrl, { 
+      method: 'HEAD',
+      redirect: 'manual' 
+    });
+    
+    if (response.status === 301 || response.status === 302) {
+      const locationHeader = response.headers.get('location');
+      return locationHeader?.includes(expectedToUrl) || false;
+    }
+    
+    return false;
+  } catch (error) {
+    console.error('Redirect validation failed:', error);
+    return false;
+  }
+};
+
+/**
+ * Test multiple redirects for debugging
+ */
+export const testRedirects = async (redirectMappings: Array<{from: string, to: string}>): Promise<void> => {
+  console.log('Testing redirects...');
+  
+  for (const mapping of redirectMappings) {
+    const isWorking = await validateRedirect(mapping.from, mapping.to);
+    console.log(`${mapping.from} → ${mapping.to}: ${isWorking ? '✅' : '❌'}`);
+  }
+};

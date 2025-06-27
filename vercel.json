@@ -1,0 +1,194 @@
+
+{
+  "rewrites": [
+    {
+      "source": "/kunststof-kozijnen.php",
+      "destination": "/kunststof-kozijnen",
+      "statusCode": 301
+    },
+    {
+      "source": "/aluminium-kozijnen.php",
+      "destination": "/aluminium-kozijnen",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-schuifpuien.php",
+      "destination": "/kunststof-schuifpuien",
+      "statusCode": 301
+    },
+    {
+      "source": "/over-ons.php",
+      "destination": "/over-ons",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact.php",
+      "destination": "/contact",
+      "statusCode": 301
+    },
+    {
+      "source": "/offerte.php",
+      "destination": "/offerte",
+      "statusCode": 301
+    },
+    {
+      "source": "/werkwijze.php",
+      "destination": "/werkwijze",
+      "statusCode": 301
+    },
+    {
+      "source": "/vacatures.php",
+      "destination": "/vacatures",
+      "statusCode": 301
+    },
+    {
+      "source": "/werkgebied.php",
+      "destination": "/werkgebied",
+      "statusCode": 301
+    },
+    {
+      "source": "/privacy-policy.php",
+      "destination": "/privacy-policy",
+      "statusCode": 301
+    },
+    {
+      "source": "/sitemap.php",
+      "destination": "/sitemap",
+      "statusCode": 301
+    },
+    {
+      "source": "/rentevrije-financiering.php",
+      "destination": "/rentevrije-financiering",
+      "statusCode": 301
+    },
+    {
+      "source": "/projecten.php",
+      "destination": "/projecten",
+      "statusCode": 301
+    },
+    {
+      "source": "/oplossingen.php",
+      "destination": "/oplossingen",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/types.php",
+      "destination": "/kunststof-kozijnen/types",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/kleuren.php",
+      "destination": "/kunststof-kozijnen/kleuren",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/afmetingen.php",
+      "destination": "/kunststof-kozijnen/afmetingen",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/montage.php",
+      "destination": "/kunststof-kozijnen/montage",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/prijzen.php",
+      "destination": "/kunststof-kozijnen/prijzen",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/merken.php",
+      "destination": "/kunststof-kozijnen/merken",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/profielen.php",
+      "destination": "/kunststof-kozijnen/profielen",
+      "statusCode": 301
+    },
+    {
+      "source": "/gevelbekleding.php",
+      "destination": "/gevelbekleding",
+      "statusCode": 301
+    },
+    {
+      "source": "/hr-beglazing.php",
+      "destination": "/hr-beglazing",
+      "statusCode": 301
+    },
+    {
+      "source": "/dakkapel.php",
+      "destination": "/dakkapel",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-deuren.php",
+      "destination": "/kunststof-deuren",
+      "statusCode": 301
+    },
+    {
+      "source": "/raamdecoratie.php",
+      "destination": "/raamdecoratie",
+      "statusCode": 301
+    },
+    {
+      "source": "/vacatures/kunststof-kozijnen-monteur.php",
+      "destination": "/vacatures/kunststof-kozijnen-monteur",
+      "statusCode": 301
+    },
+    {
+      "source": "/vacatures/commercieel-medewerker.php",
+      "destination": "/vacatures/commercieel-medewerker",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/types/draaikiepraam.php",
+      "destination": "/kunststof-kozijnen/types/draaikiepraam",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/afmetingen/100x100.php",
+      "destination": "/kunststof-kozijnen/afmetingen/100x100",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/prijzen/afbetaling.php",
+      "destination": "/kunststof-kozijnen/prijzen/afbetaling",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/prijzen/subsidie.php",
+      "destination": "/kunststof-kozijnen/prijzen/subsidie",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/schuco.php",
+      "destination": "/kunststof-kozijnen/schuco",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/locaties/enschede.php",
+      "destination": "/kunststof-kozijnen/locaties/enschede",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel.php",
+      "destination": "/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel",
+      "statusCode": 301
+    },
+    {
+      "source": "/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel.php",
+      "destination": "/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel",
+      "statusCode": 301
+    },
+    {
+      "source": "/(.*).php",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

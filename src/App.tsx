@@ -1,3 +1,4 @@
+
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -9,6 +10,7 @@ import RedirectHandler from './components/RedirectHandler';
 
 // Lazy load pages
 const Index = lazy(() => import('./pages/Index'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 const Oplossingen = lazy(() => import('./pages/Oplossingen'));
 const KunststofKozijnen = lazy(() => import('./pages/KunststofKozijnen'));
 const AluminiumKozijnen = lazy(() => import('./pages/AluminiumKozijnen'));
@@ -163,6 +165,9 @@ function App() {
                   <Route path="projects" element={<AdminProjects />} />
                   <Route path="og-images" element={<AdminOGImages />} />
                 </Route>
+
+                {/* Catch-all route for 404 pages - MUST be last */}
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
           </AdminWrapper>

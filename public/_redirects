@@ -56,5 +56,8 @@
 /kunststof-kozijnen/profielen/schuco-living-kozijnprofiel.php /kunststof-kozijnen/profielen/schuco-living-kozijnprofiel 301
 /kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel.php /kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel 301
 
-# Fallback for any other .php files
+# Catch-all rule for any other .php files - redirect to home
 /*.php / 301
+
+# SPA fallback - serve index.html for all other routes
+/*    /index.html   200
