@@ -1,0 +1,60 @@
+
+# 301 redirects for old PHP URLs to new React Router paths
+
+/kunststof-kozijnen.php /kunststof-kozijnen 301
+/aluminium-kozijnen.php /aluminium-kozijnen 301
+/kunststof-schuifpuien.php /kunststof-schuifpuien 301
+/over-ons.php /over-ons 301
+/contact.php /contact 301
+/offerte.php /offerte 301
+/werkwijze.php /werkwijze 301
+/vacatures.php /vacatures 301
+/werkgebied.php /werkgebied 301
+/privacy-policy.php /privacy-policy 301
+/sitemap.php /sitemap 301
+/rentevrije-financiering.php /rentevrije-financiering 301
+/projecten.php /projecten 301
+/oplossingen.php /oplossingen 301
+
+# Kunststof kozijnen subpages
+/kunststof-kozijnen/types.php /kunststof-kozijnen/types 301
+/kunststof-kozijnen/kleuren.php /kunststof-kozijnen/kleuren 301
+/kunststof-kozijnen/afmetingen.php /kunststof-kozijnen/afmetingen 301
+/kunststof-kozijnen/montage.php /kunststof-kozijnen/montage 301
+/kunststof-kozijnen/prijzen.php /kunststof-kozijnen/prijzen 301
+/kunststof-kozijnen/merken.php /kunststof-kozijnen/merken 301
+/kunststof-kozijnen/profielen.php /kunststof-kozijnen/profielen 301
+
+# Product pages
+/gevelbekleding.php /gevelbekleding 301
+/hr-beglazing.php /hr-beglazing 301
+/dakkapel.php /dakkapel 301
+/kunststof-deuren.php /kunststof-deuren 301
+/raamdecoratie.php /raamdecoratie 301
+
+# Job pages
+/vacatures/kunststof-kozijnen-monteur.php /vacatures/kunststof-kozijnen-monteur 301
+/vacatures/commercieel-medewerker.php /vacatures/commercieel-medewerker 301
+
+# Specific type pages
+/kunststof-kozijnen/types/draaikiepraam.php /kunststof-kozijnen/types/draaikiepraam 301
+
+# Size pages
+/kunststof-kozijnen/afmetingen/100x100.php /kunststof-kozijnen/afmetingen/100x100 301
+
+# Price subpages
+/kunststof-kozijnen/prijzen/afbetaling.php /kunststof-kozijnen/prijzen/afbetaling 301
+/kunststof-kozijnen/prijzen/subsidie.php /kunststof-kozijnen/prijzen/subsidie 301
+
+# Brand pages
+/kunststof-kozijnen/schuco.php /kunststof-kozijnen/schuco 301
+
+# Location pages
+/kunststof-kozijnen/locaties/enschede.php /kunststof-kozijnen/locaties/enschede 301
+
+# Profile pages
+/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel.php /kunststof-kozijnen/profielen/schuco-living-kozijnprofiel 301
+/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel.php /kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel 301
+
+# Fallback for any other .php files
+/*.php / 301

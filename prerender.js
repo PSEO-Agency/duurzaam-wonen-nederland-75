@@ -26,6 +26,7 @@ const routesToPrerender = [
   '/werkgebied',
   '/privacy-policy',
   '/sitemap',
+  '/oplossingen',
   
   // Project routes
   '/projecten',
@@ -44,14 +45,20 @@ const routesToPrerender = [
   '/kunststof-kozijnen/prijzen',
   '/kunststof-kozijnen/prijzen/afbetaling',
   '/kunststof-kozijnen/prijzen/subsidie',
-  '/kunststof-kozijnen/merken',
-  '/kunststof-kozijnen/merken/schuco',
+  '/kunststof-kozijnen/schuco',
   '/kunststof-kozijnen/locaties/enschede',
-  '/kunststof-kozijnen/services/inmeten',
   
   // Profile routes
-  '/kunststof-kozijnen/profielen/living-82',
-  '/kunststof-kozijnen/profielen/ct-70-as',
+  '/kunststof-kozijnen/profielen',
+  '/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel',
+  '/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel',
+  
+  // Product pages
+  '/gevelbekleding',
+  '/hr-beglazing',
+  '/dakkapel',
+  '/kunststof-deuren',
+  '/raamdecoratie',
   
   // SEO Routes
   '/sitemap.xml',

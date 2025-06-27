@@ -1,4 +1,3 @@
-
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -6,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from "@/components/ui/toaster";
 import AdminWrapper from './components/admin/AdminWrapper';
 import AdminLayout from './components/admin/AdminLayout';
+import RedirectHandler from './components/RedirectHandler';
 
 // Lazy load pages
 const Index = lazy(() => import('./pages/Index'));
@@ -81,6 +81,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <div className="App">
           <AdminWrapper>
+            <RedirectHandler />
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
                 {/* SEO Routes */}
