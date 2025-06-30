@@ -38,8 +38,7 @@ export default async (req: Request, context: Context) => {
       const prerendered = await fetch(prerenderUrl, {
         headers: {
           "User-Agent": userAgent,
-          // Add your Prerender.io token if you have one
-          // "X-Prerender-Token": "YOUR_PRERENDER_TOKEN",
+          "X-Prerender-Token": "iCYcttsrVusf8Vlp8emm",
         },
         timeout: 10000, // 10 second timeout
       });
