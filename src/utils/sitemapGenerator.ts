@@ -1,5 +1,5 @@
-
-import { supabase } from '@/integrations/supabase/client';
+// This file is now only used for the /sitemap page display
+// The actual sitemap.xml is generated statically during build
 
 export interface SitemapUrl {
   loc: string;
@@ -8,7 +8,7 @@ export interface SitemapUrl {
   priority?: number;
 }
 
-// Static pages configuration
+// Static pages for display purposes only
 const staticPages: SitemapUrl[] = [
   {
     loc: '/',
@@ -227,161 +227,15 @@ const staticPages: SitemapUrl[] = [
   }
 ];
 
-// Popular city combinations for dynamic routes
-const popularCities = [
-  'amsterdam', 'rotterdam', 'den-haag', 'utrecht', 'eindhoven', 'tilburg', 
-  'groningen', 'almere', 'breda', 'nijmegen', 'enschede', 'haarlem', 
-  'arnhem', 'zaanstad', 'amersfoort', 'apeldoorn', 's-hertogenbosch',
-  'hoofddorp', 'maastricht', 'leiden', 'dordrecht', 'zoetermeer',
-  'zwolle', 'deventer', 'ede', 'delft', 'hengelo', 'alphen-aan-den-rijn'
-];
-
-// Service types for dynamic combinations
-const serviceTypes = [
-  'kunststof-kozijnen', 'aluminium-kozijnen', 'hr-beglazing', 
-  'dakkapel', 'gevelbekleding', 'kunststof-deuren', 'raamdecoratie'
-];
-
+// This function is now only used for the /sitemap page display
+// The actual sitemap.xml is generated statically during build
 export async function generateSitemapData(): Promise<SitemapUrl[]> {
   const urls: SitemapUrl[] = [...staticPages];
   
-  try {
-    // Fetch all active products from database
-    const { data: products } = await supabase
-      .from('products')
-      .select('slug, updated_at')
-      .eq('is_active', true)
-      .order('name');
-
-    // Add database product pages
-    if (products) {
-      products.forEach(product => {
-        urls.push({
-          loc: `/${product.slug}`,
-          changefreq: 'weekly',
-          priority: 0.8,
-          lastmod: product.updated_at ? new Date(product.updated_at).toISOString().split('T')[0] : undefined
-        });
-      });
-    }
-
-    // Fetch regions for region service pages
-    const { data: regions } = await supabase
-      .from('regions')
-      .select('slug')
-      .order('name');
-
-    // Fetch services for region service pages
-    const { data: services } = await supabase
-      .from('services')
-      .select('slug')
-      .eq('is_active', true)
-      .order('name');
-
-    // Fetch cities for city service pages
-    const { data: cities } = await supabase
-      .from('cities')
-      .select('slug, region_id, regions(slug)')
-      .order('name');
-
-    // Fetch projects
-    const { data: projects } = await supabase
-      .from('projects')
-      .select('id, updated_at')
-      .eq('is_active', true)
-      .order('created_at', { ascending: false });
-
-    // Add region service pages (/{service}/{region})
-    if (services && regions) {
-      services.forEach(service => {
-        regions.forEach(region => {
-          urls.push({
-            loc: `/${service.slug}/${region.slug}`,
-            changefreq: 'weekly',
-            priority: 0.7
-          });
-        });
-      });
-    }
-
-    // Add city service pages (/{service}/{region}/{city})
-    if (services && cities) {
-      services.forEach(service => {
-        cities.forEach(city => {
-          if (city.regions?.slug) {
-            urls.push({
-              loc: `/${service.slug}/${city.regions.slug}/${city.slug}`,
-              changefreq: 'weekly',
-              priority: 0.8
-            });
-          }
-        });
-      });
-    }
-
-    // Add legacy city service pages (/diensten/{city}/{service})
-    if (services && cities) {
-      services.forEach(service => {
-        cities.forEach(city => {
-          urls.push({
-            loc: `/diensten/${city.slug}/${service.slug}`,
-            changefreq: 'weekly',
-            priority: 0.6
-          });
-        });
-      });
-    }
-
-    // Add project pages
-    if (projects) {
-      projects.forEach(project => {
-        urls.push({
-          loc: `/projecten/${project.id}`,
-          changefreq: 'monthly',
-          priority: 0.6,
-          lastmod: project.updated_at ? new Date(project.updated_at).toISOString().split('T')[0] : undefined
-        });
-      });
-    }
-
-    // Add popular city-service combinations for better local SEO
-    serviceTypes.forEach(service => {
-      popularCities.forEach(city => {
-        urls.push({
-          loc: `/${service}/${city}`,
-          changefreq: 'monthly',
-          priority: 0.7
-        });
-      });
-    });
-
-    // Add blog routes if they exist
-    const blogRoutes = [
-      '/blog',
-      '/blog/energiebesparing-tips',
-      '/blog/kozijn-onderhoud',
-      '/blog/subsidies-2024',
-      '/blog/duurzaam-bouwen'
-    ];
-
-    blogRoutes.forEach(route => {
-      urls.push({
-        loc: route,
-        changefreq: 'weekly',
-        priority: 0.5
-      });
-    });
-
-  } catch (error) {
-    console.error('Error fetching dynamic sitemap data:', error);
-  }
-
-  // Remove duplicates and sort by priority
-  const uniqueUrls = urls.filter((url, index, self) => 
-    index === self.findIndex(u => u.loc === url.loc)
-  );
-
-  return uniqueUrls.sort((a, b) => (b.priority || 0) - (a.priority || 0));
+  // Add note that this is for display only
+  console.log('Note: This sitemap data is for display purposes. The actual sitemap.xml is generated statically during build.');
+  
+  return urls.sort((a, b) => (b.priority || 0) - (a.priority || 0));
 }
 
 export function generateSitemapXML(urls: SitemapUrl[], baseUrl: string = 'https://duurzaamwonen.info'): string {
@@ -427,7 +281,7 @@ Allow: /sitemap.xml
 Allow: /robots.txt
 
 # Sitemaps
-Sitemap: https://duurzaamwonennl.netlify.app/sitemap.xml
+Sitemap: https://duurzaamwonen.info/sitemap.xml
 
 # Crawl delay to be respectful
 Crawl-delay: 1
