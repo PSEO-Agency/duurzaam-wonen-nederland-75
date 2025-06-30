@@ -9,16 +9,16 @@ const SitemapXML: React.FC = () => {
     const loadStaticSitemap = async () => {
       try {
         setIsLoading(true);
-        // Fetch the static sitemap.xml file
+        // Fetch the static sitemap.xml file from root
         const response = await fetch('/sitemap.xml');
         if (response.ok) {
           const xml = await response.text();
           setSitemapXML(xml);
         } else {
-          throw new Error('Failed to load sitemap');
+          throw new Error('Failed to load sitemap from root');
         }
       } catch (error) {
-        console.error('Error loading static sitemap:', error);
+        console.error('Error loading static sitemap from root:', error);
         setSitemapXML('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
       } finally {
         setIsLoading(false);
@@ -31,7 +31,7 @@ const SitemapXML: React.FC = () => {
   // Set document title when sitemap is loaded
   useEffect(() => {
     if (sitemapXML && !isLoading) {
-      document.title = 'Sitemap XML';
+      document.title = 'Sitemap XML - Root Location';
     }
   }, [sitemapXML, isLoading]);
 
@@ -43,7 +43,7 @@ const SitemapXML: React.FC = () => {
         padding: '20px',
         background: '#f5f5f5'
       }}>
-        Loading sitemap...
+        Loading sitemap from root location...
       </div>
     );
   }

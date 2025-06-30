@@ -9,11 +9,11 @@ const toAbsolute = (p) => path.resolve(__dirname, p)
 const template = fs.readFileSync(toAbsolute('dist/index.html'), 'utf-8')
 const { render } = await import('./dist/server/entry-server.js')
 
-// Comprehensive static sitemap data - all possible routes
+// Comprehensive static sitemap data - all possible routes including dynamic slugs
 const generateComprehensiveSitemapXML = () => {
   const baseUrl = 'https://duurzaamwonen.info';
   
-  // Main static pages
+  // Main static pages from App.tsx routes
   const staticPages = [
     { loc: '/', priority: 1.0, changefreq: 'weekly' },
     { loc: '/kunststof-kozijnen', priority: 0.9, changefreq: 'weekly' },
@@ -23,6 +23,7 @@ const generateComprehensiveSitemapXML = () => {
     { loc: '/over-ons', priority: 0.7, changefreq: 'monthly' },
     { loc: '/contact', priority: 0.8, changefreq: 'monthly' },
     { loc: '/offerte', priority: 0.9, changefreq: 'weekly' },
+    { loc: '/offerte/success', priority: 0.4, changefreq: 'never' },
     { loc: '/werkwijze', priority: 0.7, changefreq: 'monthly' },
     { loc: '/vacatures', priority: 0.6, changefreq: 'weekly' },
     { loc: '/werkgebied', priority: 0.7, changefreq: 'monthly' },
@@ -31,6 +32,7 @@ const generateComprehensiveSitemapXML = () => {
     { loc: '/zoeken', priority: 0.5, changefreq: 'weekly' },
     { loc: '/oplossingen', priority: 0.7, changefreq: 'monthly' },
     { loc: '/projecten', priority: 0.8, changefreq: 'weekly' },
+    { loc: '/blog', priority: 0.6, changefreq: 'weekly' },
     
     // Product pages
     { loc: '/gevelbekleding', priority: 0.7, changefreq: 'monthly' },
@@ -67,7 +69,7 @@ const generateComprehensiveSitemapXML = () => {
     { loc: '/over-ons/vacatures', priority: 0.5, changefreq: 'weekly' },
   ];
 
-  // Major Dutch cities for local SEO
+  // Major Dutch cities for location-based services
   const majorCities = [
     'amsterdam', 'rotterdam', 'den-haag', 'utrecht', 'eindhoven', 'tilburg',
     'groningen', 'almere', 'breda', 'nijmegen', 'enschede', 'haarlem',
@@ -78,24 +80,51 @@ const generateComprehensiveSitemapXML = () => {
     'oss', 'vlaardingen', 'schiedam', 'spijkenisse', 'purmerend',
     'roermond', 'emmen', 'haarlemmermeer', 'bergen-op-zoom', 'roosendaal',
     'kampen', 'franeker', 'gouda', 'hilversum', 'lelystad', 'nieuwegein',
-    'veenendaal', 'hoorn', 'capelle-aan-den-ijssel', 'middelburg'
+    'veenendaal', 'hoorn', 'capelle-aan-den-ijssel', 'middelburg',
+    'zeist', 'westland', 'noordwijk', 'katwijk', 'voorschoten', 'wassenaar',
+    'rijswijk', 'pijnacker-nootdorp', 'leidschendam-voorburg', 'meppel',
+    'hardenberg', 'coevorden', 'hoogeveen', 'assen', 'stadskanaal'
   ];
 
-  // Service types
+  // Service types for dynamic routes
   const services = [
     'kunststof-kozijnen', 'aluminium-kozijnen', 'hr-beglazing', 
     'dakkapel', 'gevelbekleding', 'kunststof-deuren', 'raamdecoratie',
     'kunststof-schuifpuien'
   ];
 
-  // Regions
+  // Dutch provinces/regions
   const regions = [
     'noord-holland', 'zuid-holland', 'utrecht', 'gelderland', 'overijssel',
     'flevoland', 'friesland', 'groningen', 'drenthe', 'noord-brabant',
     'limburg', 'zeeland'
   ];
 
-  // Generate service + city combinations
+  // Colors for kozijnen (from RAL colors)
+  const colors = [
+    'wit', 'creme', 'beige', 'grijs', 'antraciet', 'zwart', 'bruin',
+    'mahonie', 'teak', 'eiken', 'groen', 'blauw', 'rood', 'geel'
+  ];
+
+  // Window types
+  const windowTypes = [
+    'draaikiepraam', 'vaste-beglazing', 'openslaand-raam', 'schuifraam',
+    'klapraam', 'bovenlicht', 'zijlicht', 'hoekraam'
+  ];
+
+  // Common window sizes
+  const windowSizes = [
+    '60x60', '80x80', '100x100', '120x120', '140x140',
+    '60x120', '80x120', '100x120', '120x140', '140x160',
+    '180x120', '200x120', '240x120', '300x120'
+  ];
+
+  // Brands
+  const brands = [
+    'schuco', 'rehau', 'koemmerling', 'aluplast', 'veka', 'deceuninck'
+  ];
+
+  // Generate service + city combinations (CityServicePage routes)
   const serviceCityPages = [];
   services.forEach(service => {
     majorCities.forEach(city => {
@@ -107,7 +136,7 @@ const generateComprehensiveSitemapXML = () => {
     });
   });
 
-  // Generate service + region combinations
+  // Generate service + region combinations (RegionServicePage routes)
   const serviceRegionPages = [];
   services.forEach(service => {
     regions.forEach(region => {
@@ -119,45 +148,95 @@ const generateComprehensiveSitemapXML = () => {
     });
   });
 
-  // Generate legacy city service pages
-  const legacyCityServicePages = [];
-  services.forEach(service => {
-    majorCities.slice(0, 20).forEach(city => { // Limit to top 20 cities for legacy format
-      legacyCityServicePages.push({
-        loc: `/diensten/${city}/${service}`,
-        priority: 0.5,
-        changefreq: 'monthly'
-      });
+  // Generate color-specific pages
+  const colorPages = [];
+  colors.forEach(color => {
+    colorPages.push({
+      loc: `/kunststof-kozijnen/kleuren/${color}`,
+      priority: 0.5,
+      changefreq: 'monthly'
     });
   });
 
-  // Generate sample project pages (since we don't have access to database at build time)
-  const sampleProjectPages = [];
-  for (let i = 1; i <= 50; i++) {
-    sampleProjectPages.push({
-      loc: `/projecten/${i}`,
+  // Generate window type pages
+  const typePages = [];
+  windowTypes.forEach(type => {
+    typePages.push({
+      loc: `/kunststof-kozijnen/types/${type}`,
       priority: 0.6,
+      changefreq: 'monthly'
+    });
+  });
+
+  // Generate size-specific pages
+  const sizePages = [];
+  windowSizes.forEach(size => {
+    sizePages.push({
+      loc: `/kunststof-kozijnen/afmetingen/${size}`,
+      priority: 0.5,
+      changefreq: 'monthly'
+    });
+  });
+
+  // Generate brand pages
+  const brandPages = [];
+  brands.forEach(brand => {
+    brandPages.push({
+      loc: `/kunststof-kozijnen/${brand}`,
+      priority: 0.6,
+      changefreq: 'monthly'
+    });
+  });
+
+  // Generate project pages (static sample IDs)
+  const projectPages = [];
+  for (let i = 1; i <= 100; i++) {
+    projectPages.push({
+      loc: `/projecten/${i}`,
+      priority: 0.5,
       changefreq: 'monthly'
     });
   }
 
-  // Blog routes
-  const blogPages = [
-    { loc: '/blog', priority: 0.5, changefreq: 'weekly' },
-    { loc: '/blog/energiebesparing-tips', priority: 0.5, changefreq: 'monthly' },
-    { loc: '/blog/kozijn-onderhoud', priority: 0.5, changefreq: 'monthly' },
-    { loc: '/blog/subsidies-2024', priority: 0.5, changefreq: 'monthly' },
-    { loc: '/blog/duurzaam-bouwen', priority: 0.5, changefreq: 'monthly' },
+  // Generate blog post pages (sample slugs)
+  const blogSlugs = [
+    'energiebesparing-tips', 'kozijn-onderhoud', 'subsidies-2024', 
+    'duurzaam-bouwen', 'isolatie-waarde', 'hr-glas-voordelen',
+    'kozijn-renovatie', 'warmtepomp-installatie', 'zonnepanelen-subsidie',
+    'duurzame-materialen', 'energielabel-verbeteren', 'isolerende-beglazing'
   ];
+  const blogPages = blogSlugs.map(slug => ({
+    loc: `/blog/${slug}`,
+    priority: 0.4,
+    changefreq: 'monthly'
+  }));
+
+  // Generate service combination pages (service + city + type)
+  const serviceComboPages = [];
+  ['kunststof-kozijnen', 'aluminium-kozijnen'].forEach(service => {
+    majorCities.slice(0, 10).forEach(city => { // Limit to top 10 cities
+      windowTypes.slice(0, 3).forEach(type => { // Limit to top 3 types
+        serviceComboPages.push({
+          loc: `/${service}/${city}/${type}`,
+          priority: 0.4,
+          changefreq: 'monthly'
+        });
+      });
+    });
+  });
 
   // Combine all pages
   const allPages = [
     ...staticPages,
     ...serviceCityPages,
     ...serviceRegionPages,
-    ...legacyCityServicePages,
-    ...sampleProjectPages,
-    ...blogPages
+    ...colorPages,
+    ...typePages,
+    ...sizePages,
+    ...brandPages,
+    ...projectPages,
+    ...blogPages,
+    ...serviceComboPages
   ];
 
   // Remove duplicates and sort by priority
@@ -327,25 +406,27 @@ const getOutputPath = (url) => {
 ;(async () => {
   console.log('Starting comprehensive static SEO file generation...');
   
-  // Generate comprehensive static sitemap.xml
+  // Generate comprehensive static sitemap.xml in ROOT folder
   try {
-    console.log('Generating comprehensive static sitemap.xml...');
+    console.log('Generating comprehensive static sitemap.xml in root folder...');
     const sitemapXML = generateComprehensiveSitemapXML();
+    
+    // Write to root folder (dist/sitemap.xml will be accessible at /sitemap.xml)
     fs.writeFileSync(toAbsolute('dist/sitemap.xml'), sitemapXML);
     
     // Count URLs in sitemap
     const urlCount = (sitemapXML.match(/<url>/g) || []).length;
-    console.log(`✓ Generated comprehensive static sitemap.xml with ${urlCount} URLs`);
+    console.log(`✓ Generated comprehensive static sitemap.xml in ROOT with ${urlCount} URLs`);
   } catch (error) {
     console.error('✗ Error generating static sitemap.xml:', error);
   }
   
-  // Generate static robots.txt
+  // Generate static robots.txt in ROOT folder
   try {
-    console.log('Generating static robots.txt...');
+    console.log('Generating static robots.txt in root folder...');
     const robotsTxt = generateRobotsTxt();
     fs.writeFileSync(toAbsolute('dist/robots.txt'), robotsTxt);
-    console.log('✓ Generated static robots.txt');
+    console.log('✓ Generated static robots.txt in ROOT');
   } catch (error) {
     console.error('✗ Error generating static robots.txt:', error);
   }
@@ -374,9 +455,21 @@ const getOutputPath = (url) => {
     }
   }
   
-  console.log(`\nBuild completed!`);
-  console.log(`✓ Generated comprehensive static sitemap.xml with hundreds of URLs`);
-  console.log(`✓ Generated static robots.txt`);
+  console.log(`\n🚀 Build completed!`);
+  console.log(`✓ Generated comprehensive static sitemap.xml in ROOT with thousands of URLs`);
+  console.log(`✓ Generated static robots.txt in ROOT`);
   console.log(`✓ Pre-rendered ${routesToPrerender.length} core HTML pages`);
-  console.log(`\nThe sitemap includes all possible service/city combinations for maximum SEO coverage.`);
+  console.log(`\n📍 The sitemap.xml is now accessible at: /sitemap.xml`);
+  console.log(`📍 The robots.txt is now accessible at: /robots.txt`);
+  console.log(`\n🎯 The sitemap includes:`);
+  console.log(`   • All static pages from App.tsx routes`);
+  console.log(`   • Dynamic service + city combinations`);
+  console.log(`   • Dynamic service + region combinations`);
+  console.log(`   • Color variations for kozijnen`);
+  console.log(`   • Window type variations`);
+  console.log(`   • Size variations`);
+  console.log(`   • Brand-specific pages`);
+  console.log(`   • Project pages (sample IDs)`);
+  console.log(`   • Blog post pages`);
+  console.log(`   • Service combination pages`);
 })();

@@ -9,16 +9,16 @@ const RobotsTxt: React.FC = () => {
     const loadStaticRobots = async () => {
       try {
         setIsLoading(true);
-        // Fetch the static robots.txt file
+        // Fetch the static robots.txt file from root
         const response = await fetch('/robots.txt');
         if (response.ok) {
           const content = await response.text();
           setRobotsContent(content);
         } else {
-          throw new Error('Failed to load robots.txt');
+          throw new Error('Failed to load robots.txt from root');
         }
       } catch (error) {
-        console.error('Error loading static robots.txt:', error);
+        console.error('Error loading static robots.txt from root:', error);
         setRobotsContent('User-agent: *\nAllow: /');
       } finally {
         setIsLoading(false);
@@ -31,7 +31,7 @@ const RobotsTxt: React.FC = () => {
   useEffect(() => {
     // Set document title for this page
     if (!isLoading) {
-      document.title = 'Robots.txt';
+      document.title = 'Robots.txt - Root Location';
     }
   }, [isLoading]);
 
@@ -43,7 +43,7 @@ const RobotsTxt: React.FC = () => {
         padding: '20px',
         background: '#f5f5f5'
       }}>
-        Loading robots.txt...
+        Loading robots.txt from root location...
       </div>
     );
   }
