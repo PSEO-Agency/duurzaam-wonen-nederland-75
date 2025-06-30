@@ -1,0 +1,202 @@
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Edge Functions configuration
+[[edge_functions]]
+  path = "/*"
+  function = "seo"
+
+# Redirect rules for old PHP URLs
+[[redirects]]
+  from = "/kunststof-kozijnen.php"
+  to = "/kunststof-kozijnen"
+  status = 301
+
+[[redirects]]
+  from = "/aluminium-kozijnen.php"
+  to = "/aluminium-kozijnen"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-schuifpuien.php"
+  to = "/kunststof-schuifpuien"
+  status = 301
+
+[[redirects]]
+  from = "/over-ons.php"
+  to = "/over-ons"
+  status = 301
+
+[[redirects]]
+  from = "/contact.php"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/offerte.php"
+  to = "/offerte"
+  status = 301
+
+[[redirects]]
+  from = "/werkwijze.php"
+  to = "/werkwijze"
+  status = 301
+
+[[redirects]]
+  from = "/vacatures.php"
+  to = "/vacatures"
+  status = 301
+
+[[redirects]]
+  from = "/werkgebied.php"
+  to = "/werkgebied"
+  status = 301
+
+[[redirects]]
+  from = "/privacy-policy.php"
+  to = "/privacy-policy"
+  status = 301
+
+[[redirects]]
+  from = "/sitemap.php"
+  to = "/sitemap"
+  status = 301
+
+[[redirects]]
+  from = "/rentevrije-financiering.php"
+  to = "/rentevrije-financiering"
+  status = 301
+
+[[redirects]]
+  from = "/projecten.php"
+  to = "/projecten"
+  status = 301
+
+[[redirects]]
+  from = "/oplossingen.php"
+  to = "/oplossingen"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/types.php"
+  to = "/kunststof-kozijnen/types"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/kleuren.php"
+  to = "/kunststof-kozijnen/kleuren"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/afmetingen.php"
+  to = "/kunststof-kozijnen/afmetingen"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/montage.php"
+  to = "/kunststof-kozijnen/montage"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/prijzen.php"
+  to = "/kunststof-kozijnen/prijzen"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/merken.php"
+  to = "/kunststof-kozijnen/merken"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/profielen.php"
+  to = "/kunststof-kozijnen/profielen"
+  status = 301
+
+[[redirects]]
+  from = "/gevelbekleding.php"
+  to = "/gevelbekleding"
+  status = 301
+
+[[redirects]]
+  from = "/hr-beglazing.php"
+  to = "/hr-beglazing"
+  status = 301
+
+[[redirects]]
+  from = "/dakkapel.php"
+  to = "/dakkapel"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-deuren.php"
+  to = "/kunststof-deuren"
+  status = 301
+
+[[redirects]]
+  from = "/raamdecoratie.php"
+  to = "/raamdecoratie"
+  status = 301
+
+[[redirects]]
+  from = "/vacatures/kunststof-kozijnen-monteur.php"
+  to = "/vacatures/kunststof-kozijnen-monteur"
+  status = 301
+
+[[redirects]]
+  from = "/vacatures/commercieel-medewerker.php"
+  to = "/vacatures/commercieel-medewerker"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/types/draaikiepraam.php"
+  to = "/kunststof-kozijnen/types/draaikiepraam"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/afmetingen/100x100.php"
+  to = "/kunststof-kozijnen/afmetingen/100x100"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/prijzen/afbetaling.php"
+  to = "/kunststof-kozijnen/prijzen/afbetaling"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/prijzen/subsidie.php"
+  to = "/kunststof-kozijnen/prijzen/subsidie"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/schuco.php"
+  to = "/kunststof-kozijnen/schuco"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/locaties/enschede.php"
+  to = "/kunststof-kozijnen/locaties/enschede"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel.php"
+  to = "/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel"
+  status = 301
+
+[[redirects]]
+  from = "/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel.php"
+  to = "/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel"
+  status = 301
+
+# Catch-all rule for any other .php files
+[[redirects]]
+  from = "/*.php"
+  to = "/"
+  status = 301
+
+# SPA fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
