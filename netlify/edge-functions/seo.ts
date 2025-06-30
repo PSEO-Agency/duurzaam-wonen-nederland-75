@@ -12,11 +12,12 @@ const botUserAgents = [
   /slackbot/i,
   /discordbot/i,
   /whatsapp/i,
-  /telegram/i,
-  /skype/i,
-  /pinterest/i,
-  /applebot/i,
-  /duckduckbot/i,
+  /screaming frog/i,
+  /xenu/i,
+  /sitesucker/i,
+  /bot/i, // generic catch-all
+  /crawler/i,
+  /spider/i,
 ];
 
 export default async (req: Request, context: Context) => {

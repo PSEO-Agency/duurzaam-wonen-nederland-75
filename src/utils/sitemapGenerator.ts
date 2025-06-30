@@ -427,7 +427,7 @@ Allow: /sitemap.xml
 Allow: /robots.txt
 
 # Sitemaps
-Sitemap: ${baseUrl}/sitemap.xml
+Sitemap: https://duurzaamwonennl.netlify.app/sitemap.xml
 
 # Crawl delay to be respectful
 Crawl-delay: 1
