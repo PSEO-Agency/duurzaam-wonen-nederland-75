@@ -1,27 +1,31 @@
 
 import React, { useEffect, useState } from 'react';
-import { generateSitemapData, generateSitemapXML } from '@/utils/sitemapGenerator';
 
 const SitemapXML: React.FC = () => {
   const [sitemapXML, setSitemapXML] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const generateSitemap = async () => {
+    const loadStaticSitemap = async () => {
       try {
         setIsLoading(true);
-        const urls = await generateSitemapData();
-        const xml = generateSitemapXML(urls);
-        setSitemapXML(xml);
+        // Fetch the static sitemap.xml file
+        const response = await fetch('/sitemap.xml');
+        if (response.ok) {
+          const xml = await response.text();
+          setSitemapXML(xml);
+        } else {
+          throw new Error('Failed to load sitemap');
+        }
       } catch (error) {
-        console.error('Error generating sitemap:', error);
+        console.error('Error loading static sitemap:', error);
         setSitemapXML('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
       } finally {
         setIsLoading(false);
       }
     };
 
-    generateSitemap();
+    loadStaticSitemap();
   }, []);
 
   // Set document title when sitemap is loaded
@@ -39,7 +43,7 @@ const SitemapXML: React.FC = () => {
         padding: '20px',
         background: '#f5f5f5'
       }}>
-        Generating sitemap...
+        Loading sitemap...
       </div>
     );
   }

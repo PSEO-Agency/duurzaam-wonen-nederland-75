@@ -9,6 +9,9 @@ const toAbsolute = (p) => path.resolve(__dirname, p)
 const template = fs.readFileSync(toAbsolute('dist/index.html'), 'utf-8')
 const { render } = await import('./dist/server/entry-server.js')
 
+// Import sitemap generator functions
+const { generateSitemapData, generateSitemapXML, generateRobotsTxt } = await import('./dist/server/utils/sitemapGenerator.js')
+
 // Define all routes from App.tsx plus popular dynamic combinations
 const routesToPrerender = [
   // Main pages
@@ -91,11 +94,7 @@ const routesToPrerender = [
   
   '/dakkapel/amsterdam',
   '/dakkapel/rotterdam',
-  '/dakkapel/utrecht',
-  
-  // SEO Routes
-  '/sitemap.xml',
-  '/robots.txt'
+  '/dakkapel/utrecht'
 ];
 
 // Function to ensure directory exists
@@ -113,14 +112,6 @@ const getOutputPath = (url) => {
     return 'dist/index.html';
   }
   
-  // Handle special files
-  if (url === '/sitemap.xml') {
-    return 'dist/sitemap.xml';
-  }
-  if (url === '/robots.txt') {
-    return 'dist/robots.txt';
-  }
-  
   // For other routes, create directory structure
   const cleanUrl = url.startsWith('/') ? url.slice(1) : url;
   return `dist/${cleanUrl}/index.html`;
@@ -128,6 +119,22 @@ const getOutputPath = (url) => {
 
 ;(async () => {
   console.log('Starting prerendering...');
+  
+  // Generate static sitemap.xml and robots.txt
+  try {
+    console.log('Generating static sitemap.xml...');
+    const sitemapUrls = await generateSitemapData();
+    const sitemapXML = generateSitemapXML(sitemapUrls, 'https://duurzaamwonen.info');
+    fs.writeFileSync(toAbsolute('dist/sitemap.xml'), sitemapXML);
+    console.log('✓ Generated static sitemap.xml');
+    
+    console.log('Generating static robots.txt...');
+    const robotsTxt = generateRobotsTxt('https://duurzaamwonen.info');
+    fs.writeFileSync(toAbsolute('dist/robots.txt'), robotsTxt);
+    console.log('✓ Generated static robots.txt');
+  } catch (error) {
+    console.error('✗ Error generating static SEO files:', error);
+  }
   
   for (const url of routesToPrerender) {
     try {
@@ -139,14 +146,8 @@ const getOutputPath = (url) => {
       // Ensure the directory exists
       ensureDirectoryExists(outputPath);
       
-      let html;
-      if (url === '/sitemap.xml' || url === '/robots.txt') {
-        // For XML and text files, use the rendered content directly
-        html = appHtml;
-      } else {
-        // For HTML pages, replace the placeholder
-        html = template.replace(`<!--app-html-->`, appHtml);
-      }
+      // For HTML pages, replace the placeholder
+      const html = template.replace(`<!--app-html-->`, appHtml);
       
       fs.writeFileSync(outputPath, html);
       console.log('✓ Pre-rendered:', outputPath.replace(toAbsolute(''), ''));
@@ -157,5 +158,5 @@ const getOutputPath = (url) => {
     }
   }
   
-  console.log(`Prerendering completed! Generated ${routesToPrerender.length} pages.`);
+  console.log(`Prerendering completed! Generated ${routesToPrerender.length} pages plus static SEO files.`);
 })();

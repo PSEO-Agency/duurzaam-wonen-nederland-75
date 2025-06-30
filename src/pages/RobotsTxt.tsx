@@ -1,14 +1,52 @@
 
-import React, { useEffect } from 'react';
-import { generateRobotsTxt } from '@/utils/sitemapGenerator';
+import React, { useEffect, useState } from 'react';
 
 const RobotsTxt: React.FC = () => {
-  const robotsContent = generateRobotsTxt();
+  const [robotsContent, setRobotsContent] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadStaticRobots = async () => {
+      try {
+        setIsLoading(true);
+        // Fetch the static robots.txt file
+        const response = await fetch('/robots.txt');
+        if (response.ok) {
+          const content = await response.text();
+          setRobotsContent(content);
+        } else {
+          throw new Error('Failed to load robots.txt');
+        }
+      } catch (error) {
+        console.error('Error loading static robots.txt:', error);
+        setRobotsContent('User-agent: *\nAllow: /');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadStaticRobots();
+  }, []);
 
   useEffect(() => {
     // Set document title for this page
-    document.title = 'Robots.txt';
-  }, []);
+    if (!isLoading) {
+      document.title = 'Robots.txt';
+    }
+  }, [isLoading]);
+
+  if (isLoading) {
+    return (
+      <div style={{ 
+        fontFamily: 'monospace', 
+        whiteSpace: 'pre-wrap',
+        padding: '20px',
+        background: '#f5f5f5'
+      }}>
+        Loading robots.txt...
+      </div>
+    );
+  }
 
   return (
     <div style={{ 
