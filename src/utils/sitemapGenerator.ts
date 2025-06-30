@@ -81,6 +81,16 @@ const staticPages: SitemapUrl[] = [
     changefreq: 'weekly',
     priority: 0.5
   },
+  {
+    loc: '/oplossingen',
+    changefreq: 'monthly',
+    priority: 0.7
+  },
+  {
+    loc: '/projecten',
+    changefreq: 'weekly',
+    priority: 0.8
+  },
   // Kunststof kozijnen subpages
   {
     loc: '/kunststof-kozijnen/kleuren',
@@ -93,9 +103,19 @@ const staticPages: SitemapUrl[] = [
     priority: 0.7
   },
   {
+    loc: '/kunststof-kozijnen/types/draaikiepraam',
+    changefreq: 'monthly',
+    priority: 0.6
+  },
+  {
     loc: '/kunststof-kozijnen/afmetingen',
     changefreq: 'monthly',
     priority: 0.7
+  },
+  {
+    loc: '/kunststof-kozijnen/afmetingen/100x100',
+    changefreq: 'monthly',
+    priority: 0.6
   },
   {
     loc: '/kunststof-kozijnen/montage',
@@ -108,7 +128,42 @@ const staticPages: SitemapUrl[] = [
     priority: 0.8
   },
   {
+    loc: '/kunststof-kozijnen/prijzen/afbetaling',
+    changefreq: 'monthly',
+    priority: 0.6
+  },
+  {
+    loc: '/kunststof-kozijnen/prijzen/subsidie',
+    changefreq: 'monthly',
+    priority: 0.6
+  },
+  {
     loc: '/kunststof-kozijnen/merken',
+    changefreq: 'monthly',
+    priority: 0.6
+  },
+  {
+    loc: '/kunststof-kozijnen/schuco',
+    changefreq: 'monthly',
+    priority: 0.6
+  },
+  {
+    loc: '/kunststof-kozijnen/profielen',
+    changefreq: 'monthly',
+    priority: 0.6
+  },
+  {
+    loc: '/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel',
+    changefreq: 'monthly',
+    priority: 0.5
+  },
+  {
+    loc: '/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel',
+    changefreq: 'monthly',
+    priority: 0.5
+  },
+  {
+    loc: '/kunststof-kozijnen/locaties/enschede',
     changefreq: 'monthly',
     priority: 0.6
   },
@@ -138,13 +193,78 @@ const staticPages: SitemapUrl[] = [
     loc: '/over-ons/duurzaamheid',
     changefreq: 'yearly',
     priority: 0.5
+  },
+  {
+    loc: '/over-ons/vacatures',
+    changefreq: 'weekly',
+    priority: 0.5
+  },
+  // Product pages
+  {
+    loc: '/gevelbekleding',
+    changefreq: 'monthly',
+    priority: 0.7
+  },
+  {
+    loc: '/hr-beglazing',
+    changefreq: 'monthly',
+    priority: 0.7
+  },
+  {
+    loc: '/dakkapel',
+    changefreq: 'monthly',
+    priority: 0.7
+  },
+  {
+    loc: '/kunststof-deuren',
+    changefreq: 'monthly',
+    priority: 0.7
+  },
+  {
+    loc: '/raamdecoratie',
+    changefreq: 'monthly',
+    priority: 0.7
   }
+];
+
+// Popular city combinations for dynamic routes
+const popularCities = [
+  'amsterdam', 'rotterdam', 'den-haag', 'utrecht', 'eindhoven', 'tilburg', 
+  'groningen', 'almere', 'breda', 'nijmegen', 'enschede', 'haarlem', 
+  'arnhem', 'zaanstad', 'amersfoort', 'apeldoorn', 's-hertogenbosch',
+  'hoofddorp', 'maastricht', 'leiden', 'dordrecht', 'zoetermeer',
+  'zwolle', 'deventer', 'ede', 'delft', 'hengelo', 'alphen-aan-den-rijn'
+];
+
+// Service types for dynamic combinations
+const serviceTypes = [
+  'kunststof-kozijnen', 'aluminium-kozijnen', 'hr-beglazing', 
+  'dakkapel', 'gevelbekleding', 'kunststof-deuren', 'raamdecoratie'
 ];
 
 export async function generateSitemapData(): Promise<SitemapUrl[]> {
   const urls: SitemapUrl[] = [...staticPages];
   
   try {
+    // Fetch all active products from database
+    const { data: products } = await supabase
+      .from('products')
+      .select('slug, updated_at')
+      .eq('is_active', true)
+      .order('name');
+
+    // Add database product pages
+    if (products) {
+      products.forEach(product => {
+        urls.push({
+          loc: `/${product.slug}`,
+          changefreq: 'weekly',
+          priority: 0.8,
+          lastmod: product.updated_at ? new Date(product.updated_at).toISOString().split('T')[0] : undefined
+        });
+      });
+    }
+
     // Fetch regions for region service pages
     const { data: regions } = await supabase
       .from('regions')
@@ -224,11 +344,44 @@ export async function generateSitemapData(): Promise<SitemapUrl[]> {
       });
     }
 
+    // Add popular city-service combinations for better local SEO
+    serviceTypes.forEach(service => {
+      popularCities.forEach(city => {
+        urls.push({
+          loc: `/${service}/${city}`,
+          changefreq: 'monthly',
+          priority: 0.7
+        });
+      });
+    });
+
+    // Add blog routes if they exist
+    const blogRoutes = [
+      '/blog',
+      '/blog/energiebesparing-tips',
+      '/blog/kozijn-onderhoud',
+      '/blog/subsidies-2024',
+      '/blog/duurzaam-bouwen'
+    ];
+
+    blogRoutes.forEach(route => {
+      urls.push({
+        loc: route,
+        changefreq: 'weekly',
+        priority: 0.5
+      });
+    });
+
   } catch (error) {
     console.error('Error fetching dynamic sitemap data:', error);
   }
 
-  return urls;
+  // Remove duplicates and sort by priority
+  const uniqueUrls = urls.filter((url, index, self) => 
+    index === self.findIndex(u => u.loc === url.loc)
+  );
+
+  return uniqueUrls.sort((a, b) => (b.priority || 0) - (a.priority || 0));
 }
 
 export function generateSitemapXML(urls: SitemapUrl[], baseUrl: string = 'https://duurzaamwonen.info'): string {
@@ -244,7 +397,7 @@ export function generateSitemapXML(urls: SitemapUrl[], baseUrl: string = 'https:
     }
     
     if (url.priority !== undefined) {
-      urlXml += `      <priority>${url.priority}</priority>\n`;
+      urlXml += `      <priority>${url.priority.toFixed(1)}</priority>\n`;
     }
     
     urlXml += `    </url>`;
@@ -255,4 +408,36 @@ export function generateSitemapXML(urls: SitemapUrl[], baseUrl: string = 'https:
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${xmlUrls}
 </urlset>`;
+}
+
+export function generateRobotsTxt(baseUrl: string = 'https://duurzaamwonen.info'): string {
+  return `User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /offerte/success
+Disallow: /_redirects
+Disallow: /netlify.toml
+Disallow: /vercel.json
+
+# Allow important SEO files
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Sitemaps
+Sitemap: ${baseUrl}/sitemap.xml
+
+# Crawl delay to be respectful
+Crawl-delay: 1
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1`;
 }

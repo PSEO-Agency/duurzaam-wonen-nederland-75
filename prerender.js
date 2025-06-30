@@ -9,7 +9,7 @@ const toAbsolute = (p) => path.resolve(__dirname, p)
 const template = fs.readFileSync(toAbsolute('dist/index.html'), 'utf-8')
 const { render } = await import('./dist/server/entry-server.js')
 
-// Define all routes from App.tsx
+// Define all routes from App.tsx plus popular dynamic combinations
 const routesToPrerender = [
   // Main pages
   '/',
@@ -27,6 +27,7 @@ const routesToPrerender = [
   '/privacy-policy',
   '/sitemap',
   '/oplossingen',
+  '/zoeken',
   
   // Project routes
   '/projecten',
@@ -47,6 +48,7 @@ const routesToPrerender = [
   '/kunststof-kozijnen/prijzen/subsidie',
   '/kunststof-kozijnen/schuco',
   '/kunststof-kozijnen/locaties/enschede',
+  '/kunststof-kozijnen/merken',
   
   // Profile routes
   '/kunststof-kozijnen/profielen',
@@ -59,6 +61,37 @@ const routesToPrerender = [
   '/dakkapel',
   '/kunststof-deuren',
   '/raamdecoratie',
+  
+  // Over ons subpages
+  '/over-ons/team',
+  '/over-ons/missie',
+  '/over-ons/duurzaamheid',
+  '/over-ons/vacatures',
+  
+  // Popular city combinations for better local SEO
+  '/kunststof-kozijnen/amsterdam',
+  '/kunststof-kozijnen/rotterdam',
+  '/kunststof-kozijnen/den-haag',
+  '/kunststof-kozijnen/utrecht',
+  '/kunststof-kozijnen/eindhoven',
+  '/kunststof-kozijnen/enschede',
+  '/kunststof-kozijnen/groningen',
+  '/kunststof-kozijnen/tilburg',
+  '/kunststof-kozijnen/breda',
+  '/kunststof-kozijnen/nijmegen',
+  
+  '/aluminium-kozijnen/amsterdam',
+  '/aluminium-kozijnen/rotterdam',
+  '/aluminium-kozijnen/utrecht',
+  '/aluminium-kozijnen/eindhoven',
+  
+  '/hr-beglazing/amsterdam',
+  '/hr-beglazing/rotterdam',
+  '/hr-beglazing/utrecht',
+  
+  '/dakkapel/amsterdam',
+  '/dakkapel/rotterdam',
+  '/dakkapel/utrecht',
   
   // SEO Routes
   '/sitemap.xml',
@@ -124,5 +157,5 @@ const getOutputPath = (url) => {
     }
   }
   
-  console.log('Prerendering completed!');
+  console.log(`Prerendering completed! Generated ${routesToPrerender.length} pages.`);
 })();

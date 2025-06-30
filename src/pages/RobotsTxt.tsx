@@ -1,20 +1,9 @@
 
 import React, { useEffect } from 'react';
+import { generateRobotsTxt } from '@/utils/sitemapGenerator';
 
 const RobotsTxt: React.FC = () => {
-  const robotsContent = `User-agent: *
-Allow: /
-
-# Sitemaps
-Sitemap: https://duurzaamwonen.info/sitemap.xml
-
-# Disallow admin and internal pages
-Disallow: /admin/
-Disallow: /offerte/success
-Disallow: /api/
-
-# Crawl delay (optional)
-Crawl-delay: 1`;
+  const robotsContent = generateRobotsTxt();
 
   useEffect(() => {
     // Set document title for this page
