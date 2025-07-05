@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -20,7 +21,7 @@ const Index: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    // Preload critical images and resources
+    // Optimized preloading with faster timeout and parallel loading
     const preloadImages = [
       '/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png', // Hero background
       '/lovable-uploads/a8156bd0-f063-47c4-bf91-4902c4a2fb9b.png', // Logo
@@ -28,27 +29,26 @@ const Index: React.FC = () => {
     ];
     
     let loadedCount = 0;
+    const totalImages = preloadImages.length;
     
+    const checkComplete = () => {
+      loadedCount++;
+      if (loadedCount === totalImages) {
+        // Reduced timeout for faster loading
+        setTimeout(() => setIsLoading(false), 100);
+      }
+    };
+    
+    // Load images in parallel
     preloadImages.forEach(src => {
       const img = new Image();
       img.src = src;
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === preloadImages.length) {
-          // Small timeout to ensure smooth transition
-          setTimeout(() => setIsLoading(false), 300);
-        }
-      };
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount === preloadImages.length) {
-          setTimeout(() => setIsLoading(false), 300);
-        }
-      };
+      img.onload = checkComplete;
+      img.onerror = checkComplete; // Still count failed loads to prevent hanging
     });
     
-    // Fallback in case images don't load
-    const timeout = setTimeout(() => setIsLoading(false), 2000);
+    // Reduced fallback timeout
+    const timeout = setTimeout(() => setIsLoading(false), 1000);
     
     // Intersection Observer for reveal animations
     const observer = new IntersectionObserver(
@@ -62,22 +62,39 @@ const Index: React.FC = () => {
       { threshold: 0.1 }
     );
     
-    document.querySelectorAll('.reveal-up').forEach((el) => {
-      observer.observe(el);
-    });
+    // Set up observer after loading is complete
+    const setupObserver = () => {
+      document.querySelectorAll('.reveal-up').forEach((el) => {
+        observer.observe(el);
+      });
+    };
 
-    // Load review widget script
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://reputationhub.site/reputation/assets/review-widget.js';
-    script.async = true;
-    document.head.appendChild(script);
+    // Load review widget script asynchronously
+    const loadReviewScript = () => {
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://reputationhub.site/reputation/assets/review-widget.js';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+      return script;
+    };
+
+    const script = loadReviewScript();
+    
+    // Setup observer when page is ready
+    if (document.readyState === 'complete') {
+      setupObserver();
+    } else {
+      window.addEventListener('load', setupObserver);
+    }
     
     return () => {
       document.querySelectorAll('.reveal-up').forEach((el) => {
         observer.unobserve(el);
       });
       clearTimeout(timeout);
+      window.removeEventListener('load', setupObserver);
       // Clean up script
       if (document.head.contains(script)) {
         document.head.removeChild(script);
@@ -88,7 +105,7 @@ const Index: React.FC = () => {
   return (
     <>
       {isLoading && <LoadingScreen />}
-      <div className={`min-h-screen flex flex-col ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}`}>
+      <div className={`min-h-screen flex flex-col transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
         <SEOHead
           title="Duurzaam Wonen Nederland | Specialist in Woningverduurzaming"
           description="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten."

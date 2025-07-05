@@ -1,4 +1,3 @@
-
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -7,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import AdminWrapper from './components/admin/AdminWrapper';
 import AdminLayout from './components/admin/AdminLayout';
 import RedirectHandler from './components/RedirectHandler';
+import LoadingScreen from './components/LoadingScreen';
 
 // Lazy load pages
 const Index = lazy(() => import('./pages/Index'));
@@ -84,7 +84,7 @@ function App() {
         <div className="App">
           <AdminWrapper>
             <RedirectHandler />
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<LoadingScreen />}>
               <Routes>
                 {/* SEO Routes */}
                 <Route path="/sitemap.xml" element={<SitemapXML />} />
