@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import AnimatedSection from '@/components/AnimatedSection';
 import ContactCTA from '@/components/ContactCTA';
+import { RelatedCitiesSection } from '@/components/RelatedCitiesSection';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MapPin, CheckIcon, ArrowRight, PhoneCall, ArrowLeft } from 'lucide-react';
@@ -576,6 +577,20 @@ const CityServicePageNew: React.FC = () => {
             </div>
           </div>
         </section>
+        
+        {/* Related Cities Section */}
+        {region && (
+          <RelatedCitiesSection
+            regionId={region.id}
+            regionSlug={regionSlug}
+            serviceId={serviceData.id}
+            serviceSlug={serviceSlug}
+            serviceName={serviceData.name}
+            currentCityId={cityData.id}
+            currentCityName={cityData.name}
+            regionName={region.name}
+          />
+        )}
         
         <ContactCTA />
       </main>

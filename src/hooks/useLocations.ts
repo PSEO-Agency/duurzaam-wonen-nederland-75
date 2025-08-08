@@ -490,3 +490,31 @@ export const useCityServiceNew = (citySlug: string, serviceSlug: string) => {
     enabled: !!citySlug && !!serviceSlug
   });
 };
+
+export const useCitiesInRegionForService = (regionId: string, serviceId: string, excludeCityId?: string) => {
+  return useQuery({
+    queryKey: ['cities-in-region-for-service', regionId, serviceId, excludeCityId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('city_services')
+        .select(`
+          *,
+          cities!inner(
+            id,
+            name,
+            slug,
+            region_id
+          )
+        `)
+        .eq('cities.region_id', regionId)
+        .eq('service_id', serviceId)
+        .eq('is_active', true)
+        .neq('cities.id', excludeCityId || '')
+        .order('cities.name', { referencedTable: 'cities' });
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!regionId && !!serviceId
+  });
+};
