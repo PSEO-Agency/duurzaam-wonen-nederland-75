@@ -13,6 +13,7 @@ import ProjectForm from '@/components/admin/ProjectForm';
 interface Project {
   id: string;
   title: string;
+  slug: string;
   description: string | null;
   location: string | null;
   project_type: string | null;

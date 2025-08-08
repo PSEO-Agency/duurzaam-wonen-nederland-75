@@ -17,13 +17,14 @@ import { supabase } from '@/integrations/supabase/client';
 interface Project {
   id: string;
   title: string;
-  description: string;
-  location: string;
-  project_type: string;
-  completion_date: string;
-  image_url: string;
-  featured_image: string;
-  gallery_images: string[];
+  slug: string;
+  description: string | null;
+  location: string | null;
+  project_type: string | null;
+  completion_date: string | null;
+  image_url: string | null;
+  featured_image: string | null;
+  gallery_images: any;
   is_featured: boolean;
   is_active: boolean;
   sort_order: number;
@@ -32,26 +33,26 @@ interface Project {
 }
 
 const ProjectDetail: React.FC = () => {
-  const { projectId } = useParams<{ projectId: string }>();
+  const { projectSlug } = useParams<{ projectSlug: string }>();
   const navigate = useNavigate();
   const [activeImage, setActiveImage] = useState<string>('');
   
   const { data: project, isLoading, error } = useQuery({
-    queryKey: ['project', projectId],
+    queryKey: ['project', projectSlug],
     queryFn: async () => {
-      if (!projectId) throw new Error('Project ID is required');
+      if (!projectSlug) throw new Error('Project slug is required');
       
       const { data, error } = await supabase
         .from('projects')
         .select('*')
-        .eq('id', projectId)
+        .eq('slug', projectSlug)
         .eq('is_active', true)
         .single();
       
       if (error) throw error;
       return data as Project;
     },
-    enabled: !!projectId
+    enabled: !!projectSlug
   });
 
   const { data: relatedProjects = [] } = useQuery({
@@ -302,7 +303,7 @@ const ProjectDetail: React.FC = () => {
               <h2 className="text-2xl font-bold mb-8">Gerelateerde Projecten</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedProjects.map((relatedProject) => (
-                  <Link to={`/projecten/${relatedProject.id}`} key={relatedProject.id} className="group">
+                  <Link to={`/projecten/${relatedProject.slug}`} key={relatedProject.id} className="group">
                     <Card className="h-full overflow-hidden hover:shadow-md transition-shadow">
                       <div className="relative h-48 overflow-hidden">
                         <img 

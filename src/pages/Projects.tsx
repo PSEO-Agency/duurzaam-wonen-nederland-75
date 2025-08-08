@@ -19,6 +19,7 @@ import { useProjects } from '@/hooks/useProjects';
 interface Project {
   id: string;
   title: string;
+  slug: string;
   description: string | null;
   location: string | null;
   project_type: string | null;
@@ -284,7 +285,7 @@ const Projects: React.FC = () => {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredProjects.map((project) => (
-                      <Link to={`/projecten/${project.id}`} key={project.id} className="group">
+                      <Link to={`/projecten/${project.slug}`} key={project.id} className="group">
                         <Card className="h-full overflow-hidden hover:shadow-md transition-shadow">
                           <div className="relative h-48 overflow-hidden">
                             <img 

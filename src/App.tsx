@@ -114,7 +114,7 @@ function App() {
               
               {/* Project routes */}
               <Route path="/projecten" element={<Projects />} />
-              <Route path="/projecten/:projectId" element={<ProjectDetail />} />
+              <Route path="/projecten/:projectSlug" element={<ProjectDetail />} />
               
               {/* Job detail routes */}
               <Route path="/vacatures/kunststof-kozijnen-monteur" element={<KunststofKozijnenMonteur />} />
