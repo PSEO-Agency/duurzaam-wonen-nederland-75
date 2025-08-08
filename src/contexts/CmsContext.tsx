@@ -118,16 +118,6 @@ export const CmsProvider = ({ children }: { children: React.ReactNode }) => {
           isPublished: true,
           createdAt: new Date(),
           updatedAt: new Date()
-        },
-        {
-          id: '3',
-          title: 'Kunststof Kozijnen Enschede',
-          slug: '/kunststof-kozijnen/locaties/enschede',
-          templateId: '3',
-          metaDescription: 'Kunststof kozijnen in Enschede area',
-          isPublished: true,
-          createdAt: new Date(),
-          updatedAt: new Date()
         }
       ];
       

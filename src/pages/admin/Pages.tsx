@@ -60,14 +60,14 @@ const Pages: React.FC = () => {
       },
       { 
         id: '4', 
-        title: 'Kunststof Kozijnen Enschede', 
-        slug: '/kunststof-kozijnen/locaties/enschede', 
-        templateId: '3',
-        metaDescription: 'Kunststof kozijnen in Enschede area',
+        title: 'Product Types', 
+        slug: '/kunststof-kozijnen/types', 
+        templateId: '2',
+        metaDescription: 'Different types of kozijnen',
         isPublished: true, 
         createdAt: new Date('2023-06-12'), 
         updatedAt: new Date('2023-07-12'),
-        templateName: 'Location Template',
+        templateName: 'Product Type Template',
         parentPath: '/kunststof-kozijnen'
       },
       { 

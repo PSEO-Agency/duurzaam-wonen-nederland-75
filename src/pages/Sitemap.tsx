@@ -113,13 +113,7 @@ const siteStructure = [
       {
         title: 'Locaties',
         description: 'Kozijnen in verschillende regio\'s',
-        children: [
-          {
-            title: 'Enschede',
-            path: '/kunststof-kozijnen/locaties/enschede',
-            description: 'Kunststof kozijnen in Enschede',
-          }
-        ]
+        children: []
       }
     ]
   },

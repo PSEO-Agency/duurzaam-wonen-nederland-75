@@ -119,8 +119,8 @@ const PagesList: React.FC = () => {
     { id: '1', title: 'Home', slug: '/', templateName: 'Home Template', isPublished: true, updatedAt: '2023-07-15' },
     { id: '2', title: 'Kunststof Kozijnen', slug: '/kunststof-kozijnen', templateName: 'Product Template', isPublished: true, updatedAt: '2023-07-14' },
     { id: '3', title: 'Contact', slug: '/contact', templateName: 'Contact Template', isPublished: true, updatedAt: '2023-07-13' },
-    { id: '4', title: 'Kunststof Kozijnen Enschede', slug: '/kunststof-kozijnen/locaties/enschede', templateName: 'Location Template', isPublished: true, updatedAt: '2023-07-12' },
-    { id: '5', title: 'Draaikiepraam', slug: '/kunststof-kozijnen/types/draaikiepraam', templateName: 'Product Type Template', isPublished: true, updatedAt: '2023-07-11' },
+    { id: '4', title: 'Draaikiepraam', slug: '/kunststof-kozijnen/types/draaikiepraam', templateName: 'Product Type Template', isPublished: true, updatedAt: '2023-07-12' },
+    { id: '5', title: 'Schuco Brand', slug: '/kunststof-kozijnen/schuco', templateName: 'Brand Template', isPublished: true, updatedAt: '2023-07-11' },
   ];
   
   return (

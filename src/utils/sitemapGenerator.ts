@@ -162,11 +162,6 @@ const staticPages: SitemapUrl[] = [
     changefreq: 'monthly',
     priority: 0.5
   },
-  {
-    loc: '/kunststof-kozijnen/locaties/enschede',
-    changefreq: 'monthly',
-    priority: 0.6
-  },
   // Job detail pages
   {
     loc: '/vacatures/kunststof-kozijnen-monteur',
