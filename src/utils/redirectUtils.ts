@@ -91,7 +91,10 @@ export const REDIRECT_MAPPINGS: RedirectMapping[] = [
   { from: '/kunststof-kozijnen/afmetingen/maatwerk', to: '/kunststof-kozijnen/afmetingen', permanent: true },
   { from: '/kunststof-kozijnen/afmetingen/200x100', to: '/kunststof-kozijnen/afmetingen', permanent: true },
   { from: '/kunststof-kozijnen/afmetingen/150x150', to: '/kunststof-kozijnen/afmetingen', permanent: true },
-  { from: '/kunststof-kozijnen/afmetingen/100x100', to: '/kunststof-kozijnen/afmetingen', permanent: true }
+  { from: '/kunststof-kozijnen/afmetingen/100x100', to: '/kunststof-kozijnen/afmetingen', permanent: true },
+  
+  // Redirect service pages
+  { from: '/kunststof-kozijnen/services/reparatie', to: '/kunststof-kozijnen/', permanent: true }
 ];
 
 /**

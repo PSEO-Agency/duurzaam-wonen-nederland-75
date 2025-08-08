@@ -82,6 +82,9 @@
 /kunststof-kozijnen/afmetingen/150x150 /kunststof-kozijnen/afmetingen 301
 /kunststof-kozijnen/afmetingen/100x100 /kunststof-kozijnen/afmetingen 301
 
+# Redirect service pages
+/kunststof-kozijnen/services/reparatie /kunststof-kozijnen/ 301
+
 # Catch-all rule for any other .php files - redirect to home
 /*.php / 301
 
