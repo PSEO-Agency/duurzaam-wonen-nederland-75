@@ -75,6 +75,13 @@
 /kunststof-kozijnen/types/hefschuifpui /kunststof-kozijnen/types 301
 /kunststof-kozijnen/types/draaikiepraam /kunststof-kozijnen/types 301
 
+# Redirect specific kozijn sizes to general sizes page
+/kunststof-kozijnen/afmetingen/100x150 /kunststof-kozijnen/afmetingen 301
+/kunststof-kozijnen/afmetingen/maatwerk /kunststof-kozijnen/afmetingen 301
+/kunststof-kozijnen/afmetingen/200x100 /kunststof-kozijnen/afmetingen 301
+/kunststof-kozijnen/afmetingen/150x150 /kunststof-kozijnen/afmetingen 301
+/kunststof-kozijnen/afmetingen/100x100 /kunststof-kozijnen/afmetingen 301
+
 # Catch-all rule for any other .php files - redirect to home
 /*.php / 301
 

@@ -84,7 +84,14 @@ export const REDIRECT_MAPPINGS: RedirectMapping[] = [
   { from: '/kunststof-kozijnen/types/stolpkozijn', to: '/kunststof-kozijnen/types', permanent: true },
   { from: '/kunststof-kozijnen/types/vast-kozijn', to: '/kunststof-kozijnen/types', permanent: true },
   { from: '/kunststof-kozijnen/types/hefschuifpui', to: '/kunststof-kozijnen/types', permanent: true },
-  { from: '/kunststof-kozijnen/types/draaikiepraam', to: '/kunststof-kozijnen/types', permanent: true }
+  { from: '/kunststof-kozijnen/types/draaikiepraam', to: '/kunststof-kozijnen/types', permanent: true },
+  
+  // Redirect specific kozijn sizes to general sizes page
+  { from: '/kunststof-kozijnen/afmetingen/100x150', to: '/kunststof-kozijnen/afmetingen', permanent: true },
+  { from: '/kunststof-kozijnen/afmetingen/maatwerk', to: '/kunststof-kozijnen/afmetingen', permanent: true },
+  { from: '/kunststof-kozijnen/afmetingen/200x100', to: '/kunststof-kozijnen/afmetingen', permanent: true },
+  { from: '/kunststof-kozijnen/afmetingen/150x150', to: '/kunststof-kozijnen/afmetingen', permanent: true },
+  { from: '/kunststof-kozijnen/afmetingen/100x100', to: '/kunststof-kozijnen/afmetingen', permanent: true }
 ];
 
 /**
