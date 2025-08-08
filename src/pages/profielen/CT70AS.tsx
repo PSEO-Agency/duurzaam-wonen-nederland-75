@@ -38,7 +38,7 @@ const CT70AS: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Schüco CT70 Kozijnprofiel | Duurzaam en Energiezuinig</title>
+        <title>Schüco CT70 Kozijnprofiel - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek het Schüco CT70 kozijnprofiel. Perfecte balans tussen duurzaamheid, energie-efficiëntie en design. 5-kamersysteem met 70mm inbouwdiepte." />
       </Helmet>
       

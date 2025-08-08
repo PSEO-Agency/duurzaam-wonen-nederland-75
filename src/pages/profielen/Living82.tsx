@@ -33,7 +33,7 @@ const Living82: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Schüco Living Kozijnprofiel | Duurzaam en Energiezuinig</title>
+        <title>Schüco Living Kozijnprofiel - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek het Schüco Living kozijnprofiel. Energiezuinig, duurzaam en verkrijgbaar in vele kleuren. Uitstekende isolatie en moderne uitstraling." />
       </Helmet>
       
