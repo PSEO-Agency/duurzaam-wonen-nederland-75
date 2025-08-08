@@ -76,7 +76,15 @@ export const REDIRECT_MAPPINGS: RedirectMapping[] = [
   { from: '/over-ons/team', to: '/', permanent: true },
   { from: '/blog', to: '/', permanent: true },
   { from: '/kennisbank', to: '/', permanent: true },
-  { from: '/over-ons/missie', to: '/', permanent: true }
+  { from: '/over-ons/missie', to: '/', permanent: true },
+  
+  // Redirect specific kozijn types to general types page
+  { from: '/kunststof-kozijnen/types/schuifpui', to: '/kunststof-kozijnen/types', permanent: true },
+  { from: '/kunststof-kozijnen/types/harmonicadeur', to: '/kunststof-kozijnen/types', permanent: true },
+  { from: '/kunststof-kozijnen/types/stolpkozijn', to: '/kunststof-kozijnen/types', permanent: true },
+  { from: '/kunststof-kozijnen/types/vast-kozijn', to: '/kunststof-kozijnen/types', permanent: true },
+  { from: '/kunststof-kozijnen/types/hefschuifpui', to: '/kunststof-kozijnen/types', permanent: true },
+  { from: '/kunststof-kozijnen/types/draaikiepraam', to: '/kunststof-kozijnen/types', permanent: true }
 ];
 
 /**
