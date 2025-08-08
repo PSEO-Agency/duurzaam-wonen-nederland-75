@@ -56,6 +56,17 @@
 /kunststof-kozijnen/profielen/schuco-living-kozijnprofiel.php /kunststof-kozijnen/profielen/schuco-living-kozijnprofiel 301
 /kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel.php /kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel 301
 
+# Pages to redirect to homepage
+/brands/schuco / 301
+/over-ons/vacatures / 301
+/kunststof-kozijnen/services/inmeten / 301
+/over-ons/duurzaamheid / 301
+/kunststof-kozijnen/services/montage / 301
+/over-ons/team / 301
+/blog / 301
+/kennisbank / 301
+/over-ons/missie / 301
+
 # Catch-all rule for any other .php files - redirect to home
 /*.php / 301
 

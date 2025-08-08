@@ -65,7 +65,18 @@ export const REDIRECT_MAPPINGS: RedirectMapping[] = [
   
   // Profile pages
   { from: '/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel.php', to: '/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel', permanent: true },
-  { from: '/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel.php', to: '/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel', permanent: true }
+  { from: '/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel.php', to: '/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel', permanent: true },
+  
+  // Pages to redirect to homepage
+  { from: '/brands/schuco', to: '/', permanent: true },
+  { from: '/over-ons/vacatures', to: '/', permanent: true },
+  { from: '/kunststof-kozijnen/services/inmeten', to: '/', permanent: true },
+  { from: '/over-ons/duurzaamheid', to: '/', permanent: true },
+  { from: '/kunststof-kozijnen/services/montage', to: '/', permanent: true },
+  { from: '/over-ons/team', to: '/', permanent: true },
+  { from: '/blog', to: '/', permanent: true },
+  { from: '/kennisbank', to: '/', permanent: true },
+  { from: '/over-ons/missie', to: '/', permanent: true }
 ];
 
 /**
