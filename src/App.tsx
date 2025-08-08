@@ -55,7 +55,7 @@ import Draaikiepraam from './pages/types/Draaikiepraam';
 import Kozijn100x100 from './pages/sizes/Kozijn100x100';
 import KozijnenAfbetaling from './pages/prices/KozijnenAfbetaling';
 import KozijnenSubsidie from './pages/prices/KozijnenSubsidie';
-import KozijnenEnschede from './pages/locaties/KozijnenEnschede';
+
 
 // Profile pages
 import ProfilesOverview from './pages/ProfilesOverview';
