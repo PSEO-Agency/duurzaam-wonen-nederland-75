@@ -33,7 +33,7 @@ const Vacatures: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Vacatures | Duurzaam Wonen Nederland</title>
+        <title>Kunststof Kozijnen Vacatures - Duurzaam Wonen Nederland</title>
         <meta 
           name="description" 
           content="Bekijk onze openstaande vacatures bij Duurzaam Wonen Nederland. Sluit je aan bij ons groeiende team!"

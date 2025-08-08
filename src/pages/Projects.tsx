@@ -134,7 +134,7 @@ const Projects: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Projecten | Duurzaam Wonen Nederland</title>
+        <title>Kunststof Kozijnen Projecten - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Bekijk onze recente projecten op het gebied van woningverduurzaming, kozijnen, dakkapellen en meer. Laat u inspireren door ons vakmanschap." />
       </Helmet>
       <Navbar />

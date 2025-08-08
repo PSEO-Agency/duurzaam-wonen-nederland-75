@@ -31,7 +31,7 @@ const ProfilesOverview: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Kozijn Profielen | Schüco Living & CT70 | Kunststof Kozijnen</title>
+        <title>Kunststof Kozijnen Profielen - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek onze premium kozijn profielen van Schüco. Van het Living systeem tot het CT70 profiel - kwaliteit en duurzaamheid gegarandeerd." />
       </Helmet>
       

@@ -15,7 +15,7 @@ const Oplossingen: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Oplossingen - Duurzaam Wonen Nederland | Alle Bouwoplossingen op één plek</title>
+        <title>Oplossingen voor Verduurzamen van je Huis - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek alle oplossingen van Duurzaam Wonen Nederland. Van kunststof kozijnen tot gevelbekleding en dakkapellen. Hoogwaardige kwaliteit en professionele service." />
         <link rel="canonical" href="https://duurzaamwonen.info/oplossingen" />
       </Helmet>
