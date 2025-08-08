@@ -68,7 +68,7 @@ const RegionServicePage: React.FC = () => {
   const title = `${service.name} in ${region.name}`;
   const description = `Ontdek alle steden in ${region.name} waar wij ${service.name.toLowerCase()} leveren en installeren. Professionele service met garantie.`;
   
-  const metaTitle = `${service.name} in ${region.name} | Duurzaam Wonen Nederland`;
+  const metaTitle = `${service.name} in ${region.name} - Duurzaam Wonen Nederland`;
   const metaDescription = `${service.name} in ${region.name}. Bekijk alle steden waar wij actief zijn en vraag een vrijblijvende offerte aan.`;
 
   return (

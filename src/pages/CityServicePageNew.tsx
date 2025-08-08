@@ -99,7 +99,9 @@ const CityServicePageNew: React.FC = () => {
     const title = `${service.name} in ${city.name}`;
     const description = `Hoogwaardige ${service.name} in ${city.name} en omgeving. Professionele installatie met garantie.`;
     
-    const metaTitle = `${service.name} in ${city.name} | Duurzaam Wonen Nederland`;
+    const metaTitle = region 
+      ? `${service.name} in ${city.name} (${region.name}) - Duurzaam Wonen Nederland`
+      : `${service.name} in ${city.name} - Duurzaam Wonen Nederland`;
     const metaDescription = `Specialistische ${service.name} in ${city.name} op maat. Vraag nu een vrijblijvende offerte aan.`;
 
     return (
@@ -333,7 +335,9 @@ const CityServicePageNew: React.FC = () => {
     `Hoogwaardige ${serviceData.name} in ${cityData.name} en omgeving. Professionele installatie met garantie.`;
   
   const metaTitle = cityService.custom_meta_title || 
-    `${serviceData.name} in ${cityData.name} | Duurzaam Wonen Nederland`;
+    (region 
+      ? `${serviceData.name} in ${cityData.name} (${region.name}) - Duurzaam Wonen Nederland`
+      : `${serviceData.name} in ${cityData.name} - Duurzaam Wonen Nederland`);
   const metaDescription = cityService.custom_meta_description || 
     `Specialistische ${serviceData.name} in ${cityData.name} op maat. Vraag nu een vrijblijvende offerte aan.`;
   
