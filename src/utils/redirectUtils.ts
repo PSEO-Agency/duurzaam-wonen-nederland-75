@@ -60,8 +60,15 @@ export const REDIRECT_MAPPINGS: RedirectMapping[] = [
   // Brand pages
   { from: '/kunststof-kozijnen/schuco.php', to: '/kunststof-kozijnen/schuco', permanent: true },
   
-  // Location pages
-  { from: '/kunststof-kozijnen/locaties/enschede.php', to: '/kunststof-kozijnen/locaties/enschede', permanent: true },
+  // Location pages - redirect to new URL structure
+  { from: '/kunststof-kozijnen/locaties/enschede.php', to: '/kunststof-kozijnen/overijssel/enschede', permanent: true },
+  { from: '/kunststof-kozijnen/locaties/enschede', to: '/kunststof-kozijnen/overijssel/enschede', permanent: true },
+  { from: '/kunststof-kozijnen/locaties/hengelo', to: '/kunststof-kozijnen/overijssel/hengelo', permanent: true },
+  { from: '/kunststof-kozijnen/locaties/almelo', to: '/kunststof-kozijnen/overijssel/almelo', permanent: true },
+  { from: '/kunststof-kozijnen/locaties/oldenzaal', to: '/kunststof-kozijnen/overijssel/oldenzaal', permanent: true },
+  { from: '/kunststof-kozijnen/locaties/losser', to: '/kunststof-kozijnen/overijssel/losser', permanent: true },
+  { from: '/kunststof-kozijnen/locaties/haaksbergen', to: '/kunststof-kozijnen/overijssel/haaksbergen', permanent: true },
+  { from: '/kunststof-kozijnen/locaties/glanerbrug', to: '/kunststof-kozijnen/overijssel/glanerbrug', permanent: true },
   
   // Profile pages
   { from: '/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel.php', to: '/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel', permanent: true },

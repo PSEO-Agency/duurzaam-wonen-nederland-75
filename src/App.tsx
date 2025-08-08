@@ -132,7 +132,7 @@ function App() {
               <Route path="/kunststof-kozijnen/prijzen/afbetaling" element={<KozijnenAfbetaling />} />
               <Route path="/kunststof-kozijnen/prijzen/subsidie" element={<KozijnenSubsidie />} />
               <Route path="/kunststof-kozijnen/schuco" element={<SchucoBrand />} />
-              <Route path="/kunststof-kozijnen/locaties/enschede" element={<KozijnenEnschede />} />
+              
               
               {/* Profile routes */}
               <Route path="/kunststof-kozijnen/profielen" element={<ProfilesOverview />} />
