@@ -9,7 +9,7 @@ const RaamdecoratiePageContent: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Raamdecoratie op Maat | Specialist in Maatwerk Raamdecoratie</title>
+        <title>Raamdecoratie Laten Plaatsen - Duurzaam Wonen Nederland</title>
         <meta 
           name="description" 
           content="Hoogwaardige raamdecoratie op maat voor uw woning. Van klassieke tot moderne stijlen - wij hebben de perfecte oplossing voor elke ruimte. Realisatie door onze partner Twents Design." 

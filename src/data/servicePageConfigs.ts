@@ -214,7 +214,7 @@ export const kunststofKozijnenConfig: ServicePageTemplateProps = {
 // Configuration for Kunststof Schuifpuien page
 export const kunststofSchuifpuienConfig: ServicePageTemplateProps = {
   seo: {
-    title: "Kunststof Schuifpuien | Duurzaam Wonen Nederland",
+    title: "Schuifpui Laten Plaatsen - Duurzaam Wonen Nederland",
     description: "Bekijk ons assortiment kunststof schuifpuien. Hoogwaardige, energiezuinige en onderhoudsarme schuifpuien voor uw woning.",
     canonicalUrl: "https://duurzaamwonen.info/kunststof-schuifpuien"
   },

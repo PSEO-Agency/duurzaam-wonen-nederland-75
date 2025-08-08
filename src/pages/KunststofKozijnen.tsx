@@ -102,7 +102,7 @@ const KunststofKozijnen: React.FC = () => {
   };
   return <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Kunststof Kozijnen | Duurzaam Wonen Nederland</title>
+        <title>Kunststof Kozijnen Laten Plaatsen - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Bekijk ons assortiment kunststof kozijnen. Hoogwaardige, energiezuinige en onderhoudsarme kozijnen voor uw woning." />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen" />
       </Helmet>
