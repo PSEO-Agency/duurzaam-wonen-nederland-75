@@ -241,7 +241,7 @@ const Sitemap: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Sitemap | Duurzaam Wonen Nederland</title>
+        <title>Sitemap - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Bekijk de volledige sitemap van Duurzaam Wonen Nederland om snel de gewenste pagina te vinden." />
         <link rel="canonical" href="https://duurzaamwonen.info/sitemap" />
       </Helmet>

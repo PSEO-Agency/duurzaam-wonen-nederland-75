@@ -72,7 +72,7 @@ const Index: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEOHead
-        title="Duurzaam Wonen Nederland | Specialist in Woningverduurzaming"
+        title="Kunststof Kozijnen Expert - Duurzaam Wonen Nederland"
         description="Meer dan 20 jaar ervaring in het verduurzamen van woningen met hoogwaardige en onderhoudsarme oplossingen voor een comfortabeler huis en lagere energiekosten."
         canonicalUrl="/"
         pageType="website"

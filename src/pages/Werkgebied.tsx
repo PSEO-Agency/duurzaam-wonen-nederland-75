@@ -12,7 +12,7 @@ import ContactCTA from '@/components/ContactCTA';
 const Werkgebied: React.FC = () => {
   return <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Ons Werkgebied | Duurzaam Wonen Nederland</title>
+        <title>Werkgebied Kunststof Kozijnen & Montage - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Bekijk in welke regio's Duurzaam Wonen Nederland actief is. Wij leveren en installeren duurzame oplossingen voor uw woning in een groot deel van Nederland." />
         <link rel="canonical" href="https://duurzaamwonen.info/werkgebied" />
       </Helmet>

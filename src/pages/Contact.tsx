@@ -23,7 +23,7 @@ const Contact: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Contact | Duurzaam Wonen Nederland</title>
+        <title>Contact - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Neem contact op met Duurzaam Wonen Nederland voor vragen over duurzame woningverbetering, kunststof kozijnen en meer." />
         <link rel="canonical" href="https://duurzaamwonen.info/contact" />
       </Helmet>

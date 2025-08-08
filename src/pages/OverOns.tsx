@@ -13,7 +13,7 @@ const OverOns: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Over Ons | Duurzaam Wonen Nederland</title>
+        <title>Over ons - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Leer meer over Duurzaam Wonen Nederland, onze missie, visie en het team achter onze duurzame woningoplossingen." />
         <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://duurzaamwonen.info/over-ons" />

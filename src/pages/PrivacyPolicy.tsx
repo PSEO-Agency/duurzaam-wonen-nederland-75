@@ -12,7 +12,7 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Privacybeleid | Duurzaam Wonen Nederland</title>
+        <title>Privacybeleid - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Lees ons privacybeleid om te begrijpen hoe we uw persoonlijke gegevens verwerken en beschermen." />
         <link rel="canonical" href="https://duurzaamwonen.info/privacy-policy" />
       </Helmet>

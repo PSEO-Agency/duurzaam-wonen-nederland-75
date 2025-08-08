@@ -19,7 +19,7 @@ const RentevrijeFinanciering: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Rentevrije Financiering* | Duurzaam Wonen Nederland</title>
+        <title>Rentevrije Financiering voor Kunststof Kozijnen - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Financier uw isolerende deuren, kozijnen en panelen met een rentevrije lening van het Nationaal Warmtefonds. Ontdek de mogelijkheden voor uw verduurzamingsproject." />
         <link rel="canonical" href="https://duurzaamwonen.info/rentevrije-financiering" />
       </Helmet>
