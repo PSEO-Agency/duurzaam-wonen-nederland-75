@@ -12,6 +12,7 @@ import { RelatedCitiesSection } from '@/components/RelatedCitiesSection';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MapPin, CheckIcon, ArrowRight, PhoneCall, ArrowLeft } from 'lucide-react';
+import { generateCityServiceMetaDescription, generateCityServiceMetaTitle } from '@/utils/metaDescriptionTemplates';
 
 // Type guards for JSON data
 const isArray = (value: any): value is any[] => Array.isArray(value);
@@ -100,10 +101,16 @@ const CityServicePageNew: React.FC = () => {
     const title = `${service.name} in ${city.name}`;
     const description = `Hoogwaardige ${service.name} in ${city.name} en omgeving. Professionele installatie met garantie.`;
     
-    const metaTitle = region 
-      ? `${service.name} in ${city.name} (${region.name}) - Duurzaam Wonen Nederland`
-      : `${service.name} in ${city.name} - Duurzaam Wonen Nederland`;
-    const metaDescription = `Specialistische ${service.name} in ${city.name} op maat. Vraag nu een vrijblijvende offerte aan.`;
+    const metaTitle = generateCityServiceMetaTitle({
+      serviceName: service.name,
+      cityName: city.name,
+      regionName: region?.name
+    });
+    const metaDescription = generateCityServiceMetaDescription({
+      serviceName: service.name,
+      cityName: city.name,
+      regionName: region?.name
+    });
 
     return (
       <div className="min-h-screen flex flex-col">
@@ -336,11 +343,17 @@ const CityServicePageNew: React.FC = () => {
     `Hoogwaardige ${serviceData.name} in ${cityData.name} en omgeving. Professionele installatie met garantie.`;
   
   const metaTitle = cityService.custom_meta_title || 
-    (region 
-      ? `${serviceData.name} in ${cityData.name} (${region.name}) - Duurzaam Wonen Nederland`
-      : `${serviceData.name} in ${cityData.name} - Duurzaam Wonen Nederland`);
+    generateCityServiceMetaTitle({
+      serviceName: serviceData.name,
+      cityName: cityData.name,
+      regionName: region?.name
+    });
   const metaDescription = cityService.custom_meta_description || 
-    `Specialistische ${serviceData.name} in ${cityData.name} op maat. Vraag nu een vrijblijvende offerte aan.`;
+    generateCityServiceMetaDescription({
+      serviceName: serviceData.name,
+      cityName: cityData.name,
+      regionName: region?.name
+    });
   
   // Safely parse benefits and features with proper type validation
   const benefits: Benefit[] = parseBenefits(cityService.benefits);
