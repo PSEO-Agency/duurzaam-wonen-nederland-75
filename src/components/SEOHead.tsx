@@ -56,6 +56,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords.join(', ')} />
       <meta name="author" content={author} />
+      <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
       <link rel="canonical" href={fullCanonicalUrl} />
 
       {/* Open Graph Meta Tags */}
