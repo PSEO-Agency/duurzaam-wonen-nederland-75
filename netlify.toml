@@ -9,10 +9,6 @@ package = "@netlify/plugin-sitemap"
   [plugins.inputs]
   buildDir = "dist"
 
-# Edge Functions configuration
-[[edge_functions]]
-  path = "/*"
-  function = "seo"
 
 # Specific headers for SEO files
 [[headers]]
