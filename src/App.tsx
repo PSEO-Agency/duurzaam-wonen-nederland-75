@@ -24,7 +24,6 @@ import Vacatures from './pages/over-ons/Vacatures';
 import Werkgebied from './pages/Werkgebied';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Sitemap from './pages/Sitemap';
-import SitemapXML from './pages/SitemapXML';
 import RobotsTxt from './pages/RobotsTxt';
 import CityServicePage from './pages/CityServicePage';
 
@@ -85,7 +84,6 @@ function App() {
             <RedirectHandler />
             <Routes>
               {/* SEO Routes */}
-              <Route path="/sitemap.xml" element={<SitemapXML />} />
               <Route path="/robots.txt" element={<RobotsTxt />} />
               
               {/* Main pages */}
