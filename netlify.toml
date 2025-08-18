@@ -3,11 +3,6 @@
   command = "npm run build"
   publish = "dist"
 
-[[plugins]]
-package = "@netlify/plugin-sitemap"
-
-  [plugins.inputs]
-  buildDir = "dist"
 
 
 # Specific headers for SEO files
