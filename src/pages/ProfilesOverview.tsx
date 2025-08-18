@@ -33,6 +33,7 @@ const ProfilesOverview: React.FC = () => {
       <Helmet>
         <title>Kunststof Kozijnen Profielen - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek onze premium kozijn profielen van Schüco. Van het Living systeem tot het CT70 profiel - kwaliteit en duurzaamheid gegarandeerd." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
       </Helmet>
       
       <Navbar />

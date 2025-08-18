@@ -107,6 +107,7 @@ const Blog: React.FC = () => {
       <Helmet>
         <title>Blog | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Lees onze laatste artikelen over duurzaam wonen, energiebesparing, kunststof kozijnen en meer. Praktische tips en de laatste trends." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
       </Helmet>
       <Navbar />
       <main className="flex-grow pt-24">

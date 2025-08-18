@@ -237,6 +237,7 @@ const Sitemap: React.FC = () => {
       <Helmet>
         <title>Sitemap - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Bekijk de volledige sitemap van Duurzaam Wonen Nederland om snel de gewenste pagina te vinden." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href="https://duurzaamwonen.info/sitemap" />
       </Helmet>
       

@@ -99,6 +99,7 @@ const ColorOptions: React.FC = () => {
       <Helmet>
         <title>Kleuren voor Kunststof Kozijnen | Inspiratie & Advies</title>
         <meta name="description" content="Ontdek alle kleuren en afwerkingsmogelijkheden voor kunststof kozijnen. Van standaardkleuren tot houtlook afwerkingen. Probeer onze interactieve kleurenmodule." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
       </Helmet>
       
       <Navbar />

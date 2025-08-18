@@ -14,6 +14,7 @@ const PrivacyPolicy: React.FC = () => {
       <Helmet>
         <title>Privacybeleid - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Lees ons privacybeleid om te begrijpen hoe we uw persoonlijke gegevens verwerken en beschermen." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href="https://duurzaamwonen.info/privacy-policy" />
       </Helmet>
       

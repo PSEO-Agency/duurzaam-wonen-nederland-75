@@ -25,6 +25,7 @@ const Contact: React.FC = () => {
       <Helmet>
         <title>Contact - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Neem contact op met Duurzaam Wonen Nederland voor vragen over duurzame woningverbetering, kunststof kozijnen en meer." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href="https://duurzaamwonen.info/contact" />
       </Helmet>
       

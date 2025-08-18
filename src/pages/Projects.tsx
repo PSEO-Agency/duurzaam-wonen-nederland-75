@@ -137,6 +137,7 @@ const Projects: React.FC = () => {
       <Helmet>
         <title>Kunststof Kozijnen Projecten - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Bekijk onze recente projecten op het gebied van woningverduurzaming, kozijnen, dakkapellen en meer. Laat u inspireren door ons vakmanschap." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
       </Helmet>
       <Navbar />
       <main className="flex-grow pt-24">

@@ -361,6 +361,7 @@ const Offerte: React.FC = () => {
       <Helmet>
         <title>Kunststof Kozijnen Offerte Aanvragen (Binnen 24 uur) - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Vraag vrijblijvend een offerte aan voor kunststof kozijnen op maat. Vul onze eenvoudige wizard in en ontvang een gepersonaliseerde offerte." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
       </Helmet>
       
       <Navbar />

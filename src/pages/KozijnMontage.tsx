@@ -62,6 +62,7 @@ const KozijnMontage: React.FC = () => {
       <Helmet>
         <title>Kunststof Kozijnen Montage | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Alles over de professionele montage van kunststof kozijnen: het proces, do's & don'ts, en belangrijke overwegingen voor een perfect resultaat." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/montage" />
       </Helmet>
       

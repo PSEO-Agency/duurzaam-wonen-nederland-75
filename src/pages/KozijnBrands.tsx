@@ -101,6 +101,7 @@ const KozijnBrands: React.FC = () => {
       <Helmet>
         <title>Kunststof Kozijnen Merken | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek de topmerken in kunststof kozijnen: Schüco, Veka, Kömmerling en meer. Vergelijk kwaliteit, eigenschappen en prijsindicaties van verschillende fabrikanten." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/merken" />
       </Helmet>
       

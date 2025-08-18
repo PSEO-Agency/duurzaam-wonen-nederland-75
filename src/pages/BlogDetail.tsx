@@ -114,6 +114,7 @@ const BlogDetail: React.FC = () => {
       <Helmet>
         <title>{post.title} | Duurzaam Wonen Nederland</title>
         <meta name="description" content={post.excerpt} />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:image" content={post.featuredImage} />

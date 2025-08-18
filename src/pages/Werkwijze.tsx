@@ -67,6 +67,7 @@ const Werkwijze: React.FC = () => {
       <Helmet>
         <title>Werkwijze Kunststof Kozijnen - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek de werkwijze van Duurzaam Wonen Nederland: van vrijblijvend adviesgesprek tot vakkundige montage en nazorg. Transparant en kwaliteitsgericht." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href="https://duurzaamwonen.info/werkwijze" />
       </Helmet>
       

@@ -36,6 +36,7 @@ const KozijnSizes: React.FC = () => {
       <Helmet>
         <title>Kunststof Kozijnen Afmetingen | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek alle beschikbare afmetingen voor kunststof kozijnen en leer welke formaten het beste zijn voor uw woning." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/afmetingen" />
       </Helmet>
       

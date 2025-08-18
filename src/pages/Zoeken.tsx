@@ -51,6 +51,7 @@ const Zoeken: React.FC = () => {
       <Helmet>
         <title>Zoekresultaten | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Zoek binnen het aanbod van Duurzaam Wonen Nederland naar producten, projecten, blogs en meer." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href={`https://duurzaamwonen.info/zoeken?q=${query}`} />
       </Helmet>
       

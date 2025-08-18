@@ -54,6 +54,7 @@ const KozijnTypes: React.FC = () => {
       <Helmet>
         <title>Type Kunststof Kozijnen | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek de verschillende types kunststof kozijnen: vast, draai-kiep, schuifpui en verhuis kozijnen voor uw woning." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/types" />
       </Helmet>
       

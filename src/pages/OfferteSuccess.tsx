@@ -16,6 +16,7 @@ const OfferteSuccess: React.FC = () => {
           name="description" 
           content="Uw offerte aanvraag is succesvol verzonden. We nemen spoedig contact met u op."
         />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
       </Helmet>
       
       <Navbar />

@@ -104,6 +104,7 @@ const KunststofKozijnen: React.FC = () => {
       <Helmet>
         <title>Kunststof Kozijnen Laten Plaatsen - Duurzaam Wonen Nederland</title>
         <meta name="description" content="Bekijk ons assortiment kunststof kozijnen. Hoogwaardige, energiezuinige en onderhoudsarme kozijnen voor uw woning." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen" />
       </Helmet>
       

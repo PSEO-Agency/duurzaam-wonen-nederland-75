@@ -100,6 +100,7 @@ const KozijnPrices: React.FC = () => {
       <Helmet>
         <title>Kunststof Kozijnen Prijzen | Duurzaam Wonen Nederland</title>
         <meta name="description" content="Ontdek de prijzen van kunststof kozijnen en vergelijk verschillende opties. Vraag een vrijblijvende offerte aan voor de beste prijs." />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href="https://duurzaamwonen.info/kunststof-kozijnen/prijzen" />
       </Helmet>
       

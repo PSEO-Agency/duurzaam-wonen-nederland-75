@@ -117,6 +117,7 @@ const CityServicePageNew: React.FC = () => {
         <Helmet>
           <title>{metaTitle}</title>
           <meta name="description" content={metaDescription} />
+          <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
           <link rel="canonical" href={`https://duurzaamwonen.info/${serviceSlug}/${regionSlug}/${citySlug}`} />
         </Helmet>
         
@@ -364,6 +365,7 @@ const CityServicePageNew: React.FC = () => {
       <Helmet>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
+        <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <link rel="canonical" href={`https://duurzaamwonen.info/${serviceSlug}/${regionSlug}/${citySlug}`} />
       </Helmet>
       
