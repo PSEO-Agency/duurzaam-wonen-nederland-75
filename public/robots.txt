@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://programmaticseo.agency/sitemap.xml
+Sitemap: https://duurzaamwonen.info/sitemap.xml
