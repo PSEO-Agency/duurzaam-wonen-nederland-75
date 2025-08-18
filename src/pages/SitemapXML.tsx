@@ -28,38 +28,32 @@ const SitemapXML: React.FC = () => {
     loadStaticSitemap();
   }, []);
 
-  // Set document title when sitemap is loaded
+  // Set content type to XML and return pure XML
   useEffect(() => {
     if (sitemapXML && !isLoading) {
-      document.title = 'Sitemap XML - Root Location';
+      // Set content type for XML
+      const meta = document.querySelector('meta[http-equiv="Content-Type"]');
+      if (meta) {
+        meta.setAttribute('content', 'application/xml; charset=utf-8');
+      } else {
+        const newMeta = document.createElement('meta');
+        newMeta.setAttribute('http-equiv', 'Content-Type');
+        newMeta.setAttribute('content', 'application/xml; charset=utf-8');
+        document.head.appendChild(newMeta);
+      }
     }
   }, [sitemapXML, isLoading]);
 
+  // Return pure XML without any HTML styling
   if (isLoading) {
-    return (
-      <div style={{ 
-        fontFamily: 'monospace', 
-        whiteSpace: 'pre-wrap',
-        padding: '20px',
-        background: '#f5f5f5'
-      }}>
-        Loading sitemap from root location...
-      </div>
-    );
+    return null; // Don't show loading for XML
   }
 
+  // Return raw XML content
   return (
-    <div style={{ 
-      fontFamily: 'monospace', 
-      whiteSpace: 'pre-wrap',
-      fontSize: '12px',
-      lineHeight: '1.4',
-      padding: '0',
-      margin: '0',
-      background: 'white'
-    }}>
+    <pre style={{ margin: 0, fontFamily: 'monospace' }}>
       {sitemapXML}
-    </div>
+    </pre>
   );
 };
 
