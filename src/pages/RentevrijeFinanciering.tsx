@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Calendar, CheckCircle, InfoIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -11,9 +12,56 @@ import ContactCTA from '@/components/ContactCTA';
 
 const RentevrijeFinanciering: React.FC = () => {
   const navigate = useNavigate();
+  const [loanAmount, setLoanAmount] = useState<number>(5500);
+  const [loanTerm, setLoanTerm] = useState<number>(10);
+  const [isLowIncome, setIsLowIncome] = useState<boolean>(false);
+  const [monthlyPayment, setMonthlyPayment] = useState<number>(0);
+  const [totalCost, setTotalCost] = useState<number>(0);
+  const [interestRate, setInterestRate] = useState<number>(3.7);
 
   const handleOfferteClick = () => {
     navigate('/offerte');
+  };
+
+  // Calculate monthly payment based on inputs
+  useEffect(() => {
+    const calculatePayment = () => {
+      if (loanAmount && loanTerm) {
+        let rate = isLowIncome ? 0 : interestRate / 100;
+        let monthlyRate = rate / 12;
+        let numberOfPayments = loanTerm * 12;
+        
+        let payment;
+        if (isLowIncome) {
+          // No interest calculation
+          payment = loanAmount / numberOfPayments;
+        } else {
+          // Standard loan calculation with interest
+          if (monthlyRate > 0) {
+            payment = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
+                     (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+          } else {
+            payment = loanAmount / numberOfPayments;
+          }
+        }
+        
+        setMonthlyPayment(payment);
+        setTotalCost(payment * numberOfPayments);
+      }
+    };
+
+    calculatePayment();
+  }, [loanAmount, loanTerm, isLowIncome, interestRate]);
+
+  const handleLoanAmountChange = (value: string) => {
+    const numValue = parseFloat(value.replace(/[^\d.]/g, '')) || 0;
+    if (numValue >= 1000 && numValue <= 28000) {
+      setLoanAmount(numValue);
+    } else if (numValue < 1000) {
+      setLoanAmount(1000);
+    } else {
+      setLoanAmount(28000);
+    }
   };
 
   return (
@@ -153,6 +201,8 @@ const RentevrijeFinanciering: React.FC = () => {
                       <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">€</span>
                       <input
                         type="text"
+                        value={loanAmount.toLocaleString('nl-NL')}
+                        onChange={(e) => handleLoanAmountChange(e.target.value)}
                         className="block w-full pl-7 pr-12 py-3 border border-gray-300 rounded-md focus:ring-brand-green focus:border-brand-green"
                         placeholder="5.500"
                       />
@@ -166,34 +216,37 @@ const RentevrijeFinanciering: React.FC = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Selecteer uw gewenste looptijd
                     </label>
-                    <select className="block w-full py-3 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-brand-green focus:border-brand-green">
-                      <option>5 jaar</option>
-                      <option selected>10 jaar</option>
-                      <option>15 jaar</option>
-                      <option>20 jaar</option>
+                    <select 
+                      value={loanTerm}
+                      onChange={(e) => setLoanTerm(parseInt(e.target.value))}
+                      className="block w-full py-3 pl-3 pr-10 border border-gray-300 rounded-md focus:ring-brand-green focus:border-brand-green"
+                    >
+                      <option value="5">5 jaar</option>
+                      <option value="10">10 jaar</option>
+                      <option value="15">15 jaar</option>
+                      <option value="20">20 jaar</option>
                     </select>
                   </div>
                   
                   <div className="pt-4">
-                    <h4 className="font-medium mb-2">Vul uw gegevens in</h4>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Postcode</label>
-                        <input
-                          type="text"
-                          className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-brand-green focus:border-brand-green"
-                          placeholder="1234 AB"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Huisnummer</label>
-                        <input
-                          type="text"
-                          className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:ring-brand-green focus:border-brand-green"
-                          placeholder="123"
-                        />
-                      </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="lowIncome" 
+                        checked={isLowIncome}
+                        onCheckedChange={(checked) => setIsLowIncome(!!checked)}
+                      />
+                      <label 
+                        htmlFor="lowIncome" 
+                        className="text-sm font-medium text-gray-700 cursor-pointer"
+                      >
+                        Mijn verzamelinkomen is onder €60.000 per jaar (rentevrij)
+                      </label>
                     </div>
+                    {isLowIncome && (
+                      <p className="mt-2 text-sm text-brand-green font-medium">
+                        ✓ U komt in aanmerking voor rentevrije financiering!
+                      </p>
+                    )}
                   </div>
                 </div>
                 
@@ -202,16 +255,32 @@ const RentevrijeFinanciering: React.FC = () => {
                   
                   <div className="space-y-4">
                     <div className="flex justify-between pb-2 border-b border-gray-200">
-                      <span className="text-gray-600">Totale kosten</span>
-                      <span className="font-semibold">€ 6.570,00</span>
+                      <span className="text-gray-600">Leenbedrag</span>
+                      <span className="font-semibold">€ {loanAmount.toLocaleString('nl-NL')}</span>
                     </div>
                     <div className="flex justify-between pb-2 border-b border-gray-200">
-                      <span className="text-gray-600">Rente</span>
-                      <span className="font-semibold">3,70%</span>
+                      <span className="text-gray-600">Looptijd</span>
+                      <span className="font-semibold">{loanTerm} jaar</span>
                     </div>
+                    <div className="flex justify-between pb-2 border-b border-gray-200">
+                      <span className="text-gray-600">Totale kosten</span>
+                      <span className="font-semibold">€ {totalCost.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    </div>
+                    {!isLowIncome && (
+                      <div className="flex justify-between pb-2 border-b border-gray-200">
+                        <span className="text-gray-600">Rente</span>
+                        <span className="font-semibold">{interestRate}%</span>
+                      </div>
+                    )}
+                    {isLowIncome && (
+                      <div className="flex justify-between pb-2 border-b border-gray-200">
+                        <span className="text-gray-600">Rente</span>
+                        <span className="font-semibold text-brand-green">0% (Rentevrij!)</span>
+                      </div>
+                    )}
                     <div className="flex justify-between pt-2">
                       <span className="text-lg font-medium">Uw maandbedrag</span>
-                      <span className="text-lg font-bold text-brand-green">€ 54,75</span>
+                      <span className="text-lg font-bold text-brand-green">€ {monthlyPayment.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                   </div>
                   
@@ -220,7 +289,10 @@ const RentevrijeFinanciering: React.FC = () => {
                       Doe een aanvraag
                     </Button>
                     <p className="text-sm text-gray-500 mt-3 text-center">
-                      * Rentepercentage afhankelijk van persoonlijke situatie en creditcheck
+                      {isLowIncome 
+                        ? "* Rentevrije financiering bij verzamelinkomen onder €60.000"
+                        : "* Rentepercentage afhankelijk van persoonlijke situatie en creditcheck"
+                      }
                     </p>
                   </div>
                 </div>
