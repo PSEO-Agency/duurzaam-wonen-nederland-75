@@ -123,7 +123,7 @@ export const ralColors: RALColor[] = [
   { name: 'Grijs blauw', hex: '#26252D', ralCode: 'RAL 5008', category: 'blue', description: 'Gedempte grijs-blauwe kleur.' },
   { name: 'Azuur blauw', hex: '#025669', ralCode: 'RAL 5009', category: 'blue', description: 'Azuurblauwe tint.' },
   { name: 'Gentiaanblauw', hex: '#0E294B', ralCode: 'RAL 5010', category: 'blue', description: 'Diepe gentiaanblauwe kleur.' },
-  { name: 'Staalblauw', hex: '#231A24', ralCode: 'RAL 5011', category: 'blue', popular: true, description: 'Industriële staalblauwe tint voor moderne uitstraling.' },
+  { name: 'Staalblauw', hex: '#1F2A44', ralCode: 'RAL 5011', category: 'blue', popular: true, description: 'Industriële staalblauwe tint voor moderne uitstraling.' },
   { name: 'Lichtblauw', hex: '#3B83BD', ralCode: 'RAL 5012', category: 'blue', description: 'Frisse lichtblauwe kleur.' },
   { name: 'Kobaltblauw', hex: '#1E213D', ralCode: 'RAL 5013', category: 'blue', description: 'Rijke kobaltblauwe tint.' },
   { name: 'Duifblauw', hex: '#606E8C', ralCode: 'RAL 5014', category: 'blue', description: 'Subtiele duifblauwe kleur.' },
@@ -191,7 +191,7 @@ export const ralColors: RALColor[] = [
   { name: 'Basaltgrijs', hex: '#4E5754', ralCode: 'RAL 7012', category: 'grey', description: 'Basaltgrijze tint.' },
   { name: 'Bruingrijs', hex: '#464531', ralCode: 'RAL 7013', category: 'grey', description: 'Bruingrijze kleur.' },
   { name: 'Leigrijs', hex: '#3C3C3C', ralCode: 'RAL 7015', category: 'grey', description: 'Leigrijze tint.' },
-  { name: 'Antracietgrijs', hex: '#293133', ralCode: 'RAL 7016', category: 'grey', popular: true, description: 'Moderne antracietgrijze kleur, zeer populair voor kozijnen.' },
+  { name: 'Antracietgrijs', hex: '#383E42', ralCode: 'RAL 7016', category: 'grey', popular: true, description: 'Moderne antracietgrijze kleur, zeer populair voor kozijnen.' },
   { name: 'Zwartgrijs', hex: '#23282B', ralCode: 'RAL 7021', category: 'grey', description: 'Zwartgrijze tint.' },
   { name: 'Betongrijs', hex: '#4C4A48', ralCode: 'RAL 7023', category: 'grey', description: 'Betongrijze kleur.' },
   { name: 'Grafietgrijs', hex: '#474A51', ralCode: 'RAL 7024', category: 'grey', description: 'Grafietgrijze tint.' },
@@ -237,15 +237,15 @@ export const ralColors: RALColor[] = [
   { name: 'Parels koper', hex: '#763C28', ralCode: 'RAL 8029', category: 'brown', description: 'Parels koperbruine tint.' },
 
   // White RAL colors (9000-9018) - Complete series
-  { name: 'Crèmewit', hex: '#F4F4F4', ralCode: 'RAL 9001', category: 'white', popular: true, description: 'Warme crèmewitte kleur, perfect voor traditionele woningen.' },
+  { name: 'Crèmewit', hex: '#FDF4E3', ralCode: 'RAL 9001', category: 'white', popular: true, description: 'Warme crèmewitte kleur, perfect voor traditionele woningen.' },
   { name: 'Grijswit', hex: '#E7EBDA', ralCode: 'RAL 9002', category: 'white', description: 'Grijswitte tint.' },
   { name: 'Signaallwit', hex: '#F4F4F4', ralCode: 'RAL 9003', category: 'white', description: 'Signaalwitte kleur.' },
-  { name: 'Verkeerswit', hex: '#F4F4F4', ralCode: 'RAL 9016', category: 'white', popular: true, description: 'Zuiver verkeerswit, de meest gekozen kleur voor kozijnen.' },
+  { name: 'Verkeerswit', hex: '#FFFFFF', ralCode: 'RAL 9016', category: 'white', popular: true, description: 'Zuiver verkeerswit, de meest gekozen kleur voor kozijnen.' },
   { name: 'Parels lichtgrijs', hex: '#E4E5E5', ralCode: 'RAL 9018', category: 'white', description: 'Parels lichtgrijze tint.' },
 
   // Black RAL colors (9004-9011) - Complete series
   { name: 'Signaallzwart', hex: '#282828', ralCode: 'RAL 9004', category: 'black', description: 'Signaalzwarte kleur.' },
-  { name: 'Gitzwart', hex: '#0A0A0A', ralCode: 'RAL 9005', category: 'black', popular: true, description: 'Gitzwarte kleur voor een krachtige uitstraling.' },
+  { name: 'Gitzwart', hex: '#1C1C1C', ralCode: 'RAL 9005', category: 'black', popular: true, description: 'Gitzwarte kleur voor een krachtige uitstraling.' },
   { name: 'Aluminiumwit', hex: '#A5A5A5', ralCode: 'RAL 9006', category: 'grey', description: 'Aluminiumwitte tint.' },
   { name: 'Grijsaluminium', hex: '#8F8F8F', ralCode: 'RAL 9007', category: 'grey', description: 'Grijsaluminium kleur.' },
   { name: 'Zuiver wit', hex: '#FFFFFF', ralCode: 'RAL 9010', category: 'white', description: 'Zuiver witte kleur.' },

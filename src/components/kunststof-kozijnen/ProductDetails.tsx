@@ -77,13 +77,6 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
               alt={`${currentProfile.name} doorsnede`}
               className="w-full h-full object-cover"
             />
-            {!selectedColor && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                <div className="text-center text-white p-4">
-                  <p className="text-sm">Selecteer een kleur om preview te zien</p>
-                </div>
-              </div>
-            )}
             {selectedColor && (
               <div className="absolute top-4 left-4 bg-white/90 p-2 rounded-md shadow-sm">
                 <div className="flex items-center gap-2">
