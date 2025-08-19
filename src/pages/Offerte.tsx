@@ -363,9 +363,22 @@ const Offerte: React.FC = () => {
         <meta name="description" content="Vraag vrijblijvend een offerte aan voor kunststof kozijnen op maat. Vul onze eenvoudige wizard in en ontvang een gepersonaliseerde offerte." />
         <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <style>{`
-          /* Hide chat widget on offerte page */
-          div[data-widget-id="680f48b10f7b390172882aea"] {
+          /* Hide LeadConnector chat widget on offerte page */
+          div[data-widget-id="680f48b10f7b390172882aea"],
+          [id*="leadconnector"],
+          [class*="lc-widget"],
+          [class*="chat-widget"],
+          [class*="leadconnector"],
+          iframe[src*="leadconnectorhq.com"],
+          iframe[src*="gohighlevel.com"],
+          div[id*="chat"],
+          div[class*="chat"],
+          #leadConnectorWidget,
+          .leadConnectorWidget {
             display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
           }
         `}</style>
       </Helmet>
