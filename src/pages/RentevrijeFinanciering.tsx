@@ -54,14 +54,25 @@ const RentevrijeFinanciering: React.FC = () => {
   }, [loanAmount, loanTerm, isLowIncome, interestRate]);
 
   const handleLoanAmountChange = (value: string) => {
-    const numValue = parseFloat(value.replace(/[^\d.]/g, '')) || 0;
+    // Remove all non-digits and parse as integer
+    const cleanValue = value.replace(/\D/g, '');
+    const numValue = parseInt(cleanValue) || 0;
+    
+    // Set the loan amount with bounds checking
     if (numValue >= 1000 && numValue <= 28000) {
       setLoanAmount(numValue);
-    } else if (numValue < 1000) {
-      setLoanAmount(1000);
-    } else {
+    } else if (numValue < 1000 && numValue > 0) {
+      setLoanAmount(numValue); // Allow temporary values while typing
+    } else if (numValue === 0) {
+      setLoanAmount(0); // Allow clearing the field
+    } else if (numValue > 28000) {
       setLoanAmount(28000);
     }
+  };
+
+  const formatDisplayValue = (value: number) => {
+    if (value === 0) return '';
+    return value.toLocaleString('nl-NL');
   };
 
   return (
@@ -201,10 +212,16 @@ const RentevrijeFinanciering: React.FC = () => {
                       <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">€</span>
                       <input
                         type="text"
-                        value={loanAmount.toLocaleString('nl-NL')}
+                        value={formatDisplayValue(loanAmount)}
                         onChange={(e) => handleLoanAmountChange(e.target.value)}
+                        onBlur={(e) => {
+                          // Ensure minimum value on blur
+                          if (loanAmount < 1000 && loanAmount > 0) {
+                            setLoanAmount(1000);
+                          }
+                        }}
                         className="block w-full pl-7 pr-12 py-3 border border-gray-300 rounded-md focus:ring-brand-green focus:border-brand-green"
-                        placeholder="5.500"
+                        placeholder="5500"
                       />
                       <div className="absolute inset-y-0 right-0 flex items-center mr-3 text-sm text-gray-400">
                         min €1.000 - max €28.000
