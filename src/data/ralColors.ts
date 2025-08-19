@@ -200,7 +200,7 @@ export const ralColors: RALColor[] = [
   { name: 'Kiezel grijs', hex: '#B8B799', ralCode: 'RAL 7032', category: 'grey', description: 'Kiezelgrijze kleur.' },
   { name: 'Cement grijs', hex: '#7D8471', ralCode: 'RAL 7033', category: 'grey', description: 'Cementgrijze tint.' },
   { name: 'Geel grijs', hex: '#8F8B66', ralCode: 'RAL 7034', category: 'grey', description: 'Geelgrijze kleur.' },
-  { name: 'Licht grijs', hex: '#D7D7D7', ralCode: 'RAL 7035', category: 'grey', popular: true, description: 'Lichtgrijze tint, zeer geschikt voor moderne uitstraling.' },
+  { name: 'Licht grijs', hex: '#C5C7C4', ralCode: 'RAL 7035', category: 'grey', popular: true, description: 'Lichtgrijze tint, zeer geschikt voor moderne uitstraling.' },
   { name: 'Platina grijs', hex: '#7F7679', ralCode: 'RAL 7036', category: 'grey', description: 'Platinagrijze kleur.' },
   { name: 'Stof grijs', hex: '#7D7F7D', ralCode: 'RAL 7037', category: 'grey', description: 'Stofgrijze tint.' },
   { name: 'Agaat grijs', hex: '#B5B8B1', ralCode: 'RAL 7038', category: 'grey', description: 'Agaatgrijze kleur.' },
@@ -240,12 +240,12 @@ export const ralColors: RALColor[] = [
   { name: 'Crèmewit', hex: '#FDF4E3', ralCode: 'RAL 9001', category: 'white', popular: true, description: 'Warme crèmewitte kleur, perfect voor traditionele woningen.' },
   { name: 'Grijswit', hex: '#E7EBDA', ralCode: 'RAL 9002', category: 'white', description: 'Grijswitte tint.' },
   { name: 'Signaallwit', hex: '#F4F4F4', ralCode: 'RAL 9003', category: 'white', description: 'Signaalwitte kleur.' },
-  { name: 'Verkeerswit', hex: '#FFFFFF', ralCode: 'RAL 9016', category: 'white', popular: true, description: 'Zuiver verkeerswit, de meest gekozen kleur voor kozijnen.' },
+  { name: 'Verkeerswit', hex: '#F1F0EA', ralCode: 'RAL 9016', category: 'white', popular: true, description: 'Zuiver verkeerswit, de meest gekozen kleur voor kozijnen.' },
   { name: 'Parels lichtgrijs', hex: '#E4E5E5', ralCode: 'RAL 9018', category: 'white', description: 'Parels lichtgrijze tint.' },
 
   // Black RAL colors (9004-9011) - Complete series
   { name: 'Signaallzwart', hex: '#282828', ralCode: 'RAL 9004', category: 'black', description: 'Signaalzwarte kleur.' },
-  { name: 'Gitzwart', hex: '#1C1C1C', ralCode: 'RAL 9005', category: 'black', popular: true, description: 'Gitzwarte kleur voor een krachtige uitstraling.' },
+  { name: 'Gitzwart', hex: '#0A0A0D', ralCode: 'RAL 9005', category: 'black', popular: true, description: 'Gitzwarte kleur voor een krachtige uitstraling.' },
   { name: 'Aluminiumwit', hex: '#A5A5A5', ralCode: 'RAL 9006', category: 'grey', description: 'Aluminiumwitte tint.' },
   { name: 'Grijsaluminium', hex: '#8F8F8F', ralCode: 'RAL 9007', category: 'grey', description: 'Grijsaluminium kleur.' },
   { name: 'Zuiver wit', hex: '#FFFFFF', ralCode: 'RAL 9010', category: 'white', description: 'Zuiver witte kleur.' },

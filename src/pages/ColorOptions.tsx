@@ -49,14 +49,14 @@ const ColorOptions: React.FC = () => {
   ];
 
   const colorOptions: ColorOption[] = [
-    { name: 'Puur Wit', hex: '#FFFFFF', category: 'standard', popular: true, description: 'De klassieke en meest gekozen kleur, tijdloos en past bij elke woning.', ralCode: 'RAL 9016' },
-    { name: 'Verkeerswit', hex: '#FFFFFF', category: 'standard', description: 'Een heldere witte tint, perfect voor een frisse en moderne uitstraling.', ralCode: 'RAL 9016' },
+    { name: 'Puur Wit', hex: '#F1F0EA', category: 'standard', popular: true, description: 'De klassieke en meest gekozen kleur, tijdloos en past bij elke woning.', ralCode: 'RAL 9016' },
+    { name: 'Verkeerswit', hex: '#F1F0EA', category: 'standard', description: 'Een heldere witte tint, perfect voor een frisse en moderne uitstraling.', ralCode: 'RAL 9016' },
     { name: 'Crème', hex: '#FDF4E3', category: 'standard', popular: true, description: 'Warme, zachte tint die perfect past bij traditionele en landelijke woningen.', ralCode: 'RAL 9001' },
-    { name: 'Lichtgrijs', hex: '#D7D7D7', category: 'standard', description: 'Subtiele grijstint voor een ingetogen uitstraling.', ralCode: 'RAL 7035' },
+    { name: 'Lichtgrijs', hex: '#C5C7C4', category: 'standard', description: 'Subtiele grijstint voor een ingetogen uitstraling.', ralCode: 'RAL 7035' },
     { name: 'Antraciet', hex: '#383E42', category: 'standard', popular: true, description: 'Moderne en stijlvolle donkergrijze kleur, zeer populair bij nieuwbouw en renovaties.', ralCode: 'RAL 7016' },
     { name: 'Monumentengroen', hex: '#31372B', category: 'standard', description: 'Traditionele groentint die goed past bij klassieke woningen en landhuizen.', ralCode: 'RAL 6009' },
     { name: 'Staalblauw', hex: '#1F2A44', category: 'standard', description: 'Krachtige blauwtint met een industriële uitstraling.', ralCode: 'RAL 5011' },
-    { name: 'Zwart', hex: '#1C1C1C', category: 'standard', description: 'Elegante en contrasterende kleur voor een krachtige uitstraling.', ralCode: 'RAL 9005' },
+    { name: 'Zwart', hex: '#0A0A0D', category: 'standard', description: 'Elegante en contrasterende kleur voor een krachtige uitstraling.', ralCode: 'RAL 9005' },
     
     { name: 'Golden Oak', hex: '#C19A6B', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', popular: true, description: 'Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.', ralCode: 'Folie 2178-001' },
     { name: 'Noten', hex: '#654321', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Rijke, donkere houtlook die diepte en karakter aan uw woning toevoegt.', ralCode: 'Folie 2178-007' },
