@@ -92,7 +92,15 @@ const AdvisorPanel: React.FC = () => {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <span className="text-xs">10 jaar garantie</span>
+              <span className="text-xs">10 jaar servicegarantie</span>
+            </li>
+            <li className="flex items-center gap-1.5">
+              <div className="w-4 h-4 rounded-full bg-brand-green flex items-center justify-center flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" className="text-white">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <span className="text-xs">15 jaar productgarantie</span>
             </li>
             <li className="flex items-center gap-1.5">
               <div className="w-4 h-4 rounded-full bg-brand-green flex items-center justify-center flex-shrink-0">

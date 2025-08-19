@@ -77,33 +77,20 @@ const WindowDetailsStep: React.FC<WindowDetailsStepProps> = ({ formData, updateF
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <Label htmlFor="quantity" className="text-base mb-1.5 block">Aantal kozijnen</Label>
-            <Select value={formData.quantity} onValueChange={(value) => updateFormData('quantity', value)}>
-              <SelectTrigger id="quantity" className="border-gray-300">
-                <SelectValue placeholder="Selecteer aantal kozijnen" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="1-3">1-3 kozijnen</SelectItem>
-                <SelectItem value="3-6">3-6 kozijnen</SelectItem>
-                <SelectItem value="6-9">6-9 kozijnen</SelectItem>
-                <SelectItem value="9+">9 of meer kozijnen</SelectItem>
-                <SelectItem value="anders">Anders / Nader te bepalen</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          
-          <div>
-            <Label htmlFor="dimensions" className="text-base mb-1.5 block">Afmetingen (indien bekend)</Label>
-            <Input 
-              id="dimensions" 
-              placeholder="Bijv. 120x150 cm" 
-              className="border-gray-300"
-              value={formData.dimensions}
-              onChange={(e) => updateFormData('dimensions', e.target.value)}
-            />
-          </div>
+        <div>
+          <Label htmlFor="quantity" className="text-base mb-1.5 block">Aantal kozijnen</Label>
+          <Select value={formData.quantity} onValueChange={(value) => updateFormData('quantity', value)}>
+            <SelectTrigger id="quantity" className="border-gray-300">
+              <SelectValue placeholder="Selecteer aantal kozijnen" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="1-3">1-3 kozijnen</SelectItem>
+              <SelectItem value="3-6">3-6 kozijnen</SelectItem>
+              <SelectItem value="6-9">6-9 kozijnen</SelectItem>
+              <SelectItem value="9+">9 of meer kozijnen</SelectItem>
+              <SelectItem value="anders">Anders / Nader te bepalen</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         
         <div>
