@@ -15,7 +15,6 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import CookieConsent from '@/components/CookieConsent';
 import SEOHead from '@/components/SEOHead';
-import ChatWidget from '@/components/ChatWidget';
 
 const Index: React.FC = () => {
   useEffect(() => {
