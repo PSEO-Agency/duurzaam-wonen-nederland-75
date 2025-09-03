@@ -363,9 +363,24 @@ const Offerte: React.FC = () => {
         <meta name="description" content="Vraag vrijblijvend een offerte aan voor kunststof kozijnen op maat. Vul onze eenvoudige wizard in en ontvang een gepersonaliseerde offerte." />
         <meta name="google-site-verification" content="wctWfdTl0t8aKSX4NrFSv-Rhb4YyTREltwTINnU0gXY" />
         <style>{`
-          /* Hide chat widget on offerte page */
-          div[data-widget-id="680f48b10f7b390172882aea"] {
+          /* Hide chat widget on offerte page - comprehensive selectors */
+          div[data-widget-id="680f48b10f7b390172882aea"],
+          [id*="leadconnector"],
+          [class*="lc-"],
+          [class*="leadconnector"],
+          [id*="chat-widget"],
+          [class*="chat-widget"],
+          .leadconnector-widget,
+          #leadconnector-chat-bubble,
+          .ghl-chat-widget,
+          iframe[src*="leadconnector"],
+          iframe[src*="gohighlevel"],
+          div[data-testid*="chat"],
+          div[data-testid*="widget"] {
             display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
           }
         `}</style>
       </Helmet>
