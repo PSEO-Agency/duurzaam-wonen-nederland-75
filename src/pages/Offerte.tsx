@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ArrowRight, CheckCircle, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
