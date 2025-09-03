@@ -87,6 +87,109 @@ const Offerte: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const totalSteps = 5;
   const navigate = useNavigate();
+
+  // Hide chat widget programmatically with debugging
+  useEffect(() => {
+    const hideWidget = () => {
+      console.log('[OFFERTE] Attempting to hide chat widgets...');
+      
+      // More comprehensive selectors
+      const selectors = [
+        'div[data-widget-id="680f48b10f7b390172882aea"]',
+        '[id*="leadconnector"]',
+        '[class*="lc-"]',
+        '[class*="leadconnector"]',
+        '[id*="chat-widget"]',
+        '[class*="chat-widget"]',
+        '.leadconnector-widget',
+        '#leadconnector-chat-bubble',
+        '.ghl-chat-widget',
+        'iframe[src*="leadconnector"]',
+        'iframe[src*="gohighlevel"]',
+        'div[data-testid*="chat"]',
+        'div[data-testid*="widget"]',
+        // More generic selectors
+        '[data-widget]',
+        '[id*="widget"]',
+        '[class*="widget"]',
+        'iframe[title*="chat"]',
+        'iframe[title*="widget"]',
+        // LeadConnector specific
+        '.leadconnector',
+        '#leadconnector',
+        '[data-leadconnector]'
+      ];
+
+      let hiddenCount = 0;
+      selectors.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+          if (element instanceof HTMLElement) {
+            // More aggressive hiding - remove from DOM entirely
+            element.remove();
+            hiddenCount++;
+            console.log(`[OFFERTE] Removed element:`, selector, element);
+          }
+        });
+      });
+
+      // Also check for any iframes that might contain the widget
+      const allIframes = document.querySelectorAll('iframe');
+      allIframes.forEach(iframe => {
+        const src = iframe.src?.toLowerCase() || '';
+        const title = iframe.title?.toLowerCase() || '';
+        if (src.includes('leadconnector') || src.includes('gohighlevel') || 
+            title.includes('chat') || title.includes('widget')) {
+          iframe.remove();
+          hiddenCount++;
+          console.log('[OFFERTE] Removed iframe:', iframe);
+        }
+      });
+
+      console.log(`[OFFERTE] Hidden/removed ${hiddenCount} elements`);
+    };
+
+    // Hide immediately
+    hideWidget();
+
+    // Hide after delays to catch late-loading widgets
+    setTimeout(hideWidget, 1000);
+    setTimeout(hideWidget, 3000);
+    setTimeout(hideWidget, 5000);
+
+    // Set up observer for dynamically added widgets
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach(node => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              const element = node as Element;
+              // Check if the added element matches our widget patterns
+              const isWidget = element.matches?.('[data-widget], [id*="leadconnector"], [class*="leadconnector"], iframe[src*="leadconnector"]') ||
+                             element.querySelector?.('[data-widget], [id*="leadconnector"], [class*="leadconnector"], iframe[src*="leadconnector"]');
+              
+              if (isWidget) {
+                console.log('[OFFERTE] Widget detected and removing:', element);
+                element.remove();
+              }
+            }
+          });
+        }
+      });
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    // Log all current elements for debugging
+    console.log('[OFFERTE] Current page elements with "widget" or "leadconnector":', 
+      document.querySelectorAll('*[id*="widget"], *[class*="widget"], *[id*="leadconnector"], *[class*="leadconnector"], iframe'));
+
+    // Cleanup
+    return () => observer.disconnect();
+  }, []);
   const updateFormData = (field: string, value: any) => {
     setFormData(prev => ({
       ...prev,
