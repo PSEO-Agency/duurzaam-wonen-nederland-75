@@ -26,21 +26,6 @@
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- Chat widget - CONDITIONAL: Only load if NOT on offerte page -->
-    <script>
-      // Only load chat widget if we're NOT on the offerte page
-      if (!window.location.pathname.includes('/offerte')) {
-        const script = document.createElement('script');
-        script.src = 'https://widgets.leadconnectorhq.com/loader.js';
-        script.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
-        script.setAttribute('data-widget-id', '680f48b10f7b390172882aea');
-        script.defer = true;
-        script.async = true;
-        document.head.appendChild(script);
-        console.log('[CHAT WIDGET] Loaded on page:', window.location.pathname);
-      } else {
-        console.log('[CHAT WIDGET] Blocked on offerte page');
-      }
-    </script>
+    <!-- Chat widget removed from global load - will be added per page as needed -->
   </body>
 </html>
