@@ -1,0 +1,116 @@
+import type { Context } from "https://edge.netlify.com";
+
+// Static pages data
+const staticPages = [
+  { loc: '/', changefreq: 'weekly', priority: 1.0 },
+  { loc: '/kunststof-kozijnen', changefreq: 'weekly', priority: 0.9 },
+  { loc: '/aluminium-kozijnen', changefreq: 'weekly', priority: 0.9 },
+  { loc: '/kunststof-schuifpuien', changefreq: 'weekly', priority: 0.9 },
+  { loc: '/rentevrije-financiering', changefreq: 'monthly', priority: 0.8 },
+  { loc: '/over-ons', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/contact', changefreq: 'monthly', priority: 0.8 },
+  { loc: '/offerte', changefreq: 'weekly', priority: 0.9 },
+  { loc: '/werkwijze', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/vacatures', changefreq: 'weekly', priority: 0.6 },
+  { loc: '/werkgebied', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/privacy-policy', changefreq: 'yearly', priority: 0.3 },
+  { loc: '/sitemap', changefreq: 'monthly', priority: 0.4 },
+  { loc: '/zoeken', changefreq: 'weekly', priority: 0.5 },
+  { loc: '/oplossingen', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/projecten', changefreq: 'weekly', priority: 0.8 },
+  { loc: '/kunststof-kozijnen/kleuren', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/kunststof-kozijnen/types', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/kunststof-kozijnen/types/draaikiepraam', changefreq: 'monthly', priority: 0.6 },
+  { loc: '/kunststof-kozijnen/afmetingen', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/kunststof-kozijnen/afmetingen/100x100', changefreq: 'monthly', priority: 0.6 },
+  { loc: '/kunststof-kozijnen/montage', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/kunststof-kozijnen/prijzen', changefreq: 'weekly', priority: 0.8 },
+  { loc: '/kunststof-kozijnen/prijzen/afbetaling', changefreq: 'monthly', priority: 0.6 },
+  { loc: '/kunststof-kozijnen/prijzen/subsidie', changefreq: 'monthly', priority: 0.6 },
+  { loc: '/kunststof-kozijnen/merken', changefreq: 'monthly', priority: 0.6 },
+  { loc: '/kunststof-kozijnen/schuco', changefreq: 'monthly', priority: 0.6 },
+  { loc: '/kunststof-kozijnen/profielen', changefreq: 'monthly', priority: 0.6 },
+  { loc: '/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel', changefreq: 'monthly', priority: 0.5 },
+  { loc: '/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel', changefreq: 'monthly', priority: 0.5 },
+  { loc: '/vacatures/kunststof-kozijnen-monteur', changefreq: 'weekly', priority: 0.6 },
+  { loc: '/vacatures/commercieel-medewerker', changefreq: 'weekly', priority: 0.6 },
+  { loc: '/over-ons/team', changefreq: 'monthly', priority: 0.5 },
+  { loc: '/over-ons/missie', changefreq: 'yearly', priority: 0.5 },
+  { loc: '/over-ons/duurzaamheid', changefreq: 'yearly', priority: 0.5 },
+  { loc: '/over-ons/vacatures', changefreq: 'weekly', priority: 0.5 },
+  { loc: '/gevelbekleding', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/hr-beglazing', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/dakkapel', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/kunststof-deuren', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/raamdecoratie', changefreq: 'monthly', priority: 0.7 }
+];
+
+// Add hundreds of city/region pages to avoid duplicates
+const generateCityPages = () => {
+  const cities = [
+    'amsterdam', 'rotterdam', 'den-haag', 'utrecht', 'eindhoven', 'tilburg', 
+    'groningen', 'almere', 'breda', 'nijmegen', 'enschede', 'haarlem',
+    'arnhem', 'zaanstad', 'amersfoort', 'apeldoorn', 'zwolle', 'ede',
+    'leeuwarden', 'leiden', 'dordrecht', 'zoetermeer', 'maastricht',
+    'alphen-aan-den-rijn', 'emmen', 'deventer', 'delft', 'venlo',
+    'westland', 'alkmaar', 'helmond', 'leidschendam-voorburg'
+  ];
+  
+  const services = [
+    'kunststof-kozijnen', 'aluminium-kozijnen', 'kunststof-schuifpuien',
+    'gevelbekleding', 'hr-beglazing', 'dakkapel', 'kunststof-deuren'
+  ];
+  
+  const pages = [];
+  
+  for (const city of cities) {
+    for (const service of services) {
+      pages.push({
+        loc: `/${service}/${city}`,
+        changefreq: 'monthly' as const,
+        priority: 0.6
+      });
+    }
+  }
+  
+  return pages;
+};
+
+function generateSitemapXML(baseUrl: string = 'https://duurzaamwonen.info'): string {
+  const currentDate = new Date().toISOString().split('T')[0];
+  const allPages = [...staticPages, ...generateCityPages()];
+  
+  // Remove duplicates based on loc
+  const uniquePages = allPages.filter((page, index, self) => 
+    index === self.findIndex(p => p.loc === page.loc)
+  );
+  
+  const xmlUrls = uniquePages.map(page => {
+    return `    <url>
+      <loc>${baseUrl}${page.loc}</loc>
+      <lastmod>${currentDate}</lastmod>
+      <changefreq>${page.changefreq}</changefreq>
+      <priority>${page.priority.toFixed(1)}</priority>
+    </url>`;
+  }).join('\n');
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${xmlUrls}
+</urlset>`;
+}
+
+export default async (request: Request, context: Context) => {
+  const sitemapXML = generateSitemapXML();
+  
+  return new Response(sitemapXML, {
+    headers: {
+      'Content-Type': 'application/xml',
+      'Cache-Control': 'public, max-age=3600'
+    }
+  });
+};
+
+export const config = {
+  path: "/sitemap.xml"
+};
