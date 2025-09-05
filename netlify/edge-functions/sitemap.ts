@@ -57,11 +57,19 @@ export default async (req: Request, context: Context) => {
     ];
 
     // Get dynamic content from database
-    const [productsResult, projectsResult, citiesResult, cityServicesResult] = await Promise.all([
+    const [productsResult, projectsResult, citiesResult, cityServicesResult, allCombinationsResult, regionsResult, neighborhoodsResult] = await Promise.all([
       supabase.from('products').select('slug').eq('is_active', true),
       supabase.from('projects').select('slug').eq('is_active', true),
       supabase.from('cities').select('slug'),
-      supabase.from('city_services').select('city_id, service_id, cities(slug), services(slug)').eq('is_active', true)
+      supabase.from('city_services').select('city_id, service_id, cities(slug), services(slug)').eq('is_active', true),
+      supabase.from('services').select('slug').eq('is_active', true).then(services => 
+        supabase.from('cities').select('slug').then(cities => ({
+          services: services.data,
+          cities: cities.data
+        }))
+      ),
+      supabase.from('regions').select('slug'),
+      supabase.from('neighborhoods').select('slug, cities(slug)')
     ]);
 
     let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -107,7 +115,7 @@ export default async (req: Request, context: Context) => {
       });
     }
 
-    // Add city service pages
+    // Add city service pages (active combinations)
     if (cityServicesResult.data) {
       cityServicesResult.data.forEach(cityService => {
         if (cityService.cities?.slug && cityService.services?.slug) {
@@ -121,6 +129,109 @@ export default async (req: Request, context: Context) => {
         }
       });
     }
+
+    // Add ALL possible service + city combinations (for complete coverage)
+    if (allCombinationsResult.services && allCombinationsResult.cities) {
+      allCombinationsResult.services.forEach(service => {
+        allCombinationsResult.cities.forEach(city => {
+          sitemap += `
+  <url>
+    <loc>${baseUrl}/${service.slug}/${city.slug}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>`;
+        });
+      });
+    }
+
+    // Add blog posts (from static data)
+    const blogSlugs = [
+      'stappenplan-oude-kozijnen-naar-duurzame-kunststof-kozijnen',
+      'voordelen-dakkapel-meer-ruimte-licht-huis', 
+      'verschillende-typen-kunststof-kozijnen-vergeleken',
+      '5-manieren-woning-verduurzamen-2023',
+      'interieurtrends-2023-combineren-kunststof-kozijnen',
+      'schuifpuien-kiezen-complete-gids',
+      'kunststof-kozijnen-kleuren-welke-past-bij-uw-woning',
+      'wat-kost-dakkapel-prijsoverzicht-2023',
+      'energie-efficiënte-kozijnen-besparen',
+      'reparatie-onderhoud-kunststof-kozijnen',
+      'beveiligde-kozijnen-deuren-inbraakpreventie',
+      'geluidsisolatie-kunststof-kozijnen',
+      'subsidies-kozijnenvervanging-2023',
+      'geschiedenis-kunststof-kozijnen-nederland',
+      'voordelen-nachthok-dakkapel'
+    ];
+
+    blogSlugs.forEach(slug => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/blog/${slug}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>`;
+    });
+
+    // Add blog category pages
+    sitemap += `
+  <url>
+    <loc>${baseUrl}/blog</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
+
+    // Add regions pages
+    if (regionsResult.data) {
+      regionsResult.data.forEach(region => {
+        sitemap += `
+  <url>
+    <loc>${baseUrl}/werkgebied/${region.slug}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>`;
+      });
+    }
+
+    // Add neighborhoods
+    if (neighborhoodsResult.data) {
+      neighborhoodsResult.data.forEach(neighborhood => {
+        if (neighborhood.cities?.slug) {
+          sitemap += `
+  <url>
+    <loc>${baseUrl}/werkgebied/${neighborhood.cities.slug}/${neighborhood.slug}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>`;
+        }
+      });
+    }
+
+    // Add color detail pages
+    const ralColors = [
+      '9001', '9002', '9003', '9005', '9006', '9007', '9010', '9011', '9016', '9017', '9018',
+      '7001', '7006', '7009', '7011', '7012', '7013', '7015', '7016', '7021', '7022', '7024',
+      '7030', '7031', '7032', '7033', '7034', '7035', '7036', '7037', '7038', '7039', '7040',
+      '6005', '6009', '6011', '6019', '6020', '6021', '6027', '6028', '6029', '6034',
+      '5002', '5003', '5005', '5007', '5008', '5009', '5011', '5012', '5013', '5014', '5015',
+      '3000', '3001', '3002', '3003', '3004', '3005', '3007', '3009', '3011', '3012', '3013',
+      '2000', '2001', '2002', '2003', '2004', '2008', '2009', '2010', '2011', '2012',
+      '1000', '1001', '1002', '1003', '1004', '1005', '1006', '1007', '1011', '1012', '1013'
+    ];
+
+    ralColors.forEach(color => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/kunststof-kozijnen/kleuren/ral-${color}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>`;
+    });
 
     sitemap += `
 </urlset>`;
