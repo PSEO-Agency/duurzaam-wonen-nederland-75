@@ -1,11 +1,29 @@
 import type { Context } from "https://edge.netlify.com";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.7.1';
 
 export default async (req: Request, context: Context) => {
+  const supabaseUrl = 'https://izfiqwptfuvoswxocujw.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml6Zmlxd3B0ZnV2b3N3eG9jdWp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYwMDIyNzEsImV4cCI6MjA2MTU3ODI3MX0.zEWKXIangrt3Wlpsr_aPQ8VQ40LEeMo-U1PCtM82cLw';
+  
+  const supabase = createClient(supabaseUrl, supabaseKey);
+  
   const baseUrl = 'https://duurzaamwonen.info';
   const currentDate = new Date().toISOString();
   
   try {
-    // Static pages
+    // Fetch dynamic content from database
+    const [productsResult, projectsResult, citiesResult, cityServicesResult] = await Promise.all([
+      supabase.from('products').select('slug, updated_at').eq('is_active', true),
+      supabase.from('projects').select('slug, updated_at').eq('is_active', true),
+      supabase.from('cities').select('slug, updated_at'),
+      supabase.from('city_services').select(`
+        cities!inner(slug),
+        services!inner(slug),
+        updated_at
+      `).eq('is_active', true)
+    ]);
+
+    // Static pages with their actual update times
     const staticPages = [
       { url: '', priority: '1.0', changefreq: 'weekly' },
       { url: '/kunststof-kozijnen', priority: '0.9', changefreq: 'weekly' },
@@ -49,20 +67,11 @@ export default async (req: Request, context: Context) => {
       { url: '/raamdecoratie', priority: '0.7', changefreq: 'monthly' }
     ];
 
-    // Generate city/service pages
-    const cities = [
-      'amsterdam', 'rotterdam', 'den-haag', 'utrecht', 'eindhoven', 'tilburg', 
-      'groningen', 'almere', 'breda', 'nijmegen', 'enschede', 'haarlem',
-      'arnhem', 'zaanstad', 'amersfoort', 'apeldoorn', 'zwolle', 'ede',
-      'leeuwarden', 'leiden', 'dordrecht', 'zoetermeer', 'maastricht',
-      'alphen-aan-den-rijn', 'emmen', 'deventer', 'delft', 'venlo',
-      'westland', 'alkmaar', 'helmond', 'leidschendam-voorburg'
-    ];
-    
-    const services = [
-      'kunststof-kozijnen', 'aluminium-kozijnen', 'kunststof-schuifpuien',
-      'gevelbekleding', 'hr-beglazing', 'dakkapel', 'kunststof-deuren'
-    ];
+    // Extract data from database results
+    const products = productsResult.data || [];
+    const projects = projectsResult.data || [];
+    const cities = citiesResult.data || [];
+    const cityServices = cityServicesResult.data || [];
 
     // Build sitemap XML
     let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -82,18 +91,43 @@ export default async (req: Request, context: Context) => {
   </url>`;
     });
 
-    // Add city/service combination pages
-    for (const city of cities) {
-      for (const service of services) {
+    // Add dynamic product pages
+    products.forEach(product => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/${product.slug}</loc>
+    <lastmod>${product.updated_at}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>`;
+    });
+
+    // Add dynamic project pages
+    projects.forEach(project => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/projecten/${project.slug}</loc>
+    <lastmod>${project.updated_at}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
+    });
+
+    // Add dynamic city-service combination pages
+    cityServices.forEach(cityService => {
+      const citySlug = cityService.cities?.slug;
+      const serviceSlug = cityService.services?.slug;
+      
+      if (citySlug && serviceSlug) {
         sitemap += `
   <url>
-    <loc>${baseUrl}/${service}/${city}</loc>
-    <lastmod>${currentDate}</lastmod>
+    <loc>${baseUrl}/${serviceSlug}/${citySlug}</loc>
+    <lastmod>${cityService.updated_at}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>`;
       }
-    }
+    });
 
     sitemap += `
 </urlset>`;
