@@ -207,13 +207,12 @@
   to = "/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel"
   status = 301
 
-# Robots.txt is served properly
-[[redirects]]
-  from = "/robots.txt"
-  to = "/robots.txt"
-  status = 200
-  force = true
+# Edge functions configuration
+[[edge_functions]]
+  function = "sitemap"
+  path = "/sitemap.xml"
 
+# Robots.txt is served properly
 [[redirects]]
   from = "/robots.txt"
   to = "/robots.txt"
