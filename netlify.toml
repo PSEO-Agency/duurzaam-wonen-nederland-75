@@ -207,14 +207,28 @@
   to = "/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel"
   status = 301
 
+# Ensure sitemap.xml and robots.txt are served properly
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/robots.txt"
+  to = "/robots.txt"
+  status = 200
+  force = true
+
 # Catch-all rule for any other .php files
 [[redirects]]
   from = "/*.php"
   to = "/"
   status = 301
 
-# SPA fallback
+# SPA fallback (exclude static files)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  conditions = {Role = ["!static"]}
