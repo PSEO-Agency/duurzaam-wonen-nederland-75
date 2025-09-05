@@ -17,9 +17,9 @@ export default async (req: Request, context: Context) => {
       supabase.from('projects').select('slug, updated_at').eq('is_active', true),
       supabase.from('cities').select('slug, updated_at'),
       supabase.from('city_services').select(`
-        cities!inner(slug),
-        services!inner(slug),
-        updated_at
+        updated_at,
+        cities(slug),
+        services(slug)
       `).eq('is_active', true)
     ]);
 
