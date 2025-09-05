@@ -1,114 +1,132 @@
 import type { Context } from "https://edge.netlify.com";
 
-// Static pages data
-const staticPages = [
-  { loc: '/', changefreq: 'weekly', priority: 1.0 },
-  { loc: '/kunststof-kozijnen', changefreq: 'weekly', priority: 0.9 },
-  { loc: '/aluminium-kozijnen', changefreq: 'weekly', priority: 0.9 },
-  { loc: '/kunststof-schuifpuien', changefreq: 'weekly', priority: 0.9 },
-  { loc: '/rentevrije-financiering', changefreq: 'monthly', priority: 0.8 },
-  { loc: '/over-ons', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/contact', changefreq: 'monthly', priority: 0.8 },
-  { loc: '/offerte', changefreq: 'weekly', priority: 0.9 },
-  { loc: '/werkwijze', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/vacatures', changefreq: 'weekly', priority: 0.6 },
-  { loc: '/werkgebied', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/privacy-policy', changefreq: 'yearly', priority: 0.3 },
-  { loc: '/sitemap', changefreq: 'monthly', priority: 0.4 },
-  { loc: '/zoeken', changefreq: 'weekly', priority: 0.5 },
-  { loc: '/oplossingen', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/projecten', changefreq: 'weekly', priority: 0.8 },
-  { loc: '/kunststof-kozijnen/kleuren', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/kunststof-kozijnen/types', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/kunststof-kozijnen/types/draaikiepraam', changefreq: 'monthly', priority: 0.6 },
-  { loc: '/kunststof-kozijnen/afmetingen', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/kunststof-kozijnen/afmetingen/100x100', changefreq: 'monthly', priority: 0.6 },
-  { loc: '/kunststof-kozijnen/montage', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/kunststof-kozijnen/prijzen', changefreq: 'weekly', priority: 0.8 },
-  { loc: '/kunststof-kozijnen/prijzen/afbetaling', changefreq: 'monthly', priority: 0.6 },
-  { loc: '/kunststof-kozijnen/prijzen/subsidie', changefreq: 'monthly', priority: 0.6 },
-  { loc: '/kunststof-kozijnen/merken', changefreq: 'monthly', priority: 0.6 },
-  { loc: '/kunststof-kozijnen/schuco', changefreq: 'monthly', priority: 0.6 },
-  { loc: '/kunststof-kozijnen/profielen', changefreq: 'monthly', priority: 0.6 },
-  { loc: '/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel', changefreq: 'monthly', priority: 0.5 },
-  { loc: '/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel', changefreq: 'monthly', priority: 0.5 },
-  { loc: '/vacatures/kunststof-kozijnen-monteur', changefreq: 'weekly', priority: 0.6 },
-  { loc: '/vacatures/commercieel-medewerker', changefreq: 'weekly', priority: 0.6 },
-  { loc: '/over-ons/team', changefreq: 'monthly', priority: 0.5 },
-  { loc: '/over-ons/missie', changefreq: 'yearly', priority: 0.5 },
-  { loc: '/over-ons/duurzaamheid', changefreq: 'yearly', priority: 0.5 },
-  { loc: '/over-ons/vacatures', changefreq: 'weekly', priority: 0.5 },
-  { loc: '/gevelbekleding', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/hr-beglazing', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/dakkapel', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/kunststof-deuren', changefreq: 'monthly', priority: 0.7 },
-  { loc: '/raamdecoratie', changefreq: 'monthly', priority: 0.7 }
-];
+export default async (req: Request, context: Context) => {
+  const baseUrl = 'https://duurzaamwonen.info';
+  const currentDate = new Date().toISOString();
+  
+  try {
+    // Static pages
+    const staticPages = [
+      { url: '', priority: '1.0', changefreq: 'weekly' },
+      { url: '/kunststof-kozijnen', priority: '0.9', changefreq: 'weekly' },
+      { url: '/aluminium-kozijnen', priority: '0.9', changefreq: 'weekly' },
+      { url: '/kunststof-schuifpuien', priority: '0.9', changefreq: 'weekly' },
+      { url: '/rentevrije-financiering', priority: '0.8', changefreq: 'monthly' },
+      { url: '/over-ons', priority: '0.7', changefreq: 'monthly' },
+      { url: '/contact', priority: '0.8', changefreq: 'monthly' },
+      { url: '/offerte', priority: '0.9', changefreq: 'weekly' },
+      { url: '/werkwijze', priority: '0.7', changefreq: 'monthly' },
+      { url: '/vacatures', priority: '0.6', changefreq: 'weekly' },
+      { url: '/werkgebied', priority: '0.7', changefreq: 'monthly' },
+      { url: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
+      { url: '/zoeken', priority: '0.5', changefreq: 'weekly' },
+      { url: '/oplossingen', priority: '0.7', changefreq: 'monthly' },
+      { url: '/projecten', priority: '0.8', changefreq: 'weekly' },
+      { url: '/kunststof-kozijnen/kleuren', priority: '0.7', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/types', priority: '0.7', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/types/draaikiepraam', priority: '0.6', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/afmetingen', priority: '0.7', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/afmetingen/100x100', priority: '0.6', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/montage', priority: '0.7', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/prijzen', priority: '0.8', changefreq: 'weekly' },
+      { url: '/kunststof-kozijnen/prijzen/afbetaling', priority: '0.6', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/prijzen/subsidie', priority: '0.6', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/merken', priority: '0.6', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/schuco', priority: '0.6', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/profielen', priority: '0.6', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/profielen/schuco-living-kozijnprofiel', priority: '0.5', changefreq: 'monthly' },
+      { url: '/kunststof-kozijnen/profielen/schuco-ct70-kozijnprofiel', priority: '0.5', changefreq: 'monthly' },
+      { url: '/vacatures/kunststof-kozijnen-monteur', priority: '0.6', changefreq: 'weekly' },
+      { url: '/vacatures/commercieel-medewerker', priority: '0.6', changefreq: 'weekly' },
+      { url: '/over-ons/team', priority: '0.5', changefreq: 'monthly' },
+      { url: '/over-ons/missie', priority: '0.5', changefreq: 'yearly' },
+      { url: '/over-ons/duurzaamheid', priority: '0.5', changefreq: 'yearly' },
+      { url: '/over-ons/vacatures', priority: '0.5', changefreq: 'weekly' },
+      { url: '/gevelbekleding', priority: '0.7', changefreq: 'monthly' },
+      { url: '/hr-beglazing', priority: '0.7', changefreq: 'monthly' },
+      { url: '/dakkapel', priority: '0.7', changefreq: 'monthly' },
+      { url: '/kunststof-deuren', priority: '0.7', changefreq: 'monthly' },
+      { url: '/raamdecoratie', priority: '0.7', changefreq: 'monthly' }
+    ];
 
-// Add hundreds of city/region pages to avoid duplicates
-const generateCityPages = () => {
-  const cities = [
-    'amsterdam', 'rotterdam', 'den-haag', 'utrecht', 'eindhoven', 'tilburg', 
-    'groningen', 'almere', 'breda', 'nijmegen', 'enschede', 'haarlem',
-    'arnhem', 'zaanstad', 'amersfoort', 'apeldoorn', 'zwolle', 'ede',
-    'leeuwarden', 'leiden', 'dordrecht', 'zoetermeer', 'maastricht',
-    'alphen-aan-den-rijn', 'emmen', 'deventer', 'delft', 'venlo',
-    'westland', 'alkmaar', 'helmond', 'leidschendam-voorburg'
-  ];
-  
-  const services = [
-    'kunststof-kozijnen', 'aluminium-kozijnen', 'kunststof-schuifpuien',
-    'gevelbekleding', 'hr-beglazing', 'dakkapel', 'kunststof-deuren'
-  ];
-  
-  const pages = [];
-  
-  for (const city of cities) {
-    for (const service of services) {
-      pages.push({
-        loc: `/${service}/${city}`,
-        changefreq: 'monthly' as const,
-        priority: 0.6
-      });
+    // Generate city/service pages
+    const cities = [
+      'amsterdam', 'rotterdam', 'den-haag', 'utrecht', 'eindhoven', 'tilburg', 
+      'groningen', 'almere', 'breda', 'nijmegen', 'enschede', 'haarlem',
+      'arnhem', 'zaanstad', 'amersfoort', 'apeldoorn', 'zwolle', 'ede',
+      'leeuwarden', 'leiden', 'dordrecht', 'zoetermeer', 'maastricht',
+      'alphen-aan-den-rijn', 'emmen', 'deventer', 'delft', 'venlo',
+      'westland', 'alkmaar', 'helmond', 'leidschendam-voorburg'
+    ];
+    
+    const services = [
+      'kunststof-kozijnen', 'aluminium-kozijnen', 'kunststof-schuifpuien',
+      'gevelbekleding', 'hr-beglazing', 'dakkapel', 'kunststof-deuren'
+    ];
+
+    // Build sitemap XML
+    let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">`;
+
+    // Add static pages
+    staticPages.forEach(page => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}${page.url}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`;
+    });
+
+    // Add city/service combination pages
+    for (const city of cities) {
+      for (const service of services) {
+        sitemap += `
+  <url>
+    <loc>${baseUrl}/${service}/${city}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>`;
+      }
     }
-  }
-  
-  return pages;
-};
 
-function generateSitemapXML(baseUrl: string = 'https://duurzaamwonen.info'): string {
-  const currentDate = new Date().toISOString().split('T')[0];
-  const allPages = [...staticPages, ...generateCityPages()];
-  
-  // Remove duplicates based on loc
-  const uniquePages = allPages.filter((page, index, self) => 
-    index === self.findIndex(p => p.loc === page.loc)
-  );
-  
-  const xmlUrls = uniquePages.map(page => {
-    return `    <url>
-      <loc>${baseUrl}${page.loc}</loc>
-      <lastmod>${currentDate}</lastmod>
-      <changefreq>${page.changefreq}</changefreq>
-      <priority>${page.priority.toFixed(1)}</priority>
-    </url>`;
-  }).join('\n');
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${xmlUrls}
+    sitemap += `
 </urlset>`;
-}
 
-export default async (request: Request, context: Context) => {
-  const sitemapXML = generateSitemapXML();
-  
-  return new Response(sitemapXML, {
-    headers: {
-      'Content-Type': 'application/xml',
-      'Cache-Control': 'public, max-age=3600'
-    }
-  });
+    return new Response(sitemap, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600, s-maxage=3600'
+      },
+    });
+
+  } catch (error) {
+    console.error('Error generating sitemap:', error);
+    
+    // Fallback minimal sitemap
+    const fallbackSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${baseUrl}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`;
+
+    return new Response(fallbackSitemap, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+      },
+    });
+  }
 };
 
 export const config = {

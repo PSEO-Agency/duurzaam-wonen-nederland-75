@@ -1,3 +1,4 @@
+# Allow all bots by default
 User-agent: *
 Allow: /
 
@@ -6,8 +7,7 @@ User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
 
-# Disallow admin and private areas
-User-agent: *
+# Disallow admin and private areas for all bots
 Disallow: /admin/
 Disallow: /api/
 Disallow: /_redirects
@@ -15,13 +15,12 @@ Disallow: /netlify.toml
 Disallow: /vercel.json
 
 # Allow important SEO files
-User-agent: *
 Allow: /sitemap.xml
 Allow: /robots.txt
 
-# Sitemap location
-Sitemap: https://duurzaamwonen.info/sitemap.xml
-
-# General crawl delay for other bots
+# General crawl delay for other bots (not Googlebot)
 User-agent: *
 Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://duurzaamwonen.info/sitemap.xml
