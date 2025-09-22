@@ -28,7 +28,7 @@ const Oplossingen: React.FC = () => {
         <section 
           className="relative min-h-[60vh] flex items-center"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/lovable-uploads/c5500638-e554-4499-8490-7c52a4ec2a55.png")`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/lovable-uploads/hero-background-new.jpg")`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}

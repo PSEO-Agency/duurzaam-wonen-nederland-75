@@ -29,7 +29,7 @@ const SubpageHero: React.FC<SubpageHeroProps> = ({
     <section 
       className="relative min-h-[70vh] pt-20 flex items-center"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${imageUrl}")`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/hero-background-new.jpg")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}

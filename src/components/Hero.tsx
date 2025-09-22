@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
       id="home" 
       className="relative min-h-screen pt-20 flex items-center" 
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${heroImageUrl}")`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/hero-background-new.jpg")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         transition: 'opacity 0.3s ease-in-out',

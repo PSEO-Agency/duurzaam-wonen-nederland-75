@@ -7,7 +7,7 @@ import AnimatedSection from '../AnimatedSection';
 const RaamdecoratieHero: React.FC = () => {
   return (
     <section className="relative min-h-screen pt-16 sm:pt-20 flex items-center" style={{
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/8db39c70-870c-4ac1-93f1-0c5fd8a46dd0.png")`,
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/hero-background-new.jpg")`,
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }}>

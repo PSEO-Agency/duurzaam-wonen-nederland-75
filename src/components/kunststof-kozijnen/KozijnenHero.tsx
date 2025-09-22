@@ -10,7 +10,7 @@ const KozijnenHero: React.FC = () => {
     <section 
       className="relative min-h-screen pt-16 sm:pt-20 flex items-center"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/f45432a2-b79e-4472-b5b9-daaf325d7017.png")`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/lovable-uploads/hero-background-new.jpg")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
