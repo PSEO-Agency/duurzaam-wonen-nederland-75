@@ -209,6 +209,10 @@
 
 # Edge functions configuration
 [[edge_functions]]
+  function = "seo"
+  path = "/*"
+
+[[edge_functions]]
   function = "sitemap"
   path = "/sitemap.xml"
 
