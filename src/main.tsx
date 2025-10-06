@@ -25,3 +25,8 @@ if (import.meta.env.PROD) {
 } else {
   createRoot(root).render(app);
 }
+
+// Signal to Prerender.io that initial load is complete
+if (typeof window !== 'undefined') {
+  window.prerenderReady = true;
+}

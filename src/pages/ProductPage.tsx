@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProducts';
 import { createServicePageFromProduct } from '@/utils/createServicePageFromProduct';
@@ -18,6 +18,19 @@ const ProductPage: React.FC = () => {
   }
   
   const { data: product, isLoading, error } = useProduct(slug);
+
+  // Set prerenderReady to false while loading data, then true when complete
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.prerenderReady = false;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !isLoading) {
+      window.prerenderReady = true;
+    }
+  }, [isLoading]);
 
   // Show loading state
   if (isLoading) {
