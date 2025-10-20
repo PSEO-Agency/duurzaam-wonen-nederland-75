@@ -175,9 +175,22 @@ const Offerte: React.FC = () => {
   // Updated to send data to N8N webhook as a backup
   const sendFormData = async (data: OfferteFormData) => {
     try {
+      // Map window type IDs to their full labels
+      const windowTypeLabels: Record<string, string> = {
+        'kunststof': 'Kunststof kozijnen',
+        'schuifpui': 'Schuifpui',
+        'tuindeuren': 'Tuindeuren',
+        'deur': 'Voor/Achterdeur',
+        'anders': 'Anders / Nader te bepalen'
+      };
+      
       const params = new URLSearchParams();
       for (const [key, value] of Object.entries(data)) {
-        if (typeof value === 'object') {
+        if (key === 'windowTypes' && Array.isArray(value)) {
+          // Map window types to full labels
+          const labels = value.map(id => windowTypeLabels[id] || id).join(", ");
+          params.append(key, labels);
+        } else if (typeof value === 'object') {
           params.append(key, JSON.stringify(value));
         } else {
           params.append(key, String(value));
@@ -202,6 +215,15 @@ const Offerte: React.FC = () => {
   // Enhanced function to send data to GoHighLevel webhook with ALL form fields
   const sendToGHLWebhook = async (data: OfferteFormData, retryCount = 0): Promise<boolean> => {
     try {
+      // Map window type IDs to their full labels
+      const windowTypeLabels: Record<string, string> = {
+        'kunststof': 'Kunststof kozijnen',
+        'schuifpui': 'Schuifpui',
+        'tuindeuren': 'Tuindeuren',
+        'deur': 'Voor/Achterdeur',
+        'anders': 'Anders / Nader te bepalen'
+      };
+      
       // Format the data according to GoHighLevel webhook expectations with ALL form fields
       const ghlPayload = {
         // Contact Information
@@ -237,7 +259,9 @@ const Offerte: React.FC = () => {
           propertyType: data.propertyType,
           timeline: data.timeline,
           // Window Details
-          windowTypes: Array.isArray(data.windowTypes) ? data.windowTypes.join(", ") : data.windowTypes,
+          windowTypes: Array.isArray(data.windowTypes) 
+            ? data.windowTypes.map(id => windowTypeLabels[id] || id).join(", ") 
+            : data.windowTypes,
           quantity: data.quantity,
           dimensions: data.dimensions,
           color: data.color,
