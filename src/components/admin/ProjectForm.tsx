@@ -90,7 +90,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
       console.log('ProjectForm: Resetting to default data:', defaultData);
       setFormData(defaultData);
     }
-  }, [project?.id]); // Only re-run when project ID changes
+  }, [project]); // Re-run whenever project data changes
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
