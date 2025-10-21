@@ -11,7 +11,7 @@ const Projects: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   
   const featuredProjects = projects?.filter(project => project.is_featured) || [];
-  const displayProjects = featuredProjects.length > 0 ? featuredProjects : projects?.slice(0, 4) || [];
+  const displayProjects = featuredProjects.length > 0 ? featuredProjects.slice(0, 8) : projects?.slice(0, 8) || [];
   
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev === displayProjects.length - 1 ? 0 : prev + 1));
