@@ -110,7 +110,7 @@ const KunststofKozijnen: React.FC = () => {
       
       <Navbar />
       
-      <main className="flex-grow pt-20">
+      <main className="flex-grow pt-20 overflow-x-hidden">
         <KozijnenHero />
         
         <StickyNavigation />
@@ -180,7 +180,7 @@ const KunststofKozijnen: React.FC = () => {
                 </div>
                 
                 <div className="mt-8 text-center">
-                  <Button className="bg-brand-green hover:bg-brand-green-dark text-white px-6">
+                  <Button className="bg-brand-green hover:bg-brand-green-dark text-white px-6 w-full sm:w-auto whitespace-normal break-words text-center">
                     <span>Vraag nu vrijblijvend een offerte aan</span>
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -230,7 +230,7 @@ const KunststofKozijnen: React.FC = () => {
                   </ul>
                   
                   <div className="mt-4">
-                    <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
+                    <Button className="bg-brand-green hover:bg-brand-green-dark text-white w-full sm:w-auto whitespace-normal break-words text-center">
                       <span>Overweeg kunststof kozijnen? Vraag vrijblijvend een offerte aan!</span>
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
