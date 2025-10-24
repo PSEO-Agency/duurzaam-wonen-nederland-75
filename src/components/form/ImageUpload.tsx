@@ -23,6 +23,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   bucketName = 'project-images'
 }) => {
   const [uploading, setUploading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
@@ -51,19 +52,14 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     }
   };
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
+  const uploadFile = async (file: File) => {
     try {
       setUploading(true);
       
       console.log('Starting file upload:', file.name, 'to bucket:', bucketName);
       
-      // Ensure bucket exists
       await ensureBucketExists(bucketName);
       
-      // Create unique filename
       const fileExt = file.name.split('.').pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
       
@@ -83,7 +79,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
       console.log('Upload successful:', data);
 
-      // Get public URL
       const { data: urlData } = supabase.storage
         .from(bucketName)
         .getPublicUrl(fileName);
@@ -105,11 +100,53 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       });
     } finally {
       setUploading(false);
-      // Reset the input
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
     }
+  };
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    await uploadFile(file);
+  };
+
+  const handleDragEnter = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = async (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    
+    const file = e.dataTransfer.files?.[0];
+    if (!file) return;
+    
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Ongeldig bestand",
+        description: "Selecteer een afbeeldingsbestand",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    await uploadFile(file);
   };
 
   const handleUploadClick = () => {
@@ -125,6 +162,30 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     <div className="space-y-2">
       <Label>{label}</Label>
       
+      {/* Drag and Drop Zone */}
+      <div
+        className={`
+          border-2 border-dashed rounded-lg p-6 text-center cursor-pointer
+          transition-colors duration-200
+          ${isDragging ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'}
+          ${uploading ? 'opacity-50 cursor-not-allowed' : ''}
+        `}
+        onDragEnter={handleDragEnter}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        onClick={handleUploadClick}
+      >
+        <Upload className={`mx-auto h-12 w-12 mb-2 ${isDragging ? 'text-primary' : 'text-muted-foreground'}`} />
+        <p className="text-sm text-foreground mb-1">
+          {isDragging ? 'Laat de afbeelding los...' : 'Sleep een afbeelding hierheen'}
+        </p>
+        <p className="text-xs text-muted-foreground">
+          of klik om een bestand te selecteren
+        </p>
+      </div>
+      
+      {/* Preview */}
       {value && (
         <div className="relative inline-block">
           <img 
@@ -141,19 +202,24 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             variant="destructive"
             size="sm"
             className="absolute -top-2 -right-2 rounded-full p-1 h-6 w-6"
-            onClick={clearImage}
+            onClick={(e) => {
+              e.stopPropagation();
+              clearImage();
+            }}
           >
             <X size={12} />
           </Button>
         </div>
       )}
       
+      {/* Manual URL Input */}
       <div className="flex gap-2">
         <Input
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder || "Afbeelding URL"}
           className="flex-1"
+          onClick={(e) => e.stopPropagation()}
         />
         
         <div>
@@ -169,7 +235,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             type="button"
             variant="outline"
             disabled={uploading}
-            onClick={handleUploadClick}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleUploadClick();
+            }}
           >
             <Upload size={16} className="mr-2" />
             {uploading ? 'Uploading...' : 'Upload'}

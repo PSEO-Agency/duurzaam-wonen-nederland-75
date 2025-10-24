@@ -195,12 +195,13 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         </div>
       </div>
 
-      <ImageUpload
+      {/* Hoofdafbeelding field hidden - keeping in form state for backward compatibility */}
+      {/* <ImageUpload
         label="Hoofdafbeelding"
         value={formData.image_url}
         onChange={handleImageUpload('image_url')}
         bucketName="project-images"
-      />
+      /> */}
 
       <ImageUpload
         label="Featured Afbeelding"
