@@ -214,11 +214,11 @@ const ProjectDetail: React.FC = () => {
               {/* Gallery */}
               <div className="lg:col-span-2">
                 {displayImage && (
-                  <div className="mb-4 rounded-lg overflow-hidden aspect-video">
+                  <div className="mb-4 rounded-lg overflow-hidden bg-gray-100">
                     <img 
                       src={displayImage} 
                       alt={project.title} 
-                      className="w-full h-full object-cover"
+                      className="w-full h-auto object-contain max-h-[600px] mx-auto"
                     />
                   </div>
                 )}
@@ -227,7 +227,7 @@ const ProjectDetail: React.FC = () => {
                     {galleryImages.map((image, index) => (
                       <div 
                         key={index}
-                        className={`rounded-md overflow-hidden cursor-pointer border-2 ${
+                        className={`rounded-md overflow-hidden cursor-pointer border-2 aspect-square bg-gray-100 ${
                           activeImage === image ? 'border-brand-green' : 'border-transparent'
                         }`}
                         onClick={() => setActiveImage(image)}
@@ -235,7 +235,7 @@ const ProjectDetail: React.FC = () => {
                         <img 
                           src={image} 
                           alt={`${project.title} - afbeelding ${index + 1}`} 
-                          className="w-full h-20 object-cover"
+                          className="w-full h-full object-contain p-1"
                         />
                       </div>
                     ))}
@@ -305,11 +305,11 @@ const ProjectDetail: React.FC = () => {
                 {relatedProjects.map((relatedProject) => (
                   <Link to={`/projecten/${relatedProject.slug}`} key={relatedProject.id} className="group">
                     <Card className="h-full overflow-hidden hover:shadow-md transition-shadow">
-                      <div className="relative h-48 overflow-hidden">
+                      <div className="relative h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
                         <img 
                           src={relatedProject.featured_image || relatedProject.image_url || '/placeholder.svg'} 
                           alt={relatedProject.title} 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                         />
                         {relatedProject.project_type && (
                           <Badge className="absolute top-3 right-3 capitalize">
