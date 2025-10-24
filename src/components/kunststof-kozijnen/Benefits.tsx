@@ -15,12 +15,12 @@ interface BenefitProps {
 
 const Benefit: React.FC<BenefitProps> = ({ icon, title, description, delay = 0 }) => (
   <AnimatedSection animation="fade-in" delay={delay}>
-    <div className="flex flex-col items-center text-center p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow h-full">
+    <div className="flex flex-col items-center text-center p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow h-full max-w-full">
       <div className="bg-brand-green/10 p-3 sm:p-4 rounded-full mb-3 sm:mb-4">
         {icon}
       </div>
-      <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{title}</h3>
-      <p className="text-gray-600 text-sm sm:text-base leading-relaxed">{description}</p>
+      <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 break-words">{title}</h3>
+      <p className="text-gray-600 text-sm sm:text-base leading-relaxed break-words">{description}</p>
     </div>
   </AnimatedSection>
 );
@@ -57,8 +57,8 @@ const Benefits: React.FC = () => {
   ];
 
   return (
-    <section id="voordelen" className="py-12 sm:py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section id="voordelen" className="py-12 sm:py-16 bg-gray-50 overflow-hidden">
+      <div className="container mx-auto px-4 max-w-full">
         <AnimatedSection animation="fade-in">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-4">Voordelen van Kunststof Kozijnen</h2>
           <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto text-center mb-8 sm:mb-12 px-2 leading-relaxed">
@@ -85,9 +85,9 @@ const Benefits: React.FC = () => {
               Wij bieden 15 jaar productgarantie op alle kozijnen en 10 jaar servicegarantie op de montage voor uw volledige gemoedsrust.
             </p>
           </div>
-          <Button asChild size={isMobile ? "default" : "lg"} className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto px-2 sm:px-6 py-3 min-h-[48px] sm:min-h-[44px]">
+          <Button asChild size={isMobile ? "default" : "lg"} className="bg-brand-green hover:bg-brand-green-dark w-full sm:w-auto px-4 sm:px-6 py-3 min-h-[48px] sm:min-h-[44px] max-w-full">
             <Link to="/offerte" className="flex items-center justify-center gap-1 sm:gap-2">
-              <span className="text-center leading-snug text-xs sm:text-sm md:text-base hyphens-auto break-words">Vraag vrijblijvend een offerte aan</span>
+              <span className="text-center leading-snug text-xs sm:text-sm md:text-base hyphens-auto break-words max-w-full">Vraag vrijblijvend een offerte aan</span>
               <ArrowRight className="h-3 w-3 sm:h-4 sm:w-5 flex-shrink-0" />
             </Link>
           </Button>
