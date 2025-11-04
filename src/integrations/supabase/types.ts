@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -120,6 +120,51 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      colors: {
+        Row: {
+          category: string
+          created_at: string | null
+          description: string | null
+          has_wood_texture: boolean | null
+          hex: string
+          id: string
+          is_active: boolean | null
+          name: string
+          ral_code: string
+          slug: string
+          sort_order: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          description?: string | null
+          has_wood_texture?: boolean | null
+          hex: string
+          id?: string
+          is_active?: boolean | null
+          name: string
+          ral_code: string
+          slug: string
+          sort_order?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          description?: string | null
+          has_wood_texture?: boolean | null
+          hex?: string
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          ral_code?: string
+          slug?: string
+          sort_order?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       faqs: {
         Row: {
@@ -848,10 +893,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      generate_slug: {
-        Args: { input_text: string }
-        Returns: string
-      }
+      generate_slug: { Args: { input_text: string }; Returns: string }
     }
     Enums: {
       [_ in never]: never

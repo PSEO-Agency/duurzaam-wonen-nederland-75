@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Palette, Home, CheckCircle2, Image, Droplet, PanelRight, Paintbrush, Layers, Star, Info } from 'lucide-react';
+import { Palette, Home, CheckCircle2, Image, Droplet, PanelRight, Paintbrush, Layers, Star, Info, AlertCircle } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -16,17 +16,8 @@ import StickyNavigation from '@/components/kunststof-kozijnen/StickyNavigation';
 import ContactCTA from '@/components/ContactCTA';
 import ProductDetails from '@/components/kunststof-kozijnen/ProductDetails';
 import { Link } from 'react-router-dom';
-import { ralColorCategories } from '@/data/ralColors';
-
-interface ColorOption {
-  name: string;
-  hex: string;
-  image?: string;
-  description?: string;
-  category: string;
-  popular?: boolean;
-  ralCode?: string;
-}
+import { useColors, Color } from '@/hooks/useColors';
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface ProfileOption {
   id: string;
@@ -35,7 +26,8 @@ interface ProfileOption {
 }
 
 const ColorOptions: React.FC = () => {
-  const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null);
+  const { data: colors, isLoading } = useColors();
+  const [selectedColor, setSelectedColor] = useState<Color | null>(null);
   const [filterCategory, setFilterCategory] = useState<string>("all");
   const [activeTab, setActiveTab] = useState<string>("visualizer");
   const [selectedProfile, setSelectedProfile] = useState<string>("living-kozijnprofiel");
@@ -48,33 +40,21 @@ const ColorOptions: React.FC = () => {
     { id: "ct70-as-kozijnprofiel", name: "Schüco CT70 AS Kozijnprofiel", slug: "ct-70-as" }
   ];
 
-  const colorOptions: ColorOption[] = [
-    { name: 'Puur Wit', hex: '#F1F0EA', category: 'standard', popular: true, description: 'De klassieke en meest gekozen kleur, tijdloos en past bij elke woning.', ralCode: 'RAL 9016' },
-    { name: 'Verkeerswit', hex: '#F1F0EA', category: 'standard', description: 'Een heldere witte tint, perfect voor een frisse en moderne uitstraling.', ralCode: 'RAL 9016' },
-    { name: 'Crème', hex: '#FDF4E3', category: 'standard', popular: true, description: 'Warme, zachte tint die perfect past bij traditionele en landelijke woningen.', ralCode: 'RAL 9001' },
-    { name: 'Lichtgrijs', hex: '#C5C7C4', category: 'standard', description: 'Subtiele grijstint voor een ingetogen uitstraling.', ralCode: 'RAL 7035' },
-    { name: 'Antraciet', hex: '#383E42', category: 'standard', popular: true, description: 'Moderne en stijlvolle donkergrijze kleur, zeer populair bij nieuwbouw en renovaties.', ralCode: 'RAL 7016' },
-    { name: 'Monumentengroen', hex: '#31372B', category: 'standard', description: 'Traditionele groentint die goed past bij klassieke woningen en landhuizen.', ralCode: 'RAL 6009' },
-    { name: 'Staalblauw', hex: '#1F2A44', category: 'standard', description: 'Krachtige blauwtint met een industriële uitstraling.', ralCode: 'RAL 5011' },
-    { name: 'Zwart', hex: '#0A0A0D', category: 'standard', description: 'Elegante en contrasterende kleur voor een krachtige uitstraling.', ralCode: 'RAL 9005' },
-    
-    { name: 'Golden Oak', hex: '#C19A6B', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', popular: true, description: 'Warme eikenhouttint met natuurlijke nerftextuur voor een klassieke uitstraling.', ralCode: 'Folie 2178-001' },
-    { name: 'Noten', hex: '#654321', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Rijke, donkere houtlook die diepte en karakter aan uw woning toevoegt.', ralCode: 'Folie 2178-007' },
-    { name: 'Mahonie', hex: '#C04000', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Roodbruine houtlook met subtiele nerven voor een elegante afwerking.', ralCode: 'Folie 2097-013' },
-    { name: 'Oregon Pine', hex: '#D8B28E', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte houtlook met een subtiele nerf, perfect voor een natuurlijke uitstraling.', ralCode: 'Folie 1192-001' },
-    { name: 'Eiken Naturel', hex: '#D2B48C', image: '/lovable-uploads/bdbc3ea9-f728-449f-9b70-38036a7ea785.png', category: 'woodlook', description: 'Lichte eikenhouttint met een natuurlijke uitstraling.', ralCode: 'Folie 3149-008' },
-    
-    { name: 'Wijnrood', hex: '#722F37', category: 'special', description: 'Rijke, diepe kleur die warmte en karakter toevoegt aan uw woning.', ralCode: 'RAL 3005' },
-    { name: 'Mosgroen', hex: '#607D3B', category: 'special', description: 'Natuurlijke groentint die perfect in landelijke omgevingen past.', ralCode: 'RAL 6005' },
-    { name: 'Monumentenblauw', hex: '#27548E', category: 'special', description: 'Traditionele blauwtint, vaak gebruikt in historische gebouwen.', ralCode: 'RAL 5010' },
-    { name: 'Leisteengrijs', hex: '#708090', category: 'special', description: 'Elegante grijstint geïnspireerd door natuurlijke leisteen.', ralCode: 'RAL 7015' }
-  ];
+  const colorOptions = colors || [];
+  
+  // Group colors by category
+  const whiteColors = colorOptions.filter(c => c.category === 'white');
+  const greyColors = colorOptions.filter(c => c.category === 'grey');
+  const blueColors = colorOptions.filter(c => c.category === 'blue');
+  const otherColors = colorOptions.filter(c => 
+    ['green', 'red', 'beige', 'black'].includes(c.category)
+  );
 
   const filteredColors = filterCategory === "all" 
     ? colorOptions 
     : colorOptions.filter(color => color.category === filterCategory);
   
-  const popularColors = colorOptions.filter(color => color.popular);
+  const popularColors = whiteColors.slice(0, 3);
 
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
@@ -93,6 +73,20 @@ const ColorOptions: React.FC = () => {
       });
     }
   };
+
+  if (isLoading) {
+    return (
+      <>
+        <Navbar />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-brand-green mx-auto mb-4"></div>
+            <p className="text-lg text-gray-600">Kleuren laden...</p>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -195,28 +189,28 @@ const ColorOptions: React.FC = () => {
                                 Alle kleuren
                               </Button>
                               <Button 
-                                variant={filterCategory === "standard" ? "default" : "outline"}
+                                variant={filterCategory === "white" ? "default" : "outline"}
                                 size="sm"
-                                onClick={() => setFilterCategory("standard")}
-                                className={filterCategory === "standard" ? "bg-brand-green" : ""}
+                                onClick={() => setFilterCategory("white")}
+                                className={filterCategory === "white" ? "bg-brand-green" : ""}
                               >
-                                Standaard
+                                Wit/Crème
                               </Button>
                               <Button 
-                                variant={filterCategory === "woodlook" ? "default" : "outline"}
+                                variant={filterCategory === "grey" ? "default" : "outline"}
                                 size="sm"
-                                onClick={() => setFilterCategory("woodlook")}
-                                className={filterCategory === "woodlook" ? "bg-brand-green" : ""}
+                                onClick={() => setFilterCategory("grey")}
+                                className={filterCategory === "grey" ? "bg-brand-green" : ""}
                               >
-                                Houtlook
+                                Grijs
                               </Button>
                               <Button 
-                                variant={filterCategory === "special" ? "default" : "outline"}
+                                variant={filterCategory === "blue" ? "default" : "outline"}
                                 size="sm"
-                                onClick={() => setFilterCategory("special")}
-                                className={filterCategory === "special" ? "bg-brand-green" : ""}
+                                onClick={() => setFilterCategory("blue")}
+                                className={filterCategory === "blue" ? "bg-brand-green" : ""}
                               >
-                                Speciale kleuren
+                                Blauw
                               </Button>
                             </div>
                             
@@ -225,15 +219,15 @@ const ColorOptions: React.FC = () => {
                                 {filteredColors.map((color) => (
                                   <Tooltip key={color.name}>
                                     <TooltipTrigger asChild>
-                                      <button
-                                        className={`w-full aspect-square rounded-md border-2 ${selectedColor?.name === color.name ? 'border-brand-green' : 'border-transparent'} hover:border-brand-green-dark transition-all`}
+                                       <button
+                                        className={`w-full aspect-square rounded-md border-2 ${selectedColor?.slug === color.slug ? 'border-brand-green' : 'border-transparent'} hover:border-brand-green-dark transition-all`}
                                         style={{ 
                                           backgroundColor: color.hex,
-                                          boxShadow: color.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                          boxShadow: color.hex === '#FFFFFF' || color.hex === '#ffffff' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                         }}
                                         onClick={() => setSelectedColor(color)}
                                       >
-                                        {selectedColor?.name === color.name && (
+                                        {selectedColor?.slug === color.slug && (
                                           <CheckCircle2 className="h-5 w-5 text-brand-green bg-white rounded-full" />
                                         )}
                                       </button>
@@ -241,7 +235,7 @@ const ColorOptions: React.FC = () => {
                                     <TooltipContent className="font-medium">
                                       <div className="space-y-1">
                                         <p>{color.name}</p>
-                                        <p className="text-xs text-gray-500">{color.hex}</p>
+                                        <p className="text-xs text-gray-500">{color.ral_code}</p>
                                       </div>
                                     </TooltipContent>
                                   </Tooltip>
@@ -256,7 +250,7 @@ const ColorOptions: React.FC = () => {
                                     className="w-6 h-6 rounded-full" 
                                     style={{ 
                                       backgroundColor: selectedColor.hex,
-                                      boxShadow: selectedColor.hex === '#FFFFFF' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                      boxShadow: selectedColor.hex === '#FFFFFF' || selectedColor.hex === '#ffffff' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                     }}
                                   ></div>
                                   <h4 className="font-semibold">{selectedColor.name}</h4>
@@ -264,14 +258,17 @@ const ColorOptions: React.FC = () => {
                                 {selectedColor.description && (
                                   <p className="text-sm text-gray-600 mb-3">{selectedColor.description}</p>
                                 )}
+                                <p className="text-xs text-gray-500 mb-2">Code: {selectedColor.ral_code}</p>
                                 <Button 
                                   variant="outline" 
                                   size="sm" 
                                   className="w-full mt-2 text-xs"
-                                  onClick={() => window.open(`/kunststof-kozijnen/kleuren/${selectedColor.name.toLowerCase().replace(/\s+/g, '-')}`, '_blank')}
+                                  asChild
                                 >
-                                  <Info className="h-3.5 w-3.5 mr-1" />
-                                  Kleur details
+                                  <Link to={`/kunststof-kozijnen/kleuren/${selectedColor.slug}`}>
+                                    <Info className="h-3.5 w-3.5 mr-1" />
+                                    Kleur details
+                                  </Link>
                                 </Button>
                               </div>
                             )}
@@ -377,7 +374,7 @@ const ColorOptions: React.FC = () => {
                                   ></div>
                                   <CardContent className="p-2">
                                     <h4 className="font-medium text-xs leading-tight">{color.name}</h4>
-                                    <p className="text-xs text-gray-500">{color.ralCode}</p>
+                                    <p className="text-xs text-gray-500">{color.ral_code}</p>
                                   </CardContent>
                                 </Card>
                               </TooltipTrigger>
@@ -385,7 +382,7 @@ const ColorOptions: React.FC = () => {
                                 <div className="space-y-1">
                                   <p>{color.name}</p>
                                   <p className="text-xs text-gray-500">{color.hex}</p>
-                                  <p className="text-xs text-gray-500">{color.ralCode}</p>
+                                  <p className="text-xs text-gray-500">{color.ral_code}</p>
                                 </div>
                               </TooltipContent>
                             </Tooltip>
@@ -419,7 +416,7 @@ const ColorOptions: React.FC = () => {
                                 <div className="space-y-1">
                                   <p>{color.name}</p>
                                   <p className="text-xs text-gray-500">{color.hex}</p>
-                                  <p className="text-xs text-gray-500">{color.ralCode}</p>
+                                  <p className="text-xs text-gray-500">{color.ral_code}</p>
                                 </div>
                               </TooltipContent>
                             </Tooltip>
@@ -444,13 +441,10 @@ const ColorOptions: React.FC = () => {
                                     style={{ backgroundColor: color.hex }}
                                   ></div>
                                   <CardContent className="p-3">
-                                    <h4 className="font-semibold text-sm mb-1 flex items-center">
+                                    <h4 className="font-semibold text-sm mb-1">
                                       {color.name}
-                                      {color.popular && <CheckCircle2 className="h-3 w-3 ml-1 text-brand-green" />}
                                     </h4>
-                                    {color.ralCode && (
-                                      <p className="text-xs text-gray-500 mb-1">{color.ralCode}</p>
-                                    )}
+                                    <p className="text-xs text-gray-500 mb-1">{color.ral_code}</p>
                                     <p className="text-xs text-gray-600 line-clamp-2">{color.description}</p>
                                   </CardContent>
                                 </Card>
@@ -459,7 +453,7 @@ const ColorOptions: React.FC = () => {
                                 <div className="space-y-1">
                                   <p>{color.name}</p>
                                   <p className="text-xs text-gray-500">{color.hex}</p>
-                                  {color.ralCode && <p className="text-xs text-gray-500">{color.ralCode}</p>}
+                                  <p className="text-xs text-gray-500">{color.ral_code}</p>
                                 </div>
                               </TooltipContent>
                             </Tooltip>
