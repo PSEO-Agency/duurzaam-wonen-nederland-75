@@ -19,6 +19,8 @@ import { Link } from 'react-router-dom';
 import { useColors, Color } from '@/hooks/useColors';
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ProfileOption {
   id: string;
@@ -33,6 +35,7 @@ const ColorOptions: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("visualizer");
   const [selectedProfile, setSelectedProfile] = useState<string>("living-kozijnprofiel");
   const [zoomedColor, setZoomedColor] = useState<Color | null>(null);
+  const isMobile = useIsMobile();
 
   const visualizerTitleRef = useRef<HTMLHeadingElement>(null);
   const collectionTitleRef = useRef<HTMLHeadingElement>(null);
@@ -371,41 +374,73 @@ const ColorOptions: React.FC = () => {
                           </Alert>
                         </div>
                         <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
-                          <TooltipProvider>
-                            {whiteColors.map((color) => (
-                              <Tooltip key={color.id}>
-                                <TooltipTrigger asChild>
-                                  <Card 
-                                    className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor(color)}
-                                  >
+                          {whiteColors.map((color) => (
+                            isMobile ? (
+                              <Card 
+                                key={color.id}
+                                className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
+                                onClick={() => setZoomedColor(color)}
+                              >
+                                <div 
+                                  className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform" 
+                                  style={{ 
+                                    backgroundColor: color.hex,
+                                    boxShadow: color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                  }}
+                                >
+                                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                    <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
+                                  </div>
+                                </div>
+                                <CardContent className="p-2">
+                                  <h4 className="font-medium text-xs leading-tight">{color.name}</h4>
+                                  <p className="text-xs text-gray-500">{color.ral_code}</p>
+                                </CardContent>
+                              </Card>
+                            ) : (
+                              <HoverCard key={color.id} openDelay={200}>
+                                <HoverCardTrigger asChild>
+                                  <Card className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden">
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform" 
                                       style={{ 
                                         backgroundColor: color.hex,
                                         boxShadow: color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                       }}
-                                    >
-                                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                        <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
-                                      </div>
-                                    </div>
+                                    />
                                     <CardContent className="p-2">
                                       <h4 className="font-medium text-xs leading-tight">{color.name}</h4>
                                       <p className="text-xs text-gray-500">{color.ral_code}</p>
                                     </CardContent>
                                   </Card>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <div className="space-y-1">
-                                    <p>{color.name}</p>
-                                    <p className="text-xs text-gray-500">{color.hex}</p>
-                                    <p className="text-xs text-gray-500">{color.ral_code}</p>
+                                </HoverCardTrigger>
+                                <HoverCardContent className="w-80" side="top">
+                                  <div className="space-y-3">
+                                    <div 
+                                      className="w-full h-48 rounded-lg border-4 border-gray-200" 
+                                      style={{ 
+                                        backgroundColor: color.hex,
+                                        boxShadow: color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                      }}
+                                    />
+                                    <div className="space-y-1">
+                                      <h4 className="font-semibold">{color.name}</h4>
+                                      <p className="text-sm text-muted-foreground">{color.ral_code}</p>
+                                      <p className="text-xs font-mono text-muted-foreground">{color.hex}</p>
+                                      {color.has_wood_texture && (
+                                        <Alert className="border-amber-200 bg-amber-50 mt-2">
+                                          <Info className="h-3 w-3 text-amber-600" />
+                                          <AlertDescription className="text-xs text-amber-800">
+                                            Ook leverbaar met houtlook textuur
+                                          </AlertDescription>
+                                        </Alert>
+                                      )}
+                                    </div>
                                   </div>
-                                </TooltipContent>
-                              </Tooltip>
-                            ))}
-                          </TooltipProvider>
+                                </HoverCardContent>
+                              </HoverCard>
+                            )
+                          ))}
                         </div>
                       </AnimatedSection>
                     )}
@@ -417,38 +452,56 @@ const ColorOptions: React.FC = () => {
                           Grijstinten
                         </h3>
                         <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
-                          <TooltipProvider>
-                            {greyColors.map((color) => (
-                              <Tooltip key={color.id}>
-                                <TooltipTrigger asChild>
-                                  <Card 
-                                    className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor(color)}
-                                  >
+                          {greyColors.map((color) => (
+                            isMobile ? (
+                              <Card 
+                                key={color.id}
+                                className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
+                                onClick={() => setZoomedColor(color)}
+                              >
+                                <div 
+                                  className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform" 
+                                  style={{ backgroundColor: color.hex }}
+                                >
+                                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                    <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
+                                  </div>
+                                </div>
+                                <CardContent className="p-2">
+                                  <h4 className="font-medium text-xs leading-tight">{color.name}</h4>
+                                  <p className="text-xs text-gray-500">{color.ral_code}</p>
+                                </CardContent>
+                              </Card>
+                            ) : (
+                              <HoverCard key={color.id} openDelay={200}>
+                                <HoverCardTrigger asChild>
+                                  <Card className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden">
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform" 
                                       style={{ backgroundColor: color.hex }}
-                                    >
-                                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                        <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
-                                      </div>
-                                    </div>
+                                    />
                                     <CardContent className="p-2">
                                       <h4 className="font-medium text-xs leading-tight">{color.name}</h4>
                                       <p className="text-xs text-gray-500">{color.ral_code}</p>
                                     </CardContent>
                                   </Card>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <div className="space-y-1">
-                                    <p>{color.name}</p>
-                                    <p className="text-xs text-gray-500">{color.hex}</p>
-                                    <p className="text-xs text-gray-500">{color.ral_code}</p>
+                                </HoverCardTrigger>
+                                <HoverCardContent className="w-80" side="top">
+                                  <div className="space-y-3">
+                                    <div 
+                                      className="w-full h-48 rounded-lg border-4 border-gray-200" 
+                                      style={{ backgroundColor: color.hex }}
+                                    />
+                                    <div className="space-y-1">
+                                      <h4 className="font-semibold">{color.name}</h4>
+                                      <p className="text-sm text-muted-foreground">{color.ral_code}</p>
+                                      <p className="text-xs font-mono text-muted-foreground">{color.hex}</p>
+                                    </div>
                                   </div>
-                                </TooltipContent>
-                              </Tooltip>
-                            ))}
-                          </TooltipProvider>
+                                </HoverCardContent>
+                              </HoverCard>
+                            )
+                          ))}
                         </div>
                       </AnimatedSection>
                     )}
@@ -460,38 +513,56 @@ const ColorOptions: React.FC = () => {
                           Blauwtinten
                         </h3>
                         <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
-                          <TooltipProvider>
-                            {blueColors.map((color) => (
-                              <Tooltip key={color.id}>
-                                <TooltipTrigger asChild>
-                                  <Card 
-                                    className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor(color)}
-                                  >
+                          {blueColors.map((color) => (
+                            isMobile ? (
+                              <Card 
+                                key={color.id}
+                                className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
+                                onClick={() => setZoomedColor(color)}
+                              >
+                                <div 
+                                  className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform" 
+                                  style={{ backgroundColor: color.hex }}
+                                >
+                                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                    <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
+                                  </div>
+                                </div>
+                                <CardContent className="p-2">
+                                  <h4 className="font-medium text-xs leading-tight">{color.name}</h4>
+                                  <p className="text-xs text-gray-500">{color.ral_code}</p>
+                                </CardContent>
+                              </Card>
+                            ) : (
+                              <HoverCard key={color.id} openDelay={200}>
+                                <HoverCardTrigger asChild>
+                                  <Card className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden">
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform" 
                                       style={{ backgroundColor: color.hex }}
-                                    >
-                                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                        <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
-                                      </div>
-                                    </div>
+                                    />
                                     <CardContent className="p-2">
                                       <h4 className="font-medium text-xs leading-tight">{color.name}</h4>
                                       <p className="text-xs text-gray-500">{color.ral_code}</p>
                                     </CardContent>
                                   </Card>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <div className="space-y-1">
-                                    <p>{color.name}</p>
-                                    <p className="text-xs text-gray-500">{color.hex}</p>
-                                    <p className="text-xs text-gray-500">{color.ral_code}</p>
+                                </HoverCardTrigger>
+                                <HoverCardContent className="w-80" side="top">
+                                  <div className="space-y-3">
+                                    <div 
+                                      className="w-full h-48 rounded-lg border-4 border-gray-200" 
+                                      style={{ backgroundColor: color.hex }}
+                                    />
+                                    <div className="space-y-1">
+                                      <h4 className="font-semibold">{color.name}</h4>
+                                      <p className="text-sm text-muted-foreground">{color.ral_code}</p>
+                                      <p className="text-xs font-mono text-muted-foreground">{color.hex}</p>
+                                    </div>
                                   </div>
-                                </TooltipContent>
-                              </Tooltip>
-                            ))}
-                          </TooltipProvider>
+                                </HoverCardContent>
+                              </HoverCard>
+                            )
+                          ))}
                         </div>
                       </AnimatedSection>
                     )}
@@ -503,41 +574,65 @@ const ColorOptions: React.FC = () => {
                           Overige kleuren
                         </h3>
                         <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
-                          <TooltipProvider>
-                            {otherColors.map((color) => (
-                              <Tooltip key={color.id}>
-                                <TooltipTrigger asChild>
-                                  <Card 
-                                    className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor(color)}
-                                  >
+                          {otherColors.map((color) => (
+                            isMobile ? (
+                              <Card 
+                                key={color.id}
+                                className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
+                                onClick={() => setZoomedColor(color)}
+                              >
+                                <div 
+                                  className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform" 
+                                  style={{ 
+                                    backgroundColor: color.hex,
+                                    boxShadow: color.hex.toLowerCase() === '#ffffff' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                  }}
+                                >
+                                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                    <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
+                                  </div>
+                                </div>
+                                <CardContent className="p-2">
+                                  <h4 className="font-medium text-xs leading-tight">{color.name}</h4>
+                                  <p className="text-xs text-gray-500">{color.ral_code}</p>
+                                </CardContent>
+                              </Card>
+                            ) : (
+                              <HoverCard key={color.id} openDelay={200}>
+                                <HoverCardTrigger asChild>
+                                  <Card className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden">
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform" 
                                       style={{ 
                                         backgroundColor: color.hex,
                                         boxShadow: color.hex.toLowerCase() === '#ffffff' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                       }}
-                                    >
-                                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                        <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
-                                      </div>
-                                    </div>
+                                    />
                                     <CardContent className="p-2">
                                       <h4 className="font-medium text-xs leading-tight">{color.name}</h4>
                                       <p className="text-xs text-gray-500">{color.ral_code}</p>
                                     </CardContent>
                                   </Card>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <div className="space-y-1">
-                                    <p>{color.name}</p>
-                                    <p className="text-xs text-gray-500">{color.hex}</p>
-                                    <p className="text-xs text-gray-500">{color.ral_code}</p>
+                                </HoverCardTrigger>
+                                <HoverCardContent className="w-80" side="top">
+                                  <div className="space-y-3">
+                                    <div 
+                                      className="w-full h-48 rounded-lg border-4 border-gray-200" 
+                                      style={{ 
+                                        backgroundColor: color.hex,
+                                        boxShadow: color.hex.toLowerCase() === '#ffffff' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                      }}
+                                    />
+                                    <div className="space-y-1">
+                                      <h4 className="font-semibold">{color.name}</h4>
+                                      <p className="text-sm text-muted-foreground">{color.ral_code}</p>
+                                      <p className="text-xs font-mono text-muted-foreground">{color.hex}</p>
+                                    </div>
                                   </div>
-                                </TooltipContent>
-                              </Tooltip>
-                            ))}
-                          </TooltipProvider>
+                                </HoverCardContent>
+                              </HoverCard>
+                            )
+                          ))}
                         </div>
                       </AnimatedSection>
                     )}
