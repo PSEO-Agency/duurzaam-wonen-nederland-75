@@ -135,59 +135,23 @@ serve(async (req) => {
       </html>
     `;
 
-    // Use a screenshot service API (you can replace this with your preferred service)
-    const screenshotResponse = await fetch('https://htmlcsstoimage.com/api/v1/image', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        html: ogHtml,
-        css: '',
-        width: 1200,
-        height: 630,
-        device_scale_factor: 1,
-        format: 'png'
-      })
-    });
-
-    if (!screenshotResponse.ok) {
-      throw new Error('Failed to generate screenshot');
-    }
-
-    const imageBuffer = await screenshotResponse.arrayBuffer();
-    const fileName = `og-${pageType}-${pageSlug || pageId || 'default'}-${Date.now()}.png`;
+    // Return a default OG image URL since screenshot generation requires paid API
+    const defaultOgUrl = 'https://izfiqwptfuvoswxocujw.supabase.co/storage/v1/object/public/og-images/default-og.png';
     
-    // Upload to Supabase Storage
-    const { data: uploadData, error: uploadError } = await supabase.storage
-      .from('og-images')
-      .upload(fileName, imageBuffer, {
-        contentType: 'image/png',
-        cacheControl: '3600'
-      });
-
-    if (uploadError) {
-      throw new Error(`Upload failed: ${uploadError.message}`);
-    }
-
-    const { data: { publicUrl } } = supabase.storage
-      .from('og-images')
-      .getPublicUrl(fileName);
-
-    // Store in database
+    // Store in database with default image
     await supabase
       .from('og_images')
       .insert({
         page_type: pageType,
         page_slug: pageSlug || null,
         page_id: pageId || null,
-        image_url: publicUrl,
+        image_url: defaultOgUrl,
         title,
         description: description || null
       });
 
     return new Response(
-      JSON.stringify({ imageUrl: publicUrl }),
+      JSON.stringify({ imageUrl: defaultOgUrl }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
 
