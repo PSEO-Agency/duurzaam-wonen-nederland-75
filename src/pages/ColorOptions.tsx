@@ -76,7 +76,8 @@ const ColorOptions: React.FC = () => {
   };
 
   const getColorHex = (c: Color) => {
-    return normalizeHex(c.hex) || RAL_HEX_MAP[c.ral_code?.toUpperCase?.() as keyof typeof RAL_HEX_MAP] || '#CCCCCC';
+    const normalizedRal = c.ral_code?.replace(/\s+/g, '')?.toUpperCase?.() || '';
+    return normalizeHex(c.hex) || RAL_HEX_MAP[normalizedRal as keyof typeof RAL_HEX_MAP] || '#CCCCCC';
   };
   
   // Group colors by category
