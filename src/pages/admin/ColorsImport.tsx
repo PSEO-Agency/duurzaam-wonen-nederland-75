@@ -173,20 +173,26 @@ const ColorsImport: React.FC = () => {
 
       if (deleteError) throw deleteError;
 
-      // Prepare data for insertion with unique slugs
+      // Prepare data for insertion with unique slugs across the whole batch
       const validRows = parsedData.filter(r => r.validation.isValid);
 
-      const slugCounts = new Map<string, number>();
-      const getUniqueSlug = (base: string) => {
-        const current = slugCounts.get(base) || 0;
-        const next = current + 1;
-        slugCounts.set(base, next);
-        return next === 1 ? base : `${base}-${next}`;
+      // Start with any existing slugs (in case delete didn't remove all due to RLS/constraints)
+      const usedSlugs = new Set<string>();
+      const { data: existingSlugs } = await supabase.from('colors').select('slug');
+      existingSlugs?.forEach((r: { slug: string }) => usedSlugs.add(r.slug));
+      const makeUniqueSlug = (base: string) => {
+        let slug = base;
+        let i = 2;
+        while (usedSlugs.has(slug)) {
+          slug = `${base}-${i++}`;
+        }
+        usedSlugs.add(slug);
+        return slug;
       };
 
       const colorsToInsert = validRows.map((row, index) => {
         const baseSlug = generateSlug(row.kleur);
-        const uniqueSlug = getUniqueSlug(baseSlug);
+        const uniqueSlug = makeUniqueSlug(baseSlug);
         return {
           name: row.kleur.trim(),
           slug: uniqueSlug,
