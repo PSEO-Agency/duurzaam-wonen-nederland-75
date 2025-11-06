@@ -179,7 +179,7 @@ const ColorOptions: React.FC = () => {
         
         <StickyNavigation />
         
-        <div className="sticky top-[80px] z-10 bg-white border-b shadow-sm">
+        <div className="sticky top-[80px] z-10 bg-white border-b shadow-sm hidden md:block">
           <div className="container mx-auto px-4">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="py-2">
               <TabsList className="grid w-full grid-cols-2">
@@ -208,7 +208,7 @@ const ColorOptions: React.FC = () => {
           <div className="container mx-auto px-4">            
             <ScrollArea className="pr-4">
               <div className="space-y-20">
-                <div id="visualizer" className="space-y-8">
+                <div id="visualizer" className="space-y-8 hidden md:block">
                   <h2 ref={visualizerTitleRef} className="text-2xl font-bold mb-4">Interactieve Kleurenmodule</h2>
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-1 space-y-6">
@@ -324,17 +324,6 @@ const ColorOptions: React.FC = () => {
                                   <p className="text-sm text-gray-600 mb-3">{selectedColor.description}</p>
                                 )}
                                 <p className="text-xs text-gray-500 mb-2">Code: {selectedColor.ral_code}</p>
-                                <Button 
-                                  variant="outline" 
-                                  size="sm" 
-                                  className="w-full mt-2 text-xs"
-                                  asChild
-                                >
-                                  <Link to={`/kunststof-kozijnen/kleuren/${selectedColor.slug}`}>
-                                    <Info className="h-3.5 w-3.5 mr-1" />
-                                    Kleur details
-                                  </Link>
-                                </Button>
                               </div>
                             )}
                           </CardContent>
@@ -421,18 +410,10 @@ const ColorOptions: React.FC = () => {
                   <div className="space-y-8">
                     {whiteColors.length > 0 && (
                       <AnimatedSection animation="fade-in" delay={100}>
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-xl font-semibold flex items-center">
-                            <div className="w-1.5 h-6 bg-brand-green mr-2"></div>
-                            Wit/Crème
-                          </h3>
-                          <Alert className="w-auto inline-flex items-center py-2 px-3 border-amber-200 bg-amber-50">
-                            <Info className="h-4 w-4 text-amber-600 mr-2" />
-                            <AlertDescription className="text-xs text-amber-800">
-                              Ook leverbaar met houtlook textuur
-                            </AlertDescription>
-                          </Alert>
-                        </div>
+                        <h3 className="text-xl font-semibold mb-4 flex items-center">
+                          <div className="w-1.5 h-6 bg-brand-green mr-2"></div>
+                          Wit/Crème
+                        </h3>
                         <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
                           <TooltipProvider>
                             {whiteColors.map((color) => (
@@ -702,23 +683,7 @@ const ColorOptions: React.FC = () => {
                     <p className="text-sm text-gray-600">{zoomedColor.description}</p>
                   </div>
                 )}
-                {zoomedColor.has_wood_texture && (
-                  <Alert className="border-amber-200 bg-amber-50">
-                    <Info className="h-4 w-4 text-amber-600" />
-                    <AlertDescription className="text-xs text-amber-800">
-                      Ook leverbaar met houtlook textuur
-                    </AlertDescription>
-                  </Alert>
-                )}
               </div>
-              <Button 
-                asChild 
-                className="w-full bg-brand-green hover:bg-brand-green-dark"
-              >
-                <Link to={`/kunststof-kozijnen/kleuren/${zoomedColor.slug}`}>
-                  Meer informatie over deze kleur
-                </Link>
-              </Button>
             </div>
           )}
         </DialogContent>
