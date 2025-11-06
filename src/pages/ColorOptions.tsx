@@ -392,6 +392,9 @@ const ColorOptions: React.FC = () => {
                                           alt={color.name}
                                           className="w-full h-full object-cover"
                                           loading="lazy"
+                                          onError={(e) => {
+                                            e.currentTarget.style.display = 'none';
+                                          }}
                                         />
                                       )}
                                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
@@ -443,6 +446,9 @@ const ColorOptions: React.FC = () => {
                                           alt={color.name}
                                           className="w-full h-full object-cover"
                                           loading="lazy"
+                                          onError={(e) => {
+                                            e.currentTarget.style.display = 'none';
+                                          }}
                                         />
                                       )}
                                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">

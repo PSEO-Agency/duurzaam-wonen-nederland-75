@@ -14,6 +14,8 @@ interface ParsedRow {
   ral: string;
   categorie: string;
   imageUrl: string;
+  hex?: string;
+  kleurcode?: string;
 }
 
 interface ValidationResult {
@@ -211,7 +213,7 @@ const ColorsImport: React.FC = () => {
           ral_code: row.ral.trim(),
           category: row.categorie.toLowerCase().trim(),
           image_url: row.imageUrl && row.imageUrl.trim() !== '' ? row.imageUrl.trim() : null,
-          hex: '#FFFFFF',
+          hex: row.hex?.trim() || row.kleurcode?.trim() || '#CCCCCC',
           description: null,
           sort_order: index,
           has_wood_texture: row.categorie.toLowerCase() === 'white',
