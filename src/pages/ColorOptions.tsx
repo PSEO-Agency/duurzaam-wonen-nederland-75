@@ -66,9 +66,10 @@ const ColorOptions: React.FC = () => {
     RAL5004: '#191D3A',
     RAL5007: '#2A4B7C',
     RAL5008: '#2E3A42',
-    RAL3003: '#6D1F27',
-    RAL3011: '#7E2F2A',
+    RAL3003: '#9B111E',
     RAL3004: '#5E2129',
+    RAL3005: '#722F37',
+    RAL3011: '#B32821',
   };
 
   const normalizeHex = (hex?: string) => {
