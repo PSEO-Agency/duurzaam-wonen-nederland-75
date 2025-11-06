@@ -412,7 +412,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipTrigger asChild>
                                   <Card 
                                     className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor(color)}
+                                    onClick={() => setZoomedColor({ ...color, hex: getColorHex(color) } as any)}
                                   >
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
@@ -469,7 +469,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipTrigger asChild>
                                   <Card 
                                     className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor(color)}
+                                    onClick={() => setZoomedColor({ ...color, hex: getColorHex(color) } as any)}
                                   >
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
@@ -523,7 +523,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipTrigger asChild>
                                   <Card 
                                     className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor(color)}
+                                    onClick={() => setZoomedColor({ ...color, hex: getColorHex(color) } as any)}
                                   >
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
@@ -580,7 +580,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipTrigger asChild>
                                   <Card 
                                     className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor(color)}
+                                    onClick={() => setZoomedColor({ ...color, hex: getColorHex(color) } as any)}
                                   >
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
@@ -663,7 +663,7 @@ const ColorOptions: React.FC = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium text-gray-600">Hex:</span>
-                  <span className="font-mono text-sm">{zoomedColor.hex}</span>
+                  <span className="font-mono text-sm">{getColorHex(zoomedColor)}</span>
                 </div>
                 {zoomedColor.description && (
                   <div className="pt-2 border-t">
