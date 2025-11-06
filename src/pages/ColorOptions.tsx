@@ -44,6 +44,41 @@ const ColorOptions: React.FC = () => {
 
   const colorOptions = colors || [];
   
+  // Map RAL codes to HEX for consistent display when hex is missing/incorrect
+  const RAL_HEX_MAP: Record<string, string> = {
+    RAL9016: '#F6F6F6', // Verkeerswit
+    RAL9010: '#F0EDE3', // Zuiver wit
+    RAL9001: '#EDE5D8', // Crème wit
+    RAL9005: '#0A0A0A', // Gitzwart
+    RAL7016: '#373F43', // Antracietgrijs
+    RAL7021: '#2E3234',
+    RAL7022: '#4F4E4C',
+    RAL7012: '#59656D',
+    RAL7015: '#51565C',
+    RAL7039: '#6B6D6F',
+    RAL7043: '#4E5452',
+    RAL6005: '#114232', // Dennengroen
+    RAL6007: '#1F2D2A',
+    RAL6009: '#273B30', // Donkergroen
+    RAL6003: '#4D6B3D',
+    RAL5003: '#203A58',
+    RAL5004: '#191D3A',
+    RAL5007: '#2A4B7C',
+    RAL5008: '#2E3A42',
+    RAL3003: '#6D1F27',
+    RAL3011: '#7E2F2A',
+    RAL3004: '#5E2129',
+  };
+
+  const normalizeHex = (hex?: string) => {
+    const h = (hex || '').trim();
+    return /^#([0-9a-fA-F]{6})$/.test(h) ? h.toUpperCase() : '';
+  };
+
+  const getColorHex = (c: Color) => {
+    return normalizeHex(c.hex) || RAL_HEX_MAP[c.ral_code?.toUpperCase?.() as keyof typeof RAL_HEX_MAP] || '#CCCCCC';
+  };
+  
   // Group colors by category
   const whiteColors = colorOptions.filter(c => c.category === 'white');
   const greyColors = colorOptions.filter(c => c.category === 'grey');
@@ -224,10 +259,10 @@ const ColorOptions: React.FC = () => {
                                        <button
                                         className={`w-full aspect-square rounded-md border-2 overflow-hidden ${selectedColor?.slug === color.slug ? 'border-brand-green' : 'border-transparent'} hover:border-brand-green-dark transition-all`}
                                         style={{ 
-                                          backgroundColor: color.hex,
-                                          boxShadow: (color.hex?.toLowerCase?.() === '#ffffff' || color.hex?.toLowerCase?.() === '#f6f6f6') ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                          backgroundColor: getColorHex(color),
+                                          boxShadow: (getColorHex(color).toLowerCase() === '#ffffff' || getColorHex(color).toLowerCase() === '#f6f6f6') ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                         }}
-                                        onClick={() => setSelectedColor(color)}
+                                        onClick={() => setSelectedColor({ ...color, hex: getColorHex(color) } as any)}
                                       >{color.image_url && (<img src={color.image_url} alt={color.name} className="w-full h-full object-cover" loading="lazy" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />)}
                                         {selectedColor?.slug === color.slug && (
                                           <CheckCircle2 className="h-5 w-5 text-brand-green bg-white rounded-full" />
@@ -237,7 +272,7 @@ const ColorOptions: React.FC = () => {
                                     <TooltipContent className="font-medium">
                                       <div className="space-y-1">
                                         <p>{color.name}</p>
-                                        <p className="text-xs text-gray-500">{color.ral_code}</p>
+                                         <p className="text-xs text-gray-500">{color.ral_code}</p>
                                       </div>
                                     </TooltipContent>
                                   </Tooltip>
@@ -251,8 +286,8 @@ const ColorOptions: React.FC = () => {
                                   <div 
                                     className="w-6 h-6 rounded-full" 
                                     style={{ 
-                                      backgroundColor: selectedColor.hex,
-                                      boxShadow: selectedColor.hex === '#FFFFFF' || selectedColor.hex === '#ffffff' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                       backgroundColor: getColorHex(selectedColor),
+                                       boxShadow: getColorHex(selectedColor).toLowerCase() === '#FFFFFF'.toLowerCase() || getColorHex(selectedColor).toLowerCase() === '#F6F6F6'.toLowerCase() ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                     }}
                                   ></div>
                                   <h4 className="font-semibold">{selectedColor.name}</h4>
@@ -382,8 +417,8 @@ const ColorOptions: React.FC = () => {
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
                                       style={{ 
-                                        backgroundColor: color.hex,
-                                        boxShadow: color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                        backgroundColor: getColorHex(color),
+                                        boxShadow: getColorHex(color).toLowerCase() === '#ffffff' || getColorHex(color).toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                       }}
                                     >
                                       {color.image_url && (
@@ -410,7 +445,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipContent>
                                   <div className="space-y-1">
                                     <p>{color.name}</p>
-                                    <p className="text-xs text-gray-500">{color.hex}</p>
+                                     <p className="text-xs text-gray-500">{getColorHex(color)}</p>
                                     <p className="text-xs text-gray-500">{color.ral_code}</p>
                                   </div>
                                 </TooltipContent>
@@ -438,7 +473,7 @@ const ColorOptions: React.FC = () => {
                                   >
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
-                                      style={{ backgroundColor: color.hex }}
+                                      style={{ backgroundColor: getColorHex(color) }}
                                     >
                                       {color.image_url && (
                                         <img 
@@ -464,7 +499,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipContent>
                                   <div className="space-y-1">
                                     <p>{color.name}</p>
-                                    <p className="text-xs text-gray-500">{color.hex}</p>
+                                     <p className="text-xs text-gray-500">{getColorHex(color)}</p>
                                     <p className="text-xs text-gray-500">{color.ral_code}</p>
                                   </div>
                                 </TooltipContent>
@@ -493,8 +528,8 @@ const ColorOptions: React.FC = () => {
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
                                       style={{ 
-                                        backgroundColor: color.hex,
-                                        boxShadow: color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                        backgroundColor: getColorHex(color),
+                                        boxShadow: getColorHex(color).toLowerCase() === '#ffffff' || getColorHex(color).toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                       }}
                                     >
                                       {color.image_url && (
@@ -521,7 +556,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipContent>
                                   <div className="space-y-1">
                                     <p>{color.name}</p>
-                                    <p className="text-xs text-gray-500">{color.hex}</p>
+                                     <p className="text-xs text-gray-500">{getColorHex(color)}</p>
                                     <p className="text-xs text-gray-500">{color.ral_code}</p>
                                   </div>
                                 </TooltipContent>
@@ -550,8 +585,8 @@ const ColorOptions: React.FC = () => {
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
                                       style={{ 
-                                        backgroundColor: color.hex,
-                                        boxShadow: color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                        backgroundColor: getColorHex(color),
+                                        boxShadow: getColorHex(color).toLowerCase() === '#ffffff' || getColorHex(color).toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                       }}
                                     >
                                       {color.image_url && (
@@ -578,7 +613,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipContent>
                                   <div className="space-y-1">
                                     <p>{color.name}</p>
-                                    <p className="text-xs text-gray-500">{color.hex}</p>
+                                    <p className="text-xs text-gray-500">{getColorHex(color)}</p>
                                     <p className="text-xs text-gray-500">{color.ral_code}</p>
                                   </div>
                                 </TooltipContent>
@@ -612,10 +647,10 @@ const ColorOptions: React.FC = () => {
             <div className="space-y-4">
               <div 
                 className="w-full h-64 rounded-lg border-4 border-gray-200" 
-                style={{ 
-                  backgroundColor: zoomedColor.hex,
-                  boxShadow: zoomedColor.hex.toLowerCase() === '#ffffff' || zoomedColor.hex.toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
-                }}
+                 style={{ 
+                   backgroundColor: getColorHex(zoomedColor),
+                   boxShadow: getColorHex(zoomedColor).toLowerCase() === '#ffffff' || getColorHex(zoomedColor).toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                 }}
               ></div>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">

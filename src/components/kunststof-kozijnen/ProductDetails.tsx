@@ -82,10 +82,10 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
                 <div className="flex items-center gap-2">
                   <div 
                     className="w-4 h-4 rounded-full border" 
-                    style={{ 
-                      backgroundColor: selectedColor.hex,
-                      borderColor: selectedColor.hex === '#FFFFFF' ? '#e5e7eb' : 'transparent'
-                    }}
+                      style={{ 
+                       backgroundColor: selectedColor.hex,
+                       borderColor: selectedColor.hex?.toUpperCase?.() === '#FFFFFF' || selectedColor.hex?.toUpperCase?.() === '#F6F6F6' ? '#e5e7eb' : 'transparent'
+                     }}
                   ></div>
                   <span className="text-xs font-medium">{selectedColor.name}</span>
                 </div>
@@ -123,10 +123,10 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ selectedColor, selectedP
               <div className="flex items-center gap-2">
                 <div 
                   className="w-4 h-4 rounded-full border" 
-                  style={{ 
+                    style={{ 
                     backgroundColor: selectedColor.hex,
-                    borderColor: selectedColor.hex === '#FFFFFF' ? '#e5e7eb' : 'transparent'
-                  }}
+                    borderColor: selectedColor.hex?.toUpperCase?.() === '#FFFFFF' || selectedColor.hex?.toUpperCase?.() === '#F6F6F6' ? '#e5e7eb' : 'transparent'
+                   }}
                 ></div>
                 <span className="font-medium text-sm">{selectedColor.name}</span>
               </div>
