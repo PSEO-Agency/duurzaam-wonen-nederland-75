@@ -9,6 +9,7 @@ export interface Color {
   ral_code: string;
   category: string;
   description: string | null;
+  image_url: string | null;
   sort_order: number;
   has_wood_texture: boolean;
   is_active: boolean;

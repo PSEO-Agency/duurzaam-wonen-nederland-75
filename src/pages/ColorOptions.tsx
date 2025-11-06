@@ -380,12 +380,20 @@ const ColorOptions: React.FC = () => {
                                     onClick={() => setZoomedColor(color)}
                                   >
                                     <div 
-                                      className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform" 
+                                      className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
                                       style={{ 
                                         backgroundColor: color.hex,
                                         boxShadow: color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                       }}
                                     >
+                                      {color.image_url && (
+                                        <img 
+                                          src={color.image_url} 
+                                          alt={color.name}
+                                          className="w-full h-full object-cover"
+                                          loading="lazy"
+                                        />
+                                      )}
                                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                                         <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
                                       </div>
@@ -426,9 +434,17 @@ const ColorOptions: React.FC = () => {
                                     onClick={() => setZoomedColor(color)}
                                   >
                                     <div 
-                                      className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform" 
+                                      className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
                                       style={{ backgroundColor: color.hex }}
                                     >
+                                      {color.image_url && (
+                                        <img 
+                                          src={color.image_url} 
+                                          alt={color.name}
+                                          className="w-full h-full object-cover"
+                                          loading="lazy"
+                                        />
+                                      )}
                                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                                         <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
                                       </div>
