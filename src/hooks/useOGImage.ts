@@ -19,13 +19,19 @@ export const useOGImage = (params: OGImageParams) => {
     queryFn: async () => {
       console.log('Fetching OG image for:', params);
       
-      const { data, error } = await supabase
+      let query = supabase
         .from('og_images')
         .select('*')
-        .eq('page_type', params.pageType)
-        .eq('page_slug', params.pageSlug || '')
-        .eq('page_id', params.pageId || '')
-        .maybeSingle();
+        .eq('page_type', params.pageType);
+
+      if (params.pageSlug) {
+        query = query.eq('page_slug', params.pageSlug);
+      }
+      if (params.pageId) {
+        query = query.eq('page_id', params.pageId);
+      }
+
+      const { data, error } = await query.maybeSingle();
 
       if (error && error.code !== 'PGRST116') {
         console.error('Error fetching OG image:', error);

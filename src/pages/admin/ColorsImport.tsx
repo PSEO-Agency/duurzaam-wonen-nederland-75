@@ -153,6 +153,18 @@ const ColorsImport: React.FC = () => {
     setShowConfirmDialog(false);
 
     try {
+      // Check auth session to satisfy RLS
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast({
+          title: 'Niet ingelogd',
+          description: 'Log in om kleuren te kunnen importeren.',
+          variant: 'destructive'
+        });
+        setIsImporting(false);
+        return;
+      }
+
       // Delete all existing colors
       const { error: deleteError } = await supabase
         .from('colors')
@@ -194,7 +206,7 @@ const ColorsImport: React.FC = () => {
       console.error('Import error:', error);
       toast({
         title: 'Import mislukt',
-        description: 'Er is een fout opgetreden bij het importeren van de kleuren.',
+        description: (error as any)?.message || 'Er is een fout opgetreden bij het importeren van de kleuren.',
         variant: 'destructive'
       });
     } finally {
