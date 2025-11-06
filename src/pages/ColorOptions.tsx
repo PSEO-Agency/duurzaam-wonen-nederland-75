@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import { useColors, Color } from '@/hooks/useColors';
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ralColors } from '@/data/ralColors';
 
 interface ProfileOption {
   id: string;
@@ -75,11 +76,25 @@ const ColorOptions: React.FC = () => {
     return /^#([0-9a-fA-F]{6})$/.test(h) ? h.toUpperCase() : '';
   };
 
+  const findRalHex = (ral: string, name?: string) => {
+    const withRal = ral.startsWith('RAL') ? ral : `RAL ${ral}`;
+    const normalized = withRal.replace(/RAL\s*/i, 'RAL ').toUpperCase();
+    const found = ralColors.find(r => r.ralCode.replace(/\s+/g, '').toUpperCase() === normalized.replace(/\s+/g, ''))
+      || ralColors.find(r => r.ralCode.toUpperCase() === normalized)
+      || (name ? ralColors.find(r => r.name.toLowerCase() === name.toLowerCase()) : undefined);
+    return found?.hex || undefined;
+  };
+
   const getColorHex = (c: Color) => {
     const normalizedRal = c.ral_code?.replace(/\s+/g, '')?.toUpperCase?.() || '';
-    return normalizeHex(c.hex) || RAL_HEX_MAP[normalizedRal as keyof typeof RAL_HEX_MAP] || '#CCCCCC';
+    const digits = normalizedRal.replace(/^RAL/, '');
+    const hex = normalizeHex(c.hex);
+    const mapped = RAL_HEX_MAP[`RAL${digits}` as keyof typeof RAL_HEX_MAP];
+    const fromList = findRalHex(digits || normalizedRal, c.name);
+    // Prefer mapped/list when DB hex is missing or placeholder white
+    if ((!hex || hex === '#FFFFFF') && (mapped || fromList)) return (mapped || fromList)!;
+    return hex || mapped || fromList || '#CCCCCC';
   };
-  
   // Group colors by category
   const whiteColors = colorOptions.filter(c => c.category === 'white');
   const greyColors = colorOptions.filter(c => c.category === 'grey');
