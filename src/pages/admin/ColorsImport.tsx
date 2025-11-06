@@ -45,6 +45,10 @@ const ColorsImport: React.FC = () => {
       .trim();
   };
 
+  const normalizeRal = (ral: string): string => {
+    return ral.toString().trim().replace(/\s+/g, '').toUpperCase();
+  };
+
   const validateRow = (row: ParsedRow): ValidationResult => {
     const errors: string[] = [];
 
@@ -190,7 +194,15 @@ const ColorsImport: React.FC = () => {
         return slug;
       };
 
-      const colorsToInsert = validRows.map((row, index) => {
+      const usedRalsNorm = new Set<string>();
+      const uniqueByRal = validRows.filter((row) => {
+        const norm = normalizeRal(row.ral);
+        if (usedRalsNorm.has(norm)) return false;
+        usedRalsNorm.add(norm);
+        return true;
+      });
+
+      const colorsToInsert = uniqueByRal.map((row, index) => {
         const baseSlug = generateSlug(row.kleur);
         const uniqueSlug = makeUniqueSlug(baseSlug);
         return {
@@ -216,7 +228,7 @@ const ColorsImport: React.FC = () => {
 
       toast({
         title: 'Import geslaagd',
-        description: `${validRows.length} kleuren succesvol geïmporteerd.`
+        description: `${colorsToInsert.length} kleuren succesvol geïmporteerd.${validRows.length > colorsToInsert.length ? ` ${validRows.length - colorsToInsert.length} dubbele RAL-codes overgeslagen.` : ''}`
       });
 
       // Clear the data
