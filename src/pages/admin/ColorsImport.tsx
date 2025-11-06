@@ -173,20 +173,33 @@ const ColorsImport: React.FC = () => {
 
       if (deleteError) throw deleteError;
 
-      // Prepare data for insertion
+      // Prepare data for insertion with unique slugs
       const validRows = parsedData.filter(r => r.validation.isValid);
-      const colorsToInsert = validRows.map((row, index) => ({
-        name: row.kleur.trim(),
-        slug: generateSlug(row.kleur),
-        ral_code: row.ral.trim(),
-        category: row.categorie.toLowerCase().trim(),
-        image_url: row.imageUrl && row.imageUrl.trim() !== '' ? row.imageUrl.trim() : null,
-        hex: '#FFFFFF', // Default hex, you may want to extract this from RAL or image
-        description: null,
-        sort_order: index,
-        has_wood_texture: row.categorie.toLowerCase() === 'white',
-        is_active: true
-      }));
+
+      const slugCounts = new Map<string, number>();
+      const getUniqueSlug = (base: string) => {
+        const current = slugCounts.get(base) || 0;
+        const next = current + 1;
+        slugCounts.set(base, next);
+        return next === 1 ? base : `${base}-${next}`;
+      };
+
+      const colorsToInsert = validRows.map((row, index) => {
+        const baseSlug = generateSlug(row.kleur);
+        const uniqueSlug = getUniqueSlug(baseSlug);
+        return {
+          name: row.kleur.trim(),
+          slug: uniqueSlug,
+          ral_code: row.ral.trim(),
+          category: row.categorie.toLowerCase().trim(),
+          image_url: row.imageUrl && row.imageUrl.trim() !== '' ? row.imageUrl.trim() : null,
+          hex: '#FFFFFF',
+          description: null,
+          sort_order: index,
+          has_wood_texture: row.categorie.toLowerCase() === 'white',
+          is_active: true
+        };
+      });
 
       // Insert new colors
       const { error: insertError } = await supabase
