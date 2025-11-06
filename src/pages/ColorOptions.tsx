@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
@@ -34,6 +34,17 @@ const ColorOptions: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("visualizer");
   const [selectedProfile, setSelectedProfile] = useState<string>("living-kozijnprofiel");
   const [zoomedColor, setZoomedColor] = useState<Color | null>(null);
+
+  useEffect(() => {
+    if (zoomedColor) {
+      console.info('Modal color opened:', {
+        name: zoomedColor.name,
+        ral: zoomedColor.ral_code,
+        image_url: zoomedColor.image_url,
+        hex_used: getColorHex(zoomedColor),
+      });
+    }
+  }, [zoomedColor]);
 
   const visualizerTitleRef = useRef<HTMLHeadingElement>(null);
   const collectionTitleRef = useRef<HTMLHeadingElement>(null);
@@ -429,7 +440,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipTrigger asChild>
                                   <Card 
                                     className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor({ ...color, hex: getColorHex(color) } as any)}
+                                    onClick={() => { console.log('Zoom swatch', color.name, color.ral_code, color.image_url); setZoomedColor({ ...color, hex: getColorHex(color) } as any); }}
                                   >
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
@@ -485,7 +496,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipTrigger asChild>
                                   <Card 
                                     className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor({ ...color, hex: getColorHex(color) } as any)}
+                                    onClick={() => { console.log('Zoom swatch', color.name, color.ral_code, color.image_url); setZoomedColor({ ...color, hex: getColorHex(color) } as any); }}
                                   >
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
@@ -538,7 +549,7 @@ const ColorOptions: React.FC = () => {
                                 <TooltipTrigger asChild>
                                   <Card 
                                     className="hover:shadow-lg transition-all group cursor-pointer relative overflow-hidden"
-                                    onClick={() => setZoomedColor({ ...color, hex: getColorHex(color) } as any)}
+                                    onClick={() => { console.log('Zoom swatch', color.name, color.ral_code, color.image_url); setZoomedColor({ ...color, hex: getColorHex(color) } as any); }}
                                   >
                                     <div 
                                       className="aspect-square rounded-t-md relative group-hover:scale-105 transition-transform overflow-hidden" 
