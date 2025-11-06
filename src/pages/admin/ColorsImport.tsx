@@ -168,7 +168,7 @@ const ColorsImport: React.FC = () => {
         slug: generateSlug(row.kleur),
         ral_code: row.ral.trim(),
         category: row.categorie.toLowerCase().trim(),
-        image_url: row.imageUrl.trim() || null,
+        image_url: row.imageUrl && row.imageUrl.trim() !== '' ? row.imageUrl.trim() : null,
         hex: '#FFFFFF', // Default hex, you may want to extract this from RAL or image
         description: null,
         sort_order: index,
