@@ -222,13 +222,13 @@ const ColorOptions: React.FC = () => {
                                   <Tooltip key={color.name}>
                                     <TooltipTrigger asChild>
                                        <button
-                                        className={`w-full aspect-square rounded-md border-2 ${selectedColor?.slug === color.slug ? 'border-brand-green' : 'border-transparent'} hover:border-brand-green-dark transition-all`}
+                                        className={`w-full aspect-square rounded-md border-2 overflow-hidden ${selectedColor?.slug === color.slug ? 'border-brand-green' : 'border-transparent'} hover:border-brand-green-dark transition-all`}
                                         style={{ 
                                           backgroundColor: color.hex,
-                                          boxShadow: color.hex === '#FFFFFF' || color.hex === '#ffffff' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
+                                          boxShadow: (color.hex?.toLowerCase?.() === '#ffffff' || color.hex?.toLowerCase?.() === '#f6f6f6') ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                                         }}
                                         onClick={() => setSelectedColor(color)}
-                                      >
+                                      >{color.image_url && (<img src={color.image_url} alt={color.name} className="w-full h-full object-cover" loading="lazy" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />)}
                                         {selectedColor?.slug === color.slug && (
                                           <CheckCircle2 className="h-5 w-5 text-brand-green bg-white rounded-full" />
                                         )}
