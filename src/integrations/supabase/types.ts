@@ -129,6 +129,7 @@ export type Database = {
           has_wood_texture: boolean | null
           hex: string
           id: string
+          image_url: string | null
           is_active: boolean | null
           name: string
           ral_code: string
@@ -143,6 +144,7 @@ export type Database = {
           has_wood_texture?: boolean | null
           hex: string
           id?: string
+          image_url?: string | null
           is_active?: boolean | null
           name: string
           ral_code: string
@@ -157,6 +159,7 @@ export type Database = {
           has_wood_texture?: boolean | null
           hex?: string
           id?: string
+          image_url?: string | null
           is_active?: boolean | null
           name?: string
           ral_code?: string

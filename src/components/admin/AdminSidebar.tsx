@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, FileText, MapPin, Settings, Building2, Image, Package } from 'lucide-react';
+import { LayoutDashboard, FileText, MapPin, Settings, Building2, Image, Package, Upload } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const AdminSidebar: React.FC = () => {
@@ -47,6 +47,11 @@ const AdminSidebar: React.FC = () => {
       title: 'OG Images',
       href: '/admin/og-images',
       icon: Image
+    },
+    {
+      title: 'Kleuren Import',
+      href: '/admin/colors-import',
+      icon: Upload
     }
   ];
 

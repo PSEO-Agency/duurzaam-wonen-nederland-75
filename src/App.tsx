@@ -72,6 +72,7 @@ import AdminProjects from './pages/admin/Projects';
 import AdminProducts from './pages/admin/Products';
 import AdminProductEditor from './pages/admin/ProductEditor';
 import AdminOGImages from './pages/admin/OGImages';
+import AdminColorsImport from './pages/admin/ColorsImport';
 
 const queryClient = new QueryClient();
 
@@ -160,6 +161,7 @@ function App() {
                 <Route path="city-services" element={<AdminCityServices />} />
                 <Route path="projects" element={<AdminProjects />} />
                 <Route path="og-images" element={<AdminOGImages />} />
+                <Route path="colors-import" element={<AdminColorsImport />} />
               </Route>
 
               {/* Catch-all route for 404 pages - MUST be last */}
