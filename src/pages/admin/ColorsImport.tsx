@@ -51,6 +51,31 @@ const ColorsImport: React.FC = () => {
     return ral.toString().trim().replace(/\s+/g, '').toUpperCase();
   };
 
+  const ralToHex = (ralCode: string): string => {
+    const ralMap: Record<string, string> = {
+      'RAL9016': '#F6F6F6', // Verkeerswit
+      'RAL9010': '#F1F0EA', // Zuiverwit
+      'RAL9005': '#0E0E10', // Zwart
+      'RAL9001': '#E9E0D2', // Cremewit
+      'RAL7021': '#2E3234', // Zwartgrijs
+      'RAL7016': '#383E42', // Antracietgrijs
+      'RAL7015': '#4A5459', // Leigrijs
+      'RAL7012': '#575E62', // Basaltgrijs
+      'RAL6009': '#27352A', // Donkergroen
+      'RAL6005': '#0F4C3A', // Mosgroen
+      'RAL5013': '#1F3855', // Kobaltblauw
+      'RAL5011': '#1A2B3C', // Staalblauw
+      'RAL5004': '#191E28', // Monumentenblauw
+      'RAL3011': '#792423', // Donkerrood
+      'RAL3005': '#5E2028', // Wijnrood
+      'RAL1019': '#A48F7A', // Grijsbeige
+      'RAL1015': '#E6D2B5', // Lichtivoor
+    };
+    
+    const normalized = normalizeRal(ralCode);
+    return ralMap[normalized] || '#CCCCCC';
+  };
+
   const validateRow = (row: ParsedRow): ValidationResult => {
     const errors: string[] = [];
 
@@ -207,13 +232,15 @@ const ColorsImport: React.FC = () => {
       const colorsToInsert = uniqueByRal.map((row, index) => {
         const baseSlug = generateSlug(row.kleur);
         const uniqueSlug = makeUniqueSlug(baseSlug);
+        const hexColor = row.hex?.trim() || row.kleurcode?.trim() || ralToHex(row.ral);
+        
         return {
           name: row.kleur.trim(),
           slug: uniqueSlug,
           ral_code: row.ral.trim(),
           category: row.categorie.toLowerCase().trim(),
           image_url: row.imageUrl && row.imageUrl.trim() !== '' ? row.imageUrl.trim() : null,
-          hex: row.hex?.trim() || row.kleurcode?.trim() || '#CCCCCC',
+          hex: hexColor,
           description: null,
           sort_order: index,
           has_wood_texture: row.categorie.toLowerCase() === 'white',
