@@ -462,7 +462,6 @@ const ColorOptions: React.FC = () => {
                                 <TooltipContent>
                                   <div className="space-y-1">
                                     <p>{color.name}</p>
-                                     <p className="text-xs text-gray-500">{getColorHex(color)}</p>
                                     <p className="text-xs text-gray-500">{color.ral_code}</p>
                                   </div>
                                 </TooltipContent>
@@ -516,7 +515,6 @@ const ColorOptions: React.FC = () => {
                                 <TooltipContent>
                                   <div className="space-y-1">
                                     <p>{color.name}</p>
-                                     <p className="text-xs text-gray-500">{getColorHex(color)}</p>
                                     <p className="text-xs text-gray-500">{color.ral_code}</p>
                                   </div>
                                 </TooltipContent>
@@ -573,7 +571,6 @@ const ColorOptions: React.FC = () => {
                                 <TooltipContent>
                                   <div className="space-y-1">
                                     <p>{color.name}</p>
-                                     <p className="text-xs text-gray-500">{getColorHex(color)}</p>
                                     <p className="text-xs text-gray-500">{color.ral_code}</p>
                                   </div>
                                 </TooltipContent>
@@ -630,7 +627,6 @@ const ColorOptions: React.FC = () => {
                                 <TooltipContent>
                                   <div className="space-y-1">
                                     <p>{color.name}</p>
-                                    <p className="text-xs text-gray-500">{getColorHex(color)}</p>
                                     <p className="text-xs text-gray-500">{color.ral_code}</p>
                                   </div>
                                 </TooltipContent>
@@ -663,12 +659,24 @@ const ColorOptions: React.FC = () => {
           {zoomedColor && (
             <div className="space-y-4">
               <div 
-                className="w-full h-64 rounded-lg border-4 border-gray-200" 
+                className="w-full h-96 rounded-lg border-4 border-gray-200 relative overflow-hidden" 
                  style={{ 
                    backgroundColor: getColorHex(zoomedColor),
                    boxShadow: getColorHex(zoomedColor).toLowerCase() === '#ffffff' || getColorHex(zoomedColor).toLowerCase() === '#f6f6f6' ? 'inset 0 0 0 1px #e5e7eb' : 'none'
                  }}
-              ></div>
+              >
+                {zoomedColor.image_url && (
+                  <img 
+                    src={zoomedColor.image_url} 
+                    alt={zoomedColor.name}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                )}
+              </div>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium text-gray-600">Naam:</span>
@@ -677,10 +685,6 @@ const ColorOptions: React.FC = () => {
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium text-gray-600">RAL Code:</span>
                   <span className="font-semibold">{zoomedColor.ral_code}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-600">Hex:</span>
-                  <span className="font-mono text-sm">{getColorHex(zoomedColor)}</span>
                 </div>
                 {zoomedColor.description && (
                   <div className="pt-2 border-t">
