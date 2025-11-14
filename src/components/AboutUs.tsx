@@ -11,7 +11,7 @@ const AboutUs: React.FC = () => {
           <AnimatedSection animation="fade-in-right">
             <div className="relative">
               <img
-                src="/lovable-uploads/about-us-team.jpg"
+                src="/lovable-uploads/eb1088c6-1a05-459c-9120-85a3e455b54d.png"
                 alt="Kunststof Kozijnen Team Duurzaam Wonen Nederland"
                 className="w-full h-auto object-cover rounded-lg shadow-lg"
               />
