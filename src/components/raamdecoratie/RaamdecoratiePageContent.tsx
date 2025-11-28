@@ -15,7 +15,7 @@ const RaamdecoratiePageContent: React.FC = () => {
           content="Hoogwaardige raamdecoratie op maat voor uw woning. Van klassieke tot moderne stijlen - wij hebben de perfecte oplossing voor elke ruimte. Realisatie door onze partner Twents Design." 
         />
         <meta name="keywords" content="raamdecoratie, raamdecoratie op maat, gordijnen, luxaflex, jaloeziën, vouwgordijnen, rolgordijnen" />
-        <link rel="canonical" href="https://www.example.com/raamdecoratie" />
+        <link rel="canonical" href="https://duurzaamwonen.info/raamdecoratie" />
       </Helmet>
       
       <Navbar />
