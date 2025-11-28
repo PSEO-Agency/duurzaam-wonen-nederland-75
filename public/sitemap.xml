@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://duurzaamwonen.info/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Main Pages -->
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/aluminium-kozijnen</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-schuifpuien</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/raamdecoratie</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/offerte</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/projecten</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/werkgebied</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/werkwijze</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/showroom</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/over-ons</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/privacy-policy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- Kozijnen Sub-pages -->
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen/types</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen/kleuren</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen/merken</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen/montage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen/prijzen</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen/maten</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Kozijnen Types -->
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen/types/draaikiepraam</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Kozijnen Sizes -->
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen/maten/100x100</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Brands -->
+  <url>
+    <loc>https://duurzaamwonen.info/merken/schuco</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Profiles -->
+  <url>
+    <loc>https://duurzaamwonen.info/profielen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/profielen/ct70as</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/profielen/living82</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Pricing & Financing -->
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen/prijzen/afbetaling</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/kunststof-kozijnen/prijzen/subsidie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/rentevrije-financiering</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Over Ons Pages -->
+  <url>
+    <loc>https://duurzaamwonen.info/over-ons/team</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/over-ons/missie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/over-ons/duurzaamheid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/over-ons/vacatures</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Vacatures -->
+  <url>
+    <loc>https://duurzaamwonen.info/vacatures/kunststof-kozijnen-monteur</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/vacatures/commercieel-medewerker</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Major Cities - Overijssel -->
+  <url>
+    <loc>https://duurzaamwonen.info/werkgebied/overijssel/enschede/kunststof-kozijnen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/werkgebied/overijssel/hengelo/kunststof-kozijnen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/werkgebied/overijssel/almelo/kunststof-kozijnen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/werkgebied/overijssel/oldenzaal/kunststof-kozijnen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/werkgebied/overijssel/borne/kunststof-kozijnen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Region Pages -->
+  <url>
+    <loc>https://duurzaamwonen.info/werkgebied/overijssel/kunststof-kozijnen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/werkgebied/gelderland/kunststof-kozijnen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://duurzaamwonen.info/werkgebied/drenthe/kunststof-kozijnen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
