@@ -28,7 +28,7 @@ const AlgemeneVoorwaarden: React.FC = () => {
       
       <Navbar />
       
-      <main className="flex-grow pt-24 pb-16">
+      <main className="flex-grow pt-20 pb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumbs */}
