@@ -28,11 +28,11 @@ const AlgemeneVoorwaarden: React.FC = () => {
       
       <Navbar />
       
-      <main className="flex-grow pt-20 pb-16">
+      <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumbs */}
-            <div className="mb-8">
+            <div className="mb-6">
               <Breadcrumb>
                 <BreadcrumbList className="text-sm">
                   <BreadcrumbItem>
@@ -54,14 +54,14 @@ const AlgemeneVoorwaarden: React.FC = () => {
             </div>
 
             {/* Header */}
-            <header className="mb-10">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+            <header className="mb-8">
+              <h1 className="text-3xl md:text-4xl font-bold mb-3 text-gray-900">
                 Algemene leverings- en betalingsvoorwaarden
               </h1>
-              <p className="text-lg text-gray-600 mb-2">
+              <p className="text-lg text-gray-600 mb-1">
                 voor consumententransacties t.b.v. ramen, deuren, kozijnen en woningverbetering
               </p>
-              <p className="text-gray-500">
+              <p className="text-gray-500 text-sm">
                 Duurzaam Wonen Nederland gevestigd te Enschede
               </p>
             </header>
