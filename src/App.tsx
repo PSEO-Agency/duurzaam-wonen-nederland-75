@@ -23,6 +23,7 @@ import Werkwijze from './pages/Werkwijze';
 import Vacatures from './pages/over-ons/Vacatures';
 import Werkgebied from './pages/Werkgebied';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import AlgemeneVoorwaarden from './pages/AlgemeneVoorwaarden';
 
 import RobotsTxt from './pages/RobotsTxt';
 import CityServicePage from './pages/CityServicePage';
@@ -102,7 +103,7 @@ function App() {
               <Route path="/vacatures" element={<Vacatures />} />
               <Route path="/werkgebied" element={<Werkgebied />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              
+              <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
               
               {/* Product routes - using ProductPage component */}
               <Route path="/gevelbekleding" element={<ProductPage />} />

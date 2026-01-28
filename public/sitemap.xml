@@ -73,6 +73,11 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://duurzaamwonen.info/algemene-voorwaarden</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
   
   <!-- Kozijnen Sub-pages -->
   <url>

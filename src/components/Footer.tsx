@@ -140,6 +140,7 @@ const Footer: React.FC = () => {
             <div className="flex space-x-6">
               <Link to="/sitemap" className="text-gray-400 hover:text-brand-green text-sm">Sitemap</Link>
               <Link to="/privacy-policy" className="text-gray-400 hover:text-brand-green text-sm">Privacybeleid</Link>
+              <Link to="/algemene-voorwaarden" className="text-gray-400 hover:text-brand-green text-sm">Algemene voorwaarden</Link>
             </div>
           </div>
         </div>
